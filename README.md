@@ -1,8 +1,14 @@
 tatool-web
 ==========
 
-```ruby
-require 'redcarpet'
-markdown = Redcarpet.new("Hello World!")
-puts markdown.to_html
+```javascript
+angular.module('tatool').directive('customOnChange', function() {
+  return {
+    restrict: 'A',
+    link: function (scope, element, attrs) {
+      var onChangeFunc = element.scope()[attrs.customOnChange];
+      element.bind('change', onChangeFunc);
+    }
+  };
+});
 ```
