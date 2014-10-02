@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('tatool.app')
-  .factory('exportService', ['$log', '$q', 'dataService', 'cfgApp', function ($log, $q, dataService, cfgApp) {
+  .factory('exportService', ['$log', '$q', 'dataService', 'cfgApp', 'userService', function ($log, $q, dataService, cfgApp, userService) {
     $log.debug('ExportService: initialized');
 
     var exporter = {};
@@ -46,7 +46,7 @@ angular.module('tatool.app')
       var output = '';
       var trials = json.rows;
       var excludes = ['moduleId', 'sessionId', 'trialId', 'executableId'];
-      var header = ['moduleId', 'sessionId', 'trialId', 'executableId'];
+      var header = ['userId', 'moduleId', 'sessionId', 'trialId', 'executableId'];
       var prefix = '';
 
       // loop through all trials
@@ -74,6 +74,9 @@ angular.module('tatool.app')
           }
         }
 
+        // add userId
+        line.unshift(userService.getUserName());
+        
         var text = '';
         // transform array to csv
         for (var j = 0; j < line.length; j++) {
