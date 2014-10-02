@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('tatool.auth')
-  .service('userService', ['$window', '$q', function ($window, $q) {
+  .service('userService', ['$window', '$q', 'messageService', function ($window, $q, messageService) {
 
   // creates a new user sessions
   this.create = function (sessionId, userName) {
@@ -56,6 +56,7 @@ angular.module('tatool.auth')
       if (!response || response.rows.length === 0) {
         userDB.put({_id : userName, cred: userPassword }, function(err, response) {
           if (!err) {
+            messageService.setMessage({ type: 'success', msg: 'Registration successful. You can go ahead and login now.'});
             deferred.resolve(response);
           }
         });

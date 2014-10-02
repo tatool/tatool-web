@@ -1,30 +1,27 @@
 'use strict';
 
 angular.module('tatool.auth')
-  .controller('LoginCtrl', ['$scope', '$log', '$state', '$sce', 'authService', 'userService',
-    function ($scope, $log, $state, $sce, authService, userService) {
+  .controller('LoginCtrl', ['$scope', '$log', '$state', '$sce', 'authService', 'userService', 'messageService',
+    function ($scope, $log, $state, $sce, authService, userService, messageService) {
 
     $scope.alert = { type: 'danger', msg: '', visible: false };
 
     // login with authService and redirect if successful
     $scope.login = function(credentials) {
       if (!credentials) {
-        $scope.alert.msg = $sce.trustAsHtml('Please enter all required fields:<br> <li> Email<li> Password');
-        $scope.alert.visible = true;
+        setAlert('danger', 'Please enter all required fields:<br> <li> Email<li> Password');
       } else if (!credentials.userName || !credentials.userPassword) {
         var alertText = 'Please enter all required fields:<br>';
         alertText += (!credentials.userName) ? '<li> Email' : '';
         alertText += (!credentials.userPassword) ? '<li> Password' : '';
-        $scope.alert.msg = $sce.trustAsHtml(alertText);
-        $scope.alert.visible = true;
+        setAlert('danger', alertText);
         $scope.credentials.userName = '';
         $scope.credentials.userPassword = '';
       } else {
         authService.login(credentials).then(function() {
           $state.go('home');
         }, function(error) {
-          $scope.alert.msg = $sce.trustAsHtml(error);
-          $scope.alert.visible = true;
+          setAlert('danger', error);
           $scope.credentials.userName = '';
           $scope.credentials.userPassword = '';
         });
@@ -34,27 +31,37 @@ angular.module('tatool.auth')
     // register new user
     $scope.register = function(credentials) {
       if (!credentials) {
-        $scope.alert.msg = $sce.trustAsHtml('Please enter all required fields:<br> <li> Email<li> Password<li> Year of birth<li> Sex');
-        $scope.alert.visible = true;
-      } else if (!credentials.userName || !credentials.userPassword || !credentials.year || !credentials.sex) {
+        setAlert('danger', 'Please enter all required fields:<br> <li> Email<li> Password');
+      } else if (!credentials.userName || !credentials.userPassword) {
         var alertText = 'Please enter all required fields:<br>';
         alertText += (!credentials.userName) ? '<li> Email' : '';
         alertText += (!credentials.userPassword) ? '<li> Password' : '';
-        alertText += (!credentials.year) ? '<li> Year of birth' : '';
-        alertText += (!credentials.sex) ? '<li> Sex' : '';
-        $scope.alert.msg = $sce.trustAsHtml(alertText);
-        $scope.alert.visible = true;
+        setAlert('danger', alertText);
       } else {
-        $scope.alert.msg = '';
-        $scope.alert.visible = false;
+        hideAlert();
         
         userService.addUser(credentials).then(function() {
           $state.go('login');
         }, function(error) {
-          $scope.alert.msg = $sce.trustAsHtml(error);
-          $scope.alert.visible = true;
+          setAlert('danger', error);
         });
       }
     };
+
+    function setAlert(alertType, alertMessage) {
+      $scope.alert.type = alertType;
+      $scope.alert.msg = $sce.trustAsHtml(alertMessage);
+      $scope.alert.visible = true;
+    }
+
+    function hideAlert() {
+      $scope.alert.visible = false;
+      $scope.alert.msg = '';
+    }
+
+    var message = messageService.getMessage();
+    if (message.msg !== '') {
+      setAlert(message.type, message.msg);
+    }
 
   }]);
