@@ -1,0 +1,184 @@
+body {
+	height: 100%;
+	width: 80%;
+	min-height: 100%;
+	margin: 0 auto;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+#container {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	margin: 0 auto;
+	overflow: hidden;
+	font-size: normal;
+}
+
+
+.subtitle {
+	font-size: 200%;
+	font-weight: bold;
+	color: #424242;
+	margin-bottom: 20px;
+	float: left;
+}
+
+.logout {
+  position: relative;
+  float:right;
+  overflow: hidden;
+  margin: 10px;
+}
+
+.fileUpload {
+	position: relative;
+	float:left;
+	overflow: hidden;
+	margin-left: 10px;
+  margin-top: 2px;
+}
+.fileUpload input.upload {
+	position: absolute;
+	top: 0;
+	right: 0;
+	margin: 0;
+	padding: 0;
+	font-size: 20px;
+	cursor: pointer;
+	opacity: 0;
+	filter: alpha(opacity=0);
+}
+
+#modules {
+	width: 100%;
+	margin: 0 auto;
+  clear: left;
+	display: table;
+}
+
+#modules .tile {
+	display: table-cell;
+	position: relative;
+	float: left;
+	width: 17em;
+	margin-bottom: 1.2em;
+	margin-right: 0.5em;
+	border: 1px solid #ababab;
+	background-color: #fff;
+}
+
+#modules .tileHighlight {
+	display: table-cell;
+	position: relative;
+	float: left;
+	width: 17em;
+	margin-bottom: 1.2em;
+	margin-right: 0.5em;
+	border: 1px solid #ababab;
+	background-color: #fff
+	-webkit-animation: highlight 1s 1;
+     -moz-animation: highlight 1s 1;
+      -ms-animation: highlight 1s 1;
+       -o-animation: highlight 1s 1;
+          animation: highlight 1s 1;
+}
+
+/* Highlight animation */
+@keyframes highlight {
+    from {border: 1px solid #ababab;background-color: #fff;}
+    50% {border: 1px solid #db5628;background-color: #ffe8e2;}
+    to {border: 1px solid #ababab;background-color: #fff;}
+}
+@-webkit-keyframes highlight {
+    from {border: 1px solid #ababab;background-color: #fff;}
+    50% {border: 1px solid #db5628;background-color: #ffe8e2;}
+    to {border: 1px solid #ababab;background-color: #fff;}
+}
+@-moz-keyframes highlight {
+    from {border: 1px solid #ababab;background-color: #fff;}
+    50% {border: 1px solid #db5628;background-color: #ffe8e2;}
+    to {border: 1px solid #ababab;background-color: #fff;}
+}
+@-o-keyframes highlight {
+    from {border: 1px solid #ababab;background-color: #fff;}
+    50% {border: 1px solid #db5628;background-color: #ffe8e2;}
+    to {border: 1px solid #ababab;background-color: #fff;}
+}
+
+#modules .icon {
+	position: relative;
+	width: 6em;
+	height: 6em;
+	float: left;
+	margin-right: 0.7em;
+  	overflow: hidden;
+	background: #c64a26; /* Old browsers */
+	background: -moz-linear-gradient(left,  #c64a26 0%, #d5582c 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, right top, color-stop(0%,#c64a26), color-stop(100%,#d5582c)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(left,  #c64a26 0%,#d5582c 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(left,  #c64a26 0%,#d5582c 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(left,  #c64a26 0%,#d5582c 100%); /* IE10+ */
+	background: linear-gradient(to right,  #c64a26 0%,#d5582c 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c64a26', endColorstr='#d5582c',GradientType=1 ); /* IE6-9 */
+  	border-right: 1px solid #db5b2e;
+  	border-left: 1px solid #db5b2e;
+  	border-top: 1px solid #db5628;
+  	border-bottom: 1px solid #db5628;
+  	-webkit-box-shadow: 1px 0 1px #b84a23;
+  	-moz-box-shadow: 1px 0 1px #b84a23;
+  	-ms-box-shadow: 1px 0 1px #b84a23;
+  	-o-box-shadow: 1px 0 1px #b84a23;
+  	box-shadow: 1px 0 1px #b84a23;
+}
+
+#modules .content {
+	float: left;
+	color: #494949;
+	line-height: 1.35em;
+	height: 6em;
+	width: 10em;
+	text-align: left;
+}
+
+#modules h2 {
+	max-width: 13em;
+	font-size: 95%;
+	overflow: hidden;
+	font-weight: bold;
+}
+
+#modules h3 {
+	max-width: 13em;
+	font-size: 80%;
+	overflow: hidden;
+	white-space: nowrap;
+  	text-overflow: ellipsis;
+}
+
+#modules .buttonbar {
+	margin-top: 5px;
+}
+
+.btn-tatool {
+  	color: #fff;
+  	background-color: #d5502a;
+  	border-color: #972702;
+  	padding: 3px 7px;
+}
+
+.btn-tatool:hover {
+	color: #fff;
+  	background-color: #a23f22;
+}
+
+.btn-tatool-off {
+  	color: #333;
+  	background-color: #fff;
+  	border-color: #ccc;
+  	padding: 3px 7px;
+}
+
+.btn-tatool-off:hover {
+  	background-color: #e6e6e6;
+}

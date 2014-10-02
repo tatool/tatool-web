@@ -1,0 +1,26 @@
+<div id="login" ng-controller="LoginCtrl">
+  <!-- login form box -->
+
+  <form ng-submit="register(credentials)" novalidate>
+      <label class="sr-only" for="email">Email address</label>
+      <input id="email" tabindex="1" type="email" placeholder="Email" ng-model="credentials.userName" required auto-focus />
+      <br>
+      <label class="sr-only" for="password">Password</label>
+      <input id="password" tabindex="2" type="password" placeholder="Password" ng-model="credentials.userPassword" autocomplete="off" required />
+      <br>
+      <label class="sr-only" for="year">Year of Birth</label>
+      <input id="year" tabindex="3" type="number" min="1920" max="2020" placeholder="Year of birth" ng-model="credentials.year" autocomplete="off" required />
+      <br>
+      <label class="sr-only" for="sex">Sex</label>
+      <input tabindex="4" type="radio" name="sex" ng-model="credentials.sex" value="m"> Male
+      <input type="radio" name="sex" ng-model="credentials.sex" value="f"> Female
+      <br>
+      <input tabindex="5" type="submit"  name="login" value="Register" />
+  </form>
+  <br><a ui-sref="login">Go back</a>
+  <br><br>
+  <div id="errorbox">
+    <div class="alert alert-danger" role="alert" ng-show="alert.visible"><div ng-bind-html="alert.msg"></div></div>
+  </div>
+
+</div>

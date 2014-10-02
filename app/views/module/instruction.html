@@ -1,0 +1,27 @@
+<div id="topExecutable">
+
+	<!-- Include of instruction -->
+	<div ng-include="currentPage"></div>
+
+	<!-- Pagination -->
+	<div>
+		<ul class="nav">
+			<li>
+				<a class="page" ng-click="go(-1)">
+					<div class='paginationArrowLeft'><i class='icon-left-open'></i></div>
+				</a>
+			</li>
+    		<li ng-repeat="url in urls track by $index">
+        		<a class="page" ng-class="{pageActive: $index==currentIndex}" ng-click="jump($index)">
+        			<div class='paginationDigit'>{{$index+1}}</div>
+        		</a>
+    		</li>
+    		<li>
+    			<a class="page" ng-click="go(1)">
+    				<div class='paginationArrowRight'><i class='icon-right-open'></i></div>
+    			</a>
+    		</li>
+		</ul>
+	</div>
+
+</div>

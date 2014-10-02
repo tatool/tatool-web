@@ -1,0 +1,57 @@
+<div id="statusPanel" >
+
+    <div class="panel" ng-show="trialCountPanel">
+
+	   <span class="panelValue">
+            <span>{{trialCount}}</span>
+        </span>
+        <span class="panelTitle">
+            <span class="levelTitle">TRIAL</span>
+        </span>
+
+    </div>
+
+    <div ng-show="feedbackPanel" class="panel">
+
+        <span class="panelValue">
+            <div ng-switch="feedback">
+                <span ng-switch-when="correct"><img src="../../images/module/thumbs-up.png" width="100" height="100"></span>
+                <span ng-switch-when="wrong"><img src="../../images/module/thumbs-down.png" width="100" height="100"></span>
+                <span ng-switch-default><img src="../../images/module/thumbs-empty.png" width="100" height="100"></span>
+            </div>
+        </span>
+
+    </div>
+
+    <div ng-show="levelPanel" class="panel">
+
+        <span class="panelValue" ng-class="{'panelValueAnimate': levelPanelAnimate}">
+            <span>{{level}}</span>
+        </span>
+        <span class="panelTitle">
+            <span class="levelTitle">LEVEL</span>
+        </span>
+
+    </div>
+
+    <div ng-show="timerPanel" class="panel">
+
+        <span class="panelValue">
+            <div class="centerCircle"></div>
+            <div class="superCircle"></div>
+            <progress-arc
+                size="100"
+                stroke="#656565"
+                stroke-width="26"
+                complete="progress"
+                background="#cccccc">
+            </progress-arc>
+        </span>
+
+    </div>
+
+
+
+    
+
+</div>

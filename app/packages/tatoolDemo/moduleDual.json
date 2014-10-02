@@ -1,0 +1,80 @@
+{
+    "name": "Dual Element",
+    "id": "demoModule1",
+    "author": "University of Zurich",
+    "version": 3,
+    "packageUrl": "packages/tatoolDemo",
+    "allowEscapeKey" : true,
+    "moduleHierarchy": {
+    	"elementType": "List",
+        "iterator": { "id" : "ListIterator", "numIterations" : "1" },
+        "handlers": [ { "id" : "levelHandler", "name" : "level" }, { "id" : "trialCountHandler", "name" : "counter" } ],
+    	"children": 
+    		[
+                {
+                    "elementType": "Executable",
+                    "id": "tatoolInstruction",
+                    "name": "instructions",
+                    "blankInterval" : "600",
+                    "pages": [
+                        "complexNum.inst.01.html" ,
+                        "complexNum.inst.02.html"
+                    ]
+                },
+
+                {
+                    "elementType": "Dual",
+                    "iterator": { "id" : "ListIterator", "numIterations" : "2" },
+                    "handlers": [  ],
+                    "children": 
+                        {
+                            "primary" : {
+                                "elementType": "Executable",
+                                "id": "complexNumExecutable",
+                                "name": "first",
+                                "blankInterval" : "600",
+                                "status": {
+                                    "levelPanel": true,
+                                    "feedbackPanel": true,
+                                    "trialCountPanel": true,
+                                    "timerPanel": true
+                                }
+                            }, 
+                            "secondary" : {
+                                "elementType": "Executable",
+                                "id": "stroopExecutable",
+                                "name": "second",
+                                "blankInterval" : "600",
+                                "status": {
+                                    "levelPanel": true,
+                                    "feedbackPanel": true,
+                                    "trialCountPanel": true,
+                                    "timerPanel": true
+                                }
+                            }
+                        }
+                },
+                {
+                    "elementType": "List",
+                    "iterator": { "id" : "ListIterator", "numIterations" : "2" },
+                    "handlers": [  ],
+                    "children": 
+                        [
+                            {
+                                "elementType": "Executable",
+                                "id": "stroopExecutable",
+                                "name": "third",
+                                "fixationInterval" : "500",
+                                "blankInterval" : "600",
+                                "status": {
+                                    "levelPanel": true,
+                                    "feedbackPanel": true,
+                                    "trialCountPanel": true,
+                                    "timerPanel": true
+                                }
+                            }
+                        ]
+                }
+    		]
+    }
+}

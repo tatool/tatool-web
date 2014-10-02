@@ -1,0 +1,17 @@
+<div id="login" ng-controller="LoginCtrl">
+	<!-- login form box -->
+	<form ng-submit="login(credentials)" novalidate>
+
+	    <input id="email" class="login_input" type="email" placeholder="me@tatool.ch" ng-model="credentials.userName" ng-focus="true" auto-focus required />
+	    <br>
+	    <input id="password" class="login_input" type="password" placeholder="password" ng-model="credentials.userPassword" autocomplete="off" required />
+      <br>
+	    <input type="submit"  name="login" value="Log in" />
+
+	</form>
+	<br><a ui-sref="register">Register</a>
+  <br><br>
+  <div id="errorbox">
+    <div class="alert alert-danger" role="alert" ng-show="alert.visible"><div ng-bind-html="alert.msg"></div></div>
+  </div>
+</div>

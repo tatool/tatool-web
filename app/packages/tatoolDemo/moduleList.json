@@ -1,0 +1,60 @@
+{
+    "name": "List Element with extra line and stuff",
+    "id": "demoModule2",
+    "author": "University of Colorado Boulder",
+    "packageUrl": "/packages/tatoolDemo",
+    "version": 3,
+    "moduleHierarchy": {
+    	"elementType": "List",
+        "iterator": { "id" : "ListIterator", "numIterations" : "3" },
+        "handlers": [ { "id" : "levelHandler", "name" : "level" }, { "id" : "trialCountHandler", "name" : "counter" } ],
+    	"children": 
+    		[
+    			{
+    				"elementType": "Executable",
+    				"id": "stroopExecutable",
+                    "name": "stroop1",
+                    "blankInterval" : "600",
+                    "status": {
+                        "levelPanel": true,
+                        "feedbackPanel": true,
+                        "timerPanel": true,
+                        "trialCountPanel": true
+                    }
+    			}, 
+    			{
+    				"elementType": "Executable",
+    				"id": "stroopExecutable",
+                    "name": "stroop2",
+                    "blankInterval" : "600",
+                    "status": {
+                        "levelPanel": true,
+                        "feedbackPanel": true,
+                        "timerPanel": true,
+                        "trialCountPanel": true
+                    }
+    			},
+                {
+                    "elementType": "List",
+                    "iterator": { "id" : "ListIterator", "numIterations" : "2" },
+                    "handlers": [  ],
+                    "children": 
+                        [
+                            {
+                                "elementType": "Executable",
+                                "id": "stroopExecutable",
+                                "name": "stroop3",
+                                "fixationInterval" : "500",
+                                "blankInterval" : "600",
+                                "status": {
+                                    "levelPanel": true,
+                                    "feedbackPanel": true,
+                                    "timerPanel": true,
+                                    "trialCountPanel": true
+                                }
+                            }
+                        ]
+                }
+    		]
+    }
+}

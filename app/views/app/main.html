@@ -1,0 +1,26 @@
+
+  <div class="subtitle">Modules</div>
+
+  <div class="logout btn btn-default" ng-click="logout()">Logout</div>
+
+  <div class="fileUpload btn btn-tatool">
+    Add Module
+    <input type="file" class="upload" custom-on-change="addModule"/>
+  </div>
+
+  <div id="modules">
+
+    <div class="tile" ng-class="{'tileHighlight': module.moduleId == highlightModuleId}" ng-repeat="module in modules | orderBy:'moduleName'" ng-if="!!modules.length">
+      <div class="icon"><img src="images/app/module_icon_base.png"></div>
+      <div class="content">
+        <h2>{{module.moduleName}}</h2>
+        <h3>{{module.moduleAuthor}}</h3>
+        <div class="buttonbar">
+          <div class="btn btn-tatool" ng-click="startModule(module)">Start</div>
+          <div class="btn btn-tatool" ng-click="exportModuleData(module)">Export</div>
+          <a href="#" ng-click="deleteModule(module)" class="btn btn-tatool-off"><span class="glyphicon glyphicon-trash"></span></a>
+        </div>
+      </div>
+    </div>
+
+  </div>
