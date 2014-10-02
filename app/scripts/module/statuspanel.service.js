@@ -25,7 +25,7 @@ angular.module('tatool.module')
 
   // feedback panel
   service.updateFeedback = function(feedback) {
-    if (!feedback) {
+    if (feedback == undefined) {
       service.feedback = null;
     } else if (feedback === 1) {
       service.feedback = 'correct';

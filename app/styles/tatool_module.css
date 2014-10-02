@@ -35,7 +35,7 @@ html, body {
 #statusPanel {
   position: relative;
   width: 100%;
-  margin: auto;
+  margin: 0 auto;
   top: 0; left: 0; bottom: 1; right: 0;
   height: 120px;
   font-family: 'League Gothic', Arial, Helvetica, sans-serif;
@@ -67,11 +67,13 @@ html, body {
 
 /* Status Panel: sub panels*/
 .panel {
+  vertical-align:top;
   width: 130px;
   height: 120px;
   display: inline-block;
   margin-right: 10px;
   margin-left: 10px;
+  margin-top: 0px;
   background: #e7e7e7;
   background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(255,255,255,.1)), to(rgba(0,0,0,.07)));
   background-image: -webkit-linear-gradient(top, rgba(255,255,255,.1), rgba(0,0,0,.07));
@@ -99,11 +101,6 @@ html, body {
   display: block;
   height: 75px;
   margin: 8px auto 0 auto;
-  text-align: center;
-}
-
-.panelValue img {
-  margin: 0 auto 0 auto;
   text-align: center;
 }
   
