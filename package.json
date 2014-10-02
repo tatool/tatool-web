@@ -11,7 +11,18 @@
     "min_height": 200,
     "fullscreen": true
   },
-  "dependencies": {},
+  "dependencies": {
+	"body-parser": "^1.9.0",
+    "express": "^4.9.5"
+  },
+  "engines": {
+    "node": ">=0.8.0"
+  },
+  "main": "server.js",
+  "scripts": {
+    "webkit": "nodewebkit",
+    "test": "grunt test"
+  },
   "devDependencies": {
     "grunt": "~0.4.1",
     "grunt-autoprefixer": "~0.4.0",
@@ -55,13 +66,5 @@
     "karma-ng-scenario": "^0.1.0",
     "load-grunt-tasks": "~0.2.0",
     "time-grunt": "~0.2.1"
-  },
-  "engines": {
-    "node": ">=0.8.0"
-  },
-  "main": "app/index.html",
-  "scripts": {
-    "start": "nodewebkit",
-    "test": "grunt test"
   }
 }
