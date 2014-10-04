@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('tatool.app')
-  .controller('ModuleCtrl', ['$scope', '$q', '$timeout', '$window', '$rootScope', '$location',  '$state', 'dataService', 'cfgApp', 'authService', 'userService', 'exportService',
-    function ($scope, $q, $timeout, $window, $rootScope, $location, $state, dataService, cfgApp, authService, userService, exportService) {
+  .controller('ModuleCtrl', ['$scope', '$q', '$timeout', '$window', '$rootScope', '$location',  '$state', 'dataService', 'cfgApp', 'authService', 'userService', 'exportService', 'usSpinnerService',
+    function ($scope, $q, $timeout, $window, $rootScope, $location, $state, dataService, cfgApp, authService, userService, exportService, usSpinnerService) {
   
     // setting contants
     $scope.imgPath = cfgApp.IMG_PATH;
@@ -101,10 +101,13 @@ angular.module('tatool.app')
     };
 
     $scope.exportModuleData = function(module) {
+      usSpinnerService.spin('loadingSpinner');
       exportService.getAllTrials(module.moduleId).then(function(response) {
         var filename = module.moduleId + '_' + userService.getUserName() +  '.csv';
+         usSpinnerService.stop('loadingSpinner');
         download(response, filename, 'data:text/plain');
       }, function(error) {
+        usSpinnerService.stop('loadingSpinner');
         bootbox.dialog({
           message: error,
           title: '<b>Tatool</b>',

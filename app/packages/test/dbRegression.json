@@ -1,0 +1,22 @@
+{
+    "name": "DB Regression",
+    "id": "dbRegression",
+    "author": "Tatool",
+    "version": 3,
+    "packageUrl": "packages/test",
+    "allowEscapeKey" : true,
+    "moduleHierarchy": {
+    	"elementType": "List",
+        "iterator": { "id" : "ListIterator", "numIterations" : "100" },
+        "handlers": [ ],
+    	"children": 
+    		[
+                {
+                    "elementType": "Executable",
+                    "id": "dbRegression",
+                    "name": "regressionTask",
+                    "blankInterval" : "10"
+                }
+    		]
+    }
+}

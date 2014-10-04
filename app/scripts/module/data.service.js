@@ -9,9 +9,6 @@ angular.module('tatool.module')
     var currentModule = null;
     var currentTrials = [];
 
-    //var modulesDB = new PouchDB('modules');
-    //var trialsDb = new PouchDB('trials');
-
     data.initUserDB = function() {
       var prefix = Sha1.hash(userService.getUserName());
       data.modulesDB = new PouchDB(prefix + '_m');
@@ -109,6 +106,16 @@ angular.module('tatool.module')
       if (currentModule) {
         return currentModule.getMaxSessionId();
       }
+    };
+
+    // set a session property (key and value)
+    data.setSessionProperty = function(sessionId, propertyKey, propertyValue) {
+      currentModule.getSession(sessionId).setProperty(propertyKey, propertyValue);
+    };
+
+    // get a session property by key
+    data.getSessionProperty = function(sessionId, propertyKey) {
+      return currentModule.getSession(sessionId).getProperty(propertyKey);
     };
 
     // Trials DB

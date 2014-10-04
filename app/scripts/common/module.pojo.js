@@ -77,6 +77,10 @@ Module.prototype.addSession = function(session) {
   this.sessions[session.sessionId] = session;
 };
 
+Module.prototype.getSession = function(sessionId) {
+  return this.sessions[sessionId];
+};
+
 // set a module property (key and value)
 Module.prototype.setProperty = function(propertyKey, propertyValue) {
   this.moduleProperties[propertyKey] = propertyValue;

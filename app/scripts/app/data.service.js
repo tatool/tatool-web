@@ -73,8 +73,12 @@ angular.module('tatool.app')
             function() {
               deferred.reject('The module with the id <b>\'' + newModule.moduleId + '\'</b> already exists.');
             }, function() {
-              data.modulesDB.put(JSON.parse(JSON.stringify(newModule)), newModule.moduleId);
-              deferred.resolve(newModule);
+              data.modulesDB.put(JSON.parse(JSON.stringify(newModule)), newModule.moduleId).then(function() {
+                deferred.resolve(newModule);
+              }, function (error) {
+                deferred.reject(error);
+              });
+              
             });
           
         } else {
@@ -94,7 +98,7 @@ angular.module('tatool.app')
       data.modulesDB.get(moduleId).then(function(doc) {
         data.modulesDB.remove(doc).then(moduleDeleted);
       }).catch(function(){
-        deferred.reject('Module doesnt exist.');
+        deferred.reject('Module could not be found.');
       });
 
       // compact database and trigger deletion of all trials belonging to module
@@ -133,6 +137,7 @@ angular.module('tatool.app')
 
       // mark all trials as deleted
       function deleteTrials(result) {
+        $log.debug(new Date() + ': Change documents');
         var trials = [];
         for (var i = 0; i < result.rows.length; i++) {
           var trial = {};
@@ -142,13 +147,19 @@ angular.module('tatool.app')
           trials.push(trial);
         }
         
+        $log.debug(new Date() + ': Update documents to be deleted');
         // update db with marked trials and compact
-        data.trialsDb.bulkDocs(trials).then(function(response) {
-          data.trialsDb.compact();
-          deferred.resolve(response);
+        data.trialsDb.bulkDocs(trials).then(function() {
+          $log.debug(new Date() + ': Compressing data');
+          data.trialsDb.compact().then(function(response) {
+            $log.debug(new Date() + ': Compression done');
+            deferred.resolve(response);
+          });
+        }, function(error) {
+          deferred.reject(error);
         });
       }
-
+      $log.debug(new Date() + ': Get Trials to delete');
       // get trials of given module then delete
       this.getModuleTrialIds(moduleId).then(deleteTrials);
 

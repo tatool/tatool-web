@@ -7,7 +7,6 @@ angular.module('tatool.module')
     var moduleService = {};
     var module = null;
     var session = null;
-    var internalSessionId = '';
 
     // create a new module from a module definition and return it
     moduleService.createModule = function(moduleDefinition) {
@@ -61,16 +60,10 @@ angular.module('tatool.module')
     };
 
     moduleService.createSession = function() {
-      var currentDate = new Date();
-      internalSessionId = currentDate.getTime();
       var sessionId = this.getNextSessionId();
       session = new Session(sessionId, util.getDateTime());
       module.addSession(session);
       return sessionId;
-    };
-
-    moduleService.getInternalSessionId = function() {
-      return internalSessionId;
     };
 
     moduleService.setSessionEndTime = function(endTime) {
