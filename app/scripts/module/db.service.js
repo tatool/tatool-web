@@ -6,8 +6,8 @@
 **/
 
 angular.module('tatool.module')
-  .factory('db', ['$log', 'dataService', 'moduleService', 'contextService', 'trialService', 'executor',
-    function ($log, dataService, moduleService, contextService, trialService, executor) {
+  .factory('db', ['$log', 'dataService', 'moduleService', 'contextService', 'trialService',
+    function ($log, dataService, moduleService, contextService, trialService) {
     $log.debug('DB: initialized');
 
     var db = {};

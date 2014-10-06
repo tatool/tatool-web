@@ -1,8 +1,7 @@
 'use strict';
 
 angular.module('tatool.module')
-  .service('tatoolExecutable', ['$log', 
-    function ($log) {
+  .service('tatoolExecutable', [function () {
 
     var executable = {};
 
