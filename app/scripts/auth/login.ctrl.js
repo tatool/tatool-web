@@ -59,6 +59,7 @@ angular.module('tatool.auth')
       $scope.alert.msg = '';
     }
 
+    // on load message handler
     var message = messageService.getMessage();
     if (message.msg !== '') {
       setAlert(message.type, message.msg);

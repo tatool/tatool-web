@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('tatool.module')
-  .factory('trialCountHandler', ['$log', 'dataService', 'statusPanelService', 'handlerService', 'tatoolPhase',
-    function ($log, dataService, statusPanelService, handlerService, tatoolPhase) {
+  .factory('trialCountHandler', ['$log', 'statusPanelService', 'handlerService', 'tatoolPhase',
+    function ($log, statusPanelService, handlerService, tatoolPhase) {
 
     // create a new handler object and set all handler properties
     var TrialCountHandler = function() {

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('tatool.app', ['tatool.auth'])
+angular.module('tatool.app', ['tatool', 'tatool.auth', 'angularSpinner'])
   .constant('cfgApp', {
     IMG_PATH: 'images/app/',
     VIEW_PATH:'views/app/',

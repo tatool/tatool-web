@@ -7,7 +7,7 @@
     "allowEscapeKey" : true,
     "moduleHierarchy": {
     	"elementType": "List",
-        "iterator": { "id" : "ListIterator", "numIterations" : "100" },
+        "iterator": { "id" : "ListIterator", "numIterations" : "5000" },
         "handlers": [ ],
     	"children": 
     		[

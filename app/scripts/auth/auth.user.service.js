@@ -1,10 +1,10 @@
 'use strict';
 
 angular.module('tatool.auth')
-  .service('userService', ['$window', '$q', 'messageService', function ($window, $q, messageService) {
+  .service('userService', ['$window', '$q', 'messageService', 'dataService', function ($window, $q, messageService, dataService) {
 
   // creates a new user sessions
-  this.create = function (sessionId, userName) {
+  this.createSession = function (sessionId, userName) {
     this.sessionId = sessionId;
     this.userName = userName;
     $window.sessionStorage.setItem('sessionId', sessionId);
@@ -37,57 +37,58 @@ angular.module('tatool.auth')
     return this.userName ? this.userName : null;
   };
 
-  // adds a new user to the local user db
-  this.addUser = function(userInfo) {
-    var userDB = new PouchDB('_u');
-
+  // adds a new user to the user db and returns a promise. If user exists already rejects the returned promise
+  this.addUser = function(credentials) {
     var deferred = $q.defer();
 
-    var userName = Sha1.hash(userInfo.userName);
-    var userPassword = Sha1.hash(userInfo.userPassword);
+    var user = credentials;
 
-    function map(doc, emit) {
-      if (doc._id === userName) {
-        emit(doc._id);
-      }
+    function onReady() {
+      dataService.getUser(user.userName).then(function(data) {
+        if (data !== undefined) {
+          deferred.reject('The email address entered is already registered.');
+        } else {
+          // add new user
+          dataService.addUser(user).then(function(data) {
+            messageService.setMessage({ type: 'success', msg: 'Registration successful. You can go ahead and login now.'});
+            deferred.resolve(data);
+          }, function(error) {
+            deferred.reject(error);
+          });
+        }
+      }, function(error) {
+        deferred.reject(error);
+      });
     }
 
-    userDB.query(map, {reduce: false}, function(err, response) {
-      if (!response || response.rows.length === 0) {
-        userDB.put({_id : userName, cred: userPassword }, function(err, response) {
-          if (!err) {
-            messageService.setMessage({ type: 'success', msg: 'Registration successful. You can go ahead and login now.'});
-            deferred.resolve(response);
-          }
-        });
-      } else {
-        deferred.reject('The email address entered is already registered.');
-      }
-    });
+    dataService.openUsersDB(onReady);
 
     return deferred.promise;
   };
 
-  // authenticates user against user db
+  // authenticates user against user db and returns a promise
   this.authUser = function(credentials) {
-    var userDB = new PouchDB('_u');
     var deferred = $q.defer();
 
-    var userName = Sha1.hash(credentials.userName);
     var userPassword = Sha1.hash(credentials.userPassword);
 
-    userDB.get(userName,
-      function(err, doc) {
-        if (!err) {
-          if (userPassword === doc.cred) {
+    function onReady() {
+      dataService.getUser(credentials.userName).then(function(data) {
+        if (data !== undefined) {
+          if (userPassword === data.userPassword) {
             deferred.resolve();
           } else {
-            deferred.reject('Login failed. Make sure you enter your information correctly.');
+            deferred.reject('Login failed. Make sure you entered your information correctly.');
           }
         } else {
-          deferred.reject('Login failed. Make sure you enter your information correctly.');
+          deferred.reject('Login failed. Make sure you entered your information correctly.');
         }
+      }, function(error) {
+        deferred.reject(error);
       });
+    }
+
+    dataService.openUsersDB(onReady);
 
     return deferred.promise;
   };

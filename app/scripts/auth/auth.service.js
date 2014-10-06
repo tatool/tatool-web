@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('tatool.auth')
-  .factory('authService', ['$http', '$q', 'userService', 'dataService',  function($http, $q, userService, dataService) {
+  .factory('authService', ['$http', '$q', 'userService', function($http, $q, userService) {
 
   var authService = {};
  
@@ -11,8 +11,7 @@ angular.module('tatool.auth')
     var deferred = $q.defer();
 
     userService.authUser(credentials).then(function() {
-      userService.create(1, credentials.userName);
-      dataService.initUserDB();
+      userService.createSession(1, credentials.userName);
       deferred.resolve();
     }, function(error) {
       deferred.reject(error);

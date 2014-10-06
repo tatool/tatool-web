@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('tatool.module')
-  .controller('MainCtrl', ['$rootScope','$scope', '$log', '$timeout', '$state', '$window', 'dataService', 'executor',
-    function ($rootScope, $scope, $log, $timeout, $state, $window, dataService, executor) {
+  .controller('MainCtrl', ['$rootScope','$scope', '$log', '$timeout', '$state', '$window', 'moduleService', 'userService', 'dataService', 'executor',
+    function ($rootScope, $scope, $log, $timeout, $state, $window, moduleService, userService, dataService, executor) {
 
     $scope.alert = { type: 'danger', msg: '', visible: false };
 
@@ -10,13 +10,13 @@ angular.module('tatool.module')
 
     var allowEscapeKey = false;
 
-    // get the moduleId from sessionStorage and remove afterwards to prevent the module from rerunning after refresh
+    // get the moduleId from sessionStorage and remove afterwards to prevent the module from re-running after refresh
     var moduleId = $window.sessionStorage.getItem('moduleId');
     $window.sessionStorage.removeItem('moduleId');
 
     // Handle global key press
     $scope.keyPress = function($event){
-      if($event.which === 27) { // EscapeKey
+      if($event.which === 27) { // Escape Key
         if (allowEscapeKey) {
           if (executor.exec) {
             executor.abortExecutable();
@@ -24,7 +24,7 @@ angular.module('tatool.module')
           executor.stopModule(true);
         }
       } else {
-        // workaround for mozilla as event timestamp shows time in ms since last reboot instead of time since epoch
+        // workaround fix for mozilla as event timestamp shows time in ms since last reboot instead of time since epoch
         if ($event.timeStamp < MIN_EPOCH_MS) {
           $event.timeStamp = new Date().getTime();
         }
@@ -48,12 +48,11 @@ angular.module('tatool.module')
     });
 
     function loadModule() {
-      var myDataPromise = dataService.openModule(moduleId);
 
       function onModuleSuccess(data) {
         $log.debug('Main: Start module...');
         allowEscapeKey = data.moduleDefinition.allowEscapeKey ? data.moduleDefinition.allowEscapeKey : false;
-        executor.startModule(data);
+        executor.startModule();
       }
 
       function onModuleError(data) {
@@ -61,15 +60,7 @@ angular.module('tatool.module')
         $scope.alert.visible = true;
       }
 
-      myDataPromise.then(onModuleSuccess, onModuleError);
-    }
-
-    // Run Module
-    //enterFullscreen();
-    if (moduleId) {
-      $timeout(loadModule, 0);
-    } else {
-      executor.stopModule(false);
+      moduleService.openModule(userService.getUserName(), moduleId).then(onModuleSuccess, onModuleError);
     }
 
     // Allows to close the alert notification
@@ -78,6 +69,15 @@ angular.module('tatool.module')
       $scope.alert.visible = false;
     };
 
-    
+    // Run Module
+    //enterFullscreen();
+    if (moduleId) {
+      dataService.openModulesDB(userService.getUserName(),
+        function() {
+          dataService.openTrialsDB(userService.getUserName(), loadModule);
+        });
+    } else {
+      executor.stopModule(false);
+    }
 
   }]);

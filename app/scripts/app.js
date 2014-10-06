@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('tatool', ['ngRoute','ui.bootstrap', 'ui.router', 'tatool.app', 'angularSpinner'])
+angular.module('tatool', ['ui.bootstrap', 'ui.router'])
   .constant('cfg', {
     VIEW_PATH:'views/app/'
   })

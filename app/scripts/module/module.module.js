@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('tatool.module', ['ui.bootstrap', 'ui.router', 'angular-progress-arc', 'tatool.auth'])
+angular.module('tatool.module', ['tatool', 'tatool.auth', 'angular-progress-arc'])
   .constant('cfgModule', {
     MODULE_IMG_PATH: '../../images/module/',
     MODULE_VIEW_PATH: '../../views/module/',

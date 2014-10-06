@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('tatool.module')
-  .factory('executor', ['$log', '$location', '$q', '$state', '$timeout', '$injector', '$window', 'moduleService', 'elementStack', 'util', 'executionPhaseService', 'dataService', 'contextService', 'timerService', 'tatoolPhase', 'cfgModule',
-    function ($log, $location, $q, $state, $timeout, $injector, $window, moduleService, elementStack, util, executionPhaseService, dataService, contextService, timerService, tatoolPhase, cfgModule) {
+  .factory('executor', ['$log', '$location', '$q', '$state', '$timeout', '$injector', '$window', 'moduleService', 'elementStack', 'util', 'executionPhaseService', 'trialService', 'contextService', 'timerService', 'tatoolPhase', 'cfgModule',
+    function ($log, $location, $q, $state, $timeout, $injector, $window, moduleService, elementStack, util, executionPhaseService, trialService, contextService, timerService, tatoolPhase, cfgModule) {
     $log.debug('Executor: initialized');
 
     var obj = {currentSessionId: 0, blankInterval: 0, blankIntervalScreen: '', fixationInterval: 0, fixationIntervalScreen: ''};
@@ -12,9 +12,7 @@ angular.module('tatool.module')
     var fixationIntervalPromise;
 
     // Start a new module by initializing the elementStack, create a new session, and then run the top element
-    obj.startModule = function(module){
-      // set module to execute
-      moduleService.setModule(module);
+    obj.startModule = function(){
       // create new session
       obj.currentSessionId = moduleService.createSession();
 
@@ -24,7 +22,7 @@ angular.module('tatool.module')
       elementStack.initialize(moduleService.getModuleDefinition());
 
       // saving the module back to make sure the new session is registered in case of error
-      dataService.saveModule();
+      moduleService.saveModule();
 
       broadcastPhaseChange(tatoolPhase.SESSION_START, elementStack.stack);
       runElement();
@@ -53,14 +51,13 @@ angular.module('tatool.module')
 
       // save module information and return home
       try{
-        dataService.saveModule().then(exitModule);
+        moduleService.saveModule().then(exitModule);
       } catch(exception) {
         exitModule();
       }
     };
 
     function exitModule() {
-      moduleService.setModule(null);
       $window.location = '../../index.html';
     }
 
@@ -216,8 +213,8 @@ angular.module('tatool.module')
       // remove current executable from elementStack
       elementStack.stack.pop();
 
-      // remove all trials from temporary dataService object
-      dataService.clearCurrentTrials();
+      // remove all trials from temporary trialService object
+      trialService.clearCurrentTrials();
     };
 
     // inform the executionPhaseListener of any phase changes

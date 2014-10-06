@@ -6,47 +6,49 @@
 **/
 
 angular.module('tatool.module')
-  .factory('db', ['$log', 'dataService', 'moduleService', 'contextService', function ($log, dataService, moduleService, contextService) {
+  .factory('db', ['$log', 'dataService', 'moduleService', 'contextService', 'trialService',
+    function ($log, dataService, moduleService, contextService, trialService) {
     $log.debug('DB: initialized');
 
     var db = {};
 
     // set a module property (key and value)
     db.setModuleProperty = function(propertyKey, propertyValue) {
-      dataService.setModuleProperty(propertyKey, propertyValue);
+      moduleService.setModuleProperty(propertyKey, propertyValue);
     };
 
     // get a module property by key
     db.getModuleProperty = function(propertyKey) {
-      return dataService.getModuleProperty(propertyKey);
+      return moduleService.getModuleProperty(propertyKey);
     };
 
     // set a session property (key and value)
     db.setSessionProperty = function(propertyKey, propertyValue) {
       var currentSessionId = moduleService.getMaxSessionId();
-      dataService.setSessionProperty(currentSessionId, propertyKey, propertyValue);
+      moduleService.setSessionProperty(currentSessionId, propertyKey, propertyValue);
     };
 
     // get a session property by key
     db.getSessionProperty = function(propertyKey) {
       var currentSessionId = moduleService.getMaxSessionId();
-      return dataService.getSessionProperty(currentSessionId, propertyKey);
+      return moduleService.getSessionProperty(currentSessionId, propertyKey);
     };
 
     // save the module
-    // This is already taken care of by Tatool at the start and end of a session therefore you should not have to call this.
+    // This is already taken care of by Tatool at the start and end of a session.
+    // Only call this method if you require the module to be stored during a session.
     db.saveModule = function() {
-      return dataService.saveModule();
+      return moduleService.saveModule();
     };
 
-    // adds a new trial
+    // add new trial after extending it with base properties
     db.saveTrial = function(trial) {
       trial.moduleId = moduleService.getModuleId();
       trial.sessionId = moduleService.getMaxSessionId();
       trial.trialId = moduleService.getNextTrialId();
       var currentExecutable = contextService.getProperty('currentExecutable');
       trial.executableId = (currentExecutable.name) ? currentExecutable.name : currentExecutable.id;
-      return dataService.addTrial(trial);
+      return trialService.addTrial(trial);
     };
 
     return db;

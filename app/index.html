@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="styles/tatool_auth.css">
     <!-- endbuild -->
   </head>
-  <body ng-app="tatool" ng-controller="MainCtrl" ng-strict-di>
+  <body ng-app="tatool.app" ng-controller="MainCtrl" ng-strict-di>
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
@@ -49,11 +49,11 @@
     <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
     <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
-    <script src="bower_components/pouchdb/dist/pouchdb.js"></script>
     <script src="bower_components/bootbox/bootbox.js"></script>
     <script src="bower_components/angular-progress-arc/angular-progress-arc.js"></script>
     <script src="bower_components/spin.js/spin.js"></script>
     <script src="bower_components/angular-spinner/angular-spinner.js"></script>
+    <script src="bower_components/idb-wrapper/idbstore.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -65,9 +65,10 @@
         <script src="scripts/auth/auth.user.service.js"></script>
         <script src="scripts/auth/auth.message.service.js"></script>
         <script src="scripts/auth/login.ctrl.js"></script>
+        <script src="scripts/app/module.creator.service.js"></script>
         <script src="scripts/app/main.ctrl.js"></script>
         <script src="scripts/app/module.ctrl.js"></script>
-        <script src="scripts/app/data.service.js"></script>
+        <script src="scripts/data.service.js"></script>
         <script src="scripts/app/export.service.js"></script>
         <script src="scripts/common/module.pojo.js"></script>
         <script src="scripts/common/util/sha1.js"></script>

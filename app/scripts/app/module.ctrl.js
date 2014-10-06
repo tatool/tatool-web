@@ -1,40 +1,62 @@
 'use strict';
 
 angular.module('tatool.app')
-  .controller('ModuleCtrl', ['$scope', '$q', '$timeout', '$window', '$rootScope', '$location',  '$state', 'dataService', 'cfgApp', 'authService', 'userService', 'exportService', 'usSpinnerService',
-    function ($scope, $q, $timeout, $window, $rootScope, $location, $state, dataService, cfgApp, authService, userService, exportService, usSpinnerService) {
-  
+  .controller('ModuleCtrl', ['$scope', '$q', '$timeout', '$window', '$rootScope', '$location',  '$state', 'dataService', 'cfgApp', 'authService', 'userService', 'moduleCreatorService', 'exportService', 'usSpinnerService',
+    function ($scope, $q, $timeout, $window, $rootScope, $location, $state, dataService, cfgApp, authService, userService, moduleCreatorService, exportService, usSpinnerService) {
+
     // setting contants
     $scope.imgPath = cfgApp.IMG_PATH;
 
     $scope.modules = [];
 
+    function startSpinner() {
+      usSpinnerService.spin('loadingSpinner');
+    }
+
+    function stopSpinner() {
+      usSpinnerService.stop('loadingSpinner');
+    }
+
     // read all modules and display
     function initModules() {
-      dataService.getAllModules().then( function(response) {
+      dataService.getAllModules().then( function(data) {
         $scope.modules = [];
-        for (var i = 0; i < response.total_rows; i++) {
-          $scope.modules.push(response.rows[i].doc);
+        for (var i = 0; i < data.length; i++) {
+          $scope.modules.push(data[i]);
         }
-        $scope.$apply();
+      }, function(error) {
+        bootbox.dialog({
+          message: error,
+          title: '<b>Tatool</b>',
+          buttons: {
+            success: {
+              label: 'OK',
+              className: 'btn-default'
+            }
+          }
+        });
       });
     }
 
-    initModules();
+    dataService.openModulesDB(userService.getUserName(), initModules);
 
     // upload local file
     $scope.addModule = function(e) {
+
+      startSpinner();
 
       var evt = e || window.event;
       var file = evt.target.files[0];
 
       function onModuleLoaded(result) {
+        stopSpinner();
         $scope.modules.push(result);
         $scope.highlightModuleId = result.moduleId;
         $timeout(function() { $scope.highlightModuleId = null; }, 1000);
       }
 
       function onModuleError(result) {
+        stopSpinner();
         bootbox.dialog({
           message: result,
           title: '<b>Tatool</b>',
@@ -47,21 +69,21 @@ angular.module('tatool.app')
         });
       }
 
-      dataService.addModule(file).then(onModuleLoaded, onModuleError);
+      moduleCreatorService.loadLocalModule(file).then(onModuleLoaded, onModuleError);
     };
 
     // delete module from db
     $scope.deleteModule = function(module) {
 
       function runDelete() {
-        dataService.deleteModule(module.moduleId).then(onModuleDelete, onModuleError);
+        dataService.deleteModule(userService.getUserName(), module.moduleId).then(onModuleDelete, onModuleDeleteError);
       }
 
       function onModuleDelete() {
         initModules();
       }
 
-      function onModuleError(result) {
+      function onModuleDeleteError(result) {
 
         bootbox.dialog({
           message: result,
@@ -101,13 +123,13 @@ angular.module('tatool.app')
     };
 
     $scope.exportModuleData = function(module) {
-      usSpinnerService.spin('loadingSpinner');
+      startSpinner();
       exportService.getAllTrials(module.moduleId).then(function(response) {
         var filename = module.moduleId + '_' + userService.getUserName() +  '.csv';
-         usSpinnerService.stop('loadingSpinner');
+        stopSpinner();
         download(response, filename, 'data:text/plain');
       }, function(error) {
-        usSpinnerService.stop('loadingSpinner');
+        stopSpinner();
         bootbox.dialog({
           message: error,
           title: '<b>Tatool</b>',

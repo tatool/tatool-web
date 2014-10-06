@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('tatool.module')
-  .factory('levelHandler', ['$log', '$rootScope', 'dataService', 'statusPanelService', 'handlerService', 'tatoolPhase',
-    function ($log, $rootScope, dataService, statusPanelService, handlerService, tatoolPhase) {
+  .factory('levelHandler', ['$log', '$rootScope', 'statusPanelService', 'handlerService', 'tatoolPhase', 'moduleService', 'trialService',
+    function ($log, $rootScope, statusPanelService, handlerService, tatoolPhase, moduleService, trialService) {
 
     // create a new handler object and set all handler properties
     var LevelHandler = function() {
@@ -22,14 +22,14 @@ angular.module('tatool.module')
     LevelHandler.prototype.processPhase = function(phase) {
       if (phase == tatoolPhase.SESSION_START) {
         // get values from module
-        this.counter = (dataService.getModuleProperty(this.name + '.counter') != undefined) 
-                          ? dataService.getModuleProperty(this.name + '.counter') : 0;
-        this.totalScore = (dataService.getModuleProperty(this.name + '.totalScore') != undefined) 
-                            ? dataService.getModuleProperty(this.name + '.totalScore') : 0;
-        this.maxScore = (dataService.getModuleProperty(this.name + '.maxScore') != undefined) 
-                            ? dataService.getModuleProperty(this.name + '.maxScore') : 0;
-        this.currentLevel = (dataService.getModuleProperty(this.name + '.currentLevel') != undefined) 
-                              ? dataService.getModuleProperty(this.name + '.currentLevel') : 1;
+        this.counter = (moduleService.getModuleProperty(this.name + '.counter') != undefined) 
+                          ? moduleService.getModuleProperty(this.name + '.counter') : 0;
+        this.totalScore = (moduleService.getModuleProperty(this.name + '.totalScore') != undefined) 
+                            ? moduleService.getModuleProperty(this.name + '.totalScore') : 0;
+        this.maxScore = (moduleService.getModuleProperty(this.name + '.maxScore') != undefined) 
+                            ? moduleService.getModuleProperty(this.name + '.maxScore') : 0;
+        this.currentLevel = (moduleService.getModuleProperty(this.name + '.currentLevel') != undefined) 
+                              ? moduleService.getModuleProperty(this.name + '.currentLevel') : 1;
       } else if (phase == tatoolPhase.EXECUTABLE_START) {
         this.updateStatusPanel();
       } else if (phase == tatoolPhase.EXECUTABLE_END) {
@@ -41,7 +41,7 @@ angular.module('tatool.module')
     LevelHandler.prototype.processItems = function() {
 
       // loop through trials and increment totalScore
-      var trials = dataService.getCurrentTrials();
+      var trials = trialService.getCurrentTrials();
       for (var i = 0; i < trials.length; i++) {
         var currentTrial = trials[i];
         if ('score' in currentTrial) {
@@ -66,10 +66,10 @@ angular.module('tatool.module')
       }
 
       // save current property values to module
-      dataService.setModuleProperty(this.name + '.counter', this.counter);
-      dataService.setModuleProperty(this.name + '.totalScore', this.totalScore);
-      dataService.setModuleProperty(this.name + '.maxScore', this.totalScore);
-      dataService.setModuleProperty(this.name + '.currentLevel', this.currentLevel);
+      moduleService.setModuleProperty(this.name + '.counter', this.counter);
+      moduleService.setModuleProperty(this.name + '.totalScore', this.totalScore);
+      moduleService.setModuleProperty(this.name + '.maxScore', this.totalScore);
+      moduleService.setModuleProperty(this.name + '.currentLevel', this.currentLevel);
     };
 
     // returns the current level

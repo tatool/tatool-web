@@ -11,17 +11,19 @@ angular.module('tatool.app')
       var deferred = $q.defer();
 
       $log.debug(new Date() + ': Request all trials');
-      dataService.getAllTrials(moduleId).then( function(response) {
-        if (response.rows.length !== 0) {
-          exportData(moduleId, response).then(function(csv) {
-            deferred.resolve(csv);
-          });
-        } else {
-          deferred.reject('There is no data to export for this module.');
-        }
-      }, function(error) {
-        deferred.reject(error);
-      });
+      dataService.getAllTrials(userService.getUserName(), moduleId).then(
+        function(data) {
+          if (data !== undefined) {
+            exportData(moduleId, data).then(
+              function(csv) {
+                deferred.resolve(csv);
+              });
+          } else {
+            deferred.reject('There is no data to export for this module.');
+          }
+        }, function(error) {
+          deferred.reject(error);
+        });
 
       return deferred.promise;
     };
@@ -92,23 +94,25 @@ angular.module('tatool.app')
 
     function exportData(moduleId, trials) {
       var deferred = $q.defer();
-      dataService.getModule(moduleId).then(function(response) {
-        // prepare module properties
-        var moduleProperties = getModuleProperties(response);
-        var sessionProperties = getSessionProperties(response);
 
-        var csv = convertToCsv(trials, moduleProperties, sessionProperties);
-        deferred.resolve(csv);
-      }, function(error) {
-        deferred.reject(error);
-      });
+      dataService.getModule(moduleId).then(
+        function(response) {
+          // prepare module properties
+          var moduleProperties = getModuleProperties(response);
+          var sessionProperties = getSessionProperties(response);
+
+          var csv = convertToCsv(trials, moduleProperties, sessionProperties);
+          deferred.resolve(csv);
+        }, function(error) {
+          deferred.reject(error);
+        });
       return deferred.promise;
     }
 
     function convertToCsv(allTrials, moduleProperties, sessionProperties) {
       $log.debug(new Date() + ': Convert Trials to CSV');
       var output = '';
-      var trials = allTrials.rows;
+      var trials = allTrials;
       var header = ['userId', 'moduleId', 'sessionId', 'trialId', 'executableId'];
       var prefix = '';
 
@@ -135,7 +139,7 @@ angular.module('tatool.app')
 
       // loop through all trials
       for (var i = 0; i < trials.length; i++) {
-        var currentTrial = trials[i].doc;
+        var currentTrial = trials[i];
         prefix = currentTrial.executableId;
 
         // create new line and add userId as static first element
