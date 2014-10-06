@@ -12,31 +12,28 @@
  */
 
 angular.module('tatool.module')
-  .factory('dbRegression', [ '$log', 'executor', 'db', 'timerService', 'tatoolPhase',
-    function ($log, executor, db, timerService, tatoolPhase) {
+  .factory('dbRegression', [ '$log', 'tatoolExecutable', 'db', 'timerService', 'tatoolPhase',
+    function ($log, tatoolExecutable, db, timerService, tatoolPhase) {
 
-    // Define our executable service constructor which will be called once for every instance
-    var DbRegression = function() {
-      // no access to module properties or services here
+    // Create our executable
+    var DbRegression = tatoolExecutable.createExecutable();
+
+    // Initialize all properties at session start (executable/trial properties)
+    DbRegression.prototype.init = function() {
+      $log.debug('Initialize Executable with name: ' + this.name);
       this.stimulusText = '';
       this.styleIsGreen = true;
       this.startTime = 0;
       this.endTime = 0;
       this.timerDuration = 10;
       this.trial = {};
-    };
 
-    // Initialize all properties at session start (executable/trial properties)
-    DbRegression.prototype.processPhase = function(phase) {
-      if (phase == tatoolPhase.SESSION_START) {
-        $log.debug('Initialize Executable with name: ' + this.name);
-        this.trial.correctResponse = null;
-        this.trial.givenResponse = null;
-        this.trial.reactionTime = 0;
-        this.trial.score = null;
+      this.trial.correctResponse = null;
+      this.trial.givenResponse = null;
+      this.trial.reactionTime = 0;
+      this.trial.score = null;
 
-        this.timer = timerService.createTimer(this.timerDuration, true, this);
-      }
+      this.timer = timerService.createTimer(this.timerDuration, true, this);
     };
 
     // Generate a random stimulus and set properties
@@ -76,7 +73,7 @@ angular.module('tatool.module')
       db.setModuleProperty('module1', 2);
       db.setModuleProperty('module2', 456431);
       
-      db.saveTrial(this.trial).then(executor.stopExecutable());
+      db.saveTrial(this.trial).then(tatoolExecutable.stopExecutable());
     };
 
     // Return our executable service object

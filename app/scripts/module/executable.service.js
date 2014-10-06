@@ -1,16 +1,17 @@
 'use strict';
 
 angular.module('tatool.module')
-  .service('executableService', ['$log', '$rootScope', '$injector', 'contextService', 'tatoolPhase',
-    function ($log, $rootScope, $injector, contextService, tatoolPhase) {
+  .service('executableService', ['$log', '$rootScope', '$injector', 'contextService', 'tatoolPhase', 'tatoolExecutable',
+    function ($log, $rootScope, $injector, contextService, tatoolPhase, tatoolExecutable) {
 
     var executableService = {};
 
     var executables = {};
 
     // reset the list of executables
-    executableService.init = function() {
+    executableService.init = function(runningExecutor) {
       executables = {};
+      tatoolExecutable.init(runningExecutor);
     };
 
     // create a new executable from service and register
@@ -18,6 +19,12 @@ angular.module('tatool.module')
       var ExecutableService = $injector.get(executableJson.id);
       var executable = new ExecutableService();
       angular.extend(executable, executableJson);
+
+      // run init method on executable if available
+      if ('init' in executable) {
+        executable.init();
+      }
+
       this.registerExecutable(executable.name, executable);
       return executable;
     };

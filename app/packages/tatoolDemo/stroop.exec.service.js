@@ -12,31 +12,28 @@
  */
 
 angular.module('tatool.module')
-  .factory('stroopExecutable', [ '$log', 'executor', 'db', 'timerService', 'tatoolPhase',
-    function ($log, executor, db, timerService, tatoolPhase) {
+  .factory('stroopExecutable', [ '$log', 'db', 'timerService', 'tatoolPhase', 'tatoolExecutable',
+    function ($log, db, timerService, tatoolPhase, tatoolExecutable) {
 
     // Define our executable service constructor which will be called once for every instance
-    var StroopExecutable = function() {
-      // no access to module properties or services here
+
+    var StroopExecutable = tatoolExecutable.createExecutable();
+
+    //  Initialze variables at the start of every session
+    StroopExecutable.prototype.init = function() {
       this.stimulusText = '';
       this.styleIsGreen = true;
       this.startTime = 0;
       this.endTime = 0;
       this.timerDuration = 2000;
       this.trial = {};
-    };
 
-    // Initialize all properties at session start (executable/trial properties)
-    StroopExecutable.prototype.processPhase = function(phase) {
-      if (phase == tatoolPhase.SESSION_START) {
-        $log.debug('Initialize Executable with name: ' + this.name);
-        this.trial.correctResponse = null;
-        this.trial.givenResponse = null;
-        this.trial.reactionTime = 0;
-        this.trial.score = null;
+      this.trial.correctResponse = null;
+      this.trial.givenResponse = null;
+      this.trial.reactionTime = 0;
+      this.trial.score = null;
 
-        this.timer = timerService.createTimer(this.timerDuration, true, this);
-      }
+      this.timer = timerService.createTimer(this.timerDuration, true, this);
     };
 
     // Generate a random stimulus and set properties
@@ -77,7 +74,7 @@ angular.module('tatool.module')
       //db.saveModule().then(executor.stopExecutable());
 
       // b) if you want to save the trial to the db and stop the executable.
-      db.saveTrial(this.trial).then(executor.stopExecutable());
+      db.saveTrial(this.trial).then(tatoolExecutable.stopExecutable());
 
       // c) if you want to stop the execution of this executable without saving anything
       //executor.stopExecutable()

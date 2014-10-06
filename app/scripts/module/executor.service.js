@@ -19,7 +19,7 @@ angular.module('tatool.module')
       obj.continueModule = true;
 
       // initialize the stack
-      elementStack.initialize(moduleService.getModuleDefinition());
+      elementStack.initialize(obj, moduleService.getModuleDefinition());
 
       // saving the module back to make sure the new session is registered in case of error
       moduleService.saveModule();

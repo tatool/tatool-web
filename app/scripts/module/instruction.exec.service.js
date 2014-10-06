@@ -1,17 +1,17 @@
 'use strict';
 
 angular.module('tatool.module')
-  .factory('tatoolInstruction', [ '$log', 'executor',
-    function ($log, executor) {
+  .factory('tatoolInstruction', [ '$log', 'tatoolExecutable',
+    function ($log, tatoolExecutable) {
 
-    var tatoolInstruction = function() {
-      
+    var TatoolInstruction = tatoolExecutable.createExecutable();
+
+    TatoolInstruction.prototype.init = function() {
     };
 
-    tatoolInstruction.prototype.stopExecution = function() {
-      executor.stopExecutable();
+    TatoolInstruction.prototype.stopExecution = function() {
+      tatoolExecutable.stopExecutable();
     };
-    // Return our service object
-    return tatoolInstruction;
 
+    return TatoolInstruction;
   }]);

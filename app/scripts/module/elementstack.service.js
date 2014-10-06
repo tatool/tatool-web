@@ -79,11 +79,11 @@ angular.module('tatool.module')
     obj.stack = new Stack();
 
     // initialize the element stack
-    obj.initialize = function(json){
+    obj.initialize = function(executor, json){
       obj.stack.clearAll();
       var moduleHierarchy = JSON.parse(JSON.stringify(json.moduleHierarchy));
       handlerService.init();
-      executableService.init();
+      executableService.init(executor);
       obj.convertJson(null, 'moduleHierarchy', moduleHierarchy);
       obj.stack.push(moduleHierarchy);
     };
