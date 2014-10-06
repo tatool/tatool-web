@@ -6,14 +6,14 @@
     "packageUrl": "packages/tatoolDemo",
     "allowEscapeKey" : true,
     "moduleHierarchy": {
-    	"elementType": "List",
-        "iterator": { "id" : "ListIterator", "numIterations" : "1" },
-        "handlers": [ { "id" : "levelHandler", "name" : "level" }, { "id" : "trialCountHandler", "name" : "counter" } ],
+    	"tatoolType": "List",
+        "iterator": { "customType" : "ListIterator", "numIterations" : "1" },
+        "handlers": [ { "customType" : "levelHandler", "name" : "level" }, { "customType" : "trialCountHandler", "name" : "counter" } ],
     	"children": 
     		[
                 {
-                    "elementType": "Executable",
-                    "id": "tatoolInstruction",
+                    "tatoolType": "Executable",
+                    "customType": "tatoolInstruction",
                     "name": "instructions",
                     "blankInterval" : "600",
                     "pages": [
@@ -23,14 +23,14 @@
                 },
 
                 {
-                    "elementType": "Dual",
-                    "iterator": { "id" : "ListIterator", "numIterations" : "2" },
+                    "tatoolType": "Dual",
+                    "iterator": { "customType" : "ListIterator", "numIterations" : "2" },
                     "handlers": [  ],
                     "children": 
                         {
                             "primary" : {
-                                "elementType": "Executable",
-                                "id": "complexNumExecutable",
+                                "tatoolType": "Executable",
+                                "customType": "complexNumExecutable",
                                 "name": "first",
                                 "blankInterval" : "600",
                                 "status": {
@@ -41,8 +41,8 @@
                                 }
                             }, 
                             "secondary" : {
-                                "elementType": "Executable",
-                                "id": "stroopExecutable",
+                                "tatoolType": "Executable",
+                                "customType": "stroopExecutable",
                                 "name": "second",
                                 "blankInterval" : "600",
                                 "status": {
@@ -55,14 +55,14 @@
                         }
                 },
                 {
-                    "elementType": "List",
-                    "iterator": { "id" : "ListIterator", "numIterations" : "2" },
+                    "tatoolType": "List",
+                    "iterator": { "customType" : "ListIterator", "numIterations" : "2" },
                     "handlers": [  ],
                     "children": 
                         [
                             {
-                                "elementType": "Executable",
-                                "id": "stroopExecutable",
+                                "tatoolType": "Executable",
+                                "customType": "stroopExecutable",
                                 "name": "third",
                                 "fixationInterval" : "500",
                                 "blankInterval" : "600",

@@ -5,14 +5,14 @@
     "packageUrl": "/packages/tatoolDemo",
     "version": 3,
     "moduleHierarchy": {
-    	"elementType": "List",
-        "iterator": { "id" : "ListIterator", "numIterations" : "3" },
-        "handlers": [ { "id" : "levelHandler", "name" : "level" }, { "id" : "trialCountHandler", "name" : "counter" } ],
+    	"tatoolType": "List",
+        "iterator": { "customType" : "ListIterator", "numIterations" : "3" },
+        "handlers": [ { "customType" : "levelHandler", "name" : "level" }, { "customType" : "trialCountHandler", "name" : "counter" } ],
     	"children": 
     		[
     			{
-    				"elementType": "Executable",
-    				"id": "stroopExecutable",
+    				"tatoolType": "Executable",
+    				"customType": "stroopExecutable",
                     "name": "stroop1",
                     "blankInterval" : "600",
                     "status": {
@@ -23,8 +23,8 @@
                     }
     			}, 
     			{
-    				"elementType": "Executable",
-    				"id": "stroopExecutable",
+    				"tatoolType": "Executable",
+    				"customType": "stroopExecutable",
                     "name": "stroop2",
                     "blankInterval" : "600",
                     "status": {
@@ -35,14 +35,14 @@
                     }
     			},
                 {
-                    "elementType": "List",
-                    "iterator": { "id" : "ListIterator", "numIterations" : "2" },
+                    "tatoolType": "List",
+                    "iterator": { "customType" : "ListIterator", "numIterations" : "2" },
                     "handlers": [  ],
                     "children": 
                         [
                             {
-                                "elementType": "Executable",
-                                "id": "stroopExecutable",
+                                "tatoolType": "Executable",
+                                "customType": "stroopExecutable",
                                 "name": "stroop3",
                                 "fixationInterval" : "500",
                                 "blankInterval" : "600",

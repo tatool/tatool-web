@@ -15,7 +15,7 @@ angular.module('tatool.module')
 
     // create a new handler from service and register
     handlerService.addHandler = function(handlerJson) {
-      var HandlerService = $injector.get(handlerJson.id);
+      var HandlerService = $injector.get(handlerJson.customType);
       var handler = new HandlerService();
       angular.extend(handler, handlerJson);
       this.registerHandler(handler.name, handler);
@@ -65,7 +65,7 @@ angular.module('tatool.module')
 
         // check the current elements Dual iterator
         if ('iterator' in currentElement) {
-          if (currentElement.elementType === 'Dual') {
+          if (currentElement.tatoolType === 'Dual') {
             isReady = !currentElement.iterator.iter.hasNext();
           }
         }

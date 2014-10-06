@@ -90,16 +90,16 @@ angular.module('tatool.module')
 
     // converting JSON into JavaScripts objects
     obj.convertJson = function(parent, key, element){
-      if ('elementType' in element) {
-        if (element.elementType === 'Executable') {
+      if ('tatoolType' in element) {
+        if (element.tatoolType === 'Executable') {
           // instantiate executables and register with executableService
           var executable = executableService.addExecutable(element);
           parent[key] = executable;
         }
       }
       if ('iterator' in element) {
-        var iteratorId = element.iterator.id;
-        var iterator = new $window[iteratorId]();
+        var iteratorType = element.iterator.customType;
+        var iterator = new $window[iteratorType]();
         
         angular.extend(iterator, element.iterator);
         element.iterator = iterator;

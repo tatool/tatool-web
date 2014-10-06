@@ -4,14 +4,14 @@
     "version": 3,
     "packageUrl": "/packages/tatoolDemo",
     "moduleHierarchy": {
-    	"elementType": "List",
-        "iterator": { "id" : "ListIterator", "numIterations" : "3" },
-        "handlers": [ { "id" : "levelHandler", "name" : "level" } ],
+    	"tatoolType": "List",
+        "iterator": { "customType" : "ListIterator", "numIterations" : "3" },
+        "handlers": [ { "customType" : "levelHandler", "name" : "level" } ],
     	"children": 
     		[
     			{
-    				"elementType": "Executable",
-    				"id": "tatoolInstruction",
+    				"tatoolType": "Executable",
+    				"customType": "tatoolInstruction",
                     "name": "instruction1",
                     "blankInterval" : "600",
                     "pages": [
@@ -32,8 +32,8 @@
                                 }
     			}, 
     			{
-                    "elementType": "Executable",
-                    "id": "tatoolInstruction",
+                    "tatoolType": "Executable",
+                    "customType": "tatoolInstruction",
                     "name": "instruction2",
                     "blankInterval" : "600",
                     "pages": [

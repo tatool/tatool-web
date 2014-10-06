@@ -66,7 +66,7 @@ angular.module('tatool.module')
       var x = 0;
 
       while (x < 100) {
-        if (elementStack.stack.peek().elementType === 'Executable') {
+        if (elementStack.stack.peek().tatoolType === 'Executable') {
           return true;
         } else if (runSelector()) {
           continue;
@@ -175,10 +175,10 @@ angular.module('tatool.module')
       broadcastPhaseChange(tatoolPhase.EXECUTABLE_START, elementStack.stack);
 
       var url = '';
-      if (currentExecutable.id === 'tatoolInstruction') {
+      if (currentExecutable.tatoolType === 'Executable' && currentExecutable.customType === 'tatoolInstruction') {
         url = cfgModule.DEFAULT_INSTRUCTION_SCREEN;
       } else {
-        url = currentExecutable.id + '.html';
+        url = currentExecutable.customType + '.html';
       }
       var params = { moduleId: moduleService.getModuleId(), type: 'executable', url: url, content: currentExecutable };
 

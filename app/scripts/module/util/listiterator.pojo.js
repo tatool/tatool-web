@@ -36,7 +36,7 @@ ListIterator.prototype.canCreateIterator = function() {
 // creates a simple iterator over child elements
 ListIterator.prototype.createIterator = function(currentStack) {
   var currentElement = currentStack.peek().children;
-  if (currentStack.peek().elementType == "List") {
+  if (currentStack.peek().tatoolType === 'List') {
     this.iter = {
       i:       0,
       hasNext: function() {
@@ -50,17 +50,17 @@ ListIterator.prototype.createIterator = function(currentStack) {
     this.iter = {
       i:       1,
       hasNext: function() {
-        if (this.i == 4 && currentElement.primary.dual == 'SUSPENDED') {
+        if (this.i === 4 && currentElement.primary.dual === 'SUSPENDED') {
           this.i = 1;
           return true;
-        } else if (this.i == 4 && currentElement.primary.dual != 'SUSPENDED') {
+        } else if (this.i === 4 && currentElement.primary.dual !== 'SUSPENDED') {
           return false;
         } else if (this.i < 4) {
           return true;
         }
       },
       next:   function() {
-        if (this.i == 1 || this.i == 3) {
+        if (this.i === 1 || this.i === 3) {
           this.i++;
           return currentElement.primary;
         } else {

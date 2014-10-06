@@ -16,7 +16,7 @@ angular.module('tatool.module')
 
     // create a new executable from service and register
     executableService.addExecutable = function(executableJson) {
-      var ExecutableService = $injector.get(executableJson.id);
+      var ExecutableService = $injector.get(executableJson.customType);
       var executable = new ExecutableService();
       angular.extend(executable, executableJson);
 
@@ -53,7 +53,7 @@ angular.module('tatool.module')
       var elementStack = contextService.getProperty('elementStack');
       for (var i = 0; i < elementStack.length; i++) {
         var currentElement = elementStack[i];
-        if ('elementType' in currentElement && currentElement.elementType === 'Executable' && 'processPhase' in executables[currentElement.name]) {
+        if ('tatoolType' in currentElement && currentElement.tatoolType === 'Executable' && 'processPhase' in executables[currentElement.name]) {
           executables[currentElement.name].processPhase(phase);
         }
       }

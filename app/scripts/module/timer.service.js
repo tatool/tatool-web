@@ -14,7 +14,7 @@ angular.module('tatool.module')
     // creates a new timer, registers and returns it
     timerService.createTimer = function(duration, visual, executable) {
       if (!executable.name) {
-        throw('Timer could not be created for executable  with id \''+executable.id+ '\'. The name property for this executable is missing or the timer is instantiated in the executable constructor.');
+        throw('Timer could not be created for executable  with customType \''+executable.customType+ '\'. The name property for this executable is missing or the timer is instantiated in the executable constructor.');
       }
 
       var newTimer = new Timer(duration, visual);

@@ -47,7 +47,7 @@ angular.module('tatool.module')
       trial.sessionId = moduleService.getMaxSessionId();
       trial.trialId = moduleService.getNextTrialId();
       var currentExecutable = contextService.getProperty('currentExecutable');
-      trial.executableId = (currentExecutable.name) ? currentExecutable.name : currentExecutable.id;
+      trial.executableId = (currentExecutable.name) ? currentExecutable.name : currentExecutable.customType;
       return trialService.addTrial(trial);
     };
 

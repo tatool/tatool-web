@@ -6,14 +6,14 @@
     "packageUrl": "packages/test",
     "allowEscapeKey" : true,
     "moduleHierarchy": {
-    	"elementType": "List",
-        "iterator": { "id" : "ListIterator", "numIterations" : "5000" },
+    	"tatoolType": "List",
+        "iterator": { "customType" : "ListIterator", "numIterations" : "5000" },
         "handlers": [ ],
     	"children": 
     		[
                 {
-                    "elementType": "Executable",
-                    "id": "dbRegression",
+                    "tatoolType": "Executable",
+                    "customType": "dbRegression",
                     "name": "regressionTask",
                     "blankInterval" : "10"
                 }

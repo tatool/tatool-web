@@ -69,7 +69,7 @@ angular.module('tatool.module', ['tatool', 'tatool.auth', 'angular-progress-arc'
               if($stateParams.type === 'custom') {
                 return null;
               } else {
-                return $stateParams.content.id + 'Ctrl';
+                return $stateParams.content.customType + 'Ctrl';
               }
             }]
           },
