@@ -127,7 +127,7 @@ angular.module('tatool.app')
       exportService.getAllTrials(module.moduleId).then(function(response) {
         var filename = module.moduleId + '_' + userService.getUserName() +  '.csv';
         stopSpinner();
-        download(response, filename, 'data:text/plain');
+        download(response, filename, 'text/plain');
       }, function(error) {
         stopSpinner();
         bootbox.dialog({
