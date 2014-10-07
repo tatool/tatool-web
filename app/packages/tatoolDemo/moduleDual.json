@@ -22,7 +22,6 @@
                         "complexNum.inst.02.html"
                     ]
                 },
-
                 {
                     "tatoolType": "Dual",
                     "iterator": { "customType" : "ListIterator", "numIterations" : "2" },

@@ -10,10 +10,10 @@ angular.module('tatool.app')
     exporter.getAllTrials = function(moduleId) {
       var deferred = $q.defer();
 
-      $log.debug(new Date() + ': Request all trials');
       dataService.getAllTrials(userService.getUserName(), moduleId).then(
         function(data) {
-          if (data !== undefined) {
+          console.log(data);
+          if (data !== undefined && data.length > 0) {
             exportData(moduleId, data).then(
               function(csv) {
                 deferred.resolve(csv);
