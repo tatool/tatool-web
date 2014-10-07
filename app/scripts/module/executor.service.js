@@ -21,7 +21,7 @@ angular.module('tatool.module')
       // initialize the stack
       elementStack.initialize(obj, moduleService.getModuleDefinition());
 
-      // saving the module back to make sure the new session is registered in case of error
+      // saving the module back to make sure the new session is registered in case of an error
       moduleService.saveModule();
 
       broadcastPhaseChange(tatoolPhase.SESSION_START, elementStack.stack);
@@ -175,8 +175,10 @@ angular.module('tatool.module')
       broadcastPhaseChange(tatoolPhase.EXECUTABLE_START, elementStack.stack);
 
       var url = '';
-      if (currentExecutable.tatoolType === 'Executable' && currentExecutable.customType === 'tatoolInstruction') {
+      if (currentExecutable.customType === 'tatoolInstruction') {
         url = cfgModule.DEFAULT_INSTRUCTION_SCREEN;
+      } else if (currentExecutable.customType === 'tatoolCountdown') {
+        url = cfgModule.DEFAULT_COUNTDOWN_SCREEN;
       } else {
         url = currentExecutable.customType + '.html';
       }

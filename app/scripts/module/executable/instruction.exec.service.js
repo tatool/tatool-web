@@ -9,7 +9,7 @@ angular.module('tatool.module')
     TatoolInstruction.prototype.init = function() {
     };
 
-    TatoolInstruction.prototype.stopExecution = function() {
+    TatoolInstruction.prototype.stopExecutable = function() {
       tatoolExecutable.stopExecutable();
     };
 

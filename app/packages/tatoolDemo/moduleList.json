@@ -2,7 +2,7 @@
     "name": "List Element with extra line and stuff",
     "id": "demoModule2",
     "author": "University of Colorado Boulder",
-    "packageUrl": "/packages/tatoolDemo",
+    "packagePath": "/packages/tatoolDemo",
     "version": 3,
     "moduleHierarchy": {
     	"tatoolType": "List",

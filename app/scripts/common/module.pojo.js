@@ -9,7 +9,7 @@ var Module = function(moduleId) {
   this.moduleProperties = {};
   this.maxSessionId = 0;
   this.moduleDefinition = {};
-  this.modulePackageUrl = '';
+  this.modulePackagePath = '';
   this.sessions = {};
 };
 
@@ -43,8 +43,8 @@ Module.prototype.getDefinition = function() {
   return this.moduleDefinition;
 };
 
-Module.prototype.getPackageUrl = function() {
-  return this.modulePackageUrl;
+Module.prototype.getPackagePath = function() {
+  return this.modulePackagePath;
 };
 
 // sets the module name
@@ -68,8 +68,8 @@ Module.prototype.setModuleDefinition = function(moduleDefinition) {
 };
 
 // sets the module package url
-Module.prototype.setModulePackageUrl = function(packageUrl) {
-  this.modulePackageUrl = packageUrl;
+Module.prototype.setModulePackagePath = function(packagePath) {
+  this.modulePackagePath = packagePath;
 };
 
 // add a session to this module

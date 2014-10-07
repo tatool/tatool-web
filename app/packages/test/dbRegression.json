@@ -3,7 +3,7 @@
     "id": "dbRegression",
     "author": "Tatool",
     "version": 3,
-    "packageUrl": "packages/test",
+    "packagePath": "packages/test",
     "allowEscapeKey" : true,
     "moduleHierarchy": {
     	"tatoolType": "List",

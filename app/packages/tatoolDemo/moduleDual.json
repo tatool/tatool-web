@@ -3,7 +3,7 @@
     "id": "demoModule1",
     "author": "University of Zurich",
     "version": 3,
-    "packageUrl": "packages/tatoolDemo",
+    "packagePath": "packages/tatoolDemo",
     "allowEscapeKey" : true,
     "moduleHierarchy": {
     	"tatoolType": "List",

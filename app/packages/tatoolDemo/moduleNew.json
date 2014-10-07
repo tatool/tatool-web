@@ -2,7 +2,7 @@
     "name": "My Module",
     "id": "demoModule3",
     "author": "Andre Locher",
-    "packageUrl": "/packages/tatoolDemo",
+    "packagePath": "/packages/tatoolDemo",
     "version": 3,
     "moduleHierarchy": {
     	"tatoolType": "List",
@@ -10,6 +10,14 @@
         "handlers": [ { "customType" : "levelHandler", "name" : "level" } ],
     	"children": 
     		[
+                {
+                    "tatoolType": "Executable",
+                    "customType": "tatoolCountdown",
+                    "name": "countdown1",
+                    "countdown": 3,
+                    "interval": 800,
+                    "blankInterval" : "50"
+                }, 
     			{
     				"tatoolType": "Executable",
     				"customType": "stroopExecutable",

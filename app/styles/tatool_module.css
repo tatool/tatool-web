@@ -231,9 +231,15 @@ circle {
 /* Text Effects */
 
 .fixationCross {
-    font-size: 700%;
+    font-size: 800%;
     color:black;
     text-shadow: 0px 1px 2px #a5a5a5;
+}
+
+.countdown {
+  font-size: 700%;
+  color:black;
+  text-shadow: 0px 1px 2px #a5a5a5;
 }
 
 

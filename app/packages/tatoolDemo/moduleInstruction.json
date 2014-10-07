@@ -2,7 +2,7 @@
     "name": "Instructions",
     "id": "demo",
     "version": 3,
-    "packageUrl": "/packages/tatoolDemo",
+    "packagePath": "/packages/tatoolDemo",
     "moduleHierarchy": {
     	"tatoolType": "List",
         "iterator": { "customType" : "ListIterator", "numIterations" : "3" },

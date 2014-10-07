@@ -70,8 +70,8 @@ angular.module('tatool.module')
       return module.getDefinition();
     };
 
-    moduleService.getModulePackageUrl = function() {
-      return module.getPackageUrl();
+    moduleService.getModulePackagePath = function() {
+      return module.getPackagePath();
     };
 
     moduleService.getNextSessionId = function() {

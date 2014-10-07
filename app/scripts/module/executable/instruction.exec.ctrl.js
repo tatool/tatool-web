@@ -43,7 +43,7 @@ angular.module('tatool.module')
         $scope.currentPage = $scope.urls[$scope.currentIndex];
       } else if (index > 0 && $scope.currentIndex === ($scope.urls.length - 1)) {
         inputEnabled = false;
-        service.stopExecution();
+        service.stopExecutable();
       }
     };
 

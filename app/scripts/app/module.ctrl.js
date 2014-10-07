@@ -118,7 +118,7 @@ angular.module('tatool.app')
     $scope.startModule = function(module) {
       // set the moduleId to the session
       $window.sessionStorage.setItem('moduleId', module.moduleId);
-      var moduleUrl = module.modulePackageUrl + '/index.html';
+      var moduleUrl = module.modulePackagePath + '/index.html';
       $window.location = moduleUrl;
     };
 
