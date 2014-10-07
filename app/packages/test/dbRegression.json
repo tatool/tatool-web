@@ -3,11 +3,11 @@
     "id": "dbRegression",
     "author": "Tatool",
     "version": 3,
-    "packagePath": "packages/test",
+    "packagePath": "http://tatool-web.herokuapp.com/index.html#/packages/tatoolDemo/index.html/index.html",
     "allowEscapeKey" : true,
     "moduleHierarchy": {
     	"tatoolType": "List",
-        "iterator": { "customType" : "ListIterator", "numIterations" : "5000" },
+        "iterator": { "customType" : "ListIterator", "numIterations" : "5" },
         "handlers": [ ],
     	"children": 
     		[

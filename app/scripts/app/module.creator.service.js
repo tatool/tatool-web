@@ -78,7 +78,7 @@ angular.module('tatool.app')
               }, function(error) {
                 deferred.reject(error);
               });
-            }
+          }
         } else {
           deferred.reject('Not a proper JSON file');
         }
@@ -122,7 +122,7 @@ angular.module('tatool.app')
           if(!('children' in element)) {
             validationMessage(null, 'children', element);
           } else {
-            angular.forEach(element.children, function(value, key) {
+            angular.forEach(element.children, function(value) {
               validateHierarchy(value);
             });
           }

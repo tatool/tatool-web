@@ -5,6 +5,7 @@
     "version": 3,
     "packagePath": "packages/tatoolDemo",
     "allowEscapeKey" : true,
+    "fullscreen": true,
     "moduleHierarchy": {
     	"tatoolType": "List",
         "iterator": { "customType" : "ListIterator", "numIterations" : "1" },

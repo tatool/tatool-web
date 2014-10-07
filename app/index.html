@@ -30,9 +30,7 @@
 
     <span us-spinner="{radius:25, width:8, length: 18}" spinner-key="loadingSpinner"></span>
 
-    <div id="container">
-      <div ui-view></div>
-    </div>
+    <div ui-view></div>
 
     <!--[if lt IE 9]>
     <script src="bower_components/es5-shim/es5-shim.js"></script>
@@ -54,6 +52,7 @@
     <script src="bower_components/spin.js/spin.js"></script>
     <script src="bower_components/angular-spinner/angular-spinner.js"></script>
     <script src="bower_components/idb-wrapper/idbstore.js"></script>
+    <script src="bower_components/screenfull/dist/screenfull.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -62,17 +61,19 @@
         <script src="scripts/app/app.module.js"></script>
         <script src="scripts/auth/auth.module.js"></script>
         <script src="scripts/auth/auth.service.js"></script>
-        <script src="scripts/auth/auth.user.service.js"></script>
-        <script src="scripts/auth/auth.message.service.js"></script>
-        <script src="scripts/auth/login.ctrl.js"></script>
+        <script src="scripts/auth/user.service.js"></script>
+        <script src="scripts/auth/message.service.js"></script>
+        <script src="scripts/auth/auth.login.ctrl.js"></script>
         <script src="scripts/app/module.creator.service.js"></script>
-        <script src="scripts/app/main.ctrl.js"></script>
-        <script src="scripts/app/module.ctrl.js"></script>
+        <script src="scripts/app/app.main.ctrl.js"></script>
+        <script src="scripts/app/app.module.ctrl.js"></script>
+        <script src="scripts/app/app.package.ctrl.js"></script>
         <script src="scripts/data.service.js"></script>
         <script src="scripts/app/export.service.js"></script>
         <script src="scripts/common/module.pojo.js"></script>
         <script src="scripts/common/util/sha1.js"></script>
         <script src="scripts/common/util/download.js"></script>
+        <script src="scripts/common/util/fullscreen.js"></script>
         <!-- endbuild -->
 
 </body>

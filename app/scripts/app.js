@@ -31,7 +31,7 @@ angular.module('tatool').directive('customOnChange', function() {
     link: function (scope, element, attrs) {
       var onChangeFunc = element.scope()[attrs.customOnChange];
       element.bind('change', onChangeFunc);
-      element.bind('change', function() { document.getElementById('addModuleForm').reset() });
+      element.bind('change', function() { document.getElementById('addModuleForm').reset(); });
     }
   };
 });

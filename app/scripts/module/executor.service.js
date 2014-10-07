@@ -58,7 +58,7 @@ angular.module('tatool.module')
     };
 
     function exitModule() {
-      $window.location = '../../index.html';
+      parent.postMessage('exitModule', '*');
     }
 
     // Updating the elementStack by processing Executables or Selectors

@@ -14,6 +14,8 @@ angular.module('tatool.module')
     var moduleId = $window.sessionStorage.getItem('moduleId');
     $window.sessionStorage.removeItem('moduleId');
 
+    console.log('Which module: ' + moduleId);
+
     // Handle global key press
     $scope.keyPress = function($event){
       if($event.which === 27) { // Escape Key
@@ -70,7 +72,6 @@ angular.module('tatool.module')
     };
 
     // Run Module
-    //enterFullscreen();
     if (moduleId) {
       dataService.openModulesDB(userService.getUserName(),
         function() {
