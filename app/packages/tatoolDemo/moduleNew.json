@@ -4,6 +4,7 @@
     "author": "Andre Locher",
     "packagePath": "/packages/tatoolDemo",
     "version": 3,
+    "fullscreen": true,
     "moduleHierarchy": {
     	"tatoolType": "List",
         "iterator": { "customType" : "ListIterator", "numIterations" : "3" },
