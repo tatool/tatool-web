@@ -6,31 +6,36 @@ angular.module('tatool.app')
   .controller('PackageCtrl', ['$scope', '$window', '$state', '$sce', 'packagePath', 'usSpinnerService',
     function ($scope, $window, $state, $sce, packagePath, usSpinnerService) {
 
-    startSpinner();
-
-    // redirect to packagePath
-    $scope.packagePath = $sce.trustAsResourceUrl(packagePath);
-
-    // listen to any message from child window and exit module in any case
-    $window.addEventListener('message', function(e) {
+    // module listener
+    var moduleListener = function(e) {
       var message = e.data;
-      console.log(message);
       if (message === 'moduleLoaded') {
         stopSpinner();
       } else if (message === 'moduleExit') {
         if (screenfull.enabled) {
           screenfull.exit();
         }
+        $scope.packagePath = $sce.trustAsResourceUrl('about:blank');
+        $window.removeEventListener('message', moduleListener, false);
+        $scope.$apply();
         $state.go('home');
       }
-    }, false);
+    };
 
-    function startSpinner() {
+    $window.addEventListener('message', moduleListener, false);
+
+    var startSpinner = function() {
       usSpinnerService.spin('loadingSpinner');
-    }
+    };
 
-    function stopSpinner() {
+    var stopSpinner = function() {
       usSpinnerService.stop('loadingSpinner');
-    }
+    };
+
+    startSpinner();
+
+    // redirect to packagePath
+    $scope.packagePath = $sce.trustAsResourceUrl(packagePath);
+
 
   }]);

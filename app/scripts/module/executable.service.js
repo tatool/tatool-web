@@ -54,7 +54,7 @@ angular.module('tatool.module')
         var deferred = executables[key].init();
 
         if (deferred && deferred.promise) {
-          deferred.promise.then(function(response) {
+          deferred.promise.then(function() {
             reportProgress(key, i, initAllDeferred);
           }, function(error) {
             initAllDeferred.reject(error);
@@ -65,7 +65,7 @@ angular.module('tatool.module')
       } else {
         reportProgress(key, i, initAllDeferred);
       }
-    }
+    };
 
     var reportProgress = function(key, i, initAllDeferred) {
       if (i === numExecutables) {

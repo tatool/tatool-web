@@ -22,12 +22,11 @@ angular.module('tatool.module')
       elementStack.initialize(obj, moduleService.getModuleDefinition());
 
       // run init method on all executables
-      executableService.initAllExecutables().then(function(response) {
-        console.log('success');
+      executableService.initAllExecutables().then(function() {
         moduleLoaded();
         runModule();
       }, function(error) {
-        console.log('error');
+        console.log(error);
       });
     };
 

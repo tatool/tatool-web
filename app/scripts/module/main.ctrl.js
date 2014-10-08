@@ -14,7 +14,7 @@ angular.module('tatool.module')
     var moduleId = $window.sessionStorage.getItem('moduleId');
     $window.sessionStorage.removeItem('moduleId');
 
-    console.log('Which module: ' + moduleId);
+    $log.debug('Running module: ' + moduleId);
 
     // Handle global key press
     $scope.keyPress = function($event){
