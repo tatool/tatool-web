@@ -21,10 +21,24 @@ angular.module('tatool.module')
       // initialize the stack
       elementStack.initialize(obj, moduleService.getModuleDefinition());
 
+      // run init method on all executables
+      executableService.initAllExecutables().then(function(response) {
+        console.log('success');
+        moduleLoaded();
+        runModule();
+      }, function(error) {
+        console.log('error');
+      });
+    };
+
+    var runModule = function() {
       // saving the module back to make sure the new session is registered in case of an error
       moduleService.saveModule();
 
+      // trigger phase change
       broadcastPhaseChange(tatoolPhase.SESSION_START, elementStack.stack);
+
+      // start running root element
       runElement();
     };
 
@@ -57,8 +71,12 @@ angular.module('tatool.module')
       }
     };
 
+    function moduleLoaded() {
+      parent.postMessage('moduleLoaded', '*');
+    }
+
     function exitModule() {
-      parent.postMessage('exitModule', '*');
+      parent.postMessage('moduleExit', '*');
     }
 
     // Updating the elementStack by processing Executables or Selectors

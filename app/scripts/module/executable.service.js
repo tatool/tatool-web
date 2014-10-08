@@ -1,12 +1,14 @@
 'use strict';
 
 angular.module('tatool.module')
-  .service('executableService', ['$log', '$rootScope', '$injector', 'contextService', 'tatoolPhase', 'tatoolExecutable',
-    function ($log, $rootScope, $injector, contextService, tatoolPhase, tatoolExecutable) {
+  .service('executableService', ['$log', '$rootScope', '$injector', '$q', 'contextService', 'tatoolPhase', 'tatoolExecutable',
+    function ($log, $rootScope, $injector, $q, contextService, tatoolPhase, tatoolExecutable) {
 
     var executableService = {};
 
     var executables = {};
+
+    var numExecutables = 0;
 
     // reset the list of executables
     executableService.init = function(runningExecutor) {
@@ -19,12 +21,6 @@ angular.module('tatool.module')
       var ExecutableService = $injector.get(executableJson.customType);
       var executable = new ExecutableService();
       angular.extend(executable, executableJson);
-
-      // run init method on executable if available
-      if ('init' in executable) {
-        executable.init();
-      }
-
       this.registerExecutable(executable.name, executable);
       return executable;
     };
@@ -32,11 +28,51 @@ angular.module('tatool.module')
     // register a handler
     executableService.registerExecutable = function(name, executable) {
       executables[name] = executable;
+      numExecutables++;
     };
 
     // get a specific handler
     executableService.getExecutable = function(name) {
       return executables[name];
+    };
+
+    // run init method on all executables (preloading)
+    executableService.initAllExecutables = function() {
+      var deferred = $q.defer();
+      var i = 0;
+
+      for (var key in executables) {
+        i++;
+        runInit(key, i, deferred);
+      }
+
+      return deferred.promise;
+    };
+
+    var runInit = function(key, i, initAllDeferred) {
+      if ('init' in executables[key]) {
+        var deferred = executables[key].init();
+
+        if (deferred && deferred.promise) {
+          deferred.promise.then(function(response) {
+            reportProgress(key, i, initAllDeferred);
+          }, function(error) {
+            initAllDeferred.reject(error);
+          });
+        } else {
+          reportProgress(key, i, initAllDeferred);
+        }
+      } else {
+        reportProgress(key, i, initAllDeferred);
+      }
+    }
+
+    var reportProgress = function(key, i, initAllDeferred) {
+      if (i === numExecutables) {
+        initAllDeferred.resolve();
+      } else {
+        console.log('Finished init on executable ' + key);
+      }
     };
 
     // informs all executables

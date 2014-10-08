@@ -12,7 +12,6 @@ angular.module('tatool.app')
 
       dataService.getAllTrials(userService.getUserName(), moduleId).then(
         function(data) {
-          console.log(data);
           if (data !== undefined && data.length > 0) {
             exportData(moduleId, data).then(
               function(csv) {
@@ -110,7 +109,6 @@ angular.module('tatool.app')
     }
 
     function convertToCsv(allTrials, moduleProperties, sessionProperties) {
-      $log.debug(new Date() + ': Convert Trials to CSV');
       var output = '';
       var trials = allTrials;
       var header = ['userId', 'moduleId', 'sessionId', 'trialId', 'executableId'];
