@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('tatool.module')
-  .factory('executor', ['$log', '$location', '$q', '$state', '$timeout', '$injector', '$window', 'moduleService', 'elementStack', 'util', 'executionPhaseService', 'trialService', 'contextService', 'timerService', 'tatoolPhase', 'cfgModule',
-    function ($log, $location, $q, $state, $timeout, $injector, $window, moduleService, elementStack, util, executionPhaseService, trialService, contextService, timerService, tatoolPhase, cfgModule) {
+  .factory('executor', ['$log', '$location', '$q', '$state', '$timeout', '$injector', '$window', 'moduleService', 'elementStack', 'util', 'executionPhaseService', 'trialService', 'contextService', 'timerService', 'tatoolPhase', 'cfgModule', 'executableService',
+    function ($log, $location, $q, $state, $timeout, $injector, $window, moduleService, elementStack, util, executionPhaseService, trialService, contextService, timerService, tatoolPhase, cfgModule, executableService) {
     $log.debug('Executor: initialized');
 
     var obj = {currentSessionId: 0, blankInterval: 0, blankIntervalScreen: '', fixationInterval: 0, fixationIntervalScreen: ''};
