@@ -12,7 +12,8 @@ angular.module('tatool.module', ['tatool', 'tatool.auth', 'angular-progress-arc'
     DEFAULT_FIXATION_INTERVAL_SCREEN: '../../views/module/fixation.html',
     DEFAULT_INSTRUCTION_SCREEN: '../../views/module/instruction.html',
     DEFAULT_COUNTDOWN_SCREEN: '../../views/module/countdown.html',
-    CSV_DELIMITER: ';'
+    CSV_DELIMITER: ';',
+    MIN_EPOCH_MS: 32000000000
   })
   .constant('tatoolPhase', {
     SESSION_START: 'SESSION_START',

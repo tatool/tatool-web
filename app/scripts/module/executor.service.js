@@ -201,6 +201,9 @@ angular.module('tatool.module')
       }
       var params = { moduleId: moduleService.getModuleId(), type: 'executable', url: url, content: currentExecutable };
 
+      // focus window to make sure we're receiving user input
+      $window.focus();
+
       if ($state.is('module', params)) {
         $state.forceReload();
       } else {

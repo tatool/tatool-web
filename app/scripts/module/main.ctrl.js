@@ -1,12 +1,10 @@
 'use strict';
 
 angular.module('tatool.module')
-  .controller('MainCtrl', ['$rootScope','$scope', '$log', '$timeout', '$state', '$window', 'moduleService', 'userService', 'dataService', 'executor',
-    function ($rootScope, $scope, $log, $timeout, $state, $window, moduleService, userService, dataService, executor) {
+  .controller('MainCtrl', ['$rootScope','$scope', '$log', '$timeout', '$state', '$window', 'moduleService', 'userService', 'dataService', 'executor', 'cfgModule',
+    function ($rootScope, $scope, $log, $timeout, $state, $window, moduleService, userService, dataService, executor, cfgModule) {
 
     $scope.alert = { type: 'danger', msg: '', visible: false };
-
-    var MIN_EPOCH_MS = 32000000000;
 
     var allowEscapeKey = false;
 
@@ -27,7 +25,7 @@ angular.module('tatool.module')
         }
       } else {
         // workaround fix for mozilla as event timestamp shows time in ms since last reboot instead of time since epoch
-        if ($event.timeStamp < MIN_EPOCH_MS) {
+        if ($event.timeStamp < cfgModule.MIN_EPOCH_MS) {
           $event.timeStamp = new Date().getTime();
         }
         $scope.$broadcast('keyPress', $event);
@@ -37,7 +35,7 @@ angular.module('tatool.module')
     // Handle global mouse press
     $scope.mousePress = function($event){
       // workaround for mozilla as event timestamp shows time in ms since last reboot instead of time since epoch
-      if ($event.timeStamp < MIN_EPOCH_MS) {
+      if ($event.timeStamp < cfgModule.MIN_EPOCH_MS) {
         $event.timeStamp = new Date().getTime();
       }
       $scope.$broadcast('mousePress', $event);

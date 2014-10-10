@@ -4,7 +4,8 @@
     "author": "Andre Locher",
     "packagePath": "/packages/tatoolDemo",
     "version": 3,
-    "fullscreen": true,
+    "fullscreen": false,
+    "allowEscapeKey": true,
     "moduleHierarchy": {
     	"tatoolType": "List",
         "iterator": { "customType" : "ListIterator", "numIterations" : "3" },
@@ -13,53 +14,9 @@
     		[
                 {
                     "tatoolType": "Executable",
-                    "customType": "tatoolCountdown",
-                    "name": "countdown1",
-                    "countdown": 3,
-                    "interval": 800,
-                    "blankInterval" : "50"
-                }, 
-    			{
-    				"tatoolType": "Executable",
-    				"customType": "stroopExecutable",
-                    "name": "stroop1",
-                    "blankInterval" : "600",
-                    "status": {
-                        "levelPanel": true,
-                        "feedbackPanel": true,
-                        "trialCountPanel": true
-                    }
-    			}, 
-    			{
-    				"tatoolType": "Executable",
-    				"customType": "stroopExecutable",
-                    "name": "stroop2",
-                    "blankInterval" : "600",
-                    "status": {
-                        "levelPanel": true,
-                        "feedbackPanel": true,
-                        "trialCountPanel": true
-                    }
-    			},
-                {
-                    "tatoolType": "List",
-                    "iterator": { "customType" : "ListIterator", "numIterations" : "2" },
-                    "handlers": [  ],
-                    "children": 
-                        [
-                            {
-                                "tatoolType": "Executable",
-                                "customType": "stroopExecutable",
-                                "name": "stroop3",
-                                "fixationInterval" : "500",
-                                "blankInterval" : "600",
-                                "status": {
-                                    "levelPanel": true,
-                                    "feedbackPanel": true,
-                                    "trialCountPanel": true
-                                }
-                            }
-                        ]
+                    "customType": "visualUpdatingExecutable",
+                    "name": "visualUpdate",
+                    "blankInterval" : "250"
                 }
     		]
     }

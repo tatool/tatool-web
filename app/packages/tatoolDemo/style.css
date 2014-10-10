@@ -16,3 +16,66 @@
 	letter-spacing: -5px;  
 	text-shadow: 0px 1px 2px #a5a5a5;
 }
+
+.myTable {
+    border-collapse: collapse;
+}
+
+.clickMessage {
+  font-size: 600%;
+  color: #e10404;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin: 0 auto;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
+  text-align: center;
+  vertical-align: middle;
+  text-shadow: #777 2px 2px 2px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.myCell {
+  background-color: transparent;
+  border: 1px solid #ccc;
+  display: table-cell;
+  vertical-align: middle;
+  margin: 0;
+  padding: 10px;
+  cursor: pointer;
+  outline: 0px solid #666;
+}
+
+.myCell:hover {
+  outline: 6px solid #666;
+  -webkit-transition:outline 0.1s;
+  transition:outline 0.1s;
+}
+
+.myColoredCell {
+  background-color: #eee;
+  border: 1px solid #666;
+  display: table-cell;
+  vertical-align: middle;
+  margin: 0;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.myClass {
+  display: inline-block;
+  border-radius: 30%;
+  height: 75%;
+  width: 75%;
+  padding-bottom: 75%;
+  margin: 0 auto;
+  vertical-align: middle;
+  text-align: center;
+  border: 2px dotted #666;
+  background-color: #fff;
+}

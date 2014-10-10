@@ -26,7 +26,6 @@ angular.module('tatool.module')
     
     // 3. Show the stimulus and get the start time
     $scope.visible = true;
-    $window.focus();
     inputEnabled = true;
     service.startTime = new Date().getTime();
     service.timer.start(timerUp);
