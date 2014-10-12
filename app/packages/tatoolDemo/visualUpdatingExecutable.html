@@ -1,14 +1,12 @@
 <div id="centeredExecutable">
 
-  <div class="clickMessage">{{clickMessage}}</div>
+  <span class="clickMessage">{{clickMessage}}</span>
 
   <tatool-grid 
-    rows="2" 
-    cols="3" 
-    cells="gridCells" 
+    grid="myGrid"
     cellSize="110"
     cellClass="myCell"
-    hideEmptyCells="yes"
+    hideEmptyCells="no"
     disableHover="no"
     dataPath="{{dataPath}}"
     gridClick="gridClick(cell, $event)"

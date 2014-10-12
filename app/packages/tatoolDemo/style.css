@@ -38,21 +38,22 @@
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  white-space: nowrap;
 }
 
-.myCell {
+.myCell, .myCellStatic {
   background-color: transparent;
   border: 1px solid #ccc;
   display: table-cell;
   vertical-align: middle;
   margin: 0;
   padding: 10px;
-  cursor: pointer;
   outline: 0px solid #666;
 }
 
 .myCell:hover {
   outline: 6px solid #666;
+  cursor: pointer;
   -webkit-transition:outline 0.1s;
   transition:outline 0.1s;
 }

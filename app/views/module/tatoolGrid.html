@@ -2,16 +2,16 @@
 
   <div class="row" ng-repeat="row in gridCells">
 
-    <div ng-class="col.gridCellClass" ng-click="(col.stimulusValue !== undefined || hideemptycells==='no') ? gridClickEvent($event, col) : void();" ng-style="col.gridCellOverrideStyle" ng-mouseenter="(gridmouseenter !== undefined) ? gridMouseEnterEvent($event, col) : void();" ng-mouseleave="(gridmouseleave !== undefined) ? gridMouseLeaveEvent($event, col) : void();" ng-repeat="col in row">
+    <div ng-class="col.gridCellClass" ng-click="(col.data.stimulusValue !== undefined || hideemptycells === undefined || hideemptycells==='no') ? gridClickEvent($event, col) : void();" ng-style="col.gridCellOverrideStyle" ng-mouseenter="(gridmouseenter !== undefined) ? gridMouseEnterEvent($event, col) : void();" ng-mouseleave="(gridmouseleave !== undefined) ? gridMouseLeaveEvent($event, col) : void();" ng-repeat="col in row">
 
-      <div ng-if='col.stimulusValueType!==undefined'>
+      <div ng-if='col.data.stimulusValueType!==undefined'>
 
-        <div ng-switch on="col.stimulusValueType">
+        <div ng-switch on="col.data.stimulusValueType">
           <div ng-switch-when="image">
-            <img class="cellValue" onload="console.log('redraw');" ng-src="{{tatoolDataPath}}{{col.stimulusValue}}">
+            <img class="cellValue" onload="console.log('redraw');" ng-src="{{tatoolDataPath}}{{col.data.stimulusValue}}">
           </div>
           <div ng-switch-when="text">
-            <div class="cellValue">{{col.stimulusValue}}</div>
+            <div class="cellValue">{{col.data.stimulusValue}}</div>
           </div>
           <div ng-switch-when="circle">
             <div class="circleCellValue" ng-style="col.gridCellValueOverrideStyle"></div>
@@ -20,7 +20,7 @@
             <div class="squareCellValue" ng-style="col.gridCellValueOverrideStyle"></div>
           </div>
           <div ng-switch-when="class">
-            <div ng-class="col.stimulusValue"></div>
+            <div ng-class="col.data.stimulusValue"></div>
           </div>
           <div ng-switch-default>
             <div class="emptyCellValue"></div>
@@ -29,7 +29,7 @@
 
       </div>
 
-      <div ng-if='col.stimulusValueType===undefined'>
+      <div ng-if='col.data.stimulusValueType===undefined'>
         <div class="emptyCellValue"></div>
       </div>
 

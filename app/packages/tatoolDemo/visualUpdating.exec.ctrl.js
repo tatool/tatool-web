@@ -1,12 +1,62 @@
 'use strict';
 
 angular.module('tatool.module')
-  .controller('visualUpdatingExecutableCtrl', [ '$scope', '$log', '$timeout', 'service', 'timerService', 
-    function ($scope, $log, $timeout, service, timerService) {
+  .controller('visualUpdatingExecutableCtrl', [ '$scope', '$log', '$timeout', 'service', 'timerService', 'tatoolGridService',
+    function ($scope, $log, $timeout, service, timerService, tatoolGridService) {
 
     $scope.dataPath = 'data/';
 
+    // create  new tatoolGrid
+    var myGrid = tatoolGridService.createGrid(5, 8);
+    $scope.myGrid = myGrid;
+
+    /*
+    for (var i = 1; i <= 50; i++) {
+      var cell = {stimulusValue: 'penguine_archigraphs_96x96.png', stimulusValueType: 'image'};
+      $scope.myGrid.addCellAtPosition(i, cell);
+    }
+
+    $scope.myGrid.refresh();
+    */
+    
+
+    // add two cells and refresh afterwards
+    myGrid.addCellAtPosition(6, {stimulusValue: 'bird_96x96.png', stimulusValueType: 'image', animal: 'Birdy'});
+    myGrid.addCellAtPosition(22, {stimulusValue: 'rhino_96x96.png', stimulusValueType: 'image', animal: 'Rhino'});
+    myGrid.addCellAtPosition(40, {stimulusValue: 'bear_96x96.png', stimulusValueType: 'image', animal: 'Bear'});
+
+    var myCell = myGrid.createCell({stimulusValue: 'penguin_96x96.png', stimulusValueType: 'image', animal: 'Penguin'});
+    myGrid.addCellAtPosition(2, myCell).refresh();
+    //myGrid.refresh();
+
+    /*
+    $timeout(function() {
+      myGrid.addCell({gridPosition: 3, stimulusValue: 'B', stimulusValueType: 'text'}).refresh();
+    }, 2000);
+
+    $timeout(function() {
+      myGrid.addCell({gridPosition: 6, stimulusValue: '#00cc00', stimulusValueType: 'square'});
+      myGrid.addCell({gridPosition: 5, gridCellClass: 'myColoredCell', stimulusValue: 'myClass', stimulusValueType: 'class'}).refresh();
+    }, 3000);
+
+    $timeout(function() {
+      myGrid.moveCell(2, 4);
+      myGrid.resize(2, 4).redraw();
+    }, 4000);
+
+    $timeout(function() {
+      myGrid.swapCell(1, 6);
+      myGrid.refresh();
+    }, 6000);
+
+    $timeout(function() {
+      myGrid.clear().refresh();
+    }, 7000);*/
+
+
+    /*
     $scope.gridCells = [];
+
     $scope.gridCells.push({gridPosition: 1, gridCellSize: '110', stimulusValue: '#cc0000', stimulusValueType: 'circle'});
     var cell = {gridPosition: 2, gridCellSize: '110', stimulusValue: 'penguine_archigraphs_96x96.png', stimulusValueType: 'image'};
     $scope.gridCells.push(cell);
@@ -21,18 +71,63 @@ angular.module('tatool.module')
     }, 3000);
 
     $timeout(function() {
-      //$scope.gridCells[5].gridPosition = 2;
-      //$scope.gridCells[1].gridPosition = 4;
       cell.gridPosition = 4;
-      //$scope.gridCells.push({gridPosition: 4, gridCellSize: '110', stimulusValue: 'penguine_archigraphs_96x96.png', stimulusValueType: 'image'});
-      //$scope.gridCells.push({gridPosition: 2, gridCellSize: '110', stimulusValue: '', stimulusValueType: 'text'});
     }, 5000);
+    */
+
+    // 4. Listen to user input in the form of key press
+    $scope.$on('keyPress', function(event, keyEvent) {
+      if(keyEvent.which === 37 || keyEvent.which === 38 || keyEvent.which === 39 || keyEvent.which === 40) { // Arrow keys
+        switch (keyEvent.which) {
+          case 37:
+            action('left');
+            break;
+          case 38:
+            action('up');
+            break
+          case 39:
+            action('right');
+            break
+          case 40:
+            action('down');
+            break
+        }
+      }
+    });
+
+    function action(direction) {
+      var neighbor = myCell.getNext(direction);
+    
+      if (neighbor !== null && neighbor.data.animal !== undefined) {
+        if (neighbor.data.animal === 'Bear') {
+          displayScore(myCell.data.animal);
+          myCell.remove();
+        } else {
+          displayScore(neighbor.data.animal);
+          myCell.move(direction);
+        }
+      } else {
+        myCell.move(direction);
+      }
+
+      myGrid.refresh();
+    }
+
+    function displayScore(animal) {
+      $scope.clickMessage = 'Yummy ' + animal;
+      $timeout(function() {  $scope.clickMessage = ''; }, 1500);
+    }
 
     $scope.gridClick = function(cell, $event) {
       console.log(cell);
-      if (cell.stimulusValue === 'penguine_archigraphs_96x96.png') {
-        $scope.clickMessage = 'Penguin!!!';
-        $timeout(function() {  $scope.clickMessage = ''; }, 1500);
+      if (cell.data.stimulusValue === 'penguin_96x96.png') {
+        var neighbor = cell.getNext('right');
+        console.log('my neighbor: ', neighbor);
+        if (neighbor !== null && neighbor.data.stimulusValue === undefined) {
+          cell.move('right').refresh();
+        }
+        //$scope.clickMessage = 'Penguin!!!';
+        //$timeout(function() {  $scope.clickMessage = ''; }, 1500);
       }
     };
 

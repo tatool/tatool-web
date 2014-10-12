@@ -13,14 +13,13 @@ angular.module('tatool.module')
 
       // preload images
       var img = new Image();
-      img.src = 'data/penguine_archigraphs_96x96.png';
+      img.src = 'data/penguin_96x96.png';
       img.onload = function() {
           deferred.resolve('Whatever');
       };
 
       return deferred;
     };
-
 
     VisualUpdatingExecutable.prototype.stopExecution = function() {
       //executable.dual = 'SUSPENDED';
