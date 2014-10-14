@@ -528,7 +528,7 @@ font-size:1.9em;
 }
 
 #tatoolGrid .imageCellValue {
-  display: inline-block;
+  display: table-cell;
   margin: 0 auto;
   vertical-align: middle;
   text-align: center;
