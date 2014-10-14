@@ -154,9 +154,9 @@ angular.module('tatool.module').directive('tatoolGrid', ['$log', 'cfgModule', fu
           'width':cell.gridCellWidth + 'px',
           'height':cell.gridCellHeight + 'px',
           'min-width':cell.gridCellWidth + 'px',
-          'min-height':cell.gridCellHeight + 'px',
-          'max-width':cell.gridCellWidth + 'px',
-          'max-height':cell.gridCellHeight + 'px'
+          'min-height':cell.gridCellHeight + 'px'
+          //'max-width':cell.gridCellWidth + 'px',
+          //'max-height':cell.gridCellHeight + 'px'
         };
         var cellValueOverrideStyle = {
           'background-color':cell.data.stimulusValue
