@@ -7,8 +7,11 @@ angular.module('tatool.module')
     $scope.dataPath = 'data/';
 
     // create  new tatoolGrid
-    var myGrid = tatoolGridService.createGrid(5, 8);
+    var myGrid = tatoolGridService.createGrid(2, 4, 'questionGrid');
     $scope.myGrid = myGrid;
+
+    var myGrid2 = tatoolGridService.createGrid(1, 4, 'answerGrid');
+    $scope.myGrid2 = myGrid2;
 
     /*
     for (var i = 1; i <= 50; i++) {
@@ -21,12 +24,13 @@ angular.module('tatool.module')
     
 
     // add two cells and refresh afterwards
-    myGrid.addCellAtPosition(6, {stimulusValue: 'bird_96x96.png', stimulusValueType: 'image', animal: 'Birdy'});
-    myGrid.addCellAtPosition(22, {stimulusValue: 'rhino_96x96.png', stimulusValueType: 'image', animal: 'Rhino'});
-    myGrid.addCellAtPosition(40, {stimulusValue: 'bear_96x96.png', stimulusValueType: 'image', animal: 'Bear'});
+    myGrid.addCellAtPosition(2, {stimulusValue: 'bird_96x96.png', stimulusValueType: 'image', animal: 'Birdy'});
+    myGrid.addCellAtPosition(4, {stimulusValue: 'rhino_96x96.png', stimulusValueType: 'image', animal: 'Rhino'});
+    myGrid.addCellAtPosition(6, {stimulusValue: 'bear_96x96.png', stimulusValueType: 'image', animal: 'Bear'});
+    myGrid.addCellAtPosition(8, {stimulusValue: '#ccc', stimulusValueType: 'circle', gridAllowDrop: 'yes'});
 
     var myCell = myGrid.createCell({stimulusValue: 'penguin_96x96.png', stimulusValueType: 'image', animal: 'Penguin'});
-    myGrid.addCellAtPosition(2, myCell).refresh();
+    myGrid.addCellAtPosition(1, myCell).refresh();
     //myGrid.refresh();
 
     /*
@@ -101,16 +105,14 @@ angular.module('tatool.module')
       if (neighbor !== null && neighbor.data.animal !== undefined) {
         if (neighbor.data.animal === 'Bear') {
           displayScore(myCell.data.animal);
-          myCell.remove();
+          myCell.remove().refresh();
         } else {
           displayScore(neighbor.data.animal);
-          myCell.move(direction);
+          myCell.move(direction).refresh();
         }
       } else {
-        myCell.move(direction);
+        myCell.move(direction).refresh();
       }
-
-      myGrid.refresh();
     }
 
     function displayScore(animal) {
@@ -129,6 +131,12 @@ angular.module('tatool.module')
         //$scope.clickMessage = 'Penguin!!!';
         //$timeout(function() {  $scope.clickMessage = ''; }, 1500);
       }
+    };
+
+    $scope.gridDrop = function(dragCell, dropCell) {
+      console.log('Drag2: ', dragCell);
+      console.log('Drop2: ', dropCell);
+      return true;
     };
 
     $scope.gridMouseEnter = function(cell, $event) {

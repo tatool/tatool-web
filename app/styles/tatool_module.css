@@ -509,15 +509,24 @@ font-size:1.9em;
 }
 
 #tatoolGrid .emptyCellValue {
-  display: table-cell;
+  display: inline-block;
+  margin: 0 auto;
+  vertical-align: middle;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+}
+
+#tatoolGrid .dropHover {
+  border: 2px dashed #aaa;
 }
 
 #tatoolGrid .circleCellValue {
   display: inline-block;
   border-radius: 50%;
-  height: 75%;
-  width: 75%;
-  padding-bottom: 75%;
+  height: 80%;
+  width: 80%;
+  padding-bottom: 80%;
   margin: 0 auto;
   vertical-align: middle;
   text-align: center;
@@ -526,9 +535,9 @@ font-size:1.9em;
 
 #tatoolGrid .squareCellValue {
   display: inline-block;
-  height: 75%;
-  width: 75%;
-  padding-bottom: 75%;
+  height: 80%;
+  width: 80%;
+  padding-bottom: 80%;
   margin: 0 auto;
   vertical-align: middle;
   text-align: center;

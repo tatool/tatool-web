@@ -10,6 +10,19 @@
     disableHover="no"
     dataPath="{{dataPath}}"
     gridClick="gridClick(cell, $event)"
+    gridDrop="gridDrop(dragCell, dropCell)"
+    gridMouseEnter="gridMouseEnter(cell, $event)"
+    gridMouseLeave="gridMouseLeave(cell, $event)">
+  </tatool-grid>
+
+  <tatool-grid 
+    grid="myGrid2"
+    cellSize="110"
+    cellClass="myCell"
+    hideEmptyCells="no"
+    disableHover="no"
+    dataPath="{{dataPath}}"
+    gridClick="gridClick(cell, $event)"
     gridMouseEnter="gridMouseEnter(cell, $event)"
     gridMouseLeave="gridMouseLeave(cell, $event)">
   </tatool-grid>

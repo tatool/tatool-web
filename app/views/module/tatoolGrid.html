@@ -2,11 +2,11 @@
 
   <div class="row" ng-repeat="row in gridCells">
 
-    <div ng-class="col.gridCellClass" ng-click="(col.data.stimulusValue !== undefined || hideemptycells === undefined || hideemptycells==='no') ? gridClickEvent($event, col) : void();" ng-style="col.gridCellOverrideStyle" ng-mouseenter="(gridmouseenter !== undefined) ? gridMouseEnterEvent($event, col) : void();" ng-mouseleave="(gridmouseleave !== undefined) ? gridMouseLeaveEvent($event, col) : void();" ng-repeat="col in row">
+    <div ng-class="col.gridCellClass" ng-click="(col.data.stimulusValue !== undefined || hideemptycells === undefined || hideemptycells==='no') ? gridClickEvent($event, col) : void();" ng-style="col.gridCellOverrideStyle" ng-mouseenter="(gridmouseenter !== undefined) ? gridMouseEnterEvent($event, col) : void();" ng-mouseleave="(gridmouseleave !== undefined) ? gridMouseLeaveEvent($event, col) : void();" ng-repeat="col in row track by (col.gridPosition + ':' + $id(col))">
 
       <div ng-if='col.data.stimulusValueType!==undefined'>
 
-        <div ng-switch on="col.data.stimulusValueType">
+        <div ng-switch on="col.data.stimulusValueType" draggable droppable="grid" gridDrop="gridDrop(dragCell, dropCell)" allowDrop="col.gridAllowDrop" id="{{col.gridPosition}}">
           <div ng-switch-when="image">
             <img class="cellValue" onload="console.log('redraw');" ng-src="{{tatoolDataPath}}{{col.data.stimulusValue}}">
           </div>
@@ -23,14 +23,14 @@
             <div ng-class="col.data.stimulusValue"></div>
           </div>
           <div ng-switch-default>
-            <div class="emptyCellValue"></div>
+            <div class="emptyCellValue" style="width: 100%; height: 100%;">ERROR: unknown stimulusValueType</div>
           </div>
         </div>
 
       </div>
 
-      <div ng-if='col.data.stimulusValueType===undefined'>
-        <div class="emptyCellValue"></div>
+      <div ng-if='col.data.stimulusValueType===undefined' style="width: 100%; height: 100%;" droppable="grid" gridDrop="gridDrop(dragCell, dropCell)" allowDrop="col.gridAllowDrop" id="{{col.gridPosition}}">
+        <div class="emptyCellValue"> </div>
       </div>
 
     </div>

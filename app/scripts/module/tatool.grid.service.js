@@ -13,7 +13,7 @@ angular.module('tatool.module')
     };
 
     function Grid(gridId) {
-      var cellsObject = {};
+      this.cellsObject = {};
       this.cells = [];
       this.gridId = gridId ? gridId : 'default';
       this.rows = 0;
@@ -27,12 +27,26 @@ angular.module('tatool.module')
         return this;
       };
 
-      this.createCell = function(data) {
+      this.initCell = function(data) {
         var cell = new Cell(this);
         cell.data = data;
         if (data.gridPosition !== undefined) {
           cell.gridPosition = data.gridPosition;
         }
+        if (data.gridCellSize !== undefined) {
+          cell.gridCellSize = data.gridCellSize;
+        }
+        if (data.gridCellClass !== undefined) {
+          cell.gridCellClass = data.gridCellClass;
+        }
+        if (data.gridAllowDrop !== undefined) {
+          cell.gridAllowDrop = data.gridAllowDrop;
+        }
+        return cell;
+      };
+
+      this.createCell = function(data) {
+        var cell = this.initCell(data);
         return cell;
       };
 
@@ -40,15 +54,13 @@ angular.module('tatool.module')
         var newCell = {};
 
         if (cell.data === undefined) {
-          newCell = new Cell(this);
-          newCell.data = cell;
-          newCell.gridPosition = cell.gridPosition;
+          newCell = this.initCell(cell);
         } else {
           newCell = cell;
         }
 
-        if(cellsObject[newCell.gridPosition] === undefined) {
-          cellsObject[newCell.gridPosition] = newCell;
+        if(this.cellsObject[newCell.gridPosition] === undefined) {
+          this.cellsObject[newCell.gridPosition] = newCell;
           return this;
         } else {
           $log.error('[Error][TatoolGrid]: Can\'t add cell as there is already a cell at position ' + cell.gridPosition + '.');
@@ -59,26 +71,28 @@ angular.module('tatool.module')
       this.addCellAtPosition = function(position, cell) {
         var newCell = {};
         if (!cell instanceof Cell) {
-          newCell = new Cell(this);
-          newCell.data = cell;
+          newCell = this.initCell(cell);
         } else {
           newCell = cell;
         }
 
+        position = parseInt(position);
+
         newCell.gridPosition = position;
+
         return this.addCell(newCell);
       };
 
       this.getCell = function(position) {
-        if (cellsObject[position] === undefined && position <= this.numCells) {
+        if (this.cellsObject[position] === undefined && position <= this.numCells) {
           return {gridPosition: position, data: {}};
         } else {
-          return cellsObject[position];
+          return this.cellsObject[position];
         }
       };
 
       this.removeCell = function(position) {
-        delete cellsObject[position];
+        delete this.cellsObject[position];
         return this;
       };
 
@@ -87,11 +101,12 @@ angular.module('tatool.module')
           $log.error('[Error][TatoolGrid]: Can\'t move cell as target position is same as origin position ' + fromPosition + '.');
           return null;
         }
-        if (cellsObject[fromPosition] !== undefined) {
-          var fromCell = cellsObject[fromPosition];
+
+        if (this.cellsObject[fromPosition] !== undefined) {
+          var fromCell = this.cellsObject[fromPosition];
           fromCell.gridPosition = toPosition;
-          cellsObject[toPosition] = fromCell;
-          delete cellsObject[fromPosition];
+          this.cellsObject[toPosition] = fromCell;
+          delete this.cellsObject[fromPosition];
           return this;
         } else {
           $log.error('[Error][TatoolGrid]: Can\'t move empty cell at position ' + fromPosition);
@@ -100,15 +115,15 @@ angular.module('tatool.module')
       };
 
       this.swapCell = function(position1, position2) {
-        if (cellsObject[position1] !== undefined && cellsObject[position2] !== undefined) {
-          var cell1 = cellsObject[position1];
+        if (this.cellsObject[position1] !== undefined && this.cellsObject[position2] !== undefined) {
+          var cell1 = this.cellsObject[position1];
           var position1 = cell1.gridPosition;
-          var cell2 = cellsObject[position2];
+          var cell2 = this.cellsObject[position2];
           var position2 = cell2.gridPosition;
           cell1.gridPosition = position2;
           cell2.gridPosition = position1;
-          cellsObject[position1] = cell2;
-          cellsObject[position2] = cell1;
+          this.cellsObject[position1] = cell2;
+          this.cellsObject[position2] = cell1;
           return this;
         } else {
           $log.error('[Error][TatoolGrid]: Can\'t swap empty cell at position ' + position1 + ' or ' + position2);
@@ -117,7 +132,7 @@ angular.module('tatool.module')
       };
 
       this.clear = function() {
-        cellsObject = {};
+        this.cellsObject = {};
         return this;
       };
 
@@ -133,9 +148,9 @@ angular.module('tatool.module')
 
       this.refreshCells = function() {
         this.cells.length = 0;
-        for (var property in cellsObject) {
-          if (cellsObject.hasOwnProperty(property)) {
-            this.cells.push(cellsObject[property]);
+        for (var property in this.cellsObject) {
+          if (this.cellsObject.hasOwnProperty(property)) {
+            this.cells.push(this.cellsObject[property]);
           }
         }
       };
@@ -154,8 +169,9 @@ angular.module('tatool.module')
           return null;
         }
 
-        grid.removeCell(this.gridPosition);
+        this.grid.removeCell(this.gridPosition);
         this.gridPosition = 0;
+
         return this.grid;
       }
 
@@ -254,9 +270,11 @@ angular.module('tatool.module')
         if (this.gridPosition === 0) {
           return null;
         }
-        
+
+        toPosition = parseInt(toPosition);
+
         if (this.gridPosition != toPosition) {
-          grid.moveCell(this.gridPosition, toPosition);
+          this.grid.moveCell(this.gridPosition, toPosition);
         }
         return this.grid;
       }
