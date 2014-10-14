@@ -39,6 +39,9 @@ angular.module('tatool.module')
         if (data.gridCellClass !== undefined) {
           cell.gridCellClass = data.gridCellClass;
         }
+        if (data.gridAllowDrag !== undefined) {
+          cell.gridAllowDrag = data.gridAllowDrag;
+        }
         if (data.gridAllowDrop !== undefined) {
           cell.gridAllowDrop = data.gridAllowDrop;
         }

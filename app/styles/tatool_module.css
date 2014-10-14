@@ -498,7 +498,7 @@ font-size:1.9em;
 }
 
 #tatoolGrid .emptyCellValue {
-  display: inline-block;
+  display: table-cell;
   margin: 0 auto;
   vertical-align: middle;
   text-align: center;

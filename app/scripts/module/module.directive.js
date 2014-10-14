@@ -4,18 +4,20 @@ angular.module('tatool.module').directive('tatoolGrid', ['$log', 'cfgModule', fu
   return {
     restrict: 'E',
     scope: {
-      grid: '=',
-      gridspacing: '@',
-      cellclass: '@',
-      cellwidth: '@',
-      cellheight: '@',
-      hideemptycells: '@',
-      disablehover: '@',
-      datapath: '@',
-      gridclick: '&',
-      griddrop: '&',
-      gridmouseenter: '&',
-      gridmouseleave: '&'
+      grid: '=',                // expects a tatool-grid object provided by the tatoolGridService
+      gridspacing: '@',         // defines the table style [collapse|separate|n]
+      cellclass: '@',           // defines default class used for grid cells
+      cellwidth: '@',           // defines default width of a grid cell
+      cellheight: '@',          // defines default height of a grid cell
+      hideemptycells: '@',      // hides [yes] or shows [] empty grid cells
+      disablehover: '@',        // disables [yes] or enables [] hover effect on grid cells (expects a static css class)
+      datapath: '@',            // defines datapath to be used to access images
+      allowdrag: '@',           // defines whether drag feature is enabled [yes] or not [] by default
+      allowdrop: '@',           // defines whether drop feature is enabled [yes|all] or not [] by default
+      gridclick: '&',           // function to cal on mouse click on a specific grid cell
+      griddrop: '&',            // function to call on drop on a specific grid cell
+      gridmouseenter: '&',      // function to call on mouse enter on a specific grid cell
+      gridmouseleave: '&'       // function to call on mouse leave on a specific grid cell
     },
     link: function (scope, element, attr) {
 
@@ -129,6 +131,24 @@ angular.module('tatool.module').directive('tatoolGrid', ['$log', 'cfgModule', fu
           }
         }
 
+        // set default draganddrop behavior
+        if (scope.allowdrag !== undefined) {
+          cell.gridAllowDrag = scope.allowdrag;
+        } else {
+          if (cell.gridAllowDrag === undefined) {
+            cell.gridAllowDrag = 'no';
+          }
+        }
+
+        // set default draganddrop behavior
+        if (scope.allowdrop !== undefined) {
+          cell.gridAllowDrop = scope.allowdrop;
+        } else {
+          if (cell.gridAllowDrop === undefined) {
+            cell.gridAllowDrop = 'no';
+          }
+        }
+
         // create override styles for cell size and cellValue
         var cellOverrideStyle = {
           'width':cell.gridCellWidth + 'px',
@@ -238,10 +258,10 @@ angular.module('tatool.module').directive('tatoolGrid', ['$log', 'cfgModule', fu
 
 
 
-angular.module('tatool.module').directive('draggable', function() {
+angular.module('tatool.module').directive('tatoolDrag', function() {
   return {
     restrict: 'A',
-    link: function(scope, element) {
+    link: function(scope, element, attrs) {
       var jelement = $(element);
       var originalClass;
 
@@ -262,28 +282,29 @@ angular.module('tatool.module').directive('draggable', function() {
       };
 
       // add jquery draggable
-      jelement.draggable( {
-        start: handleStartEvent,
-        stop: handleStopEvent,
-        cursor: 'move',
-        zIndex: 5000,
-        revert: 'invalid',
-        snap: '.emptyCellValue',
-        snapMode: 'corner',
-        snapTolerance: 15
-      }).data('fromGrid', scope.grid, 'fromPosition', scope.col.gridPosition);
-
+      if (attrs.allowdragcell === 'yes') {
+        jelement.draggable( {
+          start: handleStartEvent,
+          stop: handleStopEvent,
+          cursor: 'move',
+          zIndex: 5000,
+          revert: 'invalid',
+          snap: '.emptyCellValue',
+          snapMode: 'corner',
+          snapTolerance: 15
+        }).data('fromGrid', scope.grid, 'fromPosition', scope.col.gridPosition);
+      }
     }
   };
 });
 
-angular.module('tatool.module').directive('droppable', function() {
+angular.module('tatool.module').directive('tatoolDrop', function() {
   return {
     restrict: 'A',
     scope: {
-      grid: '=droppable',
-      griddrop: '&',
-      allowdrop: '='
+      grid: '=tatoolDrop',        // expects a tatool-grid object provided by the tatoolGridService 
+      griddrop: '&',              // function to call on drop on a specific grid cell
+      allowdropcell: '@'          // defines whether drop feature is enabled [yes|all] or not [] for this cell
     },
     link: function(scope, element) {
       var jelement = $(element);
@@ -293,15 +314,17 @@ angular.module('tatool.module').directive('droppable', function() {
         var targetCellid = jelement.attr('id');
         var targetCell = scope.grid.getCell(targetCellid);
 
-        if (scope.allowdrop !== undefined && scope.allowdrop === 'yes') {
+        if (scope.allowdropcell === 'all') {
           return true;
-        } else {
+        } else if (scope.allowdropcell === 'yes'){
           // by default only allow drop on empty cells
           if(targetCell.data.stimulusValue !== undefined) {
             return false;
           } else {
             return true;
           }
+        } else {
+          return false;
         }
       }
 
@@ -314,7 +337,9 @@ angular.module('tatool.module').directive('droppable', function() {
         var sourceCell = fromGrid.getCell(sourceCellId);
         var targetCell = scope.grid.getCell(targetCellId);
 
-        scope.griddrop({'dragCell': sourceCell, 'dropCell': targetCell});
+        if (scope.griddrop !== undefined) {
+          scope.griddrop({'dragCell': sourceCell, 'dropCell': targetCell});
+        }
 
         if (fromGrid.gridId === scope.grid.gridId) {
           sourceCell.moveTo(targetCellId).refresh();
