@@ -74,7 +74,7 @@ angular.module('tatool.module', ['tatool', 'tatool.auth', 'angular-progress-arc'
                 return $stateParams.content.customType + 'Ctrl';
               }
             }]
-          },
+          }
         }
       });
   }]);

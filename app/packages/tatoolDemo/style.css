@@ -39,9 +39,11 @@
   -ms-user-select: none;
   user-select: none;
   white-space: nowrap;
+  z-index: 100;
 }
 
 .myCell, .myCellStatic {
+  font-size: 300%;
   background-color: transparent;
   border: 1px solid #ccc;
   display: table-cell;
@@ -71,9 +73,9 @@
 .myClass {
   display: inline-block;
   border-radius: 30%;
-  height: 75%;
-  width: 75%;
-  padding-bottom: 75%;
+  height: 80%;
+  width: 80%;
+  padding-bottom: 80%;
   margin: 0 auto;
   vertical-align: middle;
   text-align: center;

@@ -42,6 +42,12 @@ angular.module('tatool.module')
         if (data.gridAllowDrop !== undefined) {
           cell.gridAllowDrop = data.gridAllowDrop;
         }
+        if (data.gridCellHeight !== undefined) {
+          cell.gridCellHeight = data.gridCellHeight;
+        }
+        if (data.gridCellWidth !== undefined) {
+          cell.gridCellWidth = data.gridCellWidth;
+        }
         return cell;
       };
 
@@ -97,7 +103,7 @@ angular.module('tatool.module')
       };
 
       this.moveCell = function(fromPosition, toPosition) {
-        if (toPosition == fromPosition) {
+        if (toPosition === fromPosition) {
           $log.error('[Error][TatoolGrid]: Can\'t move cell as target position is same as origin position ' + fromPosition + '.');
           return null;
         }
@@ -117,13 +123,13 @@ angular.module('tatool.module')
       this.swapCell = function(position1, position2) {
         if (this.cellsObject[position1] !== undefined && this.cellsObject[position2] !== undefined) {
           var cell1 = this.cellsObject[position1];
-          var position1 = cell1.gridPosition;
+          var newPosition1 = cell1.gridPosition;
           var cell2 = this.cellsObject[position2];
-          var position2 = cell2.gridPosition;
-          cell1.gridPosition = position2;
-          cell2.gridPosition = position1;
-          this.cellsObject[position1] = cell2;
-          this.cellsObject[position2] = cell1;
+          var newPosition2 = cell2.gridPosition;
+          cell1.gridPosition = newPosition2;
+          cell2.gridPosition = newPosition1;
+          this.cellsObject[newPosition1] = cell2;
+          this.cellsObject[newPosition2] = cell1;
           return this;
         } else {
           $log.error('[Error][TatoolGrid]: Can\'t swap empty cell at position ' + position1 + ' or ' + position2);
@@ -156,13 +162,18 @@ angular.module('tatool.module')
       };
     }
 
-    function Cell(grid, options) {
+    /*
+      Tatool Grid: Cell Definition
+    */
+    function Cell(grid) {
       this.grid = grid;
       this.gridPosition = 0;
       this.data = {};
 
-      this.gridCellSize;
-      this.gridCellClass;
+      this.gridCellSize = '';
+      this.gridCellHeight = '';
+      this.gridCellWidth = '';
+      this.gridCellClass = '';
 
       this.remove = function() {
         if (this.gridPosition === 0) {
@@ -173,7 +184,7 @@ angular.module('tatool.module')
         this.gridPosition = 0;
 
         return this.grid;
-      }
+      };
 
       this.move = function(direction, numCells) {
         if (this.gridPosition === 0) {
@@ -190,25 +201,24 @@ angular.module('tatool.module')
 
         switch (direction) {
           case 'left':
-            var newCol = oldCol - numCells;
-            var newRow = oldRow;
+            newCol = oldCol - numCells;
+            newRow = oldRow;
             break;
           case 'right':
-            var newCol = oldCol + numCells;
-            var newRow = oldRow;
+            newCol = oldCol + numCells;
+            newRow = oldRow;
             break;
           case 'up':
-            var newCol = oldCol;
-            var newRow = oldRow - numCells;
+            newCol = oldCol;
+            newRow = oldRow - numCells;
             break;
           case 'down':
-            var newCol = oldCol;
-            var newRow = oldRow + numCells;
+            newCol = oldCol;
+            newRow = oldRow + numCells;
             break;
           default:
             $log.error('[Error][TatoolGrid]: No direction given for move.');
             return null;
-            break;
         }
 
         if(newCol >= 0 && newRow >= 0 && newCol < this.grid.cols && newRow < this.grid.rows) {
@@ -219,7 +229,7 @@ angular.module('tatool.module')
         }
         
         return this.grid.moveCell(this.gridPosition, newPosition);
-      }
+      };
 
       this.getNext = function(direction, numCells) {
         if (this.gridPosition === 0) {
@@ -236,25 +246,24 @@ angular.module('tatool.module')
 
         switch (direction) {
           case 'left':
-            var newCol = oldCol - numCells;
-            var newRow = oldRow;
+            newCol = oldCol - numCells;
+            newRow = oldRow;
             break;
           case 'right':
-            var newCol = oldCol + numCells;
-            var newRow = oldRow;
+            newCol = oldCol + numCells;
+            newRow = oldRow;
             break;
           case 'up':
-            var newCol = oldCol;
-            var newRow = oldRow - numCells;
+            newCol = oldCol;
+            newRow = oldRow - numCells;
             break;
           case 'down':
-            var newCol = oldCol;
-            var newRow = oldRow + numCells;
+            newCol = oldCol;
+            newRow = oldRow + numCells;
             break;
           default:
             $log.error('[Error][TatoolGrid]: No direction given for getNext.');
             return null;
-            break;
         }
 
         if (newCol >= 0 && newRow >= 0 && newCol < this.grid.cols && newRow < this.grid.rows) {
@@ -273,11 +282,11 @@ angular.module('tatool.module')
 
         toPosition = parseInt(toPosition);
 
-        if (this.gridPosition != toPosition) {
+        if (this.gridPosition !== toPosition) {
           this.grid.moveCell(this.gridPosition, toPosition);
         }
         return this.grid;
-      }
+      };
 
     }
 

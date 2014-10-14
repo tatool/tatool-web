@@ -4,9 +4,11 @@ angular.module('tatool.module').directive('tatoolGrid', ['$log', 'cfgModule', fu
   return {
     restrict: 'E',
     scope: {
-      cellclass: '@',
       grid: '=',
-      cellsize: '@',
+      gridspacing: '@',
+      cellclass: '@',
+      cellwidth: '@',
+      cellheight: '@',
       hideemptycells: '@',
       disablehover: '@',
       datapath: '@',
@@ -16,6 +18,22 @@ angular.module('tatool.module').directive('tatoolGrid', ['$log', 'cfgModule', fu
       gridmouseleave: '&'
     },
     link: function (scope, element, attr) {
+
+      // set table styling
+      scope.tableStyle = {};
+      if (scope.gridspacing !== undefined) {
+        if (scope.gridspacing === 'collapse') {
+          scope.tableStyle['border-collapse'] = 'collapse';
+        } else if (scope.gridspacing === 'separate') {
+          scope.tableStyle['border-collapse'] = 'separate';
+        } else {
+          scope.tableStyle['border-collapse'] = 'separate';
+          scope.tableStyle['border-spacing'] = scope.gridspacing + 'px';
+        }
+      } else {
+        scope.tableStyle['border-collapse'] = 'separate';
+        scope.tableStyle['border-spacing'] = '15px';
+      }
 
       // clean datapath value if given
       if (scope.datapath === undefined) {
@@ -66,8 +84,21 @@ angular.module('tatool.module').directive('tatoolGrid', ['$log', 'cfgModule', fu
       var initCell = function(cell) {
 
         // set cellsize (priority: cell/grid/default)
-        if (cell.gridCellSize === undefined) {
-          cell.gridCellSize = scope.cellsize;
+        if (cell.gridCellHeight === undefined || cell.gridCellHeight === '') {
+          cell.gridCellHeight = scope.cellheight;
+        }
+        if (cell.gridCellWidth === undefined || cell.gridCellWidth === '') {
+          cell.gridCellWidth = scope.cellwidth;
+        }
+
+        // try to assign appropriate size automatically depending on viewport size
+        if (cell.gridCellHeight === undefined || cell.gridCellHeight === '') {
+          var viewportHeight = $(window).height();
+          cell.gridCellHeight = (viewportHeight/2) / scope.grid.rows;
+        }
+        if (cell.gridCellWidth === undefined || cell.gridCellWidth === '') {
+          var viewportWidth = $(window).width();
+          cell.gridCellWidth = (viewportWidth/2) / scope.grid.cols;
         }
 
         // procoess built-in stimulus value types (circle/square)
@@ -78,7 +109,7 @@ angular.module('tatool.module').directive('tatoolGrid', ['$log', 'cfgModule', fu
         }
  
         // set cellclass (priority: cell/grid/default)
-        if (cell.gridCellClass === undefined) {
+        if (cell.gridCellClass === undefined || cell.gridCellClass === '') {
           if (scope.hideemptycells !== undefined && scope.hideemptycells === 'yes' && cell.data.stimulusValue === undefined) {
             cell.gridCellClass = 'hideCell';
           } else {
@@ -95,15 +126,17 @@ angular.module('tatool.module').directive('tatoolGrid', ['$log', 'cfgModule', fu
                 cell.gridCellClass = scope.cellclass;
               }
             }
-          }   
+          }
         }
 
         // create override styles for cell size and cellValue
         var cellOverrideStyle = {
-          'width':cell.gridCellSize + 'px',
-          'height':cell.gridCellSize + 'px',
-          'min-width':cell.gridCellSize + 'px',
-          'min-height':cell.gridCellSize + 'px'
+          'width':cell.gridCellWidth + 'px',
+          'height':cell.gridCellHeight + 'px',
+          'min-width':cell.gridCellWidth + 'px',
+          'min-height':cell.gridCellHeight + 'px',
+          'max-width':cell.gridCellWidth + 'px',
+          'max-height':cell.gridCellHeight + 'px'
         };
         var cellValueOverrideStyle = {
           'background-color':cell.data.stimulusValue
@@ -208,38 +241,40 @@ angular.module('tatool.module').directive('tatoolGrid', ['$log', 'cfgModule', fu
 angular.module('tatool.module').directive('draggable', function() {
   return {
     restrict: 'A',
-    link: function(scope, element, attrs) {
+    link: function(scope, element) {
       var jelement = $(element);
       var originalClass;
 
-      jelement.draggable( {
-        start: handleStartEvent,
-        stop: handleStopEvent,
-        cursor: 'move',
-        zIndex: 5000,
-        revert: "invalid",
-        snap: '.emptyCellValue',
-        snapMode: 'corner',
-        snapTolerance: 15
-      }).data("fromGrid", scope.grid, "fromPosition", scope.col.gridPosition);
-
       // remove hover effect at start of drag
-      function handleStartEvent() {
+      var handleStartEvent = function () {
         originalClass = scope.col.gridCellClass;
         if (originalClass.substring( originalClass.length - 'Static'.length, originalClass.length ) !== 'Static') {
           var staticClass = scope.cellclass + 'Static';
           scope.col.gridCellClass = staticClass;
           scope.$apply();
         }
-      }
+      };
 
       // add hover effect back at end of drag
-      function handleStopEvent() {
+      var handleStopEvent = function () {
         scope.col.gridCellClass = originalClass;
         scope.$apply();
-      }
+      };
+
+      // add jquery draggable
+      jelement.draggable( {
+        start: handleStartEvent,
+        stop: handleStopEvent,
+        cursor: 'move',
+        zIndex: 5000,
+        revert: 'invalid',
+        snap: '.emptyCellValue',
+        snapMode: 'corner',
+        snapTolerance: 15
+      }).data('fromGrid', scope.grid, 'fromPosition', scope.col.gridPosition);
+
     }
-  }
+  };
 });
 
 angular.module('tatool.module').directive('droppable', function() {
@@ -248,18 +283,13 @@ angular.module('tatool.module').directive('droppable', function() {
     scope: {
       grid: '=droppable',
       griddrop: '&',
-      allowdrop: "="
+      allowdrop: '='
     },
     link: function(scope, element) {
       var jelement = $(element);
 
-      jelement.droppable( {
-        drop: handleDropEvent,
-        accept: dropAllowed,
-        hoverClass: "dropHover"
-      });
-
-      function dropAllowed(dropElement) {
+      // accept function to decide where cell can be dropped
+      function dropAllowed() {
         var targetCellid = jelement.attr('id');
         var targetCell = scope.grid.getCell(targetCellid);
 
@@ -275,10 +305,10 @@ angular.module('tatool.module').directive('droppable', function() {
         }
       }
 
+      // handle drop event of cell
       function handleDropEvent( event, ui ) {
         var draggable = ui.draggable;
-        var fromGrid = draggable.data("fromGrid");
-        var fromPosition = draggable.data("fromPosition");
+        var fromGrid = draggable.data('fromGrid');
         var sourceCellId = parseInt(draggable.attr('id'));
         var targetCellId = parseInt(jelement.attr('id'));
         var sourceCell = fromGrid.getCell(sourceCellId);
@@ -290,9 +320,6 @@ angular.module('tatool.module').directive('droppable', function() {
           sourceCell.moveTo(targetCellId).refresh();
           scope.$apply();
         } else {
-
-          var success = scope.grid.getCell(targetCellId).data.stimulusValue === undefined;
-
           // remove target cell in target grid
           scope.grid.removeCell(targetCellId);
 
@@ -305,6 +332,13 @@ angular.module('tatool.module').directive('droppable', function() {
           scope.$apply();
         }
       }
+
+      // add jquery droppable
+      jelement.droppable( {
+        drop: handleDropEvent,
+        accept: dropAllowed,
+        hoverClass: 'dropHover'
+      });
     }
-  }
+  };
 });

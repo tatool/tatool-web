@@ -39,12 +39,9 @@ angular.module('tatool.app')
         });
       });
     }
-
+    
+    // query modules db and display
     dataService.openModulesDB(userService.getUserName(), initModules);
-
-    // preload general module images
-    var tatoolModuleAssets = ['thumbs-down.png','thumbs-empty.png','thumbs-up.png'];
-    preloadData();
 
     function preloadData() {
       for (var i = 0; i < tatoolModuleAssets.length; i++) {
@@ -52,6 +49,10 @@ angular.module('tatool.app')
         img.src = cfgApp.MODULE_IMG_PATH + tatoolModuleAssets[i];
       }
     }
+
+    // preload general module images
+    var tatoolModuleAssets = ['thumbs-down.png','thumbs-empty.png','thumbs-up.png'];
+    preloadData();
 
     // upload local file
     $scope.addModule = function(e) {

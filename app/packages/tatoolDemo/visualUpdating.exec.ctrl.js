@@ -24,14 +24,18 @@ angular.module('tatool.module')
     
 
     // add two cells and refresh afterwards
+
+    myGrid.addCellAtPosition(5, {stimulusValue: '#ccc', stimulusValueType: 'square', gridAllowDrop: 'yes'});
+    myGrid.addCellAtPosition(3, {stimulusValue: 'ABCDEFGHI', stimulusValueType: 'text', animal: 'None'});
     myGrid.addCellAtPosition(2, {stimulusValue: 'bird_96x96.png', stimulusValueType: 'image', animal: 'Birdy'});
     myGrid.addCellAtPosition(4, {stimulusValue: 'rhino_96x96.png', stimulusValueType: 'image', animal: 'Rhino'});
     myGrid.addCellAtPosition(6, {stimulusValue: 'bear_96x96.png', stimulusValueType: 'image', animal: 'Bear'});
     myGrid.addCellAtPosition(8, {stimulusValue: '#ccc', stimulusValueType: 'circle', gridAllowDrop: 'yes'});
+    myGrid.addCellAtPosition(7, {gridCellClass: 'myColoredCell', stimulusValue: 'myClass', stimulusValueType: 'class'});
 
     var myCell = myGrid.createCell({stimulusValue: 'penguin_96x96.png', stimulusValueType: 'image', animal: 'Penguin'});
-    myGrid.addCellAtPosition(1, myCell).refresh();
-    //myGrid.refresh();
+    myGrid.addCellAtPosition(1, myCell);
+    myGrid.refresh();
 
     /*
     $timeout(function() {
@@ -128,8 +132,8 @@ angular.module('tatool.module')
         if (neighbor !== null && neighbor.data.stimulusValue === undefined) {
           cell.move('right').refresh();
         }
-        //$scope.clickMessage = 'Penguin!!!';
-        //$timeout(function() {  $scope.clickMessage = ''; }, 1500);
+        $scope.clickMessage = 'Penguin!!!';
+        $timeout(function() {  $scope.clickMessage = ''; }, 1500);
       }
     };
 
