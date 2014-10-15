@@ -4,7 +4,7 @@
 
     <div ng-class="col.gridCellClass" ng-click="(col.data.stimulusValue !== undefined || hideemptycells === undefined || hideemptycells==='no') ? gridClickEvent($event, col) : void();" ng-style="col.gridCellOverrideStyle" ng-mouseenter="(gridmouseenter !== undefined) ? gridMouseEnterEvent($event, col) : void();" ng-mouseleave="(gridmouseleave !== undefined) ? gridMouseLeaveEvent($event, col) : void();" ng-repeat="col in row track by (col.gridPosition + ':' + $id(col))">
 
-      <div ng-if="col.data.stimulusValueType!==undefined" style="position: relative" allowDragCell="{{col.gridAllowDrag}}" id="{{col.gridPosition}}">
+      <div ng-if="col.data.stimulusValueType!==undefined" style="position: relative" tatool-drag allowDragCell="{{col.gridAllowDrag}}" id="{{col.gridPosition}}">
 
         <div ng-switch on="col.data.stimulusValueType">
           <div ng-switch-when="image">
