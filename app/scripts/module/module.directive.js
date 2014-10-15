@@ -286,7 +286,7 @@ angular.module('tatool.module').directive('tatoolDrag', function() {
           start: handleStartEvent,
           stop: handleStopEvent,
           cursor: 'move',
-          //zIndex: 5000,
+          zIndex: 5000,
           revert: 'invalid',
           snap: '.emptyCellValue',
           snapMode: 'corner',
