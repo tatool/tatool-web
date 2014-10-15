@@ -4,9 +4,28 @@ angular.module('tatool.module')
   .controller('visualUpdatingExecutableCtrl', [ '$scope', '$log', '$timeout', 'service', 'timerService', 'tatoolGridService',
     function ($scope, $log, $timeout, service, timerService, tatoolGridService) {
 
-    // assign grid to scope property
-    $scope.dataPath = service.dataPath;
-    $scope.myGrid = service.myGrid;
+   
+
+     // set the data path for our animal images
+      var dataPath = 'data/';
+
+      // create  new a tatoolGrid
+      var myGrid = tatoolGridService.createGrid(2, 4, 'animalGrid');
+
+       // assign grid to scope property
+      $scope.dataPath = dataPath;
+      $scope.myGrid = myGrid;
+
+      // add cells and refresh afterwards
+      myGrid.addCellAtPosition(5, {stimulusValue: '#ccc', stimulusValueType: 'square', gridAllowDrop: 'all', animal: 'None'});
+      myGrid.addCellAtPosition(3, {stimulusValue: 'AB', stimulusValueType: 'text', animal: 'None'});
+      myGrid.addCellAtPosition(2, {stimulusValue: 'bird_96x96.png', stimulusValueType: 'image', animal: 'Birdy', gridAllowDrag: 'yes'});
+      myGrid.addCellAtPosition(4, {stimulusValue: 'rhino_96x96.png', stimulusValueType: 'image', animal: 'Rhino'});
+      myGrid.addCellAtPosition(6, {stimulusValue: 'bear_96x96.png', stimulusValueType: 'image', animal: 'Bear'});
+      myGrid.addCellAtPosition(8, {stimulusValue: '#ccc', stimulusValueType: 'circle', gridAllowDrop: 'yes', animal: 'None'});
+
+      var myCell = myGrid.createCell({stimulusValue: 'penguin_96x96.png', stimulusValueType: 'image', animal: 'Penguin'});
+      myGrid.addCellAtPosition(1, myCell).refresh();
 
     /*
     $timeout(function() {

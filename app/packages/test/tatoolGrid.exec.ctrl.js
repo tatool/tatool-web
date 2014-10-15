@@ -3,7 +3,7 @@
 angular.module('tatool.module')
   .controller('tatoolGridExecutableCtrl', [ '$scope', 'service', 
     function ($scope, service) {
-      console.log('here');
+
     // assign grid to scope property
     $scope.dataPath = service.dataPath;
     $scope.myGrid = service.myGrid;
