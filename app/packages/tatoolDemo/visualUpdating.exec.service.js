@@ -9,8 +9,6 @@ angular.module('tatool.module')
 
     VisualUpdatingExecutable.prototype.init = function() {
 
-     
-
     };
 
     // Return our service object
