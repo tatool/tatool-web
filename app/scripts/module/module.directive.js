@@ -282,6 +282,7 @@ angular.module('tatool.module').directive('tatoolDrag', function() {
       // add jquery draggable
       if (attrs.allowdragcell === 'yes') {
         jelement.draggable( {
+          addClasses: false,
           start: handleStartEvent,
           stop: handleStopEvent,
           cursor: 'move',
@@ -358,6 +359,7 @@ angular.module('tatool.module').directive('tatoolDrop', function() {
 
       // add jquery droppable
       jelement.droppable( {
+        addClasses: false,
         drop: handleDropEvent,
         accept: dropAllowed,
         hoverClass: 'dropHover'
