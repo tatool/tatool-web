@@ -97,7 +97,7 @@ angular.module('tatool.module')
       var neighbor = myCell.getNext(direction);
     
       if (neighbor !== null && neighbor.data.animal !== undefined) {
-        if (neighbor.data.animal === 'Bear') {
+        if (neighbor.data.animal === 'ABear') {
           displayScore(myCell.data.animal);
           myCell.remove().refresh();
         } else {
