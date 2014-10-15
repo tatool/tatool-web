@@ -100,6 +100,26 @@ angular.module('tatool.module')
         }
       };
 
+      this.getCells = function() {
+        var allCells = [];
+        for (var property in this.cellsObject) {
+          if (this.cellsObject.hasOwnProperty(property)) {
+            allCells.push(this.cellsObject[property]);
+          }
+        }
+        return allCells;
+      };
+
+      this.getNumCells = function() {
+        var numCells = 0;
+        for (var property in this.cellsObject) {
+          if (this.cellsObject.hasOwnProperty(property)) {
+            numCells++;
+          }
+        }
+        return numCells;
+      };
+
       this.removeCell = function(position) {
         delete this.cellsObject[position];
         return this;

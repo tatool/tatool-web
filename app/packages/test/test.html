@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html class="no-js"><!--<![endif]--><head><style type="text/css">@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-animate){display:none !important;}ng\:form{display:block;}</style>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <link rel="stylesheet" href="../../styles/reset.css">
+    <link rel="stylesheet" href="../../styles/tatool_module.css">
+    <link rel="stylesheet" href="style.css">
+    <!-- endbuild -->
+  </head>
+  <body class="ng-scope">
+
+    <div id="container">
+      <!-- uiView:  --><div ui-view="" class="ng-scope"><!-- uiView: status --><div ui-view="status" class="ng-scope"><div id="blankPanel" class="ng-scope"></div></div>
+<!-- uiView: executable --><div ui-view="executable" class="ng-scope"><div id="centeredExecutable" class="ng-scope">
+
+  <div class="title">Animal Size</div>
+
+  <tatool-grid grid="myGrid" gridspacing="5" cellwidth="110" cellheight="110" cellclass="myCell" datapath="data/" allowdrag="yes" allowdrop="all" gridclick="userClick(cell, $event)" griddrop="userDrop(dragCell, dropCell)" class="ng-isolate-scope"><div id="tatoolGrid" ng-style="tableStyle" style="border-collapse: separate; border-spacing: 5px;">
+
+  <!-- ngRepeat: row in gridCells --><div class="row ng-scope" ng-repeat="row in gridCells">
+
+    <!-- ngRepeat: col in row track by (col.gridPosition + ':' + $id(col)) --><div ng-class="col.gridCellClass" ng-click="(col.data.stimulusValue !== undefined || hideemptycells === undefined || hideemptycells==='no') ? gridClickEvent($event, col) : void();" ng-style="col.gridCellOverrideStyle" ng-mouseenter="(gridmouseenter !== undefined) ? gridMouseEnterEvent($event, col) : void();" ng-mouseleave="(gridmouseleave !== undefined) ? gridMouseLeaveEvent($event, col) : void();" ng-repeat="col in row track by (col.gridPosition + ':' + $id(col))" class="ng-scope myCell" style="width: 110px; height: 110px; min-width: 110px; min-height: 110px;">
+
+      <!-- ngIf: col.data.stimulusValueType!==undefined --><div ng-if="col.data.stimulusValueType!==undefined" style="width: 100%; height: 100%; position: relative;" tatool-drag="" allowdragcell="yes" tatool-drop="grid" allowdropcell="all" griddrop="gridDrop(dragCell, dropCell)" id="1" class="ng-scope ng-isolate-scope ui-droppable ui-draggable ui-draggable-handle">
+
+        <div ng-switch="" on="col.data.stimulusValueType" style="width: 100%; height: 100%;">
+          <!-- ngSwitchWhen: image --><div ng-switch-when="image" class="ng-scope">
+            <img class="imageCellValue" draggable="false" ng-src="data/penguin_96x96.png" src="data/penguin_96x96.png">
+          </div><!-- end ngSwitchWhen: -->
+          <!-- ngSwitchWhen: text -->
+          <!-- ngSwitchWhen: circle -->
+          <!-- ngSwitchWhen: square -->
+          <!-- ngSwitchWhen: class -->
+          <!-- ngSwitchDefault:  -->
+        </div>
+
+      </div><!-- end ngIf: col.data.stimulusValueType!==undefined -->
+
+      <!-- ngIf: col.data.stimulusValueType===undefined && col.gridCellClass !== 'hideCell' -->
+
+    </div><!-- end ngRepeat: col in row track by (col.gridPosition + ':' + $id(col)) --><div ng-class="col.gridCellClass" ng-click="(col.data.stimulusValue !== undefined || hideemptycells === undefined || hideemptycells==='no') ? gridClickEvent($event, col) : void();" ng-style="col.gridCellOverrideStyle" ng-mouseenter="(gridmouseenter !== undefined) ? gridMouseEnterEvent($event, col) : void();" ng-mouseleave="(gridmouseleave !== undefined) ? gridMouseLeaveEvent($event, col) : void();" ng-repeat="col in row track by (col.gridPosition + ':' + $id(col))" class="ng-scope myCell" style="width: 110px; height: 110px; min-width: 110px; min-height: 110px;">
+
+      <!-- ngIf: col.data.stimulusValueType!==undefined --><div ng-if="col.data.stimulusValueType!==undefined" style="width: 100%; height: 100%; position: relative;" tatool-drag="" allowdragcell="yes" tatool-drop="grid" allowdropcell="all" griddrop="gridDrop(dragCell, dropCell)" id="2" class="ng-scope ng-isolate-scope ui-droppable ui-draggable ui-draggable-handle">
+
+        <div ng-switch="" on="col.data.stimulusValueType" style="width: 100%; height: 100%;">
+          <!-- ngSwitchWhen: image --><div ng-switch-when="image" class="ng-scope">
+            <img class="imageCellValue" draggable="false" ng-src="data/bird_96x96.png" src="data/bird_96x96.png">
+          </div><!-- end ngSwitchWhen: -->
+          <!-- ngSwitchWhen: text -->
+          <!-- ngSwitchWhen: circle -->
+          <!-- ngSwitchWhen: square -->
+          <!-- ngSwitchWhen: class -->
+          <!-- ngSwitchDefault:  -->
+        </div>
+
+      </div><!-- end ngIf: col.data.stimulusValueType!==undefined -->
+
+      <!-- ngIf: col.data.stimulusValueType===undefined && col.gridCellClass !== 'hideCell' -->
+
+    </div><!-- end ngRepeat: col in row track by (col.gridPosition + ':' + $id(col)) --><div ng-class="col.gridCellClass" ng-click="(col.data.stimulusValue !== undefined || hideemptycells === undefined || hideemptycells==='no') ? gridClickEvent($event, col) : void();" ng-style="col.gridCellOverrideStyle" ng-mouseenter="(gridmouseenter !== undefined) ? gridMouseEnterEvent($event, col) : void();" ng-mouseleave="(gridmouseleave !== undefined) ? gridMouseLeaveEvent($event, col) : void();" ng-repeat="col in row track by (col.gridPosition + ':' + $id(col))" class="ng-scope myCell" style="width: 110px; height: 110px; min-width: 110px; min-height: 110px;">
+
+      <!-- ngIf: col.data.stimulusValueType!==undefined -->
+
+      <!-- ngIf: col.data.stimulusValueType===undefined && col.gridCellClass !== 'hideCell' --><div ng-if="col.data.stimulusValueType===undefined &amp;&amp; col.gridCellClass !== 'hideCell'" style="width: 100%; height: 100%;" tatool-drop="grid" allowdropcell="all" griddrop="gridDrop(dragCell, dropCell)" id="3" class="ng-scope ng-isolate-scope ui-droppable"> 
+        <div class="emptyCellValue" style="width: 100%; height: 100%;"> </div>   
+      </div><!-- end ngIf: col.data.stimulusValueType===undefined && col.gridCellClass !== 'hideCell' -->
+
+    </div><!-- end ngRepeat: col in row track by (col.gridPosition + ':' + $id(col)) --><div ng-class="col.gridCellClass" ng-click="(col.data.stimulusValue !== undefined || hideemptycells === undefined || hideemptycells==='no') ? gridClickEvent($event, col) : void();" ng-style="col.gridCellOverrideStyle" ng-mouseenter="(gridmouseenter !== undefined) ? gridMouseEnterEvent($event, col) : void();" ng-mouseleave="(gridmouseleave !== undefined) ? gridMouseLeaveEvent($event, col) : void();" ng-repeat="col in row track by (col.gridPosition + ':' + $id(col))" class="ng-scope myCell" style="width: 110px; height: 110px; min-width: 110px; min-height: 110px;">
+
+      <!-- ngIf: col.data.stimulusValueType!==undefined --><div ng-if="col.data.stimulusValueType!==undefined" style="width: 100%; height: 100%; position: relative;" tatool-drag="" allowdragcell="yes" tatool-drop="grid" allowdropcell="all" griddrop="gridDrop(dragCell, dropCell)" id="4" class="ng-scope ng-isolate-scope ui-droppable ui-draggable ui-draggable-handle">
+
+        <div ng-switch="" on="col.data.stimulusValueType" style="width: 100%; height: 100%;">
+          <!-- ngSwitchWhen: image --><div ng-switch-when="image" class="ng-scope">
+            <img class="imageCellValue" draggable="false" ng-src="data/rhino_96x96.png" src="data/rhino_96x96.png">
+          </div><!-- end ngSwitchWhen: -->
+          <!-- ngSwitchWhen: text -->
+          <!-- ngSwitchWhen: circle -->
+          <!-- ngSwitchWhen: square -->
+          <!-- ngSwitchWhen: class -->
+          <!-- ngSwitchDefault:  -->
+        </div>
+
+      </div><!-- end ngIf: col.data.stimulusValueType!==undefined -->
+
+      <!-- ngIf: col.data.stimulusValueType===undefined && col.gridCellClass !== 'hideCell' -->
+
+    </div><!-- end ngRepeat: col in row track by (col.gridPosition + ':' + $id(col)) -->
+
+  </div><!-- end ngRepeat: row in gridCells --><div class="row ng-scope" ng-repeat="row in gridCells">
+
+    <!-- ngRepeat: col in row track by (col.gridPosition + ':' + $id(col)) --><div ng-class="col.gridCellClass" ng-click="(col.data.stimulusValue !== undefined || hideemptycells === undefined || hideemptycells==='no') ? gridClickEvent($event, col) : void();" ng-style="col.gridCellOverrideStyle" ng-mouseenter="(gridmouseenter !== undefined) ? gridMouseEnterEvent($event, col) : void();" ng-mouseleave="(gridmouseleave !== undefined) ? gridMouseLeaveEvent($event, col) : void();" ng-repeat="col in row track by (col.gridPosition + ':' + $id(col))" class="ng-scope myCell" style="width: 110px; height: 110px; min-width: 110px; min-height: 110px;">
+
+      <!-- ngIf: col.data.stimulusValueType!==undefined -->
+
+      <!-- ngIf: col.data.stimulusValueType===undefined && col.gridCellClass !== 'hideCell' --><div ng-if="col.data.stimulusValueType===undefined &amp;&amp; col.gridCellClass !== 'hideCell'" style="width: 100%; height: 100%;" tatool-drop="grid" allowdropcell="all" griddrop="gridDrop(dragCell, dropCell)" id="5" class="ng-scope ng-isolate-scope ui-droppable"> 
+        <div class="emptyCellValue" style="width: 100%; height: 100%;"> </div>   
+      </div><!-- end ngIf: col.data.stimulusValueType===undefined && col.gridCellClass !== 'hideCell' -->
+
+    </div><!-- end ngRepeat: col in row track by (col.gridPosition + ':' + $id(col)) --><div ng-class="col.gridCellClass" ng-click="(col.data.stimulusValue !== undefined || hideemptycells === undefined || hideemptycells==='no') ? gridClickEvent($event, col) : void();" ng-style="col.gridCellOverrideStyle" ng-mouseenter="(gridmouseenter !== undefined) ? gridMouseEnterEvent($event, col) : void();" ng-mouseleave="(gridmouseleave !== undefined) ? gridMouseLeaveEvent($event, col) : void();" ng-repeat="col in row track by (col.gridPosition + ':' + $id(col))" class="ng-scope myCell" style="width: 110px; height: 110px; min-width: 110px; min-height: 110px;">
+
+      <!-- ngIf: col.data.stimulusValueType!==undefined --><div ng-if="col.data.stimulusValueType!==undefined" style="width: 100%; height: 100%; position: relative;" tatool-drag="" allowdragcell="yes" tatool-drop="grid" allowdropcell="all" griddrop="gridDrop(dragCell, dropCell)" id="6" class="ng-scope ng-isolate-scope ui-droppable ui-draggable ui-draggable-handle">
+
+        <div ng-switch="" on="col.data.stimulusValueType" style="width: 100%; height: 100%;">
+          <!-- ngSwitchWhen: image --><div ng-switch-when="image" class="ng-scope">
+            <img class="imageCellValue" draggable="false" ng-src="data/bear_96x96.png" src="data/bear_96x96.png">
+          </div><!-- end ngSwitchWhen: -->
+          <!-- ngSwitchWhen: text -->
+          <!-- ngSwitchWhen: circle -->
+          <!-- ngSwitchWhen: square -->
+          <!-- ngSwitchWhen: class -->
+          <!-- ngSwitchDefault:  -->
+        </div>
+
+      </div><!-- end ngIf: col.data.stimulusValueType!==undefined -->
+
+      <!-- ngIf: col.data.stimulusValueType===undefined && col.gridCellClass !== 'hideCell' -->
+
+    </div><!-- end ngRepeat: col in row track by (col.gridPosition + ':' + $id(col)) --><div ng-class="col.gridCellClass" ng-click="(col.data.stimulusValue !== undefined || hideemptycells === undefined || hideemptycells==='no') ? gridClickEvent($event, col) : void();" ng-style="col.gridCellOverrideStyle" ng-mouseenter="(gridmouseenter !== undefined) ? gridMouseEnterEvent($event, col) : void();" ng-mouseleave="(gridmouseleave !== undefined) ? gridMouseLeaveEvent($event, col) : void();" ng-repeat="col in row track by (col.gridPosition + ':' + $id(col))" class="ng-scope myCell" style="width: 110px; height: 110px; min-width: 110px; min-height: 110px;">
+
+      <!-- ngIf: col.data.stimulusValueType!==undefined -->
+
+      <!-- ngIf: col.data.stimulusValueType===undefined && col.gridCellClass !== 'hideCell' --><div ng-if="col.data.stimulusValueType===undefined &amp;&amp; col.gridCellClass !== 'hideCell'" style="width: 100%; height: 100%;" tatool-drop="grid" allowdropcell="all" griddrop="gridDrop(dragCell, dropCell)" id="7" class="ng-scope ng-isolate-scope ui-droppable"> 
+        <div class="emptyCellValue" style="width: 100%; height: 100%;"> </div>   
+      </div><!-- end ngIf: col.data.stimulusValueType===undefined && col.gridCellClass !== 'hideCell' -->
+
+    </div><!-- end ngRepeat: col in row track by (col.gridPosition + ':' + $id(col)) --><div ng-class="col.gridCellClass" ng-click="(col.data.stimulusValue !== undefined || hideemptycells === undefined || hideemptycells==='no') ? gridClickEvent($event, col) : void();" ng-style="col.gridCellOverrideStyle" ng-mouseenter="(gridmouseenter !== undefined) ? gridMouseEnterEvent($event, col) : void();" ng-mouseleave="(gridmouseleave !== undefined) ? gridMouseLeaveEvent($event, col) : void();" ng-repeat="col in row track by (col.gridPosition + ':' + $id(col))" class="ng-scope myCell" style="width: 110px; height: 110px; min-width: 110px; min-height: 110px;">
+
+      <!-- ngIf: col.data.stimulusValueType!==undefined -->
+
+      <!-- ngIf: col.data.stimulusValueType===undefined && col.gridCellClass !== 'hideCell' --><div ng-if="col.data.stimulusValueType===undefined &amp;&amp; col.gridCellClass !== 'hideCell'" style="width: 100%; height: 100%;" tatool-drop="grid" allowdropcell="all" griddrop="gridDrop(dragCell, dropCell)" id="8" class="ng-scope ng-isolate-scope ui-droppable"> 
+        <div class="emptyCellValue" style="width: 100%; height: 100%;"> </div>   
+      </div><!-- end ngIf: col.data.stimulusValueType===undefined && col.gridCellClass !== 'hideCell' -->
+
+    </div><!-- end ngRepeat: col in row track by (col.gridPosition + ':' + $id(col)) -->
+
+  </div><!-- end ngRepeat: row in gridCells -->
+
+</div></tatool-grid>
+
+  <div class="message ng-binding" style="color: "></div>
+
+</div>
+</div></div>
+    </div>
+
+    <script src="../../bower_components/jquery/dist/jquery.js"></script>
+    <script src="../../bower_components/jquery-ui/jquery-ui.js"></script>
+
+    <script>
+    $('#1').draggable( {
+          cursor: 'move',
+          zIndex: 5000,
+          revert: 'invalid',
+          snap: '.emptyCellValue',
+          snapMode: 'corner',
+          snapTolerance: 15
+        });
+
+    for (var i=0; i < 8; i++) {
+      $('#' + i).droppable( {
+        drop: function(event, dropElement) {
+          $(this).append(dropElement);
+        },
+        hoverClass: 'dropHover'
+      });
+    }
+    
+    </script>
+
+
+</body></html>

@@ -1,29 +1,31 @@
 'use strict';
 
 angular.module('tatool.module')
-  .factory('visualUpdatingExecutable', [ '$rootScope', '$log', '$q', 'tatoolExecutable', 'db', 'timerService', 'tatoolPhase', 
-    function ($rootScope, $log, $q, tatoolExecutable, db, timerService, tatoolPhase) {  
+  .factory('visualUpdatingExecutable', [ '$rootScope', 'tatoolExecutable', 'db', 'timerService', 'tatoolGridService', 
+    function ($rootScope, tatoolExecutable, db, timerService, tatoolGridService) {  
 
     // Define our executable service constructor which will be called once for every instance
     var VisualUpdatingExecutable = tatoolExecutable.createExecutable();
 
     VisualUpdatingExecutable.prototype.init = function() {
-      var deferred = $q.defer();
-      $log.debug('Initialize Executable with name: ' + this.name);
 
-      // preload images
-      var img = new Image();
-      img.src = 'data/penguin_96x96.png';
-      img.onload = function() {
-          deferred.resolve('Whatever');
-      };
+      // set the data path for our animal images
+      this.dataPath = 'data/';
 
-      return deferred;
-    };
+      // create  new a tatoolGrid
+      this.myGrid = tatoolGridService.createGrid(2, 4, 'animalGrid');
 
-    VisualUpdatingExecutable.prototype.stopExecution = function() {
-      //executable.dual = 'SUSPENDED';
-      tatoolExecutable.stopExecutable();
+      // add cells and refresh afterwards
+      this.myGrid.addCellAtPosition(5, {stimulusValue: '#ccc', stimulusValueType: 'square', gridAllowDrop: 'all', animal: 'None'});
+      this.myGrid.addCellAtPosition(3, {stimulusValue: 'AB', stimulusValueType: 'text', animal: 'None'});
+      this.myGrid.addCellAtPosition(2, {stimulusValue: 'bird_96x96.png', stimulusValueType: 'image', animal: 'Birdy', gridAllowDrag: 'yes'});
+      this.myGrid.addCellAtPosition(4, {stimulusValue: 'rhino_96x96.png', stimulusValueType: 'image', animal: 'Rhino'});
+      this.myGrid.addCellAtPosition(6, {stimulusValue: 'bear_96x96.png', stimulusValueType: 'image', animal: 'Bear'});
+      this.myGrid.addCellAtPosition(8, {stimulusValue: '#ccc', stimulusValueType: 'circle', gridAllowDrop: 'yes', animal: 'None'});
+
+      var myCell = this.myGrid.createCell({stimulusValue: 'penguin_96x96.png', stimulusValueType: 'image', animal: 'Penguin'});
+      this.myGrid.addCellAtPosition(1, myCell).refresh();
+
     };
 
     // Return our service object

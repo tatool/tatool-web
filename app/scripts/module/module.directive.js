@@ -210,7 +210,6 @@ angular.module('tatool.module').directive('tatoolGrid', ['$log', 'cfgModule', fu
       // listen to refresh calls of this grid to initiate UI update
       scope.$on('tatool-grid:refresh', function (event, targetGridId) {
         if (targetGridId === scope.grid.gridId) {
-          console.log('refresh grid ' + targetGridId);
           refreshGrid();
         }
       });
@@ -218,7 +217,6 @@ angular.module('tatool.module').directive('tatoolGrid', ['$log', 'cfgModule', fu
       // listen to redraw calls of this grid to initiate UI update
       scope.$on('tatool-grid:redraw', function (event, targetGridId) {
         if (targetGridId === scope.grid.gridId) {
-          console.log('redraw grid '  + targetGridId);
           initGrid();
         }
       });
@@ -248,7 +246,7 @@ angular.module('tatool.module').directive('tatoolGrid', ['$log', 'cfgModule', fu
       };
 
       element.on('$destroy', function() {
-        console.log('clean up grid');
+        
       });
 
     },
@@ -337,10 +335,6 @@ angular.module('tatool.module').directive('tatoolDrop', function() {
         var sourceCell = fromGrid.getCell(sourceCellId);
         var targetCell = scope.grid.getCell(targetCellId);
 
-        if (scope.griddrop !== undefined) {
-          scope.griddrop({'dragCell': sourceCell, 'dropCell': targetCell});
-        }
-
         if (fromGrid.gridId === scope.grid.gridId) {
           sourceCell.moveTo(targetCellId).refresh();
           scope.$apply();
@@ -355,6 +349,10 @@ angular.module('tatool.module').directive('tatoolDrop', function() {
           sourceCell.grid = scope.grid;
           scope.grid.addCellAtPosition(targetCellId, sourceCell).refresh();
           scope.$apply();
+        }
+
+        if (scope.griddrop !== undefined) {
+          scope.griddrop({'dragCell': sourceCell, 'dropCell': targetCell});
         }
       }
 
