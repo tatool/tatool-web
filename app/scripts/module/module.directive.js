@@ -279,11 +279,15 @@ angular.module('tatool.module').directive('tatoolDrag', function() {
         scope.$apply();
       };
 
+      var dragElement = function() {
+         return $("<div style='border: solid 1px #000; width: 50px; height: 50px'></div>").append($(this).find('img').clone());
+      };
+
       // add jquery draggable
       if (attrs.allowdragcell === 'yes') {
         jelement.draggable( {
           addClasses: false,
-          helper: 'clone',
+          helper: dragElement,
           start: handleStartEvent,
           stop: handleStopEvent,
           cursor: 'move',
