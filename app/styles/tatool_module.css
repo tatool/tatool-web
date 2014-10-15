@@ -522,7 +522,6 @@ font-size:1.9em;
   -ms-user-select: none;
   user-select: none;
 }
-
 #tatoolGrid .textCellValue span {
   position: absolute;
   left: 50%;
@@ -534,9 +533,6 @@ font-size:1.9em;
   text-align: center;
   vertical-align: middle;
 }
-
-
-
 
 #tatoolGrid .imageCellValue {
   display: inline-block;
@@ -553,24 +549,36 @@ font-size:1.9em;
 }
 
 #tatoolGrid .circleCellValue div {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin: 0 auto;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
+  text-align: center;
+  vertical-align: middle;
   display: inline-block;
   border-radius: 50%;
   height: 80%;
   width: 80%;
   padding-bottom: 80%;
-  margin: 0 auto;
-  vertical-align: middle;
-  text-align: center;
   background-color: #666;
 }
 
 #tatoolGrid .squareCellValue div {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin: 0 auto;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
+  text-align: center;
+  vertical-align: middle;
   display: inline-block;
   height: 80%;
   width: 80%;
   padding-bottom: 80%;
-  margin: 0 auto;
-  vertical-align: middle;
-  text-align: center;
   background-color: #666;
 }
