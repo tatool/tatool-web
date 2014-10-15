@@ -8,7 +8,7 @@
 
         <div ng-switch on="col.data.stimulusValueType" style="width: 100%; height: 100%;">
           <div ng-switch-when="image">
-            <img class="imageCellValue" ng-src="{{tatoolDataPath}}{{col.data.stimulusValue}}">
+            <img class="imageCellValue" draggable="false" ng-src="{{tatoolDataPath}}{{col.data.stimulusValue}}">
           </div>
           <div ng-switch-when="text" style="width: 100%; height: 100%; overflow: hidden;">
             <div class="textCellValue"><span>{{col.data.stimulusValue}}</span></div>
