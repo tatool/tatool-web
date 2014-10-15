@@ -287,6 +287,7 @@ angular.module('tatool.module').directive('tatoolDrag', function() {
       if (attrs.allowdragcell === 'yes') {
         jelement.draggable( {
           addClasses: false,
+          helper: 'clone',
           //helper: dragElement,
           start: handleStartEvent,
           stop: handleStopEvent,
