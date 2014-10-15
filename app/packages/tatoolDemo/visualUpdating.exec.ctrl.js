@@ -35,7 +35,7 @@ angular.module('tatool.module')
 
     var myCell = myGrid.createCell({stimulusValue: 'penguin_96x96.png', stimulusValueType: 'image', animal: 'Penguin'});
     myGrid.addCellAtPosition(1, myCell);
-    myGrid.refresh();
+    myGrid.redraw();
 
     /*
     $timeout(function() {
