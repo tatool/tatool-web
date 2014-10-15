@@ -4,33 +4,33 @@
 
     <div ng-class="col.gridCellClass" ng-click="(col.data.stimulusValue !== undefined || hideemptycells === undefined || hideemptycells==='no') ? gridClickEvent($event, col) : void();" ng-style="col.gridCellOverrideStyle" ng-mouseenter="(gridmouseenter !== undefined) ? gridMouseEnterEvent($event, col) : void();" ng-mouseleave="(gridmouseleave !== undefined) ? gridMouseLeaveEvent($event, col) : void();" ng-repeat="col in row track by (col.gridPosition + ':' + $id(col))">
 
-      <div ng-if="col.data.stimulusValueType!==undefined" style="position: relative;" tatool-drag allowDragCell="{{col.gridAllowDrag}}" id="{{col.gridPosition}}">
+      <div ng-if="col.data.stimulusValueType!==undefined" tatool-drag allowDragCell="{{col.gridAllowDrag}}" id="{{col.gridPosition}}">
 
-        <div ng-switch on="col.data.stimulusValueType" style="width: 100%; height: 100%; position: relative;">
-          <div ng-switch-when="image" style="width: 100%; height: 100%; overflow: hidden; position: relative;">
+        <div ng-switch on="col.data.stimulusValueType">
+          <div ng-switch-when="image">
             <img class="imageCellValue" draggable="false" ng-src="{{tatoolDataPath}}{{col.data.stimulusValue}}">
           </div>
-          <div ng-switch-when="text" style="width: 100%; height: 100%; overflow: hidden; position: relative;">
+          <div ng-switch-when="text">
             <div class="textCellValue"><span>{{col.data.stimulusValue}}</span></div>
           </div>
-          <div ng-switch-when="circle" style="width: 100%; height: 100%; position: relative;">
+          <div ng-switch-when="circle">
             <div class="circleCellValue"><div ng-style="col.gridCellValueOverrideStyle"></div></div>
           </div>
-          <div ng-switch-when="square" style="width: 100%; height: 100%; position: relative;">
+          <div ng-switch-when="square">
             <div class="squareCellValue"><div ng-style="col.gridCellValueOverrideStyle"></div></div>
           </div>
-          <div ng-switch-when="class" style="width: 100%; height: 100%; position: relative;">
+          <div ng-switch-when="class">
             <div ng-class="col.data.stimulusValue"></div>
           </div>
           <div ng-switch-default>
-            <div class="emptyCellValue" style="width: 100%; height: 100%; position: relative;">ERROR: unknown stimulusValueType</div>
+            <div class="emptyCellValue">ERROR: unknown stimulusValueType</div>
           </div>
         </div>
 
       </div>
 
-      <div ng-if="col.data.stimulusValueType===undefined && col.gridCellClass !== 'hideCell'" style="width: 100%; height: 100%; position: relative;" id="{{col.gridPosition}}"> 
-        <div class="emptyCellValue" style="width: 100%; height: 100%; position: relative;"> </div>   
+      <div ng-if="col.data.stimulusValueType===undefined && col.gridCellClass !== 'hideCell'" id="{{col.gridPosition}}"> 
+        <div class="emptyCellValue"> </div>   
       </div>
 
     </div>
