@@ -2,9 +2,9 @@
 
   <div class="row" ng-repeat="row in gridCells">
 
-    <div ng-class="col.gridCellClass" ng-click="(col.data.stimulusValue !== undefined || hideemptycells === undefined || hideemptycells==='no') ? gridClickEvent($event, col) : void();" ng-style="col.gridCellOverrideStyle" ng-mouseenter="(gridmouseenter !== undefined) ? gridMouseEnterEvent($event, col) : void();" ng-mouseleave="(gridmouseleave !== undefined) ? gridMouseLeaveEvent($event, col) : void();" ng-repeat="col in row track by (col.gridPosition + ':' + $id(col))">
+    <div ng-class="col.gridCellClass" ng-click="(col.data.stimulusValue !== undefined || hideemptycells === undefined || hideemptycells==='no') ? gridClickEvent($event, col) : void();" ng-mouseenter="(gridmouseenter !== undefined) ? gridMouseEnterEvent($event, col) : void();" ng-mouseleave="(gridmouseleave !== undefined) ? gridMouseLeaveEvent($event, col) : void();" ng-repeat="col in row track by (col.gridPosition + ':' + $id(col))">
 
-      <div ng-if="col.data.stimulusValueType!==undefined" style="position: relative" tatool-drag allowDragCell="{{col.gridAllowDrag}}" id="{{col.gridPosition}}">
+      <div ng-if="col.data.stimulusValueType!==undefined" ng-style="col.gridCellOverrideStyle" tatool-drag allowDragCell="{{col.gridAllowDrag}}" id="{{col.gridPosition}}">
 
         <div ng-switch on="col.data.stimulusValueType">
           <div ng-switch-when="image">
@@ -29,7 +29,7 @@
 
       </div>
 
-      <div ng-if="col.data.stimulusValueType===undefined && col.gridCellClass !== 'hideCell'" tatool-drop="grid" allowDropCell="{{col.gridAllowDrop}}" gridDrop="gridDrop(dragCell, dropCell)" id="{{col.gridPosition}}">
+      <div ng-if="col.data.stimulusValueType===undefined && col.gridCellClass !== 'hideCell'" ng-style="col.gridCellOverrideStyle" tatool-drop="grid" allowDropCell="{{col.gridAllowDrop}}" gridDrop="gridDrop(dragCell, dropCell)" id="{{col.gridPosition}}">
         <div class="emptyCellValue"> </div>   
       </div>
 
