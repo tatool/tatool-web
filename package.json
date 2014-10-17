@@ -20,12 +20,12 @@
     "screenfull": "^1.2.1"
   },
   "engines": {
-    "node": ">=0.8.0"
+    "node": "0.10.x"
   },
   "main": "server.js",
   "scripts": {
     "test": "grunt test",
-    "postinstall": "./node_modules/bower/bin/bower install"
+    "postinstall": "bower install"
   },
   "devDependencies": {
     "grunt": "~0.4.1",
