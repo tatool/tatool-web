@@ -12,7 +12,7 @@ var userController = require('./controllers/user');
 var authController = require('./controllers/auth')
 
 // db
-mongoose.connect( 'mongodb://localhost/tatool-web' );
+mongoose.connect( process.env.MONGOLAB_URI || 'mongodb://localhost/tatool-web' );
 
 // server setup
 var app = express();
