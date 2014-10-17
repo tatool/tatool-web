@@ -5,20 +5,285 @@
 2 info using npm@1.4.28
 3 info using node@v0.10.32
 4 verbose node symlink C:\Program Files\nodejs\\node.exe
-5 error install Couldn't read dependencies
-6 error Failed to parse json
-6 error Unexpected string
-7 error File: C:\work\tatool_2.0\tatool-web\package.json
-8 error Failed to parse package.json data.
-8 error package.json must be actual JSON, not just JavaScript.
-8 error
-8 error This is not a bug in npm.
-8 error Tell the package author to fix their package.json file. JSON.parse
-9 error System Windows_NT 6.1.7601
-10 error command "C:\\Program Files\\nodejs\\\\node.exe" "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "install"
-11 error cwd C:\work\tatool_2.0\tatool-web
-12 error node -v v0.10.32
-13 error npm -v 1.4.28
-14 error file C:\work\tatool_2.0\tatool-web\package.json
-15 error code EJSONPARSE
-16 verbose exit [ 1, true ]
+5 warn package.json tatool-web@0.1.0 No repository field.
+6 verbose readDependencies using package.json deps
+7 verbose install where, deps [ 'C:\\work\\tatool_2.0\\tatool-web',
+7 verbose install   [ 'body-parser',
+7 verbose install     'bower',
+7 verbose install     'cookie-parser',
+7 verbose install     'express',
+7 verbose install     'idb-wrapper',
+7 verbose install     'mongoose',
+7 verbose install     'morgan',
+7 verbose install     'screenfull',
+7 verbose install     'grunt',
+7 verbose install     'grunt-autoprefixer',
+7 verbose install     'grunt-bower-install',
+7 verbose install     'grunt-concurrent',
+7 verbose install     'grunt-contrib-clean',
+7 verbose install     'grunt-contrib-coffee',
+7 verbose install     'grunt-contrib-compass',
+7 verbose install     'grunt-contrib-concat',
+7 verbose install     'grunt-contrib-connect',
+7 verbose install     'grunt-contrib-copy',
+7 verbose install     'grunt-contrib-cssmin',
+7 verbose install     'grunt-contrib-htmlmin',
+7 verbose install     'grunt-contrib-imagemin',
+7 verbose install     'grunt-contrib-jshint',
+7 verbose install     'grunt-contrib-uglify',
+7 verbose install     'grunt-contrib-watch',
+7 verbose install     'grunt-google-cdn',
+7 verbose install     'grunt-karma',
+7 verbose install     'grunt-newer',
+7 verbose install     'grunt-ng-annotate',
+7 verbose install     'grunt-ngmin',
+7 verbose install     'grunt-rev',
+7 verbose install     'grunt-svgmin',
+7 verbose install     'grunt-usemin',
+7 verbose install     'grunt-wiredep',
+7 verbose install     'gulp',
+7 verbose install     'gulp-clean',
+7 verbose install     'gulp-concat',
+7 verbose install     'gulp-jshint',
+7 verbose install     'gulp-minify-css',
+7 verbose install     'gulp-notify',
+7 verbose install     'gulp-rename',
+7 verbose install     'gulp-uglify',
+7 verbose install     'gulp-util',
+7 verbose install     'jshint-stylish',
+7 verbose install     'karma',
+7 verbose install     'karma-chrome-launcher',
+7 verbose install     'karma-jasmine',
+7 verbose install     'karma-ng-html2js-preprocessor',
+7 verbose install     'karma-ng-scenario',
+7 verbose install     'load-grunt-tasks',
+7 verbose install     'time-grunt' ] ]
+8 info preinstall tatool-web@0.1.0
+9 warn package.json karma-chrome-launcher@0.1.5 No README data
+10 verbose readDependencies using package.json deps
+11 verbose already installed skipping body-parser@^1.9.0 C:\work\tatool_2.0\tatool-web
+12 verbose already installed skipping bower@1.3.12 C:\work\tatool_2.0\tatool-web
+13 verbose already installed skipping cookie-parser@^1.3.3 C:\work\tatool_2.0\tatool-web
+14 verbose already installed skipping express@^4.9.5 C:\work\tatool_2.0\tatool-web
+15 verbose already installed skipping idb-wrapper@^1.4.1 C:\work\tatool_2.0\tatool-web
+16 verbose already installed skipping mongoose@^3.8.17 C:\work\tatool_2.0\tatool-web
+17 verbose already installed skipping morgan@^1.3.2 C:\work\tatool_2.0\tatool-web
+18 verbose already installed skipping screenfull@^1.2.1 C:\work\tatool_2.0\tatool-web
+19 verbose already installed skipping grunt@~0.4.1 C:\work\tatool_2.0\tatool-web
+20 verbose already installed skipping grunt-autoprefixer@~0.4.0 C:\work\tatool_2.0\tatool-web
+21 verbose already installed skipping grunt-bower-install@~0.7.0 C:\work\tatool_2.0\tatool-web
+22 verbose already installed skipping grunt-concurrent@~0.4.1 C:\work\tatool_2.0\tatool-web
+23 verbose already installed skipping grunt-contrib-clean@~0.5.0 C:\work\tatool_2.0\tatool-web
+24 verbose already installed skipping grunt-contrib-coffee@~0.7.0 C:\work\tatool_2.0\tatool-web
+25 verbose already installed skipping grunt-contrib-compass@~0.6.0 C:\work\tatool_2.0\tatool-web
+26 verbose already installed skipping grunt-contrib-concat@~0.3.0 C:\work\tatool_2.0\tatool-web
+27 verbose already installed skipping grunt-contrib-connect@~0.5.0 C:\work\tatool_2.0\tatool-web
+28 verbose already installed skipping grunt-contrib-copy@~0.4.1 C:\work\tatool_2.0\tatool-web
+29 verbose already installed skipping grunt-contrib-cssmin@~0.7.0 C:\work\tatool_2.0\tatool-web
+30 verbose already installed skipping grunt-contrib-htmlmin@~0.1.3 C:\work\tatool_2.0\tatool-web
+31 verbose already installed skipping grunt-contrib-imagemin@~0.3.0 C:\work\tatool_2.0\tatool-web
+32 verbose already installed skipping grunt-contrib-jshint@~0.7.1 C:\work\tatool_2.0\tatool-web
+33 verbose already installed skipping grunt-contrib-uglify@~0.2.0 C:\work\tatool_2.0\tatool-web
+34 verbose already installed skipping grunt-contrib-watch@~0.5.2 C:\work\tatool_2.0\tatool-web
+35 verbose already installed skipping grunt-google-cdn@~0.2.0 C:\work\tatool_2.0\tatool-web
+36 verbose already installed skipping grunt-karma@^0.9.0 C:\work\tatool_2.0\tatool-web
+37 verbose already installed skipping grunt-newer@~0.5.4 C:\work\tatool_2.0\tatool-web
+38 verbose already installed skipping grunt-ng-annotate@^0.4.0 C:\work\tatool_2.0\tatool-web
+39 verbose already installed skipping grunt-ngmin@~0.0.2 C:\work\tatool_2.0\tatool-web
+40 verbose already installed skipping grunt-rev@~0.1.0 C:\work\tatool_2.0\tatool-web
+41 verbose already installed skipping grunt-svgmin@~0.2.0 C:\work\tatool_2.0\tatool-web
+42 verbose already installed skipping grunt-usemin@~2.0.0 C:\work\tatool_2.0\tatool-web
+43 verbose already installed skipping grunt-wiredep@^1.9.0 C:\work\tatool_2.0\tatool-web
+44 verbose already installed skipping gulp@^3.8.8 C:\work\tatool_2.0\tatool-web
+45 verbose already installed skipping gulp-clean@^0.3.1 C:\work\tatool_2.0\tatool-web
+46 verbose already installed skipping gulp-concat@^2.4.1 C:\work\tatool_2.0\tatool-web
+47 verbose already installed skipping gulp-jshint@^1.8.5 C:\work\tatool_2.0\tatool-web
+48 verbose already installed skipping gulp-minify-css@^0.3.10 C:\work\tatool_2.0\tatool-web
+49 verbose already installed skipping gulp-notify@^1.8.0 C:\work\tatool_2.0\tatool-web
+50 verbose already installed skipping gulp-rename@^1.2.0 C:\work\tatool_2.0\tatool-web
+51 verbose already installed skipping gulp-uglify@^1.0.1 C:\work\tatool_2.0\tatool-web
+52 verbose already installed skipping gulp-util@^3.0.1 C:\work\tatool_2.0\tatool-web
+53 verbose already installed skipping jshint-stylish@~0.1.3 C:\work\tatool_2.0\tatool-web
+54 verbose already installed skipping karma@^0.12.23 C:\work\tatool_2.0\tatool-web
+55 verbose already installed skipping karma-chrome-launcher@^0.1.5 C:\work\tatool_2.0\tatool-web
+56 verbose already installed skipping karma-jasmine@^0.1.5 C:\work\tatool_2.0\tatool-web
+57 verbose already installed skipping karma-ng-html2js-preprocessor@^0.1.0 C:\work\tatool_2.0\tatool-web
+58 verbose already installed skipping karma-ng-scenario@^0.1.0 C:\work\tatool_2.0\tatool-web
+59 verbose already installed skipping load-grunt-tasks@~0.2.0 C:\work\tatool_2.0\tatool-web
+60 verbose already installed skipping time-grunt@~0.2.1 C:\work\tatool_2.0\tatool-web
+61 silly resolved []
+62 info build C:\work\tatool_2.0\tatool-web
+63 verbose linkStuff [ false, false, false, 'C:\\work\\tatool_2.0' ]
+64 info linkStuff tatool-web@0.1.0
+65 verbose linkBins tatool-web@0.1.0
+66 verbose linkMans tatool-web@0.1.0
+67 verbose rebuildBundles tatool-web@0.1.0
+68 verbose rebuildBundles [ '.bin',
+68 verbose rebuildBundles   'body-parser',
+68 verbose rebuildBundles   'bower',
+68 verbose rebuildBundles   'cookie-parser',
+68 verbose rebuildBundles   'express',
+68 verbose rebuildBundles   'generator-node-webkit',
+68 verbose rebuildBundles   'grunt',
+68 verbose rebuildBundles   'grunt-autoprefixer',
+68 verbose rebuildBundles   'grunt-bower-install',
+68 verbose rebuildBundles   'grunt-cli',
+68 verbose rebuildBundles   'grunt-concurrent',
+68 verbose rebuildBundles   'grunt-contrib-clean',
+68 verbose rebuildBundles   'grunt-contrib-coffee',
+68 verbose rebuildBundles   'grunt-contrib-compass',
+68 verbose rebuildBundles   'grunt-contrib-concat',
+68 verbose rebuildBundles   'grunt-contrib-connect',
+68 verbose rebuildBundles   'grunt-contrib-copy',
+68 verbose rebuildBundles   'grunt-contrib-cssmin',
+68 verbose rebuildBundles   'grunt-contrib-htmlmin',
+68 verbose rebuildBundles   'grunt-contrib-imagemin',
+68 verbose rebuildBundles   'grunt-contrib-jshint',
+68 verbose rebuildBundles   'grunt-contrib-uglify',
+68 verbose rebuildBundles   'grunt-contrib-watch',
+68 verbose rebuildBundles   'grunt-google-cdn',
+68 verbose rebuildBundles   'grunt-karma',
+68 verbose rebuildBundles   'grunt-newer',
+68 verbose rebuildBundles   'grunt-ng-annotate',
+68 verbose rebuildBundles   'grunt-ngmin',
+68 verbose rebuildBundles   'grunt-rev',
+68 verbose rebuildBundles   'grunt-svgmin',
+68 verbose rebuildBundles   'grunt-usemin',
+68 verbose rebuildBundles   'grunt-wiredep',
+68 verbose rebuildBundles   'gulp',
+68 verbose rebuildBundles   'gulp-clean',
+68 verbose rebuildBundles   'gulp-concat',
+68 verbose rebuildBundles   'gulp-jshint',
+68 verbose rebuildBundles   'gulp-minify-css',
+68 verbose rebuildBundles   'gulp-notify',
+68 verbose rebuildBundles   'gulp-rename',
+68 verbose rebuildBundles   'gulp-uglify',
+68 verbose rebuildBundles   'gulp-util',
+68 verbose rebuildBundles   'idb-wrapper',
+68 verbose rebuildBundles   'jshint-stylish',
+68 verbose rebuildBundles   'karma',
+68 verbose rebuildBundles   'karma-chrome-launcher',
+68 verbose rebuildBundles   'karma-jasmine',
+68 verbose rebuildBundles   'karma-ng-html2js-preprocessor',
+68 verbose rebuildBundles   'karma-ng-scenario',
+68 verbose rebuildBundles   'load-grunt-tasks',
+68 verbose rebuildBundles   'mongoose',
+68 verbose rebuildBundles   'morgan',
+68 verbose rebuildBundles   'nodewebkit',
+68 verbose rebuildBundles   'screenfull',
+68 verbose rebuildBundles   'time-grunt',
+68 verbose rebuildBundles   'yo' ]
+69 verbose rebuild bundle C:\work\tatool_2.0\tatool-web\node_modules\generator-node-webkit
+70 info build C:\work\tatool_2.0\tatool-web\node_modules\generator-node-webkit
+71 info preinstall generator-node-webkit@0.9.2
+72 verbose linkStuff [ false,
+72 verbose linkStuff   false,
+72 verbose linkStuff   false,
+72 verbose linkStuff   'C:\\work\\tatool_2.0\\tatool-web\\node_modules' ]
+73 info linkStuff generator-node-webkit@0.9.2
+74 verbose linkBins generator-node-webkit@0.9.2
+75 verbose linkMans generator-node-webkit@0.9.2
+76 verbose rebuildBundles generator-node-webkit@0.9.2
+77 verbose rebuildBundles [ '.bin',
+77 verbose rebuildBundles   'decompress-zip',
+77 verbose rebuildBundles   'fs-extra',
+77 verbose rebuildBundles   'github',
+77 verbose rebuildBundles   'mocha',
+77 verbose rebuildBundles   'request',
+77 verbose rebuildBundles   'tar-fs',
+77 verbose rebuildBundles   'when',
+77 verbose rebuildBundles   'yeoman-generator' ]
+78 info install generator-node-webkit@0.9.2
+79 info postinstall generator-node-webkit@0.9.2
+80 verbose rebuild bundle C:\work\tatool_2.0\tatool-web\node_modules\grunt-cli
+81 info build C:\work\tatool_2.0\tatool-web\node_modules\grunt-cli
+82 info preinstall grunt-cli@0.1.13
+83 verbose linkStuff [ false,
+83 verbose linkStuff   false,
+83 verbose linkStuff   false,
+83 verbose linkStuff   'C:\\work\\tatool_2.0\\tatool-web\\node_modules' ]
+84 info linkStuff grunt-cli@0.1.13
+85 warn prefer global grunt-cli@0.1.13 should be installed with -g
+86 verbose linkBins grunt-cli@0.1.13
+87 verbose link bins [ { grunt: 'bin/grunt' },
+87 verbose link bins   'C:\\work\\tatool_2.0\\tatool-web\\node_modules\\.bin',
+87 verbose link bins   false ]
+88 verbose linkMans grunt-cli@0.1.13
+89 verbose rebuildBundles grunt-cli@0.1.13
+90 verbose rebuildBundles [ '.bin', 'findup-sync', 'nopt', 'resolve' ]
+91 info install grunt-cli@0.1.13
+92 info postinstall grunt-cli@0.1.13
+93 verbose rebuild bundle C:\work\tatool_2.0\tatool-web\node_modules\nodewebkit
+94 info build C:\work\tatool_2.0\tatool-web\node_modules\nodewebkit
+95 info preinstall nodewebkit@0.10.5
+96 verbose linkStuff [ false,
+96 verbose linkStuff   false,
+96 verbose linkStuff   false,
+96 verbose linkStuff   'C:\\work\\tatool_2.0\\tatool-web\\node_modules' ]
+97 info linkStuff nodewebkit@0.10.5
+98 verbose linkBins nodewebkit@0.10.5
+99 verbose link bins [ { nodewebkit: 'bin/nodewebkit' },
+99 verbose link bins   'C:\\work\\tatool_2.0\\tatool-web\\node_modules\\.bin',
+99 verbose link bins   false ]
+100 verbose linkMans nodewebkit@0.10.5
+101 verbose rebuildBundles nodewebkit@0.10.5
+102 verbose rebuildBundles [ '.bin', 'download', 'multimeter', 'rimraf', 'semver', 'yargs' ]
+103 info install nodewebkit@0.10.5
+104 info postinstall nodewebkit@0.10.5
+105 verbose unsafe-perm in lifecycle true
+106 verbose rebuild bundle C:\work\tatool_2.0\tatool-web\node_modules\yo
+107 info build C:\work\tatool_2.0\tatool-web\node_modules\yo
+108 info preinstall yo@1.2.1
+109 verbose linkStuff [ false,
+109 verbose linkStuff   false,
+109 verbose linkStuff   false,
+109 verbose linkStuff   'C:\\work\\tatool_2.0\\tatool-web\\node_modules' ]
+110 info linkStuff yo@1.2.1
+111 warn prefer global yo@1.2.1 should be installed with -g
+112 verbose linkBins yo@1.2.1
+113 verbose link bins [ { yo: 'cli.js' },
+113 verbose link bins   'C:\\work\\tatool_2.0\\tatool-web\\node_modules\\.bin',
+113 verbose link bins   false ]
+114 verbose linkMans yo@1.2.1
+115 verbose rebuildBundles yo@1.2.1
+116 verbose rebuildBundles [ '.bin',
+116 verbose rebuildBundles   'async',
+116 verbose rebuildBundles   'chalk',
+116 verbose rebuildBundles   'findup',
+116 verbose rebuildBundles   'fullname',
+116 verbose rebuildBundles   'insight',
+116 verbose rebuildBundles   'is-root',
+116 verbose rebuildBundles   'lodash',
+116 verbose rebuildBundles   'multiline',
+116 verbose rebuildBundles   'nopt',
+116 verbose rebuildBundles   'opn',
+116 verbose rebuildBundles   'shelljs',
+116 verbose rebuildBundles   'string-length',
+116 verbose rebuildBundles   'sudo-block',
+116 verbose rebuildBundles   'update-notifier',
+116 verbose rebuildBundles   'yeoman-generator',
+116 verbose rebuildBundles   'yosay' ]
+117 info install yo@1.2.1
+118 info postinstall yo@1.2.1
+119 verbose unsafe-perm in lifecycle true
+120 info install tatool-web@0.1.0
+121 info postinstall tatool-web@0.1.0
+122 verbose unsafe-perm in lifecycle true
+123 info tatool-web@0.1.0 Failed to exec postinstall script
+124 error tatool-web@0.1.0 postinstall: `./node_modules/bower/bin/bower install`
+124 error Exit status 1
+125 error Failed at the tatool-web@0.1.0 postinstall script.
+125 error This is most likely a problem with the tatool-web package,
+125 error not with npm itself.
+125 error Tell the author that this fails on your system:
+125 error     ./node_modules/bower/bin/bower install
+125 error You can get their info via:
+125 error     npm owner ls tatool-web
+125 error There is likely additional logging output above.
+126 error System Windows_NT 6.1.7601
+127 error command "C:\\Program Files\\nodejs\\\\node.exe" "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "install"
+128 error cwd C:\work\tatool_2.0\tatool-web
+129 error node -v v0.10.32
+130 error npm -v 1.4.28
+131 error code ELIFECYCLE
+132 verbose exit [ 1, true ]
