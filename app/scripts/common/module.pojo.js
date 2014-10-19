@@ -82,13 +82,22 @@ Module.prototype.getSession = function(sessionId) {
 };
 
 // set a module property (key and value)
-Module.prototype.setProperty = function(propertyKey, propertyValue) {
-  this.moduleProperties[propertyKey] = propertyValue;
+Module.prototype.setProperty = function(name, propertyKey, propertyValue) {
+  if (this.moduleProperties[name] === undefined) {
+    this.moduleProperties[name] = {};
+    this.moduleProperties[name][propertyKey] = propertyValue;
+  } else {
+    this.moduleProperties[name][propertyKey] = propertyValue;
+  }
 };
 
 // get a module property by key
-Module.prototype.getProperty = function(propertyKey) {
-  return this.moduleProperties[propertyKey];
+Module.prototype.getProperty = function(name, propertyKey) {
+  if (this.moduleProperties[name] === undefined) {
+    return undefined;
+  } else {
+    return this.moduleProperties[name][propertyKey];
+  }
 };
 
 // get all module properties

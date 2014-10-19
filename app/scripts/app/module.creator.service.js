@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('tatool.app')
-  .factory('moduleCreatorService', ['$log', '$q', 'dataService', function ($log, $q, dataService) {
+  .factory('moduleCreatorService', ['$log', '$q', 'moduleDataService', function ($log, $q, moduleDataService) {
     $log.debug('ModuleCreatorService: initialized');
 
     var creator = {};
@@ -63,12 +63,12 @@ angular.module('tatool.app')
             newModule.setModuleDefinition(moduleDefinition);
 
             // store module
-            dataService.getModule(newModule.moduleId).then(
+            moduleDataService.getModule(newModule.moduleId).then(
               function(data) {
-                if (data !== undefined) {
+                if (data) {
                   deferred.reject('The module with the id <b>\'' + newModule.moduleId + '\'</b> already exists.');
                 } else {
-                  dataService.addModule(newModule).then(
+                  moduleDataService.addModule(newModule).then(
                     function() {
                       deferred.resolve(newModule);
                     }, function(error) {

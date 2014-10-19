@@ -9,6 +9,7 @@ var expressJwt = require('express-jwt');
 var jwt = require('jsonwebtoken');
 
 var userController = require('./controllers/user');
+var moduleController = require('./controllers/module');
 var authController = require('./controllers/auth')
 
 // db
@@ -33,15 +34,16 @@ app.use(passport.initialize());
 // API router
 var router = express.Router();
 
-router.get('/modules', function(req, res) {
-	res.json({ modules: [] });
-});
+router.post('/modules/:moduleId', moduleController.addModule);
+router.get('/modules/:moduleId', moduleController.getModule);
+router.delete('/modules/:moduleId', moduleController.removeModule);
+router.get('/modules', moduleController.getModules);
 
 router.post('/register', userController.register);
-router.get('/login', authController.isAuthenticated, function(req, res) {
-  var token = req.user.createToken(app.get('jwt_secret'));
-  res.json({ token: token });
-});
+router.get('/login', 
+  function(req, res, next) {
+    authController.isAuthenticated(req, res, next, app.get('jwt_secret'));
+  });
 
 // protect api with JWT
 app.use('/api', expressJwt({secret: app.get('jwt_secret')}).unless({path: ['/api/login','/api/register']}), router);

@@ -70,7 +70,7 @@ angular.module('tatool.module')
       // a) if you want to set module properties
       //    Generally you will not need to save the module to the database yourself as this happens automatically at the end of a session.
       //    You will still have access to the module properties through db.getModuleProperty('reactionTime')
-      //db.setModuleProperty('reactionTime', trial.reactionTime);
+      //db.setModuleProperty(this, 'reactionTime', trial.reactionTime);
       //db.saveModule().then(executor.stopExecutable());
 
       // b) if you want to save the trial to the db and stop the executable.

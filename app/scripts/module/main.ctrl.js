@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('tatool.module')
-  .controller('MainCtrl', ['$rootScope','$scope', '$log', '$timeout', '$state', '$window', 'moduleService', 'userService', 'dataService', 'executor', 'cfgModule',
-    function ($rootScope, $scope, $log, $timeout, $state, $window, moduleService, userService, dataService, executor, cfgModule) {
+  .controller('MainCtrl', ['$rootScope','$scope', '$log', '$timeout', '$state', '$window', 'moduleService', 'userService', 'moduleDataService', 'trialDataService', 'executor', 'cfgModule',
+    function ($rootScope, $scope, $log, $timeout, $state, $window, moduleService, userService, moduleDataService, trialDataService, executor, cfgModule) {
 
     $scope.alert = { type: 'danger', msg: '', visible: false };
 
@@ -71,9 +71,9 @@ angular.module('tatool.module')
 
     // Run Module
     if (moduleId) {
-      dataService.openModulesDB(userService.getUserName(),
+      moduleDataService.openModulesDB(userService.getUserName(),
         function() {
-          dataService.openTrialsDB(userService.getUserName(), loadModule);
+          trialDataService.openTrialsDB(userService.getUserName(), loadModule);
         });
     } else {
       executor.stopModule(false);

@@ -3,12 +3,8 @@ var BasicStrategy = require('passport-http').BasicStrategy;
 var User = require('../models/user');
 
 passport.use(new BasicStrategy(
-  {
-    usernameField: 'email',
-    passwordField: 'password'
-  }, 
-  function(email, password, callback) {
-    User.findOne({ email: email }, function (err, user) {
+  function(userName, userPassword, callback) {
+    User.findOne({ email: userName }, function (err, user) {
 
       if (err) { return callback(err); }
 
@@ -16,7 +12,7 @@ passport.use(new BasicStrategy(
       if (!user) { return callback(null, false); }
 
       // Make sure the password is correct
-      user.verifyPassword(password, function(err, isMatch) {
+      user.verifyPassword(userPassword, function(err, isMatch) {
         if (err) { return callback(err); }
 
         // Password did not match
@@ -29,6 +25,17 @@ passport.use(new BasicStrategy(
   }
 ));
 
-exports.isAuthenticated = passport.authenticate('basic', { 
+exports.isAuthenticated = function(req, res, next, secret) {
+  passport.authenticate('basic', { 
   session : false 
-});
+  }, function(err, user, info) {
+      if (err) { return next(err) }
+      if (user) {
+        var token = user.createToken(secret);
+        res.json({ token: token });
+      } else {
+        res.status(401).json({ message: 'Unauthorized access!' });
+      }
+    })(req, res, next);
+};
+

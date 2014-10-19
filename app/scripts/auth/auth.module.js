@@ -1,11 +1,17 @@
 'use strict';
 
-angular.module('tatool.auth', [])
+angular.module('tatool.auth', ['tatool', 'base64'])
   .constant('cfgAuth', {
     IMG_PATH: 'images/auth/',
     VIEW_PATH:'views/auth/'
   })
-  .config(['$stateProvider', function ($stateProvider) {
+  .config(['$httpProvider', '$stateProvider', 'cfg', 'authServiceProvider', function ($httpProvider, $stateProvider, cfg, authServiceProvider) {
+
+    authServiceProvider.setProvider(cfg.MODE);
+
+    // auth interceptor
+    $httpProvider.interceptors.push('authInterceptor');
+
     // application states
     $stateProvider
       .state('login', {
@@ -28,3 +34,23 @@ angular.module('tatool.auth', [])
       }
     };
   }]);
+
+// Authorization Service Provider
+angular.module('tatool.auth').provider('authService', function() {
+  this.setProvider = function(provider) {
+    this.authProvider = provider;
+  };
+    
+  this.$get = ['authLocalService', 'authRemoteService', function(authLocalService, authRemoteService) {
+
+    if(this.authProvider === 'LOCAL') {
+      return authLocalService;
+    }
+        
+    if(this.authProvider === 'REMOTE') {
+      return authRemoteService;
+    }
+        
+    throw 'No authService available';
+  }];
+});

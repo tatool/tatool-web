@@ -2,9 +2,11 @@
 
 angular.module('tatool', ['ui.bootstrap', 'ui.router'])
   .constant('cfg', {
-    VIEW_PATH:'views/app/'
+    MODE: 'REMOTE' // LOCAL or REMOTE
   })
-  .config(['$stateProvider', '$urlRouterProvider', '$provide', function ($stateProvider, $urlRouterProvider, $provide) {
+  .config(['$stateProvider', '$urlRouterProvider', '$provide', 'cfg', 'moduleDataServiceProvider', function ($stateProvider, $urlRouterProvider, $provide, cfg, moduleDataServiceProvider) {
+    
+    moduleDataServiceProvider.setProvider(cfg.MODE);
 
     // making sure we always point to root in case of unknown url
     $urlRouterProvider.otherwise('/');
@@ -24,14 +26,22 @@ angular.module('tatool', ['ui.bootstrap', 'ui.router'])
 
   }]);
 
-
-angular.module('tatool').directive('customOnChange', function() {
-  return {
-    restrict: 'A',
-    link: function (scope, element, attrs) {
-      var onChangeFunc = element.scope()[attrs.customOnChange];
-      element.bind('change', onChangeFunc);
-      element.bind('change', function() { document.getElementById('addModuleForm').reset(); });
-    }
+// Module Data Service Provider
+angular.module('tatool').provider('moduleDataService', function() {
+  this.setProvider = function(provider) {
+    this.authProvider = provider;
   };
+    
+  this.$get = ['moduleDataLocalService', 'moduleDataRemoteService', function(moduleDataLocalService, moduleDataRemoteService) {
+
+    if(this.authProvider === 'LOCAL') {
+      return moduleDataLocalService;
+    }
+        
+    if(this.authProvider === 'REMOTE') {
+      return moduleDataRemoteService;
+    }
+        
+    throw 'No moduleDataService available';
+  }];
 });

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('tatool.app')
-  .factory('exportService', ['$log', '$q', 'dataService', 'cfgApp', 'userService', function ($log, $q, dataService, cfgApp, userService) {
+  .factory('exportService', ['$log', '$q', 'moduleDataService', 'trialDataService', 'cfgApp', 'userService', function ($log, $q, moduleDataService, trialDataService, cfgApp, userService) {
     $log.debug('ExportService: initialized');
 
     var exporter = {};
@@ -10,7 +10,7 @@ angular.module('tatool.app')
     exporter.getAllTrials = function(moduleId) {
       var deferred = $q.defer();
 
-      dataService.getAllTrials(userService.getUserName(), moduleId).then(
+      trialDataService.getAllTrials(userService.getUserName(), moduleId).then(
         function(data) {
           if (data !== undefined && data.length > 0) {
             exportData(moduleId, data).then(
@@ -46,7 +46,7 @@ angular.module('tatool.app')
     var getTrials = function(moduleId, startSessionId, endSessionId) {
       var deferred = $q.defer();
 
-      dataService.getTrials(moduleId, startSessionId, endSessionId).then( function(response) {
+      trialDataService.getTrials(moduleId, startSessionId, endSessionId).then( function(response) {
         if (response.rows.length !== 0) {
           exportData(moduleId, response).then(function(csv) {
             deferred.resolve(csv);
@@ -65,9 +65,11 @@ angular.module('tatool.app')
     var getModuleProperties = function(module) {
       var moduleProperties = [];
       var properties = module.moduleProperties;
-      angular.forEach(properties, function(value, key) {
-          var property = {key: 'module.' + key, value: value, position: -1 };
-          moduleProperties.push(property);
+      angular.forEach(properties, function(values, element) {
+          angular.forEach(values, function(propertyValue, propertyName) {
+            var property = {key: 'module.' + element + '.' + propertyName, value: propertyValue, position: -1 };
+            moduleProperties.push(property);
+          });
         });
       return moduleProperties;
     };
@@ -83,9 +85,11 @@ angular.module('tatool.app')
         sessionProperties[value.sessionId].push({key: 'session.complete', value: sessionComplete, position: -1 });
         // loop through user defined properties
         var properties = value.sessionProperties;
-        angular.forEach(properties, function(propValue, propKey) {
-          var property = {key: 'session.' + propKey, value: propValue, position: -1 };
-          sessionProperties[value.sessionId].push(property);
+        angular.forEach(properties, function(values, element) {
+          angular.forEach(values, function(propertyValue, propertyName) {
+            var property = {key: 'session.' + element + '.' + propertyName, value: propertyValue, position: -1 };
+            sessionProperties[value.sessionId].push(property);
+          });
         });
       });
       return sessionProperties;
@@ -94,7 +98,7 @@ angular.module('tatool.app')
     function exportData(moduleId, trials) {
       var deferred = $q.defer();
 
-      dataService.getModule(moduleId).then(
+      moduleDataService.getModule(moduleId).then(
         function(response) {
           // prepare module properties
           var moduleProperties = getModuleProperties(response);

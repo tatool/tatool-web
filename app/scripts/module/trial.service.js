@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('tatool.module')
-  .factory('trialService', ['$log', '$q', '$rootScope', 'util', 'dataService', 'tatoolPhase',
-    function ($log, $q, $rootScope, util, dataService, tatoolPhase) {
+  .factory('trialService', ['$log', '$q', '$rootScope', 'util', 'trialDataService', 'tatoolPhase',
+    function ($log, $q, $rootScope, util, trialDataService, tatoolPhase) {
     $log.debug('TrialService: initialized');
 
     var trialService = {};
@@ -31,7 +31,7 @@ angular.module('tatool.module')
       $rootScope.$broadcast(tatoolPhase.TRIAL_SAVE, newTrial);
 
       // save to db
-      dataService.addTrial(newTrial).then(function(data) {
+      trialDataService.addTrial(newTrial).then(function(data) {
         deferred.resolve(data);
       }, function(error) {
         deferred.reject(error);

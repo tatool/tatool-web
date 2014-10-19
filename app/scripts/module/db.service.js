@@ -6,32 +6,32 @@
 **/
 
 angular.module('tatool.module')
-  .factory('db', ['$log', 'dataService', 'moduleService', 'contextService', 'trialService',
-    function ($log, dataService, moduleService, contextService, trialService) {
+  .factory('db', ['$log', 'moduleService', 'contextService', 'trialService',
+    function ($log, moduleService, contextService, trialService) {
     $log.debug('DB: initialized');
 
     var db = {};
 
-    // set a module property (key and value)
-    db.setModuleProperty = function(propertyKey, propertyValue) {
-      moduleService.setModuleProperty(propertyKey, propertyValue);
+    // set a module property (element, key and value)
+    db.setModuleProperty = function(element, propertyKey, propertyValue) {
+      moduleService.setModuleProperty(element, propertyKey, propertyValue);
     };
 
-    // get a module property by key
-    db.getModuleProperty = function(propertyKey) {
-      return moduleService.getModuleProperty(propertyKey);
+    // get a module property by element and key
+    db.getModuleProperty = function(element, propertyKey) {
+      return moduleService.getModuleProperty(element, propertyKey);
     };
 
-    // set a session property (key and value)
-    db.setSessionProperty = function(propertyKey, propertyValue) {
+    // set a session property (element, key and value)
+    db.setSessionProperty = function(element, propertyKey, propertyValue) {
       var currentSessionId = moduleService.getMaxSessionId();
-      moduleService.setSessionProperty(currentSessionId, propertyKey, propertyValue);
+      moduleService.setSessionProperty(element, currentSessionId, propertyKey, propertyValue);
     };
 
-    // get a session property by key
-    db.getSessionProperty = function(propertyKey) {
+    // get a session property by element and key
+    db.getSessionProperty = function(element, propertyKey) {
       var currentSessionId = moduleService.getMaxSessionId();
-      return moduleService.getSessionProperty(currentSessionId, propertyKey);
+      return moduleService.getSessionProperty(element, currentSessionId, propertyKey);
     };
 
     // save the module

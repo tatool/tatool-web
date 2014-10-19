@@ -3,8 +3,8 @@
 /* global screenfull */
 
 angular.module('tatool.app')
-  .controller('ModuleCtrl', ['$scope', '$q', '$timeout', '$window', '$rootScope', '$location',  '$state', 'dataService', 'cfgApp', 'authService', 'userService', 'moduleCreatorService', 'exportService', 'usSpinnerService',
-    function ($scope, $q, $timeout, $window, $rootScope, $location, $state, dataService, cfgApp, authService, userService, moduleCreatorService, exportService, usSpinnerService) {
+  .controller('ModuleCtrl', ['$scope', '$q', '$timeout', '$window', '$rootScope', '$location',  '$state', 'moduleDataService', 'cfgApp', 'authService', 'userService', 'moduleCreatorService', 'exportService', 'usSpinnerService',
+    function ($scope, $q, $timeout, $window, $rootScope, $location, $state, moduleDataService, cfgApp, authService, userService, moduleCreatorService, exportService, usSpinnerService) {
 
     // setting contants
     $scope.imgPath = cfgApp.IMG_PATH;
@@ -21,7 +21,7 @@ angular.module('tatool.app')
 
     // read all modules and display
     function initModules() {
-      dataService.getAllModules().then( function(data) {
+      moduleDataService.getAllModules().then( function(data) {
         $scope.modules = [];
         for (var i = 0; i < data.length; i++) {
           $scope.modules.push(data[i]);
@@ -41,7 +41,7 @@ angular.module('tatool.app')
     }
     
     // query modules db and display
-    dataService.openModulesDB(userService.getUserName(), initModules);
+    moduleDataService.openModulesDB(userService.getUserName(), initModules);
 
     function preloadData() {
       for (var i = 0; i < tatoolModuleAssets.length; i++) {
@@ -90,7 +90,7 @@ angular.module('tatool.app')
     $scope.deleteModule = function(module) {
 
       function runDelete() {
-        dataService.deleteModule(userService.getUserName(), module.moduleId).then(onModuleDelete, onModuleDeleteError);
+        moduleDataService.deleteModule(userService.getUserName(), module.moduleId).then(onModuleDelete, onModuleDeleteError);
       }
 
       function onModuleDelete() {

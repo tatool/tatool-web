@@ -67,11 +67,11 @@ angular.module('tatool.module')
         this.trial.score = 0;
       }
 
-      db.setSessionProperty('anotherProperty', '666');
-      db.setSessionProperty('myProperty', 'myValueShouldBeCorrectNow');
-      db.setSessionProperty('wtf', 'test');
-      db.setModuleProperty('module1', 2);
-      db.setModuleProperty('module2', 456431);
+      db.setSessionProperty(this, 'anotherProperty', '666');
+      db.setSessionProperty(this, 'myProperty', 'myValueShouldBeCorrectNow');
+      db.setSessionProperty(this, 'wtf', 'test');
+      db.setModuleProperty(this, 'module1', 2);
+      db.setModuleProperty(this, 'module2', 456431);
       
       db.saveTrial(this.trial).then(tatoolExecutable.stopExecutable());
     };

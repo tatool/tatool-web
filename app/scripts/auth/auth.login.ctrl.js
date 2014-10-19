@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('tatool.auth')
-  .controller('LoginCtrl', ['$scope', '$log', '$state', '$sce', 'authService', 'userService', 'messageService',
-    function ($scope, $log, $state, $sce, authService, userService, messageService) {
+  .controller('LoginCtrl', ['$scope', '$log', '$state', '$sce', 'authService', 'messageService',
+    function ($scope, $log, $state, $sce, authService, messageService) {
 
     $scope.alert = { type: 'danger', msg: '', visible: false };
 
@@ -28,7 +28,7 @@ angular.module('tatool.auth')
       }
     };
 
-    // register new user
+    // register new user with authService
     $scope.register = function(credentials) {
       if (!credentials) {
         setAlert('danger', 'Please enter all required fields:<br> <li> Email<li> Password');
@@ -40,7 +40,7 @@ angular.module('tatool.auth')
       } else {
         hideAlert();
         
-        userService.addUser(credentials).then(function() {
+        authService.register(credentials).then(function() {
           $state.go('login');
         }, function(error) {
           setAlert('danger', error);

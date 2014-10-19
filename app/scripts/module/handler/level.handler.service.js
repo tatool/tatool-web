@@ -22,14 +22,14 @@ angular.module('tatool.module')
     LevelHandler.prototype.processPhase = function(phase) {
       if (phase == tatoolPhase.SESSION_START) {
         // get values from module
-        this.counter = (moduleService.getModuleProperty(this.name + '.counter') != undefined) 
-                          ? moduleService.getModuleProperty(this.name + '.counter') : 0;
-        this.totalScore = (moduleService.getModuleProperty(this.name + '.totalScore') != undefined) 
-                            ? moduleService.getModuleProperty(this.name + '.totalScore') : 0;
-        this.maxScore = (moduleService.getModuleProperty(this.name + '.maxScore') != undefined) 
-                            ? moduleService.getModuleProperty(this.name + '.maxScore') : 0;
-        this.currentLevel = (moduleService.getModuleProperty(this.name + '.currentLevel') != undefined) 
-                              ? moduleService.getModuleProperty(this.name + '.currentLevel') : 1;
+        this.counter = (moduleService.getModuleProperty(this, 'counter') != undefined) 
+                          ? moduleService.getModuleProperty(this, 'counter') : 0;
+        this.totalScore = (moduleService.getModuleProperty(this, 'totalScore') != undefined) 
+                            ? moduleService.getModuleProperty(this, 'totalScore') : 0;
+        this.maxScore = (moduleService.getModuleProperty(this, 'maxScore') != undefined) 
+                            ? moduleService.getModuleProperty(this, 'maxScore') : 0;
+        this.currentLevel = (moduleService.getModuleProperty(this, 'currentLevel') != undefined) 
+                              ? moduleService.getModuleProperty(this, 'currentLevel') : 1;
       } else if (phase == tatoolPhase.EXECUTABLE_START) {
         this.updateStatusPanel();
       } else if (phase == tatoolPhase.EXECUTABLE_END) {
@@ -66,10 +66,10 @@ angular.module('tatool.module')
       }
 
       // save current property values to module
-      moduleService.setModuleProperty(this.name + '.counter', this.counter);
-      moduleService.setModuleProperty(this.name + '.totalScore', this.totalScore);
-      moduleService.setModuleProperty(this.name + '.maxScore', this.totalScore);
-      moduleService.setModuleProperty(this.name + '.currentLevel', this.currentLevel);
+      moduleService.setModuleProperty(this, 'counter', this.counter);
+      moduleService.setModuleProperty(this, 'totalScore', this.totalScore);
+      moduleService.setModuleProperty(this, 'maxScore', this.totalScore);
+      moduleService.setModuleProperty(this, 'currentLevel', this.currentLevel);
     };
 
     // returns the current level

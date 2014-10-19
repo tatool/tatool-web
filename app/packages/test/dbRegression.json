@@ -3,7 +3,7 @@
     "id": "dbRegression",
     "author": "Tatool",
     "version": 3,
-    "packagePath": "http://tatool-web.herokuapp.com/index.html#/packages/tatoolDemo/index.html/index.html",
+    "packagePath": "/packages/test",
     "allowEscapeKey" : true,
     "moduleHierarchy": {
     	"tatoolType": "List",

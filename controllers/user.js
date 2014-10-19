@@ -2,16 +2,17 @@
 var User = require('../models/user');
 
 exports.register = function(req, res) {
+
   // check if user already exists and add otherwise
-  User.find({email: req.body.email}, function(err, result) {
+  User.findOne({email: req.body.userName}, function(err, result) {
     if (err) res.status(500).send(err);
 
-    if (!result.length) {
+    if (!result) {
       // Create a new user
       var user = new User();
 
-      user.email = req.body.email;
-      user.password = req.body.password;
+      user.email = req.body.userName;
+      user.password = req.body.userPassword;
       user.updated_at = new Date();
 
       user.save(function(err) {
@@ -23,7 +24,7 @@ exports.register = function(req, res) {
       });
 
     } else {
-      res.status(401).json({ message: 'User already exists!' });
+      res.status(401).json({ message: 'The email address is already registered.' });
     }
   });
 };
