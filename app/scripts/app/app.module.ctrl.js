@@ -322,7 +322,15 @@ angular.module('tatool.app')
       });
     }
 
-    $scope.doExport = function(module, exportMode, exportTarget) {
+    $scope.status = {
+      isopen: false
+    };
+
+    $scope.doExport = function($event, module, exportMode, exportTarget) {
+
+      //$event.preventDefault();
+      $event.stopPropagation();
+
       startSpinner('Exporting data. Please wait...');
       exportModuleData(module, exportMode, exportTarget).then(function() {
         stopSpinner();
