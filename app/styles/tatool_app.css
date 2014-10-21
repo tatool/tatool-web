@@ -16,13 +16,58 @@ html, body {
   overflow: hidden;
 }
 
+#spinner {
+  visibility: hidden;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  height: 180px;
+  width: 300px;
+  margin: 0 auto;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
+  text-align: center;
+  vertical-align: middle;
+  z-index: 10000;
+  background-color: #fff;
+  border-radius: 3%;
+  border: 1px solid #777;
+}
+#spinnerText {
+  visibility: hidden;
+  font-size: 125%;
+  position: relative;
+  margin: 10px;
+  text-align: center;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+#spinnerAnimation {
+  visibility: hidden;
+  position: relative;
+  height: 125px; 
+  vertical-align: middle;
+}
+#spinnerBackdrop {
+  visibility: hidden;
+  position: absolute;
+  background-color: #3c3c3c;
+  opacity: 0.4;
+  left: 0px;
+  top: 0px;
+  width:100%;
+  height:100%;
+  text-align:center;
+  z-index: 1;
+}
+
 /* module overview */
 #container {
   position: relative;
   width: 80%;
   height: 100%;
   margin: 0 auto;
-  overflow: hidden;
   font-size: normal;
 }
 
@@ -122,7 +167,7 @@ html, body {
 	height: 6em;
 	float: left;
 	margin-right: 0.7em;
-  	overflow: hidden;
+  overflow: hidden;
 	background: #c64a26; /* Old browsers */
 	background: -moz-linear-gradient(left,  #c64a26 0%, #d5582c 100%); /* FF3.6+ */
 	background: -webkit-gradient(linear, left top, right top, color-stop(0%,#c64a26), color-stop(100%,#d5582c)); /* Chrome,Safari4+ */
@@ -191,4 +236,8 @@ html, body {
 
 .btn-tatool-off:hover {
   	background-color: #e6e6e6;
+}
+
+.exporterName::first-letter {
+  text-transform: capitalize;
 }

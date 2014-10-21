@@ -108,6 +108,38 @@ angular.module('tatool')
       return deferred.promise;
     };
 
+    // get a defined set of trials
+    data.getTrials = function(userName, moduleId, startSessionId, endSessionId) {
+      var deferred = $q.defer();
+
+      if (!endSessionId) endSessionId = startSessionId;
+
+      function queryTrials() {
+        var options = {};
+        var moduleKeyRange = data.trialsDB.makeKeyRange({
+          lower: moduleId + '_' + ('000000'+ startSessionId).slice(-6) + '_',
+          excludeLower: false,
+          upper: moduleId + '_' + ('000000'+ endSessionId).slice(-6) + '__',
+          excludeUpper: false
+        });
+
+        var onError = function(error) {
+          deferred.reject(error);
+        };
+
+        options = {keyRange: moduleKeyRange, onError: onError};
+
+        data.trialsDB.query(
+          function(data) {
+            deferred.resolve(data);
+          }, options);
+      }
+     
+      data.openTrialsDB(userName, queryTrials);
+
+      return deferred.promise;
+    };
+
     return data;
 
   }]);

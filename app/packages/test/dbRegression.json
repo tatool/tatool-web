@@ -5,9 +5,13 @@
     "version": 3,
     "packagePath": "/packages/test",
     "allowEscapeKey" : true,
+    "export" : [ 
+        { "mode": "local", "auto": true, "target": "uploads/abc/" }, 
+        { "mode": "remote", "auto": true},
+        { "mode": "download" } ],
     "moduleHierarchy": {
     	"tatoolType": "List",
-        "iterator": { "customType" : "ListIterator", "numIterations" : "5" },
+        "iterator": { "customType" : "ListIterator", "numIterations" : "150" },
         "handlers": [ ],
     	"children": 
     		[

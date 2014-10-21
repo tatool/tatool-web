@@ -38,6 +38,7 @@ router.post('/modules/:moduleId', moduleController.addModule);
 router.get('/modules/:moduleId', moduleController.getModule);
 router.delete('/modules/:moduleId', moduleController.removeModule);
 router.get('/modules', moduleController.getModules);
+router.post('/trials/:moduleId/:sessionId', moduleController.addTrials);
 
 router.post('/register', userController.register);
 router.get('/login', 

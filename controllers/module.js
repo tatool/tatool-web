@@ -1,5 +1,9 @@
 // Load required packages
 var Module = require('../models/module');
+var path = require("path")
+var fs = require('fs');
+var mkdirp = require("mkdirp");
+var writefile = require('writefile');
 
 exports.addModule = function(req, res) {
 
@@ -73,4 +77,30 @@ exports.removeModule = function(req, res) {
       res.json(module);
     }
   });
+};
+
+exports.addTrials = function(req, res) {
+  var uploadPath = '';
+  var filename = req.user.email + '_' + req.params.moduleId + '_' + ('000000'+ req.params.sessionId).slice(-6);
+  var extension = '.csv';
+
+  if (!req.body.target) {
+    uploadPath = 'uploads/' + req.params.moduleId + '/';
+  } else {
+    uploadPath = req.body.target;
+  }
+
+  mkdirp(uploadPath, function (err) {
+    if (err) return res.status(500).json({ message: 'Error during writing file on server.' });
+
+    fs.exists(uploadPath + filename + extension, function(exists) {
+      var timestamp = '';
+      if (exists) timestamp = '_' + new Date().getTime();
+
+      fs.writeFile(uploadPath + filename + timestamp + extension, req.body.trialData, function (err) {
+        if (err) return res.status(500).json({ message: 'Error during writing file on server.' });
+        res.json({ message: 'Trials successfully uploaded', data: req.params.sessionId });
+      });
+    });
+  })
 };

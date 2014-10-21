@@ -5,6 +5,10 @@
     "version": 3,
     "packagePath": "packages/tatoolDemo",
     "allowEscapeKey" : true,
+    "export" : [ 
+        { "mode": "local", "auto": false }, 
+        { "mode": "remote", "auto": false},
+        { "mode": "download" } ],
     "moduleHierarchy": {
     	"tatoolType": "List",
         "iterator": { "customType" : "ListIterator", "numIterations" : "1" },

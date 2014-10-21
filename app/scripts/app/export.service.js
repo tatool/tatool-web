@@ -27,6 +27,26 @@ angular.module('tatool.app')
       return deferred.promise;
     };
 
+    // get trials of a module defined by session Id
+    exporter.getTrials = function(moduleId, startSessionId, endSessionId) {
+      var deferred = $q.defer();
+
+      trialDataService.getTrials(userService.getUserName(), moduleId, startSessionId, endSessionId).then( function(data) {
+        if (data !== undefined && data.length > 0) {
+            exportData(moduleId, data).then(
+              function(csv) {
+                deferred.resolve(csv);
+              });
+          } else {
+            deferred.resolve([]);
+          }
+      }, function(error) {
+        deferred.reject(error);
+      });
+
+      return deferred.promise;
+    };
+
     // get trials of latest session
     exporter.getSessionTrials = function(module) {
       return getTrials(module.moduleId, module.getMaxSessionId(), null);
@@ -40,25 +60,6 @@ angular.module('tatool.app')
     // get all trials starting and ending with given sessionIds
     exporter.getTrialsFromToSession = function(moduleId, startSessionId, endSessionId) {
       return getTrials(moduleId, startSessionId, endSessionId);
-    };
-
-    // private functions
-    var getTrials = function(moduleId, startSessionId, endSessionId) {
-      var deferred = $q.defer();
-
-      trialDataService.getTrials(moduleId, startSessionId, endSessionId).then( function(response) {
-        if (response.rows.length !== 0) {
-          exportData(moduleId, response).then(function(csv) {
-            deferred.resolve(csv);
-          });
-        } else {
-          deferred.reject('There is no data to export for this module.');
-        }
-      }, function(error) {
-        deferred.reject(error);
-      });
-
-      return deferred.promise;
     };
 
     // return all module properties in a format to be used for exporting

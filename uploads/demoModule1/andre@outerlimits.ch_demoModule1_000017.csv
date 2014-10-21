@@ -1,0 +1,11 @@
+userId;moduleId;sessionId;trialId;executableId;module.level.counter;module.level.totalScore;module.level.maxScore;module.level.currentLevel;session.complete;second.correctResponse;second.givenResponse;second.reactionTime;second.score;first.correctResponse;first.givenResponse;first.reactionTime;first.score;third.correctResponse;third.givenResponse;third.reactionTime;third.score
+andre@outerlimits.ch;demoModule1;17;1;second;0;0;0;2;1;blue;blue;513;1
+andre@outerlimits.ch;demoModule1;17;2;first;0;0;0;2;1;;;;;82;1;827;0
+andre@outerlimits.ch;demoModule1;17;3;first;0;0;0;2;1;;;;;60;2;598;0
+andre@outerlimits.ch;demoModule1;17;4;first;0;0;0;2;1;;;;;54;3;527;0
+andre@outerlimits.ch;demoModule1;17;5;second;0;0;0;2;1;blue;blue;391;1
+andre@outerlimits.ch;demoModule1;17;6;first;0;0;0;2;1;;;;;21;2;897;0
+andre@outerlimits.ch;demoModule1;17;7;first;0;0;0;2;1;;;;;84;3;350;0
+andre@outerlimits.ch;demoModule1;17;8;first;0;0;0;2;1;;;;;83;4;398;0
+andre@outerlimits.ch;demoModule1;17;9;third;0;0;0;2;1;;;;;;;;;green;blue;243;0
+andre@outerlimits.ch;demoModule1;17;10;third;0;0;0;2;1;;;;;;;;;blue;green;282;0

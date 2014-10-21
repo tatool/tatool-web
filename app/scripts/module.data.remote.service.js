@@ -26,8 +26,8 @@ angular.module('tatool')
         .success(function (data) {
           deferred.resolve(data);
         })
-        .error(function (data) {
-          deferred.reject(data);
+        .error(function (error) {
+          deferred.reject(error.message);
         });
       
       return deferred.promise;
@@ -44,8 +44,8 @@ angular.module('tatool')
           }
           deferred.resolve(data);
         })
-        .error(function (data) {
-          deferred.reject(data);
+        .error(function (error) {
+          deferred.reject(error.message);
         });
 
       return deferred.promise;
@@ -63,8 +63,8 @@ angular.module('tatool')
           }
           deferred.resolve(data);
         })
-        .error(function (data) {
-          deferred.reject(data);
+        .error(function (error) {
+          deferred.reject(error.message);
         });
 
       return deferred.promise;
@@ -86,8 +86,8 @@ angular.module('tatool')
               deferred.reject('Error during removal of module trials.');
             });
         })
-        .error(function (data) {
-          deferred.reject(data);
+        .error(function (error) {
+          deferred.reject(error.message);
         });
 
       return deferred.promise;

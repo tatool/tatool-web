@@ -1,6 +1,7 @@
 'use strict';
 
-angular.module('tatool.auth').factory('authInterceptor', [ '$rootScope', '$q', '$window', 'cfg', function ($rootScope, $q, $window, cfg) {
+angular.module('tatool.auth').factory('authInterceptor', [ '$log', '$rootScope', '$q', '$window', '$injector', 'cfg',
+  function ($log, $rootScope, $q, $window, $injector, cfg) {
   return {
     request: function (config) {
       if (cfg.MODE === 'REMOTE') {
@@ -19,7 +20,15 @@ angular.module('tatool.auth').factory('authInterceptor', [ '$rootScope', '$q', '
       return response || $q.when(response);
     },
     responseError: function(rejection) {
-      return $q.reject(rejection);
+      if (rejection.status === 401) {
+        $log.error('HTTP Error (' + rejection.status + '): ', rejection.data);
+        var authService = $injector.get('authService');
+        var $state = $injector.get('$state');
+        authService.logout();
+        $state.go('login');
+      } else {
+        return $q.reject(rejection);
+      }
     }
   };
 }]);

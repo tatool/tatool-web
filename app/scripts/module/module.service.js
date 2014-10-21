@@ -36,8 +36,11 @@ angular.module('tatool.module')
       moduleDataService.getModule(module.moduleId).then(
         function(data) {
           if (data) {
-            moduleDataService.addModule(module);
-            deferred.resolve(data);
+            moduleDataService.addModule(module).then(function() {
+              deferred.resolve(data);
+            }, function(err) {
+              deferred.reject(err);
+            });
           } else {
             $log.error('Trying to update a module which does not exist.');
             deferred.reject('Trying to update a module which does not exist.');

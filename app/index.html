@@ -27,7 +27,7 @@
     <![endif]-->
     <!-- Add your site or application content here -->
 
-    <span us-spinner="{radius:25, width:8, length: 18}" spinner-key="loadingSpinner"></span>
+    <div tatool-spinner="{radius:25, width:8, length: 18}" spinner-key="loadingSpinner"></div>
 
     <div ui-view></div>
 
@@ -49,11 +49,11 @@
     <script src="bower_components/bootbox/bootbox.js"></script>
     <script src="bower_components/angular-progress-arc/angular-progress-arc.js"></script>
     <script src="bower_components/spin.js/spin.js"></script>
-    <script src="bower_components/angular-spinner/angular-spinner.js"></script>
     <script src="bower_components/idb-wrapper/idbstore.js"></script>
     <script src="bower_components/jquery-ui/jquery-ui.js"></script>
     <script src="bower_components/screenfull/dist/screenfull.js"></script>
     <script src="bower_components/angular-base64/angular-base64.js"></script>
+    <script src="bower_components/async/lib/async.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -72,6 +72,7 @@
         <script src="scripts/app/app.main.ctrl.js"></script>
         <script src="scripts/app/app.module.ctrl.js"></script>
         <script src="scripts/app/app.package.ctrl.js"></script>
+        <script src="scripts/app/spinner.service.js"></script>
         <script src="scripts/module.data.local.service.js"></script>
         <script src="scripts/module.data.remote.service.js"></script>
         <script src="scripts/trial.data.service.js"></script>

@@ -3,8 +3,8 @@
 /* global screenfull */
 
 angular.module('tatool.app')
-  .controller('PackageCtrl', ['$scope', '$window', '$state', '$sce', 'packagePath', 'usSpinnerService',
-    function ($scope, $window, $state, $sce, packagePath, usSpinnerService) {
+  .controller('PackageCtrl', ['$scope', '$window', '$state', '$sce', 'packagePath', 'spinnerService',
+    function ($scope, $window, $state, $sce, packagePath, spinnerService) {
 
     // module listener
     var moduleListener = function(e) {
@@ -25,11 +25,11 @@ angular.module('tatool.app')
     $window.addEventListener('message', moduleListener, false);
 
     var startSpinner = function() {
-      usSpinnerService.spin('loadingSpinner');
+      spinnerService.spin('loadingSpinner', 'Loading module...');
     };
 
     var stopSpinner = function() {
-      usSpinnerService.stop('loadingSpinner');
+      spinnerService.stop('loadingSpinner');
     };
 
     startSpinner();
