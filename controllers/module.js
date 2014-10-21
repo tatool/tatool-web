@@ -3,7 +3,6 @@ var Module = require('../models/module');
 var path = require("path")
 var fs = require('fs');
 var mkdirp = require("mkdirp");
-var writefile = require('writefile');
 
 exports.addModule = function(req, res) {
 
