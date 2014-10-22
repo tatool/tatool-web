@@ -20,8 +20,6 @@ var app = express();
 app.set('port', process.env.PORT || 3000);
 app.set('jwt_secret', process.env.JWT_SECRET || 'secret');
 
-console.log(app.get('jwt_secret'));
-
 //logging setup
 app.use(logger('dev'));
 
@@ -29,7 +27,7 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// Use the passport package in our application
+// Use passport package
 app.use(passport.initialize());
 
 
