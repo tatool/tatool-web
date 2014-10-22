@@ -112,7 +112,9 @@ angular.module('tatool')
     data.getTrials = function(userName, moduleId, startSessionId, endSessionId) {
       var deferred = $q.defer();
 
-      if (!endSessionId) endSessionId = startSessionId;
+      if (!endSessionId) {
+        endSessionId = startSessionId;
+      }
 
       function queryTrials() {
         var options = {};

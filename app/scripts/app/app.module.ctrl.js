@@ -1,6 +1,7 @@
 'use strict';
 
 /* global screenfull */
+/* global async */
 
 angular.module('tatool.app')
   .controller('ModuleCtrl', ['$scope', '$q', '$timeout', '$window', '$rootScope', '$location',  '$state', '$http', '$log', 'moduleDataService', 'cfgApp', 'authService', 'userService', 'moduleCreatorService', 'exportService', 'spinnerService',
@@ -12,7 +13,9 @@ angular.module('tatool.app')
     $scope.modules = [];
 
     function startSpinner(text) {
-      if (!text) text = 'Please wait...';
+      if (!text) {
+        text = 'Please wait...';
+      }
       spinnerService.spin('loadingSpinner', text);
     }
 
@@ -54,7 +57,9 @@ angular.module('tatool.app')
 
           // loop through exporters
           async.eachSeries(exporters, exportModule.bind(null, module), function(err) {
-            if (err) $log.error(err);
+            if (err) {
+              $log.error(err);
+            }
             cb();
           });
 
@@ -77,7 +82,9 @@ angular.module('tatool.app')
 
       // loop through modules
       async.eachSeries($scope.modules, processModule, function(err) {
-        if (err) $log.error(err);
+        if (err) {
+          $log.error(err);
+        }
         stopSpinner();
       });
 
@@ -229,7 +236,7 @@ angular.module('tatool.app')
       var sessions = [];
 
       // select sessions where localExport has not been done yet
-      angular.forEach(module.sessions, function(session, sessionId) {
+      angular.forEach(module.sessions, function(session) {
         if (session.localExportDone === undefined || session.localExportDone !== true) {
           sessions.push(session);
         }
@@ -265,12 +272,13 @@ angular.module('tatool.app')
           });
         } else {
           // no data to export
+          session.localExportDone = true;
           callback();
         }
       }, function(error) {
         callback(error.message);
       });
-    }
+    };
 
     // run remote export to other host endpoint (e.g. php script)
     var remoteExport = function(module) {
@@ -278,7 +286,7 @@ angular.module('tatool.app')
       var sessions = [];
 
       // select sessions where localExport has not been done yet
-      angular.forEach(module.sessions, function(session, sessionId) {
+      angular.forEach(module.sessions, function(session) {
         if (session.remoteExportDone === undefined || session.remoteExportDone !== true) {
           sessions.push(session);
         }
@@ -307,7 +315,7 @@ angular.module('tatool.app')
           var json = { 'trialData': data, 'moduleId': moduleId, 'sessionId': session.sessionId };
           var api = 'http://www.tatool.ch/tatoolweb/upload.php';
 
-          $http.post(api, json).then(function(data) {
+          $http.post(api, json).then(function() {
             session.remoteExportDone = true;
             callback();
           }, function(error) {
@@ -315,20 +323,19 @@ angular.module('tatool.app')
           });
         } else {
           // no data to export
+          session.remoteExportDone = true;
           callback();
         }
       }, function(error) {
         callback(error.message);
       });
-    }
+    };
 
     $scope.status = {
       isopen: false
     };
 
     $scope.doExport = function($event, module, exportMode, exportTarget) {
-
-      //$event.preventDefault();
       $event.stopPropagation();
 
       startSpinner('Exporting data. Please wait...');
@@ -338,7 +345,7 @@ angular.module('tatool.app')
         $log.error(err);
         stopSpinner();
       });
-    }
+    };
 
     // trigger different export modules
     var exportModuleData = function(module, exportMode, exportTarget) {

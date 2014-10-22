@@ -9,6 +9,8 @@
  * Copyright (C) 2013, 2014, Uri Shaked and contributors.
  */
 
+ /* global Spinner */
+
 angular.module('tatool.app')
   .factory('spinnerService', ['$log', '$rootScope', function ($log, $rootScope) {
     var config = {};
@@ -22,10 +24,10 @@ angular.module('tatool.app')
     };
 
     return config;
-}]);
+  }]);
 
 angular.module('tatool.app')
-  .directive('tatoolSpinner', ['$window', '$rootScope', function ($window, $rootScope) {
+  .directive('tatoolSpinner', ['$window', function ($window) {
     return {
       scope: true,
       link: function (scope, element, attr) {
@@ -97,4 +99,4 @@ angular.module('tatool.app')
       },
       templateUrl: '../../views/app/spinner.html'
     };
-}]);
+  }]);

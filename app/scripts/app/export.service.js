@@ -33,35 +33,20 @@ angular.module('tatool.app')
 
       trialDataService.getTrials(userService.getUserName(), moduleId, startSessionId, endSessionId).then( function(data) {
         if (data !== undefined && data.length > 0) {
-            exportData(moduleId, data).then(
-              function(csv) {
-                deferred.resolve(csv);
-              });
-          } else {
-            deferred.resolve([]);
-          }
+          exportData(moduleId, data).then(
+            function(csv) {
+              deferred.resolve(csv);
+            });
+        } else {
+          deferred.resolve([]);
+        }
       }, function(error) {
         deferred.reject(error);
       });
 
       return deferred.promise;
     };
-
-    // get trials of latest session
-    exporter.getSessionTrials = function(module) {
-      return getTrials(module.moduleId, module.getMaxSessionId(), null);
-    };
-
-    // get all trials starting from a given sessionId
-    exporter.getTrialsFromSession = function(moduleId, startSessionId) {
-      return getTrials(moduleId, startSessionId, null);
-    };
-
-    // get all trials starting and ending with given sessionIds
-    exporter.getTrialsFromToSession = function(moduleId, startSessionId, endSessionId) {
-      return getTrials(moduleId, startSessionId, endSessionId);
-    };
-
+    
     // return all module properties in a format to be used for exporting
     var getModuleProperties = function(module) {
       var moduleProperties = [];
