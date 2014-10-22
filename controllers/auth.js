@@ -32,7 +32,7 @@ exports.isAuthenticated = function(req, res, next, secret) {
       if (err) { return next(err) }
       if (user) {
         var token = user.createToken(secret);
-        res.json({ token: token });
+        res.json({ token: token, roles: user.roles });
       } else {
         res.status(401).json({ message: 'Unauthorized access!' });
       }

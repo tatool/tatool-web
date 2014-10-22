@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('tatool.auth', ['tatool', 'base64'])
+angular.module('tatool.auth', ['tatool', 'base64', 'tatool.common'])
   .constant('cfgAuth', {
     IMG_PATH: 'images/auth/',
     VIEW_PATH:'views/auth/'

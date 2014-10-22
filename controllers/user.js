@@ -13,18 +13,19 @@ exports.register = function(req, res) {
 
       user.email = req.body.userName;
       user.password = req.body.userPassword;
+      user.roles.push('user');
       user.updated_at = new Date();
 
       user.save(function(err) {
         if (err) {
-          res.status(500).send(err);
+          res.status(500).json({ message: 'Registration failed.', data: err });
         } else {
           res.json({ message: 'User successfully added to the db!', data: user });
         }
       });
 
     } else {
-      res.status(401).json({ message: 'The email address is already registered.' });
+      res.status(500).json({ message: 'The email address is already registered.' });
     }
   });
 };

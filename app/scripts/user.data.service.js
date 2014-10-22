@@ -55,6 +55,8 @@ angular.module('tatool')
 
       user.userName = Sha1.hash(user.userName);
       user.userPassword = Sha1.hash(user.userPassword);
+      user.roles = [];
+      user.roles.push('user');
 
       data.usersDB.put(user,
         function(data) {

@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('tatool.auth').factory('authInterceptor', [ '$log', '$rootScope', '$q', '$window', '$injector', 'cfg',
-  function ($log, $rootScope, $q, $window, $injector, cfg) {
+angular.module('tatool.auth').factory('authInterceptor', [ '$log', '$rootScope', '$q', '$window', '$injector', 'cfg', 'messageService', 'spinnerService',
+  function ($log, $rootScope, $q, $window, $injector, cfg, messageService, spinnerService) {
   return {
     request: function (config) {
       if (cfg.MODE === 'REMOTE') {
@@ -25,7 +25,10 @@ angular.module('tatool.auth').factory('authInterceptor', [ '$log', '$rootScope',
         var authService = $injector.get('authService');
         var $state = $injector.get('$state');
         authService.logout();
+        messageService.setMessage({ type: 'danger', msg: 'Your session has expired. Please login again.'});
+        spinnerService.stop('loadingSpinner');
         $state.go('login');
+        return $q.reject(rejection);
       } else {
         return $q.reject(rejection);
       }

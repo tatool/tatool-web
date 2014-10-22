@@ -47,14 +47,11 @@ angular.module('tatool.app')
 
     // run auto exports whenever modules are initialized
     function runAutoExport() {
-
       startSpinner('Exporting data. Please wait...');
 
       var processModule = function(module, cb) {
         var exporters = module.moduleDefinition.export;
-
         if (exporters) {
-
           // loop through exporters
           async.eachSeries(exporters, exportModule.bind(null, module), function(err) {
             if (err) {
@@ -87,7 +84,6 @@ angular.module('tatool.app')
         }
         stopSpinner();
       });
-
     }
     
     // query modules db and display
@@ -280,8 +276,8 @@ angular.module('tatool.app')
       });
     };
 
-    // run remote export to other host endpoint (e.g. php script)
-    var remoteExport = function(module) {
+    // run remote export to a different endpoint (e.g. php script)
+    var remoteExport = function(module, exportTarget) {
       var deferred = $q.defer();
       var sessions = [];
 
@@ -294,7 +290,7 @@ angular.module('tatool.app')
 
       if (sessions.length > 0) {
         // run local export and upload for every session
-        async.eachSeries(sessions, remoteUpload.bind(null, module.moduleId), function(err) {
+        async.eachSeries(sessions, remoteUpload.bind(null, module.moduleId, exportTarget), function(err) {
           if (err) {
             $log.error(err);
             deferred.reject(err);
@@ -309,11 +305,11 @@ angular.module('tatool.app')
       return deferred.promise;
     };
 
-    var remoteUpload = function(moduleId, session, callback) {
+    var remoteUpload = function(moduleId, exportTarget, session, callback) {
       exportService.getTrials(moduleId, session.sessionId).then(function(data) {
         if (data.length !== 0) {
           var json = { 'trialData': data, 'moduleId': moduleId, 'sessionId': session.sessionId };
-          var api = 'http://www.tatool.ch/tatoolweb/upload.php';
+          var api = exportTarget;
 
           $http.post(api, json).then(function() {
             session.remoteExportDone = true;
@@ -366,7 +362,7 @@ angular.module('tatool.app')
           });
           break;
         case 'remote':
-          remoteExport(module).then(function(data) {
+          remoteExport(module, exportTarget).then(function(data) {
             if (data > 0) {
               moduleDataService.addModule(module).then(function() {
                 deferred.resolve();

@@ -20,6 +20,8 @@ var app = express();
 app.set('port', process.env.PORT || 3000);
 app.set('jwt_secret', process.env.JWT_SECRET || 'secret');
 
+console.log(app.get('jwt_secret'));
+
 //logging setup
 app.use(logger('dev'));
 

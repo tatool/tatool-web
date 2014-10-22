@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('tatool.auth')
-  .factory('authRemoteService', ['$http', '$q', '$base64', 'userService', 'messageService',
-    function($http, $q, $base64, userService, messageService) {
+  .factory('authRemoteService', ['$http', '$q', '$base64', '$log', 'userService', 'messageService',
+    function($http, $q, $base64, $log, userService, messageService) {
 
   var authService = {};
  
@@ -12,12 +12,13 @@ angular.module('tatool.auth')
     $http.defaults.headers.common.Authorization = 'Basic ' + $base64.encode(credentials.userName + ':' + credentials.userPassword);
     $http.defaults.headers.common['Content-Type'] = 'application/json;charset=utf-8';
     $http.get('/api/login')
-    .success(function (data) {
-      userService.createSession(credentials.userName, data.token);
-      deferred.resolve('success');
-    })
-      .error(function () {
+      .success(function (data) {
+        userService.createSession(credentials.userName, data.token, data.roles);
+        deferred.resolve('success');
+      })
+      .error(function (error) {
         // Erase the session if the user fails to log in
+        $log.error(error);
         userService.destroySession();
         deferred.reject('Login failed. Make sure you entered your information correctly.');
       });
@@ -39,8 +40,9 @@ angular.module('tatool.auth')
         messageService.setMessage({ type: 'success', msg: 'Registration successful. You can go ahead and login now.'});
         deferred.resolve('success');
       })
-      .error(function (data) {
-        deferred.reject(data.message);
+      .error(function (error) {
+        $log.error(error.data);
+        deferred.reject(error.message);
       });
 
     return deferred.promise;

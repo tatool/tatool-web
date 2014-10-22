@@ -7,7 +7,7 @@
     "allowEscapeKey" : true,
     "export" : [ 
         { "mode": "local", "auto": false }, 
-        { "mode": "remote", "auto": false},
+        { "mode": "remote", "auto": false, "target": "http://www.tatool.ch/tatoolweb/upload.php" },
         { "mode": "download" } ],
     "moduleHierarchy": {
     	"tatoolType": "List",

@@ -15,7 +15,7 @@ angular.module('tatool.auth')
       userDataService.getUser(credentials.userName).then(function(data) {
         if (data !== undefined) {
           if (userPassword === data.userPassword) {
-            userService.createSession(credentials.userName, 1);
+            userService.createSession(credentials.userName, 1, data.roles);
             deferred.resolve();
           } else {
             userService.destroySession();

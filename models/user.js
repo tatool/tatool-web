@@ -13,6 +13,10 @@ var User = new Schema({
       type: String,
       required: true
     },
+    roles: {
+      type: [],
+      required: true
+    },
     updated_at: {
       type: Date,
       required: true
@@ -48,11 +52,12 @@ User.methods.verifyPassword = function(candidatePassword, callback) {
   });
 };
 
-// create jwt token
+// create jwt token (expiration 5 hours)
 User.methods.createToken = function(secret) {
   var token = jwt.sign({
     _id: this._id,
-    email: this.email
+    email: this.email,
+    roles: this.roles
   }, secret, { 
     expiresInMinutes: 60*5 
   });

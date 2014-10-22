@@ -4,10 +4,12 @@ angular.module('tatool.auth')
   .service('userService', [ '$window', 'moduleDataService', 'trialDataService', function ($window, moduleDataService, trialDataService) {
 
   // creates a new user sessions
-  this.createSession = function (userName, token) {
+  this.createSession = function (userName, token, roles) {
     this.userName = userName;
     this.authenticated = true;
+    this.roles = roles;
     $window.sessionStorage.setItem('userName', userName);
+    $window.sessionStorage.setItem('roles', roles);
     $window.sessionStorage.setItem('token', token);
     moduleDataService.closeModulesDB();
     trialDataService.closeTrialsDB();
@@ -17,7 +19,9 @@ angular.module('tatool.auth')
   this.destroySession = function () {
     this.userName = null;
     this.authenticated = false;
+    this.roles = null;
     $window.sessionStorage.removeItem('userName');
+    $window.sessionStorage.removeItem('roles');
     $window.sessionStorage.removeItem('token');
     moduleDataService.closeModulesDB();
     trialDataService.closeTrialsDB();
