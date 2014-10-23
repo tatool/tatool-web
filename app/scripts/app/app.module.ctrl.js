@@ -30,6 +30,10 @@ angular.module('tatool.app')
         for (var i = 0; i < data.length; i++) {
           $scope.modules.push(data[i]);
         }
+        if ($scope.modules.length > 0) {
+          $scope.status.installed = true;
+        }
+
         runAutoExport();
       }, function(error) {
         bootbox.dialog({

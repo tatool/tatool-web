@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="styles/reset.css">
     <link rel="stylesheet" href="styles/tatool_app.css">
     <link rel="stylesheet" href="styles/tatool_auth.css">
+    <link rel="stylesheet" href="styles/font-awesome/css/font-awesome.css">
     <!-- endbuild -->
   </head>
   <body ng-app="tatool.app" ng-controller="MainCtrl" ng-strict-di>
@@ -29,7 +30,7 @@
 
     <div tatool-spinner="{radius:25, width:8, length: 18}" spinner-key="loadingSpinner"></div>
 
-    <div ui-view></div>
+    <div ui-view style="height: 100%"></div>
 
     <!--[if lt IE 9]>
     <script src="bower_components/es5-shim/es5-shim.js"></script>

@@ -1,18 +1,41 @@
-<div id="container">
+<!-- Header: Navigation -->
+<div class="wrapper">
+<div>
+  <nav class="navbar navbar-static-top" role="navigation">
+    <div class="container">
+      <form class="navbar-form navbar-right" role="search">
+        <button type="submit" class="btn btn-default" ng-click="logout()">Logout</button>
+      </form>
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">
+        <img alt="Tatool" src="images/app/logo_2.png">
+        </a>
+      </div>
+      <ul class="nav navbar-nav navbar-right">
+        <li class="active"><a href="#"><i class="fa fa-home"></i> Home</a></li>
+        <li><a href="#">Developer</a></li>
+        <li><a href="#">Researcher</a></li>
+        <li><a href="#">Admin</a></li>
+      </ul>
+    </div>
+  </nav>
+</div>
 
-  <div class="subtitle">Modules</div>
-
-  <div class="logout btn btn-default" ng-click="logout()">Logout</div>
-
-  <div class="fileUpload btn btn-tatool">
-    Add Module
-    <form id="addModuleForm">
-      <input type="file" class="upload" custom-on-change="addModule"/>
-    </form>
-  </div>
+<div class="container">
+   <accordion>
+    <accordion-group is-open="status.installed">
+      <accordion-heading>
+        Installed Modules 
+        <i class="glyphicon" ng-class="{'glyphicon-chevron-down': status.installed, 'glyphicon-chevron-right': !status.installed}"></i>
+        <div class="fileUpload btn btn-tatool pull-right">
+          Add Module
+          <form id="addModuleForm">
+            <input type="file" class="upload" custom-on-change="addModule" ng-click="$event.stopPropagation()"/>
+          </form>
+        </div>
+      </accordion-heading>
 
   <div id="modules">
-
     <div class="tile" ng-class="{'tileHighlight': module.moduleId == highlightModuleId}" ng-repeat="module in modules | orderBy:'moduleName'" ng-if="!!modules.length">
       <div class="icon"><img src="images/app/module_icon_base.png"></div>
       <div class="content">
@@ -28,11 +51,65 @@
               </li>
             </ul>
           </div>
-          <a ng-click="deleteModule(module)" class="btn btn-tatool-off"><span class="glyphicon glyphicon-trash"></span></a>
+          <a ng-click="deleteModule(module)" class="btn btn-tatool-off"><i class="fa fa-trash-o"></i></a>
         </div>
       </div>
     </div>
-
   </div>
-
+  </accordion-group>
+  </accordion>
 </div>
+
+<div class="container">
+  <accordion>
+    <accordion-group is-open="status.public">
+      <accordion-heading ng-class="'tatool-panel-heading'">
+        Public Modules 
+        <i class="glyphicon" ng-class="{'glyphicon-chevron-down': status.public, 'glyphicon-chevron-right': !status.public}"></i>
+        <form class="form-inline pull-right" role="form">
+          <div class="form-group has-feedback">
+            <input type="text" class="form-control" id="searchPublic" ng-click="$event.stopPropagation()">
+            <span class="glyphicon glyphicon-search form-control-feedback"></span>
+          </div>
+        </form>
+
+      </accordion-heading>
+      <div id="modules">
+        <div class="tile" ng-class="{'tileHighlight': module.moduleId == highlightModuleId}" ng-repeat="module in modules | orderBy:'moduleName'" ng-if="!!modules.length">
+          <div class="icon"><img src="images/app/module_icon_base.png"></div>
+          <div class="content">
+            <h2>{{module.moduleName}}</h2>
+            <h3>{{module.moduleAuthor}}</h3>
+            <div class="buttonbar">
+              <div class="btn btn-tatool" ng-click="startModule(module)">Start</div>
+              <div class="btn-group" ng-if="module.moduleDefinition.export && module.moduleDefinition.export.length > 0" dropdown>
+                <div class="btn btn-tatool dropdown-toggle">Export <span class="caret"></span></div>
+                <ul class="dropdown-menu" role="menu">
+                  <li class="exporterName" ng-click="doExport($event, module, exporter.mode, exporter.target)" ng-repeat="exporter in module.moduleDefinition.export | filter:filterExporter | orderBy:'mode'">
+                    <a href="#">{{exporter.mode}}</a>
+                  </li>
+                </ul>
+              </div>
+              <a ng-click="deleteModule(module)" class="btn btn-tatool-off"><i class="fa fa-trash-o"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </accordion-group>
+  </accordion>
+</div>
+<div class="push"></div>
+</div>
+<footer>
+  <div class="container">
+    <div class="row">
+          <div class="col-sm-6 copyright">
+            <p>&copy; 2014 Tatool</p>
+          </div>
+          <div class="pull-right">
+            <i class="fa fa-twitter-square fa-2x"></i> &nbsp;
+            <i class="fa fa-facebook-square fa-2x"></i>
+          </div>
+        </div>
+  </div>
+</footer>
