@@ -17,6 +17,14 @@ var User = new Schema({
       type: [],
       required: true
     },
+    token: {
+      type: String,
+      required: false
+    },
+    verified: {
+      type: Boolean,
+      required: true
+    },
     updated_at: {
       type: Date,
       required: true

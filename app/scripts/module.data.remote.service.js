@@ -11,8 +11,10 @@ angular.module('tatool')
     };
 
     // initialize modules db
-    data.openModulesDB = function(userName, callback) {
+    data.openModulesDB = function(userName, mode, callback) {
       // we don't need to to open a connection in remote mode
+      data.api = mode;
+
       if (callback !== null) {
         callback();
       }
@@ -22,7 +24,22 @@ angular.module('tatool')
     data.getAllModules = function() {
       var deferred = $q.defer();
 
-      $http.get('/api/modules')
+      $http.get('/api/' + data.api + '/modules')
+        .success(function (data) {
+          deferred.resolve(data);
+        })
+        .error(function (error) {
+          deferred.reject(error.message);
+        });
+      
+      return deferred.promise;
+    };
+
+    // return all repository modules from DB
+    data.getRepositoryModules = function() {
+      var deferred = $q.defer();
+
+      $http.get('/api/' + data.api + '/repository')
         .success(function (data) {
           deferred.resolve(data);
         })
@@ -37,7 +54,7 @@ angular.module('tatool')
     data.getModule = function(moduleId) {
       var deferred = $q.defer();
 
-      $http.get('/api/modules/' + moduleId)
+      $http.get('/api/' + data.api + '/modules/' + moduleId)
         .success(function (data) {
           if (data === 'null') {
             data = null;
@@ -51,12 +68,67 @@ angular.module('tatool')
       return deferred.promise;
     };
 
-    // upload module file with HTML5 File API
+    // get a module from the repository by its moduleId
+    data.getRepositoryModule = function(moduleId) {
+      var deferred = $q.defer();
+
+      $http.get('/api/' + data.api + '/repository/' + moduleId)
+        .success(function (data) {
+          if (data === 'null') {
+            data = null;
+          }
+          deferred.resolve(data);
+        })
+        .error(function (error) {
+          deferred.reject(error.message);
+        });
+
+      return deferred.promise;
+    };
+
+    // add new module to db
     data.addModule = function(module) {
       var deferred = $q.defer();
       var moduleJson = JSON.parse(JSON.stringify(module));
 
-      $http.post('/api/modules/' + module.moduleId, moduleJson)
+      $http.post('/api/' + data.api + '/modules/' + module.moduleId, moduleJson)
+        .success(function (data) {
+          if (data === 'null') {
+            data = null;
+          }
+          deferred.resolve(data);
+        })
+        .error(function (error) {
+          deferred.reject(error.message);
+        });
+
+      return deferred.promise;
+    };
+
+    // publish module to repository
+    data.publishModule = function(module) {
+      var deferred = $q.defer();
+      var moduleJson = JSON.parse(JSON.stringify(module));
+
+      $http.post('/api/' + data.api + '/modules/' + module.moduleId + '/publish', moduleJson)
+        .success(function (data) {
+          if (data === 'null') {
+            data = null;
+          }
+          deferred.resolve(data);
+        })
+        .error(function (error) {
+          deferred.reject(error.message);
+        });
+
+      return deferred.promise;
+    };
+
+    // unpublish module from repository
+    data.unpublishModule = function(module) {
+      var deferred = $q.defer();
+
+      $http.get('/api/' + data.api + '/modules/' + module.moduleId + '/unpublish')
         .success(function (data) {
           if (data === 'null') {
             data = null;
@@ -74,7 +146,7 @@ angular.module('tatool')
     data.deleteModule = function(userName, moduleId) {
       var deferred = $q.defer();
 
-      $http.delete('/api/modules/' + moduleId)
+      $http.delete('/api/' + data.api + '/modules/' + moduleId)
         .success(function (data) {
           if (data === 'null') {
             data = null;

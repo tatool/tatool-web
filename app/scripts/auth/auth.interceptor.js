@@ -20,15 +20,17 @@ angular.module('tatool.auth').factory('authInterceptor', [ '$log', '$rootScope',
       return response || $q.when(response);
     },
     responseError: function(rejection) {
+      var $state = $injector.get('$state');
       if (rejection.status === 401) {
-        $log.error('HTTP Error (' + rejection.status + '): ', rejection.data);
         var authService = $injector.get('authService');
-        var $state = $injector.get('$state');
         authService.logout();
         messageService.setMessage({ type: 'danger', msg: 'Your session has expired. Please login again.'});
         spinnerService.stop('loadingSpinner');
         $state.go('login');
         return $q.reject(rejection);
+      } else if (rejection.status === 403) {
+        spinnerService.stop('loadingSpinner');
+        $state.go('home');
       } else {
         return $q.reject(rejection);
       }

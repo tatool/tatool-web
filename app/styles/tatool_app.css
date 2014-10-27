@@ -31,7 +31,7 @@ html, body {
   color: #f3f8f8;
 }
 .navbar-static-top .navbar-nav > li > a {
-  color: #cc3727;
+  color: #4e4e4e;
   font-weight: bold;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -164,18 +164,33 @@ footer {
 	display: table;
 }
 
+/* Module Tiles styling */
 #modules .tile {
 	display: table-cell;
 	position: relative;
 	float: left;
-	width: 17em;
-	margin-bottom: 1.2em;
-	margin-right: 0.5em;
+	width: 20em;
+  height: 6.5em;
+	margin-bottom: 1em;
+	margin-right: 0.8em;
 	border: 1px solid #ababab;
-	background-color: #fff;
+	background-color: #fcfcfc;
+}
+
+#modules .tileDev {
+  height: 8.5em;
 }
 
 #modules .tileHighlight {
+  border: 1px solid #db5628;
+  background-color: #ffe8e2;
+  -webkit-transition: all 0.1s ease-in-out;
+  -moz-transition: all 0.1s ease-in-out;
+  -ms-transition: all 0.1s ease-in-out;
+  transition: all 0.1s ease-in-out;
+}
+
+#modules .tileHighlight2 {
 	display: table-cell;
 	position: relative;
 	float: left;
@@ -216,10 +231,12 @@ footer {
 #modules .icon {
 	position: relative;
 	width: 6em;
-	height: 6em;
+  height: 100%;
 	float: left;
-	margin-right: 0.7em;
+	margin-right: 0.8em;
   overflow: hidden;
+  text-align: center;
+  color: #f5f5f5;
 	background: #c64a26; /* Old browsers */
 	background: -moz-linear-gradient(left,  #c64a26 0%, #d5582c 100%); /* FF3.6+ */
 	background: -webkit-gradient(linear, left top, right top, color-stop(0%,#c64a26), color-stop(100%,#d5582c)); /* Chrome,Safari4+ */
@@ -243,40 +260,51 @@ footer {
 	float: left;
 	color: #494949;
 	line-height: 1.35em;
-	height: 6em;
-	width: 10em;
+  height: 100%;
+	width: 13em;
 	text-align: left;
 }
 
 #modules h2 {
-	max-width: 13em;
+	max-width: 100%;
 	font-size: 95%;
 	overflow: hidden;
 	font-weight: bold;
 }
 
 #modules h3 {
-	max-width: 13em;
+	max-width: 100%;
 	font-size: 80%;
 	overflow: hidden;
 	white-space: nowrap;
-  	text-overflow: ellipsis;
+  text-overflow: ellipsis;
 }
 
 #modules .buttonbar {
 	margin-top: 5px;
 }
 
+/* Button styling */
 .btn-tatool {
-  	color: #fff;
-  	background-color: #d5502a;
-  	border-color: #972702;
-  	padding: 3px 7px;
+  color: #fff;
+  background-color: #d5502a;
+  border-color: #972702;
+  padding: 3px 7px;
 }
-
 .btn-tatool:hover {
 	color: #fff;
-  	background-color: #a23f22;
+  background-color: #a23f22;
+}
+
+.btn-tatool-green {
+  color: #fff;
+  background-color: #25a228;
+  border-color: #145b16;
+  padding: 3px 7px;
+}
+.btn-tatool-green:hover {
+  color: #fff;
+  background-color: #1c801e;
 }
 
 .btn-tatool-off {
@@ -285,7 +313,6 @@ footer {
   	border-color: #ccc;
   	padding: 3px 7px;
 }
-
 .btn-tatool-off:hover {
   	background-color: #e6e6e6;
 }
@@ -355,3 +382,17 @@ footer {
   text-align:center;
   z-index: 5000;
 }
+
+
+/** ---------
+    BOOTBOX
+-----------**/
+.bootbox-body {
+  line-height: 1.5em;
+}
+
+
+/** ---------
+    ADMIN TABLE
+-----------**/
+

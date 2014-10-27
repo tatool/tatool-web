@@ -1,0 +1,29 @@
+<div class="wrapper">
+
+<!-- HEADER --> 
+<div ng-include src="'../../views/app/header.html'"></div>
+
+
+<div id="login">
+  <!-- login form box -->
+  <form ng-submit="verifyUser(user)" novalidate>
+
+      <input id="email" class="login_input" type="email" placeholder="Email" ng-model="user.email" ng-focus="true" auto-focus required />
+      <br>
+      <input type="submit" name="login" value="Verify email" />
+
+  </form>
+  <br><a ui-sref="login">Login</a> | <a ui-sref="register">Register</a>
+  <br><br>
+  <div id="messagebox">
+    <div ng-class="{danger:'alert alert-danger', success:'alert alert-success', info:'alert alert-info'}[alert.type]" role="alert" ng-show="alert.visible"><div ng-bind-html="alert.msg"></div></div>
+  </div>
+</div>
+
+     <!-- Footer Helper -->
+        <div class="push"></div>
+
+    </div>
+
+<!-- FOOTER --> 
+  <div ng-include src="'../../views/app/footer.html'"></div>

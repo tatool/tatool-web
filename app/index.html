@@ -21,6 +21,10 @@
     <link rel="stylesheet" href="styles/tatool_auth.css">
     <link rel="stylesheet" href="styles/font-awesome/css/font-awesome.css">
     <!-- endbuild -->
+
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+
   </head>
   <body ng-app="tatool.app" ng-controller="MainCtrl" ng-strict-di>
     <!--[if lt IE 7]>
@@ -30,7 +34,8 @@
 
     <div tatool-spinner="{radius:25, width:8, length: 18}" spinner-key="loadingSpinner"></div>
 
-    <div ui-view style="height: 100%"></div>
+    <!-- Content -->
+    <div ui-view style="height: 100%;"></div>
 
     <!--[if lt IE 9]>
     <script src="bower_components/es5-shim/es5-shim.js"></script>
@@ -39,8 +44,6 @@
 
     <!-- build:js scripts/vendor.js -->
     <!-- bower:js -->
-    <script src="bower_components/jquery/dist/jquery.js"></script>
-    <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/json3/lib/json3.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
     <script src="bower_components/angular-resource/angular-resource.js"></script>
@@ -78,12 +81,16 @@
         <script src="scripts/app/module.creator.service.js"></script>
         <script src="scripts/app/app.main.ctrl.js"></script>
         <script src="scripts/app/app.module.ctrl.js"></script>
+        <script src="scripts/app/app.developer.ctrl.js"></script>
+        <script src="scripts/app/app.researcher.ctrl.js"></script>
+        <script src="scripts/app/app.admin.ctrl.js"></script>
         <script src="scripts/app/app.package.ctrl.js"></script>
         <script src="scripts/app/export.service.js"></script>
         <script src="scripts/module.data.local.service.js"></script>
         <script src="scripts/module.data.remote.service.js"></script>
         <script src="scripts/trial.data.service.js"></script>
-        <script src="scripts/user.data.service.js"></script>
+        <script src="scripts/user.data.local.service.js"></script>
+        <script src="scripts/user.data.remote.service.js"></script>
         <!-- endbuild -->
 
 </body>

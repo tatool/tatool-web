@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('tatool.auth')
-  .service('userService', [ '$window', 'moduleDataService', 'trialDataService', function ($window, moduleDataService, trialDataService) {
+  .service('userService', [ '$window', '$rootScope', 'moduleDataService', 'trialDataService', function ($window, $rootScope, moduleDataService, trialDataService) {
 
   // creates a new user sessions
   this.createSession = function (userName, token, roles) {
@@ -13,6 +13,7 @@ angular.module('tatool.auth')
     $window.sessionStorage.setItem('token', token);
     moduleDataService.closeModulesDB();
     trialDataService.closeTrialsDB();
+    $rootScope.$broadcast('login');
   };
 
   // destroys a user session
@@ -25,6 +26,7 @@ angular.module('tatool.auth')
     $window.sessionStorage.removeItem('token');
     moduleDataService.closeModulesDB();
     trialDataService.closeTrialsDB();
+    $rootScope.$broadcast('logout');
   };
 
   // is authenticated

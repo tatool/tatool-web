@@ -24,8 +24,47 @@ angular.module('tatool.app', ['tatool', 'tatool.auth', 'tatool.common'])
             }
           }]
         }
+      }).state('developer', {
+        url: '/developer',
+        templateUrl: 'views/app/developer.html',
+        controller: 'DeveloperCtrl',
+        resolve: {
+          auth: ['$q', '$state', 'authService', 'userService', function($q, $state, authService, userService) {
+            if (authService.isAuthenticated()) {
+              return $q.when(userService.getUserName());
+            } else {
+              return $q.reject('Error!');
+            }
+          }]
+        }
+      }).state('researcher', {
+        url: '/researcher',
+        templateUrl: 'views/app/researcher.html',
+        controller: 'ResearcherCtrl',
+        resolve: {
+          auth: ['$q', '$state', 'authService', 'userService', function($q, $state, authService, userService) {
+            if (authService.isAuthenticated()) {
+              return $q.when(userService.getUserName());
+            } else {
+              return $q.reject('Error!');
+            }
+          }]
+        }
+      }).state('admin', {
+        url: '/admin',
+        templateUrl: 'views/app/admin.html',
+        controller: 'AdminCtrl',
+        resolve: {
+          auth: ['$q', '$state', 'authService', 'userService', function($q, $state, authService, userService) {
+            if (authService.isAuthenticated()) {
+              return $q.when(userService.getUserName());
+            } else {
+              return $q.reject('Error!');
+            }
+          }]
+        }
       }).state('package', {
-        url: '/:packagePath',
+        url: '/package/:packagePath',
         templateUrl: 'views/app/package.html',
         controller: 'PackageCtrl',
         resolve: {

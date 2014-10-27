@@ -3,8 +3,8 @@
 /* global screenfull */
 
 angular.module('tatool.app')
-  .controller('PackageCtrl', ['$scope', '$window', '$state', '$sce', 'packagePath', 'spinnerService',
-    function ($scope, $window, $state, $sce, packagePath, spinnerService) {
+  .controller('PackageCtrl', ['$scope', '$window', '$state', '$sce', 'packagePath', 'spinnerService', 'cfg',
+    function ($scope, $window, $state, $sce, packagePath, spinnerService, cfg) {
 
     // module listener
     var moduleListener = function(e) {
@@ -17,8 +17,13 @@ angular.module('tatool.app')
         }
         $scope.packagePath = $sce.trustAsResourceUrl('about:blank');
         $window.removeEventListener('message', moduleListener, false);
+        stopSpinner();
         $scope.$apply();
-        $state.go('home');
+        if (mode === cfg.APP_MODE_DEVELOPER) {
+          $state.go('developer');
+        } else {
+          $state.go('home');
+        }
       }
     };
 
@@ -32,10 +37,13 @@ angular.module('tatool.app')
       spinnerService.stop('loadingSpinner');
     };
 
-    startSpinner();
+    
+
+    // remember which mode we're running
+    var mode = $window.sessionStorage.getItem('mode');
 
     // redirect to packagePath
+    startSpinner();
     $scope.packagePath = $sce.trustAsResourceUrl(packagePath);
-
-
+    
   }]);

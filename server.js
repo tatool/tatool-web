@@ -8,17 +8,21 @@ var passport = require('passport');
 var expressJwt = require('express-jwt');
 var jwt = require('jsonwebtoken');
 
-var userController = require('./controllers/user');
-var moduleController = require('./controllers/module');
-var authController = require('./controllers/auth')
-
-// db
-mongoose.connect( process.env.MONGOLAB_URI || 'mongodb://localhost/tatool-web' );
-
 // server setup
 var app = express();
 app.set('port', process.env.PORT || 3000);
 app.set('jwt_secret', process.env.JWT_SECRET || 'secret');
+
+// dependencies
+var userController = require('./controllers/user');
+var userModuleController = require('./controllers/userModule');
+var repoModuleController = require('./controllers/repository');
+var developerModuleController = require('./controllers/developerModule');
+var authController = require('./controllers/auth')
+var adminController = require('./controllers/admin');
+
+// db
+mongoose.connect( process.env.MONGOLAB_URI || 'mongodb://localhost/tatool-web' );
 
 //logging setup
 app.use(logger('dev'));
@@ -34,12 +38,33 @@ app.use(passport.initialize());
 // API router
 var router = express.Router();
 
-router.post('/modules/:moduleId', moduleController.addModule);
-router.get('/modules/:moduleId', moduleController.getModule);
-router.delete('/modules/:moduleId', moduleController.removeModule);
-router.get('/modules', moduleController.getModules);
-router.post('/trials/:moduleId/:sessionId', moduleController.addTrials);
+// User Modules
+router.post('/user/modules/:moduleId', userModuleController.addModule);
+router.get('/user/modules/:moduleId', userModuleController.getModule);
+router.delete('/user/modules/:moduleId', userModuleController.removeModule);
+router.get('/user/modules', userModuleController.getModules);
+router.post('/user/modules/:moduleId/trials/:sessionId', userModuleController.addTrials);
 
+// Repository Modules
+router.get('/user/repository', repoModuleController.getRepositoryEntries);
+router.get('/user/repository/:moduleId', repoModuleController.getRepositoryEntry);
+
+// Developer Modules
+router.post('/developer/modules/:moduleId', developerModuleController.addModule);
+router.get('/developer/modules/:moduleId', developerModuleController.getModule);
+router.delete('/developer/modules/:moduleId', developerModuleController.removeModule);
+router.get('/developer/modules', developerModuleController.getModules);
+router.post('/developer/modules/:moduleId/trials/:sessionId', developerModuleController.addTrials);
+router.post('/developer/modules/:moduleId/publish', developerModuleController.publishModule);
+router.get('/developer/modules/:moduleId/unpublish', developerModuleController.unpublishModule);
+
+// Admin
+router.get('/admin/users', adminController.getUsers);
+router.post('/admin/users/:user', adminController.updateUser);
+router.delete('/admin/users/:user', adminController.removeUser);
+
+// User
+router.get('/user/roles', authController.getRoles);
 router.post('/register', userController.register);
 router.get('/login', 
   function(req, res, next) {
@@ -47,8 +72,13 @@ router.get('/login',
   });
 
 // protect api with JWT
-app.use('/api', expressJwt({secret: app.get('jwt_secret')}).unless({path: ['/api/login','/api/register']}), router);
+app.use('/api', expressJwt({secret: app.get('jwt_secret')}).unless({path: ['/api/login','/api/register']}), authController.hasRole, router);
 
+app.post('/user/verify/resend', userController.verifyResend);
+app.get('/user/verify/:token', userController.verifyUser);
+app.post('/user/reset', userController.resetPasswordSend);
+app.get('/user/resetverify/:token', userController.verifyResetToken);
+app.post('/user/reset/:token', userController.updatePassword);
 
 // Tatool Web Client
 app.use(express.static(path.join(__dirname, 'app')));

@@ -75,6 +75,16 @@ angular.module('tatool.auth')
   authService.isAuthenticated = function () {
     return userService.isAuthenticated();
   };
+
+  authService.getRoles = function () {
+    var deferred = $q.defer();
+    userDataService.getRoles(userService.getUserName()).then(function(data) {
+      deferred.resolve(data);
+    }, function(error) {
+      deferred.reject(error);
+    });
+    return deferred.promise;
+  };
   
   return authService;
 

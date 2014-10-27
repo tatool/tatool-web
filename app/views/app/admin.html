@@ -1,0 +1,48 @@
+<div class="wrapper">
+
+<!-- HEADER --> 
+<div ng-include src="'../../views/app/header.html'"></div>
+
+  <div class="container">
+
+        <div ng-class="{danger:'alert alert-danger alert-dismissible', success:'alert alert-success alert-dismissible', info:'alert alert-info alert-dismissible'}[alert.type]" role="alert" ng-show="alert.visible">
+          <button type="button" class="close" ng-click="hideAlert()"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+          <div ng-bind-html="alert.msg"></div>
+        </div>
+
+        <table class="table table-bordered table-striped table-hover table-condensed">
+          <thead>
+            <tr>
+              <th></th>
+              <th colspan="4"><b>Roles</b></th>
+              <th><b>Actions</b></th>
+            </tr>
+            <tr>
+              <th><b>Username</b></th>
+              <th width="140px"><i class="fa fa-user fa-lg"></i> User</th>
+              <th width="140px"><i class="fa fa-cogs fa-lg"></i> Developer</th>
+              <th width="140px"><i class="fa fa-graduation-cap fa-lg"></i> Researcher</th>
+              <th width="140px"><i class="fa fa-lock fa-lg"></i> Admin</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="user in users" ng-class="{'success': user.email === highlightUserEmail}" >
+              <td> {{user.email}}</td>
+              <td align="center" ng-repeat="role in roles"> <input type="checkbox" checklist-model="user.roles" checklist-value="role"> </td>
+              <td> 
+                <div class="btn btn-tatool-off" ng-click="updateUser(user)"><i class="fa fa-floppy-o"></i> Save</div>
+                <a ng-click="deleteUser(user)" class="btn btn-tatool-off"><i class="fa fa-trash-o"></i></a> 
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+  </div>
+  <!-- Footer Helper -->
+  <div class="push"></div>
+
+</div>
+
+<!-- FOOTER --> 
+<div ng-include src="'../../views/app/footer.html'"></div>

@@ -1,4 +1,9 @@
-<div id="login" ng-controller="LoginCtrl">
+<div class="wrapper">
+
+<!-- HEADER --> 
+<div ng-include src="'../../views/app/header.html'"></div>
+
+<div id="login">
   <!-- login form box -->
 
   <form ng-submit="register(credentials)" novalidate>
@@ -8,12 +13,22 @@
       <label class="sr-only" for="password">Password</label>
       <input id="password" tabindex="2" type="password" placeholder="Password" ng-model="credentials.userPassword" autocomplete="off" required />
       <br>
+      <input id="password" tabindex="2" type="password" placeholder="Retype Password" ng-model="credentials.userPassword2" autocomplete="off" required />
+      <br>
       <input tabindex="5" type="submit"  name="login" value="Register" />
   </form>
-  <br><a ui-sref="login">Go back</a>
+  <br><a ui-sref="login">Login</a> | <a ui-sref="reset" ui-sref-opts="{location: false}">Forgot password</a>
   <br><br>
   <div id="messagebox">
     <div class="alert alert-danger" role="alert" ng-show="alert.visible"><div ng-bind-html="alert.msg"></div></div>
   </div>
 
 </div>
+
+     <!-- Footer Helper -->
+        <div class="push"></div>
+
+    </div>
+
+<!-- FOOTER --> 
+  <div ng-include src="'../../views/app/footer.html'"></div>

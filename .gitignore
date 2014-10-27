@@ -5,3 +5,6 @@ dist
 app/bower_components
 npm-debug.log
 uploads
+.env
+.envprod
+Procfile

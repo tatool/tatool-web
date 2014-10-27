@@ -1,0 +1,27 @@
+<!-- Header -->
+        <div>
+            <nav class="navbar navbar-static-top" role="navigation">
+
+                <div class="container">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" ui-sref="home" ng-click="updateNav('home')">
+                            <img alt="Tatool" src="images/app/logo.png">
+                        </a>
+                    </div>
+
+                    <div ng-if="authorized" ng-cloak> 
+                             <form class="navbar-form navbar-right" role="search">
+                            <button type="submit" class="btn btn-default" ng-click="logout()">Logout</button>
+                        </form>
+
+                        <ul class="nav navbar-nav navbar-right">
+                            <li ui-sref-active="active"><a ui-sref="home"><i class="fa fa-home"></i> Home</a></li>
+                            <li ui-sref-active="active" ng-if="hasRole('developer')" ng-cloak><a ui-sref="developer"><i class="fa fa-cogs"></i> Developer</a></li>
+                            <li ui-sref-active="active" ng-if="hasRole('researcher')" ng-cloak><a ui-sref="researcher"><i class="fa fa-graduation-cap"></i> Researcher</a></li>
+                            <li ui-sref-active="active" ng-if="hasRole('admin')" ng-cloak><a ui-sref="admin"><i class="fa fa-lock"></i> Admin</a></li>
+                        </ul>
+                    </div>
+
+                </div>
+            </nav>
+        </div>

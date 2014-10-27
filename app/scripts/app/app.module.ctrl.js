@@ -4,13 +4,20 @@
 /* global async */
 
 angular.module('tatool.app')
-  .controller('ModuleCtrl', ['$scope', '$q', '$timeout', '$window', '$rootScope', '$location',  '$state', '$http', '$log', 'moduleDataService', 'cfgApp', 'authService', 'userService', 'moduleCreatorService', 'exportService', 'spinnerService',
-    function ($scope, $q, $timeout, $window, $rootScope, $location, $state, $http, $log, moduleDataService, cfgApp, authService, userService, moduleCreatorService, exportService, spinnerService) {
+  .controller('ModuleCtrl', ['$scope', '$q', '$timeout', '$window', '$rootScope', '$location',  '$state', '$http', '$log', 'moduleDataService', 'cfgApp', 'authService', 'userService', 'moduleCreatorService', 'exportService', 'spinnerService', 'cfg',
+    function ($scope, $q, $timeout, $window, $rootScope, $location, $state, $http, $log, moduleDataService, cfgApp, authService, userService, moduleCreatorService, exportService, spinnerService, cfg) {
 
     // setting contants
     $scope.imgPath = cfgApp.IMG_PATH;
 
     $scope.modules = [];
+
+    $scope.quantity = 25;
+
+    $scope.status = {
+      'installed': true,
+      'public': true
+    };
 
     function startSpinner(text) {
       if (!text) {
@@ -25,27 +32,34 @@ angular.module('tatool.app')
 
     // read all modules and display
     function initModules() {
+      // Initialize installed modules
       moduleDataService.getAllModules().then( function(data) {
         $scope.modules = [];
+        var moduleIds = [];
+
         for (var i = 0; i < data.length; i++) {
           $scope.modules.push(data[i]);
+          moduleIds.push(data[i].moduleId);
         }
-        if ($scope.modules.length > 0) {
-          $scope.status.installed = true;
+        // run auto export on installed modules
+        runAutoExport();
+
+        // Initialize repository modules (filtering out installed ones)
+        if (cfg.MODE === 'REMOTE') {
+          moduleDataService.getRepositoryModules().then( function(data) {
+            $scope.repository = [];
+            for (var i = 0; i < data.length; i++) {
+              if (moduleIds.indexOf(data[i].moduleId) === -1) {
+                $scope.repository.push(data[i]);
+              }
+            }
+          }, function(error) {
+            $log.error(error);
+          });
         }
 
-        runAutoExport();
       }, function(error) {
-        bootbox.dialog({
-          message: error,
-          title: '<b>Tatool</b>',
-          buttons: {
-            success: {
-              label: 'OK',
-              className: 'btn-default'
-            }
-          }
-        });
+        $log.error(error);
       });
     }
 
@@ -91,7 +105,7 @@ angular.module('tatool.app')
     }
     
     // query modules db and display
-    moduleDataService.openModulesDB(userService.getUserName(), initModules);
+    moduleDataService.openModulesDB(userService.getUserName(), cfg.APP_MODE_USER, initModules);
 
     function preloadData() {
       for (var i = 0; i < tatoolModuleAssets.length; i++) {
@@ -127,6 +141,7 @@ angular.module('tatool.app')
       function onModuleLoaded(result) {
         stopSpinner();
         $scope.modules.push(result);
+        $scope.status.installed = true;
         $scope.highlightModuleId = result.moduleId;
         $timeout(function() { $scope.highlightModuleId = null; }, 1000);
       }
@@ -146,6 +161,34 @@ angular.module('tatool.app')
       }
 
       moduleCreatorService.loadLocalModule(file).then(onModuleLoaded, onModuleError);
+    };
+
+    // install a module from the repository
+    $scope.installModule = function(module) {
+      startSpinner();
+
+      function onModuleLoaded(result) {
+        stopSpinner();
+        initModules();
+        $scope.highlightModuleId = result.moduleId;
+        $timeout(function() { $scope.highlightModuleId = null; }, 1000);
+      }
+
+      function onModuleError(result) {
+        stopSpinner();
+        bootbox.dialog({
+          message: result,
+          title: '<b>Tatool</b>',
+          buttons: {
+            success: {
+              label: 'OK',
+              className: 'btn-default'
+            }
+          }
+        });
+      }
+
+      moduleCreatorService.loadRepositoryModule(module.moduleDefinition).then(onModuleLoaded, onModuleError);
     };
 
     // delete module from db
@@ -193,6 +236,7 @@ angular.module('tatool.app')
     $scope.startModule = function(module) {
       // set the moduleId as a session property
       $window.sessionStorage.setItem('moduleId', module.moduleId);
+      $window.sessionStorage.setItem('mode', cfg.APP_MODE_USER);
 
       // switch to fullscreen if available
       var fullscreen = module.moduleDefinition.fullscreen ? module.moduleDefinition.fullscreen : false;
@@ -262,7 +306,7 @@ angular.module('tatool.app')
       exportService.getTrials(moduleId, session.sessionId).then(function(data) {
         if (data.length !== 0) {
           var json = { 'trialData': data, 'target': exportTarget };
-          var api = '/api/trials/' + moduleId + '/' + session.sessionId;
+          var api = '/api/' + cfg.APP_MODE_USER + '/modules/' + moduleId + '/trials/' + session.sessionId;
 
           $http.post(api, json).then(function() {
             session.localExportDone = true;
@@ -331,9 +375,7 @@ angular.module('tatool.app')
       });
     };
 
-    $scope.status = {
-      isopen: false
-    };
+    
 
     $scope.doExport = function($event, module, exportMode, exportTarget) {
       $event.stopPropagation();

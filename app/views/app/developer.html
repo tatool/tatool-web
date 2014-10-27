@@ -1,0 +1,85 @@
+<div class="wrapper">
+
+<!-- HEADER --> 
+<div ng-include src="'../../views/app/header.html'"></div>
+
+
+<!-- DEVELOPMENT -->
+  <div class="container">
+    <accordion>
+      <accordion-group is-open="status.develop">
+        <accordion-heading>
+          DEVELOPMENT & TEST
+          <i class="glyphicon" ng-class="{'glyphicon-chevron-down': status.develop, 'glyphicon-chevron-right': !status.develop}"></i>
+          <div class="fileUpload btn btn-tatool pull-right">
+            Add Module
+            <form id="addModuleForm">
+              <input type="file" class="upload" custom-on-change="addModule" ng-click="$event.stopPropagation()"/>
+            </form>
+          </div>
+        </accordion-heading>
+        <div id="modules">
+
+          <div class="tile tileDev" ng-class="{'tileHighlight': module.moduleId == highlightModuleId}" ng-repeat="module in modules | orderBy:'moduleName'" ng-if="!!modules.length">
+            <div class="icon"><i class="fa fa-cog fa-5x"></i></div>
+            <div class="content">
+              <h2>{{module.moduleName}}</h2>
+              <h3>{{module.moduleAuthor}}</h3>
+
+              <div class="buttonbar">
+                <div class="btn btn-tatool-off" ng-click="editModule(module)"><i class="fa fa-pencil-square-o"></i> Edit</div>
+                <div ng-switch on="module.moduleType" class="btn-group">
+
+                  <div ng-switch-when="public">
+                    <div class="btn btn-tatool" ng-click="unpublishModule($event, module)"><i class="fa fa-cloud-download"></i> Unpublish</div>
+                  </div>
+                  <div ng-switch-when="private">
+                    <div class="btn btn-tatool" ng-click="unpublishModule($event, module)"><i class="fa fa-cloud-download"></i> Unpublish</div>
+                  </div>
+                  <div ng-switch-default>
+                    <div dropdown>
+                      <div class="btn btn-tatool-green dropdown-toggle"><i class="fa fa-cloud-upload"></i> Publish <span class="caret"></span></div>
+                      <ul class="dropdown-menu" role="menu">
+                        <li dropdown-toggle ng-click="publishModule($event, module, 'public')">
+                          <a ui-sref="developer">Public</a>
+                        </li>
+                        <li dropdown-toggle ng-click="publishModule($event, module, 'private')">
+                          <a ui-sref="developer">Private</a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+              <div class="buttonbar">
+                <div class="btn btn-tatool-off" ng-click="startModule(module)">Start</div>
+                <div class="btn-group" ng-if="module.moduleDefinition.export && module.moduleDefinition.export.length > 0" dropdown>
+                  <div class="btn btn-tatool-off dropdown-toggle">Export <span class="caret"></span></div>
+                  <ul class="dropdown-menu" role="menu">
+                    <li class="exporterName" dropdown-toggle ng-click="doExport($event, module, exporter.mode, exporter.target)" ng-repeat="exporter in module.moduleDefinition.export | filter:filterExporter | orderBy:'mode'">
+                      <a ui-sref="developer">{{exporter.mode}}</a>
+                    </li>
+                  </ul>
+                </div>
+                <a ng-click="deleteModule(module)" class="btn btn-tatool-off"><i class="fa fa-trash-o"></i></a>
+              </div>
+            </div>
+          </div>
+
+          <div ng-if="modules.length === 0">
+            No modules found.
+          </div>
+        </div>
+      </accordion-group>
+    </accordion>
+  </div>
+
+
+     <!-- Footer Helper -->
+        <div class="push"></div>
+
+    </div>
+
+<!-- FOOTER --> 
+  <div ng-include src="'../../views/app/footer.html'"></div>

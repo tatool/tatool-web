@@ -16,6 +16,9 @@ angular.module('tatool.common')
     var config = {};
 
     config.spin = function (key, text) {
+      if (!text) {
+        text = 'Please wait...';
+      }
       $rootScope.$broadcast('tatool-spinner:spin', key, text);
     };
 

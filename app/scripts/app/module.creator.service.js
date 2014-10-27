@@ -37,10 +37,20 @@ angular.module('tatool.app')
       return deferred.promise;
     };
 
+    // install a module from the repository
+    creator.loadRepositoryModule = function(module) {
+      var deferred = $q.defer();
+      creator.createModule(deferred, module);
+      return deferred.promise;
+    };
+
     // validate module file and save to db
     creator.createModule = function(deferred, contents) {
       try {
-        var moduleDefinition = JSON.parse(contents);
+        var moduleDefinition = contents;
+        if (typeof contents !== 'object') {
+          moduleDefinition = JSON.parse(contents);
+        }
 
         // check if moduleDefinition is a proper object
         if (typeof moduleDefinition === 'object') {

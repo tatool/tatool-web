@@ -2,7 +2,7 @@
 /* global IDBStore */
 
 angular.module('tatool')
-  .factory('moduleDataLocalService', ['$log', '$q', 'trialDataService', function ($log, $q, trialDataService) {
+  .factory('moduleDataLocalService', ['$log', '$q', 'trialDataService', 'cfg', function ($log, $q, trialDataService, cfg) {
     $log.debug('ModuleDataLocalService: initialized');
 
     var data = {};
@@ -14,18 +14,19 @@ angular.module('tatool')
     };
 
     // initialize modules db
-    data.openModulesDB = function(userName, callback) {
+    data.openModulesDB = function(userName, mode, callback) {
       if (modulesDBready) {
         if (callback !== null) {
           callback();
         }
       } else {
         var prefix = Sha1.hash(userName);
+        var suffix = (mode === cfg.APP_MODE_DEVELOPER) ? 'd' : 'u';
 
         data.modulesDB = new IDBStore({
           dbVersion: 1,
           storePrefix: '',
-          storeName: prefix + '_m',
+          storeName: prefix + '_' + suffix,
           keyPath: 'moduleId',
           autoIncrement: false,
           onStoreReady: function(){

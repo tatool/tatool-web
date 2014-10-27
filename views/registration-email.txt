@@ -1,0 +1,12 @@
+****Thanks for signing up for tatool-web!****
+**You're almost done!**
+
+To verify your email address, open the link below in your browser.
+
+<%= verifyURL %>
+
+If you didn't sign up for tatool-web, just delete this email and we'll take care of the rest.
+
+Regards
+
+Tatool

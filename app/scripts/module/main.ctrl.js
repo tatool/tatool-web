@@ -10,9 +10,11 @@ angular.module('tatool.module')
 
     // get the moduleId from sessionStorage and remove afterwards to prevent the module from re-running after refresh
     var moduleId = $window.sessionStorage.getItem('moduleId');
+    var mode = $window.sessionStorage.getItem('mode');
     $window.sessionStorage.removeItem('moduleId');
+    $window.sessionStorage.removeItem('mode');
 
-    $log.debug('Running module: ' + moduleId);
+    $log.debug('Running module (' + mode +'): ' + moduleId);
 
     // Handle global key press
     $scope.keyPress = function($event){
@@ -71,7 +73,7 @@ angular.module('tatool.module')
 
     // Run Module
     if (moduleId) {
-      moduleDataService.openModulesDB(userService.getUserName(),
+      moduleDataService.openModulesDB(userService.getUserName(), mode,
         function() {
           trialDataService.openTrialsDB(userService.getUserName(), loadModule);
         });

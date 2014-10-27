@@ -11,6 +11,7 @@ var Module = function(moduleId) {
   this.moduleDefinition = {};
   this.modulePackagePath = '';
   this.sessions = {};
+  this.moduleType = '';
 };
 
 // get the module name
@@ -47,6 +48,10 @@ Module.prototype.getPackagePath = function() {
   return this.modulePackagePath;
 };
 
+Module.prototype.getModuleType = function() {
+  return this.moduleType;
+};
+
 // sets the module name
 Module.prototype.setModuleName = function(moduleName) {
   this.moduleName = moduleName;
@@ -70,6 +75,10 @@ Module.prototype.setModuleDefinition = function(moduleDefinition) {
 // sets the module package url
 Module.prototype.setModulePackagePath = function(packagePath) {
   this.modulePackagePath = packagePath;
+};
+
+Module.prototype.setModuleType = function(moduleType) {
+  this.moduleType = moduleType;
 };
 
 // add a session to this module
