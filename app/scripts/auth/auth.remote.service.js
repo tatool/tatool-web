@@ -125,6 +125,20 @@ angular.module('tatool.auth')
       });
     return deferred.promise;
   };
+
+  authService.verifyCaptcha = function(captcha) {
+    var deferred = $q.defer();
+
+    $http.post('/user/captcha', captcha)
+      .success(function () {
+        deferred.resolve('success');
+      })
+      .error(function (error) {
+        $log.error(error);
+        deferred.reject(error.message);
+      });
+    return deferred.promise;
+  };
   
   return authService;
 

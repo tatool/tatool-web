@@ -1,5 +1,6 @@
-// Load required packages
+// Load dependencies
 var User = require('../models/user');
+var simple_recaptcha = require('simple-recaptcha');
 var uuid = require('node-uuid');
 var postmark = require("postmark")(process.env.POSTMARK_API_KEY);
 var nodemailer = require('nodemailer');
@@ -51,6 +52,21 @@ exports.register = function(req, res) {
 
     } else {
       res.status(500).json({ message: 'The email address is already registered.' });
+    }
+  });
+};
+
+exports.verifyCaptcha = function(req, res) {
+  var privateKey = process.env.RECAPTCHA_PRIVATE_KEY;
+  var ip = req.ip;
+  var challenge = req.body.recaptcha_challenge_field;
+  var response = req.body.recaptcha_response_field;
+
+  simple_recaptcha(privateKey, ip, challenge, response, function(err) {
+    if (err) {
+      res.status(500).json({ message: 'Captcha verification failed. By pressing on the refresh button right next to the Captcha you can try a different one.', data: err });
+    } else {
+      res.json('verified');
     }
   });
 };
@@ -140,7 +156,7 @@ exports.resetPasswordSend = function(req, res) {
   });
 };
 
-// check reset token for validity
+// check reset password token for validity
 exports.verifyResetToken = function(req, res) {
   User.findOne({token: req.params.token}, function(err, user) {
     if (err) res.status(500).send(err);

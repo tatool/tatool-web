@@ -1,8 +1,13 @@
 /* Login View */
 #login {
   width: 100%;
-  margin: 120px auto;
+  margin: 80px auto;
   text-align: center;
+}
+
+#captcha {
+  margin: auto;
+  width: 450px;
 }
 
 #messagebox {

@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('tatool.auth')
-  .controller('LoginCtrl', ['$scope', '$log', '$state', '$sce', 'authService', 'messageService', 'spinnerService', 'token',
-    function ($scope, $log, $state, $sce, authService, messageService, spinnerService, token) {
+  .controller('LoginCtrl', ['$scope', '$log', '$state', '$sce', 'authService', 'messageService', 'spinnerService', 'cfg', 'token',
+    function ($scope, $log, $state, $sce, authService, messageService, spinnerService, cfg, token) {
 
     $scope.alert = { type: 'danger', msg: '', visible: false };
 
@@ -33,6 +33,13 @@ angular.module('tatool.auth')
 
     // register new user with authService
     $scope.register = function(credentials) {
+
+      // add captcha information
+      var captcha = {};
+      if (cfg.MODE === 'REMOTE') {
+        captcha.recaptcha_response_field = Recaptcha.get_response();
+        captcha.recaptcha_challenge_field = Recaptcha.get_challenge();
+      }
       
       var alertText = '';
       if (!credentials) {
@@ -45,13 +52,22 @@ angular.module('tatool.auth')
       } else if (credentials.userPassword !== credentials.userPassword2) {
         alertText = 'The passwords don\'t match.';
         setAlert('danger', alertText);
+      } else if (!captcha.recaptcha_response_field && cfg.MODE === 'REMOTE') {
+        alertText += (!captcha.recaptcha_response_field) ? '<li> Captcha' : '';
+        setAlert('danger', alertText);
       } else {
         hideAlert();
 
         spinnerService.spin('loadingSpinner');
-        authService.register(credentials).then(function() {
-          spinnerService.stop('loadingSpinner');
-          $state.go('login');
+
+        authService.verifyCaptcha(captcha).then(function() {
+          authService.register(credentials).then(function() {
+            spinnerService.stop('loadingSpinner');
+            $state.go('login');
+          }, function(error) {
+            spinnerService.stop('loadingSpinner');
+            setAlert('danger', error);
+          });
         }, function(error) {
           spinnerService.stop('loadingSpinner');
           setAlert('danger', error);
@@ -109,6 +125,19 @@ angular.module('tatool.auth')
     function hideAlert() {
       $scope.alert.visible = false;
       $scope.alert.msg = '';
+    }
+
+    function showRecaptcha(element) {
+      Recaptcha.create("6LfSvfwSAAAAAOD0SuK_6f3vswGHswyH3kiHj-q3", element, {
+        theme: "clean",
+        callback: Recaptcha.focus_response_field});
+    }
+
+    // captcha loading
+    if ($state.current.name === 'register' && cfg.MODE === 'REMOTE') {
+      $script('http://www.google.com/recaptcha/api/js/recaptcha_ajax.js', function() {
+        showRecaptcha('captcha');
+      });
     }
 
     // on load message handler

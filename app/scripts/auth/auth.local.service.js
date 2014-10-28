@@ -85,6 +85,13 @@ angular.module('tatool.auth')
     });
     return deferred.promise;
   };
+
+  // currently we don't implement captcha for local mode
+  authService.verifyCaptcha = function(captcha) {
+    var deferred = $q.defer();
+    deferred.resolve();
+    return deferred.promise;
+  };
   
   return authService;
 

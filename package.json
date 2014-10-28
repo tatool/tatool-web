@@ -23,14 +23,15 @@
     "nodemailer-smtp-transport": "^0.1.13",
     "passport": "^0.2.1",
     "passport-http": "^0.2.2",
-    "postmark": "^0.2.6"
+    "postmark": "^0.2.6",
+    "simple-recaptcha": "0.0.3"
   },
   "engines": {
     "node": "0.10.x"
   },
   "main": "server.js",
   "scripts": {
-	"start": "node server.js",
+    "start": "node server.js",
     "test": "grunt test",
     "postinstall": "bower install"
   },

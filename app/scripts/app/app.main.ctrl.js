@@ -18,8 +18,11 @@ angular.module('tatool.app')
     });
 
     // Handle successful state change
-    $rootScope.$on('$stateChangeSuccess', function (event) {
+    $rootScope.$on('$stateChangeSuccess', function (event, toState) {
       event.preventDefault();
+
+      // set current state as ui-router doesn't do it for us
+      $state.current = toState;
 
       // only request roles when user is logged in (used for header nav)
       if (authService.isAuthenticated()) {
