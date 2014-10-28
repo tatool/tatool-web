@@ -37,9 +37,9 @@
                     <div class="btn btn-tatool" ng-click="unpublishModule($event, module)"><i class="fa fa-cloud-download"></i> Unpublish</div>
                   </div>
                   <div ng-switch-default>
-                    <div dropdown>
+                    <div id="dropdownPublish" class="dropdown">
                       <div class="btn btn-tatool-green dropdown-toggle"><i class="fa fa-cloud-upload"></i> Publish <span class="caret"></span></div>
-                      <ul class="dropdown-menu" role="menu">
+                      <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownPublish">
                         <li dropdown-toggle ng-click="publishModule($event, module, 'public')">
                           <a ui-sref="developer">Public</a>
                         </li>
@@ -54,9 +54,9 @@
               </div>
               <div class="buttonbar">
                 <div class="btn btn-tatool-off" ng-click="startModule(module)">Start</div>
-                <div class="btn-group" ng-if="module.moduleDefinition.export && module.moduleDefinition.export.length > 0" dropdown>
+                <div id="dropdownExport" class="btn-group dropdown" ng-if="module.moduleDefinition.export && module.moduleDefinition.export.length > 0">
                   <div class="btn btn-tatool-off dropdown-toggle">Export <span class="caret"></span></div>
-                  <ul class="dropdown-menu" role="menu">
+                  <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownExport">
                     <li class="exporterName" dropdown-toggle ng-click="doExport($event, module, exporter.mode, exporter.target)" ng-repeat="exporter in module.moduleDefinition.export | filter:filterExporter | orderBy:'mode'">
                       <a ui-sref="developer">{{exporter.mode}}</a>
                     </li>
