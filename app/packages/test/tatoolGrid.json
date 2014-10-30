@@ -2,7 +2,7 @@
     "name": "Tatool Grid",
     "id": "tatoolGridTest",
     "author": "Andre Locher",
-    "packagePath": "/packages/test",
+    "packagePath": "packages/test",
     "version": 3,
     "fullscreen": false,
     "allowEscapeKey": true,

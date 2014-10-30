@@ -37,13 +37,11 @@ angular.module('tatool.app')
       spinnerService.stop('loadingSpinner');
     };
 
-    
-
     // remember which mode we're running
     var mode = $window.sessionStorage.getItem('mode');
 
     // redirect to packagePath
     startSpinner();
-    $scope.packagePath = $sce.trustAsResourceUrl(packagePath);
+    $scope.packagePath = $sce.trustAsResourceUrl('../../views/module/index.html');
     
   }]);

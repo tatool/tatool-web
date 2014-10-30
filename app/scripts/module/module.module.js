@@ -10,8 +10,6 @@ angular.module('tatool.module', ['tatool', 'tatool.auth', 'angular-progress-arc'
     DEFAULT_BLANK_INTERVAL_SCREEN: '../../views/module/blank.html',
     DEFAULT_FIXATION_INTERVAL: 0,
     DEFAULT_FIXATION_INTERVAL_SCREEN: '../../views/module/fixation.html',
-    DEFAULT_INSTRUCTION_SCREEN: '../../views/module/instruction.html',
-    DEFAULT_COUNTDOWN_SCREEN: '../../views/module/countdown.html',
     CSV_DELIMITER: ';',
     MIN_EPOCH_MS: 32000000000
   })
@@ -23,7 +21,7 @@ angular.module('tatool.module', ['tatool', 'tatool.auth', 'angular-progress-arc'
     TRIAL_SAVE: 'TRIAL_SAVE',
     LEVEL_CHANGE: 'LEVEL_CHANGE'
   })
-  .config(['$stateProvider', '$urlRouterProvider', 'cfgModule', function ($stateProvider, $urlRouterProvider, cfgModule) {
+  .config(['$stateProvider', '$urlRouterProvider', '$templateCacheProvider', 'cfgModule', function ($stateProvider, $urlRouterProvider, $templateCacheProvider, cfgModule) {
 
     $urlRouterProvider.otherwise('/');
 
@@ -64,7 +62,7 @@ angular.module('tatool.module', ['tatool', 'tatool.auth', 'angular-progress-arc'
             controller: 'StatusPanelCtrl'
           },
           'executable@module': {
-            templateUrl: function($stateParams) {
+            templateUrl: function ($stateParams) {
               return $stateParams.url;
             },
             controllerProvider: ['$stateParams', function ($stateParams) {

@@ -1,0 +1,9 @@
+<!-- 
+ The Executable Template is responsible for the layout of your content on the screen.
+ You can access all the properties which were made accessible through the $scope object in your Controller. 
+ -->
+<div id="centeredExecutable">
+	<div class="stimulusText" ng-show='stimulusVisible'>{{stimulusText}}</div>
+
+	<div class="actionPanel" ng-show='inputVisible'><input type="text" class="textInput" ng-model="givenResponse"></div>
+</div>

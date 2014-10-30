@@ -3,15 +3,15 @@
     "id": "dbRegression",
     "author": "Tatool",
     "version": 3,
-    "packagePath": "/packages/test",
+    "packagePath": "packages/test",
     "allowEscapeKey" : true,
     "export" : [ 
-        { "mode": "local", "auto": true, "target": "uploads/abc/" }, 
-        { "mode": "remote", "auto": true, "target": "http://www.tatool.ch/tatoolweb/upload.php" },
+        { "mode": "local", "auto": false, "target": "uploads/abc/" }, 
+        { "mode": "remote", "auto": false, "target": "http://www.tatool.ch/tatoolweb/upload.php" },
         { "mode": "download" } ],
     "moduleHierarchy": {
     	"tatoolType": "List",
-        "iterator": { "customType" : "ListIterator", "numIterations" : "150" },
+        "iterator": { "customType" : "ListIterator", "numIterations" : "1000" },
         "handlers": [ ],
     	"children": 
     		[

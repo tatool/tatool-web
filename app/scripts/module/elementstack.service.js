@@ -1,11 +1,13 @@
 'use strict';
 
 angular.module('tatool.module')
-  .factory('elementStack', ['$log', '$injector', '$window', 'handlerService', 'executableService',
-    function ($log, $injector, $window, handlerService, executableService) {
+  .factory('elementStack', ['$log', '$injector', '$q', '$window', 'handlerService', 'executableService',
+    function ($log, $injector, $q, $window, handlerService, executableService) {
     $log.debug('ElementStack: initialized');
 
     var obj = {content:null};
+
+    var promises = [];
 
     // inner class represents the stack and provides utility functions
     function Stack(){
@@ -80,21 +82,46 @@ angular.module('tatool.module')
 
     // initialize the element stack
     obj.initialize = function(executor, json){
+      var deferred = $q.defer();
       obj.stack.clearAll();
       var moduleHierarchy = JSON.parse(JSON.stringify(json.moduleHierarchy));
       handlerService.init();
       executableService.init(executor);
-      obj.convertJson(null, 'moduleHierarchy', moduleHierarchy);
-      obj.stack.push(moduleHierarchy);
+
+      promises = [];
+      loadModuleHierarchy(null, 'moduleHierarchy', moduleHierarchy).then(function(data) {
+        obj.stack.push(moduleHierarchy)
+        deferred.resolve();
+      }, function(error) {
+        deferred.reject(error);
+      });
+
+      return deferred.promise;
+    };
+
+    // create promise which is resolved once the whole hierarchy is loaded
+    var loadModuleHierarchy = function(parent, key, element) {
+      var deferred = $q.defer();
+      convertJson(0, parent, key, element, deferred);
+      return deferred.promise;
     };
 
     // converting JSON into JavaScripts objects
-    obj.convertJson = function(parent, key, element){
+    var convertJson = function(depth, parent, key, element, deferred){
       if ('tatoolType' in element) {
         if (element.tatoolType === 'Executable') {
+
+          var executableDefer = $q.defer();
+          promises.push(executableDefer.promise);
+
           // instantiate executables and register with executableService
-          var executable = executableService.addExecutable(element);
-          parent[key] = executable;
+          executableService.addExecutable(element).then(function(exec) {
+            var executable = exec;
+            parent[key] = executable;
+            executableDefer.resolve(exec);
+          }, function(err) {
+            executableDefer.reject(err);
+          });
         }
       }
       if ('iterator' in element) {
@@ -112,10 +139,21 @@ angular.module('tatool.module')
         }
       }
       if ('children' in element) {
+        var newDepth = depth + 1;
         angular.forEach(element.children, function(value, key) {
-          obj.convertJson(element.children, key, value);
+          convertJson(depth + 1, element.children, key, value, deferred);
         });
       }
+
+      // finished loading check for all promises to be finished, then resolve main promise
+      if (depth === 0) {
+        $q.all(promises).then(function() {
+          deferred.resolve('moduleHierarchy loaded');
+        }, function(error) {
+          deferred.reject(error);
+        })
+      }
+
     };
 
     return obj;

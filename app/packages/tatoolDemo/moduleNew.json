@@ -2,7 +2,7 @@
     "name": "My Module",
     "id": "demoModule3",
     "author": "Andre Locher",
-    "packagePath": "/packages/tatoolDemo",
+    "packagePath": "packages/tatoolDemo",
     "version": 3,
     "fullscreen": false,
     "allowEscapeKey": true,

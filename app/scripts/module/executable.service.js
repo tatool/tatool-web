@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('tatool.module')
-  .service('executableService', ['$log', '$rootScope', '$injector', '$q', 'contextService', 'tatoolPhase', 'tatoolExecutable',
-    function ($log, $rootScope, $injector, $q, contextService, tatoolPhase, tatoolExecutable) {
+  .service('executableService', ['$log', '$rootScope', '$injector', '$q', '$http', '$templateCache', 'contextService', 'tatoolPhase', 'tatoolExecutable', 'moduleService',
+    function ($log, $rootScope, $injector, $q, $http, $templateCache, contextService, tatoolPhase, tatoolExecutable, moduleService) {
 
     var executableService = {};
 
@@ -13,16 +13,73 @@ angular.module('tatool.module')
     // reset the list of executables
     executableService.init = function(runningExecutor) {
       executables = {};
+      numExecutables = 0;
       tatoolExecutable.init(runningExecutor);
     };
 
     // create a new executable from service and register
     executableService.addExecutable = function(executableJson) {
-      var ExecutableService = $injector.get(executableJson.customType);
-      var executable = new ExecutableService();
-      angular.extend(executable, executableJson);
-      this.registerExecutable(executable.name, executable);
-      return executable;
+      var deferred = $q.defer();
+      var self = this;
+
+      var packagePath = '/' + moduleService.getModulePackagePath() + '/';
+      var libraryPath = '/library/executables/';
+      var executableName = executableJson.customType;
+      var executableSrv = executableName + '.service.js';
+      var executableCtrl = executableName + '.ctrl.js';
+      var executableStyle = executableName + '.css';
+      var executableTpl = executableName + '.html';
+
+      // every executable consists of [*service,*controller,style] (* required)
+      var dependencies = function(path) {
+        var files = [], srv = {}, ctrl = {}, style = {};
+        srv[executableSrv] = path + executableSrv;
+        ctrl[executableCtrl] = path + executableCtrl;
+        style[executableStyle] = path + executableStyle;
+        files.push(style);
+        files.push(srv);
+        files.push(ctrl);
+        return files;
+      }
+
+      // $script loader
+      /*return [
+          path + executableSrv,
+          path + executableCtrl
+        ];*/
+      
+      // try first in package folder and use library as fallback to allow override of executables
+      $http.get(packagePath + executableSrv)
+        .success(function () {
+          //$script(dependencies(packagePath), executableName);
+          head.load( dependencies(packagePath) );
+          $http.get(packagePath + executableTpl).then( function(template) {
+            $templateCache.put(executableTpl, template.data);
+          });
+        })
+        .error(function () {
+          //$script(dependencies(libraryPath), executableName);
+          head.load( dependencies(libraryPath) );
+          $http.get(libraryPath + executableTpl).then(function(template) {
+            $templateCache.put(executableTpl, template.data);
+          });
+        });
+   
+      // Create executable once scripts are loaded
+      head.ready(executableCtrl, function() {
+      //$script.ready(executableName, function() {
+        try {
+          var ExecutableService = $injector.get(executableName);
+          var executable = new ExecutableService();
+          angular.extend(executable, executableJson);
+          self.registerExecutable(executable.name, executable);
+          deferred.resolve(executable);
+        } catch (e) {
+          deferred.reject('Unable to find executable: ' + executableName + ' (' + executableSrv + ')');
+        }
+      });
+
+      return deferred.promise;
     };
 
     // register a handler

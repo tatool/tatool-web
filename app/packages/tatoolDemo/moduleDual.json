@@ -17,6 +17,11 @@
     		[
                 {
                     "tatoolType": "Executable",
+                    "customType": "tatoolCountdown",
+                    "name": "countdown"
+                },
+                {
+                    "tatoolType": "Executable",
                     "customType": "tatoolInstruction",
                     "name": "instructions",
                     "blankInterval" : "600",

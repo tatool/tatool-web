@@ -1,16 +1,20 @@
 'use strict';
 
-angular.module('tatool', ['ui.bootstrap', 'ui.router'])
+var tatool = angular.module('tatool', ['ui.bootstrap', 'ui.router'])
   .constant('cfg', {
     MODE: 'REMOTE', // LOCAL or REMOTE
     APP_MODE_USER: 'user',
     APP_MODE_DEVELOPER: 'developer',
   })
-  .config(['$stateProvider', '$urlRouterProvider', '$provide', 'cfg', 'moduleDataServiceProvider', 'userDataServiceProvider',
-    function ($stateProvider, $urlRouterProvider, $provide, cfg, moduleDataServiceProvider, userDataServiceProvider) {
+  .config(['$stateProvider', '$urlRouterProvider', '$provide', '$controllerProvider', 'cfg', 'moduleDataServiceProvider', 'userDataServiceProvider',
+    function ($stateProvider, $urlRouterProvider, $provide, $controllerProvider, cfg, moduleDataServiceProvider, userDataServiceProvider) {
     
     moduleDataServiceProvider.setProvider(cfg.MODE);
     userDataServiceProvider.setProvider(cfg.MODE);
+
+    tatool.controller = $controllerProvider.register;
+    tatool.factory = $provide.factory;
+    tatool.service = $provide.service;
 
     // making sure we always point to root in case of unknown url
     $urlRouterProvider.otherwise('/');

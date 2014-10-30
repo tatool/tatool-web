@@ -20,7 +20,6 @@
     <link rel="stylesheet" href="../../styles/tatool_module.css">
     <link rel="stylesheet" href="../../fonts/module/leaguegothic-regular-webfont.css">
     <link rel="stylesheet" href="../../fonts/module/tatool-icons.css">
-    <link rel="stylesheet" href="style.css">
     <!-- endbuild -->
   </head>
   <body ng-app="tatool.module" ng-controller="MainCtrl" ng-keydown="keyPress($event);" ng-mousedown="mousePress($event);" ng-strict-di>
@@ -29,9 +28,7 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <span us-spinner="{radius:25, width:8, length: 18}" spinner-key="loadingSpinner"></span>
-    
-    <div id='container'>
+    <div id="moduleContainer">
       <div ui-view></div>
     </div>
 
@@ -57,7 +54,7 @@
     <script src="../../bower_components/jquery-ui/jquery-ui.js"></script>
     <script src="../../bower_components/jqueryui-touch-punch/jquery.ui.touch-punch.min.js"></script>
     <script src="../../bower_components/angular-base64/angular-base64.min.js"></script>
-    <script src="../../bower_components/script.js/dist/script.js"></script>
+    <script src="../../bower_components/headjs/dist/1.0.0/head.load.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -72,7 +69,6 @@
         <script src="../../scripts/module/main.ctrl.js"></script>
         <script src="../../scripts/module/module.service.js"></script>
         <script src="../../scripts/module/trial.service.js"></script>
-        <script src="../../scripts/module/module.directive.js"></script>
         <script src="../../scripts/auth/auth.module.js"></script>
         <script src="../../scripts/auth/user.service.js"></script>
         <script src="../../scripts/auth/auth.interceptor.js"></script>
@@ -92,7 +88,6 @@
         <script src="../../scripts/module/context.service.js"></script>
         <script src="../../scripts/module/executable.service.js"></script>
         <script src="../../scripts/module/tatoolExecutable.js"></script>
-        <script src="../../scripts/module/tatool.grid.service.js"></script>
         <script src="../../scripts/module/executionphase.service.js"></script>
         <script src="../../scripts/module/timer.service.js"></script>
         <script src="../../scripts/module/db.service.js"></script>
@@ -101,9 +96,9 @@
         <script src="../../scripts/module/errorhandler.service.js"></script>
         <script src="../../scripts/module/handler/level.handler.service.js"></script>
         <script src="../../scripts/module/handler/trialcount.handler.service.js"></script>
+        <script src="../../scripts/module/module.directive.js"></script>
+        <script src="../../scripts/module/tatool.grid.service.js"></script>
         <!-- endbuild -->
-
-
 
 </body>
 </html>

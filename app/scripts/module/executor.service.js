@@ -19,15 +19,20 @@ angular.module('tatool.module')
       obj.continueModule = true;
 
       // initialize the stack
-      elementStack.initialize(obj, moduleService.getModuleDefinition());
-
-      // run init method on all executables
-      executableService.initAllExecutables().then(function() {
-        moduleLoaded();
-        runModule();
+      elementStack.initialize(obj, moduleService.getModuleDefinition()).then(function() {
+        // run init method on all executables
+        executableService.initAllExecutables().then(function() {
+          moduleLoaded(); // inform tatool app that loading has finished
+          runModule();
+        }, function(error) {
+          $log.error(error);
+          obj.stopModule(false);
+        });
       }, function(error) {
-        console.log(error);
+        $log.error(error);
+        obj.stopModule(false);
       });
+      
     };
 
     var runModule = function() {
@@ -191,14 +196,7 @@ angular.module('tatool.module')
     var runExecutable = function(currentExecutable) {
       broadcastPhaseChange(tatoolPhase.EXECUTABLE_START, elementStack.stack);
 
-      var url = '';
-      if (currentExecutable.customType === 'tatoolInstruction') {
-        url = cfgModule.DEFAULT_INSTRUCTION_SCREEN;
-      } else if (currentExecutable.customType === 'tatoolCountdown') {
-        url = cfgModule.DEFAULT_COUNTDOWN_SCREEN;
-      } else {
-        url = currentExecutable.customType + '.html';
-      }
+      var url = currentExecutable.customType + '.html';
       var params = { moduleId: moduleService.getModuleId(), type: 'executable', url: url, content: currentExecutable };
 
       // focus window to make sure we're receiving user input

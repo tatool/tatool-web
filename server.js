@@ -1,5 +1,6 @@
 // server
 var express = require('express');
+var compress = require('compression');
 var path = require('path');
 var bodyParser = require('body-parser');
 var logger = require('morgan');
@@ -27,13 +28,15 @@ mongoose.connect( process.env.MONGOLAB_URI || 'mongodb://localhost/tatool-web' )
 //logging setup
 app.use(logger('dev'));
 
+//compression
+app.use(compress());
+
 // parse json and urlencoded body
-app.use(bodyParser.json());
+app.use(bodyParser.json( { limit: 1048576 })); // allow upload of 1MB
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Use passport package
 app.use(passport.initialize());
-
 
 // API router
 var router = express.Router();
@@ -84,9 +87,9 @@ app.post('/user/captcha', userController.verifyCaptcha);
 // Tatool Web Client
 app.use(express.static(path.join(__dirname, 'app')));
 
-// redirect to index if no route matches
+// send 404 if no match found
 app.use(function(req, res, next){
-  res.redirect('/');
+  res.status(404).send('Page not found');
 });
 
 // handle error case
