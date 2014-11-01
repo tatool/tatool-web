@@ -64,7 +64,7 @@ exports.verifyCaptcha = function(req, res) {
 
   simple_recaptcha(privateKey, ip, challenge, response, function(err) {
     if (err) {
-      res.status(500).json({ message: 'Captcha verification failed. By pressing on the refresh button right next to the Captcha you can try a different one.', data: err });
+      res.status(500).json({ message: 'Captcha verification failed. Refresh  the captcha by clicking on the button right next to the Captcha to try again.', data: err });
     } else {
       res.json('verified');
     }

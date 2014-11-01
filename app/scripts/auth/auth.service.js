@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('tatool.auth')
-  .factory('authRemoteService', ['$http', '$q', '$base64', '$log', 'userService', 'messageService',
+  .factory('authService', ['$http', '$q', '$base64', '$log', 'userService', 'messageService',
     function($http, $q, $base64, $log, userService, messageService) {
 
   var authService = {};

@@ -5,9 +5,7 @@ angular.module('tatool.auth', ['tatool', 'base64', 'tatool.common'])
     IMG_PATH: 'images/auth/',
     VIEW_PATH:'views/auth/'
   })
-  .config(['$httpProvider', '$stateProvider', 'cfg', 'authServiceProvider', function ($httpProvider, $stateProvider, cfg, authServiceProvider) {
-
-    authServiceProvider.setProvider(cfg.MODE);
+  .config(['$httpProvider', '$stateProvider', 'cfg', function ($httpProvider, $stateProvider, cfg) {
 
     // auth interceptor
     $httpProvider.interceptors.push('authInterceptor');
@@ -88,23 +86,3 @@ angular.module('tatool.auth', ['tatool', 'base64', 'tatool.common'])
       }
     };
   }]);
-
-// Authorization Service Provider
-angular.module('tatool.auth').provider('authService', function() {
-  this.setProvider = function(provider) {
-    this.authProvider = provider;
-  };
-    
-  this.$get = ['authLocalService', 'authRemoteService', function(authLocalService, authRemoteService) {
-
-    if(this.authProvider === 'LOCAL') {
-      return authLocalService;
-    }
-        
-    if(this.authProvider === 'REMOTE') {
-      return authRemoteService;
-    }
-        
-    throw 'No authService available';
-  }];
-});
