@@ -11,7 +11,6 @@ angular.module('tatool.auth')
     $window.sessionStorage.setItem('userName', userName);
     $window.sessionStorage.setItem('roles', roles);
     $window.sessionStorage.setItem('token', token);
-    moduleDataService.closeModulesDB();
     trialDataService.closeTrialsDB();
     $rootScope.$broadcast('login');
   };
@@ -24,7 +23,6 @@ angular.module('tatool.auth')
     $window.sessionStorage.removeItem('userName');
     $window.sessionStorage.removeItem('roles');
     $window.sessionStorage.removeItem('token');
-    moduleDataService.closeModulesDB();
     trialDataService.closeTrialsDB();
     $rootScope.$broadcast('logout');
   };

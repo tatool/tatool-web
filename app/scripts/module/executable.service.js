@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('tatool.module')
-  .service('executableService', ['$log', '$rootScope', '$injector', '$q', '$http', '$templateCache', 'contextService', 'tatoolPhase', 'tatoolExecutable', 'moduleService',
-    function ($log, $rootScope, $injector, $q, $http, $templateCache, contextService, tatoolPhase, tatoolExecutable, moduleService) {
+  .service('executableService', ['$log', '$rootScope', '$injector', '$q', '$http', '$templateCache', 'contextService', 'tatoolPhase', 'tatoolExecutable', 'moduleService', 'cfgModule',
+    function ($log, $rootScope, $injector, $q, $http, $templateCache, contextService, tatoolPhase, tatoolExecutable, moduleService, cfgModule) {
 
     var executableService = {};
 
@@ -10,11 +10,27 @@ angular.module('tatool.module')
 
     var numExecutables = 0;
 
+    var projectUrl = cfgModule.MODULE_PROJECT_URL;
+
     // reset the list of executables
     executableService.init = function(runningExecutor) {
       executables = {};
       numExecutables = 0;
-      tatoolExecutable.init(runningExecutor);
+
+      // override project Url with url given in module
+      var url = moduleService.getProjectUrl();
+      if (url) {
+        projectUrl = url;
+      }
+
+      // clean up url so we always have a trailing slash
+      if (projectUrl.indexOf('/', projectUrl.length - 1) === -1) {
+        projectUrl = projectUrl + '/';
+      } else {
+        projectUrl = projectUrl;
+      }
+
+      tatoolExecutable.init(runningExecutor, projectUrl);
     };
 
     // create a new executable from service and register
@@ -22,8 +38,8 @@ angular.module('tatool.module')
       var deferred = $q.defer();
       var self = this;
 
-      var packagePath = '/' + moduleService.getModulePackagePath() + '/';
-      var libraryPath = '/library/executables/';
+      var projectPath = projectUrl;
+      var libraryPath = cfgModule.MODULE_LIBRARY_EXECUTABLE_URL;
       var executableName = executableJson.customType;
       var executableSrv = executableName + '.service.js';
       var executableCtrl = executableName + '.ctrl.js';
@@ -49,11 +65,11 @@ angular.module('tatool.module')
         ];*/
       
       // try first in package folder and use library as fallback to allow override of executables
-      $http.get(packagePath + executableSrv)
+      $http.get(projectPath + executableSrv)
         .success(function () {
-          //$script(dependencies(packagePath), executableName);
-          head.load( dependencies(packagePath) );
-          $http.get(packagePath + executableTpl).then( function(template) {
+          //$script(dependencies(projectPath), executableName);
+          head.load( dependencies(projectPath) );
+          $http.get(projectPath + executableTpl).then( function(template) {
             $templateCache.put(executableTpl, template.data);
           });
         })
@@ -97,38 +113,31 @@ angular.module('tatool.module')
     executableService.initAllExecutables = function() {
       var deferred = $q.defer();
       var i = 0;
+      var promises = [];
 
       for (var key in executables) {
         i++;
-        runInit(key, i, deferred);
+        runInit(key, i, deferred, promises);
       }
 
       return deferred.promise;
     };
 
-    var runInit = function(key, i, initAllDeferred) {
+    var runInit = function(key, i, initAllDeferred, promises) {
       if ('init' in executables[key]) {
         var deferred = executables[key].init();
 
         if (deferred && deferred.promise) {
-          deferred.promise.then(function() {
-            reportProgress(key, i, initAllDeferred);
+          promises.push(deferred.promise);
+        }
+      }
+
+      if (i === numExecutables) {
+        $q.all(promises).then(function() {
+            initAllDeferred.resolve();
           }, function(error) {
             initAllDeferred.reject(error);
-          });
-        } else {
-          reportProgress(key, i, initAllDeferred);
-        }
-      } else {
-        reportProgress(key, i, initAllDeferred);
-      }
-    };
-
-    var reportProgress = function(key, i, initAllDeferred) {
-      if (i === numExecutables) {
-        initAllDeferred.resolve();
-      } else {
-        console.log('Finished init on executable ' + key);
+        });
       }
     };
 

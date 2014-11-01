@@ -33,22 +33,11 @@ angular.module('tatool.module')
     moduleService.saveModule = function() {
       var deferred = $q.defer();
 
-      moduleDataService.getModule(module.moduleId).then(
-        function(data) {
-          if (data) {
-            moduleDataService.addModule(module).then(function() {
-              deferred.resolve(data);
-            }, function(err) {
-              deferred.reject(err);
-            });
-          } else {
-            $log.error('Trying to update a module which does not exist.');
-            deferred.reject('Trying to update a module which does not exist.');
-          }
-        }, function(error) {
-          $log.error('Error while updating module.', error);
-          deferred.reject('Error while updating module.');
-        });
+      moduleDataService.addModule(module).then(function(data) {
+        deferred.resolve(data);
+      }, function(err) {
+        deferred.reject(err);
+      });
 
       return deferred.promise;
     };
@@ -59,6 +48,10 @@ angular.module('tatool.module')
 
     moduleService.getModuleName = function() {
       return module.getName();
+    };
+
+    moduleService.getProjectUrl = function() {
+      return module.getProjectUrl();
     };
 
     moduleService.getModuleAuthor = function() {

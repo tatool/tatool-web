@@ -317,7 +317,7 @@ footer {
   	background-color: #e6e6e6;
 }
 
-.exporterName::first-letter {
+.exporterName {
   text-transform: capitalize;
 }
 

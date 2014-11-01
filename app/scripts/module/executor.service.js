@@ -26,11 +26,11 @@ angular.module('tatool.module')
           runModule();
         }, function(error) {
           $log.error(error);
-          obj.stopModule(false);
+          obj.stopModule(false, error);
         });
       }, function(error) {
         $log.error(error);
-        obj.stopModule(false);
+        obj.stopModule(false, error);
       });
       
     };
@@ -47,7 +47,7 @@ angular.module('tatool.module')
     };
 
     // Stop a module and return to home 
-    obj.stopModule = function(sessionComplete) {
+    obj.stopModule = function(sessionComplete, error) {
       $log.debug('Stop Module');
 
       // make sure we cancel all timers initiated by the executor
@@ -69,18 +69,20 @@ angular.module('tatool.module')
 
       // save module information and return home
       try{
-        moduleService.saveModule().then(exitModule);
+        moduleService.saveModule().then(function() {
+          exitModule(error);
+        });
       } catch(exception) {
-        exitModule();
+        exitModule(exception);
       }
     };
 
     function moduleLoaded() {
-      parent.postMessage('moduleLoaded', '*');
+      parent.postMessage({ type: 'moduleLoaded', errorMessage: '' }, '*');
     }
 
-    function exitModule() {
-      parent.postMessage('moduleExit', '*');
+    function exitModule(error) {
+      parent.postMessage({ type: 'moduleExit', errorMessage: error }, '*');
     }
 
     // Updating the elementStack by processing Executables or Selectors

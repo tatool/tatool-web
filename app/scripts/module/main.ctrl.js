@@ -12,7 +12,6 @@ angular.module('tatool.module')
     var moduleId = $window.sessionStorage.getItem('moduleId');
     var mode = $window.sessionStorage.getItem('mode');
     $window.sessionStorage.removeItem('moduleId');
-    $window.sessionStorage.removeItem('mode');
 
     $log.debug('Running module (' + mode +'): ' + moduleId);
 
@@ -75,7 +74,7 @@ angular.module('tatool.module')
     if (moduleId) {
       moduleDataService.openModulesDB(userService.getUserName(), mode,
         function() {
-          trialDataService.openTrialsDB(userService.getUserName(), loadModule);
+          trialDataService.openTrialsDB(userService.getUserName(), mode, loadModule);
         });
     } else {
       executor.stopModule(false);

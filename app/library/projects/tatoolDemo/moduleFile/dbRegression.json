@@ -1,0 +1,25 @@
+{
+    "name": "DB Regression",
+    "author": "Tatool",
+    "label": "dbRegression",
+    "projectUrl": "/library/projects/tatoolDemo/",
+    "allowEscapeKey" : true,
+    "export" : [ 
+        { "mode": "upload", "auto": false, "target": "uploads/abc/" }, 
+        { "mode": "remote", "auto": false, "target": "http://www.tatool.ch/tatoolweb/upload.php" },
+        { "mode": "download" } ],
+    "moduleHierarchy": {
+    	"tatoolType": "List",
+        "iterator": { "customType" : "ListIterator", "numIterations" : "1000" },
+        "handlers": [ ],
+    	"children": 
+    		[
+                {
+                    "tatoolType": "Executable",
+                    "customType": "dbRegression",
+                    "name": "regressionTask",
+                    "blankInterval" : "10"
+                }
+    		]
+    }
+}

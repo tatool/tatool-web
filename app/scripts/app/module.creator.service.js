@@ -38,7 +38,7 @@ angular.module('tatool.app')
     };
 
     // install a module from the repository
-    creator.loadRepositoryModule = function(module) {
+    creator.loadOnlineModule = function(module) {
       var deferred = $q.defer();
       creator.createModule(deferred, module);
       return deferred.promise;
@@ -61,33 +61,24 @@ angular.module('tatool.app')
           elementNr = 0;
           validateDefinition(moduleDefinition);
 
+
           if (!isValid) {
             deferred.reject('Validation of module file failed. <br><br><b>' + validationResult + '</b>');
           } else {
             // create module object
-            var newModule = new Module(moduleDefinition.id);
+            var newModule = new Module(uuid());
             newModule.setModuleName(moduleDefinition.name);
             newModule.setModuleAuthor(moduleDefinition.author);
-            newModule.setModuleVersion(moduleDefinition.version);
-            newModule.setModulePackagePath(moduleDefinition.packagePath);
             newModule.setModuleDefinition(moduleDefinition);
+            newModule.setModuleLabel(moduleDefinition.label);
+            newModule.setProjectUrl(moduleDefinition.projectUrl);
 
             // store module
-            moduleDataService.getModule(newModule.moduleId).then(
-              function(data) {
-                if (data) {
-                  deferred.reject('The module with the id <b>\'' + newModule.moduleId + '\'</b> already exists.');
-                } else {
-                  moduleDataService.addModule(newModule).then(
-                    function() {
-                      deferred.resolve(newModule);
-                    }, function(error) {
-                      deferred.reject(error);
-                    });
-                }
+            moduleDataService.addModule(newModule).then( function() {
+                deferred.resolve(newModule);
               }, function(error) {
                 deferred.reject(error);
-              });
+            });
           }
         } else {
           deferred.reject('Not a proper JSON file');
@@ -102,11 +93,11 @@ angular.module('tatool.app')
 
     // Basic validation of required properties for the module definition
     function validateDefinition(definition) {
-      if (!('id' in definition)) {
-        validationMessage('Missing property \'id\' on module definition.', null, definition);
+      if (!('name' in definition)) {
+        validationMessage('Missing property \'name\' on module definition.', null, definition);
       }
-      if (!('packagePath' in definition)) {
-        validationMessage('Missing property \'packagePath\' on module definition.', null, definition);
+      if (!('moduleHierarchy' in definition)) {
+        validationMessage('Missing property \'moduleHierarchy\' on module definition.', null, definition);
       }
       validateHierarchy(definition.moduleHierarchy);
     }

@@ -1,68 +1,66 @@
 'use strict';
-/* global IDBStore */
 
 angular.module('tatool')
-  .factory('userDataService', ['$log', '$q', function ($log, $q) {
+  .factory('userDataService', ['$log', '$q', '$http', function ($log, $q, $http) {
     $log.debug('UserDataService: initialized');
 
     var data = {};
 
-    var usersDBready = false;
-
     // initialize user db
     data.openUsersDB = function(callback) {
-      if (usersDBready) {
-        if (callback !== null) {
-          callback();
-        }
-      } else {
-        data.usersDB = new IDBStore({
-          dbVersion: 1,
-          storePrefix: '',
-          storeName: 'tatool_u',
-          keyPath: 'userName',
-          autoIncrement: false,
-          onStoreReady: function(){
-            $log.debug('Users store ready!');
-            usersDBready = true;
-            if (callback !== null) {
-              callback();
-            }
-          }
-        });
+      // not required for remote
+      if (callback !== null) {
+        callback();
       }
     };
 
-    // get a user by its userName
-    data.getUser = function(userName) {
+    // get all users
+    data.getUsers = function () {
       var deferred = $q.defer();
 
-      var userNameHash = Sha1.hash(userName);
-
-      data.usersDB.get(userNameHash,
-        function(data) {
+      $http.get('/api/admin/users')
+        .success(function (data) {
           deferred.resolve(data);
-        }, function() {
-          deferred.reject('Login failed. There seems to be an issue with the login process.');
+        })
+        .error(function (error) {
+          $log.error(error);
+          deferred.reject(error.message);
         });
 
       return deferred.promise;
     };
 
-    // add a new user
+    // update user
     data.addUser = function(user) {
       var deferred = $q.defer();
 
-      user.userName = Sha1.hash(user.userName);
-      user.userPassword = Sha1.hash(user.userPassword);
-      user.roles = [];
-      user.roles.push('user');
+      var userJson = JSON.parse(JSON.stringify(user));
 
-      data.usersDB.put(user,
-        function(data) {
+      $http.post('/api/admin/users/' + user._id, userJson)
+        .success(function (data) {
+          if (data === 'null') {
+            data = null;
+          }
           deferred.resolve(data);
-        }, function() {
-          deferred.reject('Login failed. There seems to be an issue with the login process.');
+        })
+        .error(function (error) {
+          deferred.reject(error.message);
+        });
+      
+      return deferred.promise;
+    };
+
+    // get a user by its userName
+    data.deleteUser = function(user) {
+      var deferred = $q.defer();
+
+      $http.delete('/api/admin/users/' + user._id)
+        .success(function (data) {
+          deferred.resolve(data);
+        })
+        .error(function (error) {
+          $log.error(error);
+          deferred.reject(error.message);
         });
 
       return deferred.promise;

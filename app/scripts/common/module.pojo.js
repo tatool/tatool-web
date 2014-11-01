@@ -4,6 +4,8 @@ var Module = function(moduleId) {
   /*jshint +W079 */
   this.moduleId = moduleId;
   this.moduleName = '';
+  this.moduleLabel = '';
+  this.projectUrl = '';
   this.moduleAuthor = '';
   this.moduleVersion = '';
   this.moduleProperties = {};
@@ -17,6 +19,14 @@ var Module = function(moduleId) {
 // get the module name
 Module.prototype.getName = function() {
   return this.moduleName;
+};
+
+Module.prototype.getLabel = function() {
+  return this.moduleLabel;
+};
+
+Module.prototype.getProjectUrl = function() {
+  return this.projectUrl;
 };
 
     // get the module ID
@@ -55,6 +65,16 @@ Module.prototype.getModuleType = function() {
 // sets the module name
 Module.prototype.setModuleName = function(moduleName) {
   this.moduleName = moduleName;
+};
+
+// sets the module label
+Module.prototype.setModuleLabel = function(moduleLabel) {
+  this.moduleLabel = moduleLabel;
+};
+
+// sets the project url for the module
+Module.prototype.setProjectUrl = function(projectUrl) {
+  this.projectUrl = projectUrl;
 };
 
 // sets the module author

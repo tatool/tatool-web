@@ -1,16 +1,16 @@
 'use strict';
 
 angular.module('tatool.app')
-  .factory('exportService', ['$log', '$q', 'moduleDataService', 'trialDataService', 'cfgApp', 'userService', function ($log, $q, moduleDataService, trialDataService, cfgApp, userService) {
+  .factory('exportService', ['$log', '$q', '$http', 'moduleDataService', 'trialDataService', 'cfgApp', 'userService', function ($log, $q, $http, moduleDataService, trialDataService, cfgApp, userService) {
     $log.debug('ExportService: initialized');
 
     var exporter = {};
 
     // get all trials of a module
-    exporter.getAllTrials = function(moduleId) {
+    var getAllTrials = function(moduleId) {
       var deferred = $q.defer();
 
-      trialDataService.getAllTrials(userService.getUserName(), moduleId).then(
+      trialDataService.getAllTrials(userService.getUserName(), moduleId, exporter.api).then(
         function(data) {
           if (data !== undefined && data.length > 0) {
             exportData(moduleId, data).then(
@@ -28,10 +28,10 @@ angular.module('tatool.app')
     };
 
     // get trials of a module defined by session Id
-    exporter.getTrials = function(moduleId, startSessionId, endSessionId) {
+    var getTrials = function(moduleId, startSessionId, endSessionId) {
       var deferred = $q.defer();
 
-      trialDataService.getTrials(userService.getUserName(), moduleId, startSessionId, endSessionId).then( function(data) {
+      trialDataService.getTrials(userService.getUserName(), moduleId, startSessionId, endSessionId, exporter.api).then( function(data) {
         if (data !== undefined && data.length > 0) {
           exportData(moduleId, data).then(
             function(csv) {
@@ -80,23 +80,6 @@ angular.module('tatool.app')
       });
       return sessionProperties;
     };
-
-    function exportData(moduleId, trials) {
-      var deferred = $q.defer();
-
-      moduleDataService.getModule(moduleId).then(
-        function(response) {
-          // prepare module properties
-          var moduleProperties = getModuleProperties(response);
-          var sessionProperties = getSessionProperties(response);
-
-          var csv = convertToCsv(trials, moduleProperties, sessionProperties);
-          deferred.resolve(csv);
-        }, function(error) {
-          deferred.reject(error);
-        });
-      return deferred.promise;
-    }
 
     function convertToCsv(allTrials, moduleProperties, sessionProperties) {
       var output = '';
@@ -207,6 +190,192 @@ angular.module('tatool.app')
       }
       return -1;
     }
+
+    function exportData(moduleId, trials) {
+      var deferred = $q.defer();
+
+      moduleDataService.getModule(moduleId).then(
+        function(response) {
+          // prepare module properties
+          var moduleProperties = getModuleProperties(response);
+          var sessionProperties = getSessionProperties(response);
+
+          console.log(trials);
+          var csv = convertToCsv(trials, moduleProperties, sessionProperties);
+          deferred.resolve(csv);
+        }, function(error) {
+          deferred.reject(error);
+        });
+      return deferred.promise;
+    }
+
+
+
+
+    /** ------------------
+      Tatool Export Modes
+    --------------------**/
+
+    // get export of data
+    var downloadExport = function(module) {
+      var deferred = $q.defer();
+      getAllTrials(module.moduleId).then(function(response) {
+        deferred.resolve(response);
+      }, function(error) {
+        deferred.reject(error);
+      });
+      return deferred.promise;
+    };
+
+    // run local export to node.js host
+    var localExport = function(module, exportTarget) {
+      var deferred = $q.defer();
+      var sessions = [];
+
+      // select sessions where localExport has not been done yet
+      angular.forEach(module.sessions, function(session) {
+        if (session.localExportDone === undefined || session.localExportDone !== true) {
+          sessions.push(session);
+        }
+      });
+
+      if (sessions.length > 0) {
+        // run local export and upload for every session
+        async.eachSeries(sessions, localUpload.bind(null, module.moduleId, exportTarget), function(err) {
+          if (err) {
+            $log.error(err);
+            deferred.reject(err);
+          } else {
+            deferred.resolve(sessions.length);
+          }
+        });
+      } else {
+        deferred.resolve(0);
+      }
+      return deferred.promise;
+    };
+
+    var localUpload = function(moduleId, exportTarget, session, callback) {
+      getTrials(moduleId, session.sessionId).then(function(data) {
+        if (data.length !== 0) {
+          var json = { 'trialData': data, 'target': exportTarget };
+          var api = '/api/' + exporter.api + '/modules/' + moduleId + '/trials/' + session.sessionId;
+
+          $http.post(api, json).then(function() {
+            session.localExportDone = true;
+            callback();
+          }, function(error) {
+            callback(error.message);
+          });
+        } else {
+          // no data to export
+          session.localExportDone = true;
+          callback();
+        }
+      }, function(error) {
+        callback(error.message);
+      });
+    };
+
+    // run remote export to a different endpoint (e.g. php script)
+    var remoteExport = function(module, exportTarget) {
+      var deferred = $q.defer();
+      var sessions = [];
+
+      // select sessions where localExport has not been done yet
+      angular.forEach(module.sessions, function(session) {
+        if (session.remoteExportDone === undefined || session.remoteExportDone !== true) {
+          sessions.push(session);
+        }
+      });
+
+      if (sessions.length > 0) {
+        // run local export and upload for every session
+        async.eachSeries(sessions, remoteUpload.bind(null, module.moduleId, exportTarget), function(err) {
+          if (err) {
+            $log.error(err);
+            deferred.reject(err);
+          } else {
+            deferred.resolve(sessions.length);
+          }
+        });
+      } else {
+        deferred.resolve(0);
+      }
+
+      return deferred.promise;
+    };
+
+    var remoteUpload = function(moduleId, exportTarget, session, callback) {
+      getTrials(moduleId, session.sessionId).then(function(data) {
+        if (data.length !== 0) {
+          var json = { 'trialData': data, 'moduleId': moduleId, 'sessionId': session.sessionId };
+          var api = exportTarget;
+
+          $http.post(api, json).then(function() {
+            session.remoteExportDone = true;
+            callback();
+          }, function(error) {
+            callback(error.message);
+          });
+        } else {
+          // no data to export
+          session.remoteExportDone = true;
+          callback();
+        }
+      }, function(error) {
+        callback(error.message);
+      });
+    };
+
+    // trigger different export modules
+    exporter.exportModuleData = function(module, exportMode, exportTarget, mode) {
+      var deferred = $q.defer();
+
+      exporter.api = mode;
+
+      switch (exportMode) {
+        case 'upload':
+          localExport(module, exportTarget).then(function(data) {
+            if (data > 0) {
+              moduleDataService.addModule(module).then(function() {
+                deferred.resolve();
+              });
+            } else {
+              deferred.resolve();
+            }
+          }, function(error) {
+            deferred.reject(error);
+          });
+          break;
+        case 'remote':
+          remoteExport(module, exportTarget).then(function(data) {
+            if (data > 0) {
+              moduleDataService.addModule(module).then(function() {
+                deferred.resolve();
+              });
+            } else {
+              deferred.resolve();
+            }
+          }, function(error) {
+            deferred.reject(error);
+          });
+          break;
+        case 'download':
+          downloadExport(module).then(function(data) {
+            deferred.resolve();
+            var filename = module.moduleId + '_' + userService.getUserName() +  '.csv';
+            download(data, filename, 'text/plain'); // triggers file download (has issues on Safari)
+          }, function(error) {
+            deferred.reject(error);
+          });
+          break;
+        default:
+          deferred.reject('No exporter found.');
+      }
+
+      return deferred.promise;
+    };
 
     return exporter;
 

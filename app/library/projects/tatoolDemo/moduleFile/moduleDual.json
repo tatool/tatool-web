@@ -1,0 +1,87 @@
+{
+    "name": "Dual Element",
+    "author": "University of Zurich",
+    "label": "moduleDual",
+    "projectUrl": "/library/projects/tatoolDemo/",
+    "allowEscapeKey" : true,
+    "export" : [ 
+        { "mode": "upload", "auto": false }, 
+        { "mode": "remote", "auto": false, "target": "http://www.tatool.ch/tatoolweb/upload.php" },
+        { "mode": "download" } ],
+    "moduleHierarchy": {
+    	"tatoolType": "List",
+        "iterator": { "customType" : "ListIterator", "numIterations" : "1" },
+        "handlers": [ { "customType" : "levelHandler", "name" : "level" }, { "customType" : "trialCountHandler", "name" : "counter" } ],
+    	"children": 
+    		[
+                {
+                    "tatoolType": "Executable",
+                    "customType": "tatoolCountdown",
+                    "name": "countdown"
+                },
+                {
+                    "tatoolType": "Executable",
+                    "customType": "tatoolInstruction",
+                    "name": "instructions",
+                    "blankInterval" : "600",
+                    "pages": [
+                        "complexNum.inst.01.html" ,
+                        "complexNum.inst.02.html"
+                    ]
+                },
+                {
+                    "tatoolType": "Dual",
+                    "iterator": { "customType" : "ListIterator", "numIterations" : "2" },
+                    "handlers": [  ],
+                    "children": 
+                        {
+                            "primary" : {
+                                "tatoolType": "Executable",
+                                "customType": "complexNumExecutable",
+                                "name": "first",
+                                "blankInterval" : "600",
+                                "status": {
+                                    "levelPanel": true,
+                                    "feedbackPanel": true,
+                                    "trialCountPanel": true,
+                                    "timerPanel": true
+                                }
+                            }, 
+                            "secondary" : {
+                                "tatoolType": "Executable",
+                                "customType": "stroopExecutable",
+                                "name": "second",
+                                "blankInterval" : "600",
+                                "status": {
+                                    "levelPanel": true,
+                                    "feedbackPanel": true,
+                                    "trialCountPanel": true,
+                                    "timerPanel": true
+                                }
+                            }
+                        }
+                },
+                {
+                    "tatoolType": "List",
+                    "iterator": { "customType" : "ListIterator", "numIterations" : "2" },
+                    "handlers": [  ],
+                    "children": 
+                        [
+                            {
+                                "tatoolType": "Executable",
+                                "customType": "stroopExecutable",
+                                "name": "third",
+                                "fixationInterval" : "500",
+                                "blankInterval" : "600",
+                                "status": {
+                                    "levelPanel": true,
+                                    "feedbackPanel": true,
+                                    "trialCountPanel": true,
+                                    "timerPanel": true
+                                }
+                            }
+                        ]
+                }
+    		]
+    }
+}

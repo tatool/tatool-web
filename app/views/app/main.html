@@ -6,30 +6,24 @@
   <!-- INSTALLED -->
   <div class="container">
     <accordion>
-      <accordion-group is-open="status.installed">
+      <accordion-group is-open="accordionStatus.installed">
         <accordion-heading>
           INSTALLED
-          <i class="glyphicon" ng-class="{'glyphicon-chevron-down': status.installed, 'glyphicon-chevron-right': !status.installed}"></i>
-          <div class="fileUpload btn btn-tatool pull-right">
-            Add Module
-            <form id="addModuleForm">
-              <input type="file" class="upload" custom-on-change="addModule" ng-click="$event.stopPropagation()"/>
-            </form>
-          </div>
+          <i class="glyphicon" ng-class="{'glyphicon-chevron-down': accordionStatus.installed, 'glyphicon-chevron-right': !accordionStatus.installed}"></i>
         </accordion-heading>
         <div id="modules">
           <div class="tile" ng-class="{'tileHighlight': module.moduleId == highlightModuleId}" ng-repeat="module in modules | orderBy:'moduleName'" ng-if="!!modules.length">
-            <div class="icon"><img src="images/app/module_icon_base.png"></div>
+            <div class="icon"><i class="fa fa-play-circle fa-5x"></i> <span ng-if="module.maxSessionId">Sessions: <b>{{module.maxSessionId}}</b></span></div>
             <div class="content">
               <h2>{{module.moduleName}}</h2>
               <h3>{{module.moduleAuthor}}</h3>
               <div class="buttonbar">
                 <div class="btn btn-tatool" ng-click="startModule(module)"><i class="fa fa-play-circle"></i> Start</div>
-                <div id="dropdownMenu1" class="btn-group dropdown" ng-if="module.moduleDefinition.export && module.moduleDefinition.export.length > 0">
-                  <div class="btn btn-tatool-off dropdown-toggle">Export <span class="caret"></span></div>
-                  <ul class="dropdown-menu" role="menu" id="dropdownMenu1" >
+                <div id="dropdownExport" class="btn-group dropdown" ng-if="module.moduleDefinition.export && module.moduleDefinition.export.length > 0">
+                  <button id="dropdownExportButton" class="btn btn-tatool-off dropdown-toggle">Export <span class="caret"></span></button>
+                  <ul class="dropdown-menu" role="menu" id="dropdownExport" >
                     <li class="exporterName" ng-click="doExport($event, module, exporter.mode, exporter.target)" ng-repeat="exporter in module.moduleDefinition.export | filter:filterExporter | orderBy:'mode'">
-                      <a href="#">{{exporter.mode}}</a>
+                      <a ui-sref="home">{{exporter.mode}}</a>
                     </li>
                   </ul>
                 </div>
@@ -50,10 +44,10 @@
   <!-- PUBLIC -->
   <div class="container">
     <accordion>
-      <accordion-group is-open="status.public">
+      <accordion-group is-open="accordionStatus.public">
         <accordion-heading ng-class="'tatool-panel-heading'">
           PUBLIC 
-          <i class="glyphicon" ng-class="{'glyphicon-chevron-down': status.public, 'glyphicon-chevron-right': !status.public}"></i>
+          <i class="glyphicon" ng-class="{'glyphicon-chevron-down': accordionStatus.public, 'glyphicon-chevron-right': !accordionStatus.public}"></i>
           <form class="form-inline pull-right" role="form">
             <div class="form-group has-feedback">
               <input type="text" class="form-control" id="searchRepo" ng-model="query" ng-change="searchRepo()" ng-click="$event.stopPropagation()">
@@ -63,7 +57,7 @@
         </accordion-heading>
         <div id="modules">
           <div class="tile" ng-class="{'tileHighlight': module.moduleId == highlightModuleId}" ng-repeat="module in repository | orderBy:'created_at':true | limitTo:quantity" ng-if="!!repository.length">
-            <div class="icon"><img src="images/app/module_icon_base.png"></div>
+            <div class="icon"><i class="fa fa-globe fa-5x"></i></div>
             <div class="content">
               <h2>{{module.moduleName}}</h2>
               <h3>{{module.moduleAuthor}}</h3>

@@ -3,22 +3,16 @@
 /* global screenfull */
 
 angular.module('tatool.app')
-  .controller('DeveloperCtrl', ['$scope', '$q', '$timeout', '$window', '$rootScope', '$location',  '$state', '$http', '$log', 'moduleDataService', 'cfg', 'cfgApp', 'authService', 'userService', 'moduleCreatorService', 'exportService', 'spinnerService',
-    function ($scope, $q, $timeout, $window, $rootScope, $location, $state, $http, $log, moduleDataService, cfg, cfgApp, authService, userService, moduleCreatorService, exportService, spinnerService) {
-
-    // setting contants
-    $scope.imgPath = cfgApp.IMG_PATH;
+  .controller('DeveloperCtrl', ['$scope', '$q', '$timeout', '$window', '$rootScope', '$location',  '$state', '$http', '$log', 'moduleDataService', 'cfg', 'authService', 'userService', 'moduleCreatorService', 'exportService', 'spinnerService',
+    function ($scope, $q, $timeout, $window, $rootScope, $location, $state, $http, $log, moduleDataService, cfg, authService, userService, moduleCreatorService, exportService, spinnerService) {
 
     $scope.modules = [];
 
-    $scope.status = {
+    $scope.accordionStatus = {
       'develop': true
     };
 
     function startSpinner(text) {
-      if (!text) {
-        text = 'Please wait...';
-      }
       spinnerService.spin('loadingSpinner', text);
     }
 
@@ -34,7 +28,7 @@ angular.module('tatool.app')
           $scope.modules.push(data[i]);
         }
         if ($scope.modules.length > 0) {
-          $scope.status.develop = true;
+          $scope.accordionStatus.develop = true;
         }
       }, function(error) {
         bootbox.dialog({
@@ -64,7 +58,7 @@ angular.module('tatool.app')
       function onModuleLoaded(result) {
         stopSpinner();
         $scope.modules.push(result);
-        $scope.status.develop = true;
+        $scope.accordionStatus.develop = true;
         $scope.highlightModuleId = result.moduleId;
         $timeout(function() { $scope.highlightModuleId = null; }, 1000);
       }
@@ -91,15 +85,9 @@ angular.module('tatool.app')
       $event.stopPropagation();
       startSpinner();
 
-      module.moduleType = moduleType;
-
-      moduleDataService.addModule(module).then(function() {
-        moduleDataService.publishModule(module).then(function() {
-          stopSpinner();
-        }, function(err) {
-          $log.error(err);
-          stopSpinner();
-        });
+      moduleDataService.publishModule(module.moduleId, moduleType).then(function() {
+        module.moduleType = moduleType;
+        stopSpinner();
       }, function(err) {
         $log.error(err);
         stopSpinner();
@@ -111,14 +99,9 @@ angular.module('tatool.app')
       $event.stopPropagation();
       startSpinner();
 
-      moduleDataService.unpublishModule(module).then(function() {
+      moduleDataService.unpublishModule(module.moduleId).then(function() {
         module.moduleType = '';
-        moduleDataService.addModule(module).then(function() {
-          stopSpinner();
-        }, function(err) {
-          $log.error(err);
-          stopSpinner();
-        });
+        stopSpinner();
       }, function(err) {
         $log.error(err);
         stopSpinner();
@@ -129,8 +112,9 @@ angular.module('tatool.app')
     $scope.deleteModule = function(module) {
 
       function runDelete() {
+        // if published then unpublish first
         if (module.moduleType === 'public' || module.moduleType === 'private') {
-          moduleDataService.unpublishModule(module).then(function() {
+          moduleDataService.unpublishModule(module.moduleId).then(function() {
             module.moduleType = '';
             moduleDataService.deleteModule(userService.getUserName(), module.moduleId).then(function() {
               onModuleDelete();
@@ -181,6 +165,20 @@ angular.module('tatool.app')
         });
     };
 
+    // function to export data
+    $scope.doExport = function($event, module, exportMode, exportTarget) {
+      $('#dropdownExport').removeClass('open');
+      $('#dropdownExportButton').dropdown();
+
+      startSpinner('Exporting data. Please wait...');
+      exportService.exportModuleData(module, exportMode, exportTarget, cfg.APP_MODE_DEVELOPER).then(function() {
+        stopSpinner();
+      }, function(err) {
+        $log.error(err);
+        stopSpinner();
+      });
+    };
+
     // function to initiate start of a module and handover to tatool.module
     $scope.startModule = function(module) {
       // set the moduleId as a session property
@@ -192,9 +190,8 @@ angular.module('tatool.app')
       if (fullscreen && screenfull.enabled) {
         screenfull.request();
       }
-      // set the module Url as a session property
-      var moduleUrl = module.modulePackagePath + '/index.html';
-      $state.go('package', {packagePath: moduleUrl}, {location: false});
+      // start moduleRunner
+      $state.go('run');
     };
 
 

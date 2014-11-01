@@ -1,6 +1,6 @@
 // server
 var express = require('express');
-var compress = require('compression');
+//var compress = require('compression');
 var path = require('path');
 var bodyParser = require('body-parser');
 var logger = require('morgan');
@@ -16,9 +16,9 @@ app.set('jwt_secret', process.env.JWT_SECRET || 'secret');
 
 // dependencies
 var userController = require('./controllers/user');
-var userModuleController = require('./controllers/userModule');
-var repoModuleController = require('./controllers/repository');
-var developerModuleController = require('./controllers/developerModule');
+var mainCtrl = require('./controllers/mainCtrl');
+var repositoryCtrl = require('./controllers/repositoryCtrl');
+var developerCtrl = require('./controllers/developerCtrl');
 var authController = require('./controllers/auth')
 var adminController = require('./controllers/admin');
 
@@ -29,7 +29,7 @@ mongoose.connect( process.env.MONGOLAB_URI || 'mongodb://localhost/tatool-web' )
 app.use(logger('dev'));
 
 //compression
-app.use(compress());
+//app.use(compress());
 
 // parse json and urlencoded body
 app.use(bodyParser.json( { limit: 1048576 })); // allow upload of 1MB
@@ -42,24 +42,25 @@ app.use(passport.initialize());
 var router = express.Router();
 
 // User Modules
-router.post('/user/modules/:moduleId', userModuleController.addModule);
-router.get('/user/modules/:moduleId', userModuleController.getModule);
-router.delete('/user/modules/:moduleId', userModuleController.removeModule);
-router.get('/user/modules', userModuleController.getModules);
-router.post('/user/modules/:moduleId/trials/:sessionId', userModuleController.addTrials);
+router.post('/user/modules/:moduleId/install', mainCtrl.install);
+router.post('/user/modules/:moduleId', mainCtrl.save);
+router.get('/user/modules', mainCtrl.getAll);
+router.get('/user/modules/:moduleId', mainCtrl.get);
+router.delete('/user/modules/:moduleId', mainCtrl.remove);
+router.post('/user/modules/:moduleId/trials/:sessionId', mainCtrl.addTrials);
 
 // Repository Modules
-router.get('/user/repository', repoModuleController.getRepositoryEntries);
-router.get('/user/repository/:moduleId', repoModuleController.getRepositoryEntry);
+router.get('/user/repository', repositoryCtrl.getAll);
+router.get('/user/repository/:moduleId', repositoryCtrl.get);
 
 // Developer Modules
-router.post('/developer/modules/:moduleId', developerModuleController.addModule);
-router.get('/developer/modules/:moduleId', developerModuleController.getModule);
-router.delete('/developer/modules/:moduleId', developerModuleController.removeModule);
-router.get('/developer/modules', developerModuleController.getModules);
-router.post('/developer/modules/:moduleId/trials/:sessionId', developerModuleController.addTrials);
-router.post('/developer/modules/:moduleId/publish', developerModuleController.publishModule);
-router.get('/developer/modules/:moduleId/unpublish', developerModuleController.unpublishModule);
+router.post('/developer/modules/:moduleId', developerCtrl.add);
+router.get('/developer/modules', developerCtrl.getAll);
+router.get('/developer/modules/:moduleId', developerCtrl.get);
+router.delete('/developer/modules/:moduleId', developerCtrl.remove);
+router.post('/developer/modules/:moduleId/publish/:moduleType', developerCtrl.publish);
+router.get('/developer/modules/:moduleId/unpublish', developerCtrl.unpublish);
+router.post('/developer/modules/:moduleId/trials/:sessionId', developerCtrl.addTrials); // REWORK UPLOAD
 
 // Admin
 router.get('/admin/users', adminController.getUsers);

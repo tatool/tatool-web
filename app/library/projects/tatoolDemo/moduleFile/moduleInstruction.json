@@ -1,0 +1,45 @@
+{
+    "name": "Instructions",
+    "label": "instructions",
+    "projectUrl": "/library/projects/tatoolDemo/",
+    "moduleHierarchy": {
+    	"tatoolType": "List",
+        "iterator": { "customType" : "ListIterator", "numIterations" : "3" },
+        "handlers": [ { "customType" : "levelHandler", "name" : "level" } ],
+    	"children": 
+    		[
+    			{
+    				"tatoolType": "Executable",
+    				"customType": "tatoolInstruction",
+                    "name": "instruction1",
+                    "blankInterval" : "600",
+                    "pages": [
+                        "stroop.inst.01.html" ,
+                        "complexNum.inst.01.html" ,
+                        "complexNum.inst.02.html" ,
+                        "complexNum.inst.01.html" ,
+                        "complexNum.inst.02.html" ,
+                        "complexNum.inst.01.html" ,
+                        "complexNum.inst.02.html" ,
+                        "complexNum.inst.01.html"
+                    ],
+                    "status": {
+                                    "levelPanel": true,
+                                    "feedbackPanel": true,
+                                    "trialCountPanel": true,
+                                    "timerPanel": true
+                                }
+    			}, 
+    			{
+                    "tatoolType": "Executable",
+                    "customType": "tatoolInstruction",
+                    "name": "instruction2",
+                    "blankInterval" : "600",
+                    "pages": [
+                        "complexNum.inst.01.html" ,
+                        "complexNum.inst.02.html"
+                    ]
+                } 
+    		]
+    }
+}

@@ -1,0 +1,22 @@
+{
+    "name": "Tatool Grid",
+    "author": "Andre Locher",
+    "label": "tatoolGrid",
+    "projectUrl": "/library/projects/tatoolDemo/",
+    "fullscreen": false,
+    "allowEscapeKey": true,
+    "moduleHierarchy": {
+    	"tatoolType": "List",
+        "iterator": { "customType" : "ListIterator", "numIterations" : "3" },
+        "handlers": [ { "customType" : "levelHandler", "name" : "level" } ],
+    	"children": 
+    		[
+                {
+                    "tatoolType": "Executable",
+                    "customType": "tatoolGridExecutable",
+                    "name": "tatoolGrid",
+                    "blankInterval" : "250"
+                }
+    		]
+    }
+}

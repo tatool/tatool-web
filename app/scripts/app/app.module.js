@@ -63,10 +63,10 @@ angular.module('tatool.app', ['tatool', 'tatool.auth', 'tatool.common'])
             }
           }]
         }
-      }).state('package', {
-        url: '/package/:packagePath',
-        templateUrl: 'views/app/package.html',
-        controller: 'PackageCtrl',
+      }).state('run', {
+        url: '/run',
+        templateUrl: 'views/app/run.html',
+        controller: 'RunCtrl',
         resolve: {
           auth: ['$q', '$state', 'authService', 'userService', function($q, $state, authService, userService) {
             if (authService.isAuthenticated()) {
@@ -74,9 +74,6 @@ angular.module('tatool.app', ['tatool', 'tatool.auth', 'tatool.common'])
             } else {
               return $q.reject('Error!');
             }
-          }],
-          packagePath: ['$stateParams', function($stateParams) {
-            return $stateParams.packagePath;
           }]
         }
       });

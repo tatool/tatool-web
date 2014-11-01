@@ -6,11 +6,10 @@ var tatool = angular.module('tatool', ['ui.bootstrap', 'ui.router'])
     APP_MODE_USER: 'user',
     APP_MODE_DEVELOPER: 'developer',
   })
-  .config(['$stateProvider', '$urlRouterProvider', '$provide', '$controllerProvider', 'cfg', 'moduleDataServiceProvider', 'userDataServiceProvider',
-    function ($stateProvider, $urlRouterProvider, $provide, $controllerProvider, cfg, moduleDataServiceProvider, userDataServiceProvider) {
-    
-    moduleDataServiceProvider.setProvider(cfg.MODE);
-    userDataServiceProvider.setProvider(cfg.MODE);
+  .config(['$stateProvider', '$urlRouterProvider', '$provide', '$controllerProvider', 'cfg',
+    function ($stateProvider, $urlRouterProvider, $provide, $controllerProvider, cfg) {
+
+    //userDataServiceProvider.setProvider(cfg.MODE);
 
     tatool.controller = $controllerProvider.register;
     tatool.factory = $provide.factory;
@@ -34,7 +33,7 @@ var tatool = angular.module('tatool', ['ui.bootstrap', 'ui.router'])
 
   }]);
 
-// User Data Service Provider
+/*
 angular.module('tatool').provider('userDataService', function() {
   this.setProvider = function(provider) {
     this.authProvider = provider;
@@ -53,23 +52,4 @@ angular.module('tatool').provider('userDataService', function() {
     throw 'No userDataService available';
   }];
 });
-
-// Module Data Service Provider
-angular.module('tatool').provider('moduleDataService', function() {
-  this.setProvider = function(provider) {
-    this.authProvider = provider;
-  };
-    
-  this.$get = ['moduleDataLocalService', 'moduleDataRemoteService', function(moduleDataLocalService, moduleDataRemoteService) {
-
-    if(this.authProvider === 'LOCAL') {
-      return moduleDataLocalService;
-    }
-        
-    if(this.authProvider === 'REMOTE') {
-      return moduleDataRemoteService;
-    }
-        
-    throw 'No moduleDataService available';
-  }];
-});
+*/

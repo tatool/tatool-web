@@ -2,11 +2,12 @@
 /* global IDBStore */
 
 angular.module('tatool')
-  .factory('trialDataService', ['$log', '$q', function ($log, $q) {
+  .factory('trialDataService', ['$log', '$q', 'cfg', function ($log, $q, cfg) {
     $log.debug('TrialDataService: initialized');
 
     var data = {};
 
+    var dbMode = '';
     var trialsDBready = false;
 
     data.closeTrialsDB = function() {
@@ -14,18 +15,20 @@ angular.module('tatool')
     };
 
     // initialize trials db
-    data.openTrialsDB = function(userName, callback) {
-      if (trialsDBready) {
+    data.openTrialsDB = function(userName, mode, callback) {
+      if (trialsDBready && mode === dbMode) {
         if (callback !== null) {
           callback();
         }
       } else {
+        dbMode = mode;
         var prefix = Sha1.hash(userName);
+        var suffix = (dbMode === cfg.APP_MODE_DEVELOPER) ? 'd' : 'u';
 
         data.trialsDB = new IDBStore({
           dbVersion: 1,
           storePrefix: '',
-          storeName: prefix + '_t',
+          storeName: prefix + '_' + suffix + '_t',
           keyPath: '_id',
           autoIncrement: false,
           onStoreReady: function(){
@@ -40,7 +43,7 @@ angular.module('tatool')
     };
     
     // delete all trials of given module
-    data.deleteModuleTrials = function(userName, moduleId) {
+    data.deleteModuleTrials = function(userName, moduleId, mode) {
       var deferred = $q.defer();
 
       function deleteTrials() {
@@ -59,7 +62,7 @@ angular.module('tatool')
           });
       }
 
-      data.openTrialsDB(userName, deleteTrials);
+      data.openTrialsDB(userName, mode, deleteTrials);
 
       return deferred.promise;
     };
@@ -79,7 +82,7 @@ angular.module('tatool')
     };
 
     // get all trials of current module
-    data.getAllTrials = function(userName, moduleId) {
+    data.getAllTrials = function(userName, moduleId, mode) {
       var deferred = $q.defer();
 
       function queryTrials() {
@@ -103,13 +106,13 @@ angular.module('tatool')
           }, options);
       }
      
-      data.openTrialsDB(userName, queryTrials);
+      data.openTrialsDB(userName, mode, queryTrials);
 
       return deferred.promise;
     };
 
     // get a defined set of trials
-    data.getTrials = function(userName, moduleId, startSessionId, endSessionId) {
+    data.getTrials = function(userName, moduleId, startSessionId, endSessionId, mode) {
       var deferred = $q.defer();
 
       if (!endSessionId) {
@@ -137,7 +140,7 @@ angular.module('tatool')
           }, options);
       }
      
-      data.openTrialsDB(userName, queryTrials);
+      data.openTrialsDB(userName, mode, queryTrials);
 
       return deferred.promise;
     };
