@@ -34,9 +34,9 @@ var Module = new Schema({
       type: String,
       required: false
     },
-    projectUrl: {      // defines the base url of the module to load any resources 
-      type: String,
-      required: false
+    project: {          // defines the project path for resources
+      name: String,   
+      access: String     
     },
 
     // TECHNICAL FIELDS
@@ -51,6 +51,10 @@ var Module = new Schema({
     moduleVersion: {    // automatically incremented when published to repository
       type: String,
       required: true
+    },
+    sessionToken: {     // session token used to access resources
+      type: String,
+      required: false
     },
     created_by: {       // owner of module will be set at time of creation and can't be changed
       type: String,

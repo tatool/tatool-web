@@ -1,6 +1,9 @@
 var passport = require('passport');
 var BasicStrategy = require('passport-http').BasicStrategy;
 var User = require('../models/user');
+var crypto = require('crypto');
+var jwt = require('jsonwebtoken');
+var Q = require('q');
 
 passport.use(new BasicStrategy(
   function(userName, userPassword, callback) {
@@ -65,3 +68,6 @@ exports.getRoles = function(req, res, next) {
     res.status(403).json({ message: 'Unauthorized access!' });
   }
 };
+
+
+

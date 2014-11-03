@@ -2,8 +2,7 @@
 
 angular.module('tatool.module', ['tatool', 'tatool.auth', 'angular-progress-arc'])
   .constant('cfgModule', {
-    MODULE_PROJECT_URL: '/library/projects/tatool/',
-    MODULE_LIBRARY_EXECUTABLE_URL: '/library/executables/',
+    MODULE_DEFAULT_PROJECT: 'tatool',
     MODULE_IMG_PATH: '../../images/module/',
     MODULE_VIEW_PATH: '../../views/module/',
     IMG_PATH: 'images/module/',

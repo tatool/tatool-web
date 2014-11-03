@@ -50,8 +50,8 @@ angular.module('tatool.module')
       return module.getName();
     };
 
-    moduleService.getProjectUrl = function() {
-      return module.getProjectUrl();
+    moduleService.getProject = function() {
+      return module.getProject();
     };
 
     moduleService.getModuleAuthor = function() {

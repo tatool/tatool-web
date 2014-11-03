@@ -16,6 +16,14 @@ angular.module('tatool.module')
       // create new session
       obj.currentSessionId = moduleService.createSession();
 
+      // saving the module back to make sure the new session is registered in case of an error
+      moduleService.saveModule();
+
+      // initialize the module
+      initializeModule();
+    };
+
+    var initializeModule = function() {
       obj.continueModule = true;
 
       // initialize the stack
@@ -32,13 +40,9 @@ angular.module('tatool.module')
         $log.error(error);
         obj.stopModule(false, error);
       });
-      
     };
 
     var runModule = function() {
-      // saving the module back to make sure the new session is registered in case of an error
-      moduleService.saveModule();
-
       // trigger phase change
       broadcastPhaseChange(tatoolPhase.SESSION_START, elementStack.stack);
 

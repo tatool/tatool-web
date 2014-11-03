@@ -21,7 +21,7 @@
         <div id="modules">
 
           <div class="tile tileDev" ng-class="{'tileHighlight': module.moduleId == highlightModuleId}" ng-repeat="module in modules | orderBy:'moduleName'" ng-if="!!modules.length">
-            <div class="icon"><i class="fa fa-cog fa-5x"></i> <span ng-if="module.maxSessionId">Sessions: <b>{{module.maxSessionId}}</b></span></div>
+            <div class="icon"><i class="fa fa-cog fa-4x"></i> <span ng-if="module.maxSessionId">Sessions: <b>{{module.maxSessionId}}</b></span></div>
             <div class="content">
               <h2>{{module.moduleName}}</h2>
               <h3>{{module.moduleAuthor}}</h3>
@@ -52,6 +52,8 @@
 
                 </div>
               </div>
+
+              <!-- Export & Delete-->
               <div class="buttonbar">
                 <div class="btn btn-tatool-off" ng-click="startModule(module)">Start</div>
                 <div id="dropdownExport" class="btn-group dropdown" ng-if="module.moduleDefinition.export && module.moduleDefinition.export.length > 0">
@@ -64,6 +66,8 @@
                 </div>
                 <a ng-click="deleteModule(module)" class="btn btn-tatool-off"><i class="fa fa-trash-o"></i></a>
               </div>
+
+
             </div>
           </div>
 

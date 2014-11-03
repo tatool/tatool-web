@@ -8,11 +8,16 @@ var mongoose = require('mongoose');
 var passport = require('passport');
 var expressJwt = require('express-jwt');
 var jwt = require('jsonwebtoken');
+var favicon = require('serve-favicon');
 
 // server setup
 var app = express();
 app.set('port', process.env.PORT || 3000);
 app.set('jwt_secret', process.env.JWT_SECRET || 'secret');
+app.set('projects_path', process.env.PROJECTS_PATH || __dirname + '/app/projects/');  //  http://www.tatool.ch/tatoolweb/projects/
+app.set('resource_user', process.env.RESOURCE_USER || 'tatool');
+app.set('resource_pw', process.env.RESOURCE_PW || 'secret');
+
 
 // dependencies
 var userController = require('./controllers/user');
@@ -30,6 +35,7 @@ app.use(logger('dev'));
 
 //compression
 //app.use(compress());
+app.use(favicon(__dirname + '/app/images/app/tatool_icon.ico'));
 
 // parse json and urlencoded body
 app.use(bodyParser.json( { limit: 1048576 })); // allow upload of 1MB
@@ -48,6 +54,11 @@ router.get('/user/modules', mainCtrl.getAll);
 router.get('/user/modules/:moduleId', mainCtrl.get);
 router.delete('/user/modules/:moduleId', mainCtrl.remove);
 router.post('/user/modules/:moduleId/trials/:sessionId', mainCtrl.addTrials);
+router.get('/user/modules/:moduleId/resources/token', mainCtrl.getResourceToken);
+app.get('/user/resources/:projectAccess/:projectName/:resourceType/:resourceName',    // NO JWT CHECK
+  function(req, res) {
+    mainCtrl.getResource(req, res, app.get('projects_path'), app.get('resource_user'), app.get('resource_pw'));
+  });
 
 // Repository Modules
 router.get('/user/repository', repositoryCtrl.getAll);
@@ -61,6 +72,11 @@ router.delete('/developer/modules/:moduleId', developerCtrl.remove);
 router.post('/developer/modules/:moduleId/publish/:moduleType', developerCtrl.publish);
 router.get('/developer/modules/:moduleId/unpublish', developerCtrl.unpublish);
 router.post('/developer/modules/:moduleId/trials/:sessionId', developerCtrl.addTrials); // REWORK UPLOAD
+router.get('/developer/modules/:moduleId/resources/token', developerCtrl.getResourceToken);
+app.get('/developer/resources/:projectAccess/:projectName/:resourceType/:resourceName',    // NO JWT CHECK
+  function(req, res) {
+    developerCtrl.getResource(req, res, app.get('projects_path'), app.get('resource_user'), app.get('resource_pw'));
+  });
 
 // Admin
 router.get('/admin/users', adminController.getUsers);
@@ -77,6 +93,7 @@ router.get('/login',
 
 // protect api with JWT
 app.use('/api', expressJwt({secret: app.get('jwt_secret')}).unless({path: ['/api/login','/api/register']}), authController.hasRole, router);
+
 
 app.post('/user/verify/resend', userController.verifyResend);
 app.get('/user/verify/:token', userController.verifyUser);

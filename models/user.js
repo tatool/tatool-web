@@ -60,14 +60,14 @@ User.methods.verifyPassword = function(candidatePassword, callback) {
   });
 };
 
-// create jwt token (expiration 5 hours)
+// create jwt token (expiration 8 hours)
 User.methods.createToken = function(secret) {
   var token = jwt.sign({
     _id: this._id,
     email: this.email,
     roles: this.roles
   }, secret, { 
-    expiresInMinutes: 60*5 
+    expiresInMinutes: 60*8 
   });
   return token;
 };

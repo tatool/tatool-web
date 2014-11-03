@@ -10,7 +10,6 @@ tatool
 
     // initialize template variables
     $scope.userName = userService.getUserName() ? userService.getUserName() : '';
-    $scope.moduleId = moduleService.getModuleId() ? moduleService.getModuleId() : '';
     $scope.moduleName = moduleService.getModuleName() ? moduleService.getModuleName() : '';
     $scope.moduleAuthor = moduleService.getModuleAuthor() ? moduleService.getModuleAuthor() : '';
     $scope.moduleVersion = moduleService.getModuleVersion() ? moduleService.getModuleVersion() : '';

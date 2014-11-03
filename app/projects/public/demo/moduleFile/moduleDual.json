@@ -2,7 +2,7 @@
     "name": "Dual Element",
     "author": "University of Zurich",
     "label": "moduleDual",
-    "projectUrl": "/library/projects/tatoolDemo/",
+    "project": { "name" : "demo", "access": "public"},
     "allowEscapeKey" : true,
     "export" : [ 
         { "mode": "upload", "auto": false }, 

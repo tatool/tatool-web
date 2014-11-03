@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('tatool.module')
-  .service('executableService', ['$log', '$rootScope', '$injector', '$q', '$http', '$templateCache', 'contextService', 'tatoolPhase', 'tatoolExecutable', 'moduleService', 'cfgModule',
-    function ($log, $rootScope, $injector, $q, $http, $templateCache, contextService, tatoolPhase, tatoolExecutable, moduleService, cfgModule) {
+  .service('executableService', ['$log', '$rootScope', '$injector', '$q', '$http', '$templateCache', '$window', 'contextService', 'tatoolPhase', 'tatoolExecutable', 'moduleService', 'cfgModule',
+    function ($log, $rootScope, $injector, $q, $http, $templateCache, $window, contextService, tatoolPhase, tatoolExecutable, moduleService, cfgModule) {
 
     var executableService = {};
 
@@ -10,27 +10,41 @@ angular.module('tatool.module')
 
     var numExecutables = 0;
 
-    var projectUrl = cfgModule.MODULE_PROJECT_URL;
+    var mode = '';
+
+    var project = {};
+
+    var token = '';
 
     // reset the list of executables
     executableService.init = function(runningExecutor) {
+      var deferred = $q.defer();
+
       executables = {};
       numExecutables = 0;
+      mode = $window.sessionStorage.getItem('mode');
 
-      // override project Url with url given in module
-      var url = moduleService.getProjectUrl();
-      if (url) {
-        projectUrl = url;
-      }
+      // override project with details given in module
+      project = moduleService.getProject();
+      project.name = (project.name) ? project.name : cfgModule.MODULE_DEFAULT_PROJECT;
+      project.access = (project.access) ? project.access : 'public';
 
-      // clean up url so we always have a trailing slash
-      if (projectUrl.indexOf('/', projectUrl.length - 1) === -1) {
-        projectUrl = projectUrl + '/';
-      } else {
-        projectUrl = projectUrl;
-      }
+      // get session token to access resources and save to tatoolExecutable
+      var tokenUrl = '/api/' + mode + '/modules/' + moduleService.getModuleId() + '/resources/token';
+      $http.get( tokenUrl)
+        .success(function (data) {
+          token = '?' + 'token=' + data.token;
+          project.token = data.token;
+          project.path = '/' + mode + '/resources/' +  project.access + '/' + project.name + '/'
+          tatoolExecutable.init(runningExecutor, project);
+          deferred.resolve();
+        })
+        .error(function (error) {
+          console.log(error);
+          deferred.reject(error);
+        });
 
-      tatoolExecutable.init(runningExecutor, projectUrl);
+      return deferred.promise;
     };
 
     // create a new executable from service and register
@@ -38,8 +52,8 @@ angular.module('tatool.module')
       var deferred = $q.defer();
       var self = this;
 
-      var projectPath = projectUrl;
-      var libraryPath = cfgModule.MODULE_LIBRARY_EXECUTABLE_URL;
+      var projectPath = '/' + mode + '/resources/' +  project.access + '/' + project.name + '/executables/';
+      var defaultProjectPath = '/' + mode + '/resources/public/' + cfgModule.MODULE_DEFAULT_PROJECT + '/executables/';
       var executableName = executableJson.customType;
       var executableSrv = executableName + '.service.js';
       var executableCtrl = executableName + '.ctrl.js';
@@ -49,9 +63,9 @@ angular.module('tatool.module')
       // every executable consists of [*service,*controller,style] (* required)
       var dependencies = function(path) {
         var files = [], srv = {}, ctrl = {}, style = {};
-        srv[executableSrv] = path + executableSrv;
-        ctrl[executableCtrl] = path + executableCtrl;
-        style[executableStyle] = path + executableStyle;
+        srv[executableSrv] = path + executableSrv + token;
+        ctrl[executableCtrl] = path + executableCtrl + token;
+        style[executableStyle] = path + executableStyle + token;
         files.push(style);
         files.push(srv);
         files.push(ctrl);
@@ -64,21 +78,19 @@ angular.module('tatool.module')
           path + executableCtrl
         ];*/
       
-      // try first in package folder and use library as fallback to allow override of executables
-      $http.get(projectPath + executableSrv)
+      // try first in project folder and use default project as fallback to allow override of executables
+      var templatePath = '';
+
+      $http.get( projectPath + executableSrv + token)
         .success(function () {
           //$script(dependencies(projectPath), executableName);
           head.load( dependencies(projectPath) );
-          $http.get(projectPath + executableTpl).then( function(template) {
-            $templateCache.put(executableTpl, template.data);
-          });
+          templatePath = projectPath + executableTpl + token;
         })
         .error(function () {
           //$script(dependencies(libraryPath), executableName);
-          head.load( dependencies(libraryPath) );
-          $http.get(libraryPath + executableTpl).then(function(template) {
-            $templateCache.put(executableTpl, template.data);
-          });
+          head.load( dependencies(defaultProjectPath) );
+          templatePath = defaultProjectPath + executableTpl + token;
         });
    
       // Create executable once scripts are loaded
@@ -89,7 +101,14 @@ angular.module('tatool.module')
           var executable = new ExecutableService();
           angular.extend(executable, executableJson);
           self.registerExecutable(executable.name, executable);
-          deferred.resolve(executable);
+
+          // load html template of executable
+          $http.get(templatePath).success( function(template) {
+            $templateCache.put(executableTpl, template);
+            deferred.resolve(executable);
+          }).error( function(error) {
+            deferred.reject(error);
+          });
         } catch (e) {
           deferred.reject('Unable to find executable: ' + executableName + ' (' + executableSrv + ')');
         }

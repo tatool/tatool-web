@@ -2,7 +2,7 @@
     "name": "Tatool Grid",
     "author": "Andre Locher",
     "label": "tatoolGrid",
-    "projectUrl": "/library/projects/tatoolDemo/",
+    "projectUrl": "http://www.tatool.ch/tatoolweb/projects/demo/",
     "fullscreen": false,
     "allowEscapeKey": true,
     "moduleHierarchy": {

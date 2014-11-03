@@ -11,12 +11,10 @@ tatool
       var deferred = $q.defer();
 
       async.each(this.pages, function(page, callback) {
-        $http.get(tatoolExecutable.projectUrl + 'instructions/' + page).
-        success(function(template) {
+        tatoolExecutable.getProjectResource('instructions', page).then(function(template) {
           $templateCache.put(page, template);
           callback();
-        }).
-        error(function(error) {
+        }, function(error) {
           callback('Could not find instruction "' + tatoolExecutable.projectUrl + 'instructions/' + page + '"');
         });
       }, function(err) {

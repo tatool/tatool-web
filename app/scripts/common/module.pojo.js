@@ -5,7 +5,7 @@ var Module = function(moduleId) {
   this.moduleId = moduleId;
   this.moduleName = '';
   this.moduleLabel = '';
-  this.projectUrl = '';
+  this.project = {};
   this.moduleAuthor = '';
   this.moduleVersion = '';
   this.moduleProperties = {};
@@ -25,8 +25,8 @@ Module.prototype.getLabel = function() {
   return this.moduleLabel;
 };
 
-Module.prototype.getProjectUrl = function() {
-  return this.projectUrl;
+Module.prototype.getProject = function() {
+  return this.project;
 };
 
     // get the module ID
@@ -72,9 +72,9 @@ Module.prototype.setModuleLabel = function(moduleLabel) {
   this.moduleLabel = moduleLabel;
 };
 
-// sets the project url for the module
-Module.prototype.setProjectUrl = function(projectUrl) {
-  this.projectUrl = projectUrl;
+// sets the project for the module
+Module.prototype.setProject = function(project) {
+  this.project = project;
 };
 
 // sets the module author

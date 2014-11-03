@@ -33,14 +33,7 @@ angular.module('tatool.module')
       var currentSessionId = moduleService.getMaxSessionId();
       return moduleService.getSessionProperty(element, currentSessionId, propertyKey);
     };
-
-    // save the module
-    // This is already taken care of by Tatool at the start and end of a session.
-    // Only call this method if you require the module to be stored during a session.
-    db.saveModule = function() {
-      return moduleService.saveModule();
-    };
-
+    
     // add new trial after extending it with base properties
     db.saveTrial = function(trial) {
       trial.moduleId = moduleService.getModuleId();

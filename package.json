@@ -25,6 +25,9 @@
     "passport": "^0.2.1",
     "passport-http": "^0.2.2",
     "postmark": "^0.2.6",
+    "q": "^1.0.1",
+    "request": "^2.47.0",
+    "serve-favicon": "^2.1.6",
     "simple-recaptcha": "0.0.3"
   },
   "engines": {

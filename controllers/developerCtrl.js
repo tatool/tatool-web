@@ -2,6 +2,9 @@ var Module = require('../models/module').developerModule;
 var constants = require('../models/module').constants;
 var repositoryCtrl = require('../controllers/repositoryCtrl');
 var exportCtrl = require('../controllers/exportCtrl');
+var request = require('request');
+var crypto = require('crypto');
+var fs = require('fs');
 
 // Adding a new module from a local file
 exports.add = function(req, res) {
@@ -47,11 +50,12 @@ var update = function(req, res, module) {
 
   // update technical fields
   module.updated_at = today;
+  module.sessionToken = undefined;  // unset session token to invalidate resources
 
   // update user defined information
   module.moduleType = req.body.moduleType;
   module.moduleLabel = req.body.moduleLabel;
-  module.projectUrl = req.body.projectUrl;
+  module.project = req.body.project;
   module.moduleDefinition = req.body.moduleDefinition;
   module.moduleName = req.body.moduleName;
   module.moduleAuthor = req.body.moduleAuthor;
@@ -165,4 +169,56 @@ exports.addTrials = function(req, res) {
       }
     }
   });
+};
+
+exports.getResourceToken = function(req, res) {
+  Module.findOne({ email: req.user.email, moduleId: req.params.moduleId }, function(err, module) {
+    if (err) {
+      res.status(500).send(err);
+    } else {
+      crypto.randomBytes(Math.ceil(8 * 3 / 4), function(ex, buf) {
+        var random = buf.toString('base64')
+        .slice(0, 8)
+        .replace(/\+/g, '0')
+        .replace(/\//g, '0');
+        random += new Date().getTime();
+
+        module.sessionToken = random;
+
+        module.save(function(err, data) {
+          if (err) {
+            res.status(500).send(err);
+          } else {
+            res.json({ token: random });
+          }
+        });
+      });
+    }
+  }); 
+};
+
+exports.getResource = function(req, res, projectsPath, RESOURCE_USER, RESOURCE_PW) {
+  Module.findOne({ sessionToken: req.query.token }, function(err, module) {
+    if (err) {
+      res.status(500).send(err);
+    } else if (module) {
+      if (projectsPath.substring(0, 4) !== 'http') {
+        var file = projectsPath + req.params.projectAccess + '/' + req.params.projectName + '/' + req.params.resourceType + '/' + req.params.resourceName;
+        fs.exists(file, function(exists) {
+          if (exists) {
+            res.download(file);
+          } else {
+            res.status(404).json({ message: 'Resource not found.'} );
+          }
+        });
+      } else {
+        request(projectsPath + req.params.projectAccess + '/' + req.params.projectName + '/' + req.params.resourceType + '/' + req.params.resourceName)
+          .auth(RESOURCE_USER, RESOURCE_PW, true)
+            .pipe(res);
+      }
+
+    } else {
+      res.status(404).json({ message: 'Resource not found.'} );
+    }
+  }); 
 };

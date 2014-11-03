@@ -143,7 +143,7 @@ exports.resetPasswordSend = function(req, res) {
                 console.error('Unable to send email: ' + error.message);
                 res.status(500).json({ message: 'Unable to send password reset email. Please try again later.' });
               } else {
-                res.json({ message: 'User successfully added to the db!' });
+                res.json({ message: 'Password reset email sent successfully.' });
               }
             });
           }

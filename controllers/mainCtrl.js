@@ -1,6 +1,9 @@
 var Module = require('../models/module').userModule;
 var Repository = require('../models/module').repositoryModule;
 var exportCtrl = require('../controllers/exportCtrl');
+var request = require('request');
+var crypto = require('crypto');
+var fs = require('fs');
 
 // Adding/Updating a new module from the repository
 exports.install = function(req, res) {
@@ -62,7 +65,7 @@ var update = function(req, res, userModule) {
         // update user defined information
         userModule.moduleType = module.moduleType;
         userModule.moduleLabel = module.moduleLabel;
-        userModule.projectUrl = module.projectUrl;
+        userModule.project = module.project;
         userModule.moduleDefinition = module.moduleDefinition;
         userModule.moduleName = module.moduleName;
         userModule.moduleAuthor = module.moduleAuthor;
@@ -95,6 +98,7 @@ exports.save = function(req, res) {
       if (module) {
         // update technical fields
         module.updated_at = today;
+        module.sessionToken = undefined;  // unset session token to invalidate resources
 
         // update runtime information
         module.maxSessionId = req.body.maxSessionId;
@@ -160,4 +164,57 @@ exports.addTrials = function(req, res) {
       }
     }
   });
+};
+
+exports.getResourceToken = function(req, res) {
+  Module.findOne({ email: req.user.email, moduleId: req.params.moduleId }, function(err, module) {
+    if (err) {
+      res.status(500).send(err);
+    } else {
+
+      crypto.randomBytes(Math.ceil(8 * 3 / 4), function(ex, buf) {
+        var random = buf.toString('base64')
+        .slice(0, 8)
+        .replace(/\+/g, '0')
+        .replace(/\//g, '0');
+        random += new Date().getTime();
+
+        module.sessionToken = random;
+
+        module.save(function(err, data) {
+          if (err) {
+            res.status(500).send(err);
+          } else {
+            res.json({ token: random });
+          }
+        });
+      });
+    }
+  }); 
+};
+
+exports.getResource = function(req, res, projectsPath, RESOURCE_USER, RESOURCE_PW) {
+  Module.findOne({ sessionToken: req.query.token }, function(err, module) {
+    if (err) {
+      res.status(500).send(err);
+    } else if (module) {
+      if (projectsPath.substring(0, 4) !== 'http') {
+        var file = projectsPath + req.params.projectAccess + '/' + req.params.projectName + '/' + req.params.resourceType + '/' + req.params.resourceName;
+        fs.exists(file, function(exists) {
+          if (exists) {
+            res.download(file);
+          } else {
+            res.status(404).json({ message: 'Resource not found.'} );
+          }
+        });
+      } else {
+        request(projectsPath + req.params.projectAccess + '/' + req.params.projectName + '/' + req.params.resourceType + '/' + req.params.resourceName)
+          .auth(RESOURCE_USER, RESOURCE_PW, true)
+            .pipe(res);
+      }
+
+    } else {
+      res.status(404).json({ message: 'Resource not found.'} );
+    }
+  }); 
 };

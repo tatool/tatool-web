@@ -86,16 +86,20 @@ angular.module('tatool.module')
       obj.stack.clearAll();
       var moduleHierarchy = JSON.parse(JSON.stringify(json.moduleHierarchy));
       handlerService.init();
-      executableService.init(executor);
 
-      promises = [];
-      loadModuleHierarchy(null, 'moduleHierarchy', moduleHierarchy).then(function(data) {
-        obj.stack.push(moduleHierarchy)
-        deferred.resolve();
+      executableService.init(executor).then(function() {
+        promises = [];
+
+        loadModuleHierarchy(null, 'moduleHierarchy', moduleHierarchy).then(function(data) {
+          obj.stack.push(moduleHierarchy)
+          deferred.resolve();
+        }, function(error) {
+          deferred.reject(error);
+        });
       }, function(error) {
         deferred.reject(error);
       });
-
+      
       return deferred.promise;
     };
 
