@@ -2,15 +2,15 @@
     "name": "DB Regression",
     "author": "Tatool",
     "label": "dbRegression",
-    "projectUrl": "/library/projects/tatoolDemo/",
+    "project": { "name" : "demo", "access": "public"},
     "allowEscapeKey" : true,
     "export" : [ 
         { "mode": "upload", "auto": false, "target": "uploads/abc/" }, 
-        { "mode": "remote", "auto": false, "target": "http://www.tatool.ch/tatoolweb/upload.php" },
+        { "mode": "remote", "auto": false, "target": "http://www.tatool.ch/tatoolweb/remoteUpload.php" },
         { "mode": "download" } ],
     "moduleHierarchy": {
     	"tatoolType": "List",
-        "iterator": { "customType" : "ListIterator", "numIterations" : "1000" },
+        "iterator": { "customType" : "ListIterator", "numIterations" : "10" },
         "handlers": [ ],
     	"children": 
     		[

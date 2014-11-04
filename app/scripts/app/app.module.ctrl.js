@@ -4,13 +4,17 @@
 /* global async */
 
 angular.module('tatool.app')
-  .controller('ModuleCtrl', ['$scope', '$q', '$timeout', '$window', '$rootScope', '$location',  '$state', '$http', '$log', 'moduleDataService', 'cfgApp', 'authService', 'userService', 'moduleCreatorService', 'exportService', 'spinnerService', 'cfg',
-    function ($scope, $q, $timeout, $window, $rootScope, $location, $state, $http, $log, moduleDataService, cfgApp, authService, userService, moduleCreatorService, exportService, spinnerService, cfg) {
+  .controller('ModuleCtrl', ['$scope', '$q', '$timeout', '$window', '$rootScope', '$location',  '$state', '$http', '$log', '$sce', 'moduleDataService', 'cfgApp', 'authService', 'userService', 'moduleCreatorService', 'exportService', 'spinnerService', 'cfg',
+    function ($scope, $q, $timeout, $window, $rootScope, $location, $state, $http, $log, $sce, moduleDataService, cfgApp, authService, userService, moduleCreatorService, exportService, spinnerService, cfg) {
 
     // setting contants
     $scope.imgPath = cfgApp.IMG_PATH;
 
+    $scope.alert = {};
+
     $scope.modules = [];
+    $scope.repository = [];
+    $scope.invites = [];
 
     $scope.quantity = 25;
 
@@ -32,11 +36,18 @@ angular.module('tatool.app')
       // Initialize installed modules
       moduleDataService.getAllModules().then( function(data) {
         $scope.modules = [];
+        $scope.invites = [];
         var moduleIds = [];
 
         for (var i = 0; i < data.length; i++) {
-          $scope.modules.push(data[i]);
-          moduleIds.push(data[i].moduleId);
+          if (data[i].moduleType === 'private' && data[i].moduleStatus === 'invite') {
+            $scope.invites.push(data[i]);
+            moduleIds.push(data[i].moduleId);
+          } else {
+            $scope.modules.push(data[i]);
+            moduleIds.push(data[i].moduleId);
+          }
+          
         }
         // run auto export on installed modules
         runAutoExport();
@@ -153,6 +164,23 @@ angular.module('tatool.app')
       moduleDataService.installModule(module.moduleId).then(onModuleLoaded, onModuleError);
     };
 
+    $scope.replyInvite = function(module, response) {
+      startSpinner();
+      moduleDataService.replyInvite(module.moduleId, response).then(function(module) {
+        stopSpinner();
+        initModules();
+        if (response === 'accepted') {
+          setAlert('success', 'The module <b>' + module.moduleName + '</b> has been installed.');
+        } else {
+          setAlert('success', 'The module invite has been declined.');
+        }
+      }, function(error) {
+        moduleDataService.deleteModule(userService.getUserName(), module.moduleId).then(initModules);
+        setAlert('danger', 'The invite is no longer valid and will be removed.');
+        stopSpinner();
+      });
+    };
+
     // delete module from db
     $scope.deleteModule = function(module) {
 
@@ -222,6 +250,21 @@ angular.module('tatool.app')
       // start moduleRunner
       $state.go('run');
     };
+
+    var setAlert = function(alertType, alertMessage) {
+      $scope.alert = {};
+      $scope.alert.type = alertType;
+      $scope.alert.msg = $sce.trustAsHtml(alertMessage);
+      $scope.alert.visible = true;
+    }
+
+    var hideAlert = function() {
+      $scope.alert = {};
+      $scope.alert.visible = false;
+      $scope.alert.msg = '';
+    };
+
+    $scope.hideAlert = hideAlert;
 
 
   }]);

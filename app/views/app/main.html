@@ -5,10 +5,15 @@
 
   <!-- INSTALLED -->
   <div class="container">
+    <div ng-class="{danger:'alert alert-danger alert-dismissible', success:'alert alert-success alert-dismissible', info:'alert alert-info alert-dismissible'}[alert.type]" role="alert" ng-show="alert.visible">
+      <button type="button" class="close" ng-click="hideAlert()"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+      <div ng-bind-html="alert.msg"></div>
+    </div>
+
     <accordion>
       <accordion-group is-open="accordionStatus.installed">
         <accordion-heading>
-          INSTALLED
+          MY MODULES
           <i class="glyphicon" ng-class="{'glyphicon-chevron-down': accordionStatus.installed, 'glyphicon-chevron-right': !accordionStatus.installed}"></i>
         </accordion-heading>
         <div id="modules">
@@ -36,6 +41,40 @@
             No modules found.
           </div>
 
+        </div>
+      </accordion-group>
+    </accordion>
+  </div>
+
+  <!-- INVITES -->
+  <div class="container">
+    <accordion>
+      <accordion-group is-open="accordionStatus.public">
+        <accordion-heading ng-class="'tatool-panel-heading'">
+          INVITES 
+          <i class="glyphicon" ng-class="{'glyphicon-chevron-down': accordionStatus.public, 'glyphicon-chevron-right': !accordionStatus.public}"></i>
+          <form class="form-inline pull-right" role="form">
+            <div class="form-group has-feedback">
+              <input type="text" class="form-control" id="searchRepo" ng-model="query" ng-change="searchRepo()" ng-click="$event.stopPropagation()">
+              <span class="glyphicon glyphicon-search form-control-feedback"></span>
+            </div>
+          </form>
+        </accordion-heading>
+        <div id="modules">
+          <div class="tile" ng-repeat="module in invites | orderBy:'created_at':true" ng-if="!!invites.length">
+            <div class="icon"><i class="fa fa-user fa-4x"></i></div>
+            <div class="content">
+              <h2>{{module.moduleName}}</h2>
+              <h3>{{module.moduleAuthor}}</h3>
+              <div class="buttonbar">
+                <div class="btn btn-tatool-green" ng-click="replyInvite(module, 'accepted')"><i class="fa fa-thumbs-up"></i> Accept</div>
+                <div class="btn btn-tatool" ng-click="replyInvite(module, 'declined')"><i class="fa fa-thumbs-down"></i> Decline</div>
+              </div>
+            </div>
+          </div>
+          <div ng-if="invites.length === 0">
+            No modules found.
+          </div>
         </div>
       </accordion-group>
     </accordion>

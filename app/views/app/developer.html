@@ -6,6 +6,11 @@
 
 <!-- DEVELOPMENT -->
   <div class="container">
+    <div ng-class="{danger:'alert alert-danger alert-dismissible', success:'alert alert-success alert-dismissible', info:'alert alert-info alert-dismissible'}[alert.type]" role="alert" ng-show="alert.visible">
+      <button type="button" class="close" ng-click="hideAlert()"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+      <div ng-bind-html="alert.msg"></div>
+    </div>
+
     <accordion>
       <accordion-group is-open="accordionStatus.develop">
         <accordion-heading>
@@ -27,34 +32,7 @@
               <h3>{{module.moduleAuthor}}</h3>
 
               <div class="buttonbar">
-                <div class="btn btn-tatool-off" ng-click="editModule(module)"><i class="fa fa-pencil-square-o"></i> Edit</div>
-                <div ng-switch on="module.moduleType" class="btn-group">
-
-                  <div ng-switch-when="public">
-                    <div class="btn btn-tatool" ng-click="unpublishModule($event, module)"><i class="fa fa-cloud-download"></i> Unpublish</div>
-                  </div>
-                  <div ng-switch-when="private">
-                    <div class="btn btn-tatool" ng-click="unpublishModule($event, module)"><i class="fa fa-cloud-download"></i> Unpublish</div>
-                  </div>
-                  <div ng-switch-default>
-                    <div id="dropdownPublish" class="dropdown">
-                      <div class="btn btn-tatool-green dropdown-toggle"><i class="fa fa-cloud-upload"></i> Publish <span class="caret"></span></div>
-                      <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownPublish">
-                        <li ng-click="publishModule($event, module, 'public')">
-                          <a ui-sref="developer">Public</a>
-                        </li>
-                        <li ng-click="publishModule($event, module, 'private')">
-                          <a ui-sref="developer">Private</a>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-
-                </div>
-              </div>
-
-              <!-- Export & Delete-->
-              <div class="buttonbar">
+                <div class="btn btn-tatool-off" ng-click="editModule(module)">Edit</div>
                 <div class="btn btn-tatool-off" ng-click="startModule(module)">Start</div>
                 <div id="dropdownExport" class="btn-group dropdown" ng-if="module.moduleDefinition.export && module.moduleDefinition.export.length > 0">
                   <div id="dropdownExportButton" class="btn btn-tatool-off dropdown-toggle">Export <span class="caret"></span></div>
@@ -65,6 +43,52 @@
                   </ul>
                 </div>
                 <a ng-click="deleteModule(module)" class="btn btn-tatool-off"><i class="fa fa-trash-o"></i></a>
+              </div>
+
+              <div class="repository">
+                <table class="repositoryTable">
+                  <tr>
+                    <td>
+                      <b>Repository</b>
+                    </td>
+                    <td align="right">
+                      <div ng-switch on="module.moduleType">
+                        <div ng-switch-when="public">
+                          <span class="toggle-tatool-text">OFF</span> 
+                          <i class="fa fa-toggle-on fa-lg toggle-tatool-on" ng-click="toggleRepository($event, module)"></i> 
+                          <span class="toggle-tatool-text">ON</span>
+                        </div>
+                        <div ng-switch-when="private">
+                          <span class="toggle-tatool-text">OFF</span> 
+                          <i class="fa fa-toggle-on fa-lg toggle-tatool-on" ng-click="toggleRepository($event, module)"></i> 
+                          <span class="toggle-tatool-text">ON</span>
+                        </div>
+                        <div ng-switch-default>
+                          <span class="toggle-tatool-text">OFF</span> 
+                          <i class="fa fa-toggle-off fa-lg toggle-tatool-off" ng-click="toggleRepository($event, module)"></i> 
+                          <span class="toggle-tatool-text">ON</span>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                </table>
+
+                <div ng-if="module.moduleType" ng-cloak>
+
+                  <div class="moduleType">
+                    <label class="radio-inline">
+                      <input type="radio" ng-model="module.moduleType" value="public"> Public
+                    </label>
+                    <label class="radio-inline">
+                      <input type="radio" ng-model="module.moduleType" value="private"> Private
+                    </label>
+                  </div>
+                  <div class="buttonbar">
+                    <div class="btn btn-tatool-green" ng-click="publishModule($event, module)"><i class="fa fa-cloud-upload"></i> Publish</div>
+                    <div ng-if="module.moduleType==='private'" class="btn btn-tatool-off" ng-click="repositoryInvite(module.moduleId)"><i class="fa fa-users"></i> Invite</div>
+                  </div>
+                 </div>
+
               </div>
 
 

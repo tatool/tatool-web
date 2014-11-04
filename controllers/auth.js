@@ -3,7 +3,6 @@ var BasicStrategy = require('passport-http').BasicStrategy;
 var User = require('../models/user');
 var crypto = require('crypto');
 var jwt = require('jsonwebtoken');
-var Q = require('q');
 
 passport.use(new BasicStrategy(
   function(userName, userPassword, callback) {
@@ -28,7 +27,7 @@ passport.use(new BasicStrategy(
   }
 ));
 
-exports.isAuthenticated = function(req, res, next, secret) {
+exports.isAuthenticated = function(req, res, next) {
   passport.authenticate('basic', { 
     session : false 
     }, function(err, user, info) {
@@ -37,7 +36,7 @@ exports.isAuthenticated = function(req, res, next, secret) {
         if (!user.verified) {
           res.status(500).json({ message: 'Email address not yet verified. Please click on the link in your verification email to activate your account.', verify: true });
         } else {
-          var token = user.createToken(secret);
+          var token = user.createToken(req.app.get('jwt_secret'));
           res.json({ token: token, roles: user.roles });
         }
         

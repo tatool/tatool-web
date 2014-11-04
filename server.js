@@ -14,10 +14,10 @@ var favicon = require('serve-favicon');
 var app = express();
 app.set('port', process.env.PORT || 3000);
 app.set('jwt_secret', process.env.JWT_SECRET || 'secret');
-app.set('projects_path', process.env.PROJECTS_PATH || __dirname + '/app/projects/');  //  http://www.tatool.ch/tatoolweb/projects/
+app.set('projects_path', process.env.PROJECTS_PATH || __dirname + '/app/projects/');
 app.set('resource_user', process.env.RESOURCE_USER || 'tatool');
 app.set('resource_pw', process.env.RESOURCE_PW || 'secret');
-
+app.set('remote_url', process.env.REMOTE_URL);
 
 // dependencies
 var userController = require('./controllers/user');
@@ -53,16 +53,17 @@ router.post('/user/modules/:moduleId', mainCtrl.save);
 router.get('/user/modules', mainCtrl.getAll);
 router.get('/user/modules/:moduleId', mainCtrl.get);
 router.delete('/user/modules/:moduleId', mainCtrl.remove);
+router.post('/user/modules/:moduleId/invite/:response', mainCtrl.processInvite);
 router.post('/user/modules/:moduleId/trials/:sessionId', mainCtrl.addTrials);
 router.get('/user/modules/:moduleId/resources/token', mainCtrl.getResourceToken);
-app.get('/user/resources/:projectAccess/:projectName/:resourceType/:resourceName',    // NO JWT CHECK
-  function(req, res) {
-    mainCtrl.getResource(req, res, app.get('projects_path'), app.get('resource_user'), app.get('resource_pw'));
-  });
+app.get('/user/resources/:projectAccess/:projectName/:resourceType/:resourceName', mainCtrl.getResource); // NO JWT CHECK
 
 // Repository Modules
 router.get('/user/repository', repositoryCtrl.getAll);
 router.get('/user/repository/:moduleId', repositoryCtrl.get);
+router.get('/developer/repository/:moduleId', repositoryCtrl.get);
+router.post('/developer/repository/:moduleId/invite', repositoryCtrl.invite);
+router.post('/developer/repository/:moduleId/invite/remove', repositoryCtrl.removeInvite);
 
 // Developer Modules
 router.post('/developer/modules/:moduleId', developerCtrl.add);
@@ -71,12 +72,9 @@ router.get('/developer/modules/:moduleId', developerCtrl.get);
 router.delete('/developer/modules/:moduleId', developerCtrl.remove);
 router.post('/developer/modules/:moduleId/publish/:moduleType', developerCtrl.publish);
 router.get('/developer/modules/:moduleId/unpublish', developerCtrl.unpublish);
-router.post('/developer/modules/:moduleId/trials/:sessionId', developerCtrl.addTrials); // REWORK UPLOAD
+router.post('/developer/modules/:moduleId/trials/:sessionId', developerCtrl.addTrials);
 router.get('/developer/modules/:moduleId/resources/token', developerCtrl.getResourceToken);
-app.get('/developer/resources/:projectAccess/:projectName/:resourceType/:resourceName',    // NO JWT CHECK
-  function(req, res) {
-    developerCtrl.getResource(req, res, app.get('projects_path'), app.get('resource_user'), app.get('resource_pw'));
-  });
+app.get('/developer/resources/:projectAccess/:projectName/:resourceType/:resourceName', developerCtrl.getResource); // NO JWT CHECK
 
 // Admin
 router.get('/admin/users', adminController.getUsers);
@@ -86,15 +84,13 @@ router.delete('/admin/users/:user', adminController.removeUser);
 // User
 router.get('/user/roles', authController.getRoles);
 router.post('/register', userController.register);
-router.get('/login', 
-  function(req, res, next) {
-    authController.isAuthenticated(req, res, next, app.get('jwt_secret'));
-  });
+router.get('/login', authController.isAuthenticated);
 
 // protect api with JWT
 app.use('/api', expressJwt({secret: app.get('jwt_secret')}).unless({path: ['/api/login','/api/register']}), authController.hasRole, router);
 
 
+// open API
 app.post('/user/verify/resend', userController.verifyResend);
 app.get('/user/verify/:token', userController.verifyUser);
 app.post('/user/reset', userController.resetPasswordSend);

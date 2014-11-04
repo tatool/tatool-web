@@ -1,0 +1,81 @@
+'use strict';
+
+angular.module('tatool.app')
+  .controller('InviteCtrl', ['$scope', '$q', '$modalInstance', '$sce', 'module', 'moduleDataService',
+    function ($scope, $q, $modalInstance, $sce, module, moduleDataService) {
+
+      $scope.user = {};
+      $scope.module = module;
+      $scope.inputError = false;
+      $scope.alert = {};
+
+      $scope.ok = function () {
+        $modalInstance.close();
+      };
+
+      $scope.cancel = function () {
+        $modalInstance.dismiss('cancel');
+      };
+
+      $scope.formatDate = function(date) {
+        return new Date(date).toLocaleString();
+      };
+
+      $scope.inviteUser = function($event) {
+        var email = $scope.user.email;
+        $scope.user.email = '';
+        $scope.inputError = false;
+
+        if (!email) {
+          $scope.inputError = true;
+        } else {
+          var exists = false;
+          if (module.invites) {
+            for (var i = 0; i < module.invites.users.length; i++) {
+              if (email === module.invites.users[i].email) {
+                exists = true;
+                break;
+              }
+            }
+          }
+
+          if (exists) {
+            setAlert('danger', 'The user is already invited.');
+          } else {
+            var user = { email: email };
+            moduleDataService.inviteUser(module.moduleId, user).then(function(data) {
+              module = data;
+              $scope.module = data;
+            }, function(error) {
+              setAlert('danger', error);
+            });
+          }
+        }
+      };
+
+      $scope.removeUser = function(user) {
+        var user = { email: user.email };
+        moduleDataService.removeInvite(module.moduleId, user).then(function(data) {
+            module = data;
+            $scope.module = data;
+          }, function(error) {
+            setAlert('danger', error);
+          });
+      };
+
+      var setAlert = function(alertType, alertMessage) {
+        $scope.alert = {};
+        $scope.alert.type = alertType;
+        $scope.alert.msg = $sce.trustAsHtml(alertMessage);
+        $scope.alert.visible = true;
+      }
+
+      var hideAlert = function() {
+        $scope.alert = {};
+        $scope.alert.visible = false;
+        $scope.alert.msg = '';
+      };
+
+      $scope.hideAlert = hideAlert;
+
+  }]);

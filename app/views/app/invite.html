@@ -1,0 +1,48 @@
+<div id="inviteModal">
+  <div class="modal-header">
+    <div class="modal-title">
+      <span>Module Invites</span>
+      <button type="button" class="bootbox-close-button close" style="margin-left: 20px" aria-hidden="true" ng-click="ok()">×</button>
+
+      <form class="form-inline pull-right" role="form" ng-submit="inviteUser($event)">
+        <div class="form-group has-feedback" ng-class="{'has-error': inputError}">
+          <input type="email" placeholder="Email" class="form-control random" id="inviteEmail" ng-model="user.email" autofocus>
+          <span class="glyphicon glyphicon-plus form-control-feedback fakeButton" ng-click="inviteUser($event)"></span>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="modal-body">
+
+    <div ng-class="{danger:'alert alert-danger alert-dismissible', success:'alert alert-success alert-dismissible', info:'alert alert-info alert-dismissible'}[alert.type]" role="alert" ng-show="alert.visible">
+      <button type="button" class="close" ng-click="hideAlert()"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+      <div ng-bind-html="alert.msg"></div>
+    </div>
+
+    
+
+    <table class="table table-bordered table-striped table-hover table-condensed table-small">
+          <thead>
+            <tr>
+              <th><b>User</b></th>
+              <th style="text-align:center"><b>Status</b></th>
+              <th style="text-align:center"><b>Date</b></th>
+              <th> </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="user in module.invites.users" ng-class="{'success': user.status === 'accepted', 'danger': user.status === 'declined'}" >
+              <td> {{user.email}}</td>
+              <td align="center"> {{user.status}} </td>
+              <td align="center"> {{formatDate(user.date)}} </td>
+              <td> 
+                <a class="fakeButton" ng-click="removeUser(user)">Remove</a> 
+              </td>
+            </tr>
+          </tbody>
+        </table>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-tatool-off" ng-click="ok()">Close</button>
+  </div>
+</div>

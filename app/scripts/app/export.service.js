@@ -200,7 +200,6 @@ angular.module('tatool.app')
           var moduleProperties = getModuleProperties(response);
           var sessionProperties = getSessionProperties(response);
 
-          console.log(trials);
           var csv = convertToCsv(trials, moduleProperties, sessionProperties);
           deferred.resolve(csv);
         }, function(error) {
@@ -258,7 +257,7 @@ angular.module('tatool.app')
     var localUpload = function(moduleId, exportTarget, session, callback) {
       getTrials(moduleId, session.sessionId).then(function(data) {
         if (data.length !== 0) {
-          var json = { 'trialData': data, 'target': exportTarget };
+          var json = { 'trialData': LZString.compressToBase64(data), 'target': exportTarget }; // compressing data
           var api = '/api/' + exporter.api + '/modules/' + moduleId + '/trials/' + session.sessionId;
 
           $http.post(api, json).then(function() {
@@ -309,7 +308,7 @@ angular.module('tatool.app')
     var remoteUpload = function(moduleId, exportTarget, session, callback) {
       getTrials(moduleId, session.sessionId).then(function(data) {
         if (data.length !== 0) {
-          var json = { 'trialData': data, 'moduleId': moduleId, 'sessionId': session.sessionId };
+          var json = { 'trialData': LZString.compressToBase64(data), 'moduleId': moduleId, 'sessionId': session.sessionId };
           var api = exportTarget;
 
           $http.post(api, json).then(function() {

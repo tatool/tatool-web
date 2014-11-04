@@ -118,6 +118,54 @@ angular.module('tatool')
       return deferred.promise;
     };
 
+    data.inviteUser = function(moduleId, user) {
+      var deferred = $q.defer();
+      $http.post('/api/' + data.api + '/repository/' + moduleId + '/invite', user)
+        .success(function (data) {
+          if (data === 'null') {
+            data = null;
+          }
+          deferred.resolve(data);
+        })
+        .error(function (error) {
+          deferred.reject(error.message);
+        });
+
+      return deferred.promise;
+    };
+
+    data.removeInvite = function(moduleId, user) {
+      var deferred = $q.defer();
+      $http.post('/api/' + data.api + '/repository/' + moduleId + '/invite/remove', user)
+        .success(function (data) {
+          if (data === 'null') {
+            data = null;
+          }
+          deferred.resolve(data);
+        })
+        .error(function (error) {
+          deferred.reject(error.message);
+        });
+
+      return deferred.promise;
+    };
+
+    data.replyInvite = function(moduleId, response) {
+      var deferred = $q.defer();
+      $http.post('/api/' + data.api + '/modules/' + moduleId + '/invite/' + response)
+        .success(function (data) {
+          if (data === 'null') {
+            data = null;
+          }
+          deferred.resolve(data);
+        })
+        .error(function (error) {
+          deferred.reject(error.message);
+        });
+
+      return deferred.promise;
+    };
+
     // publish module to repository
     data.publishModule = function(moduleId, moduleType) {
       var deferred = $q.defer();

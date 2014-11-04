@@ -161,16 +161,14 @@ footer {
 	width: 100%;
 	margin: 0 auto;
   clear: left;
-	display: table;
 }
 
 /* Module Tiles styling */
 #modules .tile {
-	display: table-cell;
 	position: relative;
 	float: left;
 	width: 20em;
-  height: 6.5em;
+  height: 7em;
 	margin-bottom: 1em;
 	margin-right: 0.8em;
 	border: 1px solid #ababab;
@@ -178,58 +176,15 @@ footer {
 }
 
 #modules .tileDev {
-  height: 8.5em;
+  height: 13.5em;
 }
 
 #modules .tileHighlight {
   border: 1px solid #db5628;
   background-color: #ffe8e2;
-  -webkit-transition: all 0.1s ease-in-out;
-  -moz-transition: all 0.1s ease-in-out;
-  -ms-transition: all 0.1s ease-in-out;
-  transition: all 0.1s ease-in-out;
-}
-
-#modules .tileHighlight2 {
-	display: table-cell;
-	position: relative;
-	float: left;
-	width: 17em;
-	margin-bottom: 1.2em;
-	margin-right: 0.5em;
-	border: 1px solid #ababab;
-	background-color: #fff
-	-webkit-animation: highlight 1s 1;
-     -moz-animation: highlight 1s 1;
-      -ms-animation: highlight 1s 1;
-       -o-animation: highlight 1s 1;
-          animation: highlight 1s 1;
-}
-
-/* Highlight animation */
-@keyframes highlight {
-    from {border: 1px solid #ababab;background-color: #fff;}
-    50% {border: 1px solid #db5628;background-color: #ffe8e2;}
-    to {border: 1px solid #ababab;background-color: #fff;}
-}
-@-webkit-keyframes highlight {
-    from {border: 1px solid #ababab;background-color: #fff;}
-    50% {border: 1px solid #db5628;background-color: #ffe8e2;}
-    to {border: 1px solid #ababab;background-color: #fff;}
-}
-@-moz-keyframes highlight {
-    from {border: 1px solid #ababab;background-color: #fff;}
-    50% {border: 1px solid #db5628;background-color: #ffe8e2;}
-    to {border: 1px solid #ababab;background-color: #fff;}
-}
-@-o-keyframes highlight {
-    from {border: 1px solid #ababab;background-color: #fff;}
-    50% {border: 1px solid #db5628;background-color: #ffe8e2;}
-    to {border: 1px solid #ababab;background-color: #fff;}
 }
 
 #modules .icon {
-	position: relative;
 	width: 6em;
   height: 100%;
 	float: left;
@@ -245,15 +200,11 @@ footer {
 	background: -ms-linear-gradient(left,  #c64a26 0%,#d5582c 100%); /* IE10+ */
 	background: linear-gradient(to right,  #c64a26 0%,#d5582c 100%); /* W3C */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c64a26', endColorstr='#d5582c',GradientType=1 ); /* IE6-9 */
-  	border-right: 1px solid #db5b2e;
-  	border-left: 1px solid #db5b2e;
-  	border-top: 1px solid #db5628;
-  	border-bottom: 1px solid #db5628;
-  	-webkit-box-shadow: 1px 0 1px #b84a23;
-  	-moz-box-shadow: 1px 0 1px #b84a23;
-  	-ms-box-shadow: 1px 0 1px #b84a23;
-  	-o-box-shadow: 1px 0 1px #b84a23;
-  	box-shadow: 1px 0 1px #b84a23;
+    -webkit-box-shadow: 1px 0 1px #b84a23;
+    -moz-box-shadow: 1px 0 1px #b84a23;
+    -ms-box-shadow: 1px 0 1px #b84a23;
+    -o-box-shadow: 1px 0 1px #b84a23;
+    box-shadow: 1px 0 1px #b84a23;
 }
 
 #modules .content {
@@ -263,10 +214,12 @@ footer {
   height: 100%;
 	width: 13em;
 	text-align: left;
+  font-size: 100%;
 }
 
 #modules h2 {
 	max-width: 100%;
+  height: 3.1em;
 	font-size: 95%;
 	overflow: hidden;
 	font-weight: bold;
@@ -275,6 +228,7 @@ footer {
 #modules h3 {
 	max-width: 100%;
 	font-size: 80%;
+  height: 1.8em;
 	overflow: hidden;
 	white-space: nowrap;
   text-overflow: ellipsis;
@@ -283,6 +237,51 @@ footer {
 #modules .buttonbar {
 	margin-top: 5px;
 }
+
+#modules .repository {
+  font-size: 100%;
+  margin-top: 10px;
+  padding-top: 8px;
+  border-top: 1px solid #b5b5b5;
+}
+#modules .repositoryTable {
+  width: 90%;
+}
+#modules .moduleType {
+  font-size: 90%;
+  margin-top: 5px;
+  margin-bottom: 3px;
+}
+
+.toggle-tatool-off {
+  color: #d5502a;
+  cursor: pointer;
+}
+.toggle-tatool-on {
+  color: #25a228;
+  cursor: pointer;
+}
+.toggle-tatool-text {
+  font-size: 90%;
+  color: #494949;
+}
+
+
+/* Invite Modal */
+#inviteModal {
+  height: 100%;
+}
+
+#inviteModal .fakeButton {
+  cursor: pointer;
+}
+
+#inviteModal .table-small {
+  font-size: 85%;
+}
+
+
+
 
 /* Button styling */
 .btn-tatool {

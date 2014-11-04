@@ -117,6 +117,9 @@ exports.publish = function(req, res) {
       if (module) {
         // we got the module, now let's add it to the repository
         module.moduleType = req.params.moduleType;
+        if (module.moduleType !== 'private') {
+          module.invites = undefined;
+        }
         repositoryCtrl.add(module, res);
 
         module.save(function(err, data) {
@@ -127,7 +130,7 @@ exports.publish = function(req, res) {
           }
         });
       } else {
-        res.status(500).send({ message: 'Module not found.'});
+        res.status(500).json({ message: 'Module not found.'});
       }
     }
   });
@@ -151,7 +154,7 @@ exports.unpublish = function(req, res) {
           }
         });
       } else {
-        res.status(500).send({ message: 'Module not found.' });
+        res.status(500).json({ message: 'Module not found.' });
       }
     }
   });
@@ -163,9 +166,9 @@ exports.addTrials = function(req, res) {
       res.status(500).send(err);
     } else {
       if (module) {
-          exportCtrl.createTrialFile(req, module, 'developer', res);
+          exportCtrl.createFile(req, module, 'developer', res);
       } else {
-        res.status(500).send({ message: 'Module not found.' });
+        res.status(500).json({ message: 'Module not found.' });
       }
     }
   });
@@ -197,7 +200,8 @@ exports.getResourceToken = function(req, res) {
   }); 
 };
 
-exports.getResource = function(req, res, projectsPath, RESOURCE_USER, RESOURCE_PW) {
+exports.getResource = function(req, res) {
+  var projectsPath = req.app.get('projects_path');
   Module.findOne({ sessionToken: req.query.token }, function(err, module) {
     if (err) {
       res.status(500).send(err);
@@ -213,7 +217,7 @@ exports.getResource = function(req, res, projectsPath, RESOURCE_USER, RESOURCE_P
         });
       } else {
         request(projectsPath + req.params.projectAccess + '/' + req.params.projectName + '/' + req.params.resourceType + '/' + req.params.resourceName)
-          .auth(RESOURCE_USER, RESOURCE_PW, true)
+          .auth(req.app.get('resource_user'), req.app.get('resource_pw'), true)
             .pipe(res);
       }
 

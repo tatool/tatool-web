@@ -38,6 +38,10 @@ var Module = new Schema({
       name: String,   
       access: String     
     },
+    invites: {          // defines details for private repository module (invite, users)
+      type: Schema.Types.Mixed,
+      required: false    
+    },
 
     // TECHNICAL FIELDS
     email: {            // account where module is installed (not necessarily the owner and not present in repository)
