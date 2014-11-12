@@ -1,0 +1,39 @@
+<b>List Element Properties</b>
+
+<br><br>
+
+<div>
+  <form class="form-horizontal" role="form">
+  <div class="form-group">
+    <label for="name" class="col-sm-3 control-label">No. of Iterations</label>
+    <div class="col-sm-9">
+      <input type="text" class="form-control" id="name" ng-model="element.iterator.numIterations" ng-required="true">
+    </div>
+  </div>
+  <hr>
+  
+  <div class="form-group">
+    <div class="col-sm-offset-3 col-sm-9">
+
+      <div id="dropdownExport" class="btn-group dropdown" ng-if="module.moduleDefinition.export && module.moduleDefinition.export.length > 0">
+        <div id="dropdownExportButton" class="btn btn-default dropdown-toggle"><i class="fa fa-plus-square-o"></i> Add</div>
+        <ul class="dropdown-menu" role="menu">
+          <li ng-click="addNewList(element, elementIndex, elementParent)">
+            <a ui-sref="developer"><i class="fa fa-list"></i> List</a>
+          </li>
+          <li ng-click="addNewDual(element, elementIndex, elementParent)">
+            <a ui-sref="developer"><i class="fa fa-list-ol"></i> Dual</a>
+          </li>
+          <li ng-click="addNewExecutable(element, elementIndex, elementParent)">
+            <a ui-sref="developer"><i class="fa fa-play-circle green"></i> Executable</a>
+          </li>
+        </ul>
+      </div>
+      <button type="button" class="btn btn-default" ng-click="moveElementUp(element, elementIndex, elementParent)" ng-if="elementParent && elementIndex > 0"><i class="fa fa-angle-double-up"></i> Up</button>
+      <button type="button" class="btn btn-default" ng-click="moveElementDown(element, elementIndex, elementParent)" ng-if="(elementIndex < (elementParent.children.length - 1))"><i class="fa fa-angle-double-down"></i> Down</button>
+      <button type="button" class="btn btn-default" ng-click="deleteElement(element, elementIndex, elementParent)" ng-if="elementParent"><i class="fa fa-trash-o"></i> Delete</button>
+    </div>
+  </div>
+</form>
+
+</div>

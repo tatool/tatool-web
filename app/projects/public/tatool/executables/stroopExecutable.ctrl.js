@@ -1,64 +1,51 @@
 'use strict';
 
 /**
- * The Stroop Executable Controller is responsible to communicate between the user interface 
- * (user input, display), and the backend (data, stimuli, trial).
+ * The Executable Controller is responsible for the communication between the user interface 
+ * (directives), and the data (service).
  *
- * The Controller is reloaded everytime the Executable is run therefore it can't keep any state.
+ * The Controller is reloaded everytime the Executable is run therefore it can't keep any state. That's what our service is for!
  * 
- * All variables that you want to use in your template should be defined as properties of the $scope object. 
+ * All variables that you want to use in your template should be assigned to properties of the $scope object. 
  * This makes sure they are accessible from your template html and will update the user interface automatically whenever the value changes.
  */
 
 tatool
-  .controller('stroopExecutableCtrl', [ '$scope', '$log', '$window', 'service',
-    function ($scope, $log, $window, service) {
+  .controller('stroopExecutableCtrl', [ '$scope', '$log', '$window', '$timeout', 'service',
+    function ($scope, $log, $window, $timeout, service) {
 
-    // 1. Making sure we hide everything at startup
-    $scope.visible = false;
+    // Make the stimulus available for the <tatool-stimulus> template
+    $scope.stimulus = service.stimulus;
+    // Make the input available for the <tatool-input> template
+    $scope.input = service.input;
+    // Make the data path available for the <tatool-stimulus> template
+    $scope.dataPath = service.dataPath;
 
-    var inputEnabled = false;
+    // Start execution
+    $scope.start = function() {
+      // Prepare stimulus
+      service.createStimulus();
 
-    // 2. Create stimulus and set our template variables
-    service.createStimulus();
-    $scope.stimulusText = service.stimulusText;
-    $scope.styleIsGreen = service.styleIsGreen;
-    
-    // 3. Show the stimulus and get the start time
-    $scope.visible = true;
-    inputEnabled = true;
-    service.startTime = new Date().getTime();
-    service.timer.start(timerUp);
+      // Enable input, start timer and display stimulus
+      service.input.enable();
+      service.timer.start(timerUp);
+      service.startTime = service.stimulus.show();
+    };
 
-    // called when timer is up to block input and stop executable
+    // Called by our timer when the time is up and no user input was captured
     function timerUp() {
-      inputEnabled = false;
-      processResponse('', new Date().getTime());
+      service.input.disable();
+      service.endTime = service.stimulus.hide();
+      service.processResponse('');
     }
 
-    // 4. Listen to user input in the form of key press
-    $scope.$on('keyPress', function(event, keyEvent) {
-      if (inputEnabled) {
-        if(keyEvent.which === 65 || keyEvent.which === 76) { // A-Key || L-Key
-          inputEnabled = false; 
-          switch (keyEvent.which) {
-            case 65:
-              processResponse('blue', keyEvent.timeStamp);
-              break;
-            case 76:
-              processResponse('green', keyEvent.timeStamp);
-            break
-          }
-        }
-      }
-    });
-
-    // 5. Provide our executable service with the response and time of response
-    function processResponse(givenResponse, endTime) {
-      service.endTime = endTime;
+    // Captures user input
+    $scope.inputAction = function(input, timing, event) {
+      service.input.disable();
       service.timer.stop();
-      $scope.visible = false;
-      service.processResponse(givenResponse);
-    }
+      service.stimulus.hide();
+      service.endTime = timing;
+      service.processResponse(input.givenResponse);
+    };
 
   }]);

@@ -6,7 +6,7 @@
     "allowEscapeKey" : true,
     "export" : [ 
         { "mode": "upload", "auto": false }, 
-        { "mode": "remote", "auto": false, "target": "http://www.tatool.ch/tatoolweb/upload.php" },
+        { "mode": "remote", "auto": false, "target": "http://www.tatool.ch/tatoolweb/remoteUpload.php" },
         { "mode": "download" } ],
     "moduleHierarchy": {
     	"tatoolType": "List",
@@ -27,7 +27,9 @@
                     "pages": [
                         "complexNum.inst.01.html" ,
                         "complexNum.inst.02.html"
-                    ]
+                    ],
+                    "randomObj" : { "key": "value"},
+                    "randomObjArray" : { "me" : ["1", "2"] }
                 },
                 {
                     "tatoolType": "Dual",
@@ -52,6 +54,7 @@
                                 "customType": "stroopExecutable",
                                 "name": "second",
                                 "blankInterval" : "600",
+                                "stimuliFile" : "stroop.csv",
                                 "status": {
                                     "levelPanel": true,
                                     "feedbackPanel": true,
@@ -73,6 +76,7 @@
                                 "name": "third",
                                 "fixationInterval" : "500",
                                 "blankInterval" : "600",
+                                "stimuliFile" : "stroop.csv",
                                 "status": {
                                     "levelPanel": true,
                                     "feedbackPanel": true,

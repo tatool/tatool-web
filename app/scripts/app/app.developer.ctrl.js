@@ -50,6 +50,7 @@ angular.module('tatool.app')
 
     // upload local file
     $scope.addModule = function(e) {
+      hideAlert();
 
       startSpinner();
 
@@ -81,6 +82,35 @@ angular.module('tatool.app')
       moduleCreatorService.loadLocalModule(file).then(onModuleLoaded, onModuleError);
     };
 
+    // open module editor
+    $scope.editModule = function(module) {
+      hideAlert();
+
+      var modalInstance = $modal.open({
+            templateUrl: 'views/app/edit.html',
+            controller: 'EditCtrl',
+            size: 'lg',
+            resolve: {
+              module: function () {
+                return module;
+              }
+            }
+          });
+
+      modalInstance.result.then(function(data) {
+        moduleDataService.addModule(module).then(function(data) {
+          setAlert('success', 'Module successfully saved.');
+          initModules();
+        }, function(error) {
+          setAlert('danger', error);
+          initModules();
+        });
+      }, function(error) {
+        initModules();
+      });
+    };
+
+    // toggle repository functionality
     $scope.toggleRepository = function($event, module) {
       if (module.moduleType) {
         bootbox.dialog({

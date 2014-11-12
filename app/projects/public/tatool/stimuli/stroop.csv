@@ -1,0 +1,13 @@
+stimulusValue;stimulusValueType;stimulusValueColor;stimulusType;correctResponse;keyCode
+green;text;green;congruent;green;ArrowDown
+red;text;red;congruent;red;ArrowLeft
+blue;text;blue;congruent;blue;ArrowRight
+red;text;green;incongruent;green;ArrowDown
+blue;text;green;incongruent;green;ArrowDown
+green;text;red;incongruent;red;ArrowLeft
+blue;text;red;incongruent;red;ArrowLeft
+green;text;blue;incongruent;blue;ArrowRight
+red;text;blue;incongruent;blue;ArrowRight
+red;circle;red;neutral;red;ArrowLeft
+green;circle;green;neutral;green;ArrowDown
+blue;circle;blue;neutral;blue;ArrowRight

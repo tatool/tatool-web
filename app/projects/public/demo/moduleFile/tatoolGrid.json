@@ -1,20 +1,21 @@
 {
-    "name": "Tatool Grid",
-    "author": "Andre Locher",
-    "label": "tatoolGrid",
-    "projectUrl": "http://www.tatool.ch/tatoolweb/projects/demo/",
+    "name": "Tatool Grid Example",
+    "author": "Tatool",
+    "label": "tatoolGridExample",
+    "project": { "name" : "demo", "access": "public"},
     "fullscreen": false,
     "allowEscapeKey": true,
     "moduleHierarchy": {
     	"tatoolType": "List",
         "iterator": { "customType" : "ListIterator", "numIterations" : "3" },
-        "handlers": [ { "customType" : "levelHandler", "name" : "level" } ],
+        "handlers": [ ],
     	"children": 
     		[
                 {
                     "tatoolType": "Executable",
                     "customType": "tatoolGridExecutable",
                     "name": "tatoolGrid",
+                    "dataPath": "",
                     "blankInterval" : "250"
                 }
     		]

@@ -16,7 +16,8 @@ angular.module('tatool.module')
 
     var token = '';
 
-    // reset the list of executables
+    // initialize executable service by requesting a resource token from the API. The token will be used to request project resources from Tatool.
+    // At the same time we're also preloading any tatool specific resources
     executableService.init = function(runningExecutor) {
       var deferred = $q.defer();
 
@@ -31,18 +32,50 @@ angular.module('tatool.module')
 
       // get session token to access resources and save to tatoolExecutable
       var tokenUrl = '/api/' + mode + '/modules/' + moduleService.getModuleId() + '/resources/token';
-      $http.get( tokenUrl)
+      $http.get(tokenUrl)
         .success(function (data) {
           token = '?' + 'token=' + data.token;
           project.token = data.token;
           project.path = '/' + mode + '/resources/' +  project.access + '/' + project.name + '/'
           tatoolExecutable.init(runningExecutor, project);
-          deferred.resolve();
+
+          initializeTatoolResources().then(function() {
+            deferred.resolve();
+          }, function(error) {
+            $log.error(error);
+            deferred.reject(error);
+          });
         })
         .error(function (error) {
-          console.log(error);
+          $log.error(error);
           deferred.reject(error);
         });
+
+      return deferred.promise;
+    };
+
+    // preload tatool templates
+    var initializeTatoolResources = function() {
+      var deferred = $q.defer();
+
+      var preload = function(item, cb) {
+        $http.get(item).success( function(template) {
+          $templateCache.put(item, template);
+          cb();
+        }).error( function(error) {
+          cb(error);
+        });
+      };
+
+      // loop through resources
+      async.each(cfgModule.MODULE_RESOURCES, preload, function(err) {
+        if (err) {
+          $log.error(err);
+          deferred.reject(err);
+        } else {
+          deferred.resolve();
+        }
+      });
 
       return deferred.promise;
     };

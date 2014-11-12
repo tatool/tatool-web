@@ -2,7 +2,7 @@
     "name": "My Module is even longer than all the other modules and some more text as well",
     "author": "Andre Locher",
     "label": "new",
-    "projectUrl": "/library/projects/tatoolDemo/",
+    "project": { "name" : "demo", "access": "public"},
     "fullscreen": false,
     "allowEscapeKey": true,
     "moduleHierarchy": {

@@ -81,7 +81,7 @@ angular.module('tatool.app')
       return sessionProperties;
     };
 
-    function convertToCsv(allTrials, moduleProperties, sessionProperties) {
+    function convertToCsv(allTrials, moduleProperties, sessionProperties, moduleLabel) {
       var output = '';
       var trials = allTrials;
       var header = ['userId', 'moduleId', 'sessionId', 'trialId', 'executableId'];
@@ -140,6 +140,9 @@ angular.module('tatool.app')
             // add header if it doesn't already exist
             tIndex = contains(header, prefixedKey);
             if (tIndex === -1) {
+              if (key === 'moduleId' && moduleLabel) {  // replacing moduleId with moduleLabel if available
+                currentTrial[key] = moduleLabel;
+              }
               tIndex = contains(header, key); // making sure we don't add a property twice from our base header
             }
             if (tIndex === -1) {
@@ -200,7 +203,7 @@ angular.module('tatool.app')
           var moduleProperties = getModuleProperties(response);
           var sessionProperties = getSessionProperties(response);
 
-          var csv = convertToCsv(trials, moduleProperties, sessionProperties);
+          var csv = convertToCsv(trials, moduleProperties, sessionProperties, response.moduleLabel);
           deferred.resolve(csv);
         }, function(error) {
           deferred.reject(error);
@@ -363,7 +366,8 @@ angular.module('tatool.app')
         case 'download':
           downloadExport(module).then(function(data) {
             deferred.resolve();
-            var filename = module.moduleId + '_' + userService.getUserName() +  '.csv';
+            var moduleName = (module.moduleLabel) ? module.moduleLabel : module.moduleId;
+            var filename = moduleName + '_' + userService.getUserName() +  '.csv';
             download(data, filename, 'text/plain'); // triggers file download (has issues on Safari)
           }, function(error) {
             deferred.reject(error);

@@ -14,7 +14,7 @@ angular.module('tatool.module')
     // creates a new timer, registers and returns it
     timerService.createTimer = function(duration, visual, executable) {
       if (!executable.name) {
-        throw('Timer could not be created for executable  with customType \''+executable.customType+ '\'. The name property for this executable is missing or the timer is instantiated in the executable constructor.');
+        throw('Timer could not be created for executable  with customType \''+executable.customType+ '\'. The name property for this executable is missing.');
       }
 
       var newTimer = new Timer(duration, visual);
@@ -77,6 +77,7 @@ angular.module('tatool.module')
       if (this.visual) {
         this.visualTimer = $interval(updateVisualTimer.bind(this), VISUAL_TIMER_INTERVAL, this.duration/VISUAL_TIMER_INTERVAL);
       }
+      return performance.now();
     };
     /*jshint -W040 */
     function updateVisualTimer() {
@@ -93,6 +94,7 @@ angular.module('tatool.module')
       if (this.visual) {
         $interval.cancel(this.visualTimer);
       }
+      return performance.now();
     };
 
     // inform the statusPanelService of the timer values
@@ -114,13 +116,13 @@ angular.module('tatool.module')
 
     // gets called when timer is up
     Timer.prototype.timerUp = function() {
+      var time = performance.now();
       if (this.visual) {
         this.endVisualTimer();
       }
       if (this.targetFunction) {
-        this.targetFunction();
+        this.targetFunction(time);
       }
-      
     };
 
     return timerService;

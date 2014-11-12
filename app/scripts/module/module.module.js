@@ -4,13 +4,14 @@ angular.module('tatool.module', ['tatool', 'tatool.auth', 'angular-progress-arc'
   .constant('cfgModule', {
     MODULE_DEFAULT_PROJECT: 'tatool',
     MODULE_IMG_PATH: '../../images/module/',
-    MODULE_VIEW_PATH: '../../views/module/',
+    MODULE_VIEW_PATH: '',
+    MODULE_RESOURCES: ['blank.html', 'fixation.html', 'statuspanel.html', 'tatoolGrid.html', 'tatoolStimulus.html'],
     IMG_PATH: 'images/module/',
     VIEW_PATH:'views/module/',
     DEFAULT_BLANK_INTERVAL: 200,
-    DEFAULT_BLANK_INTERVAL_SCREEN: '../../views/module/blank.html',
+    DEFAULT_BLANK_INTERVAL_SCREEN: 'blank.html',
     DEFAULT_FIXATION_INTERVAL: 0,
-    DEFAULT_FIXATION_INTERVAL_SCREEN: '../../views/module/fixation.html',
+    DEFAULT_FIXATION_INTERVAL_SCREEN: 'fixation.html',
     CSV_DELIMITER: ';',
     MIN_EPOCH_MS: 32000000000
   })

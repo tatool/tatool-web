@@ -1,0 +1,102 @@
+<b>Executable Properties</b>
+
+<br><br>
+
+<div>
+  <form class="form-horizontal" role="form" ng-submit="saveModule()">
+  <div class="form-group">
+    <label for="name" class="col-sm-3 control-label">Type</label>
+    <div class="col-sm-9">
+      <input type="text" class="form-control" id="customType" ng-model="element.customType" ng-required="true">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="name" class="col-sm-3 control-label">Name</label>
+    <div class="col-sm-9">
+      <input type="text" class="form-control" id="name" ng-model="element.name" ng-required="true">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="name" class="col-sm-3 control-label">Fixation Interval</label>
+    <div class="col-sm-9">
+      <input type="text" class="form-control" id="fixationInterval" ng-model="element.fixationInterval">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="name" class="col-sm-3 control-label">Blank Interval</label>
+    <div class="col-sm-9">
+      <input type="text" class="form-control" id="blankInterval" ng-model="element.blankInterval">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="name" class="col-sm-3 control-label">Status Panel</label>
+    <div class="col-sm-9">
+      <label class="checkbox-inline">
+        <input type="checkbox" id="feedback" ng-model="element.status.feedbackPanel"> Feedback
+      </label>
+      <label class="checkbox-inline">
+        <input type="checkbox" id="trial" ng-model="element.status.trialCountPanel"> Trial Counter
+      </label>
+      <label class="checkbox-inline">
+        <input type="checkbox" id="timer" ng-model="element.status.timerPanel"> Timer
+      </label>
+      <label class="checkbox-inline">
+        <input type="checkbox" id="level" ng-model="element.status.levelPanel"> Level
+      </label>
+    </div>
+  </div>
+  
+  <!-- Display custom properties -->
+  <hr>
+  <b>Custom Properties</b>
+  <br><br>
+
+  <div class="form-group" ng-repeat="property in customProperties">
+    <div ng-switch="property.propertyType">
+      <div ng-switch-when="[object Array]">
+        <label for="name" class="col-sm-3 control-label">'{{property.propertyName}}'</label>
+        <div class="col-sm-9">
+          
+          <div class="form-group col-sm-10">
+            <p class="form-control-static"><b>Array</b></p>
+          </div>
+          <div class="form-group col-sm-12" ng-repeat="entry in element[property.propertyName] track by $index">
+            <input type="text" class="form-control" id="{{entry}}" ng-model="element[property.propertyName][$index]" > 
+          </div>
+        </div>
+      </div>
+      <div ng-switch-when="[object Object]">
+        <label for="{{property.propertyName}}" class="col-sm-3 control-label">'{{property.propertyName}}'</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control" id="{{property.propertyName}}" ng-model="element[property.propertyName]" ng-disabled="property.disabled">
+        </div>
+      </div>
+      <div ng-switch-default>
+        <label for="{{property.propertyName}}" class="col-sm-3 control-label">'{{property.propertyName}}'</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control" id="{{entry}}" ng-model="element[property.propertyName]" > 
+        </div>
+      </div>
+    </div>
+    
+  </div>
+  <div class="form-group">
+    <label for="name" class="col-sm-3 control-label"></label>
+    <div class="col-sm-9">
+      <button type="button" class="btn btn-default" ng-click="addProperty(element, elementIndex, elementParent)"><i class="fa fa-plus-square-o"></i> New Property</button>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="form-group">
+    <div class="col-sm-offset-3 col-sm-9">
+      <button type="button" class="btn btn-default" ng-click="moveElementUp(element, elementIndex, elementParent)" ng-if="elementIndex > 0 || elementIndex === 'secondary'"><i class="fa fa-angle-double-up"></i> Up</button>
+      <button type="button" class="btn btn-default" ng-click="moveElementDown(element, elementIndex, elementParent)" ng-if="(elementIndex < (elementParent.children.length - 1)) || (elementIndex === 'primary')"><i class="fa fa-angle-double-down"></i> Down</button>
+      <button type="button" class="btn btn-default" ng-click="deleteElement(element, elementIndex, elementParent)"><i class="fa fa-trash-o"></i> Delete</button>
+    </div>
+  </div>
+
+</form>
+
+</div>

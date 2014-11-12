@@ -46,6 +46,10 @@ angular.module('tatool.module')
       return module.getId();
     };
 
+    moduleService.getModuleLabel = function() {
+      return module.getLabel();
+    };
+
     moduleService.getModuleName = function() {
       return module.getName();
     };

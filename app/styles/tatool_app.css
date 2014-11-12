@@ -320,6 +320,88 @@ footer {
   text-transform: capitalize;
 }
 
+/** --------- 
+EDITOR
+-----------**/
+
+#moduleEditor {
+  display: table;
+  width: 100%;
+  clear: left;
+}
+
+#moduleTree {
+  display: table-cell;
+  width: 280px;
+  max-width: 280px;
+  height: 100%;
+  border-top: 1px solid #bebebe;
+  border-left: 1px solid #bebebe;
+  border-right: 1px solid #bebebe;
+  padding: 5px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  background-color: #f2f2f2;
+}
+
+#moduleTree .green {
+  color: #19741b;
+}
+
+#moduleTree .red {
+  color: #972702;
+}
+
+#moduleTree .active {
+  font-weight: bold;
+  color: #125413;
+  background-color: #dcebda;
+}
+
+#moduleContent {
+  display: table-cell;
+  width: 65%;
+  padding-left: 15px;
+}
+
+ul.tree, ul.tree ul {
+    list-style-type: none;
+    margin:0;
+    padding:0;
+}
+
+ul.tree ul {
+    padding-left: 1.1em;
+}
+
+ul.tree li {
+    margin-top: 0.3em;
+    padding: 0.1em 0.6em;
+    line-height: 20px;
+    color: #333;
+    cursor: pointer;
+}
+
+ul.tree ul li {
+    margin-top: 0.3em;
+    padding: 0.1em 0.6em;
+    line-height: 20px;
+    background: url(../../images/app/lastnode.png) no-repeat;
+    color: #333;
+    cursor: pointer;
+}
+
+/* The #fff color background is to hide the previous background image*/
+
+ul.tree ul:last-child {
+    background: none;
+}
+
+ul.tree li .last {
+    background: #000 url(../../images/app/lastnode.png) no-repeat;
+}
+
 
 /** ---------
     PACKAGE

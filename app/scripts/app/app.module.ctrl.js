@@ -20,7 +20,8 @@ angular.module('tatool.app')
 
     $scope.accordionStatus = {
       'installed': true,
-      'public': true
+      'public': true,
+      'invites': true
     };
 
     function startSpinner(text) {
@@ -172,7 +173,7 @@ angular.module('tatool.app')
         if (response === 'accepted') {
           setAlert('success', 'The module <b>' + module.moduleName + '</b> has been installed.');
         } else {
-          setAlert('success', 'The module invite has been declined.');
+          setAlert('success', 'The module invitation has been declined.');
         }
       }, function(error) {
         moduleDataService.deleteModule(userService.getUserName(), module.moduleId).then(initModules);

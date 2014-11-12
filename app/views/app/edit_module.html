@@ -1,0 +1,45 @@
+<b>Module Settings</b>
+
+<br><br>
+
+<div>
+  <form class="form-horizontal" role="form" ng-submit="saveModule()">
+  <div class="form-group">
+    <label for="name" class="col-sm-2 control-label">Name</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="name" ng-model="module.moduleName" ng-required="true">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="author" class="col-sm-2 control-label">Author</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="author" ng-model="module.moduleAuthor">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="label" class="col-sm-2 control-label">Label</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="label" ng-model="module.moduleLabel">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="label" class="col-sm-2 control-label">Project</label>
+    <div class="col-sm-4">
+      <input type="text" class="form-control" id="label" ng-model="module.project.name">
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <div class="radio">
+        <label>
+          <input type="radio" name="projectRadio" ng-model="module.project.access" value="public"> Public
+        </label>
+        <label>
+          <input type="radio" name="projectRadio" ng-model="module.project.access" value="private"> Private
+        </label>
+      </div>
+    </div>
+  </div>
+</form>
+
+</div>

@@ -25,10 +25,12 @@ angular.module('tatool.module')
           executor.stopModule(true);
         }
       } else {
+        var timing = performance.now();
         // workaround fix for mozilla as event timestamp shows time in ms since last reboot instead of time since epoch
         if ($event.timeStamp < cfgModule.MIN_EPOCH_MS) {
           $event.timeStamp = new Date().getTime();
         }
+        $event.keyPressTime = timing;
         $scope.$broadcast('keyPress', $event);
       }
     };

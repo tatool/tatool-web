@@ -1,0 +1,35 @@
+<div id="editModal">
+  <div class="modal-header">
+    <div class="modal-title">
+      <span><b>{{module.moduleName}}</b></span>
+      <button type="button" class="bootbox-close-button close" style="margin-left: 20px" aria-hidden="true" ng-click="cancel()">×</button>
+    </div>
+  </div>
+  <div class="modal-body">
+
+    <div ng-class="{danger:'alert alert-danger alert-dismissible', success:'alert alert-success alert-dismissible', info:'alert alert-info alert-dismissible'}[alert.type]" role="alert" ng-show="alert.visible">
+      <button type="button" class="close" ng-click="hideAlert()"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+      <div ng-bind-html="alert.msg"></div>
+    </div>  
+
+    <div id="moduleEditor">
+      <div id="moduleTree">
+        <ul class="tree">
+          <li ng-click="openModule()" ng-class="{'active': highlightId.key === 'module'}"><i class="fa fa-cube"></i> <b>Module</b></li>
+          <tree element="module.moduleDefinition.moduleHierarchy" on-element-click="openElement(element, index, parent)" top-func="openElement" highlight="highlightId">        
+          </tree>
+        </ul>
+      </div>
+      <div id="moduleContent">
+        <div ng-include="elementType"></content>
+      </div>
+    </div>
+
+    <br clear="left"><br>
+ 
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-default" ng-click="ok()">Save</button>
+    <button class="btn btn-default" ng-click="cancel()">Cancel</button>
+  </div>
+</div>

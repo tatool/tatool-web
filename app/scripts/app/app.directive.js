@@ -11,6 +11,63 @@ angular.module('tatool.app').directive('customOnChange', function() {
   };
 });
 
+
+angular.module('tatool.app').directive("tree", ['RecursionHelper', function(RecursionHelper) {
+  return {
+    restrict: "E",
+    scope: {
+      element: '=',
+      onelementclick: '&',
+      topFunc: '=',
+      index: '@',
+      parent: '=',
+      highlight: '='
+    },
+    template: 
+      
+        '<div ng-switch on="element.tatoolType">' +
+          '<div ng-switch-when="Executable">' +
+            '<li ng-click="topFunc(element, index, parent);highlightElement(element)" ng-class="{\'active\' : highlight.key === myId}">' + 
+              '<i class="fa fa-play-circle"></i> {{ (element.customType) ? element.customType : element.tatoolType }}' +
+            '</li>' +
+          '</div>' +
+          '<div ng-switch-when="List">' +
+            '<li ng-click="topFunc(element, index, parent);highlightElement(element)" ng-class="{\'active\' : highlight.key === myId}">' + 
+              '<i class="fa fa-list"></i> {{ element.tatoolType }}' +
+            '</li>' +
+            '<ul>' + 
+              '<tree element="child" ng-repeat="child in element.children" index="{{$index}}" parent="element" onElementClick="topFunc(element, index, parent)" top-func="topFunc" highlight="highlight"></tree>' +
+            '</ul>' +
+          '</div>' +
+          '<div ng-switch-when="Dual">' +
+            '<li ng-click="topFunc(element, index, parent);highlightElement(element)" ng-class="{\'active\' : highlight.key === myId}">' + 
+              '<i class="fa fa-list-ol"></i> {{ element.tatoolType }}' +
+            '</li>' +
+              '<ul>' + 
+                '<tree element="element.children.primary" index="primary" parent="element" onElementClick="topFunc(element, index, parent)" top-func="topFunc" highlight="highlight"></tree>' +
+              '</ul>' +
+              '<ul>' + 
+                '<tree element="element.children.secondary" index="secondary" parent="element" onElementClick="topFunc(element, index, parent)" top-func="topFunc" highlight="highlight"></tree>' +
+              '</ul>' +
+          '</div>' +
+          '<div ng-switch-default>' +
+            '{{ element.tatoolType }}' +
+          '</div>' +
+        '</div>',
+      compile: function(element) {
+        return RecursionHelper.compile(element, function(scope, iElement, iAttrs, controller, transcludeFn) {
+
+          scope.myId = uuid();
+
+          scope.highlightElement = function(element) {
+            scope.highlight.key = scope.myId;
+          };
+        });
+      }
+    };
+  }]);
+
+
 /**
  * Checklist-model
  * AngularJS directive for list of checkboxes

@@ -1,7 +1,11 @@
 <!-- 
  The Executable Template is responsible for the layout of your content on the screen.
- You can access all the properties which were made accessible through the $scope object in your Controller. 
+ You can access all properties on the $scope object in your Controller. 
  -->
-<div id="centeredExecutable">
-	<div ng-class="{true: 'stroopStyleGreen', false: 'stroopStyleBlue'}[styleIsGreen]" ng-show='visible'>{{stimulusText}}</div>
-</div>
+<tatool>
+
+  <tatool-stimulus id="centeredExecutable" service="stimulus" class="stroopStimulus" dataPath="{{dataPath}}"></tatool-stimulus>
+
+  <tatool-input id="bottomExecutable" service="input" onInput="inputAction(input, timing, event)"></tatool-input>
+  
+</tatool>

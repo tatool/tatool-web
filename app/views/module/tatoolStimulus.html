@@ -1,0 +1,25 @@
+<div id="tatoolStimulus" ng-class="stimulus.stimulusClass">
+
+  <div ng-if="stimulus.data.stimulusValueType!==undefined">
+
+        <div ng-switch on="stimulus.data.stimulusValueType">
+          <div ng-switch-when="image">
+            <img class="imageStimulusValue" draggable="false" ng-src="{{stimulus.stimulusImage}}">
+          </div>
+          <div ng-switch-when="text" ng-style="stimulus.stimulusStyle" ng-class="stimulus.stimulusClass">
+            <div class="textStimulusValue"><span>{{stimulus.data.stimulusValue}}</span></div>
+          </div>
+          <div ng-switch-when="circle">
+            <div class="circle" ng-style="stimulus.stimulusStyle"> </div>
+          </div>
+          <div ng-switch-when="square">
+            <div class="square" ng-style="stimulus.stimulusStyle"> </div>
+          </div>
+          <div ng-switch-default>
+            <div class="emptyStimulusValue">ERROR: unknown stimulusValueType</div>
+          </div>
+        </div>
+
+      </div>
+
+</div>

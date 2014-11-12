@@ -1,7 +1,7 @@
 {
     "name": "Instructions",
     "label": "instructions",
-    "projectUrl": "/library/projects/tatoolDemo/",
+    "project": { "name" : "demo", "access": "public"},
     "moduleHierarchy": {
     	"tatoolType": "List",
         "iterator": { "customType" : "ListIterator", "numIterations" : "3" },

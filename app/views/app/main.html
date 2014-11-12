@@ -49,16 +49,10 @@
   <!-- INVITES -->
   <div class="container">
     <accordion>
-      <accordion-group is-open="accordionStatus.public">
+      <accordion-group is-open="accordionStatus.invites">
         <accordion-heading ng-class="'tatool-panel-heading'">
           INVITES 
-          <i class="glyphicon" ng-class="{'glyphicon-chevron-down': accordionStatus.public, 'glyphicon-chevron-right': !accordionStatus.public}"></i>
-          <form class="form-inline pull-right" role="form">
-            <div class="form-group has-feedback">
-              <input type="text" class="form-control" id="searchRepo" ng-model="query" ng-change="searchRepo()" ng-click="$event.stopPropagation()">
-              <span class="glyphicon glyphicon-search form-control-feedback"></span>
-            </div>
-          </form>
+          <i class="glyphicon" ng-class="{'glyphicon-chevron-down': accordionStatus.invites, 'glyphicon-chevron-right': !accordionStatus.invites}"></i>
         </accordion-heading>
         <div id="modules">
           <div class="tile" ng-repeat="module in invites | orderBy:'created_at':true" ng-if="!!invites.length">

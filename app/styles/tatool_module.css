@@ -54,6 +54,15 @@ html, body {
   text-align: center;
 }
 
+/* Executable */
+#bottomExecutable { 
+  position: fixed; 
+  bottom:0;
+  left:0;
+  width:100%; 
+  margin-bottom: 20px;
+}
+
 
 /* Status Panel: sub panels*/
 .panel {
@@ -228,7 +237,79 @@ circle {
 
 
 
-/* Action Panel */
+
+
+/* ---------- */
+/* Directives */
+/* ---------- */
+
+
+/* Tatool Input */
+
+#tatoolInput {
+  font-size: 100%;
+}
+
+#tatoolInput .tatoolKey {
+  display: inline-block;
+  color: #757474;
+  font-size:150%;
+  text-decoration: none;
+  text-align: center;
+  vertical-align: middle;
+  margin: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  min-width: 74px;
+  height: 71px;
+  line-height: 71px;
+  background: #eff0f2;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  border-top: 1px solid #f5f5f5;
+  -webkit-box-shadow: 
+    inset 0 0 25px #e8e8e8,
+    0 1px 0 #c3c3c3,
+    0 2px 0 #c9c9c9,
+    0 2px 3px #333;
+  -moz-box-shadow: 
+    inset 0 0 25px #e8e8e8,
+    0 1px 0 #c3c3c3,
+    0 2px 0 #c9c9c9,
+    0 2px 3px #333;
+  box-shadow: 
+    inset 0 0 25px #e8e8e8,
+    0 1px 0 #c3c3c3,
+    0 2px 0 #c9c9c9,
+    0 2px 3px #333;
+  text-shadow: 0px 1px 0px #f5f5f5;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: pointer;
+}
+
+#tatoolInput .tatoolKey:active {
+  color: #888;
+  background: #ebeced;
+  margin: 7px 5px 3px;
+  -webkit-box-shadow:
+    inset 0 0 25px #ddd,
+    0 0 3px #333;
+  -moz-box-shadow: 
+    inset 0 0 25px #ddd,
+    0 0 3px #333;
+  box-shadow: 
+    inset 0 0 25px #ddd,
+    0 0 3px #333;
+  border-top: 1px solid #eee;
+}
+
+#tatoolInput .img {
+  height: 100%;
+  padding: 5px;
+}
 
 .actionPanel {
   text-align: center;
@@ -253,11 +334,27 @@ circle {
 }
 
 
+/* Tatool Input */
 
+#tatoolStimulus {
+  font-size: 100%;
+}
 
-/* ---------- */
-/* Directives */
-/* ---------- */
+#tatoolStimulus .circle {
+  border-radius: 50%;
+  width: 140px;
+  height: 140px; 
+  background-color: #000;
+  margin: 0 auto;
+}
+
+#tatoolStimulus .square {
+  width: 140px;
+  height: 140px; 
+  background-color: #000;
+  margin: 0 auto;
+}
+
 
 /* Tatool Grid */
 

@@ -1,20 +1,253 @@
 'use strict';
 
-angular.module('tatool.module').directive('tatoolGrid', ['$log', 'cfgModule', function($log, cfgModule) {
+/**
+  <tatool> 
+  Main directive used to initiate start of executable after all directives have loaded.
+**/
+angular.module('tatool.module').directive('tatool', ['$timeout', function($timeout) {
+  return {
+    restrict: 'E',
+    priority: Number.MIN_SAFE_INTEGER, // execute as last directive
+    link: function($scope, $element, $attributes) {
+      // trigger the start function in the executable controller
+      $timeout($scope.start);
+    }
+  };
+}]);
+
+
+/**
+  <tatool-input> 
+  Directive to configure user input.
+**/
+angular.module('tatool.module').directive('tatoolInput', ['$log', '$templateCache', '$compile', 'cfgModule', function($log, $templateCache, $compile, cfgModule) {
+  return {
+    restrict: 'E',
+    transclude: true,
+    scope: {
+      service: '=',             // expects a stimulus object provided by the tatoolStimulusService
+      datapath: '@',            // defines datapath to be used to access external resources        
+      oninput: '&'              // method called on key press
+    },
+    controller: ['$scope', function($scope) {
+      this.addKey = function(keyCode, value) {
+        $scope.service._registerStaticKey(keyCode, value);
+      };
+
+      // process mouse click input
+      this.clickInput = function(keyCode, timing, event) {
+        $scope.oninput({'input': $scope.service.registeredKeyInputs[keyCode], 'timing': timing, '$event': event});
+      };
+
+      this.getDataPath = function() {
+        return ($scope.datapath) ? $scope.datapath : '';
+      };
+    }],
+    link: function (scope, element, attr) {
+      var inputEnabled = false;
+
+      // add key directives for dynamically added keys in the order they have been added
+      angular.forEach(scope.service.keyInputOrder, function(keyCode, index) {
+        var value = scope.service.registeredKeyInputs[keyCode];
+        if (value.dynamic) {
+          var label = (value.label) ? ' label="' + value.label + '"' : '';
+          var hide = (value.hide) ? ' hide' : '';
+          var keyEl = angular.element('<tatool-key code="'+ value.keyCode +'" response="'+ value.givenResponse + '"' + label + hide + ' dynamic="true"></tatool-key>');
+          element.children(':first').append(keyEl);
+          $compile(keyEl)(scope);
+        }
+      });
+
+      // remove dynamically added keys
+      scope.service.removeInputKey = function(keyCode) {
+        element.children(':first').children('[code=' + keyCode + ']').remove();
+        scope.service._removeDynamicKey(keyCode);
+        return scope.service;
+      };
+
+      // remove all dynamically added keys
+      scope.service.removeAllInputKeys = function() {
+        element.children(':first').children().remove();
+        scope.service._removeAllKeys();
+        return scope.service;
+      };
+
+      // listen to keyPress event broadcasted by mainCtrl
+      var watcher = scope.$on('keyPress', function(event, keyEvent) {
+        if (inputEnabled) {
+          if (scope.service.registeredKeyInputs[keyEvent.which]) {
+            scope.oninput({'input': scope.service.registeredKeyInputs[keyEvent.which], 'timing': keyEvent.keyPressTime, '$event': event});
+          }
+        }
+      });
+
+      // show all keys
+      scope.service.show = function() {
+        element.css("visibility","visible");
+        return performance.now();
+      };
+
+      // hide all keys
+      scope.service.hide = function() {
+        element.css("visibility","hidden");
+        return performance.now();
+      };
+
+      // enable input
+      scope.service.enable = function() {
+        inputEnabled = true;
+        return performance.now();
+      };
+
+      // disable input
+      scope.service.disable = function() {
+        inputEnabled = false;
+        return performance.now();
+      };
+
+      element.on('$destroy', function() {
+        watcher();
+      });
+    },
+    template: '<div id="tatoolInput" ng-transclude></div>'
+  };
+}]);
+
+
+/**
+  <tatool-key> 
+  Directive to configure key input.
+**/
+angular.module('tatool.module').directive('tatoolKey', ['$log', '$sce', 'tatoolExecutable', function($log, $sce, tatoolExecutable) {
+  return {
+    restrict: 'E',
+    scope: {},
+    require: '^tatoolInput',
+    link: function (scope, element, attr, tatoolInputCtrl) {
+      // register key with tatoolInput if not dynamically added
+      if (!attr.dynamic) {
+        tatoolInputCtrl.addKey(attr.code, attr.response);
+      }
+
+      // hide input if configured
+      if (attr.hide !== undefined) {
+        element.css('display','none');
+      }
+
+      // generate the display label for the key
+      if (attr.label !== undefined) {
+        scope.key = $sce.trustAsHtml(attr.label);
+      } else if (attr.image !== undefined) {
+        if (tatoolExecutable.isProjectResource(tatoolInputCtrl.getDataPath() + attr.image)) {
+          var imgSrc = tatoolExecutable.getResourcePath('stimuli', attr.image);
+          scope.key = $sce.trustAsHtml('<img src="' + imgSrc + '" class="img">');
+        } else {
+          scope.key = $sce.trustAsHtml('<img src="' + tatoolInputCtrl.getDataPath() + attr.image + '" class="img">');
+        }
+      } else {
+        var internalValue = attr.code;
+        if (internalValue.substring(0,5) === 'Digit') {
+          internalValue = internalValue.slice(-1);
+        } else if (internalValue.substring(0,6) === 'Numpad') {
+          internalValue = internalValue.slice(-1);
+        } else {
+          internalValue = attr.code;
+        }
+
+        switch (internalValue) {
+          case 'ArrowLeft' :
+            internalValue = '<i class="fa fa-caret-left fa-2x" style="margin-left:-7px;margin-top:12px"></i>'; 
+            break;
+          case 'ArrowRight' :
+            internalValue = '<i class="fa fa-caret-right fa-2x" style="margin-right:-7px;margin-top:12px"></i>'; 
+            break;
+          case 'ArrowUp' :
+            internalValue = '<i class="fa fa-caret-up fa-2x" style="margin-top:9px"></i>'; 
+            break;
+          case 'ArrowDown' :
+            internalValue = '<i class="fa fa-caret-down fa-2x" style="margin-top:12px"></i>'; 
+            break;
+        }
+        scope.key = $sce.trustAsHtml(internalValue);
+      }
+
+      scope.clickInput = function($event) {
+        var timing = performance.now();
+        tatoolInputCtrl.clickInput(KeyCodes[attr.code], timing, $event);
+      };
+    },
+    template: '<div class="tatoolKey" ng-click="clickInput($event)" ng-bind-html="key"></div>'
+  };
+}]);
+
+
+
+/**
+  <tatool-stimulus> 
+  Directive to display a stimulus.
+**/
+angular.module('tatool.module').directive('tatoolStimulus', ['$log', '$templateCache', 'cfgModule', function($log, $templateCache, cfgModule) {
   return {
     restrict: 'E',
     scope: {
-      grid: '=',                // expects a tatool-grid object provided by the tatoolGridService
+      service: '=',             // expects a stimulus object provided by the tatoolStimulusService
+      datapath: '@',            // defines datapath to be used to access resources
+      stimulusclick: '&'        // function to call on mouse click on stimulus
+    },
+    link: function (scope, element, attr) {
+
+      // hide by default
+      element.css("visibility","hidden");
+
+      // set the datapath
+      scope.service.dataPath = (scope.datapath) ? scope.datapath : '';
+
+      scope.service.show = function() {
+        scope.stimulus = scope.service;
+        element.css("visibility","visible");
+        return performance.now();
+      };
+
+      scope.service.hide = function() {
+        element.css("visibility","hidden");
+        return performance.now();
+      };
+
+      scope.stimulusClickEvent = function($event, stimulus) {
+        if ($event.timeStamp < cfgModule.MIN_EPOCH_MS) {
+          $event.timeStamp = new Date().getTime();
+        }
+        scope.stimulusclick({'stimulus': stimulus, '$event': $event});
+      };
+
+      element.on('$destroy', function() {
+        
+      });
+    },
+    template: $templateCache.get('tatoolStimulus.html')
+  };
+}]);
+
+
+/**
+  <tatool-grid> 
+  Directive creating a grid used to display stimuli.
+**/
+angular.module('tatool.module').directive('tatoolGrid', ['$log', '$templateCache', 'cfgModule', function($log, $templateCache, cfgModule) {
+  return {
+    restrict: 'E',
+    scope: {
+      service: '=',                // expects a tatool-grid object provided by the tatoolGridService
       gridspacing: '@',         // defines the table style [collapse|separate|n]
       cellclass: '@',           // defines default class used for grid cells
       cellwidth: '@',           // defines default width of a grid cell
       cellheight: '@',          // defines default height of a grid cell
       hideemptycells: '@',      // hides [yes] or shows [] empty grid cells
       disablehover: '@',        // disables [yes] or enables [] hover effect on grid cells (expects a static css class)
-      datapath: '@',            // defines datapath to be used to access images
+      datapath: '@',            // defines datapath to be used to access resources
       allowdrag: '@',           // defines whether drag feature is enabled [yes] or not [] by default
       allowdrop: '@',           // defines whether drop feature is enabled [yes|all] or not [] by default
-      gridclick: '&',           // function to cal on mouse click on a specific grid cell
+      gridclick: '&',           // function to call on mouse click on a specific grid cell
       griddrop: '&',            // function to call on drop on a specific grid cell
       gridmouseenter: '&',      // function to call on mouse enter on a specific grid cell
       gridmouseleave: '&'       // function to call on mouse leave on a specific grid cell
@@ -37,31 +270,33 @@ angular.module('tatool.module').directive('tatoolGrid', ['$log', 'cfgModule', fu
         scope.tableStyle['border-spacing'] = '15px';
       }
 
-      // clean datapath value if given
-      if (scope.datapath === undefined) {
-        scope.tatoolDataPath = '';
-      } else {
-        if (scope.datapath.indexOf('/', scope.datapath.length - 1) === -1) {
-          scope.tatoolDataPath = scope.datapath + '/';
-        } else {
-          scope.tatoolDataPath = scope.datapath;
-        }
-      }
+      // set the datapath
+      scope.service.dataPath = (scope.datapath) ? scope.datapath : '';
       
       // initialize grid UI
-      scope.cells = scope.grid.cells;   // grid given to directive
+      scope.cells = scope.service.cells;   // grid given to directive
       var coordinates = {};             // used as a shortcut object to transform position to row/col
       var cellsUsed = [];               // holds the cells which contain user content
 
+      scope.service.show = function() {
+        element.css("visibility","visible");
+        return performance.now();
+      };
+
+      scope.service.hide = function() {
+        element.css("visibility","hidden");
+        return performance.now();
+      };
+
       // initialize grid
-      var initGrid = function() {
+      scope.service.initGrid = function() {
 
         scope.gridCells = [];
-        for(var i = 0; i < scope.grid.rows; i++) {
+        for(var i = 0; i < scope.service.rows; i++) {
           var row = [];
           scope.gridCells.push(row);
-          for(var j = 1; j <= scope.grid.cols; j++) {
-            var position = (scope.grid.cols * i) + j;
+          for(var j = 1; j <= scope.service.cols; j++) {
+            var position = (scope.service.cols * i) + j;
 
             var cell = {gridPosition: position, data: {}};
             coordinates[position] = {row: i, col: (j - 1)};
@@ -79,7 +314,7 @@ angular.module('tatool.module').directive('tatoolGrid', ['$log', 'cfgModule', fu
           }
         }
         // provide the grid with the coordinate lookup array
-        scope.grid.coordinates = coordinates;
+        scope.service.coordinates = coordinates;
       };
 
       // init cell with values
@@ -96,11 +331,11 @@ angular.module('tatool.module').directive('tatoolGrid', ['$log', 'cfgModule', fu
         // try to assign appropriate size automatically depending on viewport size
         if (cell.gridCellHeight === undefined || cell.gridCellHeight === '') {
           var viewportHeight = $(window).height();
-          cell.gridCellHeight = (viewportHeight/2) / scope.grid.rows;
+          cell.gridCellHeight = (viewportHeight/2) / scope.service.rows;
         }
         if (cell.gridCellWidth === undefined || cell.gridCellWidth === '') {
           var viewportWidth = $(window).width();
-          cell.gridCellWidth = (viewportWidth/2) / scope.grid.cols;
+          cell.gridCellWidth = (viewportWidth/2) / scope.service.cols;
         }
 
         // procoess built-in stimulus value types (circle/square)
@@ -168,10 +403,10 @@ angular.module('tatool.module').directive('tatoolGrid', ['$log', 'cfgModule', fu
       };
 
       // initialize grid
-      initGrid();
+      scope.service.initGrid();
 
       // init cell with values
-      var refreshGrid = function() {
+      scope.service.refreshGrid = function() {
         var cellsUsedNew = [];
 
         // update cells
@@ -207,24 +442,6 @@ angular.module('tatool.module').directive('tatoolGrid', ['$log', 'cfgModule', fu
         cellsUsed = cellsUsedNew;
       };
 
-      // listen to refresh calls of this grid to initiate UI update
-      scope.$on('tatool-grid:refresh', function (event, targetGridId) {
-        if (targetGridId === scope.grid.gridId) {
-          refreshGrid();
-        }
-      });
-
-      // listen to redraw calls of this grid to initiate UI update
-      scope.$on('tatool-grid:redraw', function (event, targetGridId) {
-        if (targetGridId === scope.grid.gridId) {
-          initGrid();
-        }
-      });
-
-      scope.getValue = function(value) {
-        console.log('redraw ' + value);
-      };
-
       scope.gridClickEvent = function($event, cell) {
         if ($event.timeStamp < cfgModule.MIN_EPOCH_MS) {
           $event.timeStamp = new Date().getTime();
@@ -246,11 +463,11 @@ angular.module('tatool.module').directive('tatoolGrid', ['$log', 'cfgModule', fu
       };
 
       element.on('$destroy', function() {
-        
+
       });
 
     },
-    templateUrl: '../../views/module/tatoolGrid.html'
+    template: $templateCache.get('tatoolGrid.html')
   };
 }]);
 
@@ -293,7 +510,7 @@ angular.module('tatool.module').directive('tatoolDrag', function() {
           snap: '.emptyCellValue',
           snapMode: 'corner',
           snapTolerance: 15
-        }).data('fromGrid', scope.grid, 'fromPosition', scope.col.gridPosition);
+        }).data('fromGrid', scope.service, 'fromPosition', scope.col.gridPosition);
       }
     }
   };

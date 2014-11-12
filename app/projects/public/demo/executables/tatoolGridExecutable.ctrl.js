@@ -8,13 +8,14 @@ tatool
     $scope.dataPath = service.dataPath;
     $scope.myGrid = service.myGrid;
 
-    // tell service to prepare grid
-    service.createStimulus();
+    $scope.start = function() {
+      service.createStimulus();
+    };
 
     $scope.userClick = function(cell, $event) {
       if (cell.data.animal !== undefined) {
         service.messageTimer.stop(); // stop any previously running timer
-        processResponse('black', 'Hello, I am a ' + cell.data.animal + '!');
+        processResponse('black', 'Hello, I\'m a ' + cell.data.animal + '!');
       }
     };
 

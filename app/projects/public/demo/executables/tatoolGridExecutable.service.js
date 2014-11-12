@@ -12,9 +12,6 @@ tatool
       this.messageTimer = timerService.createTimer(2000, false, this);
       this.endTimer = timerService.createTimer(2500, false, this);
 
-      // set the data path for our animal images
-      this.dataPath = '../../packages/test/data/';
-
       // create a new tatoolGrid with 2 rows and 4 cols
       this.myGrid = tatoolGridService.createGrid(2, 4, 'animalGrid');
     };

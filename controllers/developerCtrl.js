@@ -202,10 +202,11 @@ exports.getResourceToken = function(req, res) {
 
 exports.getResource = function(req, res) {
   var projectsPath = req.app.get('projects_path');
-  Module.findOne({ sessionToken: req.query.token }, function(err, module) {
+
+  Module.find({ sessionToken: req.query.token }, {}, { limit : 1 }, function(err, module) {
     if (err) {
       res.status(500).send(err);
-    } else if (module) {
+    } else if (module.length === 1) {
       if (projectsPath.substring(0, 4) !== 'http') {
         var file = projectsPath + req.params.projectAccess + '/' + req.params.projectName + '/' + req.params.resourceType + '/' + req.params.resourceName;
         fs.exists(file, function(exists) {

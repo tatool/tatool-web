@@ -2,7 +2,7 @@
     "name": "List Element with extra line and stuff",
     "author": "University of Colorado Boulder",
     "label": "list",
-    "projectUrl": "/library/projects/tatoolDemo/",
+    "allowEscapeKey" : true,
     "moduleHierarchy": {
     	"tatoolType": "List",
         "iterator": { "customType" : "ListIterator", "numIterations" : "3" },
@@ -13,6 +13,7 @@
     				"tatoolType": "Executable",
     				"customType": "stroopExecutable",
                     "name": "stroop1",
+                    "fixationInterval" : 200,
                     "blankInterval" : "600",
                     "status": {
                         "levelPanel": true,

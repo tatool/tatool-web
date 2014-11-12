@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('tatool.module')
-  .factory('tatoolGridService', [ '$log', '$rootScope', function ($log, $rootScope) {
+  .factory('tatoolGridService', [ '$log', '$rootScope', 'tatoolExecutable', function ($log, $rootScope, tatoolExecutable) {
 
     // Define our executable service constructor which will be called once for every instance
     var tatoolGridService = {};
@@ -13,6 +13,7 @@ angular.module('tatool.module')
     };
 
     function Grid(gridId) {
+      this.dataPath;
       this.cellsObject = {};
       this.cells = [];
       this.gridId = gridId ? gridId : 'default';
@@ -50,6 +51,15 @@ angular.module('tatool.module')
         }
         if (data.gridCellWidth !== undefined) {
           cell.gridCellWidth = data.gridCellWidth;
+        }
+        // prepare image source
+        if (data.stimulusValueType === 'image') {
+          if (tatoolExecutable.isProjectResource(this.dataPath + data.stimulusValue)) {
+            var imgSrc = tatoolExecutable.getResourcePath('stimuli', data.stimulusValue);
+            cell.stimulusImage = imgSrc;
+          } else {
+            cell.stimulusImage = this.dataPath + data.stimulusValue;
+          }
         }
         return cell;
       };
@@ -167,12 +177,12 @@ angular.module('tatool.module')
 
       this.refresh = function() {
         this.refreshCells();
-        $rootScope.$broadcast('tatool-grid:refresh', this.gridId);
+        this.refreshGrid();
       };
 
       this.redraw = function() {
         this.refreshCells();
-        $rootScope.$broadcast('tatool-grid:redraw', this.gridId);
+        this.initGrid();
       };
 
       this.refreshCells = function() {

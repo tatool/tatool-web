@@ -17,10 +17,9 @@ angular.module('tatool.module')
       obj.currentSessionId = moduleService.createSession();
 
       // saving the module back to make sure the new session is registered in case of an error
-      moduleService.saveModule();
-
-      // initialize the module
-      initializeModule();
+      moduleService.saveModule().then(function() {
+        initializeModule();
+      });
     };
 
     var initializeModule = function() {
