@@ -29,7 +29,7 @@ angular.module('tatool.module', ['tatool', 'tatool.auth', 'angular-progress-arc'
 
     $stateProvider
       .state('moduleHome', {
-        url: '/',
+        url: '/module',
         templateUrl: cfgModule.MODULE_VIEW_PATH + 'module.html'
       })
       .state('module', {

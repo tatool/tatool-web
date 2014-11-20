@@ -1,0 +1,9 @@
+**New Developer Sign-Up**
+
+The following user has signed up for a developer account on tatool-web.com
+
+<%= user %>
+
+Regards
+
+Tatool

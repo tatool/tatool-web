@@ -1,3 +1,5 @@
+'use strict';
+
 angular.module('tatool.app')
 .factory('RecursionHelper', ['$compile', function($compile){
   return {

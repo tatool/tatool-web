@@ -6,8 +6,6 @@ tatool
     
     $window.focus();
 
-    var inputEnabled = true;
-
     // initialize template variables
     $scope.userName = userService.getUserName() ? userService.getUserName() : '';
     $scope.moduleName = moduleService.getModuleName() ? moduleService.getModuleName() : '';
@@ -16,21 +14,26 @@ tatool
     $scope.sessionNr = moduleService.getMaxSessionId() ? moduleService.getMaxSessionId() : '';
     $scope.moduleProperties = moduleService.getModuleProperties() ? moduleService.getModuleProperties() : {};
 
-    // initialize the instruction at startup to point to first page
-    $scope.currentIndex = 0;
-    $scope.urls = service.pages;
-    $scope.currentPage = $scope.urls[$scope.currentIndex];
+    $scope.input = service.input;
 
-    // listen to user input in the form of key press
-    $scope.$on('keyPress', function(event, keyEvent) {
-      if (inputEnabled) {
-        if(keyEvent.which === 37) { // Left Arrow
-          $scope.go(-1);
-        } else if (keyEvent.which === 39) { // Right Arrow
-          $scope.go(1);
-        }
+    // start instruction
+    $scope.start = function() {
+      // initialize the instruction at startup to point to first page
+      $scope.currentIndex = 0;
+      $scope.urls = service.pages;
+      $scope.currentPage = $scope.urls[$scope.currentIndex];
+      service.input.hide();
+      service.input.enable();
+    };
+
+    // capture user input
+    $scope.inputAction = function(input, timing, event) {
+      if(input.givenResponse === 'back') { // Left Arrow
+        $scope.go(-1);
+      } else if (input.givenResponse === 'next') { // Right Arrow
+        $scope.go(1);
       }
-    });
+    };
 
     // simple pagination
     $scope.go = function(index) {
@@ -41,12 +44,12 @@ tatool
         $scope.currentIndex += index;
         $scope.currentPage = $scope.urls[$scope.currentIndex];
       } else if (index > 0 && $scope.currentIndex === ($scope.urls.length - 1)) {
-        inputEnabled = false;
+        service.input.disable();
         service.stopExecutable();
       }
     };
 
-    // jump to a specific page
+    // jump to specific page
     $scope.jump = function(index) {
       $scope.currentIndex = index;
       $scope.currentPage = $scope.urls[$scope.currentIndex];

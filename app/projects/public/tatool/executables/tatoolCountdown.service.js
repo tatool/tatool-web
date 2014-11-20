@@ -1,8 +1,8 @@
 'use strict';
 
 tatool
-  .factory('tatoolCountdown', [ '$log', 'tatoolExecutable', 'timerService',
-    function ($log, tatoolExecutable, timerService) {
+  .factory('tatoolCountdown', [ 'tatoolExecutable', 'timerService',
+    function (tatoolExecutable, timerService) {
 
     var TatoolCountdown = tatoolExecutable.createExecutable();
 
@@ -20,7 +20,7 @@ tatool
     };
 
     TatoolCountdown.prototype.stopExecutable = function() {
-      tatoolExecutable.stopExecutable();
+      tatoolExecutable.stop();
     };
 
     return TatoolCountdown;

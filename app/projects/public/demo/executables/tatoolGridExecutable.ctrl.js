@@ -10,6 +10,7 @@ tatool
 
     $scope.start = function() {
       service.createStimulus();
+      service.myGrid.show();
     };
 
     $scope.userClick = function(cell, $event) {

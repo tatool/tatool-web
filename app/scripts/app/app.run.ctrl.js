@@ -42,9 +42,9 @@ angular.module('tatool.app')
 
     var goBack = function() {
       if (mode === cfg.APP_MODE_DEVELOPER) {
-          $state.go('developer');
-        } else {
-          $state.go('home');
+        $state.go('developer');
+      } else {
+        $state.go('home');
       }
     };
 
@@ -65,7 +65,7 @@ angular.module('tatool.app')
     // open moduleUrl in Iframe
     if (moduleId) {
       startSpinner();
-      $scope.moduleUrl = $sce.trustAsResourceUrl('../../views/module/index.html');
+      $scope.moduleUrl = $sce.trustAsResourceUrl('../../views/module/index.html#module');
     } else {
       if (mode === cfg.APP_MODE_DEVELOPER) {
         $state.go('developer');

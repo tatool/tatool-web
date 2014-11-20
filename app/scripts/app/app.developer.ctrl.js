@@ -87,31 +87,45 @@ angular.module('tatool.app')
       hideAlert();
 
       var modalInstance = $modal.open({
-            templateUrl: 'views/app/edit.html',
-            controller: 'EditCtrl',
-            size: 'lg',
-            resolve: {
-              module: function () {
-                return module;
-              }
-            }
-          });
+        templateUrl: 'views/app/edit.html',
+        controller: 'EditCtrl',
+        size: 'lg',
+        keyboard: false,
+        resolve: {
+          module: function () {
+            return module;
+          }
+        }
+      });
 
-      modalInstance.result.then(function(data) {
-        moduleDataService.addModule(module).then(function(data) {
+      modalInstance.result.then(function() {
+        moduleDataService.addModule(module).then(function() {
           setAlert('success', 'Module successfully saved.');
           initModules();
         }, function(error) {
           setAlert('danger', error);
           initModules();
         });
-      }, function(error) {
+      }, function() {
         initModules();
       });
     };
 
     // toggle repository functionality
     $scope.toggleRepository = function($event, module) {
+
+      // unpublish module
+      function unpublish() {
+        startSpinner();
+        moduleDataService.unpublishModule(module.moduleId).then(function() {
+          module.moduleType = '';
+          stopSpinner();
+        }, function(err) {
+          $log.error(err);
+          stopSpinner();
+        });
+      }
+
       if (module.moduleType) {
         bootbox.dialog({
           message: 'By disabling the Repository, the module will be unpublished. Are you sure you want to continue?',
@@ -135,25 +149,13 @@ angular.module('tatool.app')
         moduleDataService.addModule(module);
         stopSpinner();
       }
-
-      // unpublish module
-      function unpublish() {
-        startSpinner();
-        moduleDataService.unpublishModule(module.moduleId).then(function() {
-          module.moduleType = '';
-          stopSpinner();
-        }, function(err) {
-          $log.error(err);
-          stopSpinner();
-        });
-      }
     };
 
     $scope.repositoryInvite = function(moduleId) {
       hideAlert();
       moduleDataService.getRepositoryModule(moduleId).then(function(module) {
         if (module && module.moduleType === 'private') {
-          var modalInstance = $modal.open({
+          $modal.open({
             templateUrl: 'views/app/invite.html',
             controller: 'InviteCtrl',
             size: 'lg',
@@ -168,7 +170,7 @@ angular.module('tatool.app')
         } else {
           setAlert('danger', 'The module could not be found.');
         }
-      }, function(error) {
+      }, function() {
         setAlert('danger', 'The module needs to be published as a <b>private</b> module before you can invite users.');
       });
     };
@@ -278,7 +280,7 @@ angular.module('tatool.app')
       $scope.alert.type = alertType;
       $scope.alert.msg = $sce.trustAsHtml(alertMessage);
       $scope.alert.visible = true;
-    }
+    };
 
     var hideAlert = function() {
       $scope.alert = {};

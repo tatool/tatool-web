@@ -6,8 +6,8 @@ var tatool = angular.module('tatool', ['ui.bootstrap', 'ui.router'])
     APP_MODE_USER: 'user',
     APP_MODE_DEVELOPER: 'developer',
   })
-  .config(['$stateProvider', '$urlRouterProvider', '$provide', '$controllerProvider', 'cfg',
-    function ($stateProvider, $urlRouterProvider, $provide, $controllerProvider, cfg) {
+  .config(['$stateProvider', '$urlRouterProvider', '$provide', '$controllerProvider',
+    function ($stateProvider, $urlRouterProvider, $provide, $controllerProvider) {
 
     //userDataServiceProvider.setProvider(cfg.MODE);
 
@@ -17,6 +17,21 @@ var tatool = angular.module('tatool', ['ui.bootstrap', 'ui.router'])
 
     // making sure we always point to root in case of unknown url
     $urlRouterProvider.otherwise('/');
+
+    $stateProvider
+      .state('start', {
+        url: '/',
+        templateUrl: 'views/start.html',
+        controller: 'StartCtrl'
+      }).state('about', {
+        url: '/about',
+        templateUrl: 'views/about.html',
+        controller: 'StartCtrl'
+      }).state('documentation', {
+        url: '/documentation',
+        templateUrl: 'views/documentation.html',
+        controller: 'StartCtrl'
+      });
 
     // helper function for ui-router to force a reload of a state
     $provide.decorator('$state', ['$delegate', '$stateParams', function($delegate, $stateParams) {

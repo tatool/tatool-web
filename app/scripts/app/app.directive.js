@@ -1,5 +1,7 @@
 'use strict';
 
+/* global uuid */
+
 angular.module('tatool.app').directive('customOnChange', function() {
   return {
     restrict: 'A',
@@ -12,9 +14,9 @@ angular.module('tatool.app').directive('customOnChange', function() {
 });
 
 
-angular.module('tatool.app').directive("tree", ['RecursionHelper', function(RecursionHelper) {
+angular.module('tatool.app').directive('tree', ['RecursionHelper', function(RecursionHelper) {
   return {
-    restrict: "E",
+    restrict: 'E',
     scope: {
       element: '=',
       onelementclick: '&',
@@ -23,30 +25,29 @@ angular.module('tatool.app').directive("tree", ['RecursionHelper', function(Recu
       parent: '=',
       highlight: '='
     },
-    template: 
-      
+    template:
         '<div ng-switch on="element.tatoolType">' +
           '<div ng-switch-when="Executable">' +
-            '<li ng-click="topFunc(element, index, parent);highlightElement(element)" ng-class="{\'active\' : highlight.key === myId}">' + 
+            '<li ng-click="topFunc(element, index, parent);highlightElement()" ng-class="{\'active\' : highlight.key === myId}">' +
               '<i class="fa fa-play-circle"></i> {{ (element.customType) ? element.customType : element.tatoolType }}' +
             '</li>' +
           '</div>' +
           '<div ng-switch-when="List">' +
-            '<li ng-click="topFunc(element, index, parent);highlightElement(element)" ng-class="{\'active\' : highlight.key === myId}">' + 
+            '<li ng-click="topFunc(element, index, parent);highlightElement()" ng-class="{\'active\' : highlight.key === myId}">' +
               '<i class="fa fa-list"></i> {{ element.tatoolType }}' +
             '</li>' +
-            '<ul>' + 
-              '<tree element="child" ng-repeat="child in element.children" index="{{$index}}" parent="element" onElementClick="topFunc(element, index, parent)" top-func="topFunc" highlight="highlight"></tree>' +
+            '<ul>' +
+              '<tree element="child" ng-repeat="child in element.children track by $index" index="{{$index}}" parent="element" onElementClick="topFunc(element, index, parent)" top-func="topFunc" highlight="highlight"></tree>' +
             '</ul>' +
           '</div>' +
           '<div ng-switch-when="Dual">' +
-            '<li ng-click="topFunc(element, index, parent);highlightElement(element)" ng-class="{\'active\' : highlight.key === myId}">' + 
+            '<li ng-click="topFunc(element, index, parent);highlightElement()" ng-class="{\'active\' : highlight.key === myId}">' +
               '<i class="fa fa-list-ol"></i> {{ element.tatoolType }}' +
             '</li>' +
-              '<ul>' + 
+              '<ul>' +
                 '<tree element="element.children.primary" index="primary" parent="element" onElementClick="topFunc(element, index, parent)" top-func="topFunc" highlight="highlight"></tree>' +
               '</ul>' +
-              '<ul>' + 
+              '<ul>' +
                 '<tree element="element.children.secondary" index="secondary" parent="element" onElementClick="topFunc(element, index, parent)" top-func="topFunc" highlight="highlight"></tree>' +
               '</ul>' +
           '</div>' +
@@ -54,18 +55,18 @@ angular.module('tatool.app').directive("tree", ['RecursionHelper', function(Recu
             '{{ element.tatoolType }}' +
           '</div>' +
         '</div>',
-      compile: function(element) {
-        return RecursionHelper.compile(element, function(scope, iElement, iAttrs, controller, transcludeFn) {
+    compile: function(element) {
+      return RecursionHelper.compile(element, function(scope) {
 
-          scope.myId = uuid();
+        scope.myId = uuid();
 
-          scope.highlightElement = function(element) {
-            scope.highlight.key = scope.myId;
-          };
-        });
-      }
-    };
-  }]);
+        scope.highlightElement = function() {
+          scope.highlight.key = scope.myId;
+        };
+      });
+    }
+  };
+}]);
 
 
 /**

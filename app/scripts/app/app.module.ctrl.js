@@ -92,7 +92,7 @@ angular.module('tatool.app')
 
       var exportModule = function(module, exporter, callbackExport) {
         if (exporter.auto === true) {
-          exportModuleData(module, exporter.mode, exporter.target).then(function() {
+          exportService.exportModuleData(module, exporter.mode, exporter.target).then(function() {
             callbackExport();
           }, function(error) {
             callbackExport(error);
@@ -175,7 +175,7 @@ angular.module('tatool.app')
         } else {
           setAlert('success', 'The module invitation has been declined.');
         }
-      }, function(error) {
+      }, function() {
         moduleDataService.deleteModule(userService.getUserName(), module.moduleId).then(initModules);
         setAlert('danger', 'The invite is no longer valid and will be removed.');
         stopSpinner();
@@ -257,7 +257,7 @@ angular.module('tatool.app')
       $scope.alert.type = alertType;
       $scope.alert.msg = $sce.trustAsHtml(alertMessage);
       $scope.alert.visible = true;
-    }
+    };
 
     var hideAlert = function() {
       $scope.alert = {};

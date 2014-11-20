@@ -1,5 +1,7 @@
 'use strict';
 
+/* global uuid */
+
 angular.module('tatool.app')
   .factory('moduleCreatorService', ['$log', '$q', 'moduleDataService', function ($log, $q, moduleDataService) {
     $log.debug('ModuleCreatorService: initialized');
@@ -78,7 +80,7 @@ angular.module('tatool.app')
                 deferred.resolve(newModule);
               }, function(error) {
                 deferred.reject(error);
-            });
+              });
           }
         } else {
           deferred.reject('Not a proper JSON file');

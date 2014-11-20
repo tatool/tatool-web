@@ -1,4 +1,4 @@
-<div id="topExecutable">
+<tatool id="topExecutable">
 
 	<!-- Include of instruction -->
 	<div ng-include="currentPage"></div>
@@ -24,4 +24,10 @@
 		</ul>
 	</div>
 
-</div>
+  <!-- Keyboard input -->
+  <tatool-input service="input" userInput="inputAction(input, timing, event)">
+    <tatool-key code="ArrowLeft" response="back" hide></tatool-key>
+    <tatool-key code="ArrowRight" response="next" hide></tatool-key>
+  </tatool-input>
+
+</tatool>

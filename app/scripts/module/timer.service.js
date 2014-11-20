@@ -1,5 +1,7 @@
 'use strict';
 
+/* global performance */
+
 angular.module('tatool.module')
   .factory('timerService', ['$log', '$timeout', '$interval', 'statusPanelService',
     function ($log, $timeout, $interval, statusPanelService) {

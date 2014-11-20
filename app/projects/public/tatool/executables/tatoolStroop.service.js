@@ -1,18 +1,7 @@
 'use strict';
 
-/**
- * The Executable Service is responsible for the data preparation and storage.
- *
- * The Executable Service is only loaded once at the start of a session and therefore keeps its state. 
- * Make sure you reset variables if needed within a session.
- * 
- * Normally the Executable Service provides the following functionality to the Controller: 
- * 1. Stimulus data (what should be displayed in the Executable)
- * 2. Storage of data (e.g. item/trial information, responses, properties)
- */
-
 tatool
-  .factory('stroopExecutable', [ '$log', '$q', 'db', 'timerService', 'tatoolExecutable', 'tatoolStimulusService', 'tatoolInputService',
+  .factory('tatoolStroop', [ '$log', '$q', 'db', 'timerService', 'tatoolExecutable', 'tatoolStimulusService', 'tatoolInputService',
     function ($log, $q,  db, timerService, tatoolExecutable, tatoolStimulusService, tatoolInputService) {
 
     // Create a new executable service
@@ -70,7 +59,7 @@ tatool
       return newList;
     };
 
-    // Adding keyInput
+    // Adding keyInputs and hide by default
     StroopExecutable.prototype.setupInputKeys = function(stimulus) {
       var keyCodes = [];
       if (keyCodes.indexOf(stimulus.keyCode) === -1) {
@@ -96,8 +85,6 @@ tatool
       this.trial.reactionTime = 0;
       this.trial.score = null;
 
-      randomStimulus.stimulusClass = 'stroopStimulusSmall';
-
       // set stimulus data to our stimulus object
       this.stimulus.set(randomStimulus);
     };
@@ -111,7 +98,7 @@ tatool
       } else {
         this.trial.score = 0;
       }
-      db.saveTrial(this.trial).then(tatoolExecutable.stopExecutable());
+      db.saveTrial(this.trial).then(tatoolExecutable.stop());
     };
 
     // Return our executable service object

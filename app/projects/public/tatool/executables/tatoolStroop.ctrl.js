@@ -1,17 +1,7 @@
 'use strict';
 
-/**
- * The Executable Controller is responsible for the communication between the user interface 
- * (directives), and the data (service).
- *
- * The Controller is reloaded everytime the Executable is run therefore it can't keep any state. That's what our service is for!
- * 
- * All variables that you want to use in your template should be assigned to properties of the $scope object. 
- * This makes sure they are accessible from your template html and will update the user interface automatically whenever the value changes.
- */
-
 tatool
-  .controller('stroopExecutableCtrl', [ '$scope', '$log', '$window', '$timeout', 'service',
+  .controller('tatoolStroopCtrl', [ '$scope', '$log', '$window', '$timeout', 'service',
     function ($scope, $log, $window, $timeout, service) {
 
     // Make the stimulus available for the <tatool-stimulus> template

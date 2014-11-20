@@ -21,7 +21,7 @@ angular.module('tatool.app')
         return new Date(date).toLocaleString();
       };
 
-      $scope.inviteUser = function($event) {
+      $scope.inviteUser = function() {
         var email = $scope.user.email;
         $scope.user.email = '';
         $scope.inputError = false;
@@ -54,8 +54,8 @@ angular.module('tatool.app')
       };
 
       $scope.removeUser = function(user) {
-        var user = { email: user.email };
-        moduleDataService.removeInvite(module.moduleId, user).then(function(data) {
+        var userData = { email: user.email };
+        moduleDataService.removeInvite(module.moduleId, userData).then(function(data) {
             module = data;
             $scope.module = data;
           }, function(error) {
@@ -68,7 +68,7 @@ angular.module('tatool.app')
         $scope.alert.type = alertType;
         $scope.alert.msg = $sce.trustAsHtml(alertMessage);
         $scope.alert.visible = true;
-      }
+      };
 
       var hideAlert = function() {
         $scope.alert = {};
@@ -78,4 +78,4 @@ angular.module('tatool.app')
 
       $scope.hideAlert = hideAlert;
 
-  }]);
+    }]);

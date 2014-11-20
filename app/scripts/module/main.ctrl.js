@@ -1,5 +1,7 @@
 'use strict';
 
+/* global performance */
+
 angular.module('tatool.module')
   .controller('MainCtrl', ['$rootScope','$scope', '$log', '$timeout', '$state', '$window', 'moduleService', 'userService', 'moduleDataService', 'trialDataService', 'executor', 'cfgModule',
     function ($rootScope, $scope, $log, $timeout, $state, $window, moduleService, userService, moduleDataService, trialDataService, executor, cfgModule) {
@@ -20,7 +22,7 @@ angular.module('tatool.module')
       if($event.which === 27) { // Escape Key
         if (allowEscapeKey) {
           if (executor.exec) {
-            executor.abortExecutable();
+            executor.finishExecutable();
           }
           executor.stopModule(true);
         }
@@ -45,7 +47,8 @@ angular.module('tatool.module')
     };
 
     // Handle wrong state changes by stopping the current module
-    $scope.$on('$stateChangeError', function (event) {
+    $scope.$on('$stateChangeError', function (event, fromState, toState) {
+      console.log('failure in state change:', toState);
       executor.stopModule(false);
       event.preventDefault();
     });

@@ -3,11 +3,12 @@
 <br><br>
 
 <div>
-  <form class="form-horizontal" role="form" ng-submit="saveModule()">
+
+  <form class="form-horizontal">
   <div class="form-group">
     <label for="name" class="col-sm-3 control-label">Type</label>
     <div class="col-sm-9">
-      <input type="text" class="form-control" id="customType" ng-model="element.customType" ng-required="true">
+      <input type="text" class="form-control" id="customType" ng-model="element.customType" ng-required="true" typeahead="type for type in customTypes | filter:$viewValue | limitTo:8">
     </div>
   </div>
   <div class="form-group">
@@ -53,33 +54,41 @@
 
   <div class="form-group" ng-repeat="property in customProperties">
     <div ng-switch="property.propertyType">
+
       <div ng-switch-when="[object Array]">
-        <label for="name" class="col-sm-3 control-label">'{{property.propertyName}}'</label>
-        <div class="col-sm-9">
-          
-          <div class="form-group col-sm-10">
-            <p class="form-control-static"><b>Array</b></p>
+        <label for="name" class="col-sm-4 control-label">'{{property.propertyName}}' [<i class="fa fa-times delete-icon" ng-click="deleteProperty(element, property)"></i>]</label>
+        <div class="col-sm-8">
+          <div class="form-group col-sm-12">
+            <p class="form-control-static"><b>Array</b> [<i class="fa fa-plus-square-o add-icon" ng-click="addEntry(element, property)"></i>]</p>
           </div>
           <div class="form-group col-sm-12" ng-repeat="entry in element[property.propertyName] track by $index">
-            <input type="text" class="form-control" id="{{entry}}" ng-model="element[property.propertyName][$index]" > 
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="{{entry}}" ng-model="element[property.propertyName][$index]">
+              </div>
+              <div class="col-sm-2">
+                  [<i class="fa fa-times delete-icon" ng-click="deleteEntry(element, property, $index)"></i>]
+              </div>
           </div>
         </div>
       </div>
+
       <div ng-switch-when="[object Object]">
-        <label for="{{property.propertyName}}" class="col-sm-3 control-label">'{{property.propertyName}}'</label>
-        <div class="col-sm-9">
+        <label for="{{property.propertyName}}" class="col-sm-4 control-label">'{{property.propertyName}}' [<i class="fa fa-times delete-icon" ng-click="deleteProperty(element, property)"></i>]</label>
+        <div class="col-sm-8">
           <input type="text" class="form-control" id="{{property.propertyName}}" ng-model="element[property.propertyName]" ng-disabled="property.disabled">
         </div>
       </div>
+
       <div ng-switch-default>
-        <label for="{{property.propertyName}}" class="col-sm-3 control-label">'{{property.propertyName}}'</label>
-        <div class="col-sm-9">
+        <label for="{{property.propertyName}}" class="col-sm-4 control-label">'{{property.propertyName}}' [<i class="fa fa-times delete-icon" ng-click="deleteProperty(element, property)"></i>]</label>
+        <div class="col-sm-8">
           <input type="text" class="form-control" id="{{entry}}" ng-model="element[property.propertyName]" > 
         </div>
       </div>
+
     </div>
-    
   </div>
+
   <div class="form-group">
     <label for="name" class="col-sm-3 control-label"></label>
     <div class="col-sm-9">

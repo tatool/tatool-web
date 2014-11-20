@@ -90,8 +90,8 @@ angular.module('tatool.module')
       executableService.init(executor).then(function() {
         promises = [];
 
-        loadModuleHierarchy(null, 'moduleHierarchy', moduleHierarchy).then(function(data) {
-          obj.stack.push(moduleHierarchy)
+        loadModuleHierarchy(null, 'moduleHierarchy', moduleHierarchy).then(function() {
+          obj.stack.push(moduleHierarchy);
           deferred.resolve();
         }, function(error) {
           deferred.reject(error);
@@ -143,7 +143,6 @@ angular.module('tatool.module')
         }
       }
       if ('children' in element) {
-        var newDepth = depth + 1;
         angular.forEach(element.children, function(value, key) {
           convertJson(depth + 1, element.children, key, value, deferred);
         });
@@ -155,7 +154,7 @@ angular.module('tatool.module')
           deferred.resolve('moduleHierarchy loaded');
         }, function(error) {
           deferred.reject(error);
-        })
+        });
       }
 
     };

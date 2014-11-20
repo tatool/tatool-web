@@ -11,7 +11,7 @@
     		[
     			{
     				"tatoolType": "Executable",
-    				"customType": "stroopExecutable",
+    				"customType": "tatoolStroop",
                     "name": "stroop1",
                     "fixationInterval" : 200,
                     "blankInterval" : "600",
@@ -24,7 +24,7 @@
     			}, 
     			{
     				"tatoolType": "Executable",
-    				"customType": "stroopExecutable",
+    				"customType": "tatoolStroop",
                     "name": "stroop2",
                     "blankInterval" : "600",
                     "status": {
@@ -42,7 +42,7 @@
                         [
                             {
                                 "tatoolType": "Executable",
-                                "customType": "stroopExecutable",
+                                "customType": "tatoolStroop",
                                 "name": "stroop3",
                                 "fixationInterval" : "500",
                                 "blankInterval" : "600",

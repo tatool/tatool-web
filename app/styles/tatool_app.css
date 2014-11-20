@@ -7,6 +7,14 @@ html, body {
   background-color: #fdfdfd;
 }
 
+a {
+  color: #c44a27;
+}
+
+a:hover {
+  color: #9b3112;
+}
+
 
 
 /** ---------
@@ -107,6 +115,65 @@ footer {
 }
 
 
+/** ---------
+    MAIN PAGE
+-----------**/
+#startBanner {
+  height: 230px;
+  font-family: 'Open Sans', sans-serif;
+}
+
+#startBanner .bannerContent {
+  text-align: center;
+  margin: 0 auto;
+  width: 700px;
+}
+
+#startBanner .bannerImg {
+  float: left;
+  margin-right: 30px;
+}
+
+#startBanner h2 {
+  font-size: 220%;
+  line-height: 130%;
+}
+#startContent {
+  font-family: 'Open Sans', sans-serif;
+}
+
+#startContent .lead {
+  font-size: 150%;
+  line-height: 130%;
+}
+
+#startContent .red {
+  color: #c64925;
+}
+
+#startContent h3 {
+  font-size: 120%;
+  font-weight: bold;
+  margin-bottom: 12px;
+  margin-top: 8px;
+}
+
+#startContent p {
+  line-height: 140%;
+}
+
+#startContent .centerTitle {
+  text-align: center;
+}
+
+#startContent .img-screen {
+  border: 1px solid #aaa;
+}
+
+#startContent .img-beta {
+  float: left;
+  margin-right: 30px;
+}
 
 /** ---------
     MODULES
@@ -363,6 +430,20 @@ EDITOR
   display: table-cell;
   width: 65%;
   padding-left: 15px;
+}
+
+#moduleContent .my-field {
+  margin-top: 0px;
+}
+
+#moduleContent .delete-icon {
+  color: #972702;
+  cursor: pointer;
+}
+
+#moduleContent .add-icon {
+  color: #19741b;
+  cursor: pointer;
 }
 
 ul.tree, ul.tree ul {

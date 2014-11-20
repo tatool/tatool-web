@@ -1,8 +1,8 @@
 'use strict';
 
 tatool
-  .factory('complexNumExecutable', [ '$rootScope', '$log', 'tatoolExecutable', 'db', 'timerService', 'tatoolPhase', 
-    function ($rootScope, $log, tatoolExecutable, db, timerService, tatoolPhase) {  
+  .factory('tatoolComplexSpan', [ '$rootScope', '$log', 'tatoolExecutable', 'db', 'timerService', 'tatoolPhase', 'tatoolStimulusService', 'tatoolInputService',
+    function ($rootScope, $log, tatoolExecutable, db, timerService, tatoolPhase, tatoolStimulusService, tatoolInputService) {  
 
     // Define our executable service constructor which will be called once for every instance
     var ComplexNumExecutable = tatoolExecutable.createExecutable();
@@ -20,6 +20,9 @@ tatool
       this.trial.reactionTime = 0;
       this.trial.score = null;
 
+      this.stimulus = tatoolStimulusService.createStimulus();
+      this.input = tatoolInputService.createInput();
+
       this.timerDisplayMemoranda = timerService.createTimer(800, true, this);
       this.timerIntervalMemoranda = timerService.createTimer(400, false, this);
     };
@@ -32,29 +35,37 @@ tatool
 
       // generate new list of digits
       this.generateDigits();
-    }
+    };
+
+    ComplexNumExecutable.prototype.setStimulus = function(memCounter) {
+      this.stimulus.setText({ stimulusValue: this.digits[memCounter - 1] });
+    };
+
+    ComplexNumExecutable.prototype.setRecallStimulus = function(text) {
+      this.stimulus.setText({ stimulusValue: text });
+    };
 
     ComplexNumExecutable.prototype.generateDigits = function() {
       for (var i = 0; i < 3; i++) {
         var tmpNumber = 10 + (Math.floor((Math.random() * 90) + 1));
-        if (this.digits.indexOf(tmpNumber) == -1) {
+        if (this.digits.indexOf(tmpNumber) === -1) {
           this.digits.push(tmpNumber);
         } else {
           i--;
         }
       }
-    }
+    };
 
     ComplexNumExecutable.prototype.getPhase = function() {
       return this.phase;
-    }
+    };
 
     ComplexNumExecutable.prototype.setPhase = function(phase) {
       this.phase = phase;
-    }
+    };
 
     // 5. Process given response and stop executable
-    ComplexNumExecutable.prototype.processResponse = function(givenResponse) {
+    ComplexNumExecutable.prototype.addTrial = function(givenResponse) {
       this.trial.reactionTime = this.endTime - this.startTime;
       this.trial.givenResponse = givenResponse;
       this.trial.correctResponse = this.digits[this.respCounter - 1];
@@ -69,8 +80,7 @@ tatool
     };
 
     ComplexNumExecutable.prototype.stopExecution = function() {
-      //executable.dual = 'SUSPENDED';
-      tatoolExecutable.stopExecutable();
+      tatoolExecutable.stop();
     };
 
     // Return our service object

@@ -215,7 +215,28 @@ exports.verifyUser = function(req, res) {
           res.redirect('/#/login?verify=failure');
         }
     });
-}
+};
+
+exports.signupDev = function(req, res) {
+
+  var message = {
+      email: 'info@tatool.ch',
+      name: 'info@tatool.ch',
+      subject: 'Developer Signup',
+      template: 'developer-signup-email',
+      user: req.body.email
+  };
+
+  sendVerificationEmail(message, function (error, success) {
+    if (error) {
+      console.error('Unable to send email: ' + error.message);
+      res.status(500).json({ message: 'Unable to send email. Please try again later.' });
+    } else {
+      res.json({ message: 'Signup successful' });
+    }
+  });
+};
+
 
 // email processing
 function sendVerificationEmail(options, done) {

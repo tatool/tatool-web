@@ -39,7 +39,7 @@
                         {
                             "primary" : {
                                 "tatoolType": "Executable",
-                                "customType": "complexNumExecutable",
+                                "customType": "tatoolComplexSpan",
                                 "name": "first",
                                 "blankInterval" : "600",
                                 "status": {
@@ -51,7 +51,7 @@
                             }, 
                             "secondary" : {
                                 "tatoolType": "Executable",
-                                "customType": "stroopExecutable",
+                                "customType": "tatoolStroop",
                                 "name": "second",
                                 "blankInterval" : "600",
                                 "stimuliFile" : "stroop.csv",
@@ -72,7 +72,7 @@
                         [
                             {
                                 "tatoolType": "Executable",
-                                "customType": "stroopExecutable",
+                                "customType": "tatoolStroop",
                                 "name": "third",
                                 "fixationInterval" : "500",
                                 "blankInterval" : "600",

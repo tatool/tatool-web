@@ -1,7 +1,9 @@
 'use strict';
 
+/* global Papa */
+
 angular.module('tatool.module')
-  .service('tatoolExecutable', [ '$q', '$http', 'cfgModule', function ($q, $http, cfgModule) {
+  .service('tatoolExecutable', [ '$q', '$http', function ($q, $http) {
 
     var executable = {};
 
@@ -24,8 +26,20 @@ angular.module('tatool.module')
     };
 
     // stops the execution of the current executable
-    executable.stopExecutable = function() {
+    executable.stop = function() {
       executor.stopExecutable();
+    };
+
+    // suspend the current executable
+    executable.suspend = function() {
+      executor.suspendExecutable();
+    };
+
+    // stop the execution of the current module
+    executable.stopModule = function(sessionComplete) {
+      sessionComplete = (sessionComplete) ? sessionComplete : true;
+      executor.finishExecutable();
+      executor.stopModule(sessionComplete);
     };
 
     /**--------------------------------
@@ -57,7 +71,7 @@ angular.module('tatool.module')
       } else {
         return true;
       }
-    }
+    };
 
     // loading resource of project and returning raw data
     executable.getProjectResource = function(resourceType, resource) {
@@ -134,19 +148,20 @@ angular.module('tatool.module')
     // returns a random int out of the specified interval
     executable.getRandomInt = function(min, max) {
       return Math.floor(Math.random()*(max-min+1)+min);
-    }
+    };
 
     // returns a random element of an array or random property of an object
     executable.pickRandom = function(obj) {
+      var index;
       if (Array.isArray(obj)) {
-        var index = executable.getRandomInt(0, obj.length - 1);
+        index = executable.getRandomInt(0, obj.length - 1);
         return obj[index];
       } else {
         var array = Object.keys(obj);
-        var index = executable.getRandomInt(0, array.length - 1);
+        index = executable.getRandomInt(0, array.length - 1);
         return obj[array[index]];
       }
-    }
+    };
 
     return executable;
   }]);

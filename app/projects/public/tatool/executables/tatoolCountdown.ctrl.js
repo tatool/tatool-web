@@ -5,6 +5,10 @@ tatool
 
     $scope.countdown = service.countDownFrom;
 
+    $scope.start = function() {
+      service.timer.start(countDown);
+    };
+    
     function countDown() {
       service.countDownFrom--;
       $scope.countdown = service.countDownFrom;
@@ -15,7 +19,5 @@ tatool
         service.timer.start(service.stopExecutable());
       }
     }
-
-    service.timer.start(countDown);
 
   }]);

@@ -12,7 +12,7 @@ angular.module('tatool.app', ['tatool', 'tatool.auth', 'tatool.common'])
     // application states
     $stateProvider
       .state('home', {
-        url: '/',
+        url: '/home',
         templateUrl: 'views/app/main.html',
         controller: 'ModuleCtrl',
         resolve: {

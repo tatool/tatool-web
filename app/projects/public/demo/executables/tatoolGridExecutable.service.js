@@ -33,7 +33,7 @@ tatool
     };
 
     TatoolGridExecutable.prototype.stopExecution = function() {
-      tatoolExecutable.stopExecutable();
+      tatoolExecutable.stop();
     };
 
     // Return our executable service object

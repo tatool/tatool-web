@@ -1,5 +1,8 @@
 'use strict';
 
+/* global async */
+/* global head */
+
 angular.module('tatool.module')
   .service('executableService', ['$log', '$rootScope', '$injector', '$q', '$http', '$templateCache', '$window', 'contextService', 'tatoolPhase', 'tatoolExecutable', 'moduleService', 'cfgModule',
     function ($log, $rootScope, $injector, $q, $http, $templateCache, $window, contextService, tatoolPhase, tatoolExecutable, moduleService, cfgModule) {
@@ -36,7 +39,7 @@ angular.module('tatool.module')
         .success(function (data) {
           token = '?' + 'token=' + data.token;
           project.token = data.token;
-          project.path = '/' + mode + '/resources/' +  project.access + '/' + project.name + '/'
+          project.path = '/' + mode + '/resources/' +  project.access + '/' + project.name + '/';
           tatoolExecutable.init(runningExecutor, project);
 
           initializeTatoolResources().then(function() {
@@ -103,7 +106,7 @@ angular.module('tatool.module')
         files.push(srv);
         files.push(ctrl);
         return files;
-      }
+      };
 
       // $script loader
       /*return [
@@ -189,7 +192,7 @@ angular.module('tatool.module')
             initAllDeferred.resolve();
           }, function(error) {
             initAllDeferred.reject(error);
-        });
+          });
       }
     };
 

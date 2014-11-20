@@ -311,14 +311,10 @@ circle {
   padding: 5px;
 }
 
-.actionPanel {
+#tatoolInput .textInput {
   text-align: center;
   margin-top: 50px;
-}
-
-.textInput {
-  display: block;
-  margin: auto;
+  display: inline-block;
   width: 300px;
   font-family: sans-serif;
   font-size: 45px;
@@ -334,7 +330,7 @@ circle {
 }
 
 
-/* Tatool Input */
+/* Tatool Stimulus */
 
 #tatoolStimulus {
   font-size: 100%;

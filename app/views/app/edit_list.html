@@ -29,8 +29,8 @@
           </li>
         </ul>
       </div>
-      <button type="button" class="btn btn-default" ng-click="moveElementUp(element, elementIndex, elementParent)" ng-if="elementParent && elementIndex > 0"><i class="fa fa-angle-double-up"></i> Up</button>
-      <button type="button" class="btn btn-default" ng-click="moveElementDown(element, elementIndex, elementParent)" ng-if="(elementIndex < (elementParent.children.length - 1))"><i class="fa fa-angle-double-down"></i> Down</button>
+      <button type="button" class="btn btn-default" ng-click="moveElementUp(element, elementIndex, elementParent)" ng-if="elementParent && (elementIndex > 0 || elementIndex === 'secondary')"><i class="fa fa-angle-double-up"></i> Up</button>
+      <button type="button" class="btn btn-default" ng-click="moveElementDown(element, elementIndex, elementParent)" ng-if="(elementIndex < (elementParent.children.length - 1)) || (elementIndex === 'primary')"><i class="fa fa-angle-double-down"></i> Down</button>
       <button type="button" class="btn btn-default" ng-click="deleteElement(element, elementIndex, elementParent)" ng-if="elementParent"><i class="fa fa-trash-o"></i> Delete</button>
     </div>
   </div>

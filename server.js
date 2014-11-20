@@ -97,6 +97,7 @@ app.post('/user/reset', userController.resetPasswordSend);
 app.get('/user/resetverify/:token', userController.verifyResetToken);
 app.post('/user/reset/:token', userController.updatePassword);
 app.post('/user/captcha', userController.verifyCaptcha);
+app.post('/user/devaccount', userController.signupDev);
 
 // Tatool Web Client
 app.use(express.static(path.join(__dirname, 'app')));

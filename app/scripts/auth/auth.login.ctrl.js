@@ -1,5 +1,8 @@
 'use strict';
 
+/* global $script */
+/* global Recaptcha */
+
 angular.module('tatool.auth')
   .controller('LoginCtrl', ['$scope', '$log', '$state', '$sce', 'authService', 'messageService', 'spinnerService', 'cfg', 'token',
     function ($scope, $log, $state, $sce, authService, messageService, spinnerService, cfg, token) {
@@ -128,9 +131,10 @@ angular.module('tatool.auth')
     }
 
     function showRecaptcha(element) {
-      Recaptcha.create("6LfSvfwSAAAAAOD0SuK_6f3vswGHswyH3kiHj-q3", element, {
-        theme: "clean",
-        callback: Recaptcha.focus_response_field});
+      Recaptcha.create('6LfSvfwSAAAAAOD0SuK_6f3vswGHswyH3kiHj-q3', element, {
+        theme: 'clean',
+        callback: Recaptcha.focus_response_field
+      });
     }
 
     // captcha loading

@@ -5,7 +5,7 @@ angular.module('tatool.auth', ['tatool', 'base64', 'tatool.common'])
     IMG_PATH: 'images/auth/',
     VIEW_PATH:'views/auth/'
   })
-  .config(['$httpProvider', '$stateProvider', 'cfg', function ($httpProvider, $stateProvider, cfg) {
+  .config(['$httpProvider', '$stateProvider', function ($httpProvider, $stateProvider) {
 
     // auth interceptor
     $httpProvider.interceptors.push('authInterceptor');

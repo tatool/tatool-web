@@ -1,5 +1,5 @@
 {
-    "name": "Instructions",
+    "name": "Instruction Task",
     "label": "instructions",
     "project": { "name" : "demo", "access": "public"},
     "moduleHierarchy": {

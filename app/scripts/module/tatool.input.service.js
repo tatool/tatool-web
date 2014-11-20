@@ -1,7 +1,10 @@
 'use strict';
 
+/* global KeyCodes */
+/* global performance */
+
 angular.module('tatool.module')
-  .factory('tatoolInputService', [ '$log', function ($log) {
+  .factory('tatoolInputService', [ function () {
 
     var tatoolInputService = {};
 
@@ -45,6 +48,18 @@ angular.module('tatool.module')
         var obj = {};
         obj.givenResponse = givenResponse;
         obj.keyCode = keyCode;
+        obj.dynamic = false;
+        this.registeredKeyInputs[KeyCodes[keyCode]] = obj;
+        this.keyInputOrder.push(KeyCodes[keyCode]);
+        return this;
+      };
+
+      // private method used by the tatoolInput directive to register manually added text keys in the template
+      this._registerStaticTextKey = function(keyCode, givenResponse, textInputId) {
+        var obj = {};
+        obj.givenResponse = '';
+        obj.keyCode = keyCode;
+        obj.textInput = textInputId;
         obj.dynamic = false;
         this.registeredKeyInputs[KeyCodes[keyCode]] = obj;
         this.keyInputOrder.push(KeyCodes[keyCode]);

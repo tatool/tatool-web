@@ -1,5 +1,8 @@
 'use strict';
 
+/* global async */
+/* global LZString */
+
 angular.module('tatool.app')
   .factory('exportService', ['$log', '$q', '$http', 'moduleDataService', 'trialDataService', 'cfgApp', 'userService', function ($log, $q, $http, moduleDataService, trialDataService, cfgApp, userService) {
     $log.debug('ExportService: initialized');

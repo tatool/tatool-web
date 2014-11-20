@@ -217,18 +217,34 @@ angular.module('tatool.module')
     // Used to signal the executor that it can continue running through the elementStack
     obj.stopExecutable = function() {
       if (this.exec) {
-        this.abortExecutable();
+        this.finishExecutable();
 
         // inform the executor that the execution should continue with the next element
-        this.exec.resolve('');
+        this.exec.resolve();
       } else {
-        $log.error('ERROR: Call to stopExecutable failed due to not been properly initialized module. Module will be stopped.');
+        $log.error('ERROR: Call to stopExecutable failed.');
         obj.stopModule(false);
       }
     };
 
-    // Used to signal the executor that the current executable has been aborted
-    obj.abortExecutable = function() {
+    // Used to signal the executor that it can continue running through the elementStack
+    obj.suspendExecutable = function() {
+      if (this.exec) {
+        var currentExecutable = contextService.getProperty('currentExecutable');
+        currentExecutable.dual = 'SUSPENDED';
+
+        this.finishExecutable();
+
+        // inform the executor that the execution should continue with the next element
+        this.exec.resolve();
+      } else {
+        $log.error('ERROR: Call to suspendExecutable failed.');
+        obj.stopModule(false);
+      }
+    };
+
+    // Used to signal the executor that the current executable should be finished
+    obj.finishExecutable = function() {
       // broadcast the phase EXECUTABLE_END
       broadcastPhaseChange(tatoolPhase.EXECUTABLE_END, elementStack.stack);
 

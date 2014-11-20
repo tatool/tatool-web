@@ -13,7 +13,7 @@
     		[
     			{
     				"tatoolType": "Executable",
-    				"customType": "stroopExecutable",
+    				"customType": "tatoolStroop",
                     "name": "stroop-task",
                     "fixationInterval" : 250,
                     "blankInterval" : "600",

@@ -13,7 +13,8 @@ angular.module('tatool.module')
     };
 
     function Grid(gridId) {
-      this.dataPath;
+
+      this.dataPath = '';
       this.cellsObject = {};
       this.cells = [];
       this.gridId = gridId ? gridId : 'default';

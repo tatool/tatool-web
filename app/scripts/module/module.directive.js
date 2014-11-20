@@ -1,5 +1,8 @@
 'use strict';
 
+/* global KeyCodes */
+/* global performance */
+
 /**
   <tatool> 
   Main directive used to initiate start of executable after all directives have loaded.
@@ -8,7 +11,7 @@ angular.module('tatool.module').directive('tatool', ['$timeout', function($timeo
   return {
     restrict: 'E',
     priority: Number.MIN_SAFE_INTEGER, // execute as last directive
-    link: function($scope, $element, $attributes) {
+    link: function($scope) {
       // trigger the start function in the executable controller
       $timeout($scope.start);
     }
@@ -20,34 +23,51 @@ angular.module('tatool.module').directive('tatool', ['$timeout', function($timeo
   <tatool-input> 
   Directive to configure user input.
 **/
-angular.module('tatool.module').directive('tatoolInput', ['$log', '$templateCache', '$compile', 'cfgModule', function($log, $templateCache, $compile, cfgModule) {
+angular.module('tatool.module').directive('tatoolInput', ['$log', '$templateCache', '$compile', function($log, $templateCache, $compile) {
   return {
     restrict: 'E',
     transclude: true,
     scope: {
       service: '=',             // expects a stimulus object provided by the tatoolStimulusService
       datapath: '@',            // defines datapath to be used to access external resources        
-      oninput: '&'              // method called on key press
+      userinput: '&'            // method called on user input (mouse/keyboard)
     },
     controller: ['$scope', function($scope) {
       this.addKey = function(keyCode, value) {
         $scope.service._registerStaticKey(keyCode, value);
       };
 
-      // process mouse click input
+      this.addTextKey = function(keyCode, value, textInputId) {
+        $scope.service._registerStaticTextKey(keyCode, value, textInputId);
+      };
+
+      // process user input (key/mouse)
       this.clickInput = function(keyCode, timing, event) {
-        $scope.oninput({'input': $scope.service.registeredKeyInputs[keyCode], 'timing': timing, '$event': event});
+        if ($scope.service.registeredKeyInputs[keyCode].textInput) {
+          var textInput = $('#tatoolInputText').val();
+          $('#tatoolInputText').val('');
+          if (textInput) {
+            $scope.service.registeredKeyInputs[keyCode].givenResponse = textInput;
+          } else {
+            $scope.service.registeredKeyInputs[keyCode].givenResponse = '';
+          }
+        }
+        $scope.userinput({'input': $scope.service.registeredKeyInputs[keyCode], 'timing': timing, '$event': event});
       };
 
       this.getDataPath = function() {
         return ($scope.datapath) ? $scope.datapath : '';
       };
     }],
-    link: function (scope, element, attr) {
+    link: function (scope, element, attr, ctrl) {
+
+      // hide and disable by default
       var inputEnabled = false;
+      scope.show = false;
+      $('#tatoolInputText').attr('disabled', true);
 
       // add key directives for dynamically added keys in the order they have been added
-      angular.forEach(scope.service.keyInputOrder, function(keyCode, index) {
+      angular.forEach(scope.service.keyInputOrder, function(keyCode) {
         var value = scope.service.registeredKeyInputs[keyCode];
         if (value.dynamic) {
           var label = (value.label) ? ' label="' + value.label + '"' : '';
@@ -76,32 +96,34 @@ angular.module('tatool.module').directive('tatoolInput', ['$log', '$templateCach
       var watcher = scope.$on('keyPress', function(event, keyEvent) {
         if (inputEnabled) {
           if (scope.service.registeredKeyInputs[keyEvent.which]) {
-            scope.oninput({'input': scope.service.registeredKeyInputs[keyEvent.which], 'timing': keyEvent.keyPressTime, '$event': event});
+            ctrl.clickInput(keyEvent.which, keyEvent.keyPressTime, event);
           }
         }
       });
 
       // show all keys
       scope.service.show = function() {
-        element.css("visibility","visible");
+        scope.show = true;
         return performance.now();
       };
 
       // hide all keys
       scope.service.hide = function() {
-        element.css("visibility","hidden");
+        scope.show = false;
         return performance.now();
       };
 
       // enable input
       scope.service.enable = function() {
         inputEnabled = true;
+        $('#tatoolInputText').attr('disabled', false);
         return performance.now();
       };
 
       // disable input
       scope.service.disable = function() {
         inputEnabled = false;
+        $('#tatoolInputText').attr('disabled', true);
         return performance.now();
       };
 
@@ -109,7 +131,7 @@ angular.module('tatool.module').directive('tatoolInput', ['$log', '$templateCach
         watcher();
       });
     },
-    template: '<div id="tatoolInput" ng-transclude></div>'
+    template: '<div id="tatoolInput" ng-transclude ng-show="show"></div>'
   };
 }]);
 
@@ -156,16 +178,16 @@ angular.module('tatool.module').directive('tatoolKey', ['$log', '$sce', 'tatoolE
 
         switch (internalValue) {
           case 'ArrowLeft' :
-            internalValue = '<i class="fa fa-caret-left fa-2x" style="margin-left:-7px;margin-top:12px"></i>'; 
+            internalValue = '<i class="fa fa-caret-left fa-2x" style="margin-left:-7px;margin-top:12px"></i>';
             break;
           case 'ArrowRight' :
-            internalValue = '<i class="fa fa-caret-right fa-2x" style="margin-right:-7px;margin-top:12px"></i>'; 
+            internalValue = '<i class="fa fa-caret-right fa-2x" style="margin-right:-7px;margin-top:12px"></i>';
             break;
           case 'ArrowUp' :
-            internalValue = '<i class="fa fa-caret-up fa-2x" style="margin-top:9px"></i>'; 
+            internalValue = '<i class="fa fa-caret-up fa-2x" style="margin-top:9px"></i>';
             break;
           case 'ArrowDown' :
-            internalValue = '<i class="fa fa-caret-down fa-2x" style="margin-top:12px"></i>'; 
+            internalValue = '<i class="fa fa-caret-down fa-2x" style="margin-top:12px"></i>';
             break;
         }
         scope.key = $sce.trustAsHtml(internalValue);
@@ -177,6 +199,24 @@ angular.module('tatool.module').directive('tatoolKey', ['$log', '$sce', 'tatoolE
       };
     },
     template: '<div class="tatoolKey" ng-click="clickInput($event)" ng-bind-html="key"></div>'
+  };
+}]);
+
+
+/**
+  <tatool-text> 
+  Directive to configure text input.
+**/
+angular.module('tatool.module').directive('tatoolText', [ function() {
+  return {
+    restrict: 'E',
+    scope: {},
+    require: '^tatoolInput',
+    link: function (scope, element, attr, tatoolInputCtrl) {
+      tatoolInputCtrl.addTextKey('Enter', '', 'tatoolInputText');
+      $('#tatoolInputText').focus();
+    },
+    template: '<input type="text" class="textInput" id="tatoolInputText">'
   };
 }]);
 
@@ -194,22 +234,22 @@ angular.module('tatool.module').directive('tatoolStimulus', ['$log', '$templateC
       datapath: '@',            // defines datapath to be used to access resources
       stimulusclick: '&'        // function to call on mouse click on stimulus
     },
-    link: function (scope, element, attr) {
+    link: function (scope, element) {
 
       // hide by default
-      element.css("visibility","hidden");
+      scope.show = false;
 
       // set the datapath
       scope.service.dataPath = (scope.datapath) ? scope.datapath : '';
 
       scope.service.show = function() {
         scope.stimulus = scope.service;
-        element.css("visibility","visible");
+        scope.show = true;
         return performance.now();
       };
 
       scope.service.hide = function() {
-        element.css("visibility","hidden");
+        scope.show = false;
         return performance.now();
       };
 
@@ -254,6 +294,9 @@ angular.module('tatool.module').directive('tatoolGrid', ['$log', '$templateCache
     },
     link: function (scope, element, attr) {
 
+      // hide by default
+      scope.show = false;
+
       // set table styling
       scope.tableStyle = {};
       if (scope.gridspacing !== undefined) {
@@ -279,12 +322,14 @@ angular.module('tatool.module').directive('tatoolGrid', ['$log', '$templateCache
       var cellsUsed = [];               // holds the cells which contain user content
 
       scope.service.show = function() {
-        element.css("visibility","visible");
+        scope.show = true;
+        //element.css("visibility","visible");
         return performance.now();
       };
 
       scope.service.hide = function() {
-        element.css("visibility","hidden");
+        scope.show = false;
+        //element.css("visibility","hidden");
         return performance.now();
       };
 
