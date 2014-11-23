@@ -197,6 +197,7 @@ angular.module('tatool.app')
 
     // delete module from db
     $scope.deleteModule = function(module) {
+      hideAlert();
 
       function runDelete() {
         // if published then unpublish first

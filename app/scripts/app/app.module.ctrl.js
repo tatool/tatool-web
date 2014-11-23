@@ -139,6 +139,7 @@ angular.module('tatool.app')
 
     // install a module from the repository
     $scope.installModule = function(module) {
+      hideAlert();
       startSpinner();
 
       function onModuleLoaded(result) {
@@ -166,6 +167,7 @@ angular.module('tatool.app')
     };
 
     $scope.replyInvite = function(module, response) {
+      hideAlert();
       startSpinner();
       moduleDataService.replyInvite(module.moduleId, response).then(function(module) {
         stopSpinner();
@@ -184,6 +186,7 @@ angular.module('tatool.app')
 
     // delete module from db
     $scope.deleteModule = function(module) {
+      hideAlert();
 
       function runDelete() {
         moduleDataService.deleteModule(userService.getUserName(), module.moduleId).then(onModuleDelete, onModuleDeleteError);
@@ -230,9 +233,11 @@ angular.module('tatool.app')
 
       startSpinner('Exporting data. Please wait...');
       exportService.exportModuleData(module, exportMode, exportTarget, cfg.APP_MODE_USER).then(function() {
+        setAlert('success', 'Data successfully exported.');
         stopSpinner();
       }, function(err) {
         $log.error(err);
+        setAlert('danger', err);
         stopSpinner();
       });
     };

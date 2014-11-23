@@ -33,13 +33,15 @@ angular.module('tatool.module', ['tatool', 'tatool.auth', 'angular-progress-arc'
         templateUrl: cfgModule.MODULE_VIEW_PATH + 'module.html'
       })
       .state('module', {
-        url: '/module/:moduleId/:type/:url/:content',
+        url: '/module/:moduleId/:type/:url/:status',
         resolve: {
-          status: ['$stateParams', function($stateParams) {
-            return $stateParams.content.status;
+          status: ['$stateParams', 'contextService', function($stateParams, contextService) {
+            var currentExecutable = contextService.getProperty('currentExecutable');
+            return currentExecutable.status;
           }],
-          service: ['$stateParams', 'executableService', function($stateParams, executableService) {
-            return executableService.getExecutable($stateParams.content.name);
+          service: ['$stateParams', 'executableService', 'contextService', function($stateParams, executableService, contextService) {
+            var currentExecutable = contextService.getProperty('currentExecutable');
+            return executableService.getExecutable(currentExecutable.name);
           }],
           auth: ['$q', '$state', 'authService', 'userService', function($q, $state, authService, userService) {
             if (authService.isAuthenticated()) {
@@ -55,7 +57,7 @@ angular.module('tatool.module', ['tatool', 'tatool.auth', 'angular-progress-arc'
           },
           'status@module': {
             templateUrl: function($stateParams) {
-              if($stateParams.content.status) {
+              if($stateParams.status) {
                 return cfgModule.MODULE_VIEW_PATH + 'statuspanel.html';
               } else {
                 return cfgModule.MODULE_VIEW_PATH + 'blank.html';
@@ -67,11 +69,12 @@ angular.module('tatool.module', ['tatool', 'tatool.auth', 'angular-progress-arc'
             templateUrl: function ($stateParams) {
               return $stateParams.url;
             },
-            controllerProvider: ['$stateParams', function ($stateParams) {
+            controllerProvider: ['$stateParams', 'contextService', function ($stateParams, contextService) {
               if($stateParams.type === 'custom') {
                 return null;
               } else {
-                return $stateParams.content.customType + 'Ctrl';
+                var currentExecutable = contextService.getProperty('currentExecutable');
+                return currentExecutable.customType + 'Ctrl';
               }
             }]
           }

@@ -144,14 +144,16 @@ angular.module('tatool.module')
 
     // runs the blank interval screen for a given amount of time
     var runBlankInterval = function(currentExecutable) {
-      $state.go('module', {moduleId: moduleService.getModuleId(), type: 'custom', url: obj.blankIntervalScreen, content: currentExecutable }, {location: false});
+      var statusEnabled = currentExecutable.status ? true : false;
+      $state.go('module', {moduleId: moduleService.getModuleId(), type: 'custom', url: obj.blankIntervalScreen, status: statusEnabled }, {location: false});
       blankIntervalPromise = $timeout(function() {return true;}, obj.blankInterval);
       return blankIntervalPromise;
     };
 
     // runs the fixation interval screen for a given amount of time
     var runFixationInterval = function(currentExecutable) {
-      $state.go('module', {moduleId: moduleService.getModuleId(), type: 'custom', url: obj.fixationIntervalScreen, content: currentExecutable }, {location: false});
+      var statusEnabled = currentExecutable.status ? true : false;
+      $state.go('module', {moduleId: moduleService.getModuleId(), type: 'custom', url: obj.fixationIntervalScreen, status: statusEnabled }, {location: false});
       fixationIntervalPromise = $timeout(function() {return true;}, obj.fixationInterval);
       return fixationIntervalPromise;
     };
@@ -202,7 +204,8 @@ angular.module('tatool.module')
       broadcastPhaseChange(tatoolPhase.EXECUTABLE_START, elementStack.stack);
 
       var url = currentExecutable.customType + '.html';
-      var params = { moduleId: moduleService.getModuleId(), type: 'executable', url: url, content: currentExecutable };
+      var statusEnabled = currentExecutable.status ? true : false;
+      var params = { moduleId: moduleService.getModuleId(), type: 'executable', url: url, status: statusEnabled };
 
       // focus window to make sure we're receiving user input
       $window.focus();
