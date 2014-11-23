@@ -20,18 +20,6 @@
                     "name": "countdown"
                 },
                 {
-                    "tatoolType": "Executable",
-                    "customType": "tatoolInstruction",
-                    "name": "instructions",
-                    "blankInterval" : "600",
-                    "pages": [
-                        "complexNum.inst.01.html" ,
-                        "complexNum.inst.02.html"
-                    ],
-                    "randomObj" : { "key": "value"},
-                    "randomObjArray" : { "me" : ["1", "2"] }
-                },
-                {
                     "tatoolType": "Dual",
                     "iterator": { "customType" : "ListIterator", "numIterations" : "2" },
                     "handlers": [  ],
@@ -41,6 +29,7 @@
                                 "tatoolType": "Executable",
                                 "customType": "tatoolComplexSpan",
                                 "name": "first",
+                                "stimuliFile" : "complexSpanNum.csv",
                                 "blankInterval" : "600",
                                 "status": {
                                     "levelPanel": true,
@@ -63,28 +52,6 @@
                                 }
                             }
                         }
-                },
-                {
-                    "tatoolType": "List",
-                    "iterator": { "customType" : "ListIterator", "numIterations" : "2" },
-                    "handlers": [  ],
-                    "children": 
-                        [
-                            {
-                                "tatoolType": "Executable",
-                                "customType": "tatoolStroop",
-                                "name": "third",
-                                "fixationInterval" : "500",
-                                "blankInterval" : "600",
-                                "stimuliFile" : "stroop.csv",
-                                "status": {
-                                    "levelPanel": true,
-                                    "feedbackPanel": true,
-                                    "trialCountPanel": true,
-                                    "timerPanel": true
-                                }
-                            }
-                        ]
                 }
     		]
     }

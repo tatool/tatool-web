@@ -19,7 +19,6 @@ angular.module('tatool.module')
 
     // Handle global key press
     $scope.keyPress = function($event){
-      console.log('trigger?');
       if($event.which === 27) { // Escape Key
         if (allowEscapeKey) {
           if (executor.exec) {
