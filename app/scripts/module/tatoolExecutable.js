@@ -35,6 +35,11 @@ angular.module('tatool.module')
       executor.suspendExecutable();
     };
 
+    // fail the current executable and stop module
+    executable.fail = function(error) {
+      executor.failExecutable(error);
+    };
+
     // stop the execution of the current module
     executable.stopModule = function(sessionComplete) {
       sessionComplete = (sessionComplete) ? sessionComplete : true;
@@ -45,6 +50,7 @@ angular.module('tatool.module')
     /**--------------------------------
       Resource Loading Helper functions
     -------------------------------- */
+
     // returns the project path
     executable.getProjectPath = function(resourceType) {
       if (resourceType) {
@@ -97,7 +103,7 @@ angular.module('tatool.module')
 
       $http.get( project.path + resourceType + '/' + resource + '?token=' + project.token)
         .success(function (data) {
-          var csv = Papa.parse(data, {header: header});
+          var csv = Papa.parse(data, {header: header, dynamicTyping: true});
           deferred.resolve(csv.data);
         })
         .error(function (error) {
@@ -130,9 +136,7 @@ angular.module('tatool.module')
       }
       $http.get(resource)
         .success(function (data) {
-
-          console.log(data);
-          var csv = Papa.parse(data, {header: header});
+          var csv = Papa.parse(data, {header: header, dynamicTyping: true});
           deferred.resolve(csv.data);
         })
         .error(function (error) {
@@ -143,25 +147,87 @@ angular.module('tatool.module')
     };
 
     /**--------------------------------
-      Randomisation Helper functions
+      Stimuli Selection Helper functions
     -------------------------------- */
+
     // returns a random int out of the specified interval
     executable.getRandomInt = function(min, max) {
       return Math.floor(Math.random()*(max-min+1)+min);
     };
 
-    // returns a random element of an array or random property of an object
-    executable.pickRandom = function(obj) {
+    // returns a random element of an array or random property of an object without replacement
+    executable.getRandom = function(obj) {
       var index;
       if (Array.isArray(obj)) {
-        index = executable.getRandomInt(0, obj.length - 1);
-        return obj[index];
+        if (obj.length === 0) {
+          return null;
+        } else {
+          index = executable.getRandomInt(0, obj.length - 1);
+          return obj.splice(index, 1)[0];
+        }
       } else {
         var array = Object.keys(obj);
-        index = executable.getRandomInt(0, array.length - 1);
-        return obj[array[index]];
+        if (array.length === 0) {
+          return null;
+        } else {
+          index = executable.getRandomInt(0, array.length - 1);
+          var property = obj[array[index]];
+          delete obj[array[index]];
+          return property;
+        }
       }
     };
+
+    // returns a random element of an array or random property of an object with replacement
+    executable.getRandomReplace = function(obj) {
+      var index;
+      if (Array.isArray(obj)) {
+        if (obj.length === 0) {
+          return null;
+        } else {
+          index = executable.getRandomInt(0, obj.length - 1);
+          return obj[index];
+        }
+      } else {
+        var array = Object.keys(obj);
+        if (array.length === 0) {
+          return null;
+        } else {
+          index = executable.getRandomInt(0, array.length - 1);
+          return obj[array[index]];
+        }
+      }
+    };
+
+    // returns the next element of an array or next property of an object with replacement
+    executable.getNext = function(obj, counter) {
+      var index;
+      if (Array.isArray(obj)) {
+        if (obj.length === 0) {
+          return null;
+        } else {
+          return obj[counter];
+        }
+      } else {
+        var array = Object.keys(obj);
+        if (array.length === 0) {
+          return null;
+        } else {
+          return obj[array[counter]];
+        }
+      }
+    };
+
+    // Shuffle array using Fisher-Yates algorithm
+    executable.shuffle = function(array) {
+      for (var i = array.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+      }
+      return array;
+    }
 
     return executable;
   }]);

@@ -243,13 +243,27 @@ angular.module('tatool.app')
       $window.sessionStorage.setItem('moduleId', module.moduleId);
       $window.sessionStorage.setItem('mode', cfg.APP_MODE_USER);
 
-      // switch to fullscreen if available
+      // switch to fullscreen if available and enabled in module
       var fullscreen = module.moduleDefinition.fullscreen ? module.moduleDefinition.fullscreen : false;
       if (fullscreen && screenfull.enabled) {
         screenfull.request();
       }
+      
       // start moduleRunner
       $state.go('run');
+    };
+
+    $scope.setModuleFilter = function() {
+      if ($scope.query.length >= 2) {
+        $scope.filterModule = $scope.query;
+      } else {
+        $scope.filterModule = '';
+      }
+    };
+
+    $scope.removeModuleFilter = function() {
+      $scope.query = '';
+      $scope.filterModule = '';
     };
 
     var setAlert = function(alertType, alertMessage) {

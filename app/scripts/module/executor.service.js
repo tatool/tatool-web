@@ -243,6 +243,18 @@ angular.module('tatool.module')
       }
     };
 
+    // Used to signal the executor that the current executable has failed and module should be stopped
+    obj.failExecutable = function(error) {
+      if (this.exec) {
+        this.finishExecutable();
+
+        obj.stopModule(false, error);
+      } else {
+        $log.error('ERROR: Call to failExecutable failed.');
+        obj.stopModule(false, error);
+      }
+    };
+
     // Used to signal the executor that the current executable should be finished
     obj.finishExecutable = function() {
       // broadcast the phase EXECUTABLE_END

@@ -13,7 +13,7 @@ angular.module('tatool.app')
       $scope.elementIndex = {};
       $scope.elementParent = {};
 
-      $scope.highlightId = {key: 0};
+      $scope.highlightId = {key: 'module'};
 
       $scope.alert = {};
       $scope.elementType = '../../views/app/edit_module.html';
@@ -59,14 +59,6 @@ angular.module('tatool.app')
           }
         });
       }
-
-      $scope.saveModule = function() {
-        moduleDataService.addModule(module).then(function() {
-          setAlert('success', 'Module successfully saved.');
-        }, function(error) {
-          setAlert('danger', error);
-        });
-      };
 
       $scope.addNewExecutable = function(element) {
         hideAlert();
@@ -150,6 +142,8 @@ angular.module('tatool.app')
             }
           }
         }
+
+        $scope.highlightId.key = '';
       };
 
       $scope.moveElementDown = function(element, index, parent) {
@@ -172,6 +166,8 @@ angular.module('tatool.app')
             }
           }
         }
+
+        $scope.highlightId.key = '';
       };
 
       $scope.deleteElement = function(element, index, parent) {
@@ -195,7 +191,7 @@ angular.module('tatool.app')
 
       $scope.addProperty = function(element) {
         hideAlert();
-        bootbox.dialog({
+        var box =bootbox.dialog({
           title: '<b>Add new Property</b>',
           message: '<div class="row">  ' +
                     '<div class="col-md-12"> ' +
@@ -217,7 +213,7 @@ angular.module('tatool.app')
                     '</div> </div>' +
                     '</form> </div>  </div>',
           buttons: {
-            success: {
+            main: {
               label: 'Ok',
               className: 'btn-default',
               callback: function () {
@@ -235,6 +231,17 @@ angular.module('tatool.app')
               label: 'Cancel',
               className: 'btn-default'
             }
+          }
+        });
+
+        box.bind('shown.bs.modal', function(){
+          $('#newPropertyName').focus();
+        });
+
+        $('#newPropertyName').keypress(function(e) {
+          if(e.which == 13) {
+            e.preventDefault();
+            $('button[data-bb-handler="main"]').focus().click();
           }
         });
       };

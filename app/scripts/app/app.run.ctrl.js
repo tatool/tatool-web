@@ -3,8 +3,8 @@
 /* global screenfull */
 
 angular.module('tatool.app')
-  .controller('RunCtrl', ['$scope', '$window', '$state', '$sce', 'spinnerService', 'cfg',
-    function ($scope, $window, $state, $sce, spinnerService, cfg) {
+  .controller('RunCtrl', ['$scope', '$window', '$state', '$sce', '$timeout', 'spinnerService', 'cfg',
+    function ($scope, $window, $state, $sce, $timeout, spinnerService, cfg) {
 
     // module listener
     var moduleListener = function(e) {
@@ -17,6 +17,8 @@ angular.module('tatool.app')
         }
         $scope.moduleUrl = $sce.trustAsResourceUrl('about:blank');
         $window.removeEventListener('message', moduleListener, false);
+        $window.removeEventListener(screenfull.raw.fullscreenchange, fullscreenChange, false);
+        
         stopSpinner();
         $scope.$apply();
 
@@ -40,6 +42,12 @@ angular.module('tatool.app')
       }
     };
 
+    var fullscreenChange = function(e) {
+      if (!screenfull.isFullscreen) {
+        $('#iframe')[0].contentWindow.postMessage({ type: 'fullscreenExit' }, '*');
+      }
+    };
+
     var goBack = function() {
       if (mode === cfg.APP_MODE_DEVELOPER) {
         $state.go('developer');
@@ -49,6 +57,11 @@ angular.module('tatool.app')
     };
 
     $window.addEventListener('message', moduleListener, false);
+
+    // fullscreen change detection
+    if (screenfull.enabled) {
+      $window.addEventListener(screenfull.raw.fullscreenchange, fullscreenChange, false);
+    }
 
     var startSpinner = function() {
       spinnerService.spin('loadingSpinner', 'Loading module...');

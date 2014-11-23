@@ -5,31 +5,37 @@
 <div>
   <form class="form-horizontal" role="form" ng-submit="saveModule()">
   <div class="form-group">
-    <label for="name" class="col-sm-2 control-label">Name</label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control" id="name" ng-model="module.moduleName" ng-required="true">
+    <label for="name" class="col-sm-3 control-label">Name 
+      <a class="info" tooltip="The name of your module will be visible for everyone." tooltip-placement="right"><i class="fa fa-info-circle"></i></a>
+    </label>
+    <div class="col-sm-9">
+      <input type="text" class="form-control" id="name" ng-model="module.moduleName" ng-required="true" auto-focus>
     </div>
   </div>
   <div class="form-group">
-    <label for="author" class="col-sm-2 control-label">Author</label>
-    <div class="col-sm-10">
+    <label for="author" class="col-sm-3 control-label">Author
+      <a class="info" tooltip="Author name will be visible for everyone." tooltip-placement="right"><i class="fa fa-info-circle"></i></a>
+    </label>
+    <div class="col-sm-9">
       <input type="text" class="form-control" id="author" ng-model="module.moduleAuthor">
     </div>
   </div>
   <div class="form-group">
-    <label for="label" class="col-sm-2 control-label">Label</label>
-    <div class="col-sm-10">
+    <label for="label" class="col-sm-3 control-label">Label
+      <a class="info" tooltip="Internal shorthand name for your module, which will be used to name any export files." tooltip-placement="right"><i class="fa fa-info-circle"></i></a>
+    </label>
+    <div class="col-sm-9">
       <input type="text" class="form-control" id="label" ng-model="module.moduleLabel">
     </div>
   </div>
   <div class="form-group">
-    <label for="label" class="col-sm-2 control-label">Project</label>
-    <div class="col-sm-4">
+    <label for="label" class="col-sm-3 control-label">Project
+      <a class="info" tooltip="Defines from which Tatool project folder the module will load executables and other resources. If you don't have a personal folder, set it to the public folder 'tatool'." tooltip-placement="right"><i class="fa fa-info-circle"></i></a>
+    </label>
+    <div class="col-sm-5">
       <input type="text" class="form-control" id="label" ng-model="module.project.name">
     </div>
-  </div>
-  <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
+    <div class="col-sm-4">
       <div class="radio">
         <label>
           <input type="radio" name="projectRadio" ng-model="module.project.access" value="public"> Public
@@ -38,6 +44,26 @@
           <input type="radio" name="projectRadio" ng-model="module.project.access" value="private"> Private
         </label>
       </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="label" class="col-sm-3 control-label">Escape
+      <a class="info" tooltip="Allow the user to escape the module by pressing Esc key." tooltip-placement="right"><i class="fa fa-info-circle"></i></a>
+    </label>
+    <div class="col-sm-9">
+      <label>
+        <input type="checkbox" ng-model="module.moduleDefinition.allowEscapeKey" ng-true-value="true" ng-false-value="false">
+      </label>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="label" class="col-sm-3 control-label">Fullscreen
+      <a class="info" tooltip="Module will run in fullscreen mode where available." tooltip-placement="right"><i class="fa fa-info-circle"></i></a>
+    </label>
+    <div class="col-sm-9">
+      <label>
+        <input type="checkbox" ng-model="module.moduleDefinition.fullscreen" ng-true-value="true" ng-false-value="false">
+      </label>
     </div>
   </div>
 </form>

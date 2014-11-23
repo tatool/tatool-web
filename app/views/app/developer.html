@@ -11,17 +11,24 @@
       <div ng-bind-html="alert.msg"></div>
     </div>
 
+    <div class="actionHeader">
+      <div class="pull-right">
+        <div class="btn btn-tatool fileUpload" ng-click="newModule($event)">New</div> 
+        <div class="fileUpload btn btn-tatool">
+          Open
+          <form id="openModuleForm">
+            <input type="file" class="upload" custom-on-change="addModule"/>
+          </form>
+        </div> 
+      </div>
+    </div>
+
     <accordion>
       <accordion-group is-open="accordionStatus.develop">
         <accordion-heading>
           DEVELOPMENT & TEST
           <i class="glyphicon" ng-class="{'glyphicon-chevron-down': accordionStatus.develop, 'glyphicon-chevron-right': !accordionStatus.develop}"></i>
-          <div class="fileUpload btn btn-tatool pull-right">
-            Add Module
-            <form id="addModuleForm">
-              <input type="file" class="upload" custom-on-change="addModule" ng-click="$event.stopPropagation()"/>
-            </form>
-          </div>
+          
         </accordion-heading>
         <div id="modules">
 
@@ -34,8 +41,8 @@
               <div class="buttonbar">
                 <div class="btn btn-tatool-off" ng-click="editModule(module)">Edit</div>
                 <div class="btn btn-tatool-off" ng-click="startModule(module)">Start</div>
-                <div id="dropdownExport" class="btn-group dropdown" ng-if="module.moduleDefinition.export && module.moduleDefinition.export.length > 0">
-                  <div id="dropdownExportButton" class="btn btn-tatool-off dropdown-toggle">Export <span class="caret"></span></div>
+                <div id="dropdownExport" class="btn-group" dropdown is-open="status.isopen" ng-if="module.moduleDefinition.export && module.moduleDefinition.export.length > 0">
+                  <div id="dropdownExportButton" class="btn btn-tatool-off dropdown-toggle" dropdown-toggle>Export <span class="caret"></span></div>
                   <ul class="dropdown-menu" role="menu">
                     <li class="exporterName" ng-click="doExport($event, module, exporter.mode, exporter.target)" ng-repeat="exporter in module.moduleDefinition.export | filter:filterExporter | orderBy:'mode'">
                       <a ui-sref="developer">{{exporter.mode}}</a>

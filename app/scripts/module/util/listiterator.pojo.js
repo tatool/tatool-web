@@ -16,13 +16,18 @@ ListIterator.prototype.selectNextElement = function(currentStack) {
     }
   }
 
-  // check whether we can push another element
+  // check whether we can push another element according to the iterator
   if (this.iter == null) {
     return false;
   }
      
-  // get the next element and push it onto the stack
+  // get the next element
   var nextElement = this.iter.next();
+  if (!nextElement) {
+    return false;
+  }
+
+  // push it onto the stack
   currentStack.push(nextElement);
       
   return true;

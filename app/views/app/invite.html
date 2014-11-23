@@ -1,12 +1,12 @@
 <div id="inviteModal">
   <div class="modal-header">
     <div class="modal-title">
-      <span>Module Invites</span>
+      <span><b>Module Invites</b> <a class="info" tooltip="Invite registered tatool users to install your module." tooltip-placement="right"><i class="fa fa-info-circle"></i></a></span>
       <button type="button" class="bootbox-close-button close" style="margin-left: 20px" aria-hidden="true" ng-click="ok()">×</button>
 
       <form class="form-inline pull-right" role="form" ng-submit="inviteUser($event)">
         <div class="form-group has-feedback" ng-class="{'has-error': inputError}">
-          <input type="email" placeholder="Email" class="form-control random" id="inviteEmail" ng-model="user.email" autofocus>
+          <input type="email" placeholder="Email" class="form-control random" id="inviteEmail" ng-model="user.email" auto-focus>
           <span class="glyphicon glyphicon-plus form-control-feedback fakeButton" ng-click="inviteUser($event)"></span>
         </div>
       </form>

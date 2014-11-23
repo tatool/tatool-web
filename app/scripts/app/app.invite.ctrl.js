@@ -22,6 +22,7 @@ angular.module('tatool.app')
       };
 
       $scope.inviteUser = function() {
+        hideAlert();
         var email = $scope.user.email;
         $scope.user.email = '';
         $scope.inputError = false;
@@ -54,6 +55,7 @@ angular.module('tatool.app')
       };
 
       $scope.removeUser = function(user) {
+        hideAlert();
         var userData = { email: user.email };
         moduleDataService.removeInvite(module.moduleId, userData).then(function(data) {
             module = data;

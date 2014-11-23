@@ -46,6 +46,16 @@ var tatool = angular.module('tatool', ['ui.bootstrap', 'ui.router'])
       return $delegate;
     }]);
 
+  }])
+  .directive('autoFocus', ['$timeout', function($timeout) {
+    return {
+      restrict: 'AC',
+      link: function(scope, element) {
+        $timeout(function(){
+          element.focus();
+        }, 10);
+      }
+    };
   }]);
 
 /*

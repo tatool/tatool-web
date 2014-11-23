@@ -19,6 +19,7 @@ angular.module('tatool.module')
 
     // Handle global key press
     $scope.keyPress = function($event){
+      console.log('trigger?');
       if($event.which === 27) { // Escape Key
         if (allowEscapeKey) {
           if (executor.exec) {
@@ -36,6 +37,22 @@ angular.module('tatool.module')
         $scope.$broadcast('keyPress', $event);
       }
     };
+
+    // Stop execution of module on fullscreen exit
+    var appListener = function(e) {
+      var message = e.data;
+      if (message.type === 'fullscreenExit') {
+        if (allowEscapeKey) {
+          if (executor.exec) {
+            executor.finishExecutable();
+          }
+          executor.stopModule(true);
+        }
+      }
+    }
+
+    $window.removeEventListener('message', appListener, false);
+    $window.addEventListener('message', appListener, false);
 
     // Handle global mouse press
     $scope.mousePress = function($event){
@@ -58,6 +75,7 @@ angular.module('tatool.module')
       function onModuleSuccess(data) {
         $log.debug('Main: Start module...');
         allowEscapeKey = data.moduleDefinition.allowEscapeKey ? data.moduleDefinition.allowEscapeKey : false;
+
         executor.startModule();
       }
 

@@ -23,7 +23,7 @@ angular.module('tatool.module').directive('tatool', ['$timeout', function($timeo
   <tatool-input> 
   Directive to configure user input.
 **/
-angular.module('tatool.module').directive('tatoolInput', ['$log', '$templateCache', '$compile', function($log, $templateCache, $compile) {
+angular.module('tatool.module').directive('tatoolInput', ['$log', '$templateCache', '$compile', '$timeout', function($log, $templateCache, $compile, $timeout) {
   return {
     restrict: 'E',
     transclude: true,
@@ -117,6 +117,7 @@ angular.module('tatool.module').directive('tatoolInput', ['$log', '$templateCach
       scope.service.enable = function() {
         inputEnabled = true;
         $('#tatoolInputText').attr('disabled', false);
+        $timeout(function() { $('#tatoolInputText').focus(); }, 0);
         return performance.now();
       };
 

@@ -50,30 +50,38 @@ var update = function(req, res, module) {
 
   // update technical fields
   module.updated_at = today;
-  module.sessionToken = undefined;  // unset session token to invalidate resources
+  module.sessionToken = undefined;  // unset session token to protect access to resources
 
-  // update user defined information
-  module.moduleType = req.body.moduleType;
-  module.moduleLabel = req.body.moduleLabel;
-  module.project = req.body.project;
-  module.moduleDefinition = req.body.moduleDefinition;
-  module.moduleName = req.body.moduleName;
-  module.moduleAuthor = req.body.moduleAuthor;
-  module.moduleIcon = req.body.moduleIcon;
-  module.markModified('moduleDefinition');
-
-  // update runtime information
-  module.maxSessionId = req.body.maxSessionId;
-  module.moduleProperties = req.body.moduleProperties;
-  module.sessions = req.body.sessions;
-  module.markModified('moduleProperties');
-  module.markModified('sessions');
-
-  module.save(function(err, data) {
+  Module.find({ email: req.user.email, moduleType: { $exists: true, $nin: [''] } }, function (err, result) {
     if (err) {
-      res.status(500).send(err);
+      res.status(500).send({ message: 'Unknown error occurred during saving of module.'});
+    } else if (result.length >= req.app.get('module_limit') && !module.moduleType && req.body.moduleType !== '') {
+      res.status(500).send({ message: 'The number of repository modules is currently restricted to ' + req.app.get('module_limit') + ' per user.'});
     } else {
-      res.json(module);
+      // update user defined information
+      module.moduleType = req.body.moduleType;
+      module.moduleLabel = req.body.moduleLabel;
+      module.project = req.body.project;
+      module.moduleDefinition = req.body.moduleDefinition;
+      module.moduleName = req.body.moduleName;
+      module.moduleAuthor = req.body.moduleAuthor;
+      module.moduleIcon = req.body.moduleIcon;
+      module.markModified('moduleDefinition');
+
+      // update runtime information
+      module.maxSessionId = req.body.maxSessionId;
+      module.moduleProperties = req.body.moduleProperties;
+      module.sessions = req.body.sessions;
+      module.markModified('moduleProperties');
+      module.markModified('sessions');
+
+      module.save(function(err, data) {
+        if (err) {
+          res.status(500).send(err);
+        } else {
+          res.json(module);
+        }
+      });
     }
   });
 };

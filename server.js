@@ -18,6 +18,7 @@ app.set('projects_path', process.env.PROJECTS_PATH || __dirname + '/app/projects
 app.set('resource_user', process.env.RESOURCE_USER || 'tatool');
 app.set('resource_pw', process.env.RESOURCE_PW || 'secret');
 app.set('remote_url', process.env.REMOTE_URL);
+app.set('module_limit', 3);
 
 // dependencies
 var userController = require('./controllers/user');
@@ -87,8 +88,15 @@ router.post('/register', userController.register);
 router.get('/login', authController.isAuthenticated);
 
 // protect api with JWT
-app.use('/api', expressJwt({secret: app.get('jwt_secret')}).unless({path: ['/api/login','/api/register']}), authController.hasRole, router);
+app.use('/api', expressJwt({secret: app.get('jwt_secret')}).unless({path: ['/api/login','/api/register']}), noCache, authController.hasRole, router);
 
+// disable caching for API
+function noCache(req, res, next){
+  res.header("Cache-Control", "no-cache, no-store, must-revalidate");
+  res.header("Pragma", "no-cache");
+  res.header("Expires", 0);
+  next();
+}
 
 // open API
 app.post('/user/verify/resend', userController.verifyResend);

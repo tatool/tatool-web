@@ -5,9 +5,9 @@ tatool
     function ($scope, $log, $window, $timeout, service) {
 
     // Make the stimulus available for the <tatool-stimulus> template
-    $scope.stimulus = service.stimulus;
+    $scope.stimulus = service.tatoolStimulus;
     // Make the input available for the <tatool-input> template
-    $scope.input = service.input;
+    $scope.input = service.tatoolInput;
     // Make the data path available for the <tatool-stimulus> template
     $scope.dataPath = service.dataPath;
 
@@ -17,23 +17,23 @@ tatool
       service.createStimulus();
 
       // Enable input, start timer and display stimulus
-      service.input.enable();
+      service.tatoolInput.enable();
       service.timer.start(timerUp);
-      service.startTime = service.stimulus.show();
+      service.startTime = service.tatoolStimulus.show();
     };
 
     // Called by our timer when the time is up and no user input was captured
     function timerUp() {
-      service.input.disable();
-      service.endTime = service.stimulus.hide();
+      service.tatoolInput.disable();
+      service.endTime = service.tatoolStimulus.hide();
       service.processResponse('');
     }
 
     // Captures user input
     $scope.inputAction = function(input, timing, event) {
-      service.input.disable();
+      service.tatoolInput.disable();
       service.timer.stop();
-      service.stimulus.hide();
+      service.tatoolStimulus.hide();
       service.endTime = timing;
       service.processResponse(input.givenResponse);
     };

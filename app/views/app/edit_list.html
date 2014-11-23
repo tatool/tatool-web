@@ -5,9 +5,11 @@
 <div>
   <form class="form-horizontal" role="form">
   <div class="form-group">
-    <label for="name" class="col-sm-3 control-label">No. of Iterations</label>
+    <label for="name" class="col-sm-3 control-label">No. Iterations
+      <a class="info" tooltip="Sets the number of iterations. For example 1 iteration will execute all child elements once." tooltip-placement="right"><i class="fa fa-info-circle"></i></a>
+    </label>
     <div class="col-sm-9">
-      <input type="text" class="form-control" id="name" ng-model="element.iterator.numIterations" ng-required="true">
+      <input type="text" class="form-control" id="name" ng-model="element.iterator.numIterations" ng-required="true" auto-focus>
     </div>
   </div>
   <hr>
@@ -15,8 +17,8 @@
   <div class="form-group">
     <div class="col-sm-offset-3 col-sm-9">
 
-      <div id="dropdownExport" class="btn-group dropdown" ng-if="module.moduleDefinition.export && module.moduleDefinition.export.length > 0">
-        <div id="dropdownExportButton" class="btn btn-default dropdown-toggle"><i class="fa fa-plus-square-o"></i> Add</div>
+      <div id="dropdownExport" class="btn-group" dropdown>
+        <div id="dropdownExportButton" class="btn btn-default dropdown-toggle" dropdown-toggle><i class="fa fa-plus-square-o"></i> Add</div>
         <ul class="dropdown-menu" role="menu">
           <li ng-click="addNewList(element, elementIndex, elementParent)">
             <a ui-sref="developer"><i class="fa fa-list"></i> List</a>

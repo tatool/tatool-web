@@ -35,6 +35,7 @@ angular.module('tatool.module')
 
       // get session token to access resources and save to tatoolExecutable
       var tokenUrl = '/api/' + mode + '/modules/' + moduleService.getModuleId() + '/resources/token';
+
       $http.get(tokenUrl)
         .success(function (data) {
           token = '?' + 'token=' + data.token;
@@ -170,9 +171,13 @@ angular.module('tatool.module')
       var i = 0;
       var promises = [];
 
-      for (var key in executables) {
-        i++;
-        runInit(key, i, deferred, promises);
+      if (Object.keys(executables).length > 0) {
+        for (var key in executables) {
+          i++;
+          runInit(key, i, deferred, promises);
+        }
+      } else {
+        deferred.resolve();
       }
 
       return deferred.promise;

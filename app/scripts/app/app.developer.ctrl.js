@@ -50,6 +50,7 @@ angular.module('tatool.app')
 
     // upload local file
     $scope.addModule = function(e) {
+      e.preventDefault();
       hideAlert();
 
       startSpinner();
@@ -146,8 +147,13 @@ angular.module('tatool.app')
       } else {
         startSpinner();
         module.moduleType = 'public';
-        moduleDataService.addModule(module);
-        stopSpinner();
+        moduleDataService.addModule(module).then(function(data) {
+          stopSpinner();
+        }, function(error) {
+          module.moduleType = '';
+          setAlert('danger', error);
+          stopSpinner();
+        });
       }
     };
 
@@ -168,7 +174,7 @@ angular.module('tatool.app')
         } else if (module) {
           setAlert('info', 'The module <b>\'' + module.moduleName + '\'</b> needs to be published as a <b>private</b> module before you can invite users.');
         } else {
-          setAlert('danger', 'The module could not be found.');
+          setAlert('danger', 'The module was not found.');
         }
       }, function() {
         setAlert('danger', 'The module needs to be published as a <b>private</b> module before you can invite users.');
@@ -253,9 +259,11 @@ angular.module('tatool.app')
 
       startSpinner('Exporting data. Please wait...');
       exportService.exportModuleData(module, exportMode, exportTarget, cfg.APP_MODE_DEVELOPER).then(function() {
+        setAlert('success', 'Data successfully exported.');
         stopSpinner();
       }, function(err) {
         $log.error(err);
+        setAlert('danger', err);
         stopSpinner();
       });
     };
@@ -266,13 +274,46 @@ angular.module('tatool.app')
       $window.sessionStorage.setItem('moduleId', module.moduleId);
       $window.sessionStorage.setItem('mode', cfg.APP_MODE_DEVELOPER);
 
-      // switch to fullscreen if available
+      // switch to fullscreen if available and enabled in module
       var fullscreen = module.moduleDefinition.fullscreen ? module.moduleDefinition.fullscreen : false;
       if (fullscreen && screenfull.enabled) {
         screenfull.request();
       }
+      
       // start moduleRunner
       $state.go('run');
+    };
+
+    $scope.newModule = function($event) {
+      $event.stopPropagation();
+      $event.preventDefault();
+      
+      // default moduleDefinition for new modules
+      var moduleDefinition = {
+        name: 'New Module',
+        author: userService.getUserName(),
+        label: 'newModule',
+        project: { "name" : "tatool", "access": "public"},
+        export : [ 
+          { mode: 'download' } 
+        ],
+        allowEscapeKey : true,
+        fullscreen : true,
+        moduleHierarchy: { 
+          tatoolType: 'List',
+          iterator: { customType: 'ListIterator', numIterations: 1 },
+          children: []
+        }
+      };
+
+      var newModule = new Module(uuid());
+      newModule.setModuleName(moduleDefinition.name);
+      newModule.setModuleAuthor(moduleDefinition.author);
+      newModule.setModuleDefinition(moduleDefinition);
+      newModule.setModuleLabel(moduleDefinition.label);
+      newModule.setProject(moduleDefinition.project);
+
+      $scope.editModule(newModule);
     };
 
     var setAlert = function(alertType, alertMessage) {
