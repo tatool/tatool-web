@@ -161,6 +161,7 @@ footer {
   font-size: 220%;
   line-height: 130%;
 }
+
 #startContent {
   font-family: 'Open Sans', sans-serif;
 }
@@ -196,6 +197,116 @@ footer {
 #startContent .img-beta {
   float: left;
   margin-right: 30px;
+}
+
+/** ---------
+    DOCUMENTATION
+-----------**/
+
+#startDocument {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 90%;
+}
+
+#docNavigation {
+  display: inline-block;
+  float:left;
+  width: 18%;
+}
+
+#docNavigation ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+ 
+#docNavigation li {
+  border-top: 1px solid #ccc;
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+
+#docNavigation .subNav{
+  padding-left: 8px;
+  list-style-type: none;
+}
+
+#docNavigation .subNav li {
+  border: 0;
+}
+
+#docContent {
+  display: inline-block;
+  float:left;
+  width: 80%;
+  padding-left: 2%;
+}
+
+#startDocument .lead {
+  font-size: 150%;
+  line-height: 130%;
+}
+
+#startDocument .red {
+  color: #c64925;
+}
+
+#startDocument h2 {
+  font-size: 130%;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #c64925;
+}
+
+#startDocument h3 {
+  font-size: 120%;
+  font-weight: bold;
+  margin-top: 25px;
+  margin-bottom: 15px;
+  color: #c64925;
+}
+
+#startDocument h4 {
+  font-size: 110%;
+  font-weight: bold;
+  margin-top: 25px;
+  margin-bottom: 15px;
+}
+
+#startDocument p {
+  line-height: 140%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+#startDocument #docPageNav {
+  list-style-type: none;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 0;
+}
+
+#startDocument #docPageNav li {
+  padding-left: 20px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+
+#startDocument th {
+  font-weight: bold;
+}
+
+#startDocument table .cellB {
+  font-weight: bold;
+}
+
+.hr-red {
+  border: 1px solid #cd7c65;
+}
+
+pre {
+  max-height: 30em;
+  overflow: auto;
 }
 
 /** ---------

@@ -154,13 +154,13 @@ angular.module('tatool.module')
       return deferred.promise;
     };
 
-    // register a handler
+    // register an executable
     executableService.registerExecutable = function(name, executable) {
       executables[name] = executable;
       numExecutables++;
     };
 
-    // get a specific handler
+    // get a specific executable
     executableService.getExecutable = function(name) {
       return executables[name];
     };
@@ -183,6 +183,7 @@ angular.module('tatool.module')
       return deferred.promise;
     };
 
+    // run init method on executable
     var runInit = function(key, i, initAllDeferred, promises) {
       if ('init' in executables[key]) {
         var deferred = executables[key].init();

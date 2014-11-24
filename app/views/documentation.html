@@ -4,15 +4,34 @@
 <div ng-include src="'../../views/app/header.html'"></div>
 
   <!-- MAIN -->
-<div id="startContent" class="container">
+<div id="startDocument" class="container">
+
+
 
   <p class="lead">Documentation</p>
   <hr>
 
-  <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+  <div id="docNavigation">
+  <ul>
+    <li><a ui-sref="documentation" ng-click="goPage('test.html')">Getting Started</a></li>
+    <li><a ui-sref="documentation" ng-click="goPage('test.html')">Advanced</a></li>
+    <li><a ui-sref="documentation" ng-click="goPage('test.html')">Directives</a></li>
+    <ul class="subNav">
+      <li><i class="fa fa-angle-right"></i> <a ui-sref="documentation" ng-click="goPage('directive-tatoolStimulus.html')">Tatool Stimulus</a></li>
+      <li><i class="fa fa-angle-right"></i> <a ui-sref="documentation" ng-click="goPage('directive-tatoolInput.html')">Tatool Input</a></li>
+      <li><i class="fa fa-angle-right"></i> <a ui-sref="documentation" ng-click="goPage('directive-tatoolGrid.html')">Tatool Grid</a></li>
+    </ul>
+    <li><a href="">Random Stuff Here</a></li>
+  </ul>
+  </div>
 
+  <div id="docContent">
+    <div ng-include="docPage" onload="highlightCode()"></div>
+  </div>
 
 </div>
+
+
 
 <br><br>
 

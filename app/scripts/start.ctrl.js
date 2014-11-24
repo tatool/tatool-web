@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('tatool.app')
-  .controller('StartCtrl', ['$scope', '$http', '$state',
-    function ($scope, $http) {
+  .controller('StartCtrl', ['$scope', '$http', '$location', '$anchorScroll',
+    function ($scope, $http, $location, $anchorScroll) {
 
       $scope.stopDevSignup = false;
 
@@ -25,6 +25,25 @@ angular.module('tatool.app')
               $scope.stopDevSignup = true;
             });
         }
+      };
+
+      $scope.docPage = 'views/doc/test.html';
+
+      $scope.goPage = function(page) {
+        $scope.docPage = 'views/doc/' + page;
+      };
+
+      $scope.scrollTo = function(id) {
+        var old = $location.hash();
+        $location.hash(id);
+        $anchorScroll();
+        //reset to old to keep any additional routing logic from kicking in
+        $location.hash(old);
+      }
+
+      $scope.highlightCode = function() {
+        console.log('highlight');
+        Prism.highlightAll();
       };
 
     }]);
