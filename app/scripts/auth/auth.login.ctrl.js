@@ -153,8 +153,7 @@ angular.module('tatool.auth')
 
     function showRecaptcha(element) {
       Recaptcha.create('6LfSvfwSAAAAAOD0SuK_6f3vswGHswyH3kiHj-q3', element, {
-        theme: 'clean',
-        callback: Recaptcha.focus_response_field
+        theme: 'clean'
       });
     }
 
