@@ -1,10 +1,32 @@
 'use strict';
 
 angular.module('tatool.app')
-  .controller('StartCtrl', ['$scope', '$http', '$location', '$anchorScroll',
-    function ($scope, $http, $location, $anchorScroll) {
+  .controller('StartCtrl', ['$scope', '$http', '$location', '$anchorScroll', '$state',
+    function ($scope, $http, $location, $anchorScroll, $state) {
 
       $scope.stopDevSignup = false;
+      $scope.docPage = 'views/doc/test.html';
+      $scope.slides = ['slide-develop.html', 'slide-publish.html', 'slide-collect.html', 'slide-analyse.html'];
+      var currentSlide = 0;
+      $scope.slide = 'views/' + $scope.slides[currentSlide];
+
+      $scope.go = function(state) {
+        $state.go(state);
+      };
+
+      $scope.nextSlide = function() {
+        if (currentSlide < $scope.slides.length - 1) { 
+          currentSlide++;
+          $scope.slide = 'views/' + $scope.slides[currentSlide];
+        }
+      };
+
+      $scope.prevSlide = function() {
+        if (currentSlide > 0) {
+          currentSlide--;
+          $scope.slide = 'views/' + $scope.slides[currentSlide];
+        }
+      };
 
       $scope.applyDeveloper = function(emailDev) {
         if (emailDev) {
@@ -27,7 +49,7 @@ angular.module('tatool.app')
         }
       };
 
-      $scope.docPage = 'views/doc/test.html';
+      
 
       $scope.goPage = function(page) {
         $scope.docPage = 'views/doc/' + page;
@@ -39,10 +61,9 @@ angular.module('tatool.app')
         $anchorScroll();
         //reset to old to keep any additional routing logic from kicking in
         $location.hash(old);
-      }
+      };
 
       $scope.highlightCode = function() {
-        console.log('highlight');
         Prism.highlightAll();
       };
 

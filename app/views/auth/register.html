@@ -1,10 +1,9 @@
 <div class="wrapper">
 
 <!-- HEADER --> 
-<div ng-include src="'../../views/app/header.html'"></div>
+<div ng-include src="'../../views/header.html'"></div>
 
-<div id="login">
-  <!-- login form box -->
+<div id="login" class="container">
 
   <form ng-submit="register(credentials)" novalidate>
       <label class="sr-only" for="email">Email address</label>
@@ -13,14 +12,32 @@
       <label class="sr-only" for="password">Password</label>
       <input id="password" tabindex="2" type="password" placeholder="Password" ng-model="credentials.userPassword" autocomplete="off" required />
       <br>
-      <input id="password" tabindex="2" type="password" placeholder="Retype Password" ng-model="credentials.userPassword2" autocomplete="off" required />
+      <input id="password2" tabindex="2" type="password" placeholder="Retype Password" ng-model="credentials.userPassword2" autocomplete="off" required />
+      <br><br>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" ng-model="credentials.devAccess" ng-true-value="true" ng-false-value="false"> <b>Yes, I want Researcher/Developer Access</b> <a class="info" tooltip="This will give you full access to develop and publish your own modules. You'll have to sign up using your university email address." tooltip-placement="right"><i class="fa fa-info-circle"></i></a>
+        </label>
+      </div>
+      <div ng-if="credentials.devAccess">
+        <p>In order for us to verify your status, please register with your<br>university email and enter your name and affiliation below.</p>
+        <br>
+        <label class="sr-only" for="password">Full Name</label>
+        <input id="name" type="text" placeholder="Full name" ng-model="credentials.fullname" autocomplete="off" required />
+        <br>
+        <label class="sr-only" for="password">Affiliation</label>
+        <input id="affiliation" type="text" placeholder="Affiliation" ng-model="credentials.affiliation" autocomplete="off" required />
+        <br>
+      </div>
       <br><br>
       <div id="captcha"></div>
       <br>
       <input tabindex="5" type="submit"  name="login" value="Register" />
   </form>
+
   <br><a ui-sref="login">Login</a> | <a ui-sref="reset" ui-sref-opts="{location: false}">Forgot password</a>
   <br><br>
+
   <div id="messagebox">
     <div class="alert alert-danger" role="alert" ng-show="alert.visible"><div ng-bind-html="alert.msg"></div></div>
   </div>
@@ -33,4 +50,4 @@
     </div>
 
 <!-- FOOTER --> 
-  <div ng-include src="'../../views/app/footer.html'"></div>
+  <div ng-include src="'../../views/footer.html'"></div>

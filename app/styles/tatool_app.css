@@ -117,7 +117,6 @@ div.tooltip.in {
 }
 
 
-
 /** ---------
     FOOTER
 -----------**/
@@ -134,9 +133,11 @@ footer {
   background-color: #f6f6f6;
   border-top: 1px solid #d0d0d0;
   padding-top: 8px;
-  font-size: 70%;
+  font-size: 80%;
 }
 
+/* ReCaptcha Iframe FIX */
+iframe[src="about:blank"] { display: none; }
 
 /** ---------
     MAIN PAGE
@@ -170,9 +171,42 @@ footer {
   font-size: 150%;
   line-height: 130%;
 }
+#startContent .center {
+  text-align: center;
+}
 
 #startContent .red {
   color: #c64925;
+}
+
+.redBanner {
+  background-color: #cc3300;
+  color: #fff;
+}
+
+.caret-right {
+  display: block;
+  margin-left: auto;
+  margin-right: auto
+}
+
+.caret-left {
+  display: block;
+  margin-left: auto;
+  margin-right: auto
+}
+
+#startContent .white {
+  color: #fff;
+}
+
+#startContent .bold {
+  font-weight: bold;
+}
+
+#startContent .jumbo {
+  font-size: 250%;
+  font-weight: bold;
 }
 
 #startContent h3 {
@@ -184,6 +218,8 @@ footer {
 
 #startContent p {
   line-height: 140%;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 #startContent .centerTitle {
@@ -191,13 +227,19 @@ footer {
 }
 
 #startContent .img-screen {
-  border: 1px solid #aaa;
+display: block;
+margin-left: auto;
+margin-right: auto;
+-webkit-box-shadow: 3px 3px 13px 0px rgba(64,64,64,0.54);
+-moz-box-shadow: 3px 3px 13px 0px rgba(64,64,64,0.54);
+box-shadow: 3px 3px 13px 0px rgba(64,64,64,0.54);
 }
 
 #startContent .img-beta {
   float: left;
   margin-right: 30px;
 }
+
 
 /** ---------
     DOCUMENTATION

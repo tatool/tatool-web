@@ -4,21 +4,26 @@
 /* global Recaptcha */
 
 angular.module('tatool.auth')
-  .controller('LoginCtrl', ['$scope', '$log', '$state', '$sce', 'authService', 'messageService', 'spinnerService', 'cfg', 'token',
-    function ($scope, $log, $state, $sce, authService, messageService, spinnerService, cfg, token) {
+  .controller('LoginCtrl', ['$scope', '$log', '$state', '$sce', '$anchorScroll', '$location', 'authService', 'messageService', 'spinnerService', 'cfg', 'token',
+    function ($scope, $log, $state, $sce, $anchorScroll, $location, authService, messageService, spinnerService, cfg, token) {
 
     $scope.alert = { type: 'danger', msg: '', visible: false };
 
     $scope.token = token;
 
+    $scope.go = function(state) {
+      $state.go(state);
+    };
+
     // login with authService and redirect if successful
     $scope.login = function(credentials) {
       if (!credentials) {
-        setAlert('danger', 'Please enter all required fields:<br> <li> Email<li> Password');
+        setAlert('danger', 'Please enter all required fields:<br><ul><li> Email<li> Password</ul>');
       } else if (!credentials.userName || !credentials.userPassword) {
-        var alertText = 'Please enter all required fields:<br>';
+        var alertText = 'Please enter all required fields:<br><ul>';
         alertText += (!credentials.userName) ? '<li> Email' : '';
         alertText += (!credentials.userPassword) ? '<li> Password' : '';
+        alertText += '</ul>';
         setAlert('danger', alertText);
         $scope.credentials.userName = '';
         $scope.credentials.userPassword = '';
@@ -46,14 +51,21 @@ angular.module('tatool.auth')
       
       var alertText = '';
       if (!credentials) {
-        setAlert('danger', 'Please enter all required fields:<br> <li> Email<li> Password');
+        setAlert('danger', 'Please enter all required fields:<br><ul> <li> Email<li> Password</ul>');
       } else if (!credentials.userName || !credentials.userPassword || !credentials.userPassword2) {
-        alertText = 'Please enter all required fields:<br>';
+        alertText = 'Please enter all required fields:<br><ul>';
         alertText += (!credentials.userName) ? '<li> Email' : '';
         alertText += (!credentials.userPassword || !credentials.userPassword2) ? '<li> Password' : '';
+        alertText += '</ul>';
         setAlert('danger', alertText);
       } else if (credentials.userPassword !== credentials.userPassword2) {
-        alertText = 'The passwords don\'t match.';
+        alertText = 'The passwords you entered don\'t match.';
+        setAlert('danger', alertText);
+      } else if (credentials.devAccess && (!credentials.fullname || !credentials.affiliation)) {
+        alertText = 'Please enter all required fields for your Researcher/Developer Access:<br><ul>';
+        alertText += (!credentials.fullname) ? '<li> Full Name' : '';
+        alertText += (!credentials.affiliation) ? '<li> Affiliation' : '';
+        alertText += '</ul>';
         setAlert('danger', alertText);
       } else if (!captcha.recaptcha_response_field && cfg.MODE === 'REMOTE') {
         alertText += (!captcha.recaptcha_response_field) ? '<li> Captcha' : '';
@@ -119,10 +131,19 @@ angular.module('tatool.auth')
       }
     };
 
+   function scrollTo(id) {
+      var old = $location.hash();
+      $location.hash(id);
+      $anchorScroll();
+      //reset to old to keep any additional routing logic from kicking in
+      $location.hash(old);
+    };
+
     function setAlert(alertType, alertMessage) {
       $scope.alert.type = alertType;
       $scope.alert.msg = $sce.trustAsHtml(alertMessage);
       $scope.alert.visible = true;
+      scrollTo('messagebox');
     }
 
     function hideAlert() {

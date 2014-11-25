@@ -1,7 +1,7 @@
 <div class="wrapper">
 
 <!-- HEADER --> 
-<div ng-include src="'../../views/app/header.html'"></div>
+<div ng-include src="'../../views/header.html'"></div>
 
   <!-- MAIN -->
   <div id="startBanner">
@@ -11,12 +11,13 @@
     </div>
   </div>
 
-  <div id="startContent" class="container">
+  <div id="startContent">
 
-    <p class="lead">Developing computer-based experiments just got a whole lot easier with tatool.</p>
-
+  <div class="container">
+    <p class="lead center">Running computer-based experiments just got a whole lot easier with tatool.</p>
+    <br><br>
     <hr>
-
+    <br><br>
     <div class="row">
       <div class="col-sm-4">
         <img src="../../images/html-css-js-badges.png" class="img-responsive">
@@ -35,70 +36,33 @@
       </div>
     </div>
 
-    <hr>
-    <br>
-    <p class="lead red">Tatool Features</p>
-
-
-    <div class="row">
-    <div class="col-sm-6">
-        <img src="../../images/tatool-screen-home.png" class="img-screen">
-        <h3>Experiment View</h3>
-        <p>The actual experiment view comes with a set of pre-built features like feedback, trial, timer and level indicators. For stimuli presentation we provide
-          easy to use html elements to display stimuli at specific positions on the screen.</p>
-      </div>
-      <div class="col-sm-6">
-        <img src="../../images/tatool-screen-publish.png" class="img-screen">
-        <h3>Easy Publishing</h3>
-        <p>As a developer you can decide to publish your experiment into the tatool repository as a public or a private module. Public modules can be installed by anyone and private modules can only be installed by the list of people you invite.</p>
-      </div>
-    </div>
-
-<br><br>
-
-    <div class="row">
-    <div class="col-sm-6">
-        <img src="../../images/tatool-screen-editor.png" class="img-screen">
-        <h3>Experiment Editor</h3>
-        <p>The Experiment Editor allows you to change an existing experiment quickly and easily without writing a single line of code. This even allows people with no programming knowledge to take existing experiments and customize them to their needs with own stimuli, timing, sequences, etc.</p>
-      </div>
-      <div class="col-sm-6">
-        <img src="../../images/tatool-screen-research.png" class="img-screen">
-        <h3>Data Export</h3>
-        <p>As a Researcher your ultimate goal is to get access to the data collected during your experiment. Tatool provides a research view that gives you a detailed log of who's participating in your experiment and how many sessions they've completed. You can also conveniently download their data as a CSV file.</p>
-      </div>
-    </div>
-
-
-  <hr>
-  <br>
-  <p class="lead red">Beta Phase</p>
-
-  <div class="row">
-    <div class="col-sm-12">
-      <br>
-      <img src="../../images/beta_icon.png" class="img-beta">
-      <p><a ui-sref="register"><i class="fa fa-pencil-square-o"></i> Sign Up</a> for a free account and take a look at the example experiments that are available for everyone. <b>Additionally, we invite researchers to apply for a beta developer account</b> below, which will let you create your own experiments. As this view is restricted to researchers, we require you to sign up with your university email. We're currently still developing a bunch of features, therefore this will allow you to have a first look and provide us some feedback on what you like and what you're missing. After successfully <a ui-sref="register"><i class="fa fa-pencil-square-o"></i> signing up</a> for an account, you can provide us your email address below, and we'll make sure that your account gets upgraded to include the developer views.</p><br><br>
-      <div ng-switch="stopDevSignup">
-        <div ng-switch-when="true">
-           <span class="red">{{singupComplete}}</span>
-        </div>
-        <div ng-switch-default>
-          <form class="form-inline" role="form" ng-submit="applyDeveloper(emailDev)">
-            <div class="form-group">
-              <input type="email" class="form-control" ng-model="emailDev" placeholder="University email">
-            </div>
-            <button type="submit" class="btn btn-default">Upgrade to Developer Account</button>
-          </form>
-        </div>
-      </div>
-        
-    </div>
-
-    
-
   </div>
 
+  <br><br><br>
+
+  <div class="redBanner">
+    <div class="container">
+
+    <br>
+    <p class="lead white center bold">Cover the life cycle of your experiment</p>
+    <br>
+
+    <div class="row">
+      <div class="col-sm-1">
+        <br><br><br>
+        <a href ng-click="prevSlide()"><img src="../../images/caret-left.png" class="caret-left"></a>
+      </div>
+      <div class="col-sm-10 slide" ng-include="slide"></div>
+      <div class="col-sm-1">
+        <br><br><br>
+        <a href ng-click="nextSlide()"><img src="../../images/caret-right.png" class="caret-right"></a>
+      </div>
+    </div>
+
+    <br><br><br><br>
+
+    </div>
+  </div>
 
   </div>
 
@@ -111,4 +75,4 @@
     </div>
 
 <!-- FOOTER --> 
-  <div ng-include src="'../../views/app/footer.html'"></div>
+  <div ng-include src="'../../views/footer.html'"></div>
