@@ -13,6 +13,12 @@ a {
 a:hover {
   color: #9b3112;
 }
+a:active {
+  color: #c44a27;
+}
+a:visited {
+  color: #c44a27;
+}
 
 a.info {
   color: #626db3;

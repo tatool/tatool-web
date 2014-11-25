@@ -2,7 +2,9 @@
 
 The following user has signed up for a developer account on tatool-web.com
 
-<%= user %>
+User: <%= user %>
+Full Name: <%= fullName %>
+Affiliation: <%= affiliation %>
 
 Regards
 

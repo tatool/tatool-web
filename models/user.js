@@ -25,6 +25,14 @@ var User = new Schema({
       type: Boolean,
       required: true
     },
+    fullName: {
+      type: String,
+      required: false
+    },
+    affiliation: {
+      type: String,
+      required: false
+    },
     updated_at: {
       type: Date,
       required: true

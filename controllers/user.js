@@ -23,6 +23,8 @@ exports.register = function(req, res) {
       user.password = req.body.userPassword;
       user.roles.push('user');
       user.verified = false;
+      user.fullName = req.body.fullname;
+      user.affiliation = req.body.affiliation;
       user.token = uuid.v4();
       user.updated_at = new Date();
 
@@ -44,7 +46,11 @@ exports.register = function(req, res) {
               user.remove();
               res.status(500).json({ message: 'Unable to send verification email. Please try again later.' });
             } else {
-              res.json({ message: 'User successfully added to the db!', data: user });
+              if (req.body.devAccess) {
+                exports.signupDev(req, res);
+              } else {
+                res.json({ message: 'User successfully added to the db!' });
+              }
             }
           });
         }
@@ -184,7 +190,7 @@ exports.updatePassword = function(req, res) {
         if (err) {
           res.status(500).json({ message: 'Update of user failed!', data: err });
         } else {
-          res.json({ message: 'User successfully updated!', data: user });
+          res.json({ message: 'User successfully updated!' });
         }
       });
 
@@ -224,7 +230,9 @@ exports.signupDev = function(req, res) {
       name: 'info@tatool.ch',
       subject: 'Developer Signup',
       template: 'developer-signup-email',
-      user: req.body.email
+      user: req.body.userName,
+      fullName: req.body.fullname,
+      affiliation: req.body.affiliation
   };
 
   sendVerificationEmail(message, function (error, success) {
