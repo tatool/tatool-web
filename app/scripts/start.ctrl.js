@@ -5,7 +5,7 @@ angular.module('tatool.app')
     function ($scope, $http, $location, $anchorScroll, $state) {
 
       $scope.stopDevSignup = false;
-      $scope.docPage = 'views/doc/test.html';
+      $scope.docPage = 'views/doc/dev-getting-started.html';
       $scope.slides = ['slide-develop.html', 'slide-publish.html', 'slide-collect.html', 'slide-analyse.html'];
       var currentSlide = 0;
       $scope.slide = 'views/' + $scope.slides[currentSlide];

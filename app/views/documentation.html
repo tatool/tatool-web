@@ -11,17 +11,38 @@
 
   <div id="docNavigation">
   <ul>
-    <li><a ui-sref="documentation" ng-click="goPage('test.html')">Getting Started</a></li>
-    <li><a ui-sref="documentation" ng-click="goPage('test.html')">Advanced</a></li>
-    <li><a ui-sref="documentation" ng-click="goPage('test.html')">Directives</a></li>
+    <li><a ui-sref="documentation" ng-click="goPage('test.html')">Registration</a></li>
+    <li><a ui-sref="documentation" ng-click="goPage('test.html')">Roles</a></li>
+    <li><a ui-sref="documentation" ng-click="goPage('test.html')">Modules</a></li>
     <ul class="subNav">
-      <li><i class="fa fa-angle-right"></i> <a ui-sref="documentation" ng-click="goPage('directive-tatoolStimulus.html')">Tatool Stimulus</a></li>
-      <li><i class="fa fa-angle-right"></i> <a ui-sref="documentation" ng-click="goPage('directive-tatoolInput.html')">Tatool Input</a></li>
-      <li><i class="fa fa-angle-right"></i> <a ui-sref="documentation" ng-click="goPage('directive-tatoolGrid.html')">Tatool Grid</a></li>
+      <li><i class="fa fa-angle-right"></i> <a ui-sref="documentation" ng-click="goPage('directive-tatoolStimulus.html')">Run</a></li>
+      <li><i class="fa fa-angle-right"></i> <a ui-sref="documentation" ng-click="goPage('directive-tatoolInput.html')">Create</a></li>
+      <li><i class="fa fa-angle-right"></i> <a ui-sref="documentation" ng-click="goPage('directive-tatoolGrid.html')">Publish</a></li>
+      <li><i class="fa fa-angle-right"></i> <a ui-sref="documentation" ng-click="goPage('directive-tatoolGrid.html')">Export Data</a></li>
     </ul>
-    <li><a href="">Random Stuff Here</a></li>
+    <li><a href="">Task Library</a></li>
+    <ul class="subNav">
+      <li><i class="fa fa-angle-right"></i> <a ui-sref="documentation" ng-click="goPage('directive-tatoolStimulus.html')">Stroop</a></li>
+      <li><i class="fa fa-angle-right"></i> <a ui-sref="documentation" ng-click="goPage('directive-tatoolInput.html')">Complex Span</a></li>
+    </ul>
+    <li><a href="">Task Development</a></li>
+    <ul class="subNav">
+      <li><i class="fa fa-angle-right"></i> <a ui-sref="documentation" ng-click="goPage('dev-getting-started.html')">Getting Started</a></li>
+      <li><i class="fa fa-angle-right"></i> <a ui-sref="documentation" ng-click="goPage('directive-tatoolInput.html')">Basics</a></li>
+      <li><i class="fa fa-angle-right"></i> <a ui-sref="documentation" ng-click="goPage('directive-tatoolInput.html')">Components</a></li>
+      <li><i class="fa fa-angle-right"></i> <a ui-sref="documentation" ng-click="goPage('directive-tatoolInput.html')">Controller</a></li>
+      <li><i class="fa fa-angle-right"></i> <a ui-sref="documentation" ng-click="goPage('directive-tatoolInput.html')">Service</a></li>
+      <li><i class="fa fa-angle-right"></i> <a ui-sref="documentation" ng-click="goPage('directive-tatoolInput.html')">Directive</a></li>
+      <ul class="subNav">
+        <li><i class="fa fa-angle-right"></i> <a ui-sref="documentation" ng-click="goPage('directive-tatoolStimulus.html')">Tatool Stimulus</a></li>
+        <li><i class="fa fa-angle-right"></i> <a ui-sref="documentation" ng-click="goPage('directive-tatoolInput.html')">Tatool Input</a></li>
+        <li><i class="fa fa-angle-right"></i> <a ui-sref="documentation" ng-click="goPage('directive-tatoolGrid.html')">Tatool Grid</a></li>
+      </ul>
+    </ul>
   </ul>
   </div>
+
+  
 
   <div id="docContent">
     <div ng-include="docPage" onload="highlightCode()"></div>
