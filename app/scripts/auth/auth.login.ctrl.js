@@ -131,13 +131,13 @@ angular.module('tatool.auth')
       }
     };
 
-   function scrollTo(id) {
+    function scrollTo(id) {
       var old = $location.hash();
       $location.hash(id);
       $anchorScroll();
       //reset to old to keep any additional routing logic from kicking in
       $location.hash(old);
-    };
+    }
 
     function setAlert(alertType, alertMessage) {
       $scope.alert.type = alertType;

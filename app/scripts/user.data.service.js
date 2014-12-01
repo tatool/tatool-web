@@ -50,6 +50,26 @@ angular.module('tatool')
       return deferred.promise;
     };
 
+    // update password
+    data.updatePassword = function(user) {
+      var deferred = $q.defer();
+
+      var userJson = JSON.parse(JSON.stringify(user));
+
+      $http.post('/api/admin/users/' + user._id + '/reset', userJson)
+        .success(function (data) {
+          if (data === 'null') {
+            data = null;
+          }
+          deferred.resolve(data);
+        })
+        .error(function (error) {
+          deferred.reject(error.message);
+        });
+      
+      return deferred.promise;
+    };
+
     // get a user by its userName
     data.deleteUser = function(user) {
       var deferred = $q.defer();

@@ -201,7 +201,6 @@ angular.module('tatool.module')
 
     // returns the next element of an array or next property of an object with replacement
     executable.getNext = function(obj, counter) {
-      var index;
       if (Array.isArray(obj)) {
         if (obj.length === 0) {
           return null;
@@ -227,7 +226,7 @@ angular.module('tatool.module')
         array[j] = temp;
       }
       return array;
-    }
+    };
 
     return executable;
   }]);

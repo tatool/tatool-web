@@ -1,4 +1,4 @@
-<h2 id="top">Getting Started</h2>
+<h2>Getting Started</h2>
 
 <p>In order to develop your own tasks or run your own instance of tatool in your lab, you'll have setup your environment first. The following easy steps should guide you through the process of setting up your local development/lab instance of tatool.</p>
 
@@ -24,10 +24,11 @@ v0.10.33
 
 <h3 id="mongodb">Install mongoDB<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
 
-<p><img src="../../images/doc/mongodb-logo.png"><br><br>Get the latest download for your operating system from <a href="http://www.mongodb.org/downloads" target="_blank">http://www.mongodb.org/downloads</a> and follow the <a href="http://docs.mongodb.org/manual/installation/" target="_blank">instructions</a> to install it. Make sure not to forget to setup the data directory as described in the installation instructions.</p>
+<p><img src="../../images/doc/mongodb-logo.png"><br><br>Get the latest download for your operating system from <a href="http://www.mongodb.org/downloads" target="_blank">http://www.mongodb.org/downloads</a> and follow the <a href="http://docs.mongodb.org/manual/installation/" target="_blank">instructions</a> to install it. Follow the steps under 'Install MongoDB' and Step 1 under 'Run MongoDB' which will create the necessary data directory for mongoDB.</p>
 
-<p>Type the following command in your terminal window and make sure you get a response indicating your version of nodeJS. On windows you can enter the command by opening the Windows command prompt (cmd.exe) and on Mac you can fire up a terminal. If you don't see the version of your mongoDB, something went wrong with your installation.</p>
-<pre><code class="language-javascript">$> mongo -version
+<p>Type the following command in your terminal window and make sure you get a response indicating your version of mongoDB. On windows you can enter the command by opening the Windows command prompt (cmd.exe) and on Mac you can run the commands in a new terminal. If you don't see the version of your mongoDB, something went wrong with your installation.</p>
+<pre><code class="language-javascript">$> cd mongodb
+$mongodb> mongo -version
 MongoDB shell version: 2.6.5
 </code></pre>
 
@@ -35,24 +36,24 @@ MongoDB shell version: 2.6.5
 
 <h3 id="tatool">Install tatool<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
 
-<p><img src="../../images/app/tatool_logo.png" width="200"><br><br>Get the latest download of tatool from our <a href="http://github.com/tatool/tatool-web" target="_blank">github repository</a>. If you're familiar with Git, we recommend you clone the tatool-web repository, otherwise you can simply download a ZIP by clicking on the button on the right.</p>
+<p><img src="../../images/app/tatool_logo.png" width="200"><br><br>Get the latest download of tatool from our <a href="http://github.com/tatool/tatool-web" target="_blank">github repository</a>. If you're familiar with Git, we recommend you clone the tatool-web repository, otherwise you can simply download a ZIP file by clicking on the "Download ZIP" button on the right hand side menu on github.</p>
 
 <p>After having downloaded/extracted the tatool-web repository to where you want to run tatool from, you have to run a few commands to properly install all dependencies.</p>
 
-<p><b>1.</b> Open the folder where you downloaded and extracted tatool-web to in your terminal window. On windows you can enter the command by opening the Windows command prompt (cmd.exe) and on Mac you can fire up a terminal.</p>
+<p><b>1.</b> Open the folder where you downloaded and extracted tatool-web to in your terminal window. On windows you can enter the commands by opening the Windows command prompt (cmd.exe) and on Mac you can run the commands in a new terminal.</p>
 <pre><code class="language-javascript">$> cd tatool-web
 </code></pre>
 
-<p><b>2.</b> Install the bower plugin for node, which will take care of downloading the application dependencies.<br>
+<p><b>2.</b> Install the bower plugin for nodejs, which will take care of downloading the application dependencies.<br>
 Type the following command in your terminal window. </p>
-<pre><code class="language-javascript">$> npm install -g bower
+<pre><code class="language-javascript">$tatool-web> npm install -g bower
 ...
-$> bower -version
+$tatool-web> bower -version
 1.3.12
 </code></pre>
 
 <p><b>3.</b> Run npm install to automatically download all dependencies needed for tatool-web to run.</p>
-<pre><code class="language-javascript">$> npm install
+<pre><code class="language-javascript">$tatool-web> npm install
 ...
 </code></pre>
 
@@ -60,17 +61,19 @@ $> bower -version
 
 <h3 id="runTatool">Run tatool<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
 
-<p>The following steps are needed to run your local tatool-web environment. You'll need to start mongoDB and nodeJS to run tatool-web.</p>
+<p>The following steps are needed to run your local tatool-web environment. You'll need to follow these steps everytime you want to start your local instance of tatool-web.</p>
 
-<p><b>1.</b> Start mongoDB by entering the command below, which will start the database server. The terminal should not be closed, as the database will stop running.</p>
-<pre><code class="language-javascript">$> mongod
+<p><b>1.</b> Start mongoDB by entering the command below if you haven't already started it in an earlier step. Don't close the terminal, as this will kill the process running your database.</p>
+<pre><code class="language-javascript">$> cd mongodb
+$mongodb> mongod
 ...waiting for connections on port 27017
 </code></pre>
 
-<p><b>2.</b> Start nodeJS/tatool in a new terminal by entering the commands below. First you'll have to change into the directory where you extracted tatool-web to. The second command will start a local web server hosting tatool. The terminal should not be closed, as the server will stop running.</p>
+<p><b>2.</b> Start nodejs in a new terminal by entering the commands below. First you'll have to change into the directory where you extracted tatool-web to. The second command will start a local web server hosting tatool. Don't close the terminal, as this will kill the process running your server.</p>
 <pre><code class="language-javascript">$> cd tatool-web
-$tatool-web> node server.js
-...Express server listening on port 3000
+$tatool-web> node server.js lab
+Running tatool in LAB mode.
+You can access tatool on hostname:3000
 </code></pre>
 
-<p><b>3.</b> Access tatool by opening your browser and entering the url http://127.0.0.1:3000. You should now see the tatool start page.</p>
+<p><b>3.</b> Access tatool by opening the url http://127.0.0.1:3000 in your browser. You should now see the tatool start page.</p>

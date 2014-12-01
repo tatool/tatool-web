@@ -1,91 +1,112 @@
 <div class="wrapper">
 
-<!-- HEADER --> 
-<div ng-include src="'../../views/header.html'"></div>
+  <!-- HEADER --> 
+  <div ng-include src="'../../views/header.html'"></div>
 
   <!-- MAIN -->
   <div id="startBanner">
     <div class="bannerContent">
       <img src="../../images/icon-big.png" class="bannerImg"><br><br><br>
-      <h2 class="center">open-source experiment software for researchers</h3><br>
+      <h2 class="center">
+      open-source experiment software for researchers</h3><br>
     </div>
   </div>
 
-  <div id="startContent">
+  <div ng-switch on="getMode()">
 
-  <div class="container">
-    <p class="lead center">Running computer-based experiments just got a whole lot easier with tatool.</p>
-    <br>
-    <hr>
-    <div class="leadLeft">
-      <img src="../../images/beta-icon.png">
-    </div>
-    <div class="leadRight">
-      <p>We're currently in Beta phase, but want you to already experience the new tatool for yourself. So go ahead and <a ui-sref="register" class="bold">register</a> for an account.
-      Make sure you follow us on Twitter to get the latest updates on new functionliaties. We also appreciate any feedback you have!</p>
-      <div class="socialButtons">
-        <a href="http://twitter.com/tatool_ch" target="_blank"><img src="../../images/twitter.png"></a>&nbsp;&nbsp;
-        <a href="http://www.facebook.com/tatool.ch" target="_blank"><img src="../../images/facebook.png"></a>
-      </div>
-    </div>
-    <br clear="both">
-    <hr>
-    <br><br>
-    <div class="row">
-      <div class="col-sm-4">
-        <img src="../../images/html-css-js-badges.png" class="img-responsive img-main">
-        <h3>Flexible Standards</h3>
-        <p>We use the well-known web technology standards HTML5, CSS, JavaScript and node.js. This makes it easy to work with tatool and even simpler to find a developer.</p>
-      </div>
-      <div class="col-sm-4">
-        <img src="../../images/research.png" class="img-responsive img-main">
-        <h3>Built for researchers</h3>
-        <p>We focused on the functionality that you need to get your research done. Go from programming, configuring experiments to collecting data and analysing it in no time.</p>
-      </div>
-      <div class="col-sm-4">
-        <img src="../../images/globe-browser.png" class="img-responsive img-main">
-        <h3>Reach everyone, everywhere</h3>
-        <p>Thanks to our web technologies you can include participants from all around the world by telling them to simply start up their favourite web browser.</p>
+    <div ng-switch-when="lab">
+      <div id="startContent" ng-cloak>
+        <div class="container">
+          <p class="lead center">Running computer-based experiments just got a whole lot easier with tatool.</p>
+          <br>
+          <hr>
+          <div class="leadLeft">
+            <img src="../../images/beta-icon.png">
+          </div>
+          <div class="leadRight">
+            <p>We're currently in Beta phase, but want you to already experience the new tatool for yourself. If you want more information, <a href="http://www.tatool-web.com" class="bold" target="_blank">visit</a> our website.
+              Make sure you follow us on Twitter to get the latest updates on new features. We also appreciate any feedback you have!
+            </p>
+            <div class="socialButtons">
+              <a href="http://twitter.com/tatool_ch" target="_blank"><img src="../../images/twitter.png"></a>&nbsp;&nbsp;
+              <a href="http://www.facebook.com/tatool.ch" target="_blank"><img src="../../images/facebook.png"></a>
+            </div>
+          </div>
+          <br clear="both">
+          <hr>
+        </div>
       </div>
     </div>
 
-  </div>
-
-  <br><br><br>
-
-  <div class="redBanner">
-    <div class="container">
-
-    <br>
-    <h3 class="white center">Cover the life cycle of your experiment</h3>
-    <br><br>
-
-    <div class="row">
-      <div class="col-sm-1">
+    <div ng-switch-default>
+      <div id="startContent" ng-cloak>
+        <div class="container">
+          <p class="lead center">Running computer-based experiments just got a whole lot easier with tatool.</p>
+          <br>
+          <hr>
+          <div class="leadLeft">
+            <img src="../../images/beta-icon.png">
+          </div>
+          <div class="leadRight">
+            <p>We're currently in Beta phase, but want you to already experience the new tatool for yourself. So go ahead and <a ui-sref="register" class="bold">register</a> for an account.
+              Make sure you follow us on Twitter to get the latest updates on new features. We also appreciate any feedback you have!
+            </p>
+            <div class="socialButtons">
+              <a href="http://twitter.com/tatool_ch" target="_blank"><img src="../../images/twitter.png"></a>&nbsp;&nbsp;
+              <a href="http://www.facebook.com/tatool.ch" target="_blank"><img src="../../images/facebook.png"></a>
+            </div>
+          </div>
+          <br clear="both">
+          <hr>
+          <br><br>
+          <div class="row">
+            <div class="col-sm-4">
+              <img src="../../images/html-css-js-badges.png" class="img-responsive img-main">
+              <h3>Flexible Standards</h3>
+              <p>We use the well-known web technology standards HTML5, CSS, JavaScript and node.js. This makes it easy to work with tatool and even simpler to find a developer.</p>
+            </div>
+            <div class="col-sm-4">
+              <img src="../../images/research.png" class="img-responsive img-main">
+              <h3>Built for researchers</h3>
+              <p>We focused on the functionality that you need to get your research done. Go from programming, configuring experiments to collecting data and analysing it in no time.</p>
+            </div>
+            <div class="col-sm-4">
+              <img src="../../images/globe-browser.png" class="img-responsive img-main">
+              <h3>Reach everyone, everywhere</h3>
+              <p>Thanks to our web technologies you can include participants from all around the world by telling them to simply start up their favourite web browser.</p>
+            </div>
+          </div>
+        </div>
         <br><br><br>
-        <a href ng-click="prevSlide()"><img src="../../images/caret-left.png" class="caret-left"></a>
-      </div>
-      <div class="col-sm-10 slide" ng-include="slide"></div>
-      <div class="col-sm-1">
-        <br><br><br>
-        <a href ng-click="nextSlide()"><img src="../../images/caret-right.png" class="caret-right"></a>
+        <div class="redBanner">
+          <div class="container">
+            <br>
+            <h3 class="white center">Cover the life cycle of your experiment</h3>
+            <br><br>
+            <div class="row">
+              <div class="col-sm-1">
+                <br><br><br>
+                <a href ng-click="prevSlide()"><img src="../../images/caret-left.png" class="caret-left"></a>
+              </div>
+              <div class="col-sm-10 slide" ng-include="slide"></div>
+              <div class="col-sm-1">
+                <br><br><br>
+                <a href ng-click="nextSlide()"><img src="../../images/caret-right.png" class="caret-right"></a>
+              </div>
+            </div>
+            <br><br><br><br>
+          </div>
+        </div>
       </div>
     </div>
 
-    <br><br><br><br>
-
-    </div>
   </div>
-
-  </div>
-
   <br><br>
 
+  <!-- Footer Helper -->
+  <div class="push"></div>
 
-     <!-- Footer Helper -->
-        <div class="push"></div>
-
-    </div>
+</div>
 
 <!-- FOOTER --> 
-  <div ng-include src="'../../views/footer.html'"></div>
+<div ng-include src="'../../views/footer.html'"></div>

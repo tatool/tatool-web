@@ -28,6 +28,10 @@ a.info:hover {
   cursor: help;
 }
 
+.pointer {
+  cursor: pointer;
+}
+
 /* Override bootstrap tooltop styling */
 div.tooltip-inner {
     text-align: left;
@@ -120,6 +124,14 @@ div.tooltip.in {
     color: #ffffff;
     background-color: #972600;
   }
+}
+
+#lab-banner {
+  background-color: #c44a27;
+  color: #fff;
+  margin-right: 10px;
+  padding: 2px;
+  font-size: 90%;
 }
 
 
@@ -392,11 +404,13 @@ pre {
 .form-control-feedback {
   margin-top: -5px;  
 }
-.accordion-toggle {
+a.accordion-toggle {
+  color: #4e4e4e;
   cursor: pointer;
-}
-.accordion-toggle:hover {
   text-decoration: none;
+}
+a.accordion-toggle:hover {
+  color: #d5502a;
 }
 .glyphicon-chevron-down {
   color: #d5502a;
@@ -755,3 +769,10 @@ ul.tree li .last {
     ADMIN TABLE
 -----------**/
 
+.table-small {
+  font-size: 90%;
+}
+
+.table-small th {
+  text-align: center;
+}

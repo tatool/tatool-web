@@ -1,6 +1,8 @@
 <!-- Header -->
-        <div>
+        <div id="top">
             <nav class="navbar navbar-static-top" role="navigation">
+
+                <div id="lab-banner" class="pull-right" ng-if="getMode()==='lab'" ng-cloak tooltip="You\'re running tatool in LAB mode." tooltip-placement="left">LAB</div>
 
                 <div class="container">
                     <div class="navbar-header">
@@ -30,10 +32,11 @@
 
                         <ul class="nav navbar-nav navbar-right">
                             <li ui-sref-active="active"><a ui-sref="documentation"><i class="fa fa-book"></i> Documentation</a></li>
-                            <li ui-sref-active="active"><a ui-sref="register"><i class="fa fa-pencil-square-o"></i> Register</a></li>
+                            <li ui-sref-active="active" ng-if="getMode()!=='lab'" ng-cloak><a ui-sref="register"><i class="fa fa-pencil-square-o"></i> Register</a></li>
                         </ul>
                     </div>
 
                 </div>
             </nav>
+
         </div>

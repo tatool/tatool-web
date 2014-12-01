@@ -48,7 +48,7 @@ angular.module('tatool.module')
           executor.stopModule(true);
         }
       }
-    }
+    };
 
     $window.removeEventListener('message', appListener, false);
     $window.addEventListener('message', appListener, false);

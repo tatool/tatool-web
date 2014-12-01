@@ -1,6 +1,7 @@
 'use strict';
 
 /* global screenfull */
+/* global uuid */
 
 angular.module('tatool.app')
   .controller('DeveloperCtrl', ['$scope', '$q', '$timeout', '$window', '$rootScope', '$location',  '$state', '$http', '$log', '$modal', '$sce', 'moduleDataService', 'cfg', 'authService', 'userService', 'moduleCreatorService', 'exportService', 'spinnerService',
@@ -147,7 +148,7 @@ angular.module('tatool.app')
       } else {
         startSpinner();
         module.moduleType = 'public';
-        moduleDataService.addModule(module).then(function(data) {
+        moduleDataService.addModule(module).then(function() {
           stopSpinner();
         }, function(error) {
           module.moduleType = '';
@@ -294,13 +295,13 @@ angular.module('tatool.app')
         name: 'New Module',
         author: userService.getUserName(),
         label: 'newModule',
-        project: { "name" : "tatool", "access": "public"},
-        export : [ 
-          { mode: 'download' } 
+        project: { 'name' : 'tatool', 'access': 'public'},
+        export : [
+          { mode: 'download' }
         ],
         allowEscapeKey : true,
         fullscreen : true,
-        moduleHierarchy: { 
+        moduleHierarchy: {
           tatoolType: 'List',
           iterator: { customType: 'ListIterator', numIterations: 1 },
           children: []

@@ -42,7 +42,7 @@ angular.module('tatool.app')
       }
     };
 
-    var fullscreenChange = function(e) {
+    var fullscreenChange = function() {
       if (!screenfull.isFullscreen) {
         $('#iframe')[0].contentWindow.postMessage({ type: 'fullscreenExit' }, '*');
       }

@@ -1,5 +1,7 @@
 'use strict';
 
+/* global Prism */
+
 angular.module('tatool.app')
   .controller('StartCtrl', ['$scope', '$http', '$location', '$anchorScroll', '$state',
     function ($scope, $http, $location, $anchorScroll, $state) {
@@ -15,7 +17,7 @@ angular.module('tatool.app')
       };
 
       $scope.nextSlide = function() {
-        if (currentSlide < $scope.slides.length - 1) { 
+        if (currentSlide < $scope.slides.length - 1) {
           currentSlide++;
           $scope.slide = 'views/' + $scope.slides[currentSlide];
         }
@@ -49,10 +51,9 @@ angular.module('tatool.app')
         }
       };
 
-      
-
       $scope.goPage = function(page) {
         $scope.docPage = 'views/doc/' + page;
+        $scope.scrollTo('top');
       };
 
       $scope.scrollTo = function(id) {

@@ -1,6 +1,7 @@
 // server
 var express = require('express');
 //var compress = require('compression');
+var os = require('os');
 var path = require('path');
 var bodyParser = require('body-parser');
 var logger = require('morgan');
@@ -17,6 +18,7 @@ app.set('jwt_secret', process.env.JWT_SECRET || 'secret');
 app.set('projects_path', process.env.PROJECTS_PATH || __dirname + '/app/projects/');
 app.set('resource_user', process.env.RESOURCE_USER || 'tatool');
 app.set('resource_pw', process.env.RESOURCE_PW || 'secret');
+app.set('captcha_private_key', process.env.RECAPTCHA_PRIVATE_KEY || '');
 app.set('remote_url', process.env.REMOTE_URL);
 app.set('module_limit', 3);
 
@@ -80,6 +82,7 @@ app.get('/developer/resources/:projectAccess/:projectName/:resourceType/:resourc
 // Admin
 router.get('/admin/users', adminController.getUsers);
 router.post('/admin/users/:user', adminController.updateUser);
+router.post('/admin/users/:user/reset', adminController.updatePassword);
 router.delete('/admin/users/:user', adminController.removeUser);
 
 // User
@@ -99,6 +102,9 @@ function noCache(req, res, next){
 }
 
 // open API
+app.get('/mode', function(req, res) {
+  res.json({mode: req.app.get('mode')});
+});
 app.post('/user/verify/resend', userController.verifyResend);
 app.get('/user/verify/:token', userController.verifyUser);
 app.post('/user/reset', userController.resetPasswordSend);
@@ -122,7 +128,15 @@ app.use(function (err, req, res, next) {
   }
 });
 
+// Run mode
+// lab: make sure we have the admin user ready and register disabled
+if (process.argv[2] === 'lab') {
+  console.log('Running tatool in LAB mode.')
+  app.set('mode', 'lab');
+  userController.registerAdmin();
+}
+
 // start server
 app.listen(app.get('port'), function() {
-  console.log('Express server listening on port ' + app.get('port'));
+  console.log('You can now access tatool on ' + os.hostname() + ':' + app.get('port'));
 });

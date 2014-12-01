@@ -63,18 +63,23 @@ exports.register = function(req, res) {
 };
 
 exports.verifyCaptcha = function(req, res) {
-  var privateKey = process.env.RECAPTCHA_PRIVATE_KEY;
-  var ip = req.ip;
-  var challenge = req.body.recaptcha_challenge_field;
-  var response = req.body.recaptcha_response_field;
+  var privateKey = req.app.get('captcha_private_key');
 
-  simple_recaptcha(privateKey, ip, challenge, response, function(err) {
-    if (err) {
-      res.status(500).json({ message: 'Captcha verification failed. Refresh  the captcha by clicking on the button right next to the Captcha to try again.', data: err });
-    } else {
-      res.json('verified');
-    }
-  });
+  if (privateKey) {
+    var ip = req.ip;
+    var challenge = req.body.recaptcha_challenge_field;
+    var response = req.body.recaptcha_response_field;
+
+    simple_recaptcha(privateKey, ip, challenge, response, function(err) {
+      if (err) {
+        res.status(500).json({ message: 'Captcha verification failed. Refresh  the captcha by clicking on the button right next to the Captcha to try again.', data: err });
+      } else {
+        res.json();
+      }
+    });
+  } else {
+    res.json();
+  }
 };
 
 // resend email verification email
@@ -243,6 +248,39 @@ exports.signupDev = function(req, res) {
       res.json({ message: 'Signup successful' });
     }
   });
+};
+
+// creates default admin user for lab mode
+exports.registerAdmin = function() {
+  // check if user already exists and add otherwise
+  User.findOne( { roles: { $in: [ 'admin'] } }, function(err, result) {
+    if (err) console.log('Admin registration failed. Please make sure the database is running.');
+
+    if (!result) {
+
+      // Create admin user
+      var user = new User();
+      user.email = 'admin@tatool-web.com';
+      user.password = '1234';
+      user.roles.push('user');
+      user.roles.push('admin');
+      user.verified = true;
+      user.fullName = '';
+      user.affiliation = '';
+      user.token = '';
+      user.updated_at = new Date();
+
+      user.save(function(err) {
+        if (err) {
+          console.log('Admin registration failed. Please make sure the database is running.');
+        } else {
+          console.log('Admin registration successful. Login with the user admin@tatool-web.com');
+        }
+      });
+
+    } 
+  });
+
 };
 
 

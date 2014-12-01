@@ -1,12 +1,14 @@
 'use strict';
 
 angular.module('tatool.app')
-  .controller('MainCtrl', ['$scope', '$rootScope', '$state', '$window', 'authService',
-    function ($scope, $rootScope, $state, $window, authService) {
+  .controller('MainCtrl', ['$scope', '$rootScope', '$state', '$window', '$http', 'authService',
+    function ($scope, $rootScope, $state, $window, $http, authService) {
 
     $scope.authorized = authService.isAuthenticated();
 
     var roles = [];
+
+    var mode = '';
 
     // remove moduleId from sessionStorage
     $window.sessionStorage.removeItem('moduleId');
@@ -34,6 +36,15 @@ angular.module('tatool.app')
       }
     });
 
+    // get the run mode from the server
+    $http.get('/mode')
+      .success(function (data) {
+        mode = data.mode;
+      })
+      .error(function () {
+        mode = '';
+      });
+
     $scope.logout = function() {
       authService.logout();
       $state.go('login');
@@ -41,6 +52,10 @@ angular.module('tatool.app')
 
     $scope.hasRole = function(role) {
       return roles.indexOf(role) !== -1;
+    };
+
+    $scope.getMode = function() {
+      return mode;
     };
 
     $rootScope.$on('login', function() {

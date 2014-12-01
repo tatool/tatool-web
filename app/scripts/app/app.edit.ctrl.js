@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('tatool.app')
-  .controller('EditCtrl', ['$scope', '$q', '$modalInstance', '$sce', '$compile', 'module', 'moduleDataService',
-    function ($scope, $q, $modalInstance, $sce, $compile, module, moduleDataService) {
+  .controller('EditCtrl', ['$scope', '$q', '$modalInstance', '$sce', '$compile', 'module',
+    function ($scope, $q, $modalInstance, $sce, $compile, module) {
 
       var EXECUTABLE_STATIC_PROPERTIES = ['tatoolType', 'customType', 'name', 'blankInterval', 'fixationInterval', 'status'];
 
@@ -239,7 +239,7 @@ angular.module('tatool.app')
         });
 
         $('#newPropertyName').keypress(function(e) {
-          if(e.which == 13) {
+          if(e.which === 13) {
             e.preventDefault();
             $('button[data-bb-handler="main"]').focus().click();
           }
