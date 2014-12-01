@@ -1,1 +1,1 @@
-web: node server.js lab
+web: node server.js
