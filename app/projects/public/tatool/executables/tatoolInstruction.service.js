@@ -13,24 +13,28 @@ tatool
       this.dataPath = (this.dataPath) ? this.dataPath : '';
 
       var self = this;
-      async.each(this.pages, function(page, callback) {
-        if (tatoolExecutable.isProjectResource(self.dataPath + page)) {
-          tatoolExecutable.getProjectResource('instructions', page).then(function(template) {
-            $templateCache.put(page, template);
-            callback();
-          }, function(error) {
-            callback('Could not find instruction "' + page + '"');
-          });
-        } else {
-          callback('External HTML resources are not supported by this executable.<br><br><li>' + page);
-        }
-      }, function(err) {
-        if( err ) {
-          deferred.reject(err);
-        } else {
-          deferred.resolve();
-        }
-      });
+      if (this.pages && this.pages.length > 0) {
+        async.each(this.pages, function(page, callback) {
+          if (tatoolExecutable.isProjectResource(self.dataPath + page)) {
+            tatoolExecutable.getProjectResource('instructions', page).then(function(template) {
+              $templateCache.put(page, template);
+              callback();
+            }, function(error) {
+              callback('Could not find instruction "' + page + '" in instruction "' + self.name + '".');
+            });
+          } else {
+            callback('External HTML resources are currently not supported by this executable.<br><br><li>' + page);
+          }
+        }, function(err) {
+          if( err ) {
+            deferred.reject(err);
+          } else {
+            deferred.resolve();
+          }
+        });
+      } else {
+        deferred.resolve();
+      }
 
       this.input = tatoolInputService.createInput();
 

@@ -1,7 +1,6 @@
 'use strict';
 
 /* global KeyCodes */
-/* global performance */
 
 /**
   <tatool> 
@@ -23,7 +22,7 @@ angular.module('tatool.module').directive('tatool', ['$timeout', function($timeo
   <tatool-input> 
   Directive to configure user input.
 **/
-angular.module('tatool.module').directive('tatoolInput', ['$log', '$templateCache', '$compile', '$timeout', function($log, $templateCache, $compile, $timeout) {
+angular.module('tatool.module').directive('tatoolInput', ['$log', '$templateCache', '$compile', '$timeout', 'tatoolExecutable', function($log, $templateCache, $compile, $timeout, tatoolExecutable) {
   return {
     restrict: 'E',
     transclude: true,
@@ -104,13 +103,13 @@ angular.module('tatool.module').directive('tatoolInput', ['$log', '$templateCach
       // show all keys
       scope.service.show = function() {
         scope.show = true;
-        return performance.now();
+        return tatoolExecutable.getTiming();
       };
 
       // hide all keys
       scope.service.hide = function() {
         scope.show = false;
-        return performance.now();
+        return tatoolExecutable.getTiming();
       };
 
       // enable input
@@ -118,14 +117,14 @@ angular.module('tatool.module').directive('tatoolInput', ['$log', '$templateCach
         inputEnabled = true;
         $('#tatoolInputText').attr('disabled', false);
         $timeout(function() { $('#tatoolInputText').focus(); }, 0);
-        return performance.now();
+        return tatoolExecutable.getTiming();
       };
 
       // disable input
       scope.service.disable = function() {
         inputEnabled = false;
         $('#tatoolInputText').attr('disabled', true);
-        return performance.now();
+        return tatoolExecutable.getTiming();
       };
 
       element.on('$destroy', function() {
@@ -195,7 +194,7 @@ angular.module('tatool.module').directive('tatoolKey', ['$log', '$sce', 'tatoolE
       }
 
       scope.clickInput = function($event) {
-        var timing = performance.now();
+        var timing = tatoolExecutable.getTiming();
         tatoolInputCtrl.clickInput(KeyCodes[attr.code], timing, $event);
       };
     },
@@ -227,7 +226,7 @@ angular.module('tatool.module').directive('tatoolText', [ function() {
   <tatool-stimulus> 
   Directive to display a stimulus.
 **/
-angular.module('tatool.module').directive('tatoolStimulus', ['$log', '$templateCache', 'cfgModule', function($log, $templateCache, cfgModule) {
+angular.module('tatool.module').directive('tatoolStimulus', ['$log', '$templateCache', 'cfgModule', 'tatoolExecutable', function($log, $templateCache, cfgModule, tatoolExecutable) {
   return {
     restrict: 'E',
     scope: {
@@ -246,12 +245,12 @@ angular.module('tatool.module').directive('tatoolStimulus', ['$log', '$templateC
       scope.service.show = function() {
         scope.stimulus = scope.service;
         scope.show = true;
-        return performance.now();
+        return tatoolExecutable.getTiming();
       };
 
       scope.service.hide = function() {
         scope.show = false;
-        return performance.now();
+        return tatoolExecutable.getTiming();
       };
 
       scope.stimulusClickEvent = function($event, stimulus) {
@@ -274,7 +273,7 @@ angular.module('tatool.module').directive('tatoolStimulus', ['$log', '$templateC
   <tatool-grid> 
   Directive creating a grid used to display stimuli.
 **/
-angular.module('tatool.module').directive('tatoolGrid', ['$log', '$templateCache', 'cfgModule', function($log, $templateCache, cfgModule) {
+angular.module('tatool.module').directive('tatoolGrid', ['$log', '$templateCache', 'cfgModule', 'tatoolExecutable', function($log, $templateCache, cfgModule, tatoolExecutable) {
   return {
     restrict: 'E',
     scope: {
@@ -325,13 +324,13 @@ angular.module('tatool.module').directive('tatoolGrid', ['$log', '$templateCache
       scope.service.show = function() {
         scope.show = true;
         //element.css("visibility","visible");
-        return performance.now();
+        return tatoolExecutable.getTiming();
       };
 
       scope.service.hide = function() {
         scope.show = false;
         //element.css("visibility","hidden");
-        return performance.now();
+        return tatoolExecutable.getTiming();
       };
 
       // initialize grid

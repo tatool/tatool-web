@@ -1,10 +1,9 @@
 'use strict';
 
 /* global KeyCodes */
-/* global performance */
 
 angular.module('tatool.module')
-  .factory('tatoolInputService', [ function () {
+  .factory('tatoolInputService', [ 'tatoolExecutable', function (tatoolExecutable) {
 
     var tatoolInputService = {};
 
@@ -32,7 +31,7 @@ angular.module('tatool.module')
 
         // add unknown keyCode
         if (!KeyCodes[keyCode]) {
-          KeyCodes[keyCode] = performance.now();
+          KeyCodes[keyCode] = tatoolExecutable.getTiming();
         }
 
         this.registeredKeyInputs[KeyCodes[keyCode]] = obj;

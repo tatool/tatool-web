@@ -18,12 +18,15 @@ tatool
 
     // start instruction
     $scope.start = function() {
-      // initialize the instruction at startup to point to first page
-      $scope.currentIndex = 0;
-      $scope.urls = service.pages;
-      $scope.currentPage = $scope.urls[$scope.currentIndex];
-      service.input.hide();
-      service.input.enable();
+      if (service.pages && service.pages.length > 0) {
+        $scope.currentIndex = 0;
+        $scope.urls = service.pages;
+        $scope.currentPage = $scope.urls[$scope.currentIndex];
+        service.input.hide();
+        service.input.enable();
+      } else {
+        service.stopExecutable();
+      }
     };
 
     // capture user input

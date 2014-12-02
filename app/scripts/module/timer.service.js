@@ -1,10 +1,8 @@
 'use strict';
 
-/* global performance */
-
 angular.module('tatool.module')
-  .factory('timerService', ['$log', '$timeout', '$interval', 'statusPanelService',
-    function ($log, $timeout, $interval, statusPanelService) {
+  .factory('timerService', ['$log', '$timeout', '$interval', 'statusPanelService', 'tatoolExecutable',
+    function ($log, $timeout, $interval, statusPanelService, tatoolExecutable) {
     $log.debug('TimerService: initialized');
 
     var timerService = {};
@@ -79,7 +77,7 @@ angular.module('tatool.module')
       if (this.visual) {
         this.visualTimer = $interval(updateVisualTimer.bind(this), VISUAL_TIMER_INTERVAL, this.duration/VISUAL_TIMER_INTERVAL);
       }
-      return performance.now();
+      return tatoolExecutable.getTiming();
     };
     /*jshint -W040 */
     function updateVisualTimer() {
@@ -96,7 +94,7 @@ angular.module('tatool.module')
       if (this.visual) {
         $interval.cancel(this.visualTimer);
       }
-      return performance.now();
+      return tatoolExecutable.getTiming();
     };
 
     // inform the statusPanelService of the timer values
@@ -118,7 +116,7 @@ angular.module('tatool.module')
 
     // gets called when timer is up
     Timer.prototype.timerUp = function() {
-      var time = performance.now();
+      var time = tatoolExecutable.getTiming();
       if (this.visual) {
         this.endVisualTimer();
       }
