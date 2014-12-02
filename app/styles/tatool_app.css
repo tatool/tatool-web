@@ -157,6 +157,21 @@ footer {
 /* ReCaptcha Iframe FIX */
 iframe[src="about:blank"] { display: none; }
 
+.donate-button {
+  margin-top: 2px;
+  margin-right: 10px;
+}
+
+a.twitter-icon {
+  color: #3383c2;
+}
+a.facebook-icon {
+  color: #3c5a98;
+}
+a.github-icon {
+  color: #211f20;
+}
+
 /** ---------
     MAIN PAGE
 -----------**/
