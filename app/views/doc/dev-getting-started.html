@@ -28,7 +28,8 @@ v0.10.33
 
 <p>Type the following command in your terminal window and make sure you get a response indicating your version of mongoDB. On windows you can enter the command by opening the Windows command prompt (cmd.exe) and on Mac you can run the commands in a new terminal. If you don't see the version of your mongoDB, something went wrong with your installation.</p>
 <pre><code class="language-javascript">$> cd mongodb
-$mongodb> mongo -version
+$mongodb> cd bin
+$mongodb\bin> mongo -version
 MongoDB shell version: 2.6.5
 </code></pre>
 
@@ -63,9 +64,10 @@ $tatool-web> bower -version
 
 <p>The following steps are needed to run your local tatool-web environment. You'll need to follow these steps everytime you want to start your local instance of tatool-web.</p>
 
-<p><b>1.</b> Start mongoDB by entering the command below if you haven't already started it in an earlier step. Don't close the terminal, as this will kill the process running your database.</p>
+<p><b>1.</b> Start mongoDB by entering the command below if you haven't already started it in an earlier step. Don't close the terminal, as this will kill the process running your database. If you chose a different data directory during the installation, you'll need to provide the dbpath argument.</p>
 <pre><code class="language-javascript">$> cd mongodb
-$mongodb> mongod
+$mongodb> cd bin
+$mongodb\bin> mongod --dbpath [your data directory path]
 ...waiting for connections on port 27017
 </code></pre>
 
@@ -78,3 +80,8 @@ You can access tatool on hostname:3000
 </code></pre>
 
 <p><b>3.</b> Access tatool by opening the url http://127.0.0.1:3000 in your browser. You should now see the tatool start page.</p>
+
+<p><b>4.</b> If this is your first time starting tatool, you can login with the default admin user:</p>
+<p><b>Email:</b> admin@tatool-web.com<br><b>Password:</b> 1234</p>
+
+<p><b>Change the admin password immediately</b> by going to the Admin tab and clicking on the change password button next to the user 'admin@tatool-web.com'. You can also start adding your lab users in the admin tab by clicking on the 'Add user' button.</p>

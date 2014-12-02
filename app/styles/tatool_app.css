@@ -32,6 +32,10 @@ a.info:hover {
   cursor: pointer;
 }
 
+i {
+  font-style: italic;
+}
+
 /* Override bootstrap tooltop styling */
 div.tooltip-inner {
     text-align: left;
