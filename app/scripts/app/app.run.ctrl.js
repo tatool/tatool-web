@@ -17,7 +17,9 @@ angular.module('tatool.app')
         }
         $scope.moduleUrl = $sce.trustAsResourceUrl('about:blank');
         $window.removeEventListener('message', moduleListener, false);
-        $window.removeEventListener(screenfull.raw.fullscreenchange, fullscreenChange, false);
+        if (screenfull.enabled) {
+          $window.removeEventListener(screenfull.raw.fullscreenchange, fullscreenChange, false);
+        }
         
         stopSpinner();
         $scope.$apply();
