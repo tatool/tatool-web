@@ -22,7 +22,7 @@
     "spin.js": "~2.0.1",
     "script.js": "~2.5.7",
     "headjs": "~1.0.3",
-    "lz-string": "*",
+    "lz-string": "1.3.3",
     "papaparse": "~3.1.3",
     "angular-animate": "1.3.3"
   },
