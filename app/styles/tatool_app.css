@@ -397,6 +397,21 @@ pre {
   overflow: auto;
 }
 
+#startDocument ul.docContentList {
+list-style-type: none;
+padding: 0;
+margin: 0;
+}
+
+#startDocument ul.docContentList li {
+background-image: url(../images/app/arrow.gif);
+background-repeat: no-repeat;
+background-position: 0 .5em;
+padding-left: 20px;
+line-height: 120%;
+margin-bottom: 8px;
+}
+
 /** ---------
     MODULES
 -----------**/
