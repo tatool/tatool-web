@@ -30,19 +30,16 @@ tatool
         this.stimuliFile = 'stroop.csv';
       }
 
-      var self = this;
-      if (tatoolExecutable.isProjectResource(this.dataPath + this.stimuliFile)) {
-        tatoolExecutable.getProjectCSV('stimuli', this.stimuliFile, true).then(function(list) {
-          self.processStimuliFile(list, deferred);
-        }, function(error) {
-          deferred.reject('Resource not found: ' + self.stimuliFile);
-        });
+      // prepare stimuli
+      if (this.stimuliFile) {
+        var self = this;
+        tatoolExecutable.getCSVResource(this.stimuliFile, true).then(function(list) {
+            self.processStimuliFile(list, deferred);
+          }, function(error) {
+            deferred.reject('Resource not found: ' + self.stimuliFile.resourceName);
+          });
       } else {
-        tatoolExecutable.getExternalCSV(this.dataPath + this.stimuliFile, true).then(function(list) {
-          self.processStimuliFile(list, deferred);
-        }, function(error) {
-          deferred.reject('Resource not found: ' + self.stimuliFile);
-        });
+        deferred.reject('Invalid property settings for Executable tatoolComplexSpan. Expected property stimuliFile of type Resource.');
       }
 
       return deferred;

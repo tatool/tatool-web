@@ -1,12 +1,14 @@
 'use strict';
 
 angular.module('tatool.app')
-  .controller('EditCtrl', ['$scope', '$q', '$modalInstance', '$sce', '$compile', 'module',
-    function ($scope, $q, $modalInstance, $sce, $compile, module) {
+  .controller('EditCtrl', ['$scope', '$q', '$modalInstance', '$sce', '$compile', '$modal', 'module', 'moduleDataService',
+    function ($scope, $q, $modalInstance, $sce, $compile, $modal, module, moduleDataService) {
 
-      var EXECUTABLE_STATIC_PROPERTIES = ['tatoolType', 'customType', 'name', 'blankInterval', 'fixationInterval', 'status'];
+      var VIEW_PATH = '../../views/app/';
 
-      $scope.customTypes = ['tatoolInstruction', 'tatoolCountdown', 'tatoolStroop', 'tatoolComplexSpan'];
+      var EXECUTABLE_STATIC_PROPERTIES = ['tatoolType', 'customType', 'name', 'blankInterval', 'fixationInterval', 'status', 'project'];
+
+      $scope.resourceTypes = ['stimuli', 'instructions'];
 
       $scope.module = module;
       $scope.element = {};
@@ -17,6 +19,8 @@ angular.module('tatool.app')
 
       $scope.alert = {};
       $scope.elementType = '../../views/app/edit_module.html';
+      $scope.projects = [];
+      $scope.executables = [];
 
       $scope.trustAsHtml = function(value) {
         return $sce.trustAsHtml(value);
@@ -36,11 +40,11 @@ angular.module('tatool.app')
         $scope.customProperties = [];
 
         if (element.tatoolType === 'List' || element.tatoolType === 'Dual') {
-          $scope.elementType = '../../views/app/edit_list.html';
+          $scope.elementType = VIEW_PATH + 'edit_list.html';
         } else if (element.tatoolType === 'Executable') {
           // prepare custom properties
           loadCustomProperties(element);
-          $scope.elementType = '../../views/app/edit_executable.html';
+          $scope.elementType = VIEW_PATH + 'edit_executable.html';
         }
       };
 
@@ -52,8 +56,8 @@ angular.module('tatool.app')
             if (EXECUTABLE_STATIC_PROPERTIES.indexOf(key) === -1) {
               var obj = {};
               obj.propertyName = key;
-              obj.propertyType = Object.prototype.toString.call( value );
-              obj.disabled = (obj.propertyType === '[object Object]') ? true : false;
+              obj.propertyType = value.propertyType; //Object.prototype.toString.call( value );
+              //obj.disabled = (obj.propertyType === '[object Object]') ? true : false;
               $scope.customProperties.push(obj);
             }
           }
@@ -175,14 +179,125 @@ angular.module('tatool.app')
         if (parent) {
           if (parent.tatoolType === 'Dual') {
             delete parent.children[index];
-            $scope.elementType = '../../views/app/edit_module.html';
+            $scope.elementType = VIEW_PATH + 'edit_module.html';
           } else {
             parent.children.splice(index, 1);
-            $scope.elementType = '../../views/app/edit_module.html';
+            $scope.elementType = VIEW_PATH + 'edit_module.html';
           }
         }
       };
 
+      function getProjects() {
+        moduleDataService.getProjects().then(function(data) {
+          $scope.projects = data;
+          $scope.projects.push({ access: 'external', name: 'External Resource', description: 'Allows you to provide a complete URL.' });
+        }, function(err) {
+          $log.error(err);
+        });
+      };
+
+      // loading all projects from tatool
+      getProjects();
+
+      $scope.selectExecutable = function() {
+        $scope.currentProject = {};
+        $scope.currentExecutable = {};
+
+        if ($scope.element.project) {
+          for (var i=0; i < $scope.projects.length; i++) {
+            if ($scope.projects[i].name === $scope.element.project.name && $scope.projects[i].access === $scope.element.project.access) {
+              $scope.currentProject = $scope.projects[i];
+              break;
+            }
+          }
+
+          for (var i=0; i < $scope.currentProject.executables.length; i++) {
+            if ($scope.currentProject.executables[i].customType === $scope.element.customType) {
+              $scope.currentExecutable = $scope.currentProject.executables[i];
+              break;
+            }
+          }
+        }
+
+        $scope.elementType = VIEW_PATH + 'edit_executable_select.html';
+      };
+
+      $scope.groupByProjectAccess = function (item) {
+        if (item.access === 'public') {
+          return 'Public';
+        } else if (item.access === 'private') {
+          return 'Private';
+        } else if (item.access === 'external') {
+          return 'External';
+        } else {
+          return undefined;
+        }
+      };
+
+      // triggered by Select Executable
+      $scope.chooseProject = function($item, $model) {
+        var project = {};
+        project.name = $item.name;
+        project.access = $item.access;
+        $scope.element.project = project;
+        $scope.element.customType = '';
+        $scope.currentProject = $item;
+        $scope.currentExecutable = {};
+      };
+
+      // triggered by Select Executable
+      $scope.chooseExecutable = function($item, $model) {
+        var customType = $item.customType;
+        $scope.element.customType = customType;
+        $scope.currentExecutable = $item;
+      };
+
+      $scope.returnTo = function(string) {
+        if (string === 'executable') {
+          $scope.elementType = VIEW_PATH + 'edit_executable.html';
+        }
+      };
+
+
+
+
+      $scope.editProperty = function(property, $index) {
+        $scope.customProperty = {};
+        if ($index >= 0) {
+          $scope.customProperty = $scope.element[property.propertyName].propertyValue[$index];
+        } else {
+          $scope.customProperty = $scope.element[property.propertyName];
+        }
+
+        if ($scope.customProperty.project) {
+          for (var i=0; i < $scope.projects.length; i++) {
+            if ($scope.projects[i].name === $scope.customProperty.project.name && $scope.projects[i].access === $scope.customProperty.project.access) {
+              $scope.currentProject = $scope.projects[i];
+              break;
+            }
+          }
+        } else {
+          $scope.currentProject = {};
+        }
+
+        $scope.elementType = VIEW_PATH + 'edit_executable_property.html';
+        $scope.currentProperty = property;
+      };
+
+      // triggered by Edit Resource Property
+      $scope.chooseResourceProject = function($item, $model) {
+        var project = {};
+        project.name = $item.name;
+        project.access = $item.access;
+        $scope.currentProject = $item;
+        $scope.customProperty.project = project;
+        $scope.customProperty.resourceName = '';
+      };
+
+
+
+
+      // Property Management
       $scope.deleteProperty = function(element, property) {
         hideAlert();
         delete element[property.propertyName];
@@ -208,8 +323,16 @@ angular.module('tatool.app')
                     '<input type="radio" name="type" id="type-0" value="String" checked="checked"> ' +
                     'String </label> ' +
                     '</div><div class="radio"> <label for="type-1"> ' +
-                    '<input type="radio" name="type" id="type-1" value="Array"> Array</label> ' +
+                    '<input type="radio" name="type" id="type-1" value="ArrayString"> Array (String)</label> ' +
                     '</div> ' +
+                    '<div class="radio"> <label for="type-2"> ' +
+                    '<input type="radio" name="type" id="type-2" value="Resource"> ' +
+                    'Resource </label> ' +
+                    '</div>' +
+                    '<div class="radio"> <label for="type-3"> ' +
+                    '<input type="radio" name="type" id="type-3" value="ArrayResource"> ' +
+                    'Array (Resource) </label> ' +
+                    '</div>' +
                     '</div> </div>' +
                     '</form> </div>  </div>',
           buttons: {
@@ -247,8 +370,17 @@ angular.module('tatool.app')
       };
 
       function insertProperty(element, propertyName, propertyType) {
-        if (propertyType === 'Array') {
-          element[propertyName] = [];
+        if (propertyType === 'ArrayString') {
+          element[propertyName] = {};
+          element[propertyName].propertyType = propertyType;
+          element[propertyName].propertyValue = [];
+        } else if (propertyType === 'ArrayResource') {
+          element[propertyName] = {};
+          element[propertyName].propertyType = propertyType;
+          element[propertyName].propertyValue = [];
+        } else if (propertyType === 'Resource') {
+          element[propertyName] = {};
+          element[propertyName].propertyType = propertyType;
         } else {
           element[propertyName] = '';
         }
@@ -259,18 +391,33 @@ angular.module('tatool.app')
 
       $scope.addEntry = function(element, property) {
         hideAlert();
-        element[property.propertyName].push('');
+        if (property.propertyType === 'ArrayString') {
+          element[property.propertyName].propertyValue.push('');
+        } else if (property.propertyType === 'ArrayResource') {
+          var res = {};
+          if (element[property.propertyName].propertyValue.length > 0) {
+            res.project = element[property.propertyName].propertyValue[0].project;
+            res.resourceType = element[property.propertyName].propertyValue[0].resourceType;
+          }
+          element[property.propertyName].propertyValue.push(res);
+        }
         loadCustomProperties(element);
       };
 
       $scope.deleteEntry = function(element, property, index) {
         hideAlert();
-        element[property.propertyName].splice(index, 1);
+        element[property.propertyName].propertyValue.splice(index, 1);
         loadCustomProperties(element);
       };
 
       $scope.ok = function () {
-        $modalInstance.close();
+        if ($scope.elementType === VIEW_PATH + 'edit_executable_select.html') {
+          $scope.returnTo('executable');
+        } else if ($scope.elementType === VIEW_PATH + 'edit_executable_property.html') {
+          $scope.returnTo('executable');
+        } else {
+          $modalInstance.close();
+        }
       };
 
       $scope.cancel = function () {

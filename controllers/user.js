@@ -1,5 +1,6 @@
 // Load dependencies
 var User = require('../models/user');
+var Counter = require('../models/counter');
 var simple_recaptcha = require('simple-recaptcha');
 var uuid = require('node-uuid');
 var postmark = require("postmark")(process.env.POSTMARK_API_KEY);
@@ -28,34 +29,40 @@ exports.register = function(req, res) {
       user.token = uuid.v4();
       user.updated_at = new Date();
 
-      user.save(function(err) {
+      Counter.getUserCode(function (err, userCode) {
         if (err) {
-          res.status(500).json({ message: 'Registration failed. Please try again later.', data: err });
+          res.status(500).json({ message: 'Can\'t add user. Please try again later.', data: err });
         } else {
-
-          var message = {
-            email: user.email,
-            name: user.email,
-            subject: 'Confirm your email address',
-            template: 'registration-email',
-            verifyURL: req.protocol + '://' + req.get('host') + '/user/verify/' + user.token};
-          
-          sendVerificationEmail(message, function (error, success) {
-            if (error) {
-              console.error('Unable to send email: ' + error.message);
-              user.remove();
-              res.status(500).json({ message: 'Unable to send verification email. Please try again later.' });
+          user.code = userCode.next;
+          user.save(function(err) {
+            if (err) {
+              res.status(500).json({ message: 'Registration failed. Please try again later.', data: err });
             } else {
-              if (req.body.devAccess) {
-                exports.signupDev(req, res);
-              } else {
-                res.json({ message: 'User successfully added to the db!' });
-              }
+
+              var message = {
+                email: user.email,
+                name: user.email,
+                subject: 'Confirm your email address',
+                template: 'registration-email',
+                verifyURL: req.protocol + '://' + req.get('host') + '/user/verify/' + user.token};
+              
+              sendVerificationEmail(message, function (error, success) {
+                if (error) {
+                  console.error('Unable to send email: ' + error.message);
+                  user.remove();
+                  res.status(500).json({ message: 'Unable to send verification email. Please try again later.' });
+                } else {
+                  if (req.body.devAccess) {
+                    exports.signupDev(req, res);
+                  } else {
+                    res.json({ message: 'User successfully added to the db!' });
+                  }
+                }
+              });
             }
           });
         }
-      });
-
+      });   
     } else {
       res.status(500).json({ message: 'The email address is already registered.' });
     }
@@ -270,19 +277,28 @@ exports.registerAdmin = function() {
       user.token = '';
       user.updated_at = new Date();
 
-      user.save(function(err) {
+      Counter.getUserCode(function (err, userCode) {
         if (err) {
-          console.log('Admin registration failed. Please make sure the database is running.');
+          res.status(500).json({ message: 'Can\'t add user. Please try again later.', data: err });
         } else {
-          console.log('Admin registration successful. Login with the user admin@tatool-web.com');
+          user.code = userCode.next;
+          user.save(function(err) {
+            if (err) {
+              console.log('Admin registration failed. Please make sure the database is running.');
+            } else {
+              console.log('Admin registration successful. Login with the user admin@tatool-web.com and change the password immediately.');
+            }
+          });
         }
-      });
-
-    } 
+      }); 
+    }
   });
-
 };
 
+// initialize userCode counter at first startup
+exports.setCounter = function(callback) {
+  Counter.findByIdAndUpdate('userCode', { next: 100000 }, {upsert: true}, callback);
+};
 
 // email processing
 function sendVerificationEmail(options, done) {

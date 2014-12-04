@@ -25,6 +25,10 @@ var User = new Schema({
       type: Boolean,
       required: true
     },
+    code: {
+      type: Number,
+      required: true
+    },
     fullName: {
       type: String,
       required: false
@@ -79,5 +83,5 @@ User.methods.createToken = function(secret) {
   });
   return token;
 };
- 
+
 module.exports = mongoose.model( 'User', User );

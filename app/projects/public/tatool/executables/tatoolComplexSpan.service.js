@@ -27,23 +27,13 @@ tatool
       // prepare stimuli
       if (this.stimuliFile) {
         var self = this;
-        if (tatoolExecutable.isProjectResource(this.dataPath + this.stimuliFile)) {
-          tatoolExecutable.getProjectCSV('stimuli', this.stimuliFile, true).then(function(list) {
+        tatoolExecutable.getCSVResource(this.stimuliFile, true).then(function(list) {
             self.processStimuliFile(list, deferred);
           }, function(error) {
-            deferred.reject('Resource not found: ' + self.stimuliFile);
+            deferred.reject('Resource not found: ' + self.stimuliFile.resourceName);
           });
-        } else {
-          tatoolExecutable.getExternalCSV(this.dataPath + this.stimuliFile, true).then(function(list) {
-            self.processStimuliFile(list, deferred);
-          }, function(error) {
-            deferred.reject('Resource not found: ' + self.stimuliFile);
-          });
-        }
-      } else if (this.random !== 'full') {
-        deferred.reject('Invalid property settings for Executable tatoolComplexSpan. Expected property random or stimuliFile is missing.');
       } else {
-        deferred.resolve();
+        deferred.reject('Invalid property settings for Executable tatoolComplexSpan. Expected property stimuliFile of type Resource.');
       }
       
       return deferred;

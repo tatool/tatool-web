@@ -2,7 +2,6 @@
     "name": "Complex Span",
     "author": "Tatool",
     "label": "moduleDual",
-    "project": { "name" : "tatool", "access": "public"},
     "allowEscapeKey" : true,
     "export" : [ 
         { "mode": "upload", "auto": false }, 
@@ -17,6 +16,7 @@
                 {
                     "tatoolType": "Executable",
                     "customType": "tatoolCountdown",
+                    "project": { "name" : "tatool", "access": "public"},
                     "name": "countdown"
                 },
                 {
@@ -28,27 +28,39 @@
                             "primary" : {
                                 "tatoolType": "Executable",
                                 "customType": "tatoolComplexSpan",
+                                "project": { "name" : "tatool", "access": "public"},
                                 "name": "first",
-                                "stimuliFile" : "complexSpanNum.csv",
                                 "blankInterval" : "600",
                                 "status": {
                                     "levelPanel": true,
                                     "feedbackPanel": true,
                                     "trialCountPanel": true,
                                     "timerPanel": true
+                                },
+                                "stimuliFile" : { 
+                                    "propertyType": "Resource",
+                                    "resourceName": "complexSpanNum.csv",
+                                    "resourceType": "stimuli",
+                                    "project": { "name" : "tatool", "access": "public"}
                                 }
                             }, 
                             "secondary" : {
                                 "tatoolType": "Executable",
                                 "customType": "tatoolStroop",
+                                "project": { "name" : "tatool", "access": "public"},
                                 "name": "second",
                                 "blankInterval" : "600",
-                                "stimuliFile" : "stroop.csv",
                                 "status": {
                                     "levelPanel": true,
                                     "feedbackPanel": true,
                                     "trialCountPanel": true,
                                     "timerPanel": true
+                                },
+                                "stimuliFile" : { 
+                                    "propertyType": "Resource",
+                                    "resourceName": "stroop.csv",
+                                    "resourceType": "stimuli",
+                                    "project": { "name" : "tatool", "access": "public"}
                                 }
                             }
                         }

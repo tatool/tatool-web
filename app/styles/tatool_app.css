@@ -7,6 +7,7 @@ html, body {
   background-color: #fdfdfd;
 }
 
+/* General link */
 a {
   color: #c44a27;
 }
@@ -20,6 +21,7 @@ a:visited {
   color: #c44a27;
 }
 
+/* Info link (icon) */
 a.info {
   color: #626db3;
 }
@@ -28,15 +30,35 @@ a.info:hover {
   cursor: help;
 }
 
+/* General class to allow change of cursor to 'pointer' */
 .pointer {
   cursor: pointer;
 }
 
+/* fixes inline alignment of button and input fields*/
+.button-up {
+  margin-top: -5px;
+}
+
+/* override overrides */
 i {
   font-style: italic;
 }
+small {
+  font-size: 85%;
+}
 
-/* Override bootstrap tooltop styling */
+/* the ui-select dropdown group title format*/
+.ui-select-choices-group-label {
+  font-size: 120%;
+  font-weight: bold;
+}
+/* Making sure we display a scrollbar after adding new elements */
+.modal {
+  overflow: auto;
+}
+
+/* Override bootstrap tooltip styling */
 div.tooltip-inner {
     text-align: left;
     margin-bottom: 6px;
@@ -675,6 +697,7 @@ EDITOR
   display: table-cell;
   width: 65%;
   padding-left: 15px;
+  font-size: 100%;
 }
 
 #moduleContent .my-field {

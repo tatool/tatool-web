@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('tatool.app', ['tatool', 'tatool.auth', 'tatool.common', 'ngAnimate'])
+angular.module('tatool.app', ['tatool', 'tatool.auth', 'tatool.common', 'ngAnimate', 'ngSanitize', 'ui.select'])
   .constant('cfgApp', {
     IMG_PATH: 'images/app/',
     MODULE_IMG_PATH: 'images/module/',

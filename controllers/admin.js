@@ -1,6 +1,7 @@
 // Load required packages
 var uuid = require('node-uuid');
 var User = require('../models/user');
+var Counter = require('../models/counter');
 var UserModule = require('../models/module').userModule;
 var DeveloperModule = require('../models/module').developerModule;
 var RepositoryModule = require('../models/module').repositoryModule;
@@ -44,13 +45,21 @@ exports.updateUser = function(req, res) {
       user.token = '';
       user.updated_at = new Date();
 
-      user.save(function(err) {
+      Counter.getUserCode(function (err, userCode) {
         if (err) {
           res.status(500).json({ message: 'Can\'t add user. Please try again later.', data: err });
         } else {
-          res.json( { message: 'User successfully added.' });
+          user.code = userCode.next;
+          user.save(function(err) {
+            if (err) {
+              res.status(500).json({ message: 'Can\'t add user. Please try again later.', data: err });
+            } else {
+              res.json( { message: 'User successfully added.' });
+            }
+          });
         }
       });
+      
     }
   });
 };

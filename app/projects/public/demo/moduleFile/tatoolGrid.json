@@ -2,7 +2,6 @@
     "name": "Tatool Grid Example",
     "author": "Tatool",
     "label": "tatoolGridExample",
-    "project": { "name" : "demo", "access": "public"},
     "fullscreen": false,
     "allowEscapeKey": true,
     "moduleHierarchy": {
@@ -14,6 +13,7 @@
                 {
                     "tatoolType": "Executable",
                     "customType": "tatoolGridExecutable",
+                    "project": { "name" : "demo", "access": "public"},
                     "name": "tatoolGrid",
                     "dataPath": "",
                     "blankInterval" : "250"

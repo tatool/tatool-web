@@ -18,10 +18,10 @@ tatool
 
     // start instruction
     $scope.start = function() {
-      if (service.pages && service.pages.length > 0) {
+      if (service.pages && service.pages.propertyValue.length > 0) {
         $scope.currentIndex = 0;
-        $scope.urls = service.pages;
-        $scope.currentPage = $scope.urls[$scope.currentIndex];
+        $scope.urls = service.pages.propertyValue;
+        $scope.currentPage = $scope.urls[$scope.currentIndex].resourceName;
         service.input.hide();
         service.input.enable();
       } else {
@@ -42,10 +42,10 @@ tatool
     $scope.go = function(index) {
       if (index > 0 && $scope.currentIndex < ($scope.urls.length - 1)) {
         $scope.currentIndex += index;
-        $scope.currentPage = $scope.urls[$scope.currentIndex];
+        $scope.currentPage = $scope.urls[$scope.currentIndex].resourceName;
       } else if (index < 0 && $scope.currentIndex > 0) {
         $scope.currentIndex += index;
-        $scope.currentPage = $scope.urls[$scope.currentIndex];
+        $scope.currentPage = $scope.urls[$scope.currentIndex].resourceName;
       } else if (index > 0 && $scope.currentIndex === ($scope.urls.length - 1)) {
         service.input.disable();
         service.stopExecutable();
@@ -55,7 +55,7 @@ tatool
     // jump to specific page
     $scope.jump = function(index) {
       $scope.currentIndex = index;
-      $scope.currentPage = $scope.urls[$scope.currentIndex];
+      $scope.currentPage = $scope.urls[$scope.currentIndex].resourceName;
     };
 
   }]);

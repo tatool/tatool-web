@@ -57,7 +57,7 @@ angular.module('tatool.module', ['tatool', 'tatool.auth', 'angular-progress-arc'
           },
           'status@module': {
             templateUrl: function($stateParams) {
-              if($stateParams.status) {
+              if($stateParams.status === 'true' ) {
                 return cfgModule.MODULE_VIEW_PATH + 'statuspanel.html';
               } else {
                 return cfgModule.MODULE_VIEW_PATH + 'blank.html';

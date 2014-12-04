@@ -225,6 +225,22 @@ angular.module('tatool')
       return deferred.promise;
     };
 
+    // get all projects a user has access to
+    data.getProjects = function() {
+      var deferred = $q.defer();
+
+      $http.get('/api/' + data.api + '/projects')
+        .success(function (data) {
+          deferred.resolve(data);
+        })
+        .error(function (error) {
+          $log.error(error);
+          deferred.reject(error.message);
+        });
+
+      return deferred.promise;
+    };
+
     return data;
 
   }]);

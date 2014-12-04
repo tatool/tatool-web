@@ -13,17 +13,17 @@ tatool
       this.dataPath = (this.dataPath) ? this.dataPath : '';
 
       var self = this;
-      if (this.pages && this.pages.length > 0) {
-        async.each(this.pages, function(page, callback) {
-          if (tatoolExecutable.isProjectResource(self.dataPath + page)) {
-            tatoolExecutable.getProjectResource('instructions', page).then(function(template) {
-              $templateCache.put(page, template);
-              callback();
-            }, function(error) {
-              callback('Could not find instruction "' + page + '" in instruction "' + self.name + '".');
-            });
+      if (this.pages && this.pages.propertyValue.length > 0) {
+        async.each(this.pages.propertyValue, function(page, callback) {
+          if (tatoolExecutable.isProjectResource(page.resourceName)) {
+            tatoolExecutable.getResource(page).then(function(template) {
+                $templateCache.put(page.resourceName, template);
+                callback();
+              }, function(error) {
+                callback('Could not find instruction "' + page.resourceName + '" in instruction "' + self.name + '".');
+              });
           } else {
-            callback('External HTML resources are currently not supported by this executable.<br><br><li>' + page);
+            callback('External HTML resources are currently not supported by this executable.<br><br><li>' + page.resourceName);
           }
         }, function(err) {
           if( err ) {

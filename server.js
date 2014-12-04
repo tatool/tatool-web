@@ -29,6 +29,7 @@ var repositoryCtrl = require('./controllers/repositoryCtrl');
 var developerCtrl = require('./controllers/developerCtrl');
 var authController = require('./controllers/auth')
 var adminController = require('./controllers/admin');
+var commonCtrl = require('./controllers/commonCtrl');
 
 // db
 mongoose.connect( process.env.MONGOLAB_URI || 'mongodb://localhost/tatool-web' );
@@ -59,6 +60,7 @@ router.delete('/user/modules/:moduleId', mainCtrl.remove);
 router.post('/user/modules/:moduleId/invite/:response', mainCtrl.processInvite);
 router.post('/user/modules/:moduleId/trials/:sessionId', mainCtrl.addTrials);
 router.get('/user/modules/:moduleId/resources/token', mainCtrl.getResourceToken);
+router.get('/user/projects', commonCtrl.getProjects);
 app.get('/user/resources/:projectAccess/:projectName/:resourceType/:resourceName', mainCtrl.getResource); // NO JWT CHECK
 
 // Repository Modules
@@ -77,6 +79,7 @@ router.post('/developer/modules/:moduleId/publish/:moduleType', developerCtrl.pu
 router.get('/developer/modules/:moduleId/unpublish', developerCtrl.unpublish);
 router.post('/developer/modules/:moduleId/trials/:sessionId', developerCtrl.addTrials);
 router.get('/developer/modules/:moduleId/resources/token', developerCtrl.getResourceToken);
+router.get('/developer/projects', commonCtrl.getProjects);
 app.get('/developer/resources/:projectAccess/:projectName/:resourceType/:resourceName', developerCtrl.getResource); // NO JWT CHECK
 
 // Admin
@@ -128,12 +131,21 @@ app.use(function (err, req, res, next) {
   }
 });
 
-// Run mode
-// lab: make sure we have the admin user ready and register disabled
-if (process.argv[2] === 'lab') {
-  console.log('Running tatool in LAB mode.')
-  app.set('mode', 'lab');
-  userController.registerAdmin();
+
+//** -------------- **//
+//** STARTUP SCRIPT **//
+//** -------------- **//
+
+// initialize userCode counter at startup
+userController.setCounter(labSetup);
+
+function labSetup() {
+  // processing run mode 'lab'
+  if (process.argv[2] === 'lab') {
+    console.log('Running tatool in LAB mode.')
+    app.set('mode', 'lab');
+    userController.registerAdmin();
+  }
 }
 
 // start server

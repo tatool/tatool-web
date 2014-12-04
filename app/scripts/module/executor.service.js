@@ -204,7 +204,14 @@ angular.module('tatool.module')
       broadcastPhaseChange(tatoolPhase.EXECUTABLE_START, elementStack.stack);
 
       var url = currentExecutable.customType + '.html';
-      var statusEnabled = currentExecutable.status ? true : false;
+
+      // check for status panel settings
+      var statusEnabled = false;
+      angular.forEach(currentExecutable.status, function(panelValue, panelName) {
+        if (panelValue) {
+          statusEnabled = panelValue;
+        }
+      });
       var params = { moduleId: moduleService.getModuleId(), type: 'executable', url: url, status: statusEnabled };
 
       // focus window to make sure we're receiving user input

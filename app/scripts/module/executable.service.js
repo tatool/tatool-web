@@ -15,7 +15,7 @@ angular.module('tatool.module')
 
     var mode = '';
 
-    var project = {};
+    var moduleProject = {};
 
     var token = '';
 
@@ -28,10 +28,10 @@ angular.module('tatool.module')
       numExecutables = 0;
       mode = $window.sessionStorage.getItem('mode');
 
-      // override project with details given in module
-      project = moduleService.getProject();
-      project.name = (project.name) ? project.name : cfgModule.MODULE_DEFAULT_PROJECT;
-      project.access = (project.access) ? project.access : 'public';
+      // override moduleProject with details given in module
+      moduleProject = moduleService.getProject();
+      moduleProject.name = (moduleProject.name) ? moduleProject.name : cfgModule.MODULE_DEFAULT_PROJECT;
+      moduleProject.access = (moduleProject.access) ? moduleProject.access : 'public';
 
       // get session token to access resources and save to tatoolExecutable
       var tokenUrl = '/api/' + mode + '/modules/' + moduleService.getModuleId() + '/resources/token';
@@ -39,9 +39,9 @@ angular.module('tatool.module')
       $http.get(tokenUrl)
         .success(function (data) {
           token = '?' + 'token=' + data.token;
-          project.token = data.token;
-          project.path = '/' + mode + '/resources/' +  project.access + '/' + project.name + '/';
-          tatoolExecutable.init(runningExecutor, project);
+          moduleProject.token = data.token;
+          moduleProject.path = '/' + mode + '/resources/' +  moduleProject.access + '/' + moduleProject.name + '/';
+          tatoolExecutable.init(runningExecutor, moduleProject, mode);
 
           initializeTatoolResources().then(function() {
             deferred.resolve();
@@ -88,6 +88,16 @@ angular.module('tatool.module')
     executableService.addExecutable = function(executableJson) {
       var deferred = $q.defer();
       var self = this;
+
+      // check if moduleProject should be overriden by executable project
+      var project = {};
+      if (executableJson.project) {
+        project.access = executableJson.project.access;
+        project.name = executableJson.project.name;
+      } else {
+        project.access = moduleProject.access;
+        project.name = moduleProject.name;
+      }
 
       var projectPath = '/' + mode + '/resources/' +  project.access + '/' + project.name + '/executables/';
       var defaultProjectPath = '/' + mode + '/resources/public/' + cfgModule.MODULE_DEFAULT_PROJECT + '/executables/';
