@@ -2,7 +2,6 @@ var mongoose  = require('mongoose');
 var Schema    = mongoose.Schema;
 
 var Project = new mongoose.Schema({
-    _id: String,
     access: {
       type: String,
       required: true
@@ -17,7 +16,7 @@ var Project = new mongoose.Schema({
     },
     description: {
       type: String,
-      required: true
+      required: false
     },
     executables: {
       type: [],

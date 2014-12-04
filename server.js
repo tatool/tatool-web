@@ -88,6 +88,10 @@ router.post('/admin/users/:user', adminController.updateUser);
 router.post('/admin/users/:user/reset', adminController.updatePassword);
 router.delete('/admin/users/:user', adminController.removeUser);
 
+router.get('/admin/projects', adminController.getAllProjects);
+router.post('/admin/projects/:access/:project', adminController.addProject);
+router.delete('/admin/projects/:access/:project', adminController.deleteProject);
+
 // User
 router.get('/user/roles', authController.getRoles);
 router.post('/register', userController.register);

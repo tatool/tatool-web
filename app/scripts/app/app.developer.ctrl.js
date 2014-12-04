@@ -295,7 +295,6 @@ angular.module('tatool.app')
         name: 'New Module',
         author: userService.getUserName(),
         label: 'newModule',
-        project: { 'name' : 'tatool', 'access': 'public'},
         export : [
           { mode: 'download' }
         ],

@@ -5,14 +5,14 @@ angular.module('tatool.module')
 
     var tatoolStimulusService = {};
 
-    tatoolStimulusService.createStimulus = function(stimulusId) {
+    tatoolStimulusService.createStimulus = function(stimulusId, stimuliPath) {
       var stimulus = new Stimulus(stimulusId);
+      stimulus.stimuliPath = stimuliPath ? stimuliPath : '';
       return stimulus;
     };
 
     function Stimulus(stimulusId) {
       this.stimulusId = stimulusId ? stimulusId : 'default';
-      this.dataPath = '';
       this.data = {};
 
       this.init = function() {
@@ -30,12 +30,10 @@ angular.module('tatool.module')
 
         // prepare image source
         if (this.data.stimulusValueType === 'image') {
-          if (tatoolExecutable.isProjectResource(this.dataPath + this.data.stimulusValue)) {
-            var imgSrc = tatoolExecutable.getResourcePath('stimuli', this.data.stimulusValue);
-            this.stimulusImage = imgSrc;
-          } else {
-            this.stimulusImage = this.dataPath + this.data.stimulusValue;
-          }
+          var resource = this.stimuliPath;
+          resource.resourceName = this.data.stimulusValue;
+          var imgSrc = tatoolExecutable.getResourcePath(resource);
+          this.stimulusImage = imgSrc;
         }
         
         if (this.data.stimulusClass !== undefined) {

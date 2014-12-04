@@ -5,7 +5,6 @@ tatool
     function ($scope, service) {
 
     // assign grid to scope property
-    $scope.dataPath = service.dataPath;
     $scope.myGrid = service.myGrid;
 
     $scope.start = function() {

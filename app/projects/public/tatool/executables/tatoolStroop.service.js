@@ -11,24 +11,32 @@ tatool
     StroopExecutable.prototype.init = function() {
       var deferred = $q.defer();
 
+      if (!this.hideKeys) {
+        this.hideKeys = { propertyValue: false };
+      } else {
+        this.hideKeys = (this.hideKeys.propertyValue === true) ? true : false;
+      }
+
+      if (!this.timerEnabled) {
+        this.timerEnabled = { propertyValue: false };
+      } else {
+        this.timerEnabled = (this.timerEnabled.propertyValue === true) ? true : false;
+      }
+      
+      if (!this.stimuliPath) {
+        deferred.reject('Invalid property settings for Executable tatoolStroop. Expected property stimuliPath of type Path.');
+      }
+
       // template properties
-      this.tatoolStimulus = tatoolStimulusService.createStimulus();
-      this.tatoolInput = tatoolInputService.createInput();
+      this.tatoolStimulus = tatoolStimulusService.createStimulus('main', this.stimuliPath);
+      this.tatoolInput = tatoolInputService.createInput(this.stimuliPath);
 
       // timing properties
-      this.timerDuration = 2000;
+      this.timerDuration = (this.timerDuration ) ? this.timerDuration : 2000;
       this.timer = timerService.createTimer(this.timerDuration, true, this);
 
       // trial counter property
       this.counter = -1;
-
-      // load stimuli file from project or external resource
-      this.dataPath = (this.dataPath) ? this.dataPath : '';
-
-      // set stimuliFile to default tatool project stimuli file if not set via module file
-      if (!this.stimuliFile) {
-        this.stimuliFile = 'stroop.csv';
-      }
 
       // prepare stimuli
       if (this.stimuliFile) {
@@ -39,7 +47,7 @@ tatool
             deferred.reject('Resource not found: ' + self.stimuliFile.resourceName);
           });
       } else {
-        deferred.reject('Invalid property settings for Executable tatoolComplexSpan. Expected property stimuliFile of type Resource.');
+        deferred.reject('Invalid property settings for Executable tatoolStroop. Expected property stimuliFile of type Resource.');
       }
 
       return deferred;
@@ -77,7 +85,7 @@ tatool
       for (var i = 0; i < list.length; i++) {
         if (keyCodes.indexOf(list[i].keyCode) === -1) {
           keyCodes.push(list[i].keyCode);
-          this.tatoolInput.addInputKey(list[i].keyCode, list[i].correctResponse, null, true);
+          this.tatoolInput.addInputKey(list[i].keyCode, list[i].correctResponse, list[i].keyLabel, list[i].keyLabelType, this.hideKeys);
         }
       }
       if (keyCodes.length === 0) {

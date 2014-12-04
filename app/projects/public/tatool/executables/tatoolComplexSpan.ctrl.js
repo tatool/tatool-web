@@ -60,7 +60,7 @@ tatool
       service.respCounter++;
 
       // display recall queue
-      var stimulusText = 'Digit ' + service.respCounter + ' ?';
+      var stimulusText = 'Stimulus ' + service.respCounter + ' ?';
       service.setRecallStimulus(stimulusText);
 
       service.startTime = service.tatoolStimulus.show();      

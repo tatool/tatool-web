@@ -10,12 +10,10 @@ tatool
     TatoolInstruction.prototype.init = function() {
       var deferred = $q.defer();
 
-      this.dataPath = (this.dataPath) ? this.dataPath : '';
-
       var self = this;
       if (this.pages && this.pages.propertyValue.length > 0) {
         async.each(this.pages.propertyValue, function(page, callback) {
-          if (tatoolExecutable.isProjectResource(page.resourceName)) {
+          if (page.project.access !== 'external') {
             tatoolExecutable.getResource(page).then(function(template) {
                 $templateCache.put(page.resourceName, template);
                 callback();

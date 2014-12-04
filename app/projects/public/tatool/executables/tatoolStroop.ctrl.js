@@ -8,8 +8,6 @@ tatool
     $scope.stimulus = service.tatoolStimulus;
     // Make the input available for the <tatool-input> template
     $scope.input = service.tatoolInput;
-    // Make the data path available for the <tatool-stimulus> template
-    $scope.dataPath = service.dataPath;
 
     // Start execution
     $scope.start = function() {
@@ -18,7 +16,12 @@ tatool
 
       // Enable input, start timer and display stimulus
       service.tatoolInput.enable();
-      service.timer.start(timerUp);
+      if (!service.hideKeys) {
+        service.tatoolInput.show();
+      }
+      if (service.timerEnabled) {
+        service.timer.start(timerUp);
+      }
       service.startTime = service.tatoolStimulus.show();
     };
 
@@ -33,6 +36,7 @@ tatool
     $scope.inputAction = function(input, timing, event) {
       service.tatoolInput.disable();
       service.timer.stop();
+      service.tatoolInput.hide();
       service.tatoolStimulus.hide();
       service.endTime = timing;
       service.processResponse(input.givenResponse);

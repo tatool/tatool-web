@@ -35,6 +35,14 @@ a.info:hover {
   cursor: pointer;
 }
 
+/* General classes to change font color */
+.green {
+  color: #1a882a;
+}
+.red {
+  color: #cd2b00;
+}
+
 /* fixes inline alignment of button and input fields*/
 .button-up {
   margin-top: -5px;
@@ -74,6 +82,11 @@ div.tooltip-inner {
 div.tooltip.in {
   opacity: 1;
   filter: alpha(opacity=100);
+}
+
+/* Fix bootstrap radio-inline class to move up a bit */
+.radio-inline-up {
+  padding-bottom: 10px;
 }
 
 /** ---------
@@ -570,6 +583,11 @@ a.accordion-toggle:hover {
 
 #modules .buttonbar {
 	margin-top: 5px;
+}
+
+#modules .sessionNum {
+  line-height: 140%;
+  font-size: 120%;
 }
 
 #modules .repository {

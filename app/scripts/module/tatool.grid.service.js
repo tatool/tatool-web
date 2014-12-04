@@ -6,15 +6,15 @@ angular.module('tatool.module')
     // Define our executable service constructor which will be called once for every instance
     var tatoolGridService = {};
 
-    tatoolGridService.createGrid = function(rows, cols, gridId) {
+    tatoolGridService.createGrid = function(rows, cols, gridId, stimuliPath) {
       var grid = new Grid(gridId);
       grid.resize(rows, cols);
+      grid.stimuliPath = stimuliPath ? stimuliPath : '';
       return grid;
     };
 
     function Grid(gridId) {
 
-      this.dataPath = '';
       this.cellsObject = {};
       this.cells = [];
       this.gridId = gridId ? gridId : 'default';
@@ -55,12 +55,10 @@ angular.module('tatool.module')
         }
         // prepare image source
         if (data.stimulusValueType === 'image') {
-          if (tatoolExecutable.isProjectResource(this.dataPath + data.stimulusValue)) {
-            var imgSrc = tatoolExecutable.getResourcePath('stimuli', data.stimulusValue);
-            cell.stimulusImage = imgSrc;
-          } else {
-            cell.stimulusImage = this.dataPath + data.stimulusValue;
-          }
+          var resource = this.stimuliPath;
+          resource.resourceName = data.stimulusValue;
+          var imgSrc = tatoolExecutable.getResourcePath(resource);
+          cell.stimulusImage = imgSrc;
         }
         return cell;
       };

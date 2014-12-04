@@ -27,7 +27,7 @@
         </accordion-heading>
         <div id="modules">
           <div class="tile" ng-class="{'tileHighlight': module.moduleId == highlightModuleId}" ng-repeat="module in modules | orderBy:'moduleName' | filter:{ moduleName: filterModule }" ng-if="!!modules.length">
-            <div class="icon"><i class="fa fa-play-circle fa-4x"></i> <span ng-if="module.maxSessionId">Sessions: <b>{{module.maxSessionId}}</b></span></div>
+            <div class="icon"><i class="fa fa-play-circle fa-4x"></i> <span ng-if="module.maxSessionId"><small>Sessions<br></small> <b class="sessionNum">{{module.maxSessionId}}</b></span></div>
             <div class="content">
               <h2>{{module.moduleName}}</h2>
               <h3>{{module.moduleAuthor}}</h3>

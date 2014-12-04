@@ -5,6 +5,9 @@ var Counter = require('../models/counter');
 var UserModule = require('../models/module').userModule;
 var DeveloperModule = require('../models/module').developerModule;
 var RepositoryModule = require('../models/module').repositoryModule;
+var Project = require('../models/project');
+var mkdirp = require('mkdirp');
+var rmdir = require('rimraf');
 
 exports.getUsers = function(req, res) {
   User.find( function(err, users) {
@@ -133,4 +136,127 @@ exports.removeUser = function(req, res) {
     }
   });
 
+};
+
+exports.getAllProjects = function(req, res) {
+  Project.find( {}, function(err, projects) {
+    if (err) {
+      res.status(500).json({message: 'Error reading projects.'});
+    } else {
+      res.json(projects);
+    }
+  });
+}
+
+exports.addProject = function(req, res) {
+
+  Project.findOne({name: req.params.project, access: req.params.access}, function(err, project) {
+    if (err) res.status(500).send(err);
+
+    if (project) {
+      project.description = req.body.description;
+      project.executables = req.body.executables;
+
+      project.save(function(err) {
+        if (err) {
+          res.status(500).json({ message: 'Can\'t edit project. Please try again later.', data: err });
+        } else {
+          res.json( { message: 'Project saved successfully.' });
+        }
+      });
+
+    } else {
+      var project = new Project();
+      project.name = req.body.name;
+      project.access = req.body.access;
+      project.email = req.body.email;
+      project.description = req.body.description;
+      project.executables = req.body.executables;
+
+      var projectPath = '';
+      if (project.access === 'private') {
+        projectPath = 'app/projects/' + project.access + '/' + project.email + '/' + project.name;
+      } else {
+        projectPath = 'app/projects/' + project.access + '/' + project.name;
+      }
+
+      mkdirp(projectPath, function (err) {
+        if (err) {
+          res.status(500).json({ message: 'Can\'t add project. Please try again later.', data: err });
+        } else {
+          mkdirp(projectPath + '/' + 'executables', function (err) {
+            if (err) {
+              res.status(500).json({ message: 'Can\'t add project. Please try again later.', data: err });
+            } else {
+              mkdirp(projectPath + '/' + 'instructions', function (err) {
+                if (err) {
+                  res.status(500).json({ message: 'Can\'t add project. Please try again later.', data: err });
+                } else {
+                  mkdirp(projectPath + '/' + 'stimuli', function (err) {
+                    if (err) {
+                      res.status(500).json({ message: 'Can\'t add project. Please try again later.', data: err });
+                    } else {
+                      mkdirp(projectPath + '/' + 'modules', function (err) {
+                        if (err) {
+                          res.status(500).json({ message: 'Can\'t add project. Please try again later.', data: err });
+                        } else {
+                          project.save(function(err) {
+                            if (err) {
+                              res.status(500).json({ message: 'Can\'t add project. Please try again later.', data: err });
+                            } else {
+                              res.json( { message: 'Project added successfully.' });
+                            }
+                          });
+                        }
+                      });
+                    }
+                  });
+                }
+              });
+            }
+          });
+          
+        }
+      });
+    }
+  });
+};
+
+exports.deleteProject = function(req, res) {
+
+  Project.findOne({name: req.params.project, access: req.params.access}, function(err, project) {
+    if (err) {
+      res.status(500).send(err);
+    } else {
+      if (project) {
+
+        var projectPath = '';
+        if (project.access === 'private') {
+          projectPath = 'app/projects/' + project.access + '/' + project.email + '/' + project.name;
+        } else {
+          projectPath = 'app/projects/' + project.access + '/' + project.name;
+        }
+
+        Project.remove({ _id: project._id }, function(err, project) {
+          if (err) {
+            res.status(500).send(err);
+          } else {
+
+            rmdir(projectPath, function(error){
+              if (error) {
+                res.status(500).send(err);
+              } else {
+                res.json(project);
+              }
+            });
+            
+          }
+        });
+      } else {
+        res.json({});
+      }
+    }
+  });
+
+  
 };

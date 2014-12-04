@@ -4,14 +4,10 @@ tatool
   .controller('visualUpdatingExecutableCtrl', [ '$scope', '$log', '$timeout', 'service', 'timerService', 'tatoolGridService',
     function ($scope, $log, $timeout, service, timerService, tatoolGridService) {
       
-     // set the data path for our animal images
-      var dataPath = 'data/';
-
       // create  new a tatoolGrid
       var myGrid = tatoolGridService.createGrid(2, 4, 'animalGrid');
 
        // assign grid to scope property
-      $scope.dataPath = dataPath;
       $scope.myGrid = myGrid;
       var myCell;
 

@@ -27,8 +27,7 @@ angular.module('tatool.module').directive('tatoolInput', ['$log', '$templateCach
     restrict: 'E',
     transclude: true,
     scope: {
-      service: '=',             // expects a stimulus object provided by the tatoolStimulusService
-      datapath: '@',            // defines datapath to be used to access external resources        
+      service: '=',             // expects a stimulus object provided by the tatoolStimulusService      
       userinput: '&'            // method called on user input (mouse/keyboard)
     },
     controller: ['$scope', function($scope) {
@@ -54,8 +53,8 @@ angular.module('tatool.module').directive('tatoolInput', ['$log', '$templateCach
         $scope.userinput({'input': $scope.service.registeredKeyInputs[keyCode], 'timing': timing, '$event': event});
       };
 
-      this.getDataPath = function() {
-        return ($scope.datapath) ? $scope.datapath : '';
+      this.getStimuliPath = function() {
+        return $scope.service.stimuliPath;
       };
     }],
     link: function (scope, element, attr, ctrl) {
@@ -69,9 +68,10 @@ angular.module('tatool.module').directive('tatoolInput', ['$log', '$templateCach
       angular.forEach(scope.service.keyInputOrder, function(keyCode) {
         var value = scope.service.registeredKeyInputs[keyCode];
         if (value.dynamic) {
-          var label = (value.label) ? ' label="' + value.label + '"' : '';
+          var label = (value.labelType === 'text' && value.label) ? ' label="' + value.label + '"' : '';
+          var image = (value.labelType === 'image' && value.label) ? ' image="' + value.label + '"' : '';
           var hide = (value.hide) ? ' hide' : '';
-          var keyEl = angular.element('<tatool-key code="'+ value.keyCode +'" response="'+ value.givenResponse + '"' + label + hide + ' dynamic="true"></tatool-key>');
+          var keyEl = angular.element('<tatool-key code="'+ value.keyCode +'" response="'+ value.givenResponse + '"' + label + image + hide + ' dynamic="true"></tatool-key>');
           element.children(':first').append(keyEl);
           $compile(keyEl)(scope);
         }
@@ -160,12 +160,10 @@ angular.module('tatool.module').directive('tatoolKey', ['$log', '$sce', 'tatoolE
       if (attr.label !== undefined) {
         scope.key = $sce.trustAsHtml(attr.label);
       } else if (attr.image !== undefined) {
-        if (tatoolExecutable.isProjectResource(tatoolInputCtrl.getDataPath() + attr.image)) {
-          var imgSrc = tatoolExecutable.getResourcePath('stimuli', attr.image);
-          scope.key = $sce.trustAsHtml('<img src="' + imgSrc + '" class="img">');
-        } else {
-          scope.key = $sce.trustAsHtml('<img src="' + tatoolInputCtrl.getDataPath() + attr.image + '" class="img">');
-        }
+        var resource = tatoolInputCtrl.getStimuliPath();
+        resource.resourceName = attr.image;
+        var imgSrc = tatoolExecutable.getResourcePath(resource);
+        scope.key = $sce.trustAsHtml('<img src="' + imgSrc + '" class="img">');
       } else {
         var internalValue = attr.code;
         if (internalValue.substring(0,5) === 'Digit') {
@@ -231,16 +229,12 @@ angular.module('tatool.module').directive('tatoolStimulus', ['$log', '$templateC
     restrict: 'E',
     scope: {
       service: '=',             // expects a stimulus object provided by the tatoolStimulusService
-      datapath: '@',            // defines datapath to be used to access resources
       stimulusclick: '&'        // function to call on mouse click on stimulus
     },
     link: function (scope, element) {
 
       // hide by default
       scope.show = false;
-
-      // set the datapath
-      scope.service.dataPath = (scope.datapath) ? scope.datapath : '';
 
       scope.service.show = function() {
         scope.stimulus = scope.service;
@@ -284,7 +278,6 @@ angular.module('tatool.module').directive('tatoolGrid', ['$log', '$templateCache
       cellheight: '@',          // defines default height of a grid cell
       hideemptycells: '@',      // hides [yes] or shows [] empty grid cells
       disablehover: '@',        // disables [yes] or enables [] hover effect on grid cells (expects a static css class)
-      datapath: '@',            // defines datapath to be used to access resources
       allowdrag: '@',           // defines whether drag feature is enabled [yes] or not [] by default
       allowdrop: '@',           // defines whether drop feature is enabled [yes|all] or not [] by default
       gridclick: '&',           // function to call on mouse click on a specific grid cell
@@ -312,9 +305,6 @@ angular.module('tatool.module').directive('tatoolGrid', ['$log', '$templateCache
         scope.tableStyle['border-collapse'] = 'separate';
         scope.tableStyle['border-spacing'] = '15px';
       }
-
-      // set the datapath
-      scope.service.dataPath = (scope.datapath) ? scope.datapath : '';
       
       // initialize grid UI
       scope.cells = scope.service.cells;   // grid given to directive

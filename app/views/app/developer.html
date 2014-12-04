@@ -33,7 +33,7 @@
         <div id="modules">
 
           <div class="tile tileDev" ng-class="{'tileHighlight': module.moduleId == highlightModuleId}" ng-repeat="module in modules | orderBy:'moduleName'" ng-if="!!modules.length">
-            <div class="icon"><i class="fa fa-cog fa-4x"></i> <span ng-if="module.maxSessionId">Sessions: <b>{{module.maxSessionId}}</b></span></div>
+            <div class="icon"><i class="fa fa-cog fa-4x"></i> <span ng-if="module.maxSessionId"><small>Sessions<br></small> <b class="sessionNum">{{module.maxSessionId}}</b></span></div>
             <div class="content">
               <h2>{{module.moduleName}}</h2>
               <h3>{{module.moduleAuthor}}</h3>

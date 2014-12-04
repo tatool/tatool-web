@@ -1,14 +1,16 @@
 'use strict';
 
 angular.module('tatool.app')
-  .controller('AdminCtrl', ['$scope', '$q', '$http', '$log', '$timeout', '$sce', 'userDataService',
-    function ($scope, $q, $http, $log, $timeout, $sce, userDataService) {
+  .controller('AdminCtrl', ['$scope', '$q', '$http', '$log', '$timeout', '$sce', 'userDataService', 'moduleDataService',
+    function ($scope, $q, $http, $log, $timeout, $sce, userDataService, moduleDataService) {
 
       $scope.users = [];
 
       $scope.roles = ['user', 'developer', 'researcher', 'admin'];
 
       $scope.highlightUserEmail = '';
+
+      $scope.query = {};
 
       $scope.updateUser = function(user) {
         $scope.hideAlert();
@@ -205,17 +207,300 @@ angular.module('tatool.app')
       // query modules db and display
       userDataService.openUsersDB(initUsers);
 
+
+
+      $scope.addProject = function() {
+        $scope.hideAlert();
+        var box =bootbox.dialog({
+          title: '<b>Add Project</b>',
+          message: '<div class="row">  ' +
+                    '<div class="col-md-12"> ' +
+                    '<form class="form-horizontal"> ' +
+                    '<div class="form-group"> ' +
+                    '<label class="col-md-4 control-label" for="name">Name</label> ' +
+                    '<div class="col-md-6"> ' +
+                    '<input id="name" name="name" type="text" class="form-control input-md" ng-required> ' +
+                    '</div> ' +
+                    '</div> ' +
+
+                    '<div class="form-group"> ' +
+                    '<label class="col-md-4 control-label" for="name">Access</label> ' +
+                    '<div class="col-md-6"> ' +
+                    '<div class="radio"> <label for="access-public"> ' +
+                    '<input type="radio" name="access" id="access-public" value="public" checked> ' +
+                    'Public </label> ' +
+                    '</div>' +
+                    '<div class="radio"> <label for="access-private"> ' +
+                    '<input type="radio" name="access" id="access-private" value="private"> ' +
+                    'Private </label> ' +
+                    '</div>' +
+                    '</div> ' +
+                    '</div> ' +
+
+                    '<div class="form-group"> ' +
+                    '<label class="col-md-4 control-label" for="name">Owner</label> ' +
+                    '<div class="col-md-6"> ' +
+                    '<input id="owner" name="owner" type="text" class="form-control input-md" ng-required> ' +
+                    '</div> ' +
+                    '</div> ' +
+
+                    '<div class="form-group"> ' +
+                    '<label class="col-md-4 control-label" for="name">Description</label> ' +
+                    '<div class="col-md-6"> ' +
+                    '<input id="description" name="description" type="text" class="form-control input-md"> ' +
+                    '</div> ' +
+                    '</div> ' +
+
+                    '<div class="form-group"> ' +
+                    '<label class="col-md-4 control-label" for="name">Executables (JSON)</label> ' +
+                    '<div class="col-md-8"> ' +
+                    '<textarea id="executables" name="executables" class="form-control input-sm" rows="10"></textarea>' + 
+                    '<small><b>Format:</b> [ { "customType" : "executable1" }, <br>{ "customType" : "executable2" } ]</small>' +
+                    '</div> ' +
+                    '</div> ' +
+                    '</div> ' +
+                    '</form> </div> </div>',
+          buttons: {
+            main: {
+              label: 'Ok',
+              className: 'btn-default',
+              callback: function () {
+                var project = {};
+                project.name = $('#name').val();
+                project.access = $('input[name=\'access\']:checked').val();
+                project.email = $('#owner').val();
+                project.description = $('#description').val();
+                project.executables = $('#executables').val().replace(/\r?\n/g, '');
+                if (!project.name || project.name === '' || !project.access || project.access === '' || !project.email || project.email === '') {
+                  setAlert('danger', 'Invalid project name or access type.');
+                  $scope.$apply();
+                } else {
+                  insertProject(project);
+                }
+              }
+            },
+            cancel: {
+              label: 'Cancel',
+              className: 'btn-default'
+            }
+          }
+        });
+
+        box.bind('shown.bs.modal', function(){
+          $('#name').focus();
+        });
+
+        $('#description').keypress(function(e) {
+          if(e.which === 13) {
+            e.preventDefault();
+            $('button[data-bb-handler="main"]').focus().click();
+          }
+        });
+      };
+
+      function insertProject(project) {
+        var uniqueProject = true;
+        var jsonParse = true;
+
+        for (var i=0; i < $scope.projects.length; i++) {
+          if (project.name === $scope.projects[i].name && project.access === $scope.projects[i].access) {
+            uniqueProject = false;
+            break;
+          }
+        }
+
+        project.description = (project.description) ? project.description : '';
+        project.email = (project.email) ? project.email : '';
+        try {
+          project.executables = (project.executables) ? JSON.parse(project.executables) : [];
+        } catch (e) {
+          jsonParse = false;
+        }
+
+        if (uniqueProject && jsonParse) {
+          moduleDataService.addProject(project).then( function() {
+            setAlert('success', 'Project '+ project.name + ' has been added.');
+            getProjects();
+          }, function(err) {
+            $log.error(err);
+          });
+        } else if (!uniqueProject) {
+          setAlert('danger', 'There already exists a project with this name and access type.');
+          $scope.$apply();
+        } else if (!jsonParse) {
+          setAlert('danger', 'The executables are not in proper JSON format.');
+          $scope.$apply();
+        } else {
+          setAlert('danger', 'Unknown error');
+          $scope.$apply();
+        }
+      }
+
+      $scope.deleteProject = function(project) {
+        $scope.hideAlert();
+
+        function runDelete() {
+          moduleDataService.deleteProject(project).then( function() {
+            setAlert('info', 'Project '+ project.name + ' has been deleted.');
+            getProjects();
+          }, function(err) {
+            $log.error(err);
+          });
+        }
+        
+        bootbox.dialog({
+          message: 'Are you sure you want to delete the project <b>\'' + project.name + '\'</b>?<br>All files in the project folder will be deleted.',
+          title: '<b>Delete Project</b>',
+          buttons: {
+            ok: {
+              label: 'OK',
+              className: 'btn-default',
+              callback: runDelete
+            },
+            cancel: {
+              label: 'Cancel',
+              className: 'btn-default'
+            }
+          }
+        });
+      };
+
+
+      $scope.editProject = function(project) {
+        $scope.hideAlert();
+        var box =bootbox.dialog({
+          title: '<b>Edit Project</b>',
+          message: '<div class="row">  ' +
+                    '<div class="col-md-12"> ' +
+                    '<form class="form-horizontal"> ' +
+                    '<div class="form-group"> ' +
+                    '<label class="col-md-4 control-label" for="name">Name</label> ' +
+                    '<div class="col-md-6"> ' +
+                    '<p class="form-control-static"><b>' + project.name + '</b></p>' +
+                    '</div> ' +
+                    '</div> ' +
+
+                    '<div class="form-group"> ' +
+                    '<label class="col-md-4 control-label" for="name">Access</label> ' +
+                    '<div class="col-md-6"> ' +
+                    '<p class="form-control-static"><b>' + project.access + '</b></p>' +
+                    '</div> ' +
+                    '</div> ' +
+
+                    '<div class="form-group"> ' +
+                    '<label class="col-md-4 control-label" for="name">Owner</label> ' +
+                    '<div class="col-md-6"> ' +
+                    '<p class="form-control-static"><b>' + project.email + '</b></p>' +
+                    '</div> ' +
+                    '</div> ' +
+
+                    '<div class="form-group"> ' +
+                    '<label class="col-md-4 control-label" for="name">Description</label> ' +
+                    '<div class="col-md-6"> ' +
+                    '<input id="description" name="description" type="text" class="form-control input-md" value="' + project.description + '"> ' +
+                    '</div> ' +
+                    '</div> ' +
+
+                    '<div class="form-group"> ' +
+                    '<label class="col-md-4 control-label" for="name">Executables (JSON)</label> ' +
+                    '<div class="col-md-8"> ' +
+                    '<textarea id="executables" name="executables" class="form-control input-sm" rows="10">' + JSON.stringify(project.executables) + '</textarea>' + 
+                    '<small><b>Format:</b> [ { "customType" : "executable1" }, <br>{ "customType" : "executable2" } ]</small>' +
+                    '</div> ' +
+                    '</div> ' +
+                    '</div> ' +
+                    '</form> </div> </div>',
+          buttons: {
+            main: {
+              label: 'Ok',
+              className: 'btn-default',
+              callback: function () {
+                project.description = $('#description').val();
+                project.executables = $('#executables').val().replace(/\r?\n/g, '');
+                updateProject(project);
+              }
+            },
+            cancel: {
+              label: 'Cancel',
+              className: 'btn-default'
+            }
+          }
+        });
+
+        box.bind('shown.bs.modal', function(){
+          $('#description').focus();
+        });
+
+        $('#description').keypress(function(e) {
+          if(e.which === 13) {
+            e.preventDefault();
+            $('button[data-bb-handler="main"]').focus().click();
+          }
+        });
+      };
+
+      function updateProject(project) {
+        var jsonParse = true;
+
+        project.description = (project.description) ? project.description : '';
+        try {
+          project.executables = (project.executables) ? JSON.parse(project.executables) : [];
+        } catch (e) {
+          jsonParse = false;
+        }
+
+        if (jsonParse) {
+          moduleDataService.addProject(project).then( function() {
+            setAlert('success', 'Project '+ project.name + ' has been saved.');
+            getProjects();
+          }, function(err) {
+            $log.error(err);
+          });
+        } else if (!jsonParse) {
+          setAlert('danger', 'The executables are not in proper JSON format.');
+          $scope.$apply();
+        } else {
+          setAlert('danger', 'Unknown error');
+          $scope.$apply();
+        }
+      }
+
+      function getProjects() {
+        moduleDataService.getAllProjects().then(function(data) {
+          $scope.projects = data;
+        }, function(err) {
+          $log.error(err);
+        });
+      };
+
+      // loading all projects from tatool
+      moduleDataService.openModulesDB(null, 'user', getProjects);
+
+
       $scope.setUserFilter = function() {
-        if ($scope.query.length >= 2) {
-          $scope.filterUser = $scope.query;
+        if ($scope.query.user.length >= 2) {
+          $scope.filterUser = $scope.query.user;
         } else {
           $scope.filterUser = '';
         }
       };
 
       $scope.removeUserFilter = function() {
-        $scope.query = '';
+        $scope.query.user = '';
         $scope.filterUser = '';
+      };
+
+      $scope.setProjectFilter = function() {
+        if ($scope.query.project.length >= 2) {
+          $scope.filterProject = $scope.query.project;
+        } else {
+          $scope.filterProject = '';
+        }
+      };
+
+      $scope.removeProjectFilter = function() {
+        $scope.query.project = '';
+        $scope.filterProject = '';
       };
 
       function setAlert(alertType, alertMessage) {

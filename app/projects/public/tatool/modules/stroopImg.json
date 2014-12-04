@@ -1,0 +1,79 @@
+{
+  "name": "Stroop Image Test",
+  "author": "andre@outerlimits.ch",
+  "label": "newModule",
+  "project": {
+    "name": "tatool",
+    "access": "public"
+  },
+  "export": [
+    {
+      "mode": "download",
+      "$$hashKey": "object:258"
+    }
+  ],
+  "allowEscapeKey": true,
+  "fullscreen": false,
+  "moduleHierarchy": {
+    "tatoolType": "List",
+    "iterator": {
+      "customType": "ListIterator",
+      "numIterations": "10"
+    },
+    "children": [
+      {
+        "tatoolType": "Executable",
+        "customType": "tatoolInstruction",
+        "name": "instr",
+        "project": {
+          "name": "tatool",
+          "access": "public"
+        },
+        "pages": {
+          "propertyType": "ArrayResource",
+          "propertyValue": [
+            {
+              "project": {
+                "name": "demo",
+                "access": "public"
+              },
+              "resourceName": "complexNum.inst.01.html",
+              "resourceType": "instructions"
+            }
+          ]
+        }
+      },
+      {
+        "tatoolType": "Executable",
+        "customType": "tatoolStroop",
+        "name": "stroop",
+        "project": {
+          "name": "tatool",
+          "access": "public"
+        },
+        "stimuliFile": {
+          "propertyType": "Resource",
+          "project": {
+            "name": "tatool",
+            "access": "public"
+          },
+          "resourceName": "stroop.csv",
+          "resourceType": "stimuli"
+        },
+        "stimuliPath": {
+          "propertyType": "Path",
+          "project": {
+            "name": "demo",
+            "access": "public"
+          },
+          "resourceName": "",
+          "resourceType": "stimuli",
+          "resourcePath": "https:\/\/dl.dropboxusercontent.com\/u\/22626547\/"
+        },
+        "timerEnabled": "true",
+        "timerDuration": "2000",
+        "hideKeys": "true"
+      }
+    ]
+  }
+}

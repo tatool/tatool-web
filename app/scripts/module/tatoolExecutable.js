@@ -9,7 +9,7 @@ angular.module('tatool.module')
 
     var executor = {};
 
-    var project = {};
+    var token = '';
 
     var mode = '';
 
@@ -17,9 +17,9 @@ angular.module('tatool.module')
       General Executable functions
     -------------------------------- */
     // initialize the common executable service
-    executable.init = function(runningExecutor, moduleProject, moduleMode) {
+    executable.init = function(runningExecutor, moduleToken, moduleMode) {
       executor = runningExecutor;
-      project = moduleProject;
+      token = moduleToken;
       mode = moduleMode;
     };
 
@@ -77,31 +77,16 @@ angular.module('tatool.module')
       Resource Loading Helper functions
     -------------------------------- */
 
-    // returns the project path
-    executable.getProjectPath = function(resourceType) {
-      if (resourceType) {
-        return project.path + resourceType + '/';
+    executable.getResourcePath = function(res) {
+      if (res.project.access === 'external') {
+        if (res.resourcePath) {
+          return res.resourcePath + res.resourceName;
+        } else {
+          return res.resourceName;
+        }
       } else {
-        return project.path;
-      }
-    };
-
-    // returns the currently valid resource token
-    executable.getResourceToken = function() {
-      return project.token;
-    };
-
-    // get full path to a specific project resource
-    executable.getResourcePath = function(resourceType, resourceName) {
-      return project.path + resourceType + '/' + resourceName + '?token=' + project.token;
-    };
-
-    // check whether path is external or project specific
-    executable.isProjectResource = function(path) {
-      if (path.substring(0, 4) === 'http' || path.substring(0, 3) === 'www') {
-        return false;
-      } else {
-        return true;
+        var path = '/' + mode + '/resources/' +  res.project.access + '/' + res.project.name + '/';
+        return path + res.resourceType + '/' + res.resourceName + '?token=' + token;
       }
     };
 
@@ -119,7 +104,7 @@ angular.module('tatool.module')
 
       var path = '/' + mode + '/resources/' +  res.project.access + '/' + res.project.name + '/';
 
-      $http.get( path + res.resourceType + '/' + res.resourceName + '?token=' + project.token)
+      $http.get( path + res.resourceType + '/' + res.resourceName + '?token=' + token)
         .success(function (data) {
           deferred.resolve(data);
         })
@@ -144,7 +129,7 @@ angular.module('tatool.module')
       return deferred.promise;
     };
 
-    // get a resource (project or external)
+    // get a CSV resource (project or external)
     executable.getCSVResource = function(res, header) {
       if (res.project.access === 'external') {
         return getExternalCSVResource(res.resourceName, header);
@@ -161,7 +146,7 @@ angular.module('tatool.module')
 
       var path = '/' + mode + '/resources/' +  res.project.access + '/' + res.project.name + '/';
 
-      $http.get( path + res.resourceType + '/' + res.resourceName + '?token=' + project.token)
+      $http.get( path + res.resourceType + '/' + res.resourceName + '?token=' + token)
         .success(function (data) {
           var csv = Papa.parse(data, {header: header, dynamicTyping: true});
           deferred.resolve(csv.data);
@@ -191,73 +176,6 @@ angular.module('tatool.module')
       return deferred.promise;
     };
 
-/*
-    // loading resource of project and returning raw data
-    executable.getProjectResource = function(resourceType, resource) {
-      var deferred = $q.defer();
-
-      $http.get( project.path + resourceType + '/' + resource + '?token=' + project.token)
-        .success(function (data) {
-          deferred.resolve(data);
-        })
-        .error(function (error) {
-          deferred.reject(error);
-        });
-
-      return deferred.promise;
-    };
-
-    // loading project CSV resource and return array
-    executable.getProjectCSV = function(resourceType, resource, header) {
-      var deferred = $q.defer();
-      if (!header) {
-        header = false;
-      }
-
-      $http.get( project.path + resourceType + '/' + resource + '?token=' + project.token)
-        .success(function (data) {
-          var csv = Papa.parse(data, {header: header, dynamicTyping: true});
-          deferred.resolve(csv.data);
-        })
-        .error(function (error) {
-          deferred.reject(error);
-        });
-
-      return deferred.promise;
-    };
-
-    // loading external resource and returning raw data
-    executable.getExternalResource = function(resourceUrl) {
-      var deferred = $q.defer();
-
-      $http.get(resourceUrl)
-        .success(function (data) {
-          deferred.resolve(data);
-        })
-        .error(function (error) {
-          deferred.reject(error);
-        });
-
-      return deferred.promise;
-    };
-
-    // loading external CSV resource and return array
-    executable.getExternalCSV = function(resource, header) {
-      var deferred = $q.defer();
-      if (!header) {
-        header = false;
-      }
-      $http.get(resource)
-        .success(function (data) {
-          var csv = Papa.parse(data, {header: header, dynamicTyping: true});
-          deferred.resolve(csv.data);
-        })
-        .error(function (error) {
-          deferred.reject(error);
-        });
-
-      return deferred.promise;
-    };*/
 
     /**--------------------------------
       Stimuli Selection Helper functions

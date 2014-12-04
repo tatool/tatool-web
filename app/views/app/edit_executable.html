@@ -110,6 +110,29 @@
         </div>
       </div>
 
+      <div ng-switch-when="Path">
+        <label for="{{property.propertyName}}" class="col-sm-3 control-label">{{property.propertyName}}</label>
+        <div class="col-sm-9">
+          <div class="input-group">
+            <span class="input-group-btn">
+              <button type="button" class="btn btn-danger button-up" ng-click="deleteProperty(element, property)"><i class="fa fa-times"></i></button>
+            </span>
+            <div ng-switch on="element[property.propertyName].project.access">
+              <div ng-switch-when="external">
+                <input type="text" class="form-control" id="{{property.propertyName}}" ng-model="element[property.propertyName].resourcePath" readonly>
+              </div>
+              <div ng-switch-default>
+                <input type="text" class="form-control" id="{{property.propertyName}}" ng-value="'project: ' + element[property.propertyName].project.name + '/' + element[property.propertyName].resourceType" readonly>
+              </div>
+            </div>
+            
+            <span class="input-group-btn">
+              <button type="button" class="btn btn-primary button-up" ng-click="editPathProperty(property)"><i class="fa fa-pencil-square-o"></i></button>
+            </span>
+          </div>
+        </div>
+      </div>
+
       <div ng-switch-when="ArrayResource">
         <label for="name" class="col-sm-3 control-label">{{property.propertyName}}</label>
         <div class="col-sm-9">
@@ -130,6 +153,23 @@
                   </span>
                 </div>
           </div>
+        </div>
+      </div>
+
+      <div ng-switch-when="Boolean">
+        <label for="{{property.propertyName}}" class="col-sm-3 control-label">{{property.propertyName}}</label>
+        <div class="col-sm-9">
+
+          <button type="button" class="btn btn-danger button-up" ng-click="deleteProperty(element, property)"><i class="fa fa-times"></i></button>
+              <span>
+                &nbsp;&nbsp;&nbsp;
+              </span>
+              <label class="radio-inline radio-inline-up">
+                <input type="radio" ng-model="element[property.propertyName].propertyValue" name="{{property.propertyName}}" value="true" ng-value="true"> Yes
+              </label>
+              <label class="radio-inline radio-inline-up">
+                <input type="radio" ng-model="element[property.propertyName].propertyValue" name="{{property.propertyName}}" value="false" ng-value="false"> No
+              </label>
         </div>
       </div>
 

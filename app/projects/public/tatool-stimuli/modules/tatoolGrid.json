@@ -1,0 +1,38 @@
+{
+  "name": "Tatool Grid Example",
+  "author": "Tatool",
+  "label": "tatoolGridExample",
+  "fullscreen": false,
+  "allowEscapeKey": true,
+  "moduleHierarchy": {
+    "tatoolType": "List",
+    "iterator": {
+      "customType": "ListIterator",
+      "numIterations": "3"
+    },
+    "handlers": [
+      
+    ],
+    "children": [
+      {
+        "tatoolType": "Executable",
+        "customType": "tatoolGridExecutable",
+        "project": {
+          "name": "demo",
+          "access": "public"
+        },
+        "name": "tatoolGrid",
+        "blankInterval": "250",
+        "stimuliPath": {
+          "propertyType": "Path",
+          "project": {
+            "name": "demo",
+            "access": "public"
+          },
+          "resourceName": "",
+          "resourceType": "stimuli"
+        }
+      }
+    ]
+  }
+}

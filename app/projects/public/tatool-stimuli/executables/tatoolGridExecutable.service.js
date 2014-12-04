@@ -12,8 +12,12 @@ tatool
       this.messageTimer = timerService.createTimer(2000, false, this);
       this.endTimer = timerService.createTimer(2500, false, this);
 
+      if (!this.stimuliPath) {
+        tatoolExecutable.fail('Invalid property settings for Executable tatoolGrid. Expected property stimuliPath of type Path.');
+      }
+
       // create a new tatoolGrid with 2 rows and 4 cols
-      this.myGrid = tatoolGridService.createGrid(2, 4, 'animalGrid');
+      this.myGrid = tatoolGridService.createGrid(2, 4, 'animalGrid', this.stimuliPath);
     };
 
     TatoolGridExecutable.prototype.createStimulus = function() {

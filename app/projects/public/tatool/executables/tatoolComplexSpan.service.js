@@ -12,7 +12,11 @@ tatool
 
       this.phase = 'INIT';
 
-      this.tatoolStimulus = tatoolStimulusService.createStimulus();
+      if (!this.stimuliPath) {
+        deferred.reject('Invalid property settings for Executable tatoolComplexSpan. Expected property stimuliPath of type Path.');
+      }
+
+      this.tatoolStimulus = tatoolStimulusService.createStimulus('main', this.stimuliPath);
       this.tatoolInput = tatoolInputService.createInput();
 
       this.timerDisplayMemoranda = timerService.createTimer(800, true, this);
@@ -20,9 +24,6 @@ tatool
 
       // trial counter property
       this.counter = -1;
-
-      // load stimuli file from project or external resource
-      this.dataPath = (this.dataPath) ? this.dataPath : '';
 
       // prepare stimuli
       if (this.stimuliFile) {
@@ -94,7 +95,7 @@ tatool
     };
 
     ComplexNumExecutable.prototype.setStimulus = function() {
-      this.tatoolStimulus.setText({ stimulusValue: this.stimulus['stimulusValue' + this.memCounter] });
+      this.tatoolStimulus.set({ stimulusValueType: this.stimulus['stimulusValueType' + this.memCounter], stimulusValue: this.stimulus['stimulusValue' + this.memCounter] });
     };
 
     ComplexNumExecutable.prototype.setRecallStimulus = function(text) {
@@ -127,7 +128,7 @@ tatool
       this.trial.givenResponse = givenResponse;
       this.trial.correctResponse = this.stimulus['correctResponse' + this.respCounter];
 
-      if (this.trial.correctResponse == this.trial.givenResponse) {
+      if (this.trial.correctResponse.toLowerCase() == this.trial.givenResponse.toLowerCase()) {
         this.trial.score = 1;
       } else {
         this.trial.score = 0;

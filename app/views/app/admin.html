@@ -10,47 +10,102 @@
           <div ng-bind-html="alert.msg"></div>
         </div>
 
-        <div class="actionHeader">
-          <form class="form-inline pull-right" role="form">
-            <div class="form-group has-feedback">
-              <input type="text" class="form-control" id="searchUser" ng-model="query" ng-change="setUserFilter()">
-              <span class="form-control-feedback"><i class="fa fa-times pointer" ng-click="removeUserFilter()"></i></span>
-            </div>
-          </form>
-          <div class="btn btn-tatool" ng-click="addUser()">Add User</div>
-        </div>
+        <tabset>
+          <tab select="hideAlert()">
+            <tab-heading>
+              <b>Users</b>
+            </tab-heading>
+            <br>
 
-        <table class="table table-bordered table-striped table-hover table-condensed table-small">
-          <thead>
-            <tr>
-              <th></th>
-              <th></th>
-              <th colspan="4"><b>Roles</b></th>
-              <th></th>
-            </tr>
-            <tr>
-              <th><b>Username</b></th>
-              <th><b>Name/Affiliation</b></th>
-              <th width="140px"><i class="fa fa-cube fa-lg"></i><br>Modules</th>
-              <th width="140px"><i class="fa fa-cogs fa-lg"></i><br>Developer</th>
-              <th width="140px"><i class="fa fa-graduation-cap fa-lg"></i><br>Researcher</th>
-              <th width="140px"><i class="fa fa-lock fa-lg"></i><br>Admin</th>
-              <th><b>Actions</b></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr ng-repeat="user in users | filter:{ $: filterUser }" ng-class="{'success': user.email === highlightUserEmail}" >
-              <td> {{user.email}}</td>
-              <td> {{user.fullName}}<br><span ng-if="user.affiliation">({{user.affiliation}})</span></td>
-              <td align="center" ng-repeat="role in roles"> <input type="checkbox" checklist-model="user.roles" checklist-value="role"> </td>
-              <td align="center"> 
-                <div class="btn btn-tatool-off" ng-click="updateUser(user)" tooltip="Save changes to user roles." tooltip-placement="top" tooltip-animation="false"><i class="fa fa-floppy-o"></i></div>
-                <a ng-click="deleteUser(user)" class="btn btn-tatool-off" tooltip="Delete user." tooltip-placement="top" tooltip-animation="false"><i class="fa fa-trash-o"></i></a>
-                <a ng-click="changePassword(user)" class="btn btn-tatool-off" tooltip="Change user password." tooltip-placement="top" tooltip-animation="false"><i class="fa fa-lock"></i></a>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+            <div class="actionHeader">
+              <form class="form-inline pull-right" role="form">
+                <div class="form-group has-feedback">
+                <input type="text" class="form-control" id="searchUser" ng-model="query.user" ng-change="setUserFilter()">
+                <span class="form-control-feedback"><i class="fa fa-times pointer" ng-click="removeUserFilter()"></i></span>
+                </div>
+              </form>
+              <div class="btn btn-tatool" ng-click="addUser()">Add User</div>
+            </div>
+    
+            <table class="table table-bordered table-striped table-hover table-condensed table-small">
+              <thead>
+                <tr>
+                <th></th>
+                <th></th>
+                <th colspan="4"><b>Roles</b></th>
+                <th></th>
+                </tr>
+                <tr>
+                <th><b>Username</b></th>
+                <th><b>Name/Affiliation</b></th>
+                <th width="100px"><i class="fa fa-cube fa-lg"></i><br>Modules</th>
+                <th width="100px"><i class="fa fa-cogs fa-lg"></i><br>Developer</th>
+                <th width="100px"><i class="fa fa-graduation-cap fa-lg"></i><br>Researcher</th>
+                <th width="100px"><i class="fa fa-lock fa-lg"></i><br>Admin</th>
+                <th width="110px"><b>Actions</b></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="user in users | filter:{ $: filterUser } | orderBy:'email'" ng-class="{'success': user.email === highlightUserEmail}" >
+                <td> {{user.email}}</td>
+                <td> {{user.fullName}}<br><span ng-if="user.affiliation">({{user.affiliation}})</span></td>
+                <td align="center" ng-repeat="role in roles"> <input type="checkbox" checklist-model="user.roles" checklist-value="role"> </td>
+                <td align="center"> 
+                  <div class="btn btn-tatool-off" ng-click="updateUser(user)" tooltip="Save changes to user roles." tooltip-placement="top" tooltip-animation="false"><i class="fa fa-floppy-o"></i></div>
+                  <a ng-click="deleteUser(user)" class="btn btn-tatool-off" tooltip="Delete user." tooltip-placement="top" tooltip-animation="false"><i class="fa fa-trash-o"></i></a>
+                  <a ng-click="changePassword(user)" class="btn btn-tatool-off" tooltip="Change user password." tooltip-placement="top" tooltip-animation="false"><i class="fa fa-lock"></i></a>
+                </td>
+                </tr>
+              </tbody>
+            </table>
+
+          </tab>
+          <tab select="hideAlert()">
+            <tab-heading>
+              <b>Projects</b>
+            </tab-heading>
+            <br>
+
+            <div class="actionHeader">
+              <form class="form-inline pull-right" role="form">
+                <div class="form-group has-feedback">
+                <input type="text" class="form-control" id="searchProject" ng-model="query.project" ng-change="setProjectFilter()">
+                <span class="form-control-feedback"><i class="fa fa-times pointer" ng-click="removeProjectFilter()"></i></span>
+                </div>
+              </form>
+              <div class="btn btn-tatool" ng-click="addProject()">Add Project</div>
+            </div>
+    
+            <table class="table table-bordered table-striped table-hover table-condensed table-small">
+              <thead>
+                <tr>
+                  <th><b>Name</b></th>
+                  <th><b>Owner</b></th>
+                  <th><b>Description</b></th>
+                  <th width="110px"><b>Actions</b></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="project in projects | filter:{ $: filterProject } | orderBy:'name'">
+                  <td> 
+                    <span ng-if="project.access === 'public'"><i class="fa fa-globe fa-lg fa-fw green" tooltip="Public project" tooltip-placement="top"></i> </span>
+                    <span ng-if="project.access === 'private'"><i class="fa fa-lock fa-lg fa-fw red" tooltip="Private project" tooltip-placement="top"></i> </span>
+                    {{project.name}} 
+                  </td>
+                  <td> {{project.email}}</td>
+                  <td> {{project.description}}</td>
+                  <td align="center"> 
+                    <div class="btn btn-tatool-off" ng-click="editProject(project)" tooltip="Edit project." tooltip-placement="top" tooltip-animation="false"><i class="fa fa-pencil-square-o"></i></div>
+                    <a ng-click="deleteProject(project)" class="btn btn-tatool-off" tooltip="Delete project." tooltip-placement="top" tooltip-animation="false"><i class="fa fa-trash-o"></i></a>
+                </td>
+                </tr>
+              </tbody>
+            </table>
+
+          </tab>
+        </tabset>
+
+        
 
   </div>
   <!-- Footer Helper -->

@@ -7,8 +7,9 @@ angular.module('tatool.module')
 
     var tatoolInputService = {};
 
-    tatoolInputService.createInput = function() {
+    tatoolInputService.createInput = function(stimuliPath) {
       var input = new Input();
+      input.stimuliPath = stimuliPath ? stimuliPath : '';
       return input;
     };
 
@@ -17,12 +18,15 @@ angular.module('tatool.module')
       this.keyInputOrder = [];
 
       // adds new key
-      this.addInputKey = function(keyCode, givenResponse, label, hide) {
+      this.addInputKey = function(keyCode, givenResponse, label, labelType, hide) {
         var obj = {};
         obj.givenResponse = givenResponse;
         obj.keyCode = keyCode;
         if (label) {
           obj.label = label;
+        }
+        if (labelType) {
+          obj.labelType = labelType;
         }
         if (hide) {
           obj.hide = hide;

@@ -241,6 +241,59 @@ angular.module('tatool')
       return deferred.promise;
     };
 
+    // get all projects
+    data.getAllProjects = function() {
+      var deferred = $q.defer();
+
+      $http.get('/api/admin/projects')
+        .success(function (data) {
+          deferred.resolve(data);
+        })
+        .error(function (error) {
+          $log.error(error);
+          deferred.reject(error.message);
+        });
+
+      return deferred.promise;
+    };
+
+    // add project
+    data.addProject = function(project) {
+      var deferred = $q.defer();
+
+      $http.post('/api/admin/projects/' + project.access + '/' + project.name, project)
+        .success(function (data) {
+          if (data === 'null') {
+            data = null;
+          }
+          deferred.resolve(data);
+        })
+        .error(function (error) {
+          console.log(error.data);
+          deferred.reject(error.message);
+        });
+
+      return deferred.promise;
+    };
+
+    // delete a module and all of its trials
+    data.deleteProject = function(project) {
+      var deferred = $q.defer();
+
+      $http.delete('/api/admin/projects/' + project.access + '/' + project.name)
+        .success(function (data) {
+          if (data === 'null') {
+            data = null;
+          }
+          deferred.resolve(data);
+        })
+        .error(function (error) {
+          deferred.reject(error.message);
+        });
+
+      return deferred.promise;
+    };
+
     return data;
 
   }]);

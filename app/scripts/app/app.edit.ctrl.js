@@ -211,12 +211,15 @@ angular.module('tatool.app')
             }
           }
 
-          for (var i=0; i < $scope.currentProject.executables.length; i++) {
-            if ($scope.currentProject.executables[i].customType === $scope.element.customType) {
-              $scope.currentExecutable = $scope.currentProject.executables[i];
-              break;
+          if ($scope.currentProject.executables) {
+            for (var i=0; i < $scope.currentProject.executables.length; i++) {
+              if ($scope.currentProject.executables[i].customType === $scope.element.customType) {
+                $scope.currentExecutable = $scope.currentProject.executables[i];
+                break;
+              }
             }
           }
+          
         }
 
         $scope.elementType = VIEW_PATH + 'edit_executable_select.html';
@@ -262,6 +265,7 @@ angular.module('tatool.app')
 
 
       $scope.editProperty = function(property, $index) {
+        $scope.currentProject = {};
         $scope.customProperty = {};
         if ($index >= 0) {
           $scope.customProperty = $scope.element[property.propertyName].propertyValue[$index];
@@ -281,6 +285,29 @@ angular.module('tatool.app')
         }
 
         $scope.elementType = VIEW_PATH + 'edit_executable_property.html';
+        $scope.currentProperty = property;
+      };
+
+      $scope.editPathProperty = function(property, $index) {
+        $scope.customProperty = {};
+        if ($index >= 0) {
+          $scope.customProperty = $scope.element[property.propertyName].propertyValue[$index];
+        } else {
+          $scope.customProperty = $scope.element[property.propertyName];
+        }
+
+        if ($scope.customProperty.project) {
+          for (var i=0; i < $scope.projects.length; i++) {
+            if ($scope.projects[i].name === $scope.customProperty.project.name && $scope.projects[i].access === $scope.customProperty.project.access) {
+              $scope.currentProject = $scope.projects[i];
+              break;
+            }
+          }
+        } else {
+          $scope.currentProject = {};
+        }
+
+        $scope.elementType = VIEW_PATH + 'edit_executable_property_path.html';
         $scope.currentProperty = property;
       };
 
@@ -319,18 +346,29 @@ angular.module('tatool.app')
                     '</div> ' +
                     '<div class="form-group"> ' +
                     '<label class="col-md-4 control-label" for="type">Property Type</label> ' +
-                    '<div class="col-md-4"> <div class="radio"> <label for="type-0"> ' +
-                    '<input type="radio" name="type" id="type-0" value="String" checked="checked"> ' +
+                    '<div class="col-md-4">' +
+                    '<div class="radio"> <label for="type-string"> ' +
+                    '<input type="radio" name="type" id="type-string" value="String" checked="checked"> ' +
                     'String </label> ' +
-                    '</div><div class="radio"> <label for="type-1"> ' +
-                    '<input type="radio" name="type" id="type-1" value="ArrayString"> Array (String)</label> ' +
-                    '</div> ' +
-                    '<div class="radio"> <label for="type-2"> ' +
-                    '<input type="radio" name="type" id="type-2" value="Resource"> ' +
+                    '</div>' + 
+                    '<div class="radio"> <label for="type-boolean"> ' +
+                    '<input type="radio" name="type" id="type-boolean" value="Boolean"> ' +
+                    'Boolean </label> ' +
+                    '</div>' +
+                    '<div class="radio"> <label for="type-resource"> ' +
+                    '<input type="radio" name="type" id="type-resource" value="Resource"> ' +
                     'Resource </label> ' +
                     '</div>' +
-                    '<div class="radio"> <label for="type-3"> ' +
-                    '<input type="radio" name="type" id="type-3" value="ArrayResource"> ' +
+                    '<div class="radio"> <label for="type-path"> ' +
+                    '<input type="radio" name="type" id="type-path" value="Path"> ' +
+                    'Path </label> ' +
+                    '</div>' +
+                    '<div class="radio"> <label for="type-arraystring"> ' +
+                    '<input type="radio" name="type" id="type-arraystring" value="ArrayString"> ' +
+                    'Array (String)</label> ' +
+                    '</div> ' +
+                    '<div class="radio"> <label for="type-arrayresource"> ' +
+                    '<input type="radio" name="type" id="type-arrayresource" value="ArrayResource"> ' +
                     'Array (Resource) </label> ' +
                     '</div>' +
                     '</div> </div>' +
@@ -381,6 +419,13 @@ angular.module('tatool.app')
         } else if (propertyType === 'Resource') {
           element[propertyName] = {};
           element[propertyName].propertyType = propertyType;
+        } else if (propertyType === 'Path') {
+          element[propertyName] = {};
+          element[propertyName].propertyType = propertyType;
+        } else if (propertyType === 'Boolean') {
+          element[propertyName] = {};
+          element[propertyName].propertyType = propertyType;
+          element[propertyName].propertyValue = true;
         } else {
           element[propertyName] = '';
         }
@@ -410,12 +455,31 @@ angular.module('tatool.app')
         loadCustomProperties(element);
       };
 
+      $scope.download = function () {
+        // copy higher level descriptive properties to moduleDefinition
+        module.moduleDefinition.name = module.moduleName;
+        module.moduleDefinition.author = module.moduleAuthor;
+        module.moduleDefinition.label = module.moduleLabel;
+
+        // prepare export
+        var exportModule = JSON.stringify(module.moduleDefinition);
+        var filename = (module.moduleLabel) ? module.moduleLabel : module;
+
+        download(exportModule, filename + '.json', 'text/plain'); // triggers file download (has issues on Safari)
+      };
+
       $scope.ok = function () {
         if ($scope.elementType === VIEW_PATH + 'edit_executable_select.html') {
           $scope.returnTo('executable');
         } else if ($scope.elementType === VIEW_PATH + 'edit_executable_property.html') {
           $scope.returnTo('executable');
+        } else if ($scope.elementType === VIEW_PATH + 'edit_executable_property_path.html') {
+          $scope.returnTo('executable');
         } else {
+          // copy higher level descriptive properties to moduleDefinition
+          module.moduleDefinition.name = module.moduleName;
+          module.moduleDefinition.author = module.moduleAuthor;
+          module.moduleDefinition.label = module.moduleLabel;
           $modalInstance.close();
         }
       };
