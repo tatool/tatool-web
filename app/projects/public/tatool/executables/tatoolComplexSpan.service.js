@@ -128,7 +128,7 @@ tatool
       this.trial.givenResponse = givenResponse;
       this.trial.correctResponse = this.stimulus['correctResponse' + this.respCounter];
 
-      if (this.trial.correctResponse.toLowerCase() == this.trial.givenResponse.toLowerCase()) {
+      if (this.trial.correctResponse.toString().toLowerCase() == this.trial.givenResponse.toLowerCase()) {
         this.trial.score = 1;
       } else {
         this.trial.score = 0;
