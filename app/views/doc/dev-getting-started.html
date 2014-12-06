@@ -1,6 +1,6 @@
 <h2>Getting Started</h2>
 
-<p>In order to develop your own tasks or run your own instance of tatool in your lab, you'll have setup your environment first. The following easy steps should guide you through the process of setting up your local development/lab instance of tatool.</p>
+<p>In order to develop your own tasks or run your own instance of tatool in your lab, you'll have setup your environment first. The following easy steps guide you through the process of setting up your local development/lab instance of tatool. The environment only needs to be setup on one machine. As long as your network settings allow it, other machines will then be able to access tatool via a standard web browser.</p>
 
 <ul id="docPageNav">
   <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('nodejs')">Install nodeJS</a></li>
@@ -15,7 +15,7 @@
 
 <p><img src="../../images/doc/nodejs-logo.png"><br><br>Get the latest download for your operating system from <a href="http://nodejs.org/" target="_blank">http://nodejs.org/</a> and follow the instructions to install it.</p>
 
-<p>Type the following command in your terminal window and make sure you get a response indicating your version of nodeJS. On windows you can enter the command by opening the Windows command prompt (cmd.exe) and on Mac you can fire up a terminal. If you don't see the version of your nodeJS, something went wrong with your installation.</p>
+<p>Type the following command in your terminal window and make sure you get a response indicating your version of nodeJS. On windows you can enter the command by opening the Windows command prompt (cmd.exe) and on Mac you can run the commands in a new terminal. If you don't see the version of your nodeJS, something went wrong with your installation.</p>
 <pre><code class="language-javascript">$> node --version
 v0.10.33
 </code></pre>
@@ -24,7 +24,7 @@ v0.10.33
 
 <h3 id="mongodb">Install mongoDB<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
 
-<p><img src="../../images/doc/mongodb-logo.png"><br><br>Get the latest download for your operating system from <a href="http://www.mongodb.org/downloads" target="_blank">http://www.mongodb.org/downloads</a> and follow the <a href="http://docs.mongodb.org/manual/installation/" target="_blank">instructions</a> to install it. Follow the steps under 'Install MongoDB' and Step 1 under 'Run MongoDB' which will create the necessary data directory for mongoDB.</p>
+<p><img src="../../images/doc/mongodb-logo.png"><br><br>Get the latest download for your operating system from <a href="http://www.mongodb.org/downloads" target="_blank">http://www.mongodb.org/downloads</a> and follow the <a href="http://docs.mongodb.org/manual/installation/" target="_blank">instructions</a> to install it. Follow the steps under 'Install MongoDB' and also complete Step 1 under 'Run MongoDB' which will create the necessary data directory for mongoDB.</p>
 
 <p>Type the following command in your terminal window and make sure you get a response indicating your version of mongoDB. On windows you can enter the command by opening the Windows command prompt (cmd.exe) and on Mac you can run the commands in a new terminal. If you don't see the version of your mongoDB, something went wrong with your installation.</p>
 <pre><code class="language-javascript">$> cd mongodb
@@ -45,15 +45,15 @@ MongoDB shell version: 2.6.5
 <pre><code class="language-javascript">$> cd tatool-web
 </code></pre>
 
-<p><b>2.</b> Install the bower plugin for nodejs, which will take care of downloading the application dependencies.<br>
-Type the following command in your terminal window. </p>
+<p><b>2.</b> Install the <b>bower plugin</b> for nodejs, which will take care of downloading the application dependencies.<br>
+Type the following commands in your terminal window. The second checks whether your installation of bower is successful. If you don't see the version of bower, something went wrong with your installation.</p>
 <pre><code class="language-javascript">$tatool-web> npm install -g bower
 ...
 $tatool-web> bower -version
 1.3.12
 </code></pre>
 
-<p><b>3.</b> Run npm install to automatically download all dependencies needed for tatool-web to run.</p>
+<p><b>3.</b> Run <b>npm install</b> to automatically download all dependencies needed for tatool-web to run. On Mac you might need to run this with sudo. The installation might take a while the first time.</p>
 <pre><code class="language-javascript">$tatool-web> npm install
 ...
 </code></pre>
@@ -64,14 +64,14 @@ $tatool-web> bower -version
 
 <p>The following steps are needed to run your local tatool-web environment. You'll need to follow these steps everytime you want to start your local instance of tatool-web.</p>
 
-<p><b>1.</b> Start mongoDB by entering the command below if you haven't already started it in an earlier step. Don't close the terminal, as this will kill the process running your database. If you chose a different data directory during the installation, you'll need to provide the dbpath argument.</p>
+<p><b>1.</b> Start <b>mongoDB</b> by entering the command below if you haven't already started it in an earlier step. Don't close the terminal, as this will kill the process running your database. If you chose a different data directory during the installation, you'll need to provide the dbpath argument.</p>
 <pre><code class="language-javascript">$> cd mongodb
 $mongodb> cd bin
 $mongodb\bin> mongod --dbpath [your data directory path]
 ...waiting for connections on port 27017
 </code></pre>
 
-<p><b>2.</b> Start nodejs in a new terminal by entering the commands below. First you'll have to change into the directory where you extracted tatool-web to. The second command will start a local web server hosting tatool. Don't close the terminal, as this will kill the process running your server.</p>
+<p><b>2.</b> Start <b>nodejs</b> in a new terminal by entering the commands below. First you'll have to change into the directory where you extracted tatool-web to. The second command will start a local web server hosting tatool. Don't close the terminal, as this will kill the process running your server.</p>
 <pre><code class="language-javascript">$> cd tatool-web
 $tatool-web> npm start
 ...

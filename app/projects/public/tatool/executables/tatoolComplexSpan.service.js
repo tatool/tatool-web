@@ -1,8 +1,8 @@
 'use strict';
 
 tatool
-  .factory('tatoolComplexSpan', [ '$rootScope', '$q', 'tatoolExecutable', 'db', 'timerService', 'tatoolPhase', 'tatoolStimulusService', 'tatoolInputService',
-    function ($rootScope, $q, tatoolExecutable, db, timerService, tatoolPhase, tatoolStimulusService, tatoolInputService) {  
+  .factory('tatoolComplexSpan', [ '$q', 'tatoolExecutable', 'db', 'timerService', 'tatoolPhase', 'tatoolStimulusService', 'tatoolInputService',
+    function ($q, tatoolExecutable, db, timerService, tatoolPhase, tatoolStimulusService, tatoolInputService) {  
 
     // Define our executable service constructor which will be called once for every instance
     var ComplexNumExecutable = tatoolExecutable.createExecutable();
@@ -25,11 +25,37 @@ tatool
       // trial counter property
       this.counter = -1;
 
-      // prepare stimuli
+      // prepare stimuliFile
       if (this.stimuliFile) {
         var self = this;
         tatoolExecutable.getCSVResource(this.stimuliFile, true).then(function(list) {
             self.processStimuliFile(list, deferred);
+
+            // preload stimuli
+            var images = [];
+            async.each(self.stimuliList, function(stimulus, callback) {
+              // get all resource names of current stimulus
+              for (var i = 1; i <= stimulus.stimulusCount; i++) {
+                var stimulusValueType = stimulus['stimulusValueType' + i];
+                if (stimulus.stimulusValueType1 === 'image') {
+                  if (images.indexOf(stimulus['stimulusValue' + i]) === -1) {
+                    images.push(stimulus['stimulusValue' + i]);
+                  }
+                }
+              }
+              callback();
+            }, function(err) {
+              if( err ) {
+                deferred.reject(err);
+              } else {
+                if (images.length > 0) {
+                  self.preloadStimuli(images, deferred);
+                } else {
+                  deferred.resolve();
+                }
+              }
+            });
+
           }, function(error) {
             deferred.reject('Resource not found: ' + self.stimuliFile.resourceName);
           });
@@ -40,6 +66,23 @@ tatool
       return deferred;
     };
 
+    ComplexNumExecutable.prototype.preloadStimuli = function(stimuli, deferred) {
+      var self = this;
+      async.each(stimuli, function(stimulus, callback) {
+        var img = new Image();
+        var resource = self.stimuliPath;
+        resource.resourceName = stimulus;
+        img.src = tatoolExecutable.getResourcePath(resource);
+        callback();
+      }, function(err) {
+        if( err ) {
+          deferred.reject(err);
+        } else {
+          deferred.resolve();
+        }
+      });
+    };
+
     // process stimuli file according to random property
     ComplexNumExecutable.prototype.processStimuliFile = function(list, deferred) {
       if (this.random === 'full') {
@@ -47,7 +90,7 @@ tatool
       } else {
         this.stimuliList = list;
       }
-      deferred.resolve();
+      //deferred.resolve();
     };
 
     // Create stimulus and set properties

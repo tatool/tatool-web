@@ -1,0 +1,64 @@
+<h2>Basics</h2>
+
+<ul id="docPageNav">
+  <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('tatool-skills')">What Skills do I need?</a></li>
+  <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('tatool-definition')">Tatool Glossary</a></li>
+<ul>
+
+<hr class="hr-red">
+
+<h3 id="tatool-skills">What Skills do I need?<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
+
+<p>If you simply want to run a local version of tatool in your lab, you can just follow the instructions on our <a href ng-click="goPage('dev-getting-started.html')">Getting started</a> page. You don't need any superpowers for that.</p>
+
+<p>If you want to start developing your own tasks, you'll need to make yourself familiar with HTML, JavaScript and CSS. These are the technologies you'll be working with. There's tons of tutorials on the web, which can get you started quickly.</p>
+
+<p>If you're already familiar with programming in JavaScript and HTML/CSS, here's the information you've been waiting for. Tatool makes heavy use of the following libraries/frameworks, just to name a few. Don't worry you don't need to know them all, as we'll guide you through the bits and pieces you'll need.</p>
+
+<p>
+  <b>Client</b><br>
+  <ul>
+    <li><i class="fa fa-angle-right"></i> <a href="http://www.angularjs.org/" target="_blank">AngularJS</a></li>
+    <li><i class="fa fa-angle-right"></i> <a href="http://www.jquery.com/" target="_blank">JQuery</a></li>
+    <li><i class="fa fa-angle-right"></i> <a href="http://getbootstrap.com/" target="_blank">Bootstrap</a></li>
+  </ul>
+  <br>
+    <b>Server</b><br><br>
+  <ul>
+    <li><i class="fa fa-angle-right"></i> <a href="http://nodejs.org/" target="_blank">nodeJS</a></li>
+    <li><i class="fa fa-angle-right"></i> <a href="http://expressjs.com/" target="_blank">Express</a></li>
+    <li><i class="fa fa-angle-right"></i> <a href="http://www.mongodb.org/" target="_blank">mongoDB</a></li>
+  <ul>
+</p>
+
+<hr class="hr-red">
+
+<h3 id="tatool-definition">Tatool Glossary<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
+
+<p>Take a minute to make yourself familiar with a few definitions used in the tatool universe. This will help you understand the rest of this documentation.</p>
+
+<p><b>Executable (Task)</b><br>
+An Executable is the tatool definition of a task. An Executable defines the code which is needed to represent a specific task paradigm. A task paradigm usually consists of showing stimuli on the screen and asking the user to interact. Therefore, an Executable executes the code needed for a Task.</p>
+
+<p><b>Property</b><br>
+A Property is defined as a key-value pair used to make your Executables more generic and easier to work with. Instead of hard coding the name of a stimuliFile into your task you can create a stimuliFile Property, which will allow you to change the value quickly with the Tatool Module Editor. The key is a property name, and the value can be a given value of a specific type (String, Array, Resource, Boolean (true/false), etc.).</p>
+
+<p><b>Element</b><br>
+An Element is used to group your Executables in different ways. Let's say for example you want to execute Executable A and then Executable B in sequence. You can use a ListElement for this purpose which allows you to execute the containing Executables in sequence. Elements can also be nested allowing you to create complex execution sequences.</p>
+
+<p><b>Handler</b><br>
+A Handler is used to provide your Elements and Executables with reusable code. Instead of duplicating the same code in different Executables, you can extract the logic and make it available for multiple Elements, allowing them to share the same state. A simple example for this is a Handler called trialCountHandler, which does what the name suggests: it counts trials and allows you to display the information on screen independent of the Executable.</p>
+
+<p><b>Module</b><br>
+A Module is used to group all your Elements and Executables into a single unit which can be executed by the users. The Module also allows you to provide some extra metadata like name and author of the code. In most cases an experiment consists of one Module which can be installed by your users.</p>
+
+<p><b>Project</b><br>
+A Project is used to group all the files needed for a specific experiment into one folder. For example, every Executable is part of a project and every stimuli file or stimulus you use is part of a project. There is one special type of Project which is called "External Resource" which again does what it says: it represents a resource from an external source (e.g. some http address), instead of a local tatool project.</p>
+
+<p><b>Repository</b><br>
+The Repository is the once place where you can publish your modules to, which makes them available to all users (public), or if you wish, to a defined set of users (private). It's the most convenient way to get your experiments to your users.</p>
+
+<p><b>Session</b><br>
+A Session represents one execution of a Module. Tatool stores trial data as part of a Session which is defined with a start and and end time.</p>
+
+<p><span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></p>

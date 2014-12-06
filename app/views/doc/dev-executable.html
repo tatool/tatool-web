@@ -1,0 +1,101 @@
+<h2>Executable</h2>
+
+<p>In this section you'll learn how to create your first Executable, add it in your local tatool environment project and embed it in a Module.</p>
+
+<ul id="docPageNav">
+  <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('architecture')">Executable Architecture</a></li>
+  <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('service')">Executable Service</a></li>
+  <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('controller')">Executable Controller</a></li>
+  <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('template')">Executable Template</a></li>
+<ul>
+
+<hr class="hr-red">
+
+<h3 id="architecture">Executable Architecture<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
+
+<p>The development of Executables in tatool follows the architectural pattern of AngularJS, which is defined as a <a href="https://plus.google.com/+AngularJS/posts/aZNVhj355G2" target="_blank">MVW</a> (Model-View-Whatever) framework. For tatool, that means, that every executable is made up of three parts:</p>
+
+<p><b>Service (&asymp;Model)</b> - JavaScript<br>This is where the business logic of our task sits. Here we do all the heavy lifting, like reading stimuli files, preparing stimuli data, and on the other hand, the saving of trial data.</p>
+
+<div class="hint">
+  <div class="icon red"><i class="fa fa-lightbulb-o fa-2x"></i></div> 
+  <div class="text">
+    <p>Every service is created once per Session execution. Therefore, variable values will persists from one trial execution to the next.</p>
+  </div>
+</div>
+
+<p><b>Template (=View)</b> - HTML<br>This is where the view logic of your Executable sits. The view is represented as a simple HTML page which defines where you want the stimuli to appear on the screen and how it should looke like.</p>
+
+<p><b>Controller (=Whatever)</b> - JavaScript<br>With the Service and the Template in place, the only thing missing is the "Whatever" part. In the case of a Tatool Executable, the Controller takes on the "Whatever" role, to mediate between your Service (Model) and the Template (View). This mediation goes in both directions. The user might click on a button in your Template and the Controller will pick up this interaction and tell the Service about the button which was clicked. On the other hand the Controller might ask the Service for a new Stimulus, and hands it over to the Template to display. Think of the Controller as the script deciding what to do when, but keep in mind, that most of the work is done by the Service.</p>
+
+<div class="hint">
+  <div class="icon red"><i class="fa fa-lightbulb-o fa-2x"></i></div> 
+  <div class="text">
+    <p>Every controller is created once per Executable execution. Therefore, variable values will not persists from one trial execution to the next. For this purpose you can use a Service.</p>
+  </div>
+</div>
+
+<p>With the theoretical background above, you can now create the three corresponding files for your first Executable which we're going to call 'myExecutable'. We'll talk you through the content of these files. Don't worry, if the code looks complicated at first, it will all make sense in a few minutes.</p>
+
+<hr class="hr-red">
+
+<h3 id="service">Executable Service<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
+
+<h4>myExecutable.service.js</h4>
+<pre class="line-numbers"><code class="line-numbers language-javascript">tatool.factory('myExecutable', [ '$q', 'tatoolExecutable', 'db',
+  function ($q, tatoolExecutable, db) {  
+
+    var MyExecutable = tatoolExecutable.createExecutable();
+
+    MyExecutable.prototype.init = function() {
+      // our Executable initialization code goes here
+    };
+
+    // our custom methods go here
+
+    return MyExecutable;
+  }]);
+</code></pre>
+<p>The tatool.factory() method in <b>line 1</b> will instantiate our Service for us. Since we're going to have multiple Services, we need to assign a unique name to our Service. The first argument of the tatool.factory() method defines just that name. Use lowerCamelCase to name your Executable Service and make sure you use the exact same name, as the prefix in your filename. In our case that's 'myExecutable'. At runtime, tatool will look for the file according to the name you've given in your Service, and will fail to locate the file if they don't match.</p>
+
+<p>The second argument of the tatool.factory() method is an array [] containing the dependencies and the main function as the last entry of the array on <b>line 2</b>. As you can see, we've already added three dependencies ($q, tatoolExecutable, db). These dependencies are Services provided by AngularJS and Tatool, which we're going to use in our code. Every dependency has to occurr twice, once as a String entry in the array, and once as an argument in the main function. The order of the dependencies also needs to match.</p>
+
+<p>On <b>line 4</b> we create an instance of our Executable with the help of the tatoolExecutable Service, and on <b>line 12</b> we return that instance. This makes sure that wherever this Executable Service is used, it will always return that once instance we've just created.</p>
+
+<p>On <b>line 6</b> we create the default prototype method 'init', which is a mandatory method required by tatool. This method is called once at the beginning of every Session and allows you to prepare your Executable for execution. This may consist of loading stimuli files, preloading of stimuli images, and creation of objects which should only be created once per Session. The init method is tatools answer to avoid any long running processes during the actual execution of your Executable. We don't want our users to wait 5 seconds before every trial execution until the stimulus has loaded.</p>
+
+<p>That's it for the basic structure of our Executable Service. You can use this example code as a template for your future Executables, as it contains the minimum code required for an Executable to run.</p>
+
+<hr class="hr-red">
+
+<h3 id="controller">Executable Controller<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
+
+<h4>myExecutable.ctrl.js (Controller)</h4>
+<pre class="line-numbers"><code class="language-javascript">tatool.controller('myExecutableCtrl', [ '$scope', 'service',
+  function ($scope, service) {
+    
+    $scope.start = function() {
+      // our code goes here
+    }
+
+    // our custom methods go here
+
+  }]);
+</code></pre>
+<p>As you can see the first two lines look extremely similar to our Executable Service. The only difference being that this time we're calling the method tatool.controller() in <b>line 1</b>, which will instantiate our controller. We again define the dependencies as we're used to from the Service but we'll add different ones this time. The controller will always need the two dependencies ($scope, service) which allow us to talk to our Template and our Service.</p>
+
+<p>The body of our controller only contains one mandatory method on <b>line 4</b>, which is called 'start' and belongs to the $scope object. This method is the starting point of your Executable and will be called once the Service, Controller and Template have loaded successfully.</p>
+
+<hr class="hr-red">
+
+<h3 id="template">Executable Template<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
+
+<h4>myExecutable.html (Template)</h4>
+<pre class="line-numbers"><code class="language-markup">&lt;tatool>
+  &lt;!-- our code goes here -->
+&lt;/tatool>
+</code></pre>
+
+<p>Yes, that's the minimum required code for a Template. The tatool element (<b>line 1</b>) will call your Controllers' 'start' method, once all code contained within the tags has finished loading.</p>
+
+<p><span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></p>

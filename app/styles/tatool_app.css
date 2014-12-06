@@ -447,6 +447,26 @@ line-height: 120%;
 margin-bottom: 8px;
 }
 
+#startDocument .hint {
+  display: block;
+  background-color: #f7e9d8;
+  padding: 6px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-radius: 6px;
+  border: 1px solid #f4d4af;
+}
+
+#startDocument .hint .icon {
+  display: inline-block;
+  padding: 12px 15px 12px 12px;
+  vertical-align: top;
+}
+#startDocument .hint .text {
+  display: inline-block;
+  width: 90%;
+}
+
 /** ---------
     MODULES
 -----------**/
