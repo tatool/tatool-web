@@ -1,0 +1,28 @@
+<h2>Tatool Glossary</h2>
+<p>Take a minute to familiarise yourself with a few definitions of terms used in the Tatool universe. This will help you to understand the remainder of this documentation.</p>
+
+<p><b>Executable (Task)</b><br>
+Executables can be understood as tasks or experimental paradigms. The code of an Executable usually consists of displaying stimuli on the screen and asking the user to respond to it in some way. In other words, Executables execute the code needed for a task.</p>
+
+<p><b>Property</b><br>
+A Property is defined as a key-value pair used to make your Executables more generic and easier to work with. The key of a Property is a property name, and the value can be a given value of a specified type (String, Array, Resource, Boolean (true/false), etc.). For example, defining the specific name of a stimuli file in your task would mean you'd have to write a new Executable each time you'd like to use the same paradigm just with different stimuli. Instead, you can create a Property called stimuliFile of the type String, which allows for reusing the Executable by simply replacing the name of your new stimuliFile quickly within the Tatool Module Editor. </p>
+
+<p><b>Element</b><br>
+An Element is used to group your Executables in different ways. For example, let's say you'd want to execute Executable A first and then Executable B right afterward. You can use a ListElement for this purpose which allows you to execute the containing Executables in sequence. Elements can also be nested allowing you to create complex execution sequences.</p>
+
+<p><b>Handler</b><br>
+A Handler is used to provide your Elements and Executables with reusable code. Instead of duplicating the same code in different Executables, you can extract the logic and make it available for multiple Elements, allowing them to share the same state. A simple example for this is a Handler called trialCountHandler, which does what the name suggests: it counts trials and allows you to display the information on screen independent of the Executable.</p>
+
+<p><b>Module</b><br>
+A Module groups all your Elements and Executables into a single unit which can be executed by the users. The Module also allows you to provide some extra metadata like name and author of the code. In omost cases, an experiment consists of one Module (e.g., including instructions, practice trials and test trials) which can be installed by your users.</p>
+
+<p><b>Project</b><br>
+A Project groups all the files needed for a specific experiment into one folder. For example, every Executable is part of a Project, and every stimuli file or stimulus you use is part of a project. There is one special type of Project which is called "External Resource" which again does what it says: it represents a resource from an external source (e.g., some http address) instead of a local tatool project.</p>
+
+<p><b>Repository</b><br>
+The Repository is the place where you can publish your modules to, which makes them available to all users (public), or if you wish, to a defined set of users (private). It's the most convenient way to get your experiments to your users.</p>
+
+<p><b>Session</b><br>
+A Session represents one execution of a Module. Tatool stores trial data as part of a Session which is defined by a start and and end time.</p>
+
+<p><span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></p>
