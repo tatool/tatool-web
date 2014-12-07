@@ -11,18 +11,28 @@
 
   <div id="docNavigation">
   <ul>
+  <li><a ui-sref="documentation" ng-click="goPage('main-about.html')"><b>Start</b></a></li>
+    <ul class="subNav">
+	<li><i class="fa fa-angle-right"></i> <a ui-sref="documentation" ng-click="goPage('dev-glossary.html')">Glossary</a></li>
+	 <br>
+    </ul>
     <li><a ui-sref="documentation" ng-click="goPage('main-about.html')"><b>About</b></a></li>
     <ul class="subNav">
       <li><i class="fa fa-angle-right"></i> <a ui-sref="documentation" ng-click="goPage('main-cite.html')">How to cite</a></li>
 	  <li><i class="fa fa-angle-right"></i> <a ui-sref="documentation" ng-click="goPage('main-publications.html')">Publications</a></li>
 	  <br>
     </ul>
-    <li><a ui-sref="documentation" ng-click="goPage('main-registration.html')">Registration &amp; Roles</a></li>
-    <br>
+	<li><a ui-sref="documentation" ng-click="goPage('general-start.html')"><b>Community</b></a></li>
+	  <ul class="subNav">
+		<li><i class="fa fa-angle-right"></i> <a ui-sref="documentation" ng-click="goPage('dev-advanced-executable.html')">Forum</a></li>
+        <li><i class="fa fa-angle-right"></i> <a ui-sref="documentation" ng-click="goPage('dev-first-executable.html')">Contribute</a></li>
+      </ul>
+	  <br>
+
     <li><a ui-sref="documentation" ng-click="goPage('modules-start.html')"><b>Modules</b></a></li>
     <ul class="subNav">
       <li><i class="fa fa-angle-right"></i> <a ui-sref="documentation" ng-click="goPage('modules-run.html')">Run</a></li>
-      <li><i class="fa fa-angle-right"></i> <a ui-sref="documentation" ng-click="goPage('modules-create.html')">Create</a></li>
+      <li><i class="fa fa-angle-right"></i> <a ui-sref="documentation" ng-click="goPage('modules-create.html')">Create &amp; Edit</a></li>
       <li><i class="fa fa-angle-right"></i> <a ui-sref="documentation" ng-click="goPage('modules-publish.html')">Publish</a></li>
       <li><i class="fa fa-angle-right"></i> <a ui-sref="documentation" ng-click="goPage('modules-export.html')">Export Data</a></li>
     </ul>
@@ -36,8 +46,8 @@
     <li><a ui-sref="documentation" ng-click="goPage('dev-start.html')"><b>Development</b></a></li>
     <ul class="subNav">
       <li><i class="fa fa-angle-right"></i> <a ui-sref="documentation" ng-click="goPage('dev-basics.html')">Basics</a></li>
-	  <li><i class="fa fa-angle-right"></i> <a ui-sref="documentation" ng-click="goPage('dev-glossary.html')">Glossary</a></li>
-      <li><i class="fa fa-angle-right"></i> <a ui-sref="documentation" ng-click="goPage('dev-getting-started.html')">Getting Started</a></li>
+      <li><i class="fa fa-angle-right"></i> <a ui-sref="documentation" ng-click="goPage('dev-getting-started.html')">Getting Started</a></li>  
+	  <li><i class="fa fa-angle-right"></i> <a ui-sref="documentation" ng-click="goPage('dev-glossary.html')">Administration</a></li>
       <li><i class="fa fa-angle-right"></i> <a ui-sref="documentation" ng-click="goPage('dev-executable.html')">Executable</a></li>
 	  <ul class="subNav">
         <li><i class="fa fa-angle-right"></i> <a ui-sref="documentation" ng-click="goPage('dev-first-executable.html')">A First Executable</a></li>
