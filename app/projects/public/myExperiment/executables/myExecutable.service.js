@@ -1,6 +1,6 @@
 tatool.factory('myExecutable', [ 'tatoolExecutable',
   function (tatoolExecutable) {  
-
+    
     var MyExecutable = tatoolExecutable.createExecutable();
 
     MyExecutable.prototype.init = function() {

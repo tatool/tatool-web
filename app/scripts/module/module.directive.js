@@ -6,13 +6,18 @@
   <tatool> 
   Main directive used to initiate start of executable after all directives have loaded.
 **/
-angular.module('tatool.module').directive('tatool', ['$timeout', function($timeout) {
+angular.module('tatool.module').directive('tatool', ['$timeout', 'tatoolExecutable', 'contextService', function($timeout, tatoolExecutable, contextService) {
   return {
     restrict: 'E',
     priority: Number.MIN_SAFE_INTEGER, // execute as last directive
     link: function($scope) {
       // trigger the start function in the executable controller
-      $timeout($scope.start);
+      if ('start' in $scope) {
+        $timeout($scope.start);
+      } else {
+        var currentExecutable = contextService.getProperty('currentExecutable');
+        tatoolExecutable.fail('Executable Controller with name \'' + currentExecutable.name + '\' is missing the mandatory \'start\' method.');
+      }
     }
   };
 }]);

@@ -201,6 +201,8 @@ angular.module('tatool.module')
         if (deferred && deferred.promise) {
           promises.push(deferred.promise);
         }
+      } else {
+        initAllDeferred.reject('Executable Service with name \'' + key + '\' is missing the mandatory \'init\' method.');
       }
 
       if (i === numExecutables) {
