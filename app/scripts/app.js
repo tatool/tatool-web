@@ -22,15 +22,34 @@ var tatool = angular.module('tatool', ['ui.bootstrap', 'ui.router'])
       .state('start', {
         url: '/',
         templateUrl: 'views/start.html',
-        controller: 'StartCtrl'
+        controller: 'StartCtrl',
+        resolve: {
+          page: [function() {
+            return '';
+          }]
+        }
       }).state('about', {
         url: '/about',
         templateUrl: 'views/about.html',
-        controller: 'StartCtrl'
-      }).state('documentation', {
-        url: '/documentation',
+        controller: 'StartCtrl',
+        resolve: {
+          page: [function() {
+            return '';
+          }]
+        }
+      }).state('doc', {
+        url: '/doc/:page',
         templateUrl: 'views/documentation.html',
-        controller: 'StartCtrl'
+        controller: 'StartCtrl',
+        resolve: {
+          page: ['$state', '$stateParams', function($state, $stateParams) {
+            if (!$stateParams.page) {
+              return 'start';
+            } else {
+              return $stateParams.page;
+            }
+          }]
+        }
       });
 
     // helper function for ui-router to force a reload of a state

@@ -279,7 +279,7 @@ exports.registerAdmin = function() {
 
       Counter.getUserCode(function (err, userCode) {
         if (err) {
-          res.status(500).json({ message: 'Can\'t add user. Please try again later.', data: err });
+          console.log('Admin registration failed. Please make sure the database is running.');
         } else {
           user.code = userCode.next;
           user.save(function(err) {
@@ -295,9 +295,28 @@ exports.registerAdmin = function() {
   });
 };
 
-// initialize userCode counter at first startup
-exports.setCounter = function(callback) {
-  Counter.findByIdAndUpdate('userCode', { next: 100000 }, {upsert: true}, callback);
+// initialize userCode counter at startup
+exports.initCounter = function(callback) {
+  Counter.findById('userCode', function(err, counter) {
+    if (err) {
+      console.log('Failed to initialize Counter. Make sure the database is running.');
+    } else {
+      if (!counter) {
+        counter = new Counter();
+        counter._id = 'userCode';
+        counter.next = 10000;
+        counter.save(function(err) {
+          if (err) {
+            console.log('Failed to initialize Counter. Make sure the database is running.');
+          } else {
+            callback();
+          }
+        });
+      } else {
+        callback();
+      }
+    }
+  });
 };
 
 // email processing

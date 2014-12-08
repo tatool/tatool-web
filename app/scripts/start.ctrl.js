@@ -3,11 +3,10 @@
 /* global Prism */
 
 angular.module('tatool.app')
-  .controller('StartCtrl', ['$scope', '$http', '$location', '$anchorScroll', '$state',
-    function ($scope, $http, $location, $anchorScroll, $state) {
+  .controller('StartCtrl', ['$scope', '$http', '$location', '$anchorScroll', '$state', '$timeout', 'page',
+    function ($scope, $http, $location, $anchorScroll, $state, $timeout, page) {
 
       $scope.stopDevSignup = false;
-      $scope.docPage = 'views/doc/main-start.html';
       $scope.slides = ['slide-develop.html', 'slide-publish.html', 'slide-collect.html', 'slide-analyse.html'];
       var currentSlide = 0;
       $scope.slide = 'views/' + $scope.slides[currentSlide];
@@ -67,5 +66,12 @@ angular.module('tatool.app')
       $scope.highlightCode = function() {
         Prism.highlightAll();
       };
+
+      if (page === 'start') {
+        $state.go('doc', {page: 'main-start.html'});
+      } else if (page !== '') {
+        $scope.docPage = 'views/doc/' + page;
+        $timeout(function() {$scope.scrollTo('top'); }, 0);
+      }
 
     }]);

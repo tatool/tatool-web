@@ -1,0 +1,23 @@
+{
+	"projects": [
+		{ 
+			"name" : "tatool", 
+			"access" : "public", 
+			"email" : "info@tatool.ch",
+			"description" : "default tatool project", 
+			"executables" : [ 
+				{ "customType" : "tatoolInstruction", "description" : "Instruction Task" }, 
+				{ "customType" : "tatoolCountdown", "description" : "A Countdown Task" }, 
+				{ "customType" : "tatoolStroop", "description" : "A Stroop Task" }, 
+				{ "customType" : "tatoolComplexSpan", "description" : "A ComplexSpan Task" }
+			]
+		},
+		{ 
+			"access" : "public", 
+			"name" : "tatool-stimuli", 
+			"email" : "info@tatool.ch",
+			"description" : "The official tatool stimuli project containing different stimuli data for everyone to use.", 
+			"executables" : [ ]
+		}
+	]
+}

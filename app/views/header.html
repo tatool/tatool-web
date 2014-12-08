@@ -21,7 +21,7 @@
                             <li ui-sref-active="active" ng-if="hasRole('developer')" ng-cloak><a ui-sref="developer"><i class="fa fa-cogs"></i> Developer</a></li>
                             <li ui-sref-active="active" ng-if="hasRole('researcher')" ng-cloak><a ui-sref="researcher"><i class="fa fa-graduation-cap"></i> Researcher</a></li>
                             <li ui-sref-active="active" ng-if="hasRole('admin')" ng-cloak><a ui-sref="admin"><i class="fa fa-lock"></i> Admin</a></li>
-                            <li ui-sref-active="active"><a ui-sref="documentation"><i class="fa fa-book"></i> Docs</a></li>
+                            <li ui-sref-active="active"><a ui-sref="doc"><i class="fa fa-book"></i> Docs</a></li>
                         </ul>
                     </div>
 
@@ -31,7 +31,7 @@
                         </form>
 
                         <ul class="nav navbar-nav navbar-right">
-                            <li ui-sref-active="active"><a ui-sref="documentation"><i class="fa fa-book"></i> Docs</a></li>
+                            <li ui-sref-active="active"><a ui-sref="doc"><i class="fa fa-book"></i> Docs</a></li>
                             <li ui-sref-active="active" ng-if="getMode()!=='lab'" ng-cloak><a ui-sref="register"><i class="fa fa-pencil-square-o"></i> Register</a></li>
                         </ul>
                     </div>

@@ -10,6 +10,7 @@ var passport = require('passport');
 var expressJwt = require('express-jwt');
 var jwt = require('jsonwebtoken');
 var favicon = require('serve-favicon');
+var projects = require('./projects');
 
 // server setup
 var app = express();
@@ -141,15 +142,18 @@ app.use(function (err, req, res, next) {
 //** -------------- **//
 
 // initialize userCode counter at startup
-userController.setCounter(labSetup);
+userController.initCounter(setup);
 
-function labSetup() {
+function setup() {
   // processing run mode 'lab'
   if (process.argv[2] === 'lab') {
     console.log('Running tatool in LAB mode.')
     app.set('mode', 'lab');
     userController.registerAdmin();
   }
+
+  // setup default project structure
+  adminController.initProjects(projects);
 }
 
 // start server

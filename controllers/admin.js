@@ -258,5 +258,50 @@ exports.deleteProject = function(req, res) {
     }
   });
 
-  
+};
+
+// add/update built-in projects at startup
+exports.initProjects = function(projects) {
+  var projects = projects.projects;
+  saveAll(projects);
+};
+
+function saveAll(projects) {
+
+  var project = projects.pop();
+
+  Project.findOne({name: project.name, access: project.access}, function(err, prj) {
+    if (err) res.status(500).send(err);
+
+    if (prj) {
+
+      prj.description = project.description;
+      prj.executables = project.executables;
+
+      prj.save(function(err) {
+        if (err) {
+          console.log('Can\'t update built-in projects.');
+        } else {
+          if (projects.length > 0) {
+            saveAll(projects);
+          }
+        }
+      });
+
+    } else {
+      var newProject = new Project();
+      newProject = project;
+
+      newProject.save(function(err) {
+        if (err) {
+          console.log('Can\'t add built-in projects.');
+        } else {
+          if (projects.length > 0) {
+            saveAll(projects);
+          }
+        }
+      });
+    }
+  });
+
 };

@@ -347,6 +347,7 @@ box-shadow: 3px 3px 13px 0px rgba(64,64,64,0.54);
   border-top: 1px solid #ccc;
   padding-top: 6px;
   padding-bottom: 6px;
+  padding-left: 3px;
 }
 
 #docNavigation .subNav{
@@ -465,6 +466,15 @@ margin-bottom: 8px;
 #startDocument .hint .text {
   display: inline-block;
   width: 90%;
+}
+
+#docNavigation .active {
+  background-color: #c44a27;
+  color: #fff;
+  font-weight: bold;
+}
+#docNavigation .active a {
+  color: #fff;
 }
 
 /** ---------
