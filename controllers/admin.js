@@ -262,13 +262,11 @@ exports.deleteProject = function(req, res) {
 
 // add/update built-in projects at startup
 exports.initProjects = function(projects) {
-  console.log(projects);
   var projects = projects.projects;
   saveAll(projects);
 };
 
 function saveAll(projects) {
-
   var project = projects.pop();
 
   Project.findOne({name: project.name, access: project.access}, function(err, prj) {
@@ -291,7 +289,11 @@ function saveAll(projects) {
 
     } else {
       var newProject = new Project();
-      newProject = project;
+      newProject.name = project.name;
+      newProject.access = project.access;
+      newProject.email = project.email;
+      newProject.description = project.description;
+      newProject.executables = project.executables;
 
       newProject.save(function(err) {
         if (err) {
