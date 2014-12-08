@@ -262,6 +262,7 @@ exports.deleteProject = function(req, res) {
 
 // add/update built-in projects at startup
 exports.initProjects = function(projects) {
+  console.log(projects);
   var projects = projects.projects;
   saveAll(projects);
 };
