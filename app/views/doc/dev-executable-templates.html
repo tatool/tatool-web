@@ -1,4 +1,4 @@
-<h2>A First Executable</h2>
+<h2>Create Executable</h2>
 
 <p>In this section you'll learn how to create your first Executable, to add it to your local Tatool environment project, and to embed it in a Module. With the theoretical background about Tatool's <a href ng-click="goPage('dev-executable.html')">Executable Architecture</a>, you can now create the three corresponding files for your first Executable which we're going to call 'myExecutable'. We'll talk you through the content of these files. Don't worry if the code looks complicated to you at first, it will all make sense in a few minutes.</p>
 
@@ -7,7 +7,7 @@
   <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('controller')">Executable Controller</a></li>
   <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('template')">Executable Template</a></li>
   <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('run')">Run Executable</a></li>
-<ul>
+</ul>
 
 <hr class="hr-red">
 
@@ -78,27 +78,22 @@
 
 <hr class="hr-red">
 
-<h3 id="template">Run Executable<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
+<h3 id="run">Run Executable<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
 
 <p>Now that we have created our first Executable, albeit a pretty boring one, it's time to see whether we can actually run it. In order to run the Executable, we'll first have to put the files into a Project, which in turn can be used by a Module.</p>
 
-<p><b>1. </b> Open your local Tatool by opening the website (e.g. http://127.0.0.1:3000) in your browser. Login with a user that has the 'Admin' role. Once logged in, click on the 'Admin' link in the top navigation. On the admin page you can select the 'Projects' tab at the top and add a new Project. Let's keep it simple for now and give the Project the name 'myExperiment' of access type 'public', and provide your login email as the owner. Choose any text you like in the description (e.g., 'My first module'). In addition, we'll have to provide more detailed information about our Executable, so we can select it later in the Module Editor. Add the following text in the Executables (JSON) text field:</p>
-
-<pre><code class="language-markup">[{"customType":"myExecutable","description":"Our executable"}]
-</code></pre>
-
-<p><img src="../../images/doc/screen-add-project.png"></p>
+<p><b>1. </b> Copy/save the three Executable files into the Project executables sub-folder (<b>app/projects/public/myExperiment/executables</b>) of your local Tatool installation. If the folder is not yet available, make sure to complete the previous step (<a ui-sref="doc({page: 'dev-executable-project.html'})">Setup Project</a>) first.</p>
 
 <p><b>2. </b> Login to your local Tatool with any user having the 'Developer' role (note that you might have to <a href ng-click="goPage('main-registration.html')">add</a> such a user first). Once logged in, click on the 'Developer' link in the top navigation. On the developer page create a new Module and add a new Executable to the List Element. Change the Type of the Executable by clicking on the blue edit button. Choose the Project 'myExperiment' we just added before and select the 'myExecutable' Executable in the Type dropdown below. Press 'OK' twice to save the Module.</p>
 
-<p><img src="../../images/doc/screen-new-module-1.png"></p>
-<p><img src="../../images/doc/screen-new-module-2.png"></p>
-<p><img src="../../images/doc/screen-new-module-3.png"></p>
+<p><img src="../../images/doc/screen-new-module-1.png" class="internal"></p>
+<p><img src="../../images/doc/screen-new-module-2.png" class="internal"></p>
+<p><img src="../../images/doc/screen-new-module-3.png" class="internal"></p>
 
-<p><b>3. </b> You can now run your Module by pressing the 'Start' button. Tatool will open the Module and finish immediately by returning to the the Module overview screen. This is exactly what we expect, as we didn't add any logic to our Executable yet.</p>
+<p><b>3. </b> You can now run your Module by pressing the 'Start' button. Tatool will open the Module and finish immediately by returning to the Module overview screen. This is exactly what we expect, as we didn't add any logic to our Executable yet.</p>
 
 <hr class="hr-red">
 
 <h3>What's Next?<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
 
-<p>As a next step, we're going to add some flesh to our Executable by presenting actual stimuli and recording the users' responses to it. To proceed, please go to <a href ng-click="goPage('dev-first-executable.html')">Advanced Executable</a>.</p>
+<p>As a next step, we're going to create a stimuli file and the corresponding stimuli for our Executable. To proceed, please go to <a ui-sref="doc({page: 'dev-executable-create-stimuli.html'})">Create Stimuli</a>.</p>

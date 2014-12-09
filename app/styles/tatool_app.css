@@ -477,6 +477,14 @@ margin-bottom: 8px;
   color: #fff;
 }
 
+#docContent img.external {
+  border: 1px solid #999;
+}
+
+#docContent img.internal {
+  border: 3px solid #f4d4af;
+}
+
 /** ---------
     MODULES
 -----------**/

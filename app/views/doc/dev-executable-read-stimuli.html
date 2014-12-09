@@ -1,0 +1,72 @@
+<h2>Read Stimuli</h2>
+
+<p>In this section we'll introduce some of the useful services Tatool is offering the developers to create their tasks. Make sure you've finished the previous section about creating your first Executable <a ui-sref="doc({page: 'dev-executable-templates.html'})">Create Executable</a>, as we'll continue adding to the existing code.</p>
+
+<hr class="hr-red">
+
+<p>We're now ready to read the stimuli files created in the previous seciont in our Excutable. Tatool offers a very useful service called <b>tatoolExecutable</b> which provides the necessary functionality. As we only want to read the stimuli file (CSV) and all required stimuli (images) once per Session, we're going to add this code into our Executable Service init() method.</p>
+
+<div class="hint">
+  <div class="icon red"><i class="fa fa-lightbulb-o fa-2x"></i></div> 
+  <div class="text">
+    <p>Remember that all <b>actions</b> that should only be <b>executed once per Session</b> (e.g. reading a stimuli file into memory), should be placed into the <b>Executable Service init()</b> method.</p>
+  </div>
+</div>
+
+<p>The init() method for all Executables is run by Tatool at the beginning of every Session, during which the user is shown a nice animated loading screen. As we don't want to block the animation in our loading screen and also want to take advantage of being able to run multiple init() methods at once, we're going to use the concept of JavaScript Promises, as a method of running our code asynchronously. A Promise object represents a value that may not be available yet, but will be resolved at some point in future. Let's take a look at what that means for our task of reading a stimuli file. If we would read our stimuli file synchronously, the main process would be blocked until the whole file was read and made available in a variable. In order to avoid this for the reasons mentioned earlier, we're going to call the read operation asynchronously. This will result in our call to the read method to return immediately with a Promise. The Promise tells us that the file is being read in the background and we can continue doing other things and check the Promise at a later time for the actual data. In order for us to tell Tatool when we finished our init() method (when all asynchronous processing has finished), we're going to return a Promise.</p>
+
+<p>Let's take a look at the necessary code to create a Promise, return it and tell Tatool when it has been satisfied. Add the following code to your init() method.</p>
+
+<pre class="line-numbers"><code class="language-javascript">MyExecutable.prototype.init = function() {
+  var promise = tatoolExecutable.createPromise();
+  // read stimuli file and resolve promise after done
+  promise.resolve();
+  return promise;
+};
+</code></pre>
+
+<p>On <b>line 2</b> we use the tatoolExecutable service to create a Promise and store it in a local variable promise. On <b>line 4</b> we resolve our promise and on <b>line 5</b> we return the promise. You're right in assuming that this doesn't make much sense right now, as we resolve our promise before we return it. This looks like a normal synchronous process right now. The magic happens now when we add our call to the read function.</p>
+
+<pre class="line-numbers"><code class="language-javascript">MyExecutable.prototype.init = function() {
+  var promise = tatoolExecutable.createPromise();
+
+  // define resource for stimuliFile
+  var stimuliFile = {
+    project: {
+      name: 'tatool-stimuli',
+      access: 'public'
+    },
+    resourceType: 'stimuli',
+    resourceName: 'stroopImg.csv'
+  };
+
+  // define resource for stimuliPath
+  var stimuliPath = {
+    project: {
+      name: 'tatool-stimuli',
+      access: 'public'
+    },
+    resourceType: 'stimuli'
+  };
+
+  // read the stimuliFile and all image stimuli
+  // resolve promise when reading successful and reject when an error occurred
+  tatoolExecutable.getCSVResource(stimuliFile, true, stimuliPath).then(
+    function(list) {
+      this.stimuliList = list;
+      promise.resolve();
+    }, function(error) {
+      promise.reject(error);
+    });
+
+  return promise;
+};
+</code></pre>
+
+<p>On <b>line 5</b> we define a new Resource and provide all the details needed for Tatool to access our stimuli file. On <b>line 15</b> we define a new Path and provide the details needed for Tatool to know where to access our image files.</p>
+
+<hr class="hr-red">
+
+<h3>What's Next?<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
+
+<p>As a next step, we're going to improve our code by externalising some definitions into Properties. To proceed, please go to <a ui-sref="doc({page: 'dev-executable-properties.html'})">Create Properties</a>.</p>

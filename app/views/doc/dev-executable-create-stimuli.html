@@ -1,0 +1,54 @@
+<h2>Create Stimuli</h2>
+
+<p>In this section we're going to create a stimuli file and the corresponding stimuli to be used by our Executable.</p>
+
+<hr class="hr-red">
+
+<p>A stimuli file represents the list of stimuli and their properties you'd like to use in your Executable. A stimulus can be anything from a single character, a word, a digit, an image, a video or an audio file. As long as you can show/play the stimulus on a HTML page, it should be fine to use with Tatool. The stimuli file should be a <a href="http://en.wikipedia.org/wiki/Comma-separated_values" target="_blank">CSV</a> (Comma-separated values) file.</p>
+
+<p>In order for the CSV file to be used with Tatool, you should follow these conventions:<br>
+  <ul class="docContentList">
+    <li>Use either <b>comma (,) or semicolon (;)</b> as your delimiter. Tatool will try to detect the delimiter automatically.</li>
+    <li>Use a <b>header line</b>, as it will simplify the access to the different columns of your stimulus later on.</li>
+    <li>Use <b><a href="http://en.wikipedia.org/wiki/CamelCase" target="_blank">lowerCamelCase</a></b> for the header columns, as it will simplify the access to the different columns of your stimulus later on.</li>
+  </ul>
+</p>
+
+<p>For our purpose let's create a stimuli file for a <a href="http://en.wikipedia.org/wiki/Eriksen_flanker_task" target="_blank">Flanker Task</a>. Therefore, a stimulus is defined as being congruent, incongruent or neutral (<i>stimulusType</i>). We'll need to define whether the items in our stimulus are going to be text or image values (<i>stimulusValueType</i>) (e.g. character, digit, arrow) and what their values (<i>stimulusValue</i>) are going to be (e.g. 'A', 'congruent-left.png'). As a last property, we'll have to define the correct response (<i>correctResponse</i>) in order to compare the response given by the user with the expected response to provide some user feedback.</p>
+
+<p>
+  <img src="../../images/doc/figure-flanker.png" class="internal"><br>
+  <i>Example arrow stimuli</i>
+</p>
+
+<p>We end up with a stimuli file that will look similar to this:</p>
+
+<pre><code class="language-bash">stimulusType;stimulusValue;stimulusValueType;correctResponse
+congruent;congruent-right.png;image;congruent
+incongruent;incongruent-right.png;image;incongruent
+neutral;neutral-left.png;image;neutral
+incongruent;incongruent-right.png;image;incongruent
+congruent;congruent-right.png;image;congruent
+incongruent;incongruent-left.png;image;incongruent
+neutral;neutral-right.png;image;neutral
+neutral;neutral-left.png;image;neutral
+incongruent;incongruent-left.png;image;incongruent
+neutral;neutral-left.png;image;neutral
+congruent;congruent-right.png;image;congruent
+...
+</code></pre>
+
+<p>You can create your own stimuli file or use the example already provided in your local Tatool installation. At the same time we also have to create our actual stimuli which we've decided are going to be images. There's going to be a total of 6 images for every possible combination of left/right and congruent/incongruent/neutral stimuli types. You again can create your own images or use the ones provided in your local Tatool installation.</p>
+
+<p>
+  <img src="../../images/doc/flanker-incongruent-left.png" class="internal"><br>
+  <i>Example stimulus image (incongruent-left.png)</i>
+</p>
+
+<p>In order to use the stimuli files in our Executable, we'll have to save/copy all stimuli related files into our project stimuli (<b>app/projects/public/myExperiment/stimuli</b>) sub-folder of our local Tatool installation.</p>
+
+<hr class="hr-red">
+
+<h3>What's Next?<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
+
+<p>As a next step, we're going to extend our basic Executable by reading the stimuli file and stimuli we've just created. To proceed, please go to <a ui-sref="doc({page: 'dev-executable-read-stimuli.html'})">Read Stimuli</a>.</p>

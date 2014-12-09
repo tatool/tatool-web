@@ -50,6 +50,11 @@ angular.module('tatool.module')
       executor.stopModule(sessionComplete);
     };
 
+    // create a new promise by using the $q service (abstraction for users)
+    executable.createPromise = function() {
+      return $q.defer();
+    };
+
     /**--------------------------------
       Timing Helper functions
     -------------------------------- */
@@ -78,6 +83,10 @@ angular.module('tatool.module')
     -------------------------------- */
 
     executable.getResourcePath = function(res) {
+      return getResourcePath(res);
+    };
+
+    var getResourcePath = function(res) {
       if (res.project.access === 'external') {
         if (res.resourcePath) {
           return res.resourcePath + res.resourceName;
@@ -92,10 +101,14 @@ angular.module('tatool.module')
 
     // get a resource (project or external)
     executable.getResource = function(res) {
-      if (res.project.access === 'external') {
-        return getExternalResource(res.resourceName);
+      if (res && res.project) {
+        if (res.project.access === 'external') {
+          return getExternalResource(res.resourceName);
+        } else {
+          return getProjectResource(res);
+        }
       } else {
-        return getProjectResource(res);
+        return $q.reject('Resource not found: undefined');
       }
     };
 
@@ -130,15 +143,19 @@ angular.module('tatool.module')
     };
 
     // get a CSV resource (project or external)
-    executable.getCSVResource = function(res, header) {
-      if (res.project.access === 'external') {
-        return getExternalCSVResource(res.resourceName, header);
+    executable.getCSVResource = function(res, header, stimuliPath) {
+      if (res && res.project) {
+        if (res.project.access === 'external') {
+          return getExternalCSVResource(res.resourceName, header, stimuliPath);
+        } else {
+          return getProjectCSVResource(res, header, stimuliPath);
+        }
       } else {
-        return getProjectCSVResource(res, header);
+        return $q.reject('Resource not found: undefined');
       }
     };
 
-    var getProjectCSVResource = function(res, header) {
+    var getProjectCSVResource = function(res, header, stimuliPath) {
       var deferred = $q.defer();
       if (!header) {
         header = false;
@@ -149,7 +166,11 @@ angular.module('tatool.module')
       $http.get( path + res.resourceType + '/' + res.resourceName + '?token=' + token)
         .success(function (data) {
           var csv = Papa.parse(data, {header: header, dynamicTyping: true});
-          deferred.resolve(csv.data);
+          if (header && stimuliPath) {
+            getImages(csv.data, deferred, stimuliPath);
+          } else {
+            deferred.resolve(csv.data);
+          }
         })
         .error(function (error) {
           deferred.reject(error);
@@ -158,7 +179,7 @@ angular.module('tatool.module')
       return deferred.promise;
     };
 
-    var getExternalCSVResource = function(resUrl, header) {
+    var getExternalCSVResource = function(resUrl, header, stimuliPath) {
       var deferred = $q.defer();
       if (!header) {
         header = false;
@@ -167,13 +188,60 @@ angular.module('tatool.module')
       $http.get(resUrl)
         .success(function (data) {
           var csv = Papa.parse(data, {header: header, dynamicTyping: true});
-          deferred.resolve(csv.data);
+          if (header && stimuliPath) {
+            getImages(csv.data, deferred, stimuliPath);
+          } else {
+            deferred.resolve(csv.data);
+          }
         })
         .error(function (error) {
           deferred.reject(error);
         });
 
       return deferred.promise;
+    };
+
+    // loops through a stimuli file and collects all image file names
+    var getImages = function(list, deferred, stimuliPath) {
+      var images = [];
+      async.each(list, function(stimulus, callback) {
+        angular.forEach(stimulus, function(value, key) {
+          if (key.indexOf('stimulusValueType') >= 0 && value === 'image') {
+            if (images.indexOf(stimulus[key.replace('Type', '')]) === -1) {
+              images.push(stimulus[key.replace('Type', '')]);
+            }
+          }
+        });
+        callback();
+      }, function(err) {
+        if( err ) {
+          deferred.reject(err);
+        } else {
+          if (images.length > 0) {
+            preloadImages(list, images, deferred, stimuliPath);
+          } else {
+            deferred.resolve(list);
+          }
+        }
+      });
+    };
+
+    // preloads images
+    var preloadImages = function(list, images, deferred, stimuliPath) {
+      var self = this;
+      async.each(images, function(image, callback) {
+        var img = new Image();
+        var resource = stimuliPath;
+        resource.resourceName = image;
+        img.src = getResourcePath(resource);
+        callback();
+      }, function(err) {
+        if( err ) {
+          deferred.reject(err);
+        } else {
+          deferred.resolve(list);
+        }
+      });
     };
 
 
