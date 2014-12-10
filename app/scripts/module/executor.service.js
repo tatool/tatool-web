@@ -130,7 +130,7 @@ angular.module('tatool.module')
         obj.exec = $q.defer();
         obj.exec.promise.then(
           function() {
-            if (obj.blankInterval !== 0) {
+            if (obj.blankInterval > 0) {
               runBlankInterval(currentExecutable).then(runElement);
             } else {
               runElement();
@@ -162,7 +162,7 @@ angular.module('tatool.module')
     var preprocessExecutable = function(currentExecutable) {
     
       // set the current blankInterval
-      if ('blankInterval' in currentExecutable) {
+      if ('blankInterval' in currentExecutable && currentExecutable.blankInterval !== '') {
         obj.blankInterval = currentExecutable.blankInterval;
       } else {
         obj.blankInterval = cfgModule.DEFAULT_BLANK_INTERVAL;
@@ -176,7 +176,7 @@ angular.module('tatool.module')
       }
 
       // set the current fixationInterval
-      if ('fixationInterval' in currentExecutable) {
+      if ('fixationInterval' in currentExecutable && currentExecutable.fixationInterval !== '') {
         obj.fixationInterval = currentExecutable.fixationInterval;
       } else {
         obj.fixationInterval = cfgModule.DEFAULT_FIXATION_INTERVAL;
@@ -191,7 +191,7 @@ angular.module('tatool.module')
 
       // display fixation screen if executable is configured accordingly
       // run executable
-      if (obj.fixationInterval !== 0) {
+      if (obj.fixationInterval > 0) {
         runFixationInterval(currentExecutable).then(function() { runExecutable(currentExecutable);});
       } else {
         runExecutable(currentExecutable);

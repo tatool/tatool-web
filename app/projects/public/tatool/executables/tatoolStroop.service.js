@@ -28,7 +28,7 @@ tatool
       }
 
       // template properties
-      this.tatoolStimulus = tatoolStimulusService.createStimulus('main', this.stimuliPath);
+      this.tatoolStimulus = tatoolStimulusService.createStimulus(this.stimuliPath);
       this.tatoolInput = tatoolInputService.createInput(this.stimuliPath);
 
       // timing properties
@@ -41,7 +41,7 @@ tatool
       // prepare stimuli
       if (this.stimuliFile) {
         var self = this;
-        tatoolExecutable.getCSVResource(this.stimuliFile, true).then(function(list) {
+        tatoolExecutable.getCSVResource(this.stimuliFile, true, this.stimuliPath).then(function(list) {
             self.processStimuliFile(list, deferred);
           }, function(error) {
             deferred.reject('Resource not found: ' + self.stimuliFile.resourceName);

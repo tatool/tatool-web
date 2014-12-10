@@ -46,16 +46,18 @@ angular.module('tatool.module').directive('tatoolInput', ['$log', '$templateCach
 
       // process user input (key/mouse)
       this.clickInput = function(keyCode, timing, event) {
-        if ($scope.service.registeredKeyInputs[keyCode].textInput) {
-          var textInput = $('#tatoolInputText').val();
-          $('#tatoolInputText').val('');
-          if (textInput) {
-            $scope.service.registeredKeyInputs[keyCode].givenResponse = textInput;
-          } else {
-            $scope.service.registeredKeyInputs[keyCode].givenResponse = '';
+        if ($scope.inputEnabled) {
+          if ($scope.service.registeredKeyInputs[keyCode].textInput) {
+            var textInput = $('#tatoolInputText').val();
+            $('#tatoolInputText').val('');
+            if (textInput) {
+              $scope.service.registeredKeyInputs[keyCode].givenResponse = textInput;
+            } else {
+              $scope.service.registeredKeyInputs[keyCode].givenResponse = '';
+            }
           }
+          $scope.userinput({'input': $scope.service.registeredKeyInputs[keyCode], 'timing': timing, '$event': event});
         }
-        $scope.userinput({'input': $scope.service.registeredKeyInputs[keyCode], 'timing': timing, '$event': event});
       };
 
       this.getStimuliPath = function() {
@@ -65,7 +67,7 @@ angular.module('tatool.module').directive('tatoolInput', ['$log', '$templateCach
     link: function (scope, element, attr, ctrl) {
 
       // hide and disable by default
-      var inputEnabled = false;
+      scope.inputEnabled = false;
       scope.show = false;
       $('#tatoolInputText').attr('disabled', true);
 
@@ -98,7 +100,7 @@ angular.module('tatool.module').directive('tatoolInput', ['$log', '$templateCach
 
       // listen to keyPress event broadcasted by mainCtrl
       var watcher = scope.$on('keyPress', function(event, keyEvent) {
-        if (inputEnabled) {
+        if (scope.inputEnabled) {
           if (scope.service.registeredKeyInputs[keyEvent.which]) {
             ctrl.clickInput(keyEvent.which, keyEvent.keyPressTime, event);
           }
@@ -119,7 +121,7 @@ angular.module('tatool.module').directive('tatoolInput', ['$log', '$templateCach
 
       // enable input
       scope.service.enable = function() {
-        inputEnabled = true;
+        scope.inputEnabled = true;
         $('#tatoolInputText').attr('disabled', false);
         $timeout(function() { $('#tatoolInputText').focus(); }, 0);
         return tatoolExecutable.getTiming();
@@ -127,7 +129,7 @@ angular.module('tatool.module').directive('tatoolInput', ['$log', '$templateCach
 
       // disable input
       scope.service.disable = function() {
-        inputEnabled = false;
+        scope.inputEnabled = false;
         $('#tatoolInputText').attr('disabled', true);
         return tatoolExecutable.getTiming();
       };

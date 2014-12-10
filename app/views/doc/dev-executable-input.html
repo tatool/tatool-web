@@ -1,13 +1,112 @@
-<h2>Capture Input</h2>
+<h2>Record Input</h2>
 
-<p>text</p>
+<p>This section will introduce on how to capture user input by listening to keyboard input or mouse click. We're going to extend our previous code with some additional logic in the template, service and controller.</p>
 
 <hr class="hr-red">
 
-<p>text</p>
+<p>As we want to be able to display keys/buttons on screen we're going to make use of the <b>tatool-input</b> element which allows us to display keys/buttons/textfields as a method of user interaction and trigger some action at the time of user input. Take a look at the extended template below.</p>
+
+<h4>myExecutable.html</h4>
+<pre class="line-numbers" data-line="4-7"><code class="language-markup">&lt;tatool>
+  &lt;tatool-stimulus id="centeredExecutable" service="stimulus">&lt;/tatool-stimulus>
+
+  &lt;tatool-input id="bottomExecutable" service="input" userInput="inputAction(input, timing, event)">
+    &lt;tatool-key code="ArrowLeft" response="left">&lt;/tatool-key>
+    &lt;tatool-key code="ArrowRight" response="right">&lt;/tatool-key>
+  &lt;/tatool-input>
+&lt;/tatool>
+</code></pre>
+
+<p>We've introduced the tatool-input element on <b>line 4</b>, provided the predefined id <i>bottomExecutable</i> which will make sure the input will be displayed at the bottom of the screen. We again provide a <i>service</i> attribute and give it the value <i>input</i>, which we'll be linking to the tatoolInputService of our Executable later on. The last attribute <i>userInput</i> expects a function name with the three parameters <i>input, timing, event</i>. This is the function that should be called once the user has pressed a key or clicked on a button.</p>
+
+<p>Similar to the tatool-stimulus element we're going to extend our Executable service now by adding a new dependency to <b>tatoolInputService</b>. See the updated code below.</p>
+
+<h4>myExecutable.service.js</h4>
+<pre class="line-numbers" data-line="1-2,11"><code class="language-javascript">tatool.factory('myExecutable', [ 'tatoolExecutable', 'tatoolStimulusService', 'tatoolInputService',
+  function (tatoolExecutable, tatoolStimulusService, tatoolInputService) {  
+    
+    var MyExecutable = tatoolExecutable.createExecutable();
+
+    MyExecutable.prototype.init = function() {
+      var promise = tatoolExecutable.createPromise();
+
+      this.counter = 0;
+      this.tatoolStimulus = tatoolStimulusService.createStimulus(this.stimuliPath);
+      this.tatoolInput = tatoolInputService.createInput(this.stimuliPath);
+
+      var self = this;
+      tatoolExecutable.getCSVResource(this.stimuliFile, true, this.stimuliPath).then(
+        function(list) {
+          self.stimuliList = list;
+          promise.resolve();
+        }, function(error) {
+          promise.reject(error);
+        });
+
+      return promise;
+    };
+
+    // custom method to get the next stimulus out of our stimuliList
+    MyExecutable.prototype.createStimulus = function() {
+      var stimulus = tatoolExecutable.getNext(this.stimuliList, this.counter);
+      this.tatoolStimulus.set(stimulus);
+      this.counter++;
+    };
+
+    MyExecutable.prototype.stopExecution = function() {
+      tatoolExecutable.stop();
+    };
+
+    return MyExecutable;
+  }]);
+</code></pre>
+
+<p>We've added the new dependency of tatoolInputService on <b>line 1/2</b>. On <b>line 11</b> we create a new input service and provide the only required parameter stimuli path, which would be used in the case we wanted to display images on our keys.</p>
+
+<p>And finally we're going to extend our controller which with the functionality to listen to user input from the template.</p>
+
+<h4>myExecutable.ctrl.js</h4>
+<pre class="line-numbers" data-line="5,10-11, 16-20"><code class="language-javascript">tatool.controller('myExecutableCtrl', [ '$scope', 'service',
+  function ($scope, service) {
+
+    $scope.stimulus = service.tatoolStimulus;
+    $scope.input = service.tatoolInput;
+    
+    $scope.start = function() {
+      service.createStimulus();
+
+      service.tatoolInput.show();
+      service.tatoolInput.enable();
+      
+      service.tatoolStimulus.show();
+    };
+
+    $scope.inputAction = function(input, timing, event) {
+      service.tatoolInput.disable();
+      service.tatoolStimulus.hide();
+      service.stopExecution();
+    };
+
+  }]);
+</code></pre>
+
+<p>On <b>line 5</b> we assign the tatoolInput service we've created in our Executable service to the $scope variable <i>input</i>. If you remember <i>input</i> was the value of the service attribute we've provided in the template. Now we've bridged the gap and the tatoolInput service is linked to our template.</p>
+
+<div class="hint">
+  <div class="icon red"><i class="fa fa-lightbulb-o fa-2x"></i></div> 
+  <div class="text">
+    <p>All variables/functions assigned to the <b>$scope</b> object will be accessible in the Executable template.</p>
+  </div>
+</div>
+
+<p>As part of our <i>start()</i> method on <b>line 10/11</b> we add a call to display our input buttons on screen with the <i>show()</i> method and activate the user input by calling the <i>enable()</i> method. The <i>show()</i> method is optional as you might choose not to display any buttons if the user has to respond by keyboard only. Finally on <b>line 16</b> we add the function <i>inputAction()</i> to the $scope service. Within the function we make sure that the user input is deactivated by calling the method <i>disable()</i> and also hide our stimulus by calling the method <i>hide()</i>. On <b>line 19</b> we call our <i>stopExecution()</i> method which will make sure, that once a key is pressed, the current execution is stopped.</p>
+
+<p>Let's change our Module to execute our Executable several times (e.g. 3 times) instead of once. When we now execute our Module, we should be able to press the left/right arrow key to go to the next stimulus.</p>
+
+<iframe width="560" height="315" src="//www.youtube.com/embed/tHQ93QoaFzU" frameborder="0" allowfullscreen></iframe>
 
 <hr class="hr-red">
 
 <h3>What's Next?<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
 
-<p>As a next step, we're going to .... To proceed, please go to <a ui-sref="doc({page: 'dev-executable-timer.html'})">Add Timer</a>.</p>
+<p>As a next step, we're going to make sure that we actually store the user response and some additional properties. To proceed, please go to <a ui-sref="doc({page: 'dev-executable-data.html'})">Store Data</a>.</p>

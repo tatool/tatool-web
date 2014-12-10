@@ -5,14 +5,13 @@ angular.module('tatool.module')
 
     var tatoolStimulusService = {};
 
-    tatoolStimulusService.createStimulus = function(stimulusId, stimuliPath) {
-      var stimulus = new Stimulus(stimulusId);
+    tatoolStimulusService.createStimulus = function(stimuliPath) {
+      var stimulus = new Stimulus();
       stimulus.stimuliPath = stimuliPath ? stimuliPath : '';
       return stimulus;
     };
 
     function Stimulus(stimulusId) {
-      this.stimulusId = stimulusId ? stimulusId : 'default';
       this.data = {};
 
       this.init = function() {

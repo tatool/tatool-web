@@ -69,7 +69,9 @@ angular.module('tatool.app')
         var executable = {
           'tatoolType': 'Executable',
           'customType': '',
-          'name': (Math.random().toString(36)+'00000000000000000').slice(2,16+2)
+          'name': (Math.random().toString(36)+'00000000000000000').slice(2,16+2),
+          'blankInterval': 0,
+          'fixationInterval': 0
         };
         if (element.tatoolType === 'Dual') {
           if (element.children.primary && element.children.secondary) {

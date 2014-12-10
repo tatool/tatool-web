@@ -8,7 +8,7 @@ angular.module('tatool.module', ['tatool', 'tatool.auth', 'angular-progress-arc'
     MODULE_RESOURCES: ['blank.html', 'fixation.html', 'statuspanel.html', 'tatoolGrid.html', 'tatoolStimulus.html'],
     IMG_PATH: 'images/module/',
     VIEW_PATH:'views/module/',
-    DEFAULT_BLANK_INTERVAL: 200,
+    DEFAULT_BLANK_INTERVAL: 0,
     DEFAULT_BLANK_INTERVAL_SCREEN: 'blank.html',
     DEFAULT_FIXATION_INTERVAL: 0,
     DEFAULT_FIXATION_INTERVAL_SCREEN: 'fixation.html',

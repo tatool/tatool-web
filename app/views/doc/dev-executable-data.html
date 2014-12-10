@@ -1,10 +1,99 @@
 <h2>Store Data</h2>
 
-<p>text</p>
+<p>As a final step we're going to add some functionality to our Executable to store the users response to our stimuli. In the case of Tatool, this means we're going to create a Trial and store it to the database. This will make it available for the data export.</p>
 
 <hr class="hr-red">
 
-<p>text</p>
+<p>Before we're going to implement a Trial object and store it, let's capture some more information we want to store. For this purpose we're going to extend our controller as follows.</p>
+
+<h4>myExecutable.ctrl.js</h4>
+<pre class="line-numbers" data-line="13,19-20"><code class="language-javascript">tatool.controller('myExecutableCtrl', [ '$scope', 'service',
+  function ($scope, service) {
+
+    $scope.stimulus = service.tatoolStimulus;
+    $scope.input = service.tatoolInput;
+    
+    $scope.start = function() {
+      service.createStimulus();
+
+      service.tatoolInput.show();
+      service.tatoolInput.enable();
+
+      service.startTime = service.tatoolStimulus.show();
+    };
+
+    $scope.inputAction = function(input, timing, event) {
+      service.tatoolInput.disable();
+      service.tatoolStimulus.hide();
+      service.endTime = timing;
+      service.processResponse(input.givenResponse);
+    };
+
+  }]);
+</code></pre>
+
+<p>On <b>line 13</b> we've created a variable called <i>startTime</i> on our service object and assign it the return value of the <i>show()</i> method. This method returns the timestamp in milliseconds of when the stimulus has been shown. On <b>line 19</b> we're assigning the <i>timing</i> variable to a new variabled called <i>endTime</i> on our service object. These two timestamps will allow us to calculate the most accurate reaction time. On <b>line 20</b> we call a new custom method <i>processResponse()</i> on our service, which we're going to create in a bit. Notice that we removed the call to the <i>stopExecution()</i> method, as we're going to do this now as part of our <i>processResponse()</i> method.</p>
+
+<p>With this extra logic in place let's move to our Executable service and implement the new method.</p>
+
+<h4>myExecutable.service.js</h4>
+<pre class="line-numbers" data-line="1-2,29-33, 35-44"><code class="language-javascript">tatool.factory('myExecutable',['tatoolExecutable', 'tatoolStimulusService', 'tatoolInputService', 'db',
+  function (tatoolExecutable, tatoolStimulusService, tatoolInputService, db) {  
+    
+    var MyExecutable = tatoolExecutable.createExecutable();
+
+    MyExecutable.prototype.init = function() {
+      var promise = tatoolExecutable.createPromise();
+
+      this.counter = 0;
+      this.tatoolStimulus = tatoolStimulusService.createStimulus(this.stimuliPath);
+      this.tatoolInput = tatoolInputService.createInput(this.stimuliPath);
+
+      var self = this;
+      tatoolExecutable.getCSVResource(this.stimuliFile, true, this.stimuliPath).then(
+        function(list) {
+          self.stimuliList = list;
+          promise.resolve();
+        }, function(error) {
+          promise.reject(error);
+        });
+
+      return promise;
+    };
+
+    MyExecutable.prototype.createStimulus = function() {
+      var stimulus = tatoolExecutable.getNext(this.stimuliList, this.counter);
+      this.tatoolStimulus.set(stimulus);
+      this.counter++;
+
+      this.trial = {};
+      this.trial.stimulusType = stimulus.stimulusType;
+      this.trial.stimulusValue = stimulus.stimulusValue;
+      this.trial.correctResponse = stimulus.correctResponse;
+    };
+
+    MyExecutable.prototype.processResponse = function(response) {
+      this.trial.reactionTime = this.endTime - this.startTime; 
+      this.trial.givenResponse = response;
+      if (this.trial.correctResponse == this.trial.givenResponse) {
+        this.trial.score = 1;
+      } else {
+        this.trial.score = 0;
+      }
+      db.saveTrial(this.trial).then(tatoolExecutable.stop);
+    };
+
+    return MyExecutable;
+  }]);
+</code></pre>
+ 
+<p>First of all we're going to add the service <b>db</b> as a new dependency on <b>line 1/2</b>. On <b>line 30</b> we create a new Trial as a simple JavaScript object with the assignment of and empty object {}. This will serve as our container where we can add any data we want to store for the current execution. Usually you'll want to add the three properties defined on <b>line 31-33</b> to store the basic information on which stimulus was presented, what type of stimuli and what the correct response for the stimulus was.</p>
+
+<p>On <b>line 36</b> we create a new custom method called <i>processResponse()</i> with the argument <i>response</i>. Our controller will call this method after the user has provided a response by clicking the button or pressing the left/right arrow keys. On <b>line 37-43</b> we add some more data to our trial object. We're calculating the time elapsed between stimulus onset and user feedback and store it as the <i>reactionTime</i>. The response provided by the user is stored as <i>givenResponse</i> and with some additional logic we create a variable <i>score</i> which will be set to 1 if the response was correct and 0 otherwise. Finally on <b>line 44</b> we're using the <b>db</b> service to save our Trial object. The <i>saveTrial</i> object returns a Promise which is why we're calling the <i>then</i> method to let the Promise know that as soon as it has finished saving the trial, it can call the <i>stop</i> method to finish the execution.</p>
+
+<p>We can now execute our Module again and take a look at the export data afterwards to see whether all our data has been stored correctly.</p>
+
+<iframe width="560" height="315" src="//www.youtube.com/embed/e6U3fCaeGc4" frameborder="0" allowfullscreen></iframe>
 
 <hr class="hr-red">
 

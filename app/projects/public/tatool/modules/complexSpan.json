@@ -1,80 +1,97 @@
-{
-    "name": "Complex Span",
-    "author": "Tatool",
-    "label": "moduleDual",
-    "allowEscapeKey" : true,
-    "export" : [ 
-        { "mode": "upload", "auto": false }, 
-        { "mode": "remote", "auto": false, "target": "http://www.tatool.ch/tatoolweb/remoteUpload.php" },
-        { "mode": "download" } ],
-    "moduleHierarchy": {
-    	"tatoolType": "List",
-        "iterator": { "customType" : "ListIterator", "numIterations" : "1" },
-        "handlers": [ { "customType" : "levelHandler", "name" : "level" }, { "customType" : "trialCountHandler", "name" : "counter" } ],
-    	"children": 
-    		[
-                {
-                    "tatoolType": "Executable",
-                    "customType": "tatoolCountdown",
-                    "project": { "name" : "tatool", "access": "public"},
-                    "name": "countdown"
-                },
-                {
-                    "tatoolType": "Dual",
-                    "iterator": { "customType" : "ListIterator", "numIterations" : "2" },
-                    "handlers": [  ],
-                    "children": 
-                        {
-                            "primary" : {
-                                "tatoolType": "Executable",
-                                "customType": "tatoolComplexSpan",
-                                "project": { "name" : "tatool", "access": "public"},
-                                "name": "first",
-                                "blankInterval" : "600",
-                                "status": {
-                                    "levelPanel": true,
-                                    "feedbackPanel": true,
-                                    "trialCountPanel": true,
-                                    "timerPanel": true
-                                },
-                                "stimuliFile" : { 
-                                    "propertyType": "Resource",
-                                    "resourceName": "complexSpanNum.csv",
-                                    "resourceType": "stimuli",
-                                    "project": { "name" : "tatool", "access": "public"}
-                                },
-                                "stimuliPath" : {
-                                    "propertyType": "Path",
-                                    "project": { "name" : "demo", "access": "public"},
-                                    "resourceType": "stimuli"
-                                }
-                            }, 
-                            "secondary" : {
-                                "tatoolType": "Executable",
-                                "customType": "tatoolStroop",
-                                "project": { "name" : "tatool", "access": "public"},
-                                "name": "second",
-                                "blankInterval" : "600",
-                                "status": {
-                                    "levelPanel": true,
-                                    "feedbackPanel": true,
-                                    "trialCountPanel": true,
-                                    "timerPanel": true
-                                },
-                                "stimuliFile" : { 
-                                    "propertyType": "Resource",
-                                    "resourceName": "stroop.csv",
-                                    "resourceType": "stimuli",
-                                    "project": { "name" : "tatool", "access": "public"}
-                                },
-                                "stimuliPath" : {
-                                    "propertyType": "Path",
-                                    "project": { "name" : "tatool", "access": "public"},
-                                    "resourceType": "stimuli"
-                                }
-                            }
-                        }
-                }
-    		]
-    }
+{ "allowEscapeKey" : true,
+  "author" : "Tatool",
+  "export" : [ { "$$hashKey" : "object:392",
+        "auto" : false,
+        "mode" : "upload"
+      },
+      { "$$hashKey" : "object:391",
+        "auto" : false,
+        "mode" : "remote",
+        "target" : "http://www.tatool.ch/tatoolweb/remoteUpload.php"
+      },
+      { "$$hashKey" : "object:390",
+        "mode" : "download"
+      }
+    ],
+  "label" : "moduleDual",
+  "moduleHierarchy" : { "children" : [ { "customType" : "tatoolCountdown",
+            "name" : "countdown",
+            "project" : { "access" : "public",
+                "name" : "tatool"
+              },
+            "tatoolType" : "Executable"
+          },
+          { "children" : { "primary" : { "blankInterval" : "600",
+                    "customType" : "tatoolComplexSpan",
+                    "name" : "first",
+                    "project" : { "access" : "public",
+                        "name" : "tatool"
+                      },
+                    "status" : { "feedbackPanel" : true,
+                        "levelPanel" : true,
+                        "timerPanel" : true,
+                        "trialCountPanel" : true
+                      },
+                    "stimuliFile" : { "project" : { "access" : "public",
+                            "name" : "tatool-stimuli"
+                          },
+                        "propertyType" : "Resource",
+                        "resourceName" : "complexSpanNum.csv",
+                        "resourceType" : "stimuli"
+                      },
+                    "stimuliPath" : { "project" : { "access" : "public",
+                            "name" : "demo"
+                          },
+                        "propertyType" : "Path",
+                        "resourceType" : "stimuli"
+                      },
+                    "tatoolType" : "Executable"
+                  },
+                "secondary" : { "blankInterval" : "600",
+                    "customType" : "tatoolStroop",
+                    "name" : "second",
+                    "project" : { "access" : "public",
+                        "name" : "tatool"
+                      },
+                    "status" : { "feedbackPanel" : true,
+                        "levelPanel" : true,
+                        "timerPanel" : true,
+                        "trialCountPanel" : true
+                      },
+                    "stimuliFile" : { "project" : { "access" : "public",
+                            "name" : "tatool-stimuli"
+                          },
+                        "propertyType" : "Resource",
+                        "resourceName" : "stroop.csv",
+                        "resourceType" : "stimuli"
+                      },
+                    "stimuliPath" : { "project" : { "access" : "public",
+                            "name" : "tatool"
+                          },
+                        "propertyType" : "Path",
+                        "resourceType" : "stimuli"
+                      },
+                    "tatoolType" : "Executable"
+                  }
+              },
+            "handlers" : [  ],
+            "iterator" : { "customType" : "ListIterator",
+                "numIterations" : "2"
+              },
+            "tatoolType" : "Dual"
+          }
+        ],
+      "handlers" : [ { "customType" : "levelHandler",
+            "name" : "level"
+          },
+          { "customType" : "trialCountHandler",
+            "name" : "counter"
+          }
+        ],
+      "iterator" : { "customType" : "ListIterator",
+          "numIterations" : "1"
+        },
+      "tatoolType" : "List"
+    },
+  "name" : "Complex Span"
 }

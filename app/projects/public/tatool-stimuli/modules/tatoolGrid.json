@@ -1,38 +1,27 @@
-{
-  "name": "Tatool Grid Example",
-  "author": "Tatool",
-  "label": "tatoolGridExample",
-  "fullscreen": false,
-  "allowEscapeKey": true,
-  "moduleHierarchy": {
-    "tatoolType": "List",
-    "iterator": {
-      "customType": "ListIterator",
-      "numIterations": "3"
-    },
-    "handlers": [
-      
-    ],
-    "children": [
-      {
-        "tatoolType": "Executable",
-        "customType": "tatoolGridExecutable",
-        "project": {
-          "name": "demo",
-          "access": "public"
+{ "allowEscapeKey" : true,
+  "author" : "Tatool",
+  "fullscreen" : false,
+  "label" : "tatoolGridExample",
+  "moduleHierarchy" : { "children" : [ { "blankInterval" : "250",
+            "customType" : "tatoolGridExecutable",
+            "name" : "tatoolGrid",
+            "project" : { "access" : "public",
+                "name" : "tatool-stimuli"
+              },
+            "stimuliPath" : { "project" : { "access" : "public",
+                    "name" : "tatool-stimuli"
+                  },
+                "propertyType" : "Path",
+                "resourceName" : "",
+                "resourceType" : "stimuli"
+              },
+            "tatoolType" : "Executable"
+          } ],
+      "handlers" : [  ],
+      "iterator" : { "customType" : "ListIterator",
+          "numIterations" : "3"
         },
-        "name": "tatoolGrid",
-        "blankInterval": "250",
-        "stimuliPath": {
-          "propertyType": "Path",
-          "project": {
-            "name": "demo",
-            "access": "public"
-          },
-          "resourceName": "",
-          "resourceType": "stimuli"
-        }
-      }
-    ]
-  }
+      "tatoolType" : "List"
+    },
+  "name" : "Tatool Grid Example"
 }

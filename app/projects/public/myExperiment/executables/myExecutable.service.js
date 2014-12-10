@@ -1,35 +1,19 @@
-tatool.factory('myExecutable', [ 'tatoolExecutable',
-  function (tatoolExecutable) {  
+tatool.factory('myExecutable', [ 'tatoolExecutable', 'tatoolStimulusService', 'tatoolInputService', 'db',
+  function (tatoolExecutable, tatoolStimulusService, tatoolInputService, db) {  
     
     var MyExecutable = tatoolExecutable.createExecutable();
 
     MyExecutable.prototype.init = function() {
       var promise = tatoolExecutable.createPromise();
 
-      // define resource for stimuliFile
-      var stimuliFile = {
-        project: {
-          name: 'myExperiment',
-          access: 'public'
-        },
-        resourceType: 'stimuli',
-        resourceName: 'flanker-arrows.csv'
-      };
+      this.counter = 0;
+      this.tatoolStimulus = tatoolStimulusService.createStimulus(this.stimuliPath);
+      this.tatoolInput = tatoolInputService.createInput(this.stimuliPath);
 
-      // define resource for stimuliPath
-      var stimuliPath = {
-        project: {
-          name: 'myExperiment',
-          access: 'public'
-        },
-        resourceType: 'stimuli'
-      };
-
-      // read the stimuliFile and all image stimuli
-      // resolve promise when reading successful and reject when an error occurred
-      tatoolExecutable.getCSVResource(stimuliFile, true, stimuliPath).then(
+      var self = this;
+      tatoolExecutable.getCSVResource(this.stimuliFile, true, this.stimuliPath).then(
         function(list) {
-          this.stimuliList = list;
+          self.stimuliList = list;
           promise.resolve();
         }, function(error) {
           promise.reject(error);
@@ -38,9 +22,26 @@ tatool.factory('myExecutable', [ 'tatoolExecutable',
       return promise;
     };
 
-    // our custom methods go here
-    MyExecutable.prototype.stopExecution = function() {
-      tatoolExecutable.stop();
+    MyExecutable.prototype.createStimulus = function() {
+      var stimulus = tatoolExecutable.getNext(this.stimuliList, this.counter);
+      this.tatoolStimulus.set(stimulus);
+      this.counter++;
+
+      this.trial = {};
+      this.trial.stimulusType = stimulus.stimulusType;
+      this.trial.stimulusValue = stimulus.stimulusValue;
+      this.trial.correctResponse = stimulus.correctResponse;
+    };
+
+    MyExecutable.prototype.processResponse = function(response) {
+      this.trial.reactionTime = this.endTime - this.startTime; 
+      this.trial.givenResponse = response;
+      if (this.trial.correctResponse == this.trial.givenResponse) {
+        this.trial.score = 1;
+      } else {
+        this.trial.score = 0;
+      }
+      db.saveTrial(this.trial).then(tatoolExecutable.stop);
     };
 
     return MyExecutable;

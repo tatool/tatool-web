@@ -16,7 +16,7 @@ tatool
         promise.reject('Invalid property settings for Executable tatoolComplexSpan. Expected property stimuliPath of type Path.');
       }
 
-      this.tatoolStimulus = tatoolStimulusService.createStimulus('main', this.stimuliPath);
+      this.tatoolStimulus = tatoolStimulusService.createStimulus(this.stimuliPath);
       this.tatoolInput = tatoolInputService.createInput();
 
       this.timerDisplayMemoranda = timerService.createTimer(800, true, this);
