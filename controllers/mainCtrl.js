@@ -2,6 +2,7 @@ var Module = require('../models/module').userModule;
 var Repository = require('../models/module').repositoryModule;
 var exportCtrl = require('../controllers/exportCtrl');
 var repositoryCtrl = require('../controllers/repositoryCtrl');
+var analyticsCtrl = require('../controllers/analyticsCtrl');
 var request = require('request');
 var crypto = require('crypto');
 var fs = require('fs');
@@ -43,7 +44,11 @@ var insert = function(req, res) {
           if (err) {
             res.status(500).send(err);
           } else {
-            res.json(module);
+            analyticsCtrl.addAnalyticsUser(req, module).then(function(data) {
+              res.json(module);
+            }, function(error) {
+              res.status(500).json({ message: 'Error adding analytics data.'});
+            });
           }
         });
 
@@ -83,7 +88,11 @@ var update = function(req, res, userModule) {
           if (err) {
             res.status(500).send(err);
           } else {
-            res.json(userModule);
+            analyticsCtrl.addAnalyticsUser(req, module).then(function(data) {
+              res.json(userModule);
+            }, function(error) {
+              res.status(500).json({ message: 'Error adding analytics data.'});
+            });
           }
         });
 
@@ -200,7 +209,11 @@ exports.save = function(req, res) {
           if (err) {
             res.status(500).send(err);
           } else {
-            res.json(module);
+            analyticsCtrl.addAnalyticsData(req).then(function(data) {
+              res.json(module);
+            }, function(error) {
+              res.status(500).json({ message: 'Error adding analytics data.'});
+            });
           }
         });
 

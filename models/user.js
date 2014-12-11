@@ -77,6 +77,7 @@ User.methods.createToken = function(secret) {
   var token = jwt.sign({
     _id: this._id,
     email: this.email,
+    code: this.code,
     roles: this.roles
   }, secret, { 
     expiresInMinutes: 60*8 

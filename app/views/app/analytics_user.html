@@ -1,0 +1,39 @@
+<div id="inviteModal">
+  <div class="modal-header">
+    <div class="modal-title">
+      <span><b>User Details</b> <a class="info" tooltip="User session details." tooltip-placement="right"><i class="fa fa-info-circle"></i></a></span>
+      <button type="button" class="bootbox-close-button close" style="margin-left: 20px" aria-hidden="true" ng-click="ok()">×</button>
+    </div>
+  </div>
+  <div class="modal-body">
+    <table class="table table-bordered table-striped table-hover table-condensed table-small">
+          <thead>
+            <tr>
+              <th><b>Session</b></th>
+              <th style="text-align:center"><b>Start Time</b></th>
+              <th style="text-align:center"><b>End Time</b></th>
+              <th style="text-align:center"><b>Trials</b></th>
+              <th width="80"><b>Status</b></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="session in user.sessions">
+              <td align="center"> {{session.sessionId}}</td>
+              <td align="center"> {{formatDate(session.startTime)}} </td>
+              <td align="center"> {{formatDate(session.endTime)}} </td>
+              <td align="center"> {{session.maxTrialId}} </td>
+              <td align="center">
+                <div ng-switch on="session.sessionComplete">
+                  <span ng-switch-when="true"><i class="fa fa-check-circle-o fa-lg green"></i></span>
+                  <span ng-switch-when="false"><i class="fa fa-times-circle-o fa-lg red"></i></span>
+                  <span ng-switch-default></span>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-tatool-off" ng-click="ok()">Close</button>
+  </div>
+</div>

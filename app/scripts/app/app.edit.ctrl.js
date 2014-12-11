@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('tatool.app')
-  .controller('EditCtrl', ['$scope', '$q', '$modalInstance', '$sce', '$compile', '$modal', 'module', 'moduleDataService',
-    function ($scope, $q, $modalInstance, $sce, $compile, $modal, module, moduleDataService) {
+  .controller('EditCtrl', ['$scope', '$q', '$modalInstance', '$sce', '$compile', '$modal', '$log', 'module', 'moduleDataService',
+    function ($scope, $q, $modalInstance, $sce, $compile, $modal, $log, module, moduleDataService) {
 
       var VIEW_PATH = '../../views/app/';
 
@@ -63,6 +63,16 @@ angular.module('tatool.app')
           }
         });
       }
+
+      // filters valid exporter in editor
+      $scope.filterValidExporter = function(exporter) {
+        if (exporter.mode === 'upload' || exporter.mode === 'download') {
+          return true;
+        } else {
+          return false;
+        }
+      };
+
 
       $scope.addNewExecutable = function(element) {
         hideAlert();
@@ -196,7 +206,7 @@ angular.module('tatool.app')
         }, function(err) {
           $log.error(err);
         });
-      };
+      }
 
       // loading all projects from tatool
       getProjects();
@@ -214,9 +224,9 @@ angular.module('tatool.app')
           }
 
           if ($scope.currentProject.executables) {
-            for (var i=0; i < $scope.currentProject.executables.length; i++) {
-              if ($scope.currentProject.executables[i].customType === $scope.element.customType) {
-                $scope.currentExecutable = $scope.currentProject.executables[i];
+            for (var j=0; j < $scope.currentProject.executables.length; j++) {
+              if ($scope.currentProject.executables[j].customType === $scope.element.customType) {
+                $scope.currentExecutable = $scope.currentProject.executables[j];
                 break;
               }
             }
@@ -240,7 +250,7 @@ angular.module('tatool.app')
       };
 
       // triggered by Select Executable
-      $scope.chooseProject = function($item, $model) {
+      $scope.chooseProject = function($item) {
         var project = {};
         project.name = $item.name;
         project.access = $item.access;
@@ -251,7 +261,7 @@ angular.module('tatool.app')
       };
 
       // triggered by Select Executable
-      $scope.chooseExecutable = function($item, $model) {
+      $scope.chooseExecutable = function($item) {
         var customType = $item.customType;
         $scope.element.customType = customType;
         $scope.currentExecutable = $item;
@@ -314,7 +324,7 @@ angular.module('tatool.app')
       };
 
       // triggered by Edit Resource Property
-      $scope.chooseResourceProject = function($item, $model) {
+      $scope.chooseResourceProject = function($item) {
         var project = {};
         project.name = $item.name;
         project.access = $item.access;
@@ -352,7 +362,7 @@ angular.module('tatool.app')
                     '<div class="radio"> <label for="type-string"> ' +
                     '<input type="radio" name="type" id="type-string" value="String" checked="checked"> ' +
                     'String </label> ' +
-                    '</div>' + 
+                    '</div>' +
                     '<div class="radio"> <label for="type-boolean"> ' +
                     '<input type="radio" name="type" id="type-boolean" value="Boolean"> ' +
                     'Boolean </label> ' +

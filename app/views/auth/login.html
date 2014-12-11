@@ -13,7 +13,7 @@
 	    <input type="submit"  name="login" value="Log in" />
 	</form>
 
-	<br><a ui-sref="register">Register</a> | <a ui-sref="reset" ui-sref-opts="{location: false}">Forgot password</a>
+	<br><span ng-if="getMode()!=='lab'"><a ui-sref="register">Register</a> | <a ui-sref="reset" ui-sref-opts="{location: false}">Forgot password</a></span>
   <br><br>
 
   <div id="messagebox">

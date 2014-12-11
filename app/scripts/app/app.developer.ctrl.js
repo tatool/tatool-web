@@ -254,6 +254,26 @@ angular.module('tatool.app')
         });
     };
 
+    $scope.exporterEnabled = function(module) {
+      var exporterEnabled = false;
+      var exporters = module.moduleDefinition.export;
+      for (var i = 0; i < exporters.length; i++) {
+        if ((exporters[i].mode === 'download') && exporters[i].enabled === true) {
+          exporterEnabled = true;
+          break;
+        }
+      }
+      return exporterEnabled;
+    };
+
+    $scope.filterExporterValues = function(exporter) {
+      if ((exporter.mode === 'download') && exporter.enabled === true) {
+        return true;
+      } else {
+        return false;
+      }
+    };
+
     // function to export data
     $scope.doExport = function($event, module, exportMode, exportTarget) {
       $('#dropdownExport').removeClass('open');
@@ -296,10 +316,11 @@ angular.module('tatool.app')
         author: userService.getUserName(),
         label: 'newModule',
         export : [
-          { mode: 'download' }
+          { mode: 'upload', auto: true, enabled: false},
+          { mode: 'download', enabled: true }
         ],
         allowEscapeKey : true,
-        fullscreen : true,
+        fullscreen : false,
         moduleHierarchy: {
           tatoolType: 'List',
           iterator: { customType: 'ListIterator', numIterations: 1 },

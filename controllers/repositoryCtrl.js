@@ -2,8 +2,6 @@ var Module = require('../models/module').repositoryModule;
 var mainCtrl = require('../controllers/mainCtrl');
 var Q = require('q');
 
-// Adding a new module from a local file
-// if everything goes well will return to calling method (mainCtrl)
 exports.add = function(module, res) {
   Module.findOne({ moduleId: module.moduleId }, function(err, entry) {
     if (err) {
@@ -16,7 +14,7 @@ exports.add = function(module, res) {
       }
     }
   });
-}
+};
 
 var insert = function(module, res) {
   var today = new Date();
@@ -33,6 +31,8 @@ var insert = function(module, res) {
   Module.create(module, function(err, result) {
     if (err) {
       res.status(500).send(err);
+    } else {
+      res.json();
     }
   });
 };
@@ -55,6 +55,8 @@ var update = function(entry, module, res) {
   entry.save(function(err, data) {
     if (err) {
       res.status(500).send(err);
+    } else {
+      res.json();
     }
   });
 };
@@ -111,6 +113,8 @@ exports.remove = function(moduleId, res) {
   Module.remove({ moduleId: moduleId }, function(err, entry) {
     if (err) {
       res.status(500).send(err);
+    } else {
+      res.json();
     }
   });
 };

@@ -21,6 +21,9 @@ app.set('resource_user', process.env.RESOURCE_USER || 'tatool');
 app.set('resource_pw', process.env.RESOURCE_PW || 'secret');
 app.set('captcha_private_key', process.env.RECAPTCHA_PRIVATE_KEY || '');
 app.set('remote_url', process.env.REMOTE_URL);
+app.set('remote_upload', process.env.REMOTE_UPLOAD);
+app.set('remote_download', process.env.REMOTE_DOWNLOAD);
+app.set('override_upload_dir', false);
 app.set('module_limit', 3);
 
 // dependencies
@@ -28,6 +31,7 @@ var userController = require('./controllers/user');
 var mainCtrl = require('./controllers/mainCtrl');
 var repositoryCtrl = require('./controllers/repositoryCtrl');
 var developerCtrl = require('./controllers/developerCtrl');
+var analyticsCtrl = require('./controllers/analyticsCtrl');
 var authController = require('./controllers/auth')
 var adminController = require('./controllers/admin');
 var commonCtrl = require('./controllers/commonCtrl');
@@ -83,6 +87,12 @@ router.get('/developer/modules/:moduleId/resources/token', developerCtrl.getReso
 router.get('/developer/projects', commonCtrl.getProjects);
 app.get('/developer/resources/:projectAccess/:projectName/:resourceType/:resourceName', developerCtrl.getResource); // NO JWT CHECK
 
+// Analytics Modules
+router.get('/analytics/modules', analyticsCtrl.getAll);
+router.get('/analytics/modules/:moduleId', analyticsCtrl.get);
+router.delete('/analytics/modules/:moduleId', analyticsCtrl.remove);
+router.get('/analytics/data/modules/:moduleId/:userCode', analyticsCtrl.getUserDataDownloadToken);
+
 // Admin
 router.get('/admin/users', adminController.getUsers);
 router.post('/admin/users/:user', adminController.updateUser);
@@ -120,6 +130,7 @@ app.get('/user/resetverify/:token', userController.verifyResetToken);
 app.post('/user/reset/:token', userController.updatePassword);
 app.post('/user/captcha', userController.verifyCaptcha);
 app.post('/user/devaccount', userController.signupDev);
+app.get('/data/user/:token', analyticsCtrl.getUserData);
 
 // Tatool Web Client
 app.use(express.static(path.join(__dirname, 'app')));

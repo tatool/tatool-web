@@ -37,10 +37,10 @@ angular.module('tatool.app', ['tatool', 'tatool.auth', 'tatool.common', 'ngAnima
             }
           }]
         }
-      }).state('researcher', {
-        url: '/researcher',
-        templateUrl: 'views/app/researcher.html',
-        controller: 'ResearcherCtrl',
+      }).state('analytics', {
+        url: '/analytics',
+        templateUrl: 'views/app/analytics.html',
+        controller: 'AnalyticsCtrl',
         resolve: {
           auth: ['$q', '$state', 'authService', 'userService', function($q, $state, authService, userService) {
             if (authService.isAuthenticated()) {

@@ -87,7 +87,7 @@ angular.module('tatool.app')
     function convertToCsv(allTrials, moduleProperties, sessionProperties, moduleLabel) {
       var output = '';
       var trials = allTrials;
-      var header = ['userId', 'moduleId', 'sessionId', 'trialId', 'executableId'];
+      var header = ['userCode', 'moduleId', 'sessionId', 'trialId', 'executableId'];
       var prefix = '';
 
       // add module properties header
@@ -116,9 +116,9 @@ angular.module('tatool.app')
         var currentTrial = trials[i];
         prefix = currentTrial.executableId;
 
-        // create new line and add userId as static first element
+        // create new line and add userCode as static first element
         var line = [];
-        line.push(userService.getUserName());
+        line.push(userService.getUserCode());
 
         // add module properties
         for (var mpi = 0; mpi < moduleProperties.length; mpi++){
@@ -370,7 +370,7 @@ angular.module('tatool.app')
           downloadExport(module).then(function(data) {
             deferred.resolve();
             var moduleName = (module.moduleLabel) ? module.moduleLabel : module.moduleId;
-            var filename = moduleName + '_' + userService.getUserName() +  '.csv';
+            var filename = moduleName + '_' + userService.getUserCode() +  '.csv';
             download(data, filename, 'text/plain'); // triggers file download (has issues on Safari)
           }, function(error) {
             deferred.reject(error);

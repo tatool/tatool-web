@@ -1,15 +1,16 @@
 { "allowEscapeKey" : true,
   "author" : "Tatool",
-  "export" : [ { "$$hashKey" : "object:392",
-        "auto" : false,
-        "mode" : "upload"
+  "export" : [ { 
+        "auto" : true,
+        "mode" : "upload",
+		"target" : "uploads/whatever/"
       },
-      { "$$hashKey" : "object:391",
+      { 
         "auto" : false,
         "mode" : "remote",
         "target" : "http://www.tatool.ch/tatoolweb/remoteUpload.php"
       },
-      { "$$hashKey" : "object:390",
+      { 
         "mode" : "download"
       }
     ],

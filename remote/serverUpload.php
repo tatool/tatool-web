@@ -31,12 +31,13 @@ if ((!isset($json->moduleId) || is_null($json->moduleId)) || (!isset($json->sess
 	exit;
 }
 
-$user = filter_var($json->userId, FILTER_SANITIZE_STRING);
+$user = filter_var($json->userCode, FILTER_SANITIZE_STRING);
 $moduleId = filter_var($json->moduleId, FILTER_SANITIZE_STRING);
 $sessionId = str_pad($json->sessionId, 6, "0", STR_PAD_LEFT);
 $data = LZString::decompressFromBase64($json->trialData);
 $path = "/home/outerlim/tatoolweb/" . $moduleId . "/";
-$filename = $user . "_" . $moduleId . "_" . $sessionId;
+$filename = $moduleId . "_" . $user . "_" . $sessionId;
+$zipFilename = $moduleId . "_" . $user . '.zip';
 $timestamp = ""; 
 $extension = ".csv";
 
@@ -55,10 +56,21 @@ try {
 	$fh = fopen($path . $filename . $timestamp . $extension, 'w');
 	fwrite($fh, $data);
 	fclose($fh);
-	echo json_decode("{'message': 'Data upload successful!'}");
+
+  // add file to zip
+  $zip = new ZipArchive;
+  $res = $zip->open($path . $zipFilename, ZipArchive::CREATE);
+  if ($res === TRUE) {
+    $zip->addFile($path . $filename . $timestamp . $extension, $filename . $timestamp . $extension);
+    $zip->close();
+    echo json_decode("{'message': 'Data upload successful.'}");
+  } else {
+    header('HTTP/1.1 500 Internal Server Error');
+    echo json_decode("{'message': 'Error creating archive file.'}");
+  }
 } catch (Exception $e) {
 	header('HTTP/1.1 500 Internal Server Error');
-	echo json_decode("{'message': 'Error creating file!'}");
+	echo json_decode("{'message': 'Error creating file!.}");
 	exit;
 }
 

@@ -62,7 +62,7 @@ angular.module('tatool.auth')
         alertText = 'The passwords you entered don\'t match.';
         setAlert('danger', alertText);
       } else if (credentials.devAccess && (!credentials.fullname || !credentials.affiliation)) {
-        alertText = 'Please enter all required fields for your Researcher/Developer Access:<br><ul>';
+        alertText = 'Please enter all required fields for your Developer Access:<br><ul>';
         alertText += (!credentials.fullname) ? '<li> Full Name' : '';
         alertText += (!credentials.affiliation) ? '<li> Affiliation' : '';
         alertText += '</ul>';

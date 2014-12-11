@@ -37,7 +37,7 @@ exports.isAuthenticated = function(req, res, next) {
           res.status(500).json({ message: 'Email address not yet verified. Please click on the link in your verification email to activate your account.', verify: true });
         } else {
           var token = user.createToken(req.app.get('jwt_secret'));
-          res.json({ token: token, roles: user.roles });
+          res.json({ token: token, roles: user.roles, code: user.code });
         }
         
       } else {

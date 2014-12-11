@@ -1,6 +1,7 @@
 'use strict';
 
 /* global Papa */
+/* global async */
 
 angular.module('tatool.module')
   .service('tatoolExecutable', [ '$q', '$http', function ($q, $http) {
@@ -60,7 +61,7 @@ angular.module('tatool.module')
     -------------------------------- */
 
     // provide the current time in sub-millisecond resolution and such that it is not subject to system clock skew or adjustments
-    executable.getTiming = (function() {
+    executable.getTiming = function() {
       // Returns the number of milliseconds elapsed since either the browser navigationStart event or
       // the UNIX epoch, depending on availability.
       // Where the browser supports 'performance' we use that as it is more accurate (microsoeconds
@@ -76,7 +77,7 @@ angular.module('tatool.module')
         function() { return new Date().getTime(); };
       })();
       return performance.now();
-    });
+    };
 
     /**--------------------------------
       Resource Loading Helper functions
@@ -228,7 +229,6 @@ angular.module('tatool.module')
 
     // preloads images
     var preloadImages = function(list, images, deferred, stimuliPath) {
-      var self = this;
       async.each(images, function(image, callback) {
         var img = new Image();
         var resource = stimuliPath;

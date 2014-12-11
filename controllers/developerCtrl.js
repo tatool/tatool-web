@@ -2,6 +2,7 @@ var Module = require('../models/module').developerModule;
 var constants = require('../models/module').constants;
 var repositoryCtrl = require('../controllers/repositoryCtrl');
 var exportCtrl = require('../controllers/exportCtrl');
+var analyticsCtrl = require('../controllers/analyticsCtrl');
 var request = require('request');
 var crypto = require('crypto');
 var fs = require('fs');
@@ -58,6 +59,12 @@ var update = function(req, res, module) {
     } else if (result.length >= req.app.get('module_limit') && !module.moduleType && req.body.moduleType !== '') {
       res.status(500).send({ message: 'The number of repository modules is currently restricted to ' + req.app.get('module_limit') + ' per user.'});
     } else {
+      // check whether repository has been enabled - initiate analytics
+      var initAnalytics = false;
+      if (!module.moduleType && req.body.moduleType !== '') {
+        initAnalytics = true;
+      }
+
       // update user defined information
       module.moduleType = req.body.moduleType;
       module.moduleLabel = req.body.moduleLabel;
@@ -75,13 +82,27 @@ var update = function(req, res, module) {
       module.markModified('moduleProperties');
       module.markModified('sessions');
 
-      module.save(function(err, data) {
-        if (err) {
-          res.status(500).send(err);
-        } else {
-          res.json(module);
-        }
-      });
+      if (initAnalytics) {
+        analyticsCtrl.initAnalytics(module).then(function() {
+          module.save(function(err, data) {
+            if (err) {
+              res.status(500).send(err);
+            } else {
+              res.json(module);
+            }
+          });
+        }, function(error) {
+          res.status(500).json(error);
+        });
+      } else {
+        module.save(function(err, data) {
+          if (err) {
+            res.status(500).send(err);
+          } else {
+            res.json(module);
+          }
+        });
+      }
     }
   });
 };
@@ -123,18 +144,18 @@ exports.publish = function(req, res) {
       res.status(500).send(err);
     } else {
       if (module) {
-        // we got the module, now let's add it to the repository
+        
         module.moduleType = req.params.moduleType;
         if (module.moduleType !== 'private') {
           module.invites = undefined;
         }
-        repositoryCtrl.add(module, res);
 
         module.save(function(err, data) {
           if (err) {
             res.status(500).send(err);
           } else {
-            res.json(module);
+            // we got the module, now let's add it to the repository
+            repositoryCtrl.add(module, res);
           }
         });
       } else {
@@ -150,15 +171,15 @@ exports.unpublish = function(req, res) {
       res.status(500).send(err);
     } else {
       if (module) {
-        // we got the module, now let's remove it from the repository
-        repositoryCtrl.remove(module.moduleId, res);
 
         module.moduleType = '';
+        module.invites = undefined;
         module.save(function(err, data) {
           if (err) {
             res.status(500).send(err);
           } else {
-            res.json(module);
+            // we got the module, now let's remove it from the repository
+            repositoryCtrl.remove(module.moduleId, res);
           }
         });
       } else {

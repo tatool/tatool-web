@@ -1,0 +1,71 @@
+<div class="wrapper">
+
+<!-- HEADER --> 
+<div ng-include src="'../../views/header.html'"></div>
+  
+  
+  <div class="container">
+
+    <div ng-class="{danger:'alert alert-danger alert-dismissible', success:'alert alert-success alert-dismissible', info:'alert alert-info alert-dismissible'}[alert.type]" role="alert" ng-show="alert.visible">
+      <button type="button" class="close" ng-click="hideAlert()"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+      <div ng-bind-html="alert.msg"></div>
+    </div>
+
+    <div class="actionHeader" ng-if="modules.length > 0">
+      <ui-select ng-model="selectedModule" theme="bootstrap" ng-disabled="disabled" on-select="chooseModule($item)">
+        <ui-select-match placeholder="Select module...">{{$select.selected.moduleName}}</ui-select-match>
+        <ui-select-choices repeat="module in modules | filter: $select.search | orderBy:'moduleName'">
+          <span ng-bind-html="module.moduleName | highlight: $select.search"></span>
+        </ui-select-choices>
+      </ui-select>
+    </div>
+
+    <div ng-if="currentModule">
+      <button type="button" class="btn btn-primary" ng-model="showEmail" btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0">
+        Show Email
+      </button>
+      <button type="button" class="btn btn-default" ng-click="deleteModule(currentModule.moduleId)">
+        <i class="fa fa-trash-o"></i> Delete
+      </button>
+    </div>
+
+    <br>
+
+    <div ng-if="modules.length > 0 && !currentModule.userData">
+      <b>Select a module first</b>
+    </div>
+
+    <table ng-if="currentModule.userData" class="table table-bordered table-striped table-hover table-condensed table-small">
+      <thead>
+        <tr>
+          <th width="300"><b>Subject</b></th>
+          <th><b>Sessions</b></th>
+          <th><b>Last Update</b></th>
+          <th width="110px"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="user in currentModule.userData | filter:{ $: filterUser } | orderBy:'email'">
+          <td> <b>{{user.code}}</b> <span ng-if="showEmail === 1 && user.email !== ''">({{user.email}})</span></td>
+          <td align="center"> {{user.maxSessionId}}<br></td>
+          <td align="center"> {{formatDate(user.updated_at)}}<br></td>
+          <td align="center"> 
+            <a ng-click="showDetails(user)" class="btn btn-tatool-off" tooltip="Show user details" tooltip-placement="top" tooltip-animation="false"><i class="fa fa-search-plus"></i></a>
+            <a ng-click="downloadData(user, currentModule)" class="btn btn-tatool-off" tooltip="Download user data for this Module. Download will open a Pop-up window." tooltip-placement="top" tooltip-animation="false"><i class="fa fa-download"></i></a>
+          </td>
+        </tr>
+        <tr ng-if="currentModule.userData.length === 0">
+          <td colspan="4"> No data available </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+
+  <!-- Footer Helper -->
+  <div class="push"></div>
+
+</div>
+
+<!-- FOOTER --> 
+<div ng-include src="'../../views/footer.html'"></div>

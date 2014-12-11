@@ -294,6 +294,72 @@ angular.module('tatool')
       return deferred.promise;
     };
 
+    // get all analytics enabled modules
+    data.getAllModuleAnalytics = function() {
+      var deferred = $q.defer();
+
+      $http.get('/api/analytics/modules')
+        .success(function (data) {
+          deferred.resolve(data);
+        })
+        .error(function (error) {
+          $log.error(error);
+          deferred.reject(error.message);
+        });
+
+      return deferred.promise;
+    };
+
+    // get analytics of one module
+    data.getModuleAnalytics = function(moduleId) {
+      var deferred = $q.defer();
+
+      $http.get('/api/analytics/modules/' + moduleId)
+        .success(function (data) {
+          deferred.resolve(data);
+        })
+        .error(function (error) {
+          $log.error(error);
+          deferred.reject(error.message);
+        });
+
+      return deferred.promise;
+    };
+
+    // delete module analytics
+    data.deleteModuleAnalytics = function(moduleId) {
+      var deferred = $q.defer();
+
+      $http.delete('/api/analytics/modules/' + moduleId)
+        .success(function (data) {
+          if (data === 'null') {
+            data = null;
+          }
+          deferred.resolve(data);
+        })
+        .error(function (error) {
+          deferred.reject(error.message);
+        });
+
+      return deferred.promise;
+    };
+
+    // get user analytics data
+    data.getModuleAnalyticsUserData = function(user, module) {
+      var deferred = $q.defer();
+
+      $http.get('/api/analytics/data/modules/' + module.moduleId + '/' + user.code)
+        .success(function (data) {
+          deferred.resolve(data);
+        })
+        .error(function (error) {
+          $log.error(error);
+          deferred.reject(error.message);
+        });
+
+      return deferred.promise;
+    };
+
     return data;
 
   }]);

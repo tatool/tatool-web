@@ -13,7 +13,7 @@ angular.module('tatool.auth')
     $http.defaults.headers.common['Content-Type'] = 'application/json;charset=utf-8';
     $http.get('/api/login')
       .success(function (data) {
-        userService.createSession(credentials.userName, data.token, data.roles);
+        userService.createSession(credentials.userName, data.token, data.roles, data.code);
         deferred.resolve('success');
       })
       .error(function (error) {

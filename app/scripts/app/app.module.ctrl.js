@@ -75,8 +75,9 @@ angular.module('tatool.app')
       startSpinner('Exporting data. Please wait...');
 
       var processModule = function(module, cb) {
+        var exportersEnabled = $scope.exporterEnabled(module);
         var exporters = module.moduleDefinition.export;
-        if (exporters) {
+        if (exportersEnabled) {
           // loop through exporters
           async.eachSeries(exporters, exportModule.bind(null, module), function(err) {
             if (err) {
@@ -91,8 +92,8 @@ angular.module('tatool.app')
       };
 
       var exportModule = function(module, exporter, callbackExport) {
-        if (exporter.auto === true) {
-          exportService.exportModuleData(module, exporter.mode, exporter.target).then(function() {
+        if (exporter.enabled === true && exporter.auto === true) {
+          exportService.exportModuleData(module, exporter.mode, exporter.target, cfg.APP_MODE_USER).then(function() {
             callbackExport();
           }, function(error) {
             callbackExport(error);
@@ -224,6 +225,26 @@ angular.module('tatool.app')
             }
           }
         });
+    };
+
+    $scope.exporterEnabled = function(module) {
+      var exporterEnabled = false;
+      var exporters = module.moduleDefinition.export;
+      for (var i = 0; i < exporters.length; i++) {
+        if ((exporters[i].mode === 'upload' || exporters[i].mode === 'download') && exporters[i].enabled === true) {
+          exporterEnabled = true;
+          break;
+        }
+      }
+      return exporterEnabled;
+    };
+
+    $scope.filterExporterValues = function(exporter) {
+      if ((exporter.mode === 'download' || exporter.mode === 'upload') && exporter.enabled === true) {
+        return true;
+      } else {
+        return false;
+      }
     };
 
     // function to export data

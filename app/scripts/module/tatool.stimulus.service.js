@@ -11,7 +11,7 @@ angular.module('tatool.module')
       return stimulus;
     };
 
-    function Stimulus(stimulusId) {
+    function Stimulus() {
       this.data = {};
 
       this.init = function() {

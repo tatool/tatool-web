@@ -4,13 +4,15 @@ angular.module('tatool.auth')
   .service('userService', [ '$window', '$rootScope', 'moduleDataService', 'trialDataService', function ($window, $rootScope, moduleDataService, trialDataService) {
 
   // creates a new user sessions
-  this.createSession = function (userName, token, roles) {
+  this.createSession = function (userName, token, roles, code) {
     this.userName = userName;
     this.authenticated = true;
     this.roles = roles;
+    this.code = code;
     $window.sessionStorage.setItem('userName', userName);
     $window.sessionStorage.setItem('roles', roles);
     $window.sessionStorage.setItem('token', token);
+    $window.sessionStorage.setItem('code', code);
     trialDataService.closeTrialsDB();
     $rootScope.$broadcast('login');
   };
@@ -23,6 +25,7 @@ angular.module('tatool.auth')
     $window.sessionStorage.removeItem('userName');
     $window.sessionStorage.removeItem('roles');
     $window.sessionStorage.removeItem('token');
+    $window.sessionStorage.removeItem('code');
     trialDataService.closeTrialsDB();
     $rootScope.$broadcast('logout');
   };
@@ -38,12 +41,20 @@ angular.module('tatool.auth')
     return this.authenticated ? this.authenticated : false;
   };
 
-  // gets the current username
+  // gets the userName
   this.getUserName = function() {
     if (!this.userName) {
       this.userName = $window.sessionStorage.getItem('userName');
     }
     return this.userName ? this.userName : null;
+  };
+
+  // gets the user code
+  this.getUserCode = function() {
+    if (!this.code) {
+      this.code = $window.sessionStorage.getItem('code');
+    }
+    return this.code ? this.code : null;
   };
 
   return this;

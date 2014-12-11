@@ -207,7 +207,7 @@ angular.module('tatool.module')
 
       // check for status panel settings
       var statusEnabled = false;
-      angular.forEach(currentExecutable.status, function(panelValue, panelName) {
+      angular.forEach(currentExecutable.status, function(panelValue) {
         if (panelValue) {
           statusEnabled = panelValue;
         }

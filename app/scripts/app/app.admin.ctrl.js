@@ -6,7 +6,7 @@ angular.module('tatool.app')
 
       $scope.users = [];
 
-      $scope.roles = ['user', 'developer', 'researcher', 'admin'];
+      $scope.roles = ['user', 'developer', 'analytics', 'admin'];
 
       $scope.highlightUserEmail = '';
 
@@ -254,7 +254,7 @@ angular.module('tatool.app')
                     '<div class="form-group"> ' +
                     '<label class="col-md-4 control-label" for="name">Executables (JSON)</label> ' +
                     '<div class="col-md-8"> ' +
-                    '<textarea id="executables" name="executables" class="form-control input-sm" rows="10"></textarea>' + 
+                    '<textarea id="executables" name="executables" class="form-control input-sm" rows="10"></textarea>' +
                     '<small><b>Format:</b> [ { "customType" : "executable1" }, <br>{ "customType" : "executable2" } ]</small>' +
                     '</div> ' +
                     '</div> ' +
@@ -404,7 +404,7 @@ angular.module('tatool.app')
                     '<div class="form-group"> ' +
                     '<label class="col-md-4 control-label" for="name">Executables (JSON)</label> ' +
                     '<div class="col-md-8"> ' +
-                    '<textarea id="executables" name="executables" class="form-control input-sm" rows="10">' + JSON.stringify(project.executables) + '</textarea>' + 
+                    '<textarea id="executables" name="executables" class="form-control input-sm" rows="10">' + JSON.stringify(project.executables) + '</textarea>' +
                     '<small><b>Format:</b> [ { "customType" : "executable1" }, <br>{ "customType" : "executable2" } ]</small>' +
                     '</div> ' +
                     '</div> ' +
@@ -471,7 +471,7 @@ angular.module('tatool.app')
         }, function(err) {
           $log.error(err);
         });
-      };
+      }
 
       // loading all projects from tatool
       moduleDataService.openModulesDB(null, 'user', getProjects);

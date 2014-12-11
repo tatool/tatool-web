@@ -33,10 +33,10 @@
               <h3>{{module.moduleAuthor}}</h3>
               <div class="buttonbar">
                 <div class="btn btn-tatool" ng-click="startModule(module)"><i class="fa fa-play-circle"></i> Start</div>
-                <div id="dropdownExport" class="btn-group" dropdown ng-if="module.moduleDefinition.export && module.moduleDefinition.export.length > 0">
+                <div id="dropdownExport" class="btn-group" dropdown ng-if="exporterEnabled">
                   <button id="dropdownExportButton" class="btn btn-tatool-off dropdown-toggle" dropdown-toggle>Export <span class="caret"></span></button>
                   <ul class="dropdown-menu" role="menu" id="dropdownExport" >
-                    <li class="exporterName" ng-click="doExport($event, module, exporter.mode, exporter.target)" ng-repeat="exporter in module.moduleDefinition.export | filter:filterExporter | orderBy:'mode'">
+                    <li class="exporterName" ng-click="doExport($event, module, exporter.mode, exporter.target)" ng-repeat="exporter in module.moduleDefinition.export | filter:filterExporterValues | orderBy:'mode'">
                       <a ui-sref="home">{{exporter.mode}}</a>
                     </li>
                   </ul>
