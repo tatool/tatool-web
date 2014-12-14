@@ -1,5 +1,7 @@
 'use strict';
 
+/* global Date */
+
 angular.module('tatool.app')
   .controller('InviteCtrl', ['$scope', '$q', '$modalInstance', '$sce', 'module', 'moduleDataService',
     function ($scope, $q, $modalInstance, $sce, module, moduleDataService) {
@@ -18,7 +20,7 @@ angular.module('tatool.app')
       };
 
       $scope.formatDate = function(date) {
-        return new Date(date).toLocaleString();
+        return new Date(Date.parse(date)).toLocaleString();
       };
 
       $scope.inviteUser = function() {

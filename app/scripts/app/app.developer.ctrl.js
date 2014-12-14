@@ -24,6 +24,8 @@ angular.module('tatool.app')
 
     // read all modules and display
     function initModules() {
+      startSpinner('Loading modules...');
+
       moduleDataService.getAllModules().then( function(data) {
         $scope.modules = [];
         for (var i = 0; i < data.length; i++) {
@@ -32,7 +34,9 @@ angular.module('tatool.app')
         if ($scope.modules.length > 0) {
           $scope.accordionStatus.develop = true;
         }
+        stopSpinner();
       }, function(error) {
+        stopSpinner();
         bootbox.dialog({
           message: error,
           title: '<b>Tatool</b>',

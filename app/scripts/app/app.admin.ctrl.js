@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('tatool.app')
-  .controller('AdminCtrl', ['$scope', '$q', '$http', '$log', '$timeout', '$sce', 'userDataService', 'moduleDataService',
-    function ($scope, $q, $http, $log, $timeout, $sce, userDataService, moduleDataService) {
+  .controller('AdminCtrl', ['$scope', '$q', '$http', '$log', '$timeout', '$sce', 'userDataService', 'moduleDataService', 'spinnerService',
+    function ($scope, $q, $http, $log, $timeout, $sce, userDataService, moduleDataService, spinnerService) {
 
       $scope.users = [];
 
@@ -197,10 +197,13 @@ angular.module('tatool.app')
       };
 
       function initUsers() {
+        startSpinner('Loading users...');
         userDataService.getUsers().then( function(data) {
           $scope.users = data;
+          stopSpinner();
         }, function(error) {
           $log.error(error);
+          stopSpinner();
         });
       }
 
@@ -466,9 +469,12 @@ angular.module('tatool.app')
       }
 
       function getProjects() {
+        startSpinner('Loading users...');
         moduleDataService.getAllProjects().then(function(data) {
           $scope.projects = data;
+          stopSpinner();
         }, function(err) {
+          stopSpinner();
           $log.error(err);
         });
       }
@@ -515,5 +521,13 @@ angular.module('tatool.app')
         $scope.alert.visible = false;
         $scope.alert.msg = '';
       };
+
+      function startSpinner(text) {
+        spinnerService.spin('loadingSpinner', text);
+      }
+
+      function stopSpinner() {
+        spinnerService.stop('loadingSpinner');
+      }
 
     }]);

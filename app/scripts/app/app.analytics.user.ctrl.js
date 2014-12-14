@@ -1,5 +1,7 @@
 'use strict';
 
+/* global Date */
+
 angular.module('tatool.app')
   .controller('AnalyticsUserCtrl', [ '$scope', '$sce', '$modalInstance', 'user', function ($scope, $sce, $modalInstance, user) {
 
@@ -9,7 +11,7 @@ angular.module('tatool.app')
       if (!date) {
         return '-';
       } else {
-        return new Date(date).toLocaleString();
+        return new Date(Date.parse(date)).toLocaleString();
       }
     };
 

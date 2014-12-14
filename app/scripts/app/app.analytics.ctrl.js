@@ -1,5 +1,7 @@
 'use strict';
 
+/* global Date */
+
 angular.module('tatool.app')
   .controller('AnalyticsCtrl', [ '$scope', '$sce', '$modal', '$log', 'moduleDataService', 'spinnerService', function ($scope, $sce, $modal, $log, moduleDataService, spinnerService) {
 
@@ -107,7 +109,7 @@ angular.module('tatool.app')
     };
 
     $scope.formatDate = function(date) {
-      return new Date(date).toLocaleString();
+      return new Date(Date.parse(date)).toLocaleString();
     };
 
     function startSpinner(text) {

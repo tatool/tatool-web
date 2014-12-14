@@ -35,6 +35,7 @@ angular.module('tatool.app')
     // read all modules and display
     function initModules() {
       // Initialize installed modules
+      startSpinner('Loading modules...');
       moduleDataService.getAllModules().then( function(data) {
         $scope.modules = [];
         $scope.invites = [];
@@ -50,6 +51,8 @@ angular.module('tatool.app')
           }
           
         }
+        stopSpinner();
+
         // run auto export on installed modules
         runAutoExport();
 
