@@ -12,9 +12,11 @@
 
     <div class="actionHeader">
       <form class="form-inline pull-right" role="form">
-        <div class="form-group has-feedback">
-          <input type="text" class="form-control" id="searchRepo" ng-model="query" ng-change="setModuleFilter()">
-          <span class="form-control-feedback"><i class="fa fa-times pointer" ng-click="removeModuleFilter()"></i></span>
+        <div class="input-group">
+          <input type="text" class="form-control" id="searchRepo" ng-model="query" ng-change="setModuleFilter()" placeholder="Search Module...">
+          <span class="input-group-btn">
+            <button type="button" class="btn btn-default button-up" ng-click="removeModuleFilter()"><i class="fa fa-times"></i></button>
+          </span>
         </div>
       </form>
     </div>
@@ -26,7 +28,7 @@
           <i class="glyphicon" ng-class="{'glyphicon-chevron-down': accordionStatus.installed, 'glyphicon-chevron-right': !accordionStatus.installed}"></i>
         </accordion-heading>
         <div id="modules">
-          <div class="tile" ng-class="{'tileHighlight': module.moduleId == highlightModuleId}" ng-repeat="module in modules | orderBy:'moduleName' | filter:{ moduleName: filterModule }" ng-if="!!modules.length">
+          <div class="tile" ng-class="{'tileHighlight': module.moduleId == highlightModuleId}" ng-repeat="module in modules | orderBy:'moduleName' | filter:{ $: filterModule }" ng-if="!!modules.length">
             <div class="icon"><i class="fa fa-play-circle fa-4x"></i> <span ng-if="module.maxSessionId"><small>Sessions<br></small> <b class="sessionNum">{{module.maxSessionId}}</b></span></div>
             <div class="content">
               <h2>{{module.moduleName}}</h2>
@@ -64,7 +66,7 @@
           <i class="glyphicon" ng-class="{'glyphicon-chevron-down': accordionStatus.invites, 'glyphicon-chevron-right': !accordionStatus.invites}"></i>
         </accordion-heading>
         <div id="modules">
-          <div class="tile" ng-repeat="module in invites | orderBy:'created_at':true | filter:{ moduleName: filterModule }" ng-if="!!invites.length">
+          <div class="tile" ng-repeat="module in invites | orderBy:'created_at':true | filter:{ $: filterModule }" ng-if="!!invites.length">
             <div class="icon"><i class="fa fa-user fa-4x"></i></div>
             <div class="content">
               <h2>{{module.moduleName}}</h2>
@@ -92,7 +94,7 @@
           <i class="glyphicon" ng-class="{'glyphicon-chevron-down': accordionStatus.public, 'glyphicon-chevron-right': !accordionStatus.public}"></i>
         </accordion-heading>
         <div id="modules">
-          <div class="tile" ng-class="{'tileHighlight': module.moduleId == highlightModuleId}" ng-repeat="module in repository | orderBy:'created_at':true | limitTo:quantity | filter:{ moduleName: filterModule }" ng-if="!!repository.length">
+          <div class="tile" ng-class="{'tileHighlight': module.moduleId == highlightModuleId}" ng-repeat="module in repository | orderBy:'created_at':true | startFrom:repositoryCurrentPage*repositoryPageSize | limitTo:repositoryPageSize | filter:{ $: filterModule }" ng-if="!!repository.length">
             <div class="icon"><i class="fa fa-globe fa-4x"></i></div>
             <div class="content">
               <h2>{{module.moduleName}}</h2>
@@ -105,6 +107,16 @@
           <div ng-if="repository.length === 0">
             No modules found.
           </div>
+        </div>
+        <br clear="left">
+        <div class="pull-right">
+          <button class="btn btn-default" ng-disabled="repositoryCurrentPage == 0" ng-click="repositoryCurrentPage=repositoryCurrentPage-1">
+            <i class="fa fa-chevron-left"></i>
+          </button>
+          {{(numRepositoryModule == 0) ? repositoryCurrentPage : repositoryCurrentPage+1}}/{{numRepositoryModule}}
+          <button class="btn btn-default" ng-disabled="repositoryCurrentPage >= numRepositoryModule - 1" ng-click="repositoryCurrentPage=repositoryCurrentPage+1">
+            <i class="fa fa-chevron-right"></i>
+          </button>
         </div>
       </accordion-group>
     </accordion>

@@ -16,8 +16,6 @@ angular.module('tatool.app')
     $scope.repository = [];
     $scope.invites = [];
 
-    $scope.quantity = 25;
-
     $scope.accordionStatus = {
       'installed': true,
       'public': true,
@@ -25,6 +23,9 @@ angular.module('tatool.app')
     };
 
     $scope.filterModule = '';
+
+    $scope.repositoryCurrentPage = 0;
+    $scope.repositoryPageSize = 25;
 
     function startSpinner(text) {
       spinnerService.spin('loadingSpinner', text);
@@ -64,6 +65,9 @@ angular.module('tatool.app')
               $scope.repository.push(data[i]);
             }
           }
+
+          $scope.numRepositoryModule = Math.ceil($scope.repository.length/$scope.repositoryPageSize);  
+          $scope.repositoryCurrentPage = 0;
           stopSpinner();
         }, function(error) {
           stopSpinner();
@@ -236,10 +240,12 @@ angular.module('tatool.app')
     $scope.exporterEnabled = function(module) {
       var exporterEnabled = false;
       var exporters = module.moduleDefinition.export;
-      for (var i = 0; i < exporters.length; i++) {
-        if ((exporters[i].mode === 'upload' || exporters[i].mode === 'download') && exporters[i].enabled === true) {
-          exporterEnabled = true;
-          break;
+      if (exporters) {
+        for (var i = 0; i < exporters.length; i++) {
+          if ((exporters[i].mode === 'upload' || exporters[i].mode === 'download') && exporters[i].enabled === true) {
+            exporterEnabled = true;
+            break;
+          }
         }
       }
       return exporterEnabled;

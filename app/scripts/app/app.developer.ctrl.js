@@ -261,12 +261,15 @@ angular.module('tatool.app')
     $scope.exporterEnabled = function(module) {
       var exporterEnabled = false;
       var exporters = module.moduleDefinition.export;
-      for (var i = 0; i < exporters.length; i++) {
-        if ((exporters[i].mode === 'download') && exporters[i].enabled === true) {
-          exporterEnabled = true;
-          break;
+      if (exporters) {
+        for (var i = 0; i < exporters.length; i++) {
+          if ((exporters[i].mode === 'download') && exporters[i].enabled === true) {
+            exporterEnabled = true;
+            break;
+          }
         }
       }
+      
       return exporterEnabled;
     };
 

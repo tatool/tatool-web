@@ -19,9 +19,11 @@
 
             <div class="actionHeader">
               <form class="form-inline pull-right" role="form">
-                <div class="form-group has-feedback">
-                <input type="text" class="form-control" id="searchUser" ng-model="query.user" ng-change="setUserFilter()">
-                <span class="form-control-feedback"><i class="fa fa-times pointer" ng-click="removeUserFilter()"></i></span>
+                <div class="input-group">
+                  <input type="text" class="form-control" id="searchUser" ng-model="query.user" ng-change="setUserFilter()" placeholder="Search User...">
+                  <span class="input-group-btn">
+                    <button type="button" class="btn btn-default button-up" ng-click="removeUserFilter()"><i class="fa fa-times"></i></button>
+                  </span>
                 </div>
               </form>
               <div class="btn btn-tatool" ng-click="addUser()">Add User</div>
