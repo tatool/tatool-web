@@ -24,8 +24,9 @@ angular.module('tatool.app')
 
     $scope.filterModule = '';
 
-    $scope.repositoryCurrentPage = 0;
-    $scope.repositoryPageSize = 25;
+    $scope.repoPaging = {};
+    $scope.repoPaging.currentPage = 0;
+    $scope.repoPaging.pageSize = 25;
 
     function startSpinner(text) {
       spinnerService.spin('loadingSpinner', text);
@@ -66,8 +67,8 @@ angular.module('tatool.app')
             }
           }
 
-          $scope.numRepositoryModule = Math.ceil($scope.repository.length/$scope.repositoryPageSize);  
-          $scope.repositoryCurrentPage = 0;
+          $scope.repoPaging.numPerPage = Math.ceil($scope.repository.length/$scope.repoPaging.pageSize);  
+          $scope.repoPaging.currentPage = 0;
           stopSpinner();
         }, function(error) {
           stopSpinner();

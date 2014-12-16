@@ -4,8 +4,8 @@
 /* global head */
 
 angular.module('tatool.module')
-  .service('executableService', ['$log', '$rootScope', '$injector', '$q', '$http', '$templateCache', '$window', 'contextService', 'tatoolPhase', 'tatoolExecutable', 'moduleService', 'cfgModule',
-    function ($log, $rootScope, $injector, $q, $http, $templateCache, $window, contextService, tatoolPhase, tatoolExecutable, moduleService, cfgModule) {
+  .service('executableService', ['$log', '$rootScope', '$injector', '$q', '$http', '$templateCache', '$window', 'contextService', 'tatoolPhase', 'executableUtils', 'moduleService', 'cfgModule',
+    function ($log, $rootScope, $injector, $q, $http, $templateCache, $window, contextService, tatoolPhase, executableUtils, moduleService, cfgModule) {
 
     var executableService = {};
 
@@ -33,7 +33,7 @@ angular.module('tatool.module')
       moduleProject.name = (moduleProject.name) ? moduleProject.name : cfgModule.MODULE_DEFAULT_PROJECT;
       moduleProject.access = (moduleProject.access) ? moduleProject.access : 'public';
 
-      // get session token to access resources and save to tatoolExecutable
+      // get session token to access resources and save to executableUtils
       var tokenUrl = '/api/' + mode + '/modules/' + moduleService.getModuleId() + '/resources/token';
 
       $http.get(tokenUrl)
@@ -41,7 +41,7 @@ angular.module('tatool.module')
           token = '?' + 'token=' + data.token;
           moduleProject.token = data.token;
           moduleProject.path = '/' + mode + '/resources/' +  moduleProject.access + '/' + moduleProject.name + '/';
-          tatoolExecutable.init(runningExecutor, data.token, mode);
+          executableUtils.init(runningExecutor, data.token, mode);
 
           initializeTatoolResources().then(function() {
             deferred.resolve();

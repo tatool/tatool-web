@@ -573,6 +573,7 @@ a.accordion-toggle:hover {
 	width: 6em;
   height: 100%;
 	float: left;
+  padding-top: 3px;
 	margin-right: 0.8em;
   overflow: hidden;
   text-align: center;
@@ -877,6 +878,15 @@ ul.tree li .last {
   line-height: 1.5em;
 }
 
+/* making sure bootbox is always above any other modal */
+.bootbox  {
+  z-index: 99999;
+}
+
+/* fix bootstrap issue to make sure backdrop is visible (v3.3.1) */
+.modal-backdrop {
+  height: 100%;
+}
 
 /** ---------
     ADMIN TABLE

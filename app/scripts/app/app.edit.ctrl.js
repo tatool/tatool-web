@@ -345,7 +345,7 @@ angular.module('tatool.app')
 
       $scope.addProperty = function(element) {
         hideAlert();
-        var box =bootbox.dialog({
+        var box = bootbox.dialog({
           title: '<b>Add new Property</b>',
           message: '<div class="row">  ' +
                     '<div class="col-md-12"> ' +

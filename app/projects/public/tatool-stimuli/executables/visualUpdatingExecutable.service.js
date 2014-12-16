@@ -1,11 +1,11 @@
 'use strict';
 
 tatool
-  .factory('visualUpdatingExecutable', [ '$rootScope', 'tatoolExecutable', 'db', 'timerService', 'tatoolGridService', 
-    function ($rootScope, tatoolExecutable, db, timerService, tatoolGridService) {  
+  .factory('visualUpdatingExecutable', [ '$rootScope', 'executableUtils', 'dbUtils', 'timerService', 'gridServiceFactory', 
+    function ($rootScope, executableUtils, dbUtils, timerService, gridServiceFactory) {  
 
     // Define our executable service constructor which will be called once for every instance
-    var VisualUpdatingExecutable = tatoolExecutable.createExecutable();
+    var VisualUpdatingExecutable = executableUtils.createExecutable();
 
     VisualUpdatingExecutable.prototype.init = function() {
 

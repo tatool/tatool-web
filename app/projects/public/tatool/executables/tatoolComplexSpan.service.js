@@ -1,23 +1,23 @@
 'use strict';
 
 tatool
-  .factory('tatoolComplexSpan', [ 'tatoolExecutable', 'db', 'timerService', 'tatoolPhase', 'tatoolStimulusService', 'tatoolInputService',
-    function (tatoolExecutable, db, timerService, tatoolPhase, tatoolStimulusService, tatoolInputService) {  
+  .factory('tatoolComplexSpan', [ 'executableUtils', 'dbUtils', 'timerService', 'tatoolPhase', 'stimulusServiceFactory', 'inputServiceFactory',
+    function (executableUtils, dbUtils, timerService, tatoolPhase, stimulusServiceFactory, inputServiceFactory) {  
 
     // Define our executable service constructor which will be called once for every instance
-    var ComplexNumExecutable = tatoolExecutable.createExecutable();
+    var ComplexNumExecutable = executableUtils.createExecutable();
 
     ComplexNumExecutable.prototype.init = function() {
-      var promise = tatoolExecutable.createPromise();
+      var promise = executableUtils.createPromise();
 
       this.phase = 'INIT';
 
       if (!this.stimuliPath) {
-        promise.reject('Invalid property settings for Executable tatoolComplexSpan. Expected property stimuliPath of type Path.');
+        promise.reject('Invalid property settings for Executable tatoolComplexSpan. Expected property <b>stimuliPath</b> of type Path.');
       }
 
-      this.tatoolStimulus = tatoolStimulusService.createStimulus(this.stimuliPath);
-      this.tatoolInput = tatoolInputService.createInput();
+      this.tatoolStimulus = stimulusServiceFactory.createService(this.stimuliPath);
+      this.tatoolInput = inputServiceFactory.createService();
 
       this.timerDisplayMemoranda = timerService.createTimer(800, true, this);
       this.timerIntervalMemoranda = timerService.createTimer(400, false, this);
@@ -28,14 +28,14 @@ tatool
       // prepare stimuliFile
       if (this.stimuliFile) {
         var self = this;
-        tatoolExecutable.getCSVResource(this.stimuliFile, true, this.stimuliPath).then(
+        executableUtils.getCSVResource(this.stimuliFile, true, this.stimuliPath).then(
           function(list) {
             self.processStimuliFile(list, promise);
           }, function(error) {
             promise.reject('Resource not found: ' + self.stimuliFile.resourceName);
           });
       } else {
-        promise.reject('Invalid property settings for Executable tatoolComplexSpan. Expected property stimuliFile of type Resource.');
+        promise.reject('Invalid property settings for Executable tatoolComplexSpan. Expected property <b>stimuliFile</b> of type Resource.');
       }
       
       return promise;
@@ -44,7 +44,7 @@ tatool
     // process stimuli file according to random property
     ComplexNumExecutable.prototype.processStimuliFile = function(list, promise) {
       if (this.random === 'full') {
-        this.stimuliList = tatoolExecutable.shuffle(list);
+        this.stimuliList = executableUtils.shuffle(list);
       } else {
         this.stimuliList = list;
       }
@@ -74,7 +74,7 @@ tatool
       }
 
       if (stimulus === null) {
-        tatoolExecutable.fail('Error creating stimulus in Executable tatoolStroop. No more stimuli available in current stimuliList.');
+        executableUtils.fail('Error creating stimulus in Executable tatoolStroop. No more stimuli available in current stimuliList.');
       } else {
         this.stimulus = stimulus;
       }
@@ -85,13 +85,13 @@ tatool
 
     ComplexNumExecutable.prototype.createRandomStimulus = function() {
       // get random stimulus
-      var  randomStimulus = tatoolExecutable.getRandom(this.stimuliList);
+      var  randomStimulus = executableUtils.getRandom(this.stimuliList);
       return randomStimulus;
     };
 
     ComplexNumExecutable.prototype.createNonRandomStimulus = function() {
       // get next stimulus
-      var nonRandomStimulus = tatoolExecutable.getNext(this.stimuliList, this.counter);
+      var nonRandomStimulus = executableUtils.getNext(this.stimuliList, this.counter);
       return nonRandomStimulus;
     };
 
@@ -135,11 +135,11 @@ tatool
         this.trial.score = 0;
       }
 
-      return db.saveTrial(this.trial);
+      return dbUtils.saveTrial(this.trial);
     };
 
     ComplexNumExecutable.prototype.stopExecution = function() {
-      tatoolExecutable.stop();
+      executableUtils.stop();
     };
 
     // Return our service object

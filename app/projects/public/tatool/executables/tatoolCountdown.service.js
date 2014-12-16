@@ -1,10 +1,10 @@
 'use strict';
 
 tatool
-  .factory('tatoolCountdown', [ 'tatoolExecutable', 'timerService',
-    function (tatoolExecutable, timerService) {
+  .factory('tatoolCountdown', [ 'executableUtils', 'timerService',
+    function (executableUtils, timerService) {
 
-    var TatoolCountdown = tatoolExecutable.createExecutable();
+    var TatoolCountdown = executableUtils.createExecutable();
 
     var DEFAULT_COUNTDOWN = 5;
     var DEFAULT_INTERVAL = 600;
@@ -20,7 +20,7 @@ tatool
     };
 
     TatoolCountdown.prototype.stopExecutable = function() {
-      tatoolExecutable.stop();
+      executableUtils.stop();
     };
 
     return TatoolCountdown;

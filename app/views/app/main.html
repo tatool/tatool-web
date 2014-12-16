@@ -94,7 +94,7 @@
           <i class="glyphicon" ng-class="{'glyphicon-chevron-down': accordionStatus.public, 'glyphicon-chevron-right': !accordionStatus.public}"></i>
         </accordion-heading>
         <div id="modules">
-          <div class="tile" ng-class="{'tileHighlight': module.moduleId == highlightModuleId}" ng-repeat="module in repository | orderBy:'created_at':true | startFrom:repositoryCurrentPage*repositoryPageSize | limitTo:repositoryPageSize | filter:{ $: filterModule }" ng-if="!!repository.length">
+          <div class="tile" ng-class="{'tileHighlight': module.moduleId == highlightModuleId}" ng-repeat="module in repository | orderBy:'created_at':true | startFrom:repoPaging.currentPage*repoPaging.pageSize | limitTo:repoPaging.pageSize | filter:{ $: filterModule }" ng-if="!!repository.length">
             <div class="icon"><i class="fa fa-globe fa-4x"></i></div>
             <div class="content">
               <h2>{{module.moduleName}}</h2>
@@ -109,12 +109,12 @@
           </div>
         </div>
         <br clear="left">
-        <div class="pull-right">
-          <button class="btn btn-default" ng-disabled="repositoryCurrentPage == 0" ng-click="repositoryCurrentPage=repositoryCurrentPage-1">
+        <div class="pull-right" ng-show="repository.length > 0">
+          <button class="btn btn-default" ng-disabled="repoPaging.currentPage == 0" ng-click="repoPaging.currentPage=repoPaging.currentPage-1">
             <i class="fa fa-chevron-left"></i>
           </button>
-          {{(numRepositoryModule == 0) ? repositoryCurrentPage : repositoryCurrentPage+1}}/{{numRepositoryModule}}
-          <button class="btn btn-default" ng-disabled="repositoryCurrentPage >= numRepositoryModule - 1" ng-click="repositoryCurrentPage=repositoryCurrentPage+1">
+          {{(repoPaging.numPerPage == 0) ? repoPaging.currentPage : repoPaging.currentPage+1}}/{{repoPaging.numPerPage}}
+          <button class="btn btn-default" ng-disabled="repoPaging.currentPage >= repoPaging.numPerPage - 1" ng-click="repoPaging.currentPage=repoPaging.currentPage+1">
             <i class="fa fa-chevron-right"></i>
           </button>
         </div>

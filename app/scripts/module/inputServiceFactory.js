@@ -3,11 +3,11 @@
 /* global KeyCodes */
 
 angular.module('tatool.module')
-  .factory('tatoolInputService', [ 'tatoolExecutable', function (tatoolExecutable) {
+  .factory('inputServiceFactory', [ 'executableUtils', function (executableUtils) {
 
-    var tatoolInputService = {};
+    var inputServiceFactory = {};
 
-    tatoolInputService.createInput = function(stimuliPath) {
+    inputServiceFactory.createService = function(stimuliPath) {
       var input = new Input();
       input.stimuliPath = stimuliPath ? stimuliPath : '';
       return input;
@@ -35,7 +35,7 @@ angular.module('tatool.module')
 
         // add unknown keyCode
         if (!KeyCodes[keyCode]) {
-          KeyCodes[keyCode] = tatoolExecutable.getTiming();
+          KeyCodes[keyCode] = executableUtils.getTiming();
         }
 
         this.registeredKeyInputs[KeyCodes[keyCode]] = obj;
@@ -88,6 +88,6 @@ angular.module('tatool.module')
 
     }
 
-    return tatoolInputService;
+    return inputServiceFactory;
 
   }]);

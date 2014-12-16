@@ -1,20 +1,20 @@
 'use strict';
 
 tatool
-  .factory('tatoolInstruction', [ '$log', '$templateCache', '$http', '$q', 'tatoolExecutable', 'tatoolInputService',
-    function ($log, $templateCache, $http, $q, tatoolExecutable, tatoolInputService) {
+  .factory('tatoolInstruction', [ '$log', '$templateCache', '$http', '$q', 'executableUtils', 'inputServiceFactory',
+    function ($log, $templateCache, $http, $q, executableUtils, inputServiceFactory) {
 
-    var TatoolInstruction = tatoolExecutable.createExecutable();
+    var TatoolInstruction = executableUtils.createExecutable();
 
     // preload all instructions and fail if page can't be found
     TatoolInstruction.prototype.init = function() {
       var deferred = $q.defer();
 
       var self = this;
-      if (this.pages && this.pages.propertyValue.length > 0) {
+      if (this.pages && this.pages.propertyValue && this.pages.propertyValue.length > 0) {
         async.each(this.pages.propertyValue, function(page, callback) {
           if (page.project.access !== 'external') {
-            tatoolExecutable.getResource(page).then(function(template) {
+            executableUtils.getResource(page).then(function(template) {
                 $templateCache.put(page.resourceName, template);
                 callback();
               }, function(error) {
@@ -31,16 +31,16 @@ tatool
           }
         });
       } else {
-        deferred.resolve();
+        deferred.reject('Invalid property settings for Executable tatoolInstruction. Expected property <b>pages</b> of type Array (Resource).');
       }
 
-      this.input = tatoolInputService.createInput();
+      this.input = inputServiceFactory.createService();
 
       return deferred;
     };
 
     TatoolInstruction.prototype.stopExecutable = function() {
-      tatoolExecutable.stop();
+      executableUtils.stop();
     };
 
     return TatoolInstruction;

@@ -1,11 +1,11 @@
 'use strict';
 
 angular.module('tatool.module')
-  .factory('tatoolStimulusService', [ '$log', 'tatoolExecutable', function ($log, tatoolExecutable) {
+  .factory('stimulusServiceFactory', [ '$log', 'executableUtils', function ($log, executableUtils) {
 
-    var tatoolStimulusService = {};
+    var stimulusServiceFactory = {};
 
-    tatoolStimulusService.createStimulus = function(stimuliPath) {
+    stimulusServiceFactory.createService = function(stimuliPath) {
       var stimulus = new Stimulus();
       stimulus.stimuliPath = stimuliPath ? stimuliPath : '';
       return stimulus;
@@ -31,7 +31,7 @@ angular.module('tatool.module')
         if (this.data.stimulusValueType === 'image') {
           var resource = this.stimuliPath;
           resource.resourceName = this.data.stimulusValue;
-          var imgSrc = tatoolExecutable.getResourcePath(resource);
+          var imgSrc = executableUtils.getResourcePath(resource);
           this.stimulusImage = imgSrc;
         }
         
@@ -65,6 +65,6 @@ angular.module('tatool.module')
       };
     }
 
-    return tatoolStimulusService;
+    return stimulusServiceFactory;
 
   }]);

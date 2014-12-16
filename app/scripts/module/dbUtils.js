@@ -1,41 +1,41 @@
 'use strict';
 
 /** 
-  DB Service  
+  dbUtils Service  
   Handling saving and retrieving of data for current module/session only.
 **/
 
 angular.module('tatool.module')
-  .factory('db', ['$log', 'moduleService', 'contextService', 'trialService',
+  .factory('dbUtils', ['$log', 'moduleService', 'contextService', 'trialService',
     function ($log, moduleService, contextService, trialService) {
     $log.debug('DB: initialized');
 
-    var db = {};
+    var utils = {};
 
     // set a module property (element, key and value)
-    db.setModuleProperty = function(element, propertyKey, propertyValue) {
+    utils.setModuleProperty = function(element, propertyKey, propertyValue) {
       moduleService.setModuleProperty(element, propertyKey, propertyValue);
     };
 
     // get a module property by element and key
-    db.getModuleProperty = function(element, propertyKey) {
+    utils.getModuleProperty = function(element, propertyKey) {
       return moduleService.getModuleProperty(element, propertyKey);
     };
 
     // set a session property (element, key and value)
-    db.setSessionProperty = function(element, propertyKey, propertyValue) {
+    utils.setSessionProperty = function(element, propertyKey, propertyValue) {
       var currentSessionId = moduleService.getMaxSessionId();
       moduleService.setSessionProperty(element, currentSessionId, propertyKey, propertyValue);
     };
 
     // get a session property by element and key
-    db.getSessionProperty = function(element, propertyKey) {
+    utils.getSessionProperty = function(element, propertyKey) {
       var currentSessionId = moduleService.getMaxSessionId();
       return moduleService.getSessionProperty(element, currentSessionId, propertyKey);
     };
     
     // add new trial after extending it with base properties
-    db.saveTrial = function(trial) {
+    utils.saveTrial = function(trial) {
       trial.moduleId = moduleService.getModuleId();
       trial.sessionId = moduleService.getMaxSessionId();
       trial.trialId = moduleService.getNextTrialId();
@@ -44,6 +44,6 @@ angular.module('tatool.module')
       return trialService.addTrial(trial);
     };
 
-    return db;
+    return utils;
 
   }]);

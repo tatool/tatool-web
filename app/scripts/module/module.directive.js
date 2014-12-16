@@ -6,7 +6,7 @@
   <tatool> 
   Main directive used to initiate start of executable after all directives have loaded.
 **/
-angular.module('tatool.module').directive('tatool', ['$timeout', 'tatoolExecutable', 'contextService', function($timeout, tatoolExecutable, contextService) {
+angular.module('tatool.module').directive('tatool', ['$timeout', 'executableUtils', 'contextService', function($timeout, executableUtils, contextService) {
   return {
     restrict: 'E',
     priority: Number.MIN_SAFE_INTEGER, // execute as last directive
@@ -16,7 +16,7 @@ angular.module('tatool.module').directive('tatool', ['$timeout', 'tatoolExecutab
         $timeout($scope.start);
       } else {
         var currentExecutable = contextService.getProperty('currentExecutable');
-        tatoolExecutable.fail('Executable Controller with name \'' + currentExecutable.name + '\' is missing the mandatory \'start\' method.');
+        executableUtils.fail('Executable Controller with name \'' + currentExecutable.name + '\' is missing the mandatory \'start\' method.');
       }
     }
   };
@@ -27,12 +27,12 @@ angular.module('tatool.module').directive('tatool', ['$timeout', 'tatoolExecutab
   <tatool-input> 
   Directive to configure user input.
 **/
-angular.module('tatool.module').directive('tatoolInput', ['$log', '$templateCache', '$compile', '$timeout', 'tatoolExecutable', function($log, $templateCache, $compile, $timeout, tatoolExecutable) {
+angular.module('tatool.module').directive('tatoolInput', ['$log', '$templateCache', '$compile', '$timeout', 'executableUtils', function($log, $templateCache, $compile, $timeout, executableUtils) {
   return {
     restrict: 'E',
     transclude: true,
     scope: {
-      service: '=',             // expects a stimulus object provided by the tatoolStimulusService      
+      service: '=',             // expects a stimulus object provided by the inputServiceFactory      
       userinput: '&'            // method called on user input (mouse/keyboard)
     },
     controller: ['$scope', function($scope) {
@@ -110,13 +110,13 @@ angular.module('tatool.module').directive('tatoolInput', ['$log', '$templateCach
       // show all keys
       scope.service.show = function() {
         scope.show = true;
-        return tatoolExecutable.getTiming();
+        return executableUtils.getTiming();
       };
 
       // hide all keys
       scope.service.hide = function() {
         scope.show = false;
-        return tatoolExecutable.getTiming();
+        return executableUtils.getTiming();
       };
 
       // enable input
@@ -124,14 +124,14 @@ angular.module('tatool.module').directive('tatoolInput', ['$log', '$templateCach
         scope.inputEnabled = true;
         $('#tatoolInputText').attr('disabled', false);
         $timeout(function() { $('#tatoolInputText').focus(); }, 0);
-        return tatoolExecutable.getTiming();
+        return executableUtils.getTiming();
       };
 
       // disable input
       scope.service.disable = function() {
         scope.inputEnabled = false;
         $('#tatoolInputText').attr('disabled', true);
-        return tatoolExecutable.getTiming();
+        return executableUtils.getTiming();
       };
 
       element.on('$destroy', function() {
@@ -147,7 +147,7 @@ angular.module('tatool.module').directive('tatoolInput', ['$log', '$templateCach
   <tatool-key> 
   Directive to configure key input.
 **/
-angular.module('tatool.module').directive('tatoolKey', ['$log', '$sce', 'tatoolExecutable', function($log, $sce, tatoolExecutable) {
+angular.module('tatool.module').directive('tatoolKey', ['$log', '$sce', 'executableUtils', function($log, $sce, executableUtils) {
   return {
     restrict: 'E',
     scope: {},
@@ -169,7 +169,7 @@ angular.module('tatool.module').directive('tatoolKey', ['$log', '$sce', 'tatoolE
       } else if (attr.image !== undefined) {
         var resource = tatoolInputCtrl.getStimuliPath();
         resource.resourceName = attr.image;
-        var imgSrc = tatoolExecutable.getResourcePath(resource);
+        var imgSrc = executableUtils.getResourcePath(resource);
         scope.key = $sce.trustAsHtml('<img src="' + imgSrc + '" class="img">');
       } else {
         var internalValue = attr.code;
@@ -199,7 +199,7 @@ angular.module('tatool.module').directive('tatoolKey', ['$log', '$sce', 'tatoolE
       }
 
       scope.clickInput = function($event) {
-        var timing = tatoolExecutable.getTiming();
+        var timing = executableUtils.getTiming();
         tatoolInputCtrl.clickInput(KeyCodes[attr.code], timing, $event);
       };
     },
@@ -231,11 +231,11 @@ angular.module('tatool.module').directive('tatoolText', [ function() {
   <tatool-stimulus> 
   Directive to display a stimulus.
 **/
-angular.module('tatool.module').directive('tatoolStimulus', ['$log', '$templateCache', 'cfgModule', 'tatoolExecutable', function($log, $templateCache, cfgModule, tatoolExecutable) {
+angular.module('tatool.module').directive('tatoolStimulus', ['$log', '$templateCache', 'cfgModule', 'executableUtils', function($log, $templateCache, cfgModule, executableUtils) {
   return {
     restrict: 'E',
     scope: {
-      service: '=',             // expects a stimulus object provided by the tatoolStimulusService
+      service: '=',             // expects a stimulus object provided by the stimulusServiceFactory
       stimulusclick: '&'        // function to call on mouse click on stimulus
     },
     link: function (scope, element) {
@@ -246,12 +246,12 @@ angular.module('tatool.module').directive('tatoolStimulus', ['$log', '$templateC
       scope.service.show = function() {
         scope.stimulus = scope.service;
         scope.show = true;
-        return tatoolExecutable.getTiming();
+        return executableUtils.getTiming();
       };
 
       scope.service.hide = function() {
         scope.show = false;
-        return tatoolExecutable.getTiming();
+        return executableUtils.getTiming();
       };
 
       scope.stimulusClickEvent = function($event, stimulus) {
@@ -274,11 +274,11 @@ angular.module('tatool.module').directive('tatoolStimulus', ['$log', '$templateC
   <tatool-grid> 
   Directive creating a grid used to display stimuli.
 **/
-angular.module('tatool.module').directive('tatoolGrid', ['$log', '$templateCache', 'cfgModule', 'tatoolExecutable', function($log, $templateCache, cfgModule, tatoolExecutable) {
+angular.module('tatool.module').directive('tatoolGrid', ['$log', '$templateCache', 'cfgModule', 'executableUtils', function($log, $templateCache, cfgModule, executableUtils) {
   return {
     restrict: 'E',
     scope: {
-      service: '=',                // expects a tatool-grid object provided by the tatoolGridService
+      service: '=',                // expects a tatool-grid object provided by the gridServiceFactory
       gridspacing: '@',         // defines the table style [collapse|separate|n]
       cellclass: '@',           // defines default class used for grid cells
       cellwidth: '@',           // defines default width of a grid cell
@@ -321,13 +321,13 @@ angular.module('tatool.module').directive('tatoolGrid', ['$log', '$templateCache
       scope.service.show = function() {
         scope.show = true;
         //element.css("visibility","visible");
-        return tatoolExecutable.getTiming();
+        return executableUtils.getTiming();
       };
 
       scope.service.hide = function() {
         scope.show = false;
         //element.css("visibility","hidden");
-        return tatoolExecutable.getTiming();
+        return executableUtils.getTiming();
       };
 
       // initialize grid
@@ -562,7 +562,7 @@ angular.module('tatool.module').directive('tatoolDrop', function() {
   return {
     restrict: 'A',
     scope: {
-      grid: '=tatoolDrop',        // expects a tatool-grid object provided by the tatoolGridService 
+      grid: '=tatoolDrop',        // expects a tatool-grid object provided by the gridServiceFactory 
       griddrop: '&',              // function to call on drop on a specific grid cell
       allowdropcell: '@'          // defines whether drop feature is enabled [yes|all] or not [] for this cell
     },

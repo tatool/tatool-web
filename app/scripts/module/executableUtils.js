@@ -4,9 +4,9 @@
 /* global async */
 
 angular.module('tatool.module')
-  .service('tatoolExecutable', [ '$q', '$http', function ($q, $http) {
+  .service('executableUtils', [ '$q', '$http', function ($q, $http) {
 
-    var executable = {};
+    var utils = {};
 
     var executor = {};
 
@@ -18,41 +18,41 @@ angular.module('tatool.module')
       General Executable functions
     -------------------------------- */
     // initialize the common executable service
-    executable.init = function(runningExecutor, moduleToken, moduleMode) {
+    utils.init = function(runningExecutor, moduleToken, moduleMode) {
       executor = runningExecutor;
       token = moduleToken;
       mode = moduleMode;
     };
 
     // returns empty constructor for an executable
-    executable.createExecutable = function() {
+    utils.createExecutable = function() {
       return function() { };
     };
 
     // stops the execution of the current executable
-    executable.stop = function() {
+    utils.stop = function() {
       executor.stopExecutable();
     };
 
     // suspend the current executable
-    executable.suspend = function() {
+    utils.suspend = function() {
       executor.suspendExecutable();
     };
 
     // fail the current executable and stop module
-    executable.fail = function(error) {
+    utils.fail = function(error) {
       executor.failExecutable(error);
     };
 
     // stop the execution of the current module
-    executable.stopModule = function(sessionComplete) {
+    utils.stopModule = function(sessionComplete) {
       sessionComplete = (sessionComplete) ? sessionComplete : true;
       executor.finishExecutable();
       executor.stopModule(sessionComplete);
     };
 
     // create a new promise by using the $q service (abstraction for users)
-    executable.createPromise = function() {
+    utils.createPromise = function() {
       return $q.defer();
     };
 
@@ -61,7 +61,7 @@ angular.module('tatool.module')
     -------------------------------- */
 
     // provide the current time in sub-millisecond resolution and such that it is not subject to system clock skew or adjustments
-    executable.getTiming = function() {
+    utils.getTiming = function() {
       // Returns the number of milliseconds elapsed since either the browser navigationStart event or
       // the UNIX epoch, depending on availability.
       // Where the browser supports 'performance' we use that as it is more accurate (microsoeconds
@@ -83,7 +83,7 @@ angular.module('tatool.module')
       Resource Loading Helper functions
     -------------------------------- */
 
-    executable.getResourcePath = function(res) {
+    utils.getResourcePath = function(res) {
       return getResourcePath(res);
     };
 
@@ -101,7 +101,7 @@ angular.module('tatool.module')
     };
 
     // get a resource (project or external)
-    executable.getResource = function(res) {
+    utils.getResource = function(res) {
       if (res && res.project) {
         if (res.project.access === 'external') {
           return getExternalResource(res.resourceName);
@@ -144,7 +144,7 @@ angular.module('tatool.module')
     };
 
     // get a CSV resource (project or external)
-    executable.getCSVResource = function(res, header, stimuliPath) {
+    utils.getCSVResource = function(res, header, stimuliPath) {
       if (res && res.project) {
         if (res.project.access === 'external') {
           return getExternalCSVResource(res.resourceName, header, stimuliPath);
@@ -250,18 +250,18 @@ angular.module('tatool.module')
     -------------------------------- */
 
     // returns a random int out of the specified interval
-    executable.getRandomInt = function(min, max) {
+    utils.getRandomInt = function(min, max) {
       return Math.floor(Math.random()*(max-min+1)+min);
     };
 
     // returns a random element of an array or random property of an object without replacement
-    executable.getRandom = function(obj) {
+    utils.getRandom = function(obj) {
       var index;
       if (Array.isArray(obj)) {
         if (obj.length === 0) {
           return null;
         } else {
-          index = executable.getRandomInt(0, obj.length - 1);
+          index = utils.getRandomInt(0, obj.length - 1);
           return obj.splice(index, 1)[0];
         }
       } else {
@@ -269,7 +269,7 @@ angular.module('tatool.module')
         if (array.length === 0) {
           return null;
         } else {
-          index = executable.getRandomInt(0, array.length - 1);
+          index = utils.getRandomInt(0, array.length - 1);
           var property = obj[array[index]];
           delete obj[array[index]];
           return property;
@@ -278,13 +278,13 @@ angular.module('tatool.module')
     };
 
     // returns a random element of an array or random property of an object with replacement
-    executable.getRandomReplace = function(obj) {
+    utils.getRandomReplace = function(obj) {
       var index;
       if (Array.isArray(obj)) {
         if (obj.length === 0) {
           return null;
         } else {
-          index = executable.getRandomInt(0, obj.length - 1);
+          index = utils.getRandomInt(0, obj.length - 1);
           return obj[index];
         }
       } else {
@@ -292,14 +292,14 @@ angular.module('tatool.module')
         if (array.length === 0) {
           return null;
         } else {
-          index = executable.getRandomInt(0, array.length - 1);
+          index = utils.getRandomInt(0, array.length - 1);
           return obj[array[index]];
         }
       }
     };
 
     // returns the next element of an array or next property of an object with replacement
-    executable.getNext = function(obj, counter) {
+    utils.getNext = function(obj, counter) {
       if (Array.isArray(obj)) {
         if (obj.length === 0) {
           return null;
@@ -317,7 +317,7 @@ angular.module('tatool.module')
     };
 
     // Shuffle array using Fisher-Yates algorithm
-    executable.shuffle = function(array) {
+    utils.shuffle = function(array) {
       for (var i = array.length - 1; i > 0; i--) {
         var j = Math.floor(Math.random() * (i + 1));
         var temp = array[i];
@@ -327,5 +327,5 @@ angular.module('tatool.module')
       return array;
     };
 
-    return executable;
+    return utils;
   }]);

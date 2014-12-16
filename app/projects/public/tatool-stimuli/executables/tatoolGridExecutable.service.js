@@ -1,11 +1,11 @@
 'use strict';
 
 tatool
-  .factory('tatoolGridExecutable', [ 'tatoolExecutable', 'timerService', 'tatoolGridService',
-    function (tatoolExecutable, timerService, tatoolGridService) {
+  .factory('tatoolGridExecutable', [ 'executableUtils', 'timerService', 'gridServiceFactory',
+    function (executableUtils, timerService, gridServiceFactory) {
 
     // Define our executable service constructor
-    var TatoolGridExecutable = tatoolExecutable.createExecutable();
+    var TatoolGridExecutable = executableUtils.createExecutable();
 
     TatoolGridExecutable.prototype.init = function() {
       // create non visual timers to be used by the controller
@@ -13,11 +13,11 @@ tatool
       this.endTimer = timerService.createTimer(2500, false, this);
 
       if (!this.stimuliPath) {
-        tatoolExecutable.fail('Invalid property settings for Executable tatoolGrid. Expected property stimuliPath of type Path.');
+        executableUtils.fail('Invalid property settings for Executable tatoolGrid. Expected property stimuliPath of type Path.');
       }
 
       // create a new tatoolGrid with 2 rows and 4 cols
-      this.myGrid = tatoolGridService.createGrid(2, 4, 'animalGrid', this.stimuliPath);
+      this.myGrid = gridServiceFactory.createService(2, 4, 'animalGrid', this.stimuliPath);
     };
 
     TatoolGridExecutable.prototype.createStimulus = function() {
@@ -37,7 +37,7 @@ tatool
     };
 
     TatoolGridExecutable.prototype.stopExecution = function() {
-      tatoolExecutable.stop();
+      executableUtils.stop();
     };
 
     // Return our executable service object

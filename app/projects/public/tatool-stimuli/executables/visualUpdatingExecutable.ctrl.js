@@ -1,11 +1,11 @@
 'use strict';
 
 tatool
-  .controller('visualUpdatingExecutableCtrl', [ '$scope', '$log', '$timeout', 'service', 'timerService', 'tatoolGridService',
-    function ($scope, $log, $timeout, service, timerService, tatoolGridService) {
+  .controller('visualUpdatingExecutableCtrl', [ '$scope', '$log', '$timeout', 'service', 'timerService', 'gridServiceFactory',
+    function ($scope, $log, $timeout, service, timerService, gridServiceFactory) {
       
       // create  new a tatoolGrid
-      var myGrid = tatoolGridService.createGrid(2, 4, 'animalGrid');
+      var myGrid = gridServiceFactory.createService(2, 4, 'animalGrid');
 
        // assign grid to scope property
       $scope.myGrid = myGrid;

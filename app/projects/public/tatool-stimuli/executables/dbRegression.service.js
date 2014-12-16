@@ -12,11 +12,11 @@
  */
 
 tatool
-  .factory('dbRegression', [ '$log', 'tatoolExecutable', 'db', 'timerService', 'tatoolPhase',
-    function ($log, tatoolExecutable, db, timerService, tatoolPhase) {
+  .factory('dbRegression', [ '$log', 'executableUtils', 'dbUtils', 'timerService', 'tatoolPhase',
+    function ($log, executableUtils, dbUtils, timerService, tatoolPhase) {
 
     // Create our executable
-    var DbRegression = tatoolExecutable.createExecutable();
+    var DbRegression = executableUtils.createExecutable();
 
     // Initialize all properties at session start (executable/trial properties)
     DbRegression.prototype.init = function() {
@@ -67,13 +67,13 @@ tatool
         this.trial.score = 0;
       }
 
-      db.setSessionProperty(this, 'anotherProperty', '666');
-      db.setSessionProperty(this, 'myProperty', 'myValueShouldBeCorrectNow');
-      db.setSessionProperty(this, 'wtf', 'test');
-      db.setModuleProperty(this, 'module1', 2);
-      db.setModuleProperty(this, 'module2', 456431);
+      dbUtils.setSessionProperty(this, 'anotherProperty', '666');
+      dbUtils.setSessionProperty(this, 'myProperty', 'myValueShouldBeCorrectNow');
+      dbUtils.setSessionProperty(this, 'wtf', 'test');
+      dbUtils.setModuleProperty(this, 'module1', 2);
+      dbUtils.setModuleProperty(this, 'module2', 456431);
       
-      db.saveTrial(this.trial).then(tatoolExecutable.stopExecutable());
+      dbUtils.saveTrial(this.trial).then(executableUtils.stop);
     };
 
     // Return our executable service object

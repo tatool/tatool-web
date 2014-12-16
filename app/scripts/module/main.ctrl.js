@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('tatool.module')
-  .controller('MainCtrl', ['$rootScope','$scope', '$log', '$timeout', '$state', '$window', 'moduleService', 'userService', 'moduleDataService', 'trialDataService', 'executor', 'cfgModule', 'tatoolExecutable',
-    function ($rootScope, $scope, $log, $timeout, $state, $window, moduleService, userService, moduleDataService, trialDataService, executor, cfgModule, tatoolExecutable) {
+  .controller('MainCtrl', ['$rootScope','$scope', '$log', '$timeout', '$state', '$window', 'moduleService', 'userService', 'moduleDataService', 'trialDataService', 'executor', 'cfgModule', 'executableUtils',
+    function ($rootScope, $scope, $log, $timeout, $state, $window, moduleService, userService, moduleDataService, trialDataService, executor, cfgModule, executableUtils) {
 
     $scope.alert = { type: 'danger', msg: '', visible: false };
 
@@ -25,7 +25,7 @@ angular.module('tatool.module')
           executor.stopModule(true);
         }
       } else {
-        var timing = tatoolExecutable.getTiming();
+        var timing = executableUtils.getTiming();
         // workaround fix for mozilla as event timestamp shows time in ms since last reboot instead of time since epoch
         if ($event.timeStamp < cfgModule.MIN_EPOCH_MS) {
           $event.timeStamp = new Date().getTime();

@@ -1,12 +1,12 @@
 'use strict';
 
 angular.module('tatool.module')
-  .factory('tatoolGridService', [ '$log', '$rootScope', 'tatoolExecutable', function ($log, $rootScope, tatoolExecutable) {
+  .factory('gridServiceFactory', [ '$log', '$rootScope', 'executableUtils', function ($log, $rootScope, executableUtils) {
 
     // Define our executable service constructor which will be called once for every instance
-    var tatoolGridService = {};
+    var gridServiceFactory = {};
 
-    tatoolGridService.createGrid = function(rows, cols, gridId, stimuliPath) {
+    gridServiceFactory.createService = function(rows, cols, gridId, stimuliPath) {
       var grid = new Grid(gridId);
       grid.resize(rows, cols);
       grid.stimuliPath = stimuliPath ? stimuliPath : '';
@@ -57,7 +57,7 @@ angular.module('tatool.module')
         if (data.stimulusValueType === 'image') {
           var resource = this.stimuliPath;
           resource.resourceName = data.stimulusValue;
-          var imgSrc = tatoolExecutable.getResourcePath(resource);
+          var imgSrc = executableUtils.getResourcePath(resource);
           cell.stimulusImage = imgSrc;
         }
         return cell;
@@ -323,6 +323,6 @@ angular.module('tatool.module')
     }
 
     // Return our service object
-    return tatoolGridService;
+    return gridServiceFactory;
 
   }]);
