@@ -24,6 +24,8 @@ angular.module('tatool.app')
       'invites': true
     };
 
+    $scope.filterModule = '';
+
     function startSpinner(text) {
       spinnerService.spin('loadingSpinner', text);
     }
@@ -48,10 +50,8 @@ angular.module('tatool.app')
           } else {
             $scope.modules.push(data[i]);
             moduleIds.push(data[i].moduleId);
-          }
-          
+          } 
         }
-        stopSpinner();
 
         // run auto export on installed modules
         runAutoExport();
@@ -64,11 +64,14 @@ angular.module('tatool.app')
               $scope.repository.push(data[i]);
             }
           }
+          stopSpinner();
         }, function(error) {
+          stopSpinner();
           $log.error(error);
         });
 
       }, function(error) {
+        stopSpinner();
         $log.error(error);
       });
     }

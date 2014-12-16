@@ -17,7 +17,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr ng-repeat="session in user.sessions">
+            <tr ng-repeat="session in sessions | orderBy:'startTime'">
               <td align="center"> {{session.sessionId}}</td>
               <td align="center"> {{formatDate(session.startTime)}} </td>
               <td align="center"> {{formatDate(session.endTime)}} </td>

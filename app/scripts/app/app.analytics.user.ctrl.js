@@ -6,6 +6,8 @@ angular.module('tatool.app')
   .controller('AnalyticsUserCtrl', [ '$scope', '$sce', '$modalInstance', 'user', function ($scope, $sce, $modalInstance, user) {
 
     $scope.user = user;
+    $scope.sessions = Object.keys(user.sessions).map(function(k) { return user.sessions[k] });
+
 
     $scope.formatDate = function(date) {
       if (!date) {

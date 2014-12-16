@@ -12,6 +12,10 @@ angular.module('tatool.app')
 
       $scope.query = {};
 
+      $scope.filterUser = '';
+
+      $scope.filterProject = '';
+
       $scope.updateUser = function(user) {
         $scope.hideAlert();
 

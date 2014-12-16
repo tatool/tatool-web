@@ -45,7 +45,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr ng-repeat="user in currentModule.userData | filter:{ $: filterUser } | orderBy:'email'">
+        <tr ng-repeat="user in currentModule.userData | orderBy:'code'">
           <td> <b>{{user.code}}</b> <span ng-if="showEmail === 1 && user.email !== ''">({{user.email}})</span></td>
           <td align="center"> {{user.maxSessionId}}<br></td>
           <td align="center"> {{formatDate(user.updated_at)}}<br></td>

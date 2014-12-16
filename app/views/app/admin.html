@@ -52,8 +52,8 @@
                 <td align="center" ng-repeat="role in roles"> <input type="checkbox" checklist-model="user.roles" checklist-value="role"> </td>
                 <td align="center"> 
                   <div class="btn btn-tatool-off" ng-click="updateUser(user)" tooltip="Save changes to user roles." tooltip-placement="top" tooltip-animation="false"><i class="fa fa-floppy-o"></i></div>
-                  <a ng-click="deleteUser(user)" class="btn btn-tatool-off" tooltip="Delete user." tooltip-placement="top" tooltip-animation="false"><i class="fa fa-trash-o"></i></a>
                   <a ng-click="changePassword(user)" class="btn btn-tatool-off" tooltip="Change user password." tooltip-placement="top" tooltip-animation="false"><i class="fa fa-lock"></i></a>
+                  <a ng-click="deleteUser(user)" class="btn btn-tatool-off" tooltip="Delete user." tooltip-placement="top" tooltip-animation="false"><i class="fa fa-trash-o"></i></a>
                 </td>
                 </tr>
               </tbody>
