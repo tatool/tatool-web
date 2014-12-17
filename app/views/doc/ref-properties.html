@@ -1,3 +1,153 @@
 <h2>Properties</h2>
 
-<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+<p>There are two different types of Properties available in Tatool. This page describes the Properties that can be customized with the help of the Module Editor. If you're looking for Module or Session Properties as part of your Executable/Handler code, take a look at the reference page of the dbUtils service instead.</p>
+
+<p>A Property is defined as a key-value pair which is mostly used to make your Executables more generic and easier to work with. The key of a Property is a property name, and the value can be a given value of a specified type (String, Array, Resource, Path, Boolean, Array etc.). For example, defining (hardcoding) the name of a stimuli file in your task would mean you'd have to write a new Executable each time you'd like to use the same paradigm just with different stimuli. Instead, you can create a Property called stimuliFile of the type String, which allows for reusing the Executable by simply replacing the name of your new stimuliFile quickly within the Tatool Module Editor.</p>
+
+<p>Properties that have been added with the Module Editor can be accessed in your Exectuable Service as properties of the current object (this) with the propertyName. The following line would print out the details of the Resource Property <i>stimuliFile</i> to the console:</p>
+
+<pre><code class="language-javascript">console.log(this.stimuliFile);
+</code></pre>
+
+<hr class="hr-red">
+
+<h3 id="howto">Property Types<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
+
+<p>The following property types are available within Tatool and can be customized with the help of the Module Editor.</p>
+
+<p><b>String</b><br>
+Allows you to provide a short text, letter or digit to be used within the Executable code. A String property is represented as a String object in JavaScript and can therefore be used according to its rules.</p>
+
+<pre><code class="language-javascript">var stringProperty = 'Please answer the question.';
+var anotherStringProperty = '250';
+</code></pre>
+
+<p><b>Boolean</b><br>
+Allows you to provide true or false value (1/0) to be used within the Executable code. A Boolean property is represented as a simple JavaScript object with the following structure.</p>
+
+<pre><code class="language-javascript">var booleanProperty = {
+  propertyType: 'Boolean',
+  propertyValue: true
+};
+</code></pre>
+
+<p><b>Resource</b><br>
+Allows you to provide a specific <b>file resource</b> to be used within the Executable code (e.g. stimuli file). A Resource property is represented as a simple JavaScript object. The required properties of the object differ between project (tatool internal folders) and external (web address) resources.</p>
+
+<i>Project Resource:</i><br>
+<pre><code class="language-javascript">var projectResourceProperty = {
+  propertyType: 'Resource',
+  project:{
+    name: 'tatool-stimuli',
+    access: 'public'
+  },
+  resourceName: 'myFile.csv',
+  resourceType: 'stimuli'
+};
+
+// will be resolved to the local resource {path to projects folder}/public/tatool-stimuli/stimuli/myFile.csv
+</code></pre>
+
+<i>External Resource:</i><br>
+<pre><code class="language-javascript">var externalResourceProperty = {
+  propertyType: 'Resource',
+  project:{
+    name: 'External Resource',
+    access: 'external'
+  },
+  resourceName: 'http://www.example.com/file.csv'
+};
+</code></pre>
+
+<p><b>Path</b><br>
+Allows you to provide a path resource to be used within the Executable code (e.g. path to access stimuli images). A Path property is represented as a simple JavaScript object. The required properties of the object differ between project (tatool internal folders) and external (web address) paths.</p>
+
+<i>Project Path:</i><br>
+<pre><code class="language-javascript">var projectPathProperty = {
+  propertyType: 'Path',
+  project:{
+    name: 'tatool-stimuli',
+    access: 'public'
+  },
+  resourceType: 'stimuli'
+};
+
+// will be resolved to the local path {path to projects folder}/public/tatool-stimuli/stimuli/
+</code></pre>
+
+<i>External Path:</i><br>
+<pre><code class="language-javascript">var externalPathProperty = {
+  propertyType: 'Path',
+  project:{
+    name: 'External Resource',
+    access: 'external'
+  },
+  resourcePath: 'http://www.example.com/'
+};
+</code></pre>
+
+<p><b>Array (String)</b><br>
+Allows you to provide a string array to be used within the Executable code (e.g. list of image names). An Array (String) property is represented as a simple JavaScript object with the following structure.</p>
+
+<pre><code class="language-javascript">var arrayStringProperty = {
+  propertyType: 'ArrayString',
+  propertyValue: [
+    'a',
+    'b',
+    'c'
+  ]
+};
+</code></pre>
+
+<p><b>Array (Resource)</b><br>
+Allows you to provide a resource array to be used within the Executable code (e.g. list of html files). An Array (Resource) property can contain up to n Resources. An Array (Resource) property is represented as a simple JavaScript object. The required properties of the object differ between project (tatool internal folders) and external (web address) resources.</p>
+
+<i>Project Array (Resource):</i><br>
+<pre><code class="language-javascript">var projectArrayResourceProperty = {
+  propertyType: 'ArrayResource',
+  propertyValue: [
+    {
+      propertyType: 'Resource',
+      project:{
+        name: 'tatool-stimuli',
+        access: 'public'
+      },
+      resourceName: 'instruction_01.html',
+      resourceType: 'stimuli'
+    },
+    {
+      propertyType: 'Resource',
+      project:{
+        name: 'tatool-stimuli',
+        access: 'public'
+      },
+      resourceName: 'instruction_02.html',
+      resourceType: 'stimuli'
+    }
+  ]
+};
+</code></pre>
+
+<i>External Array (Resource):</i><br>
+<pre><code class="language-javascript">var externalArrayResourceProperty = {
+  propertyType: 'ArrayResource',
+  propertyValue: [
+    {
+      propertyType: 'Resource',
+      project:{
+        name: 'External Resource',
+        access: 'external'
+      },
+      resourceName: 'http://www.example.com/instruction_01.html'
+    },
+    {
+      propertyType: 'Resource',
+      project:{
+        name: 'External Resource',
+        access: 'external'
+      },
+      resourceName: 'http://www.example.com/instruction_02.html'
+    }
+  ]
+};
+</code></pre>

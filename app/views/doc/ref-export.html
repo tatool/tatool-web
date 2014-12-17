@@ -1,0 +1,37 @@
+<h2>Data Export</h2>
+
+<p>Tatool allows you to configure your Module with different types of Exporters for different scenarios. An Exporter always extracts the underlying trial data of a Module and creates a CSV file. The structure of the CSV file always follows the same structure whereas every Trial you save in your Executable corresponds to one line and every property you add to a Trial corresponds to a column. There is a defined set of columns which will always be present.
+</p>
+
+<hr class="hr-red">
+
+<h3 id="howto">CSV File Structure<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
+
+<p>The following attributes are added automatically to your Trials and are visible in the first columns of the export.</p>
+
+<ul class="docContentList">
+  <li><b>userCode:</b> the internal Tatool user code which is unique for every user and allows you to identify the Trials of a specific user.</li>
+  <li><b>moduleId:</b> the module generating the Trials. Corresponds to the Module Label provided in the Module Editor.</li>
+  <li><b>sessionId:</b> the internal Tatool sequence for Sessions which allows you to identify Trials belonging to the same Session.</li>
+  <li><b>trialId:</b> the internal Tatool sequence for Trials</li>
+  <li><b>executableId:</b> the name of the Executable generating the Trials.</li>
+</ul>
+<br>
+
+<p>If any Executable or Handler stores <b>Module Properties</b>, they will be available in the following columns with the prefix <b>module</b>. For example a Module Property with the name <i>lastValue</i> as part of the Executable <i>digitTask</i> will receive a column header of <i>module.digitTask.lastValue</i>.</p>
+
+<p>If any Executable or Handler stores <b>Session Properties</b>, they will be available in the following columns with the prefix <b>session</b>. For example a Session Property with the name <i>lastValue</i> as part of the Executable <i>digitTask</i> will receive a column header of <i>session.digitTask.lastValue</i>.<br>Tatool stores one mandatory session property with the column header <b>session.complete</b> which indicates whether the Session was completed successfully (1), e.g. all trials executed or Module successfully stopped by pressing Escape, or not completed due to an error (0), e.g. abort of a running Session by refreshing the page or closing the browser window/tab.</p>
+
+<p>All the following columns are customized according to the properties you define in your Trial object. The column header naming will be [executableName].[propertyName]. For example an executable property named <i>setSize</i> as part of an Executable <i>digitTask</i> will receive a column header of <i>digitTask.setSize</i>.</p>
+
+<hr class="hr-red">
+
+<h3 id="howto">Exporter Types<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
+
+<p>A Module can have multiple Exporters defined at the same time but only one of each type. The following Exporters are supported by Tatool:</p>
+
+<ul class="docContentList">
+  <li><b>Upload:</b> automatically exports data and uploads it to the Tatool Server running the Module after every Session.</li>
+  <li><b>Download:</b> allows the user to download all data to his local disk. (currently not supported with Safari)</li>
+</ul>
+<br>
