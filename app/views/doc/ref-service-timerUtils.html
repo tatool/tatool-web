@@ -1,0 +1,76 @@
+<h2>timerUtils</h2>
+
+<p>The timerUtils service allows you to introduce timers in your task that can trigger methods after a given duration. This is usually what you'll need when you for example want to have a stimulus shown on scrren for a limited duration or a limited duration for the user the provide an answer.
+</p>
+
+<ul id="docPageNav">
+  <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('timerUtils')">timerUtils Methods</a></li>
+  <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('timer')">timer Methods</a></li>
+</ul>
+
+<hr class="hr-red">
+
+<h4 id="timerUtils">timerUtils Methods<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h4>
+
+<hr>
+
+<p><b class="red">createTimer(duration, visual, executable)</b> - returns a new timer object</p>
+<p>Used to create a new timer object with the properties specified. You can create as many timers as you want although you should re-use a timer if no property has changed. For example a timer meant to limit the duration time of a stimulus being shown will be the same for every trial and should only be created once (Executable init() method).</p>
+
+<p><b>Parameters</b><br>
+<i>duration</i>: the duration of the timer in milliseconds<br>
+<i>visual</i>: a boolean value indicating whether the timer progress should be visible in the timer status panel<br>
+<i>executable</i>: the current executable creating the timer (usually this)
+</p>
+
+<pre><code class="language-javascript">// create a new timer object in the Executable service init method
+this.timerDisplayStimulus = timerUtils.createTimer(800, true, this);
+</code></pre>
+
+<hr>
+
+<p><b class="red">cancelExecutableTimers(executable)</b> - (no return value)</p>
+<p>Used to cancel all registered timers for a specific Executable at once. This method can be helpful if you have multiple timers running and want to make sure to cancel all of them.</p>
+
+<p><b>Parameters</b><br>
+<i>executable</i>: the current executable creating the timer (usually this)
+</p>
+
+<pre><code class="language-javascript">// cancel all timers of this executable
+dbUtils.cancelAllTimers(this);
+</code></pre>
+
+
+
+<hr>
+
+<h4 id="timer">timer Methods<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h4>
+
+<hr>
+
+<p><b class="red">start(targetFunction)</b> - returns a timestamp in sub-millisecond precision</p>
+<p>Start the specific timer object and provide a target function to execute once the timer has elapsed. Usually the target function hides a stimulus, displays another one or enables/disables user input.</p>
+<p>The timestamp returned is created by calling the getTiming() method on the executableUtils service (see <a ui-sref="doc({page: 'ref-service-executableUtils.html'})">executableUtils</a> for more details).</p>
+
+<p><b>Parameters</b><br>
+<i>targetFunction</i>: the function to be executed once the timer duration has elapsed</p>
+
+<pre><code class="language-javascript">// start the timerDisplayStimulus timer and run the hideStimulus method once finished
+service.timerDisplayStimulus.start(hideStimulus);
+
+function hideStimulus() {
+  // clean up stimulus
+}
+</code></pre>
+
+<hr>
+
+<p><b class="red">stop()</b> - returns a timestamp in sub-millisecond precision</p>
+<p>Stop the specific timer object before the full duration of the timer has elapsed.</p>
+<p>The timestamp returned is created by calling the getTiming() method on the executableUtils service (see <a ui-sref="doc({page: 'ref-service-executableUtils.html'})">executableUtils</a> for more details).</p>
+
+<pre><code class="language-javascript">// start the timerDisplayStimulus timer and run the hideStimulus method once finished
+service.timerDisplayStimulus.stop();
+</code></pre>
+
+<hr>

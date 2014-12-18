@@ -1,4 +1,21 @@
-<h2>Directives</h2>
+<h2>Template Services</h2>
 
-<p>
-</p>
+<p>Tatool offers a set of template services that help you when developing your own Executables/Handlers. The Services offer methods that can be used to arrange, display and hide stimuli on-screen or to allow user input by keyboard and/or mouse.</p>
+
+<p>In order to use any of the template services, you'll need to add the dependency to your Executable Service and/or Controller. The following example shows you how to make use of the template service called <i>stimulusServiceFactory</i> in your Executable Service.</p>
+
+<h4>myExecutable.service.js</h4>
+<pre class="line-numbers"><code class="line-numbers language-javascript">tatool.factory('myExecutable', [ 'executableUtils', 'stimulusServiceFactory',
+  function (executableUtils, stimulusServiceFactory) {  
+
+    var MyExecutable = executableUtils.createExecutable();
+
+    MyExecutable.prototype.init = function() {
+      this.stimulusService = stimulusServiceFactory.createService(this.stimuliPath);
+    };
+
+    // our custom methods go here
+
+    return MyExecutable;
+  }]);
+</code></pre>

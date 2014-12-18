@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('tatool.module')
-  .factory('executor', ['$log', '$location', '$q', '$state', '$timeout', '$injector', '$window', 'moduleService', 'elementStack', 'util', 'executionPhaseService', 'trialService', 'contextService', 'timerService', 'tatoolPhase', 'cfgModule', 'executableService',
-    function ($log, $location, $q, $state, $timeout, $injector, $window, moduleService, elementStack, util, executionPhaseService, trialService, contextService, timerService, tatoolPhase, cfgModule, executableService) {
+  .factory('executor', ['$log', '$location', '$q', '$state', '$timeout', '$injector', '$window', 'moduleService', 'elementStack', 'util', 'executionPhaseService', 'trialService', 'contextService', 'timerUtils', 'tatoolPhase', 'cfgModule', 'executableService',
+    function ($log, $location, $q, $state, $timeout, $injector, $window, moduleService, elementStack, util, executionPhaseService, trialService, contextService, timerUtils, tatoolPhase, cfgModule, executableService) {
     $log.debug('Executor: initialized');
 
     var obj = {currentSessionId: 0, blankInterval: 0, blankIntervalScreen: '', fixationInterval: 0, fixationIntervalScreen: ''};
@@ -58,7 +58,7 @@ angular.module('tatool.module')
       $timeout.cancel(fixationIntervalPromise);
 
       // stop and remove all timers
-      timerService.clearAllTimers();
+      timerUtils.clearAllTimers();
 
       // closing the open session
       if (obj.currentSessionId !== 0) {
@@ -271,7 +271,7 @@ angular.module('tatool.module')
       broadcastPhaseChange(tatoolPhase.EXECUTABLE_END, elementStack.stack);
 
       // cancel executable timers
-      timerService.cancelExecutableTimers(elementStack.stack.peek().name);
+      timerUtils.cancelExecutableTimers(elementStack.stack.peek().name);
         
       // remove current executable from elementStack
       elementStack.stack.pop();

@@ -1,8 +1,8 @@
 'use strict';
 
 tatool
-  .controller('tatoolComplexSpanCtrl', [ '$scope', '$log', '$timeout', 'service', 'timerService', 
-    function ($scope, $log, $timeout, service, timerService) {
+  .controller('tatoolComplexSpanCtrl', [ '$scope', '$log', 'service', 
+    function ($scope, $log, service) {
 
     $scope.stimulus = service.tatoolStimulus;
     $scope.input = service.tatoolInput;

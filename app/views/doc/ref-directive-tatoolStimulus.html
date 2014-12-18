@@ -1,11 +1,11 @@
 <h2>Tatool Stimulus</h2>
-<p>The tatool-stimulus directive allows to arrange and display a stimulus on screen. The tatool-stimulus element also offers a mouseclick interaction feature. If you have multiple stimuli to display at once, you might want to take a look at the tatool-grid directive which offers more functionality. As with all directives, in order to use it, you'll have to add the HTML element to your executable template and add a dependency on the directive service in order to use the component in your executable.</p>
+<p>The tatool-stimulus template allows to arrange and display a stimulus on screen. The tatool-stimulus element also offers a mouseclick interaction feature. If you have multiple stimuli to display at once, you might want to take a look at the tatool-grid template which offers more functionality. As with all templates, in order to use it, you'll have to add the HTML element to your executable template and add a dependency on the template service in order to use the component in your executable.</p>
 
 <ul id="docPageNav">
   <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('howto')">Quick: How to use it</a></li>
   <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('introduction')">Introduction</a></li>
   <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('attributes')">&lt;tatool-stimulus&gt; attributes</a></li>
-  <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('functions')">tatoolStimulusService functions</a></li>
+  <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('functions')">Methods</a></li>
   <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('example')">Example</a></li>
 </ul>
 
@@ -17,37 +17,46 @@
 
 <pre><code class="language-markup">&lt;!-- 
   This represents the minimum required attributes. 
-  For the full list of attributes see &lt;tatool-grid> attributes. 
+  For the full list of attributes see &lt;tatool-stimulus> attributes. 
 -->
-&lt;tatool-stimulus service="myStimulus">&lt;/tatool-stimulus>
+&lt;tatool-stimulus service="stimulusService">&lt;/tatool-stimulus>
 </code></pre>
 
-<p><b>2.</b> Add a new dependency to the tatoolStimulusService in your executable service and/or controller.</p>
+<p><b>2.</b> Add a new dependency to the stimulusServiceFactory in your executable service.</p>
 
 <pre><code class="language-javascript">tatool
-.factory('myExecutable', [ 'tatoolExecutable', 'tatoolStimulusService', 
-  function (tatoolExecutable, tatoolStimulusService) {
+.factory('myExecutable', [ 'tatoolExecutable', 'stimulusServiceFactory', 
+  function (tatoolExecutable, stimulusServiceFactory) {
   ...
 </code></pre>
 
-<p><b>3.</b> Start by creating a new stimulus by accessing the tatoolStimulusService. Make the new stimulus available in your executable scope by assigning it to the scope property which you defined in step 1 as 'myStimulus'.</p>
+<p><b>3.</b> Start by creating a new stimulus service with the help of the stimulusServiceFactory.</p>
 
-<pre><code class="language-javascript">...
-// create a new stimulus instance in your executable service
-this.myStimulus = tatoolStimulusService.createStimulus();
-...
-// assign the stimulus to your executable scope property 'myStimulus' in your controller
-$scope.myStimulus = service.myStimulus;
-// show stimulus (hidden by default)
-service.myStimulus.show();
-...
+<pre><code class="language-javascript">MyExecutable.prototype.init = function() {
+  // create a new stimulus service
+  this.stimulusService = stimulusServiceFactory.createService();
+};
+</code></pre>
+
+<p><b>4.</b> At the very beginning of your controller make the new stimulus service available in your template scope by assigning it to the scope property which you defined in step 1 as 'stimulusService'.</p>
+
+<pre><code class="language-javascript">tatool.controller('myExecutable', [ '$scope', 'service', 
+  function ($scope, service) {
+    // assign the stimulus to your scope property 'stimulusService'
+    $scope.stimulusService = service.stimulusService;
+
+    $scope.start = function() {
+      // show stimulus (hidden by default)
+      service.stimulusService.show();
+    };
+    ...
 </code></pre>
 
 <hr class="hr-red">
 
 <h3 id="introduction">Introduction <span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
 
-<p>When you want to create an experimental task you'll most probably want to display something on screen for the user to interact with. That something can be a simple digit, a word, an image or even some audio or video content. In order to simplify the code to display something on screen, we've created tatool-stimulus directive. It allows you to do what you've done so many times before: display a stimulus! As the name already states this directive allows you to present ONE and only one stimulus at a time. But don't worry you can add multiple separate stimulus directives to your task allowing you to interact with multiple stimuli at a time. At some point you might also want to take a look at the tatool-grid directive which simplifies the display of multiple stimuli at different positions. The tatool-stimulus directive offers one interaction possibility, which is a simple 'mouseclick' informing you when a user clicked on what stimulus. If you want to capture keyboard events, take a look at the tatool-input directive.</p>
+<p>When you want to create an experimental task you'll most probably want to display something on screen for the user to interact with. That something can be a simple digit, a word, an image or even some audio or video content. In order to simplify the code to display something on screen, we've created the tatool-stimulus template. It allows you to do what you've done so many times before: display a stimulus! As the name already states this template allows you to present ONE and only one stimulus at a time. But don't worry you can add multiple separate stimulus templates to your task allowing you to interact with multiple stimuli at a time. At some point you might also want to take a look at the tatool-grid template which simplifies the display of multiple stimuli at different positions. The tatool-stimulus template offers one interaction possibility, which is a simple 'mouseclick' informing you when a user clicked on what stimulus. If you want to capture keyboard events, take a look at the tatool-input template.</p>
 
 <hr class="hr-red">
 
@@ -66,43 +75,55 @@ service.myStimulus.show();
   <tbody>
     <tr>
       <td class="cellB">service</td>
-      <td>[tatool-stimulus object]</td>
-      <td>expects a tatool-stimulus object created by the tatoolStimulusService</td>
+      <td>[stimulus service object]</td>
+      <td>expects a stimulus service object created by the stimulusServiceFactory</td>
     </tr>
     <tr>
       <td class="cellB">stimulusClick</td>
       <td>[function(stimulus,$event)]</td>
-      <td>custom function to call on mouse click on a stimulus</td>
-    </tr>
-    <tr>
-      <td class="cellB">dataPath</td>
-      <td>[path]</td>
-      <td>defines datapath to be used to access resources (e.g. images)</td>
+      <td>custom function to call on mouse click on stimulus. Parameter names are predefined.</td>
     </tr>
   </tbody>
 </table>
 
 <hr class="hr-red">
 
-<h3 id="functions">tatoolStimulusService functions <span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
+<h3 id="functions">Methods<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
 
-<p>With the help of the tatoolStimulusService you can create a new stimulus and control its behaviour in your executable controller/service. In this chapter we give you an introduction to all available functions with example code. It is important to remember that manipulations to the stimulus will only become visible after calling show(). This allows you to trigger the visibility as you see it fit in your executable.</p>
+<hr>
+
+<h4 id="stimulusServiceFactory">stimulusServiceFactory<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h4>
+
+<hr>
+
+<p>With the help of the stimulusServiceFactory you can create a new stimulus service. In this chapter we'll give you an introduction to all available methods and some example code.</p>
 
 
-<p><b>tatoolStimulusService.createStimulus()</b> - returns a new tatool-stimulus object.</p>
-<p>Creates a new tatool-stimulus object that can be used to manipulate one stimulus.</p>
+<p><b class="red">tatoolStimulusService.createService(stimuliPath)</b> - returns a new tatool-stimulus object.</p>
+<p>Creates a new stimulus service object that can be used to manipulate one stimulus. The stimuli path parameter can be used to let the service know where to access resources (e.g. images).</p>
+
+<p><b>Parameters</b><br>
+<i>stimuliPath</i>: a Path Property object (see <a ui-sref="doc({page: 'ref-properties.html'})">Properties</a> for more details)
+</p>
+
 <pre><code class="language-javascript">// create a new stimulus in your executable service
-this.myStimulus = tatoolStimulusService.createStimulus();
+this.myStimulus = tatoolStimulusService.createService(this.stimuliPath);
 ...
 // assign the stimulus to your executable scope property 'myStimulus' in your executable controller
 $scope.myStimulus= myStimulus;
 </code></pre>
 
-<h4>Stimulus object</h4>
+<hr>
 
-<p><b>myStimulus.set(data)</b> - returns the tatool-stimulus object.</p>
+<h4 id="stimulusService">Stimulus Service<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h4>
 
-<p>Sets a new stimulus which can be displayed later. In order to set a stimulus, a data object needs to be passed in. The data object needs a few mandatory stimulus properties. Additionally you can pass in any custom properties you want to have available later to process user feedback.</p>
+<p>It is important to remember that any manipulation to the stimulus will only become visible after calling show(). This allows you to trigger the visibility as you see it fit in your executable.</p>
+
+<hr>
+
+<p><b class="red">set(data)</b> - returns the stimulus service object.</p>
+
+<p>Sets a new stimulus which can be displayed later. In order to set a stimulus, a data object needs to be passed in. The data object needs a few mandatory stimulus properties. Additionally you can pass in any custom properties you want to have available later for process user feedback.</p>
 
 <table class="table table-striped table-condensed table-bordered">
   <thead>
@@ -138,60 +159,60 @@ $scope.myStimulus= myStimulus;
 
 <pre><code class="language-javascript">var data = {stimulusValue: 'A', stimulusValueType: 'text', myProperty: 'ABC'};
 // set the stimulus to our stimulus object.
-myStimulus.set(data);
+stimulusService.set(data);
 </code></pre>
 
 <hr>
 
-<p><b>myStimulus.setText(data)</b> - returns the tatool-stimulus object.</p>
+<p><b class="red">setText(data)</b> - returns the stimulus service object.</p>
 <p>Same functionality as set() but automatically defines the stimulus to be of type text, so you don't have to pass it in as a data property yourself.</p>
 
 <pre><code class="language-javascript">var data = {stimulusValue: 'random word', myProperty: 'ABC'};
 // set the stimulus to our stimulus object.
-myStimulus.setText(data);
+stimulusService.setText(data);
 </code></pre>
 
 <hr>
 
-<p><b>myStimulus.setImage(data)</b> - returns the tatool-stimulus object.</p>
+<p><b class="red">setImage(data)</b> - returns the stimulus service object.</p>
 <p>Same functionality as set() but automatically defines the stimulus to be of type image, so you don't have to pass it in as a data property yourself.</p>
 
 <pre><code class="language-javascript">var data = {stimulusValue: 'myAnimal.png', myProperty: 'ABC'};
 // set the stimulus to our stimulus object.
-myStimulus.setImage(data);
+stimulusService.setImage(data);
 </code></pre>
 
 <hr>
 
-<p><b>myStimulus.get()</b> - returns the data object currently set to a stimulus.</p>
-<p>Returns the currently set data object of the stimulus object.</p>
+<p><b class="red">get()</b> - returns the data object currently set to a stimulus service.</p>
+<p>Returns the currently set data object of the stimulus service object.</p>
 
-<pre><code class="language-javascript">var myData = myStimulus.get();
+<pre><code class="language-javascript">var myData = stimulusService.get();
 </code></pre>
 
 <hr>
 
-<p><b>myStimulus.show()</b> - returns the timing when the stimulus has been set to visible.</p>
-<p>Changes the visibility of your stimulus to 'visible' and returns the timing (performance.now()) which you can use to measure reaction times. As most functions manipulating the stimulus return the stimulus object itself, you can chain the show call to your previous call as in the second example below.</p>
+<p><b class="red">show()</b> - returns the timestamp when the stimulus has been set to visible.</p>
+<p>Changes the visibility of your stimulus to 'visible' and returns the timestamp which you can use to measure reaction times. As most functions manipulating the stimulus return the stimulus service object itself, you can chain the show call to your previous call as in the second example below.</p>
 
-<pre><code class="language-javascript">myStimulus.show();
-// Set new stimulus and display on screen
-myStimulus.set(data).show();
+<pre><code class="language-javascript">stimulusService.show();
+// Set new stimulus and display on screen chained
+stimulusService.set(data).show();
 </code></pre>
 
 <hr>
 
-<p><b>myStimulus.hide()</b> - returns the timing when the stimulus has been set to hidden.</p>
-<p>Changes the visibility of your stimulus to 'hidden' and returns the timing (performance.now()) which you can use to measure reaction times.</p>
+<p><b class="red">hide()</b> - returns the timestamp when the stimulus has been set to hidden.</p>
+<p>Changes the visibility of your stimulus to 'hidden' and returns the timestamp which you can be used to measure reaction times.</p>
 
-<pre><code class="language-javascript">myStimulus.hide();
+<pre><code class="language-javascript">stimulusService.hide();
 </code></pre>
 
 <hr class="hr-red">
 
 <h3 id="example">Example <span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
 
-<p>In the following example we're going to create a simple stroop task using the stimuli directive to display words or circles. The executable will display different types of stimuli (congruent, incongruent, neutral) and expects the user to press a key (tatool-input directive) to answer with the color of the stimulus.</p>
+<p>In the following example we're going to create a simple stroop task using the stimulus template to display words and circles. The executable will display different types of stimuli (congruent, incongruent, neutral) and expects the user to press a key (tatool-input template) to answer with the color of the stimulus.</p>
 
 <p><b>Executable HTML Template:</b></p>
 <pre><code class="language-markup">&lt;tatool>
@@ -199,51 +220,83 @@ myStimulus.set(data).show();
   &lt;tatool-stimulus 
     id="centeredExecutable" 
     service="stimulus" 
-    class="stroopStimulus" 
-    dataPath="{{dataPath}}">
+    class="stroopStimulus">
   &lt;/tatool-stimulus>
 
   &lt;tatool-input 
     id="bottomExecutable" 
     service="input" 
-    onInput="inputAction(input, timing, event)">
+    userInput="inputAction(input, timing, event)">
   &lt;/tatool-input>
-
+  
 &lt;/tatool>
 </code></pre>
 
 <p><b>Executable Service:</b></p>
-<pre><code class="language-javascript">tatool.factory('stroopExecutable', [ '$q', 'db', 'timerService', 'tatoolExecutable', 'tatoolStimulusService', 'tatoolInputService',
-    function ($q,  db, timerService, tatoolExecutable, tatoolStimulusService, tatoolInputService) {
+<pre><code class="language-javascript">tatool
+  .factory('tatoolStroop', [ '$log', 'dbUtils', 'timerUtils', 'executableUtils', 'stimulusServiceFactory', 'inputServiceFactory',
+    function ($log, dbUtils, timerUtils, executableUtils, stimulusServiceFactory, inputServiceFactory) {
 
     // Create a new executable service
-    var StroopExecutable = tatoolExecutable.createExecutable();
+    var StroopExecutable = executableUtils.createExecutable();
 
     //  Initialze variables at the start of every session
     StroopExecutable.prototype.init = function() {
-      var deferred = $q.defer();
+      var deferred = executableUtils.createPromise();
+
+      if (!this.hideKeys) {
+        this.hideKeys = { propertyValue: false };
+      } else {
+        this.hideKeys = (this.hideKeys.propertyValue === true) ? true : false;
+      }
+
+      if (!this.timerEnabled) {
+        this.timerEnabled = { propertyValue: false };
+      } else {
+        this.timerEnabled = (this.timerEnabled.propertyValue === true) ? true : false;
+      }
+      
+      if (!this.stimuliPath) {
+        deferred.reject('Invalid property settings for Executable tatoolStroop. Expected property <b>stimuliPath</b> of type Path.');
+      }
 
       // template properties
-      this.stimulus = tatoolStimulusService.createStimulus();
-      this.input = tatoolInputService.createInput();
+      this.tatoolStimulus = stimulusServiceFactory.createService(this.stimuliPath);
+      this.tatoolInput = inputServiceFactory.createService(this.stimuliPath);
 
       // timing properties
-      this.startTime = 0;
-      this.endTime = 0;
-      this.timerDuration = 2000;
-      this.timer = timerService.createTimer(this.timerDuration, true, this);
+      this.timerDuration = (this.timerDuration ) ? this.timerDuration : 2000;
+      this.timer = timerUtils.createTimer(this.timerDuration, true, this);
 
-      // load stimuli file from project or external resource
-      this.dataPath = (this.dataPath) ? this.dataPath : '';
-      var self = this;
-      tatoolExecutable.getProjectCSV('stimuli', this.stimuliFile, true).then(function(list) {
-          self.stimuliList = self.splitStimuliList(list);
-          deferred.resolve();
-        }, function(error) {
-          deferred.reject(error);
-        });
+      // trial counter property
+      this.counter = -1;
 
-      return deferred.promise;
+      // prepare stimuli
+      if (this.stimuliFile) {
+        var self = this;
+        executableUtils.getCSVResource(this.stimuliFile, true, this.stimuliPath).then(function(list) {
+            self.processStimuliFile(list, deferred);
+          }, function(error) {
+            deferred.reject('Resource not found: ' + self.stimuliFile.resourceName);
+          });
+      } else {
+        deferred.reject('Invalid property settings for Executable tatoolStroop. Expected property <b>stimuliFile</b> of type Resource.');
+      }
+
+      return deferred;
+    };
+
+    // process stimuli file according to random property
+    StroopExecutable.prototype.processStimuliFile = function(list, deferred) {
+      if (this.random === 'full-condition') {
+        this.stimuliList = this.splitStimuliList(list);
+      } else if (this.random === 'full') {
+        this.stimuliList = executableUtils.shuffle(list);
+      } else {
+        this.stimuliList = list;
+      }
+      this.setupInputKeys(list);
+      deferred.resolve();
     };
 
     // Splitting the stimuliList according to stimulusType
@@ -255,41 +308,79 @@ myStimulus.set(data).show();
           newList[stimulusType] = [];
         }
         newList[stimulusType].push(list[i]);
-
-        // setup input keys for stimulus
-        this.setupInputKeys(list[i]);
       }
       return newList;
     };
 
-    // Adding keyInputs from stimuliFile
-    StroopExecutable.prototype.setupInputKeys = function(stimulus) {
+    // Adding keyInputs and hide by default
+    StroopExecutable.prototype.setupInputKeys = function(list) {
       var keyCodes = [];
-      if (keyCodes.indexOf(stimulus.keyCode) === -1) {
-        keyCodes.push(stimulus.keyCode);
-        this.input.addInputKey(stimulus.keyCode, stimulus.correctResponse, null, false);
+      for (var i = 0; i &lt; list.length; i++) {
+        if (keyCodes.indexOf(list[i].keyCode) === -1) {
+          keyCodes.push(list[i].keyCode);
+          this.tatoolInput.addInputKey(list[i].keyCode, list[i].correctResponse, list[i].keyLabel, list[i].keyLabelType, this.hideKeys);
+        }
+      }
+      if (keyCodes.length === 0) {
+        executableUtils.fail('Error creating tatoolInput in Executable tatoolStroop. No keyCodes provided in stimuliFile.');
       }
     };
 
-    // Generate a random stimulus and set properties
+    // Create stimulus and set properties
     StroopExecutable.prototype.createStimulus = function() {
+      // reset executable properties
+      this.startTime = 0;
+      this.endTime = 0;
+      this.counter++;
 
-      // pick random stimuliType
-      var stimuli = tatoolExecutable.pickRandom(this.stimuliList);
-
-      // pick random stimulus out of selected stimuliType
-      var randomStimulus = tatoolExecutable.pickRandom(stimuli);
+      // reset counter to 0 if > no. of stimuli
+      if (this.counter >= this.stimuliList.length) {
+        this.counter = 0;
+      }
 
       // create new trial
       this.trial = {};
-      this.trial.stimulusType = randomStimulus.stimulusType;
-      this.trial.correctResponse = randomStimulus.correctResponse;
       this.trial.givenResponse = null;
       this.trial.reactionTime = 0;
       this.trial.score = null;
 
-      // set stimulus data to our stimulus object
-      this.stimulus.set(randomStimulus);
+      var stimulus = null;
+      if (this.random === 'full-condition') {
+        stimulus = this.createRandomConditionStimulus();
+      } else if (this.random === 'full') {
+        stimulus = this.createRandomStimulus();
+      } else {
+        stimulus = this.createNonRandomStimulus();
+      }
+
+      if (stimulus === null) {
+        executableUtils.fail('Error creating stimulus in Executable tatoolStroop. No more stimuli available in current stimuliList.');
+      } else {
+        this.trial.stimulusType = stimulus.stimulusType;
+        this.trial.correctResponse = stimulus.correctResponse;
+        this.tatoolStimulus.set(stimulus);
+      }
+    };
+
+    StroopExecutable.prototype.createRandomConditionStimulus = function() {
+      // get random stimuliType with replacement
+      var stimuli = executableUtils.getRandomReplace(this.stimuliList);
+
+      // get random stimulus out of selected stimuliType
+      var  randomStimulus = executableUtils.getRandomReplace(stimuli);
+      return randomStimulus;
+    };
+
+    StroopExecutable.prototype.createRandomStimulus = function() {
+      // get random stimulus out of selected stimuliType
+      var  randomStimulus = executableUtils.getRandom(this.stimuliList);
+      return randomStimulus;
+    };
+
+    StroopExecutable.prototype.createNonRandomStimulus = function() {
+      // get stimulus next replacement
+      var nonRandomStimulus = executableUtils.getNext(this.stimuliList, this.counter);
+      return nonRandomStimulus;
     };
 
     // Process given response and stop executable
@@ -301,7 +392,7 @@ myStimulus.set(data).show();
       } else {
         this.trial.score = 0;
       }
-      db.saveTrial(this.trial).then(tatoolExecutable.stop());
+      dbUtils.saveTrial(this.trial).then(executableUtils.stop());
     };
 
     // Return our executable service object
@@ -312,15 +403,13 @@ myStimulus.set(data).show();
 
 <p><b>Executable Controller:</b></p>
 <pre><code class="language-javascript">tatool
-  .controller('stroopExecutableCtrl', [ '$scope', '$log', '$window', '$timeout', 'service', 'tatoolInputService',
-    function ($scope, $log, $window, $timeout, service, tatoolInputService) {
+  .controller('tatoolStroopCtrl', [ '$scope', '$log', '$window', '$timeout', 'service',
+    function ($scope, $log, $window, $timeout, service) {
 
     // Make the stimulus available for the &lt;tatool-stimulus> template
-    $scope.stimulus = service.stimulus;
+    $scope.stimulus = service.tatoolStimulus;
     // Make the input available for the &lt;tatool-input> template
-    $scope.input = service.input;
-    // Make the data path available for the &lt;tatool-stimulus> template
-    $scope.dataPath = service.dataPath;
+    $scope.input = service.tatoolInput;
 
     // Start execution
     $scope.start = function() {
@@ -328,23 +417,29 @@ myStimulus.set(data).show();
       service.createStimulus();
 
       // Enable input, start timer and display stimulus
-      service.input.enable();
-      service.timer.start(timerUp);
-      service.startTime = service.stimulus.show();
+      service.tatoolInput.enable();
+      if (!service.hideKeys) {
+        service.tatoolInput.show();
+      }
+      if (service.timerEnabled) {
+        service.timer.start(timerUp);
+      }
+      service.startTime = service.tatoolStimulus.show();
     };
 
     // Called by our timer when the time is up and no user input was captured
     function timerUp() {
-      service.input.disable();
-      service.endTime = service.stimulus.hide();
+      service.tatoolInput.disable();
+      service.endTime = service.tatoolStimulus.hide();
       service.processResponse('');
     }
 
     // Captures user input
     $scope.inputAction = function(input, timing, event) {
-      service.input.disable();
+      service.tatoolInput.disable();
       service.timer.stop();
-      service.stimulus.hide();
+      service.tatoolInput.hide();
+      service.tatoolStimulus.hide();
       service.endTime = timing;
       service.processResponse(input.givenResponse);
     };
@@ -357,39 +452,6 @@ myStimulus.set(data).show();
   color: #000;
   font-size: 550%;
   text-shadow: 0px 1px 2px #a2c9b2;
-}
-</code></pre>
-
-<p><b>Executable Module File:</b></p>
-<pre><code class="language-javascript">{
-    "name": "Stroop Task",
-    "author": "Tatool",
-    "label": "stroop",
-    "allowEscapeKey" : true,
-    "export" : [ 
-        { "mode": "download" } ],
-    "moduleHierarchy": {
-        "tatoolType": "List",
-        "iterator": { "customType" : "ListIterator", "numIterations" : "12" },
-        "handlers": [ { "customType" : "levelHandler", "name" : "level" }, { "customType" : "trialCountHandler", "name" : "counter" } ],
-        "children": 
-            [
-                {
-                    "tatoolType": "Executable",
-                    "customType": "stroopExecutable",
-                    "name": "stroop-task",
-                    "fixationInterval" : 250,
-                    "blankInterval" : "600",
-                    "stimuliFile" : "stroop.csv",
-                    "status": {
-                        "levelPanel": true,
-                        "feedbackPanel": true,
-                        "timerPanel": true,
-                        "trialCountPanel": true
-                    }
-                }
-            ]
-    }
 }
 </code></pre>
 

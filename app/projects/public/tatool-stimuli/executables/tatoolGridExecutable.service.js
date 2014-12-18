@@ -1,16 +1,16 @@
 'use strict';
 
 tatool
-  .factory('tatoolGridExecutable', [ 'executableUtils', 'timerService', 'gridServiceFactory',
-    function (executableUtils, timerService, gridServiceFactory) {
+  .factory('tatoolGridExecutable', [ 'executableUtils', 'timerUtils', 'gridServiceFactory',
+    function (executableUtils, timerUtils, gridServiceFactory) {
 
     // Define our executable service constructor
     var TatoolGridExecutable = executableUtils.createExecutable();
 
     TatoolGridExecutable.prototype.init = function() {
       // create non visual timers to be used by the controller
-      this.messageTimer = timerService.createTimer(2000, false, this);
-      this.endTimer = timerService.createTimer(2500, false, this);
+      this.messageTimer = timerUtils.createTimer(2000, false, this);
+      this.endTimer = timerUtils.createTimer(2500, false, this);
 
       if (!this.stimuliPath) {
         executableUtils.fail('Invalid property settings for Executable tatoolGrid. Expected property stimuliPath of type Path.');

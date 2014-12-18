@@ -1,8 +1,8 @@
 'use strict';
 
 tatool
-  .factory('tatoolCountdown', [ 'executableUtils', 'timerService',
-    function (executableUtils, timerService) {
+  .factory('tatoolCountdown', [ 'executableUtils', 'timerUtils',
+    function (executableUtils, timerUtils) {
 
     var TatoolCountdown = executableUtils.createExecutable();
 
@@ -12,7 +12,7 @@ tatool
     TatoolCountdown.prototype.init = function() {
       this.countDownFrom = this.countdown || DEFAULT_COUNTDOWN;
       var countDownInterval = this.interval || DEFAULT_INTERVAL;
-      this.timer = timerService.createTimer(countDownInterval, false, this);
+      this.timer = timerUtils.createTimer(countDownInterval, false, this);
     };
 
     TatoolCountdown.prototype.resetCountDown = function() {

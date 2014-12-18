@@ -1,18 +1,18 @@
 'use strict';
 
 angular.module('tatool.module')
-  .factory('timerService', ['$log', '$timeout', '$interval', 'statusPanelService', 'executableUtils',
+  .factory('timerUtils', ['$log', '$timeout', '$interval', 'statusPanelService', 'executableUtils',
     function ($log, $timeout, $interval, statusPanelService, executableUtils) {
     $log.debug('TimerService: initialized');
 
-    var timerService = {};
+    var timerUtils = {};
 
     var timers = {};
 
     var VISUAL_TIMER_INTERVAL = 25;
 
     // creates a new timer, registers and returns it
-    timerService.createTimer = function(duration, visual, executable) {
+    timerUtils.createTimer = function(duration, visual, executable) {
       if (!executable.name) {
         throw('Timer could not be created for executable  with customType \''+executable.customType+ '\'. The name property for this executable is missing.');
       }
@@ -26,7 +26,7 @@ angular.module('tatool.module')
     };
 
     // stops all timers
-    timerService.cancelAllTimers = function() {
+    timerUtils.cancelAllTimers = function() {
       for (var key in timers) {
         for (var i = 0; i < timers[key].length; i++) {
           timers[key][i].stop();
@@ -35,13 +35,13 @@ angular.module('tatool.module')
     };
 
     // stops all timers and deletes them
-    timerService.clearAllTimers = function() {
+    timerUtils.clearAllTimers = function() {
       this.cancelAllTimers();
       timers = [];
     };
 
     // stops all timers of a given executable
-    timerService.cancelExecutableTimers = function(executableId) {
+    timerUtils.cancelExecutableTimers = function(executableId) {
       if (executableId in timers) {
         for (var i = 0; i < timers[executableId].length; i++) {
           timers[executableId][i].stop();
@@ -125,6 +125,6 @@ angular.module('tatool.module')
       }
     };
 
-    return timerService;
+    return timerUtils;
 
   }]);

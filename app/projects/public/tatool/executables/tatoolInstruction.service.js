@@ -1,14 +1,14 @@
 'use strict';
 
 tatool
-  .factory('tatoolInstruction', [ '$log', '$templateCache', '$http', '$q', 'executableUtils', 'inputServiceFactory',
-    function ($log, $templateCache, $http, $q, executableUtils, inputServiceFactory) {
+  .factory('tatoolInstruction', [ '$log', '$templateCache', 'executableUtils', 'inputServiceFactory',
+    function ($log, $templateCache, executableUtils, inputServiceFactory) {
 
     var TatoolInstruction = executableUtils.createExecutable();
 
     // preload all instructions and fail if page can't be found
     TatoolInstruction.prototype.init = function() {
-      var deferred = $q.defer();
+      var deferred = executableUtils.createPromise();
 
       var self = this;
       if (this.pages && this.pages.propertyValue && this.pages.propertyValue.length > 0) {

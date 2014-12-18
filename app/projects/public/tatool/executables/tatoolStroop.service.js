@@ -1,15 +1,15 @@
 'use strict';
 
 tatool
-  .factory('tatoolStroop', [ '$log', '$q', 'dbUtils', 'timerService', 'executableUtils', 'stimulusServiceFactory', 'inputServiceFactory',
-    function ($log, $q,  dbUtils, timerService, executableUtils, stimulusServiceFactory, inputServiceFactory) {
+  .factory('tatoolStroop', [ '$log', 'dbUtils', 'timerUtils', 'executableUtils', 'stimulusServiceFactory', 'inputServiceFactory',
+    function ($log, dbUtils, timerUtils, executableUtils, stimulusServiceFactory, inputServiceFactory) {
 
     // Create a new executable service
     var StroopExecutable = executableUtils.createExecutable();
 
     //  Initialze variables at the start of every session
     StroopExecutable.prototype.init = function() {
-      var deferred = $q.defer();
+      var deferred = executableUtils.createPromise();
 
       if (!this.hideKeys) {
         this.hideKeys = { propertyValue: false };
@@ -33,7 +33,7 @@ tatool
 
       // timing properties
       this.timerDuration = (this.timerDuration ) ? this.timerDuration : 2000;
-      this.timer = timerService.createTimer(this.timerDuration, true, this);
+      this.timer = timerUtils.createTimer(this.timerDuration, true, this);
 
       // trial counter property
       this.counter = -1;

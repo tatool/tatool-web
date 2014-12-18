@@ -12,8 +12,8 @@
  */
 
 tatool
-  .factory('dbRegression', [ '$log', 'executableUtils', 'dbUtils', 'timerService', 'tatoolPhase',
-    function ($log, executableUtils, dbUtils, timerService, tatoolPhase) {
+  .factory('dbRegression', [ '$log', 'executableUtils', 'dbUtils', 'timerUtils', 'tatoolPhase',
+    function ($log, executableUtils, dbUtils, timerUtils, tatoolPhase) {
 
     // Create our executable
     var DbRegression = executableUtils.createExecutable();
@@ -33,7 +33,7 @@ tatool
       this.trial.reactionTime = 0;
       this.trial.score = null;
 
-      this.timer = timerService.createTimer(this.timerDuration, true, this);
+      this.timer = timerUtils.createTimer(this.timerDuration, true, this);
     };
 
     // Generate a random stimulus and set properties

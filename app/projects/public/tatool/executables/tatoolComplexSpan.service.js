@@ -1,8 +1,8 @@
 'use strict';
 
 tatool
-  .factory('tatoolComplexSpan', [ 'executableUtils', 'dbUtils', 'timerService', 'tatoolPhase', 'stimulusServiceFactory', 'inputServiceFactory',
-    function (executableUtils, dbUtils, timerService, tatoolPhase, stimulusServiceFactory, inputServiceFactory) {  
+  .factory('tatoolComplexSpan', [ 'executableUtils', 'dbUtils', 'timerUtils', 'tatoolPhase', 'stimulusServiceFactory', 'inputServiceFactory',
+    function (executableUtils, dbUtils, timerUtils, tatoolPhase, stimulusServiceFactory, inputServiceFactory) {  
 
     // Define our executable service constructor which will be called once for every instance
     var ComplexNumExecutable = executableUtils.createExecutable();
@@ -19,8 +19,8 @@ tatool
       this.tatoolStimulus = stimulusServiceFactory.createService(this.stimuliPath);
       this.tatoolInput = inputServiceFactory.createService();
 
-      this.timerDisplayMemoranda = timerService.createTimer(800, true, this);
-      this.timerIntervalMemoranda = timerService.createTimer(400, false, this);
+      this.timerDisplayMemoranda = timerUtils.createTimer(800, true, this);
+      this.timerIntervalMemoranda = timerUtils.createTimer(400, false, this);
 
       // trial counter property
       this.counter = -1;
