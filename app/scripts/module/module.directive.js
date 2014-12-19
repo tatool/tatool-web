@@ -255,10 +255,11 @@ angular.module('tatool.module').directive('tatoolStimulus', ['$log', '$templateC
       };
 
       scope.stimulusClickEvent = function($event, stimulus) {
+        var timing = executableUtils.getTiming();
         if ($event.timeStamp < cfgModule.MIN_EPOCH_MS) {
           $event.timeStamp = new Date().getTime();
         }
-        scope.stimulusclick({'stimulus': stimulus, '$event': $event});
+        scope.stimulusclick({'stimulus': stimulus, 'timing': timing, '$event': $event});
       };
 
       element.on('$destroy', function() {
@@ -485,10 +486,11 @@ angular.module('tatool.module').directive('tatoolGrid', ['$log', '$templateCache
       };
 
       scope.gridClickEvent = function($event, cell) {
+        var timing = executableUtils.getTiming();
         if ($event.timeStamp < cfgModule.MIN_EPOCH_MS) {
           $event.timeStamp = new Date().getTime();
         }
-        scope.gridclick({'cell': cell, '$event': $event});
+        scope.gridclick({'cell': cell, 'timing': timing, '$event': $event});
       };
 
       scope.gridDrop = function(dragCell, dropCell) {

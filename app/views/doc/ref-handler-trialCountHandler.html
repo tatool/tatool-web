@@ -1,3 +1,18 @@
-<h2>Start</h2>
-<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-</p>
+<h2>trialCountHandler</h2>
+
+<p>The trialCountHandler can be used in combination with the counter status panel that can be activated for every Executable. The trialCountHandler provides the values for the counter status panel who takes care of displaying the values on screen.</p>
+
+<p>The trial counter will always be reset to 1 at the beginning of a new session. Within a session the counter will be incremented by 1 after every execution of an Executable defined as a child of the current Element, regardless of whether a trial object is saved. In the case of a Dual Element, the counter will only increment after one iteration has completed (e.g. primary, secondary, primary). The counter status panel will be updated at the beginning of every new execution and should therefore show the count of the current trial.</p>
+
+<hr>
+
+<h4>Variables<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h4>
+
+<p>The levelHandler has no variables for customization within a Module.</p>
+
+
+<hr>
+
+<h4>Module/Session Properties<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h4>
+
+<p>The trialCountHandler doesn't save any data to the database and will lose all information at the end of every a session.</p>

@@ -15,7 +15,7 @@ A Property is defined as a key-value pair used to make your Executables more gen
 An Element is used to group your Executables in different ways. For example, let's say you'd want to execute Executable A followed by Executable B. You can use a List Element for this purpose which allows you to execute the containing Executables in sequence. Elements can also be nested allowing you to create complex execution sequences.</p>
 
 <p><b>Handler</b><br>
-A Handler is used to provide your Elements and Executables with reusable functionality. Instead of duplicating the same code in different Executables, you can extract the logic and make it available for multiple Elements, allowing them to share the same state. A simple example for this is a Handler called trialCountHandler, which does what the name suggests: it counts trials and allows you to display the information on screen independent of the Executable.</p>
+A Handler is used to provide your Modules with reusable functionality. Instead of duplicating the same code in different Executables, you can extract the logic and make it available for multiple Elements, allowing them to share the same state. A simple example for this is a Handler called trialCountHandler, which does what the name suggests: it counts trials and allows you to display the information on screen independent of the Executable.</p>
 
 <p><b>Module</b><br>
 A Module groups all your Elements and Executables into a single unit which can be executed by your users. The Module also allows you to provide some extra metadata as for example name and author of the Module. In most cases, an experiment consists of one Module (e.g., including instructions, practice trials and test trials) which can be installed by your users.</p>

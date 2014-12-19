@@ -1,42 +1,496 @@
 <h2>Tatool Grid</h2>
-<p></p>
+<p>The tatool-grid template is a powerful component to arrange and display 1-n stimuli in a grid structure on screen. The tatool-grid also offers different interaction features like mouseclick, mouseover and drag'n'drop out of the box. As with all template, in order to use it, you'll have to add the HTML element to your executable template and add the grid service as a dependency in order to use the component in your executable.</p>
 
 <ul id="docPageNav">
   <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('howto')">Quick: How to use it</a></li>
   <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('introduction')">Introduction</a></li>
-  <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('attributes')">&lt;tatool-stimulus&gt; attributes</a></li>
-  <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('functions')">tatoolStimulusService functions</a></li>
-  <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('example')">Example</a></li>
+  <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('element')">&lt;tatool-grid&gt; element</a></li>
+  <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('functions')">Methods</a></li>
 </ul>
 
 <hr class="hr-red">
 
 <h3 id="howto">Quick: How to use it <span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
 
-<p><b>1.</b> </p>
+<p><b>1.</b> Add the tatool-grid element to the html template of your executable.</p>
 
-<pre><code class="language-markup">
+<pre><code class="language-markup">&lt;!-- This represents the minimum required attributes. For the full list of attributes see &lt;tatool-grid> attributes. -->
+&lt;tatool-grid service="myGrid">
+&lt;/tatool-grid>
 </code></pre>
 
-<p><b>2.</b> </p>
+<p><b>2.</b> Add the gridServiceFactory as a new dependency to your executable service.</p>
 
-<pre><code class="language-javascript">
+<pre><code class="language-javascript">tatool
+.factory('myExecutable', [ 'tatoolExecutable', 'gridServiceFactory', 
+  function (tatoolExecutable, gridServiceFactory) {
+  ...
 </code></pre>
 
-<p><b>3.</b> </p>
+<p><b>3.</b> Start by creating a new grid service with the help of the gridServiceFactory.</p>
 
-<pre><code class="language-javascript">
+<pre><code class="language-javascript">MyExecutable.prototype.init = function() {
+  // create a new grid service
+  this.gridService = gridServiceFactory.createService();
+};
 </code></pre>
+
+<p><b>4.</b> At the very beginning of your controller make the new grid service available to your template by assigning it to the $scope property which you defined in step 1 as 'gridService'.</p>
+
+<pre><code class="language-javascript">tatool.controller('myExecutable', [ '$scope', 'service', 
+  function ($scope, service) {
+    // assign the stimulus to your scope property 'gridService'
+    $scope.gridService = service.gridService;
+
+    $scope.start = function() {
+      // show grid (hidden by default)
+      service.gridService.show();
+    };
+    ...
+</code></pre>
+
+
 
 <hr class="hr-red">
 
 <h3 id="introduction">Introduction <span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
 
-<p></p>
+<p>The following figure shows a example of the tatool-grid in action. In order to address cells within the grid the <b>gridPosition</b> is your one and only number to use. The gridPosition enumerates cells starting from 1 at the top left and counting cell by cell and row by row. When the <b>hover effect</b> is enabled, it will indicate which cell you're mouse is currently over. Every cell can contain either a <b>stimulus</b> (e.g. image, text) or nothing at all. If no stimulus is provided the cell will be <b>empty</b> and can be hidden. Every <b>cell</b> has a <b>default style</b> but can be assigned a <b>custom style</b> if required. The <b>gridSpacing</b> allows you to introduce gaps between your cells. It is important to remember that manipulations to the grid will only become visible after calling show().</p>
+
+<p>
+  <img src="../../images/doc/figure-tatool-grid.png" class="internal"><br>
+  <i>Example tatool-grid</i>
+</p>
 
 <hr class="hr-red">
 
-<h3 id="attributes">&lt;tatool-stimulus&gt; attributes <span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
+<h3 id="element">&lt;tatool-grid&gt; element <span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
 
+<p>The following attributes can be provided when using the tatool-grid element in your executable template html. The attributes mainly control the styling and user interaction possibilities.</p>
+
+<table class="table table-striped table-condensed table-bordered">
+  <thead>
+    <tr>
+      <th>Attribute</th>
+      <th>Value</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="cellB">service</td>
+      <td>[grid service object]</td>
+      <td>expects a grid service object created by the gridServiceFactory</td>
+    </tr>
+    <tr>
+      <td class="cellB">gridSpacing</td>
+      <td>collapse</td>
+      <td>collapses all cell borders to create a unique border and no spacing</td>
+    </tr>
+    <tr>
+      <td class="cellB"></td>
+      <td>separate</td>
+      <td>keeps cell borders separate without spacing</td>
+    </tr>
+    <tr>
+      <td class="cellB"></td>
+      <td>[n]</td>
+      <td>keeps cell borders separate and sets the spacing to n pixels</td>
+    </tr>
+    <tr>
+      <td class="cellB">cellClass</td>
+      <td>[css class]</td>
+      <td>defines default class used for grid cells</td>
+    </tr>
+    <tr>
+      <td class="cellB">cellWidth</td>
+      <td>[n]</td>
+      <td>defines default width of grid cells to n pixels</td>
+    </tr>
+    <tr>
+      <td class="cellB">cellHeight</td>
+      <td>[n]</td>
+      <td>defines default height of grid cells to n pixels</td>
+    </tr>
+    <tr>
+      <td class="cellB">hideEmptyCells</td>
+      <td>yes</td>
+      <td>hides all empty grid cells and their border</td>
+    </tr>
+    <tr>
+      <td class="cellB">disableHover</td>
+      <td>yes</td>
+      <td>disables the hover effect on grid cells (assigns css class with name [cellClass]Static)</td>
+    </tr>
+    <tr>
+      <td class="cellB">disableHover</td>
+      <td>yes</td>
+      <td>disables the hover effect on grid cells (assigns css class with name [cellClass]Static)</td>
+    </tr>
+    <tr>
+      <td class="cellB">allowDrag</td>
+      <td>yes</td>
+      <td>defines whether drag feature is enabled by default for all cells</td>
+    </tr>
+    <tr>
+      <td class="cellB">allowDrop</td>
+      <td>yes</td>
+      <td>defines whether drop feature is enabled by default on all empty cells</td>
+    </tr>
+    <tr>
+      <td class="cellB"></td>
+      <td>all</td>
+      <td>defines whether drop feature is enabled by default on all cells (replaces value in target cell)</td>
+    </tr>
+    <tr>
+      <td class="cellB">gridClick</td>
+      <td>[function(cell, timing, $event)]</td>
+      <td>custom function to call on mouse click on a specific grid cell</td>
+    </tr>
+    <tr>
+      <td class="cellB">gridDrop</td>
+      <td>[function(dragCell, dropCell)]</td>
+      <td>custom function to call on drop on a specific grid cell</td>
+    </tr>
+    <tr>
+      <td class="cellB">gridMouseEnter</td>
+      <td>[function(cell, $event)]</td>
+      <td>custom function to call on mouse enter on a specific grid cell</td>
+    </tr>
+    <tr>
+      <td class="cellB">gridMouseLeave</td>
+      <td>[function(cell, $event)]</td>
+      <td>custom function to call on mouse leave on a specific grid cell</td>
+    </tr>
+  </tbody>
+</table>
+
+
+<hr class="hr-red">
+
+<h3 id="functions">Methods<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
+
+<hr>
+
+<h4>gridServiceFactory<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h4>
+
+<p>With the help of the gridServiceFactory you can create a new grid service. The following reference lists all available methods and some example code.</p>
+
+<p>While working with the tatool-grid you're working either with the grid service factory, the grid service object or with a specific grid cell object. All objects allow you to manipulate different aspects of the tatool-grid.</p>
+
+<hr>
+
+<p><b class="red">createService(rows, cols, gridId, stimuliPath)</b> - returns a new grid service object.</p>
+<p>Creates a new grid service object that can be used to manipulate the cells in a grid. The dimensions of the grid can be defined by setting the number of rows and columns. In order to allow drag and drop behavior between multiple grids, every grid must be assigned a unique gridId. The stimuli path parameter can be used to let the service know where to access resources (e.g. images).</p>
+
+<p><b>Parameters</b><br>
+<i>rows</i>: integer value defining the number of rows to be displayed<br>
+<i>cols</i>: integer value defining the number of columns to be displayed<br>
+<i>gridId</i>: string value defining the unique name of this grid<br>
+<i>stimuliPath</i>: a Path Property object (see <a ui-sref="doc({page: 'ref-properties.html'})">Properties</a> for more details)
+</p>
+
+<pre><code class="language-javascript">// create a new grid service in your executable service
+this.gridService = gridServiceFactory.createService(2, 4, 'myGrid', this.stimuliPath);
+</code></pre>
+
+<hr>
+
+<h4>Grid Service<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h4>
+
+<p>It is important to remember that manipulations to the grid will only become visible after calling the refresh() method. This allows you to trigger the visibility as you see it fit in your executable.</p>
+
+<hr>
+
+<p><b class="red">resize(rows, cols)</b> - returns the grid service object.</p>
+
+<p>Allows you to resize your grid at runtime. In order to make the change visible a call to redraw() is required.</p>
+
+<p><b>Parameters</b><br>
+<i>rows</i>: integer value defining the number of rows to be displayed<br>
+<i>cols</i>: integer value defining the number of columns to be displayed<br>
+</p>
+
+<pre><code class="language-javascript">// resizes grid to 2 rows and 3 columns
+gridService.resize(2, 3);
+</code></pre>
+
+<p>Alternatively you can also provide the possible keys in your html template upfront. This will still allow you to control the behavior from your executable with the input service and reduce the required code. For the possible attributes see <a href ng-click="scrollTo('key-attributes')">&lt;tatool-key&gt; attributes</a>.</p>
+
+<pre><code class="language-markup">&lt;tatool-key code="ArrowLeft" response="blue">&lt;/tatool-key>
+</code></pre>
+
+<hr>
+
+<p><b class="red">createCell(data)</b> - returns a new cell object.</p>
+
+<p>Creates a new tatool-grid cell which can be added to the grid. If you don't need the cell object as a return value, you can use the addCellAtPosition() or the addCell() function directly. In order to create a cell, a data object needs to be passed in. As a tatool-grid cell displays one stimulus, you'll have to pass in the mandatory stimulus properties and the gridPosition (can also be provided by using addCellAtPosition() later). Additionally you can pass in any custom properties you want to have available later to process user feedback.</p>
+
+<p><b>Parameters</b><br>
+<i>data</i>: a JavaScript object representing a stimulus. See required properties in table below.
+</p>
+
+<table class="table table-striped table-condensed table-bordered">
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Mandatory</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="cellB">stimulusValueType</td>
+      <td>(yes)</td>
+      <td>the stimulus value type (text/image/circle/square)</td>
+    </tr>
+    <tr>
+      <td class="cellB">stimulusValue</td>
+      <td>(yes)</td>
+      <td>the stimulus value (depending on stimulusValueType either a text or an image filename)</td>
+    </tr>
+    <tr>
+      <td class="cellB">gridPosition</td>
+      <td>(yes)</td>
+      <td>sets the tatool-grid position for cell</td>
+    </tr>
+    <tr>
+      <td class="cellB">gridCellHeight</td>
+      <td>no</td>
+      <td>defines the height of the tatool-grid cell (overrides setting on tatool-grid element)</td>
+    </tr>
+    <tr>
+      <td class="cellB">gridCellWidth</td>
+      <td>no</td>
+      <td>defines the width of the tatool-grid cell (overrides setting on tatool-grid element)</td>
+    </tr>
+    <tr>
+      <td class="cellB">gridCellClass</td>
+      <td>no</td>
+      <td>defines a custom css class to be used to style this tatool-grid cell (overrides setting on tatool-grid element)</td>
+    </tr>
+    <tr>
+      <td class="cellB">gridAllowDrag</td>
+      <td>no</td>
+      <td>defines whether drag is allowed for this tatool-grid cell (doesn't override setting on tatool-grid element)</td>
+    </tr>
+    <tr>
+      <td class="cellB">gridAllowDrop</td>
+      <td>no</td>
+      <td>defines whether drop is allowed for this tatool-grid cell (doesn't override setting on tatool-grid element)</td>
+    </tr>
+  </tbody>
+</table>
+
+<pre><code class="language-javascript">var data = {stimulusValue: 'A', stimulusValueType: 'text', myProperty: 'ABC'};
+// create a new cell and pass in our data object
+var myCell = gridService.createCell(data);
+</code></pre>
+
+<hr>
+
+<p><b class="red">addCell(cell)</b> - returns the grid service object.</p>
+
+<p>Adds a new cell to the tatool-grid. Expects a tatool-grid cell object as returned by the createCell() method. All mandatory properties must already be set manually when creating the cell. By using the addCellAtPosition() method instead, you can provide the gridPosition property at the time of adding a cell.</p>
+
+<p><b>Parameters</b><br>
+<i>cell</i>: a cell object as returned by createCell().
+</p>
+
+<pre><code class="language-javascript">var data = {gridPosition: 3, stimulusValue: 'A', stimulusValueType: 'text', myProperty: 'ABC'};
+var myCell = gridService.createCell(data);
+// add the new cell
+gridService.addCell(myCell);
+</code></pre>
+
+<hr>
+
+<p><b class="red">addCellAtPosition(gridPosition, data)</b> - returns the grid service object.</p>
+
+<p>Adds a new cell to the tatool-grid at the given gridPosition. Expects a data objects with the mandatory stimulus properties as listed under the createCell() method.</p>
+
+<p><b>Parameters</b><br>
+<i>gridPosition</i>: the position inside the grid to add the cell.<br>
+<i>data</i>: a JavaScript object representing a stimulus. See required properties in table below.
+</p>
+
+<pre><code class="language-javascript">var data = {stimulusValue: 'A', stimulusValueType: 'text', myProperty: 'ABC'};
+// add new cell at gridPosition 3
+gridService.addCellAtPosition(3, data);
+</code></pre>
+
+<hr>
+
+<p><b class="red">getCell(gridPosition)</b> - returns the cell object.</p>
+
+<p>Returns the cell object at the given gridPosition.</p>
+
+<p><b>Parameters</b><br>
+<i>gridPosition</i>: return the cell at the given position inside the grid
+</p>
+
+<pre><code class="language-javascript">// get cell at position 3
+var myCell = gridService.getCell(3);
+</code></pre>
+
+<hr>
+
+<p><b class="red">getCells()</b> - returns an array of all cell objects.</p>
+
+<p>Returns the cells assigned to a grid (empty cells are not included).</p>
+
+<pre><code class="language-javascript">// get all cells from grid
+var myCells = gridService.getCells();
+</code></pre>
+
+<hr>
+
+<p><b class="red">getNumCells()</b> - returns number of cells.</p>
+
+<p>Returns the number of cells assigned to a grid (empty cells are not included).</p>
+
+<pre><code class="language-javascript">// get the number of cells from grid
+var numCells = gridService.getNumCells();
+</code></pre>
+
+<hr>
+
+<p><b class="red">removeCell(gridPosition)</b> - returns the grid service object.</p>
+
+<p>Removes the cell at the given gridPosition from the grid.</p>
+
+<p><b>Parameters</b><br>
+<i>gridPosition</i>: cell position inside the grid
+</p>
+
+<pre><code class="language-javascript">// remove cell at position 3
+gridService.removeCell(3);
+</code></pre>
+
+<hr>
+
+<p><b class="red">moveCell(fromPosition, toPosition)</b> - returns the grid service object.</p>
+
+<p>Moves cell at gridPosition (fromPosition) to gridPosition (toPosition). The cell at toPosition will be replaced.</p>
+
+<p><b>Parameters</b><br>
+<i>fromPosition</i>: cell position inside the grid<br>
+<i>toPosition</i>: cell position inside the grid
+</p>
+
+<pre><code class="language-javascript">// move cell at gridPosition 3 to gridPosition 5
+gridService.moveCell(3,5);
+</code></pre>
+
+<hr>
+
+<p><b class="red">swapCell(position1, position2)</b> - returns the grid service object.</p>
+
+<p>Swaps the cell at gridPosition (position1) with the cell at gridPosition (position2).</p>
+
+<p><b>Parameters</b><br>
+<i>position1</i>: cell position inside the grid<br>
+<i>position2</i>: cell position inside the grid
+</p>
+
+<pre><code class="language-javascript">// swap cell at position 3 and 5
+gridService.swapCell(3,5);
+</code></pre>
+
+<hr>
+
+<p><b class="red">clear()</b> - returns the grid service object.</p>
+
+<p>Clears all cells in the grid.</p>
+
+<pre><code class="language-javascript">// remove all cells
+gridService.clear();
+</code></pre>
+
+<hr>
+
+<p><b class="red">refresh()</b> - (no return value)</p>
+
+<p>Refreshes the grid to show all changes made to it since the last time it was refreshed. This function will only refreh the cells that have been changed since the last refresh/redraw. As most functions manipulating the grid return the grid service object itself, you can chain the refresh call to your previous call as in the second example below.</p>
+
+<pre><code class="language-javascript">// refresh the grid
+gridService.refresh();
+// add a new cell and refresh afterwards
+gridService.addCellAtPosition(3, data).refresh();
+</code></pre>
+
+<hr>
+
+<p><b class="red">redraw()</b> - (no return value)</p>
+
+<p>Redraws the whole grid to show all changes made to it since the last time it was redrawn. This function will redraw all cells regardless of changes and should only be used in the case where refresh() doesn't work (e.g. resize). As most functions manipulating the grid return the grid service object itself, you can chain the redraw call to your previous call as in the second example below.</p>
+
+<pre><code class="language-javascript">// redraw the grid
+gridService.redraw();
+// resize grid and redraw
+gridService.resize(3, 5).redraw();
+</code></pre>
+
+<hr>
+
+<h4>Cell Object<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h4>
+
+<hr>
+
+<p><b class="red">remove()</b> - returns the grid service object.</p>
+
+<p>Removes the cell from the tatool-grid.</p>
+
+<pre><code class="language-javascript">// removes the cell
+myCell.remove();
+</code></pre>
+
+<hr>
+
+<p><b class="red">move(direction,[numCells])</b> - returns the grid service object.</p>
+
+<p>Moves the cell into the given direction (left, up, right, down) for a given number of cells. If you don't provide the numCells parameter it will be 1 by default. The cell at the target position will be replaced.</p>
+
+<p><b>Parameters</b><br>
+<i>direction</i>: string value indicating the direction to move (left, up, right, down)<br>
+<i>numCells</i>: integer value defining the number of cells to move into the given direction
+</p>
+
+<pre><code class="language-javascript">// move the cell 2 cells to the right replacing any exiting cell at that position
+myCell.move('right', 2);
+// moves the cell 1 down replacing any exiting cell at that position
+myCell.move('down');
+</code></pre>
+
+<hr>
+
+<p><b class="red">moveTo(toPosition)</b> - returns the grid service object.</p>
+
+<p>Moves the cell to the given gridPosition (toPosition) replacing any existing cell.</p>
+
+<p><b>Parameters</b><br>
+<i>toPosition</i>: integer value defining the gridPosition to move this cell to
+</p>
+
+<pre><code class="language-javascript">// move the cell to gridPosition 4 replacing any exiting cell at that position
+myCell.moveTo(4);
+</code></pre>
+
+<hr>
+
+<p><b class="red">getNext(direction,[numCells])</b> - returns the cell object.</p>
+
+<p>Gets the next cell relative to this cell in the given direction (left, up, right, down) and number of cells in distance. If you don't provide the numCells parameter it will be 1 by default.</p>
+
+<p><b>Parameters</b><br>
+<i>direction</i>: string value indicating the direction (left, up, right, down) to search for neighbor cell<br>
+<i>numCells</i>: integer value defining the distance in number of cells to search for neighbor cell 
+</p>
+
+<pre><code class="language-javascript">// gets the cell 2 positions to the right of myCell
+var nextCellRight = myCell.getNext('right', 2);
+// gets the cell 1 position above of myCell
+var nextCellUp = myCell.getNext('up');
+</code></pre>
 
 <p><span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></p>

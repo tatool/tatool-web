@@ -13,7 +13,6 @@ angular.module('tatool.module')
       this.maxScore = 0;
 
       // preset properties that can be overwritten by properties in module file
-      this.sampleSize = 3;
       this.benchmarkSampleSize = 3;
       this.benchmark = 0.6;
     };

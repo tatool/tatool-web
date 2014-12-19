@@ -1,3 +1,63 @@
-<h2>Start</h2>
-<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-</p>
+<h2>levelhandler</h2>
+
+<p>The levelHandler can be used in combination with the level status panel that can be activated for every Executable. The levelhandler provides the values for the level status panel who takes care of displaying the values on screen.</p>
+
+<p>The levelHandler will always retrieve the latest level, counter, score at the beginning of every session. Within a session the counter will execute the level algorithm shown in the figure below after every execution of an Executable, regardless of whether a trial object is saved. In the case of a Dual Element, the algorithm will only be executed after one iteration has completed (e.g. primary, secondary, primary). The level status panel will be updated at the beginning of every new execution and should therefore show the current level.</p>
+
+<hr>
+
+<h4>Variables<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h4>
+
+<p>The levelHandler allows to customize the following variables used by the level algorithm by adding a property to the handler definition in the Module file.</p>
+
+<table class="table table-striped table-condensed table-bordered">
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="cellB">benchmarkSampleSize</td>
+      <td>integer value indicating the interval of when the level algorithm should be executed (number of trials)</td>
+    </tr>
+    <tr>
+      <td class="cellB">benchmark</td>
+      <td>float value between 0 and 1 indicating what percentage of correct answers (totalScore / maxScore) must be achieved for a level-up</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr>
+
+<h4>Module/Session Properties<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h4>
+
+<p>The levelHandler stores the following Module Properties to keep track of the level information across multiple sessions.</p>
+
+<table class="table table-striped table-condensed table-bordered">
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="cellB">counter</td>
+      <td>Counter of how many trials have been executed. Used to keep track of when to trigger the level algorithm according to benchmarkSampleSize.</td>
+    </tr>
+    <tr>
+      <td class="cellB">totalScore</td>
+      <td>The summed up total score achieved over the last interval of trials (benchmarkSampleSize). Source of the value is the score property of the stored trial object.</td>
+    </tr>
+    <tr>
+      <td class="cellB">maxScore</td>
+      <td>The summed up maximum score possible over the last interval of trials (benchmarkSampleSize). The max score is set to 1 by default for every trial.</td>
+    </tr>
+    <tr>
+      <td class="cellB">currentLevel</td>
+      <td>The current level of this levelHandler</td>
+    </tr>
+  </tbody>
+</table>
