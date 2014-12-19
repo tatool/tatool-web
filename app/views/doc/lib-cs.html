@@ -40,6 +40,27 @@
       <td>A stimuli path where to load any resources from (stimuli images, input key images)</td>
     </tr>
     <tr>
+      <td class="cellB">timerEnabled</td>
+      <td>Boolean</td>
+      <td>true</td>
+      <td>No</td>
+      <td>Enables or disables timer used to display memoranda. Should always be enabled as disabling it will not allow the task to continue.</td>
+    </tr>
+    <tr>
+      <td class="cellB">displayDuration</td>
+      <td>String</td>
+      <td>800</td>
+      <td>No</td>
+      <td>Display duration for memoranda.</td>
+    </tr>
+    <tr>
+      <td class="cellB">intervalDuration</td>
+      <td>String</td>
+      <td>400</td>
+      <td>No</td>
+      <td>Interval duration between memoranda.</td>
+    </tr>
+    <tr>
       <td class="cellB">randomisation</td>
       <td>String</td>
       <td>(none)</td>
@@ -47,14 +68,6 @@
       <td>Defines the randomisation criteria. If no value is set no randomisation is applied. The following values are allowed:<br>
         <b>full:</b> fully randomises stimuli (no duplicates until all stimuli are shown once)</td>
     </tr>
-    <tr>
-      <td class="cellB"></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    
   </tbody>
 </table>
 
@@ -62,7 +75,7 @@
 
 <h3 id="stimuli">Stimuli File<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
 
-<p>This task requires a Stimuli File to run. If you're looking to randomise your stimuli, you'll only have to provide every possible combinations once. By setting the number of Iterations you can control the number of Trials. The Stimuli File should contain the following columns.</p>
+<p>This task requires a Stimuli File to run. In order to allow n Memoranda per Trial you can use the usual Stimulus properties and append a counter at the end (e.g. stimulusValue1). The Stimuli File should contain the following columns.</p>
 
 <table class="table table-striped table-condensed table-bordered">
   <thead>
@@ -75,70 +88,45 @@
   </thead>
   <tbody>
     <tr>
-      <td class="cellB">stimulusValue</td>
+      <td class="cellB">stimulusCount</td>
+      <td>(String)</td>
+      <td class="cellB">Yes</td>
+      <td>Number of memoranda in this trial.</td>
+    </tr>
+    <tr>
+      <td class="cellB">stimulusValue[n]</td>
       <td>(String)/(Image Filename)</td>
       <td class="cellB">Yes</td>
       <td>Value to display on screen. Can either be a text or an image.</td>
     </tr>
     <tr>
-      <td class="cellB">stimulusValueType</td>
+      <td class="cellB">stimulusValueType[n]</td>
       <td>text/image/circle/square</td>
       <td class="cellB">Yes</td>
-      <td>The stimulus value type to identify how to display the value.</td>
+      <td>The stimulus value type in order to identify how to display the value.</td>
     </tr>
     <tr>
-      <td class="cellB">stimulusValueColor</td>
-      <td>(String)/(Hex Color)</td>
-      <td class="cellB">Yes</td>
-      <td>The color used for text/circle/square stimulusValueType.</td>
-    </tr>
-    <tr>
-      <td class="cellB">stimulusType</td>
+      <td class="cellB">correctResponse[n]</td>
       <td>(String)</td>
       <td class="cellB">Yes</td>
-      <td>Categorize stimulus according to these groups (usually congruent, incongruent, neutral) but anything is allowed.</td>
-    </tr>
-    <tr>
-      <td class="cellB">correctResponse</td>
-      <td>(String)</td>
-      <td class="cellB">Yes</td>
-      <td>The correct response for this stimulus.</td>
-    </tr>
-    <tr>
-      <td class="cellB">keyCode</td>
-      <td>(KeyCode)</td>
-      <td class="cellB">Yes</td>
-      <td>The correct keyCode to press from the list of available KeyCodes (see the Tatool Input Service for more details).</td>
-    </tr>
-    <tr>
-      <td class="cellB">keyLabel</td>
-      <td>(String)/(Image Filename)</td>
-      <td>No</td>
-      <td>An alternate label to display on the input key. Can either be text or an image filename.</td>
-    </tr>
-    <tr>
-      <td class="cellB">keyLabelType</td>
-      <td>text/image</td>
-      <td>No</td>
-      <td>The key label type to identify how to display the value.</td>
+      <td>The correct response for this memoranda.</td>
     </tr>
   </tbody>
 </table>
 
-<h4>Example</h4>
-<pre><code class="language-javascript">stimulusValue;stimulusValueType;stimulusValueColor;stimulusType;correctResponse;keyCode
-red;text;red;congruent;red;ArrowLeft
-green;text;green;congruent;green;ArrowDown
-blue;text;blue;congruent;blue;ArrowRight
-red;text;green;incongruent;green;ArrowDown
-blue;text;green;incongruent;green;ArrowDown
-green;text;red;incongruent;red;ArrowLeft
-blue;text;red;incongruent;red;ArrowLeft
-green;text;blue;incongruent;blue;ArrowRight
-red;text;blue;incongruent;blue;ArrowRight
-red;circle;red;neutral;red;ArrowLeft
-green;circle;green;neutral;green;ArrowDown
-blue;circle;blue;neutral;blue;ArrowRight
+<h4>Example (allows up to 5 Memoranda)</h4>
+<pre><code class="language-javascript">stimulusCount;stimulusValue1;stimulusValueType1;correctResponse1;stimulusValue2;stimulusValueType2;correctResponse2;stimulusValue3;stimulusValueType3;correctResponse3;stimulusValue4;stimulusValueType4;correctResponse4;stimulusValue5;stimulusValueType5;correctResponse5
+3;20;text;20;54;text;54;18;text;18
+4;72;text;72;26;text;26;87;text;87;94;text;94
+5;18;text;18;10;text;10;29;text;29;30;text;30;62;text;62
+3;84;text;84;63;text;63;25;text;25
+4;95;text;95;13;text;13;85;text;85;72;text;72
+3;58;text;58;60;text;60;84;text;84
+5;64;text;64;33;text;33;54;text;54;98;text;98;32;text;32
+4;99;text;99;41;text;41;70;text;70;73;text;73
+3;66;text;66;25;text;25;12;text;12
+5;15;text;15;11;text;11;89;text;89;36;text;36;52;text;52
+3;37;text;37;76;text;76;32;text;32
 </code></pre>
 
 <hr class="hr-red">

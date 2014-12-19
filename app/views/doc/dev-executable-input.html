@@ -22,8 +22,8 @@
 <p>Similar to the &lt;tatool-stimulus> element we're going to extend our Executable service now by adding a new dependency to the <b>inputServiceFactory</b>. See the updated code below.</p>
 
 <h4>myExecutable.service.js</h4>
-<pre class="line-numbers" data-line="1-2,11"><code class="language-javascript">tatool.factory('myExecutable', [ 'executableUtils', 'tatoolStimulusService', 'inputServiceFactory',
-  function (executableUtils, tatoolStimulusService, inputServiceFactory) {  
+<pre class="line-numbers" data-line="1-2,11"><code class="language-javascript">tatool.factory('myExecutable', [ 'executableUtils', 'stimulusServiceFactory', 'inputServiceFactory',
+  function (executableUtils, stimulusServiceFactory, inputServiceFactory) {  
     
     var MyExecutable = executableUtils.createExecutable();
 
@@ -31,7 +31,7 @@
       var promise = executableUtils.createPromise();
 
       this.counter = 0;
-      this.stimulusService = tatoolStimulusService.createService(this.stimuliPath);
+      this.stimulusService = stimulusServiceFactory.createService(this.stimuliPath);
       this.inputService = inputServiceFactory.createService(this.stimuliPath);
 
       var self = this;
@@ -78,7 +78,7 @@
       service.inputService.show();
       service.inputService.enable();
       
-      service.tatoolStimulus.show();
+      service.stimulusService.show();
     };
 
     $scope.inputAction = function(input, timing, event) {

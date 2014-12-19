@@ -6,6 +6,9 @@ tatool
 
     var ComplexNumExecutable = executableUtils.createExecutable();
 
+    var DISPLAY_DURATION_DEFAULT = 800;
+    var INTERVAL_DURATION_DEFAULT = 400;
+
     ComplexNumExecutable.prototype.init = function() {
       var promise = executableUtils.createPromise();
 
@@ -15,11 +18,21 @@ tatool
         promise.reject('Invalid property settings for Executable tatoolComplexSpan. Expected property <b>stimuliPath</b> of type Path.');
       }
 
+      if (!this.timerEnabled) {
+        this.timerEnabled = { propertyValue: true };
+      } else {
+        this.timerEnabled.propertyValue = (this.timerEnabled.propertyValue === true) ? true : false;
+      }
+
+      // template properties
       this.stimulusService = stimulusServiceFactory.createService(this.stimuliPath);
       this.inputService = inputServiceFactory.createService();
 
-      this.timerDisplayMemoranda = timerUtils.createTimer(800, true, this);
-      this.timerIntervalMemoranda = timerUtils.createTimer(400, false, this);
+      // timing properties
+      this.displayDuration = (this.displayDuration ) ? this.displayDuration : DISPLAY_DURATION_DEFAULT;
+      this.intervalDuration = (this.intervalDuration ) ? this.intervalDuration : INTERVAL_DURATION_DEFAULT;
+      this.timerDisplayMemoranda = timerUtils.createTimer(this.displayDuration, true, this);
+      this.timerIntervalMemoranda = timerUtils.createTimer(this.intervalDuration, false, this);
 
       // trial counter property
       this.counter = 0;
@@ -103,17 +116,6 @@ tatool
 
     ComplexNumExecutable.prototype.setRecallStimulus = function(text) {
       this.stimulusService.setText({ stimulusValue: text });
-    };
-
-    ComplexNumExecutable.prototype.generateDigits = function() {
-      for (var i = 0; i < 3; i++) {
-        var tmpNumber = 10 + (Math.floor((Math.random() * 90) + 1));
-        if (this.digits.indexOf(tmpNumber) === -1) {
-          this.digits.push(tmpNumber);
-        } else {
-          i--;
-        }
-      }
     };
 
     ComplexNumExecutable.prototype.getPhase = function() {

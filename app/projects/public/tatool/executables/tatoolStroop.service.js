@@ -6,6 +6,8 @@ tatool
 
     var StroopExecutable = executableUtils.createExecutable();
 
+    var DISPLAY_DURATION_DEFAULT = 2000;
+
     //  Initialze variables at the start of every session
     StroopExecutable.prototype.init = function() {
       var deferred = executableUtils.createPromise();
@@ -31,8 +33,8 @@ tatool
       this.inputService = inputServiceFactory.createService(this.stimuliPath);
 
       // timing properties
-      this.timerDuration = (this.timerDuration ) ? this.timerDuration : 2000;
-      this.timer = timerUtils.createTimer(this.timerDuration, true, this);
+      this.displayDuration = (this.displayDuration ) ? this.displayDuration : DISPLAY_DURATION_DEFAULT;
+      this.timer = timerUtils.createTimer(this.displayDuration, true, this);
 
       // trial counter property
       this.counter = 0;

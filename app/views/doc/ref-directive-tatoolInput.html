@@ -27,8 +27,8 @@
 <p><b>2.</b> Add the inputServiceFactory as a new dependency to your executable service.</p>
 
 <pre><code class="language-javascript">tatool
-.factory('myExecutable', [ 'tatoolExecutable', 'inputServiceFactory', 
-  function (tatoolExecutable, inputServiceFactory) {
+.factory('myExecutable', [ 'executableUtils', 'inputServiceFactory', 
+  function (executableUtils, inputServiceFactory) {
   ...
 </code></pre>
 

@@ -40,7 +40,9 @@ tatool
       service.setStimulus();
 
       // start timer and show memoranda
-      service.timerDisplayMemoranda.start(memorisationTimeUp);
+      if (service.timerEnabled.propertyValue === true) {
+        service.timerDisplayMemoranda.start(memorisationTimeUp);
+      }
       service.stimulusService.show();
     }
 
@@ -48,7 +50,9 @@ tatool
     function memorisationTimeUp() {
       service.stimulusService.hide();
       if (service.getPhase() == 'MEMORISATION') {
-        service.timerIntervalMemoranda.start(memorisationPhase);
+        if (service.timerEnabled.propertyValue === true) {
+          service.timerIntervalMemoranda.start(memorisationPhase);
+        }
       } else {
         service.stopExecution();
       }

@@ -22,8 +22,8 @@
 <p><b>2.</b> Add the gridServiceFactory as a new dependency to your executable service.</p>
 
 <pre><code class="language-javascript">tatool
-.factory('myExecutable', [ 'tatoolExecutable', 'gridServiceFactory', 
-  function (tatoolExecutable, gridServiceFactory) {
+.factory('myExecutable', [ 'executableUtils', 'gridServiceFactory', 
+  function (executableUtils, gridServiceFactory) {
   ...
 </code></pre>
 
