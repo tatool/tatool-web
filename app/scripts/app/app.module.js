@@ -12,7 +12,7 @@ angular.module('tatool.app', ['tatool', 'tatool.auth', 'tatool.common', 'ngAnima
     // application states
     $stateProvider
       .state('home', {
-        url: '/home',
+        url: '/modules',
         templateUrl: 'views/app/main.html',
         controller: 'ModuleCtrl',
         resolve: {
@@ -25,7 +25,7 @@ angular.module('tatool.app', ['tatool', 'tatool.auth', 'tatool.common', 'ngAnima
           }]
         }
       }).state('developer', {
-        url: '/developer',
+        url: '/editor',
         templateUrl: 'views/app/developer.html',
         controller: 'DeveloperCtrl',
         resolve: {
