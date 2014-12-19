@@ -1,11 +1,7 @@
-<!-- 
- The Executable Template is responsible for the layout of your content on the screen.
- You can access all the properties which were made accessible through the $scope object in your Controller. 
- -->
 <tatool id="centeredExecutable">
-	<tatool-stimulus class="stimulusText" service="stimulus"></tatool-stimulus>
+	<tatool-stimulus class="stimulusText" service="stimulusService"></tatool-stimulus>
 
-  <tatool-input service="input" userInput="inputAction(input, timing, event)">
+  <tatool-input service="inputService" userInput="inputAction(input, timing, event)">
     <tatool-text></tatool-text>
   </tatool-input>
 </tatool>

@@ -1,6 +1,6 @@
 <h2>Create Properties</h2>
 
-<p>In this section we're going to improve the readiability and maintainability of our Executable by externalising the resource and path definitions of our stimuli file and stimuli path into Properties. A Property will allow you to set the values through the Module Editor instead of having to change the underlying code every time.</p>
+<p>In this section we're going to improve the readability and maintainability of our Executable by externalising the resource and path definitions of our stimuli file and stimuli path into Properties. A Property will allow you to set the values through the Module Editor instead of having to change the underlying code every time you want to use different stimuli.</p>
 
 <hr class="hr-red">
 
@@ -30,14 +30,14 @@
 
 <hr class="hr-red">
 
-<p>Now we can make use of these Properties in our Executable Service code, where we previously manually defined the Resource and Path location. We can remove the two variable definitions of stimuliFile and stimuliPath and use the Properties instead. Properties are always available on your current object (this). As you can see on <b>line 6</b> below, we can now access the Properties with this.stimuliFile and this.stimuliPath. In the future you can easily swap your stimuli file or allow other users to use their own stimuli files.</p>
+<p>Now we can make use of these Properties in our Executable Service code, where we previously manually defined the resource and path location. We can remove the two variable definitions of stimuliFile and stimuliPath and use the Properties instead. Properties are always available on your current object (this). As you can see on <b>line 6</b> below, we can now access the Properties with this.stimuliFile and this.stimuliPath. From now on you can easily swap your stimuli file or allow other users to use their own stimuli files by using the Module Editor alone.</p>
 
 <h4>myExecutable.service.js</h4>
 <pre class="line-numbers"><code class="language-javascript">MyExecutable.prototype.init = function() {
-  var promise = tatoolExecutable.createPromise();
+  var promise = executableUtils.createPromise();
 
   var self = this;
-  tatoolExecutable.getCSVResource(this.stimuliFile, true, this.stimuliPath).then(
+  executableUtils.getCSVResource(this.stimuliFile, true, this.stimuliPath).then(
     function(list) {
       self.stimuliList = list;
       promise.resolve();
@@ -54,4 +54,4 @@
 
 <h3>What's Next?<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
 
-<p>As a next step, we're finally going to add the necessary code to display our stimuli on screen. To proceed, please go to <a ui-sref="doc({page: 'dev-executable-display-stimuli.html'})">Display Stimuli</a>.</p>
+<p>As a next step, we're going to add the necessary code to display our stimuli on screen. To proceed, please go to <a ui-sref="doc({page: 'dev-executable-display-stimuli.html'})">Display Stimuli</a>.</p>

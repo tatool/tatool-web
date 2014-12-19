@@ -1,43 +1,42 @@
 'use strict';
 
 tatool
-  .controller('tatoolStroopCtrl', [ '$scope', '$log', '$window', '$timeout', 'service',
-    function ($scope, $log, $window, $timeout, service) {
+  .controller('tatoolStroopCtrl', [ '$scope', 'service',
+    function ($scope, service) {
 
-    // Make the stimulus available for the <tatool-stimulus> template
-    $scope.stimulus = service.tatoolStimulus;
-    // Make the input available for the <tatool-input> template
-    $scope.input = service.tatoolInput;
+    // Make the stimulus service available for the <tatool-stimulus> directive
+    $scope.stimulusService = service.stimulusService;
+    // Make the input service available for the <tatool-input> directive
+    $scope.inputService = service.inputService;
 
     // Start execution
     $scope.start = function() {
-      // Prepare stimulus
       service.createStimulus();
 
-      // Enable input, start timer and display stimulus
-      service.tatoolInput.enable();
-      if (!service.hideKeys) {
-        service.tatoolInput.show();
+      service.inputService.enable();
+
+      if (service.showKeys.propertyValue === true) {
+        service.inputService.show();
       }
-      if (service.timerEnabled) {
+      if (service.timerEnabled.propertyValue === true) {
         service.timer.start(timerUp);
       }
-      service.startTime = service.tatoolStimulus.show();
+      service.startTime = service.stimulusService.show();
     };
 
-    // Called by our timer when the time is up and no user input was captured
+    // Called by timer when time elapsed without user input
     function timerUp() {
-      service.tatoolInput.disable();
-      service.endTime = service.tatoolStimulus.hide();
+      service.inputService.disable();
+      service.endTime = service.stimulusService.hide();
       service.processResponse('');
     }
 
-    // Captures user input
+    // Capture user input
     $scope.inputAction = function(input, timing, event) {
-      service.tatoolInput.disable();
+      service.inputService.disable();
       service.timer.stop();
-      service.tatoolInput.hide();
-      service.tatoolStimulus.hide();
+      service.inputService.hide();
+      service.stimulusService.hide();
       service.endTime = timing;
       service.processResponse(input.givenResponse);
     };

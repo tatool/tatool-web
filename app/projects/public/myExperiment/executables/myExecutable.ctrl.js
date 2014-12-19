@@ -1,21 +1,21 @@
 tatool.controller('myExecutableCtrl', [ '$scope', 'service',
   function ($scope, service) {
 
-    $scope.stimulus = service.tatoolStimulus;
-    $scope.input = service.tatoolInput;
+    $scope.stimulusService = service.stimulusService;
+    $scope.inputService = service.inputService;
     
     $scope.start = function() {
       service.createStimulus();
 
-      service.startTime = service.tatoolInput.show();
-      service.tatoolInput.enable();
+      service.inputService.show();
+      service.inputService.enable();
 
-      service.tatoolStimulus.show();
+      service.startTime = service.stimulusService.show();
     };
 
     $scope.inputAction = function(input, timing, event) {
-      service.tatoolInput.disable();
-      service.tatoolStimulus.hide();
+      service.inputService.disable();
+      service.stimulusService.hide();
       service.endTime = timing;
       service.processResponse(input.givenResponse);
     };

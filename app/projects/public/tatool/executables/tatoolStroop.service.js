@@ -1,26 +1,25 @@
 'use strict';
 
 tatool
-  .factory('tatoolStroop', [ '$log', 'dbUtils', 'timerUtils', 'executableUtils', 'stimulusServiceFactory', 'inputServiceFactory',
-    function ($log, dbUtils, timerUtils, executableUtils, stimulusServiceFactory, inputServiceFactory) {
+  .factory('tatoolStroop', [ 'executableUtils', 'dbUtils', 'timerUtils', 'stimulusServiceFactory', 'inputServiceFactory',
+    function (executableUtils, dbUtils, timerUtils, stimulusServiceFactory, inputServiceFactory) {
 
-    // Create a new executable service
     var StroopExecutable = executableUtils.createExecutable();
 
     //  Initialze variables at the start of every session
     StroopExecutable.prototype.init = function() {
       var deferred = executableUtils.createPromise();
 
-      if (!this.hideKeys) {
-        this.hideKeys = { propertyValue: false };
+      if (!this.showKeys) {
+        this.showKeys = { propertyValue: true };
       } else {
-        this.hideKeys = (this.hideKeys.propertyValue === true) ? true : false;
+        this.showKeys.propertyValue = (this.showKeys.propertyValue === true) ? true : false;
       }
 
       if (!this.timerEnabled) {
         this.timerEnabled = { propertyValue: false };
       } else {
-        this.timerEnabled = (this.timerEnabled.propertyValue === true) ? true : false;
+        this.timerEnabled.propertyValue = (this.timerEnabled.propertyValue === true) ? true : false;
       }
       
       if (!this.stimuliPath) {
@@ -28,15 +27,15 @@ tatool
       }
 
       // template properties
-      this.tatoolStimulus = stimulusServiceFactory.createService(this.stimuliPath);
-      this.tatoolInput = inputServiceFactory.createService(this.stimuliPath);
+      this.stimulusService = stimulusServiceFactory.createService(this.stimuliPath);
+      this.inputService = inputServiceFactory.createService(this.stimuliPath);
 
       // timing properties
       this.timerDuration = (this.timerDuration ) ? this.timerDuration : 2000;
       this.timer = timerUtils.createTimer(this.timerDuration, true, this);
 
       // trial counter property
-      this.counter = -1;
+      this.counter = 0;
 
       // prepare stimuli
       if (this.stimuliFile) {
@@ -53,20 +52,22 @@ tatool
       return deferred;
     };
 
-    // process stimuli file according to random property
+    // process stimuli file according to randomisation property
     StroopExecutable.prototype.processStimuliFile = function(list, deferred) {
-      if (this.random === 'full-condition') {
+      if (this.randomisation === 'full-condition') {
         this.stimuliList = this.splitStimuliList(list);
-      } else if (this.random === 'full') {
+      } else if (this.randomisation === 'full') {
         this.stimuliList = executableUtils.shuffle(list);
       } else {
         this.stimuliList = list;
       }
+
+      this.totalStimuli = list.length;
       this.setupInputKeys(list);
       deferred.resolve();
     };
 
-    // Splitting the stimuliList according to stimulusType
+    // Splitting the stimuliList according to stimulusType for full-condition and randomise
     StroopExecutable.prototype.splitStimuliList = function(list) {
       var newList = {};
       for (var i = 0; i < list.length; i++) {
@@ -76,20 +77,21 @@ tatool
         }
         newList[stimulusType].push(list[i]);
       }
+
       return newList;
     };
 
-    // Adding keyInputs and hide by default
+    // Adding keyInputs and show by default
     StroopExecutable.prototype.setupInputKeys = function(list) {
       var keyCodes = [];
       for (var i = 0; i < list.length; i++) {
         if (keyCodes.indexOf(list[i].keyCode) === -1) {
           keyCodes.push(list[i].keyCode);
-          this.tatoolInput.addInputKey(list[i].keyCode, list[i].correctResponse, list[i].keyLabel, list[i].keyLabelType, this.hideKeys);
+          this.inputService.addInputKey(list[i].keyCode, list[i].correctResponse, list[i].keyLabel, list[i].keyLabelType, !this.showKeys.propertyValue);
         }
       }
       if (keyCodes.length === 0) {
-        executableUtils.fail('Error creating tatoolInput in Executable tatoolStroop. No keyCodes provided in stimuliFile.');
+        executableUtils.fail('Error creating input in Executable tatoolStroop. No keyCode provided in stimuliFile.');
       }
     };
 
@@ -98,11 +100,13 @@ tatool
       // reset executable properties
       this.startTime = 0;
       this.endTime = 0;
-      this.counter++;
 
-      // reset counter to 0 if > no. of stimuli
-      if (this.counter >= this.stimuliList.length) {
+      // reset counter to 0 if > no. of total stimuli
+      if (this.counter >= this.totalStimuli) {
         this.counter = 0;
+        if (this.randomisation === 'full') {
+          this.stimuliList = executableUtils.shuffle(this.stimuliList);
+        }
       }
 
       // create new trial
@@ -111,10 +115,11 @@ tatool
       this.trial.reactionTime = 0;
       this.trial.score = null;
 
+      // pick stimulus to display
       var stimulus = null;
-      if (this.random === 'full-condition') {
+      if (this.randomisation === 'full-condition') {
         stimulus = this.createRandomConditionStimulus();
-      } else if (this.random === 'full') {
+      } else if (this.randomisation === 'full') {
         stimulus = this.createRandomStimulus();
       } else {
         stimulus = this.createNonRandomStimulus();
@@ -125,22 +130,25 @@ tatool
       } else {
         this.trial.stimulusType = stimulus.stimulusType;
         this.trial.correctResponse = stimulus.correctResponse;
-        this.tatoolStimulus.set(stimulus);
+        this.stimulusService.set(stimulus);
       }
+
+      // increment trial index counter
+      this.counter++;
     };
 
     StroopExecutable.prototype.createRandomConditionStimulus = function() {
       // get random stimuliType with replacement
-      var stimuli = executableUtils.getRandomReplace(this.stimuliList);
+      var stimuliType = executableUtils.getRandomReplace(this.stimuliList);
 
       // get random stimulus out of selected stimuliType
-      var  randomStimulus = executableUtils.getRandomReplace(stimuli);
+      var  randomStimulus = executableUtils.getRandomReplace(stimuliType);
       return randomStimulus;
     };
 
     StroopExecutable.prototype.createRandomStimulus = function() {
       // get random stimulus out of selected stimuliType
-      var  randomStimulus = executableUtils.getRandom(this.stimuliList);
+      var  randomStimulus = executableUtils.getNext(this.stimuliList, this.counter);
       return randomStimulus;
     };
 
@@ -159,10 +167,9 @@ tatool
       } else {
         this.trial.score = 0;
       }
-      dbUtils.saveTrial(this.trial).then(executableUtils.stop());
+      dbUtils.saveTrial(this.trial).then(executableUtils.stop);
     };
 
-    // Return our executable service object
     return StroopExecutable;
 
   }]);

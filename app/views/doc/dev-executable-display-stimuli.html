@@ -1,36 +1,36 @@
 <h2>Display Stimuli</h2>
 
-<p>This section will introduce you to a simple way to display your stimuli on screen. Tatool provides some helper services that makes displaying stimuli easy.</p>
+<p>This section will introduce you to how to display your stimuli on screen. Tatool provides some helper services that makes displaying stimuli easy.</p>
 
 <hr class="hr-red">
 
-<p>It's time we get to edit at our Executable template, which is represented as a HTML file. Until now our template only contained the mandatory <b>tatool</b> element. This element represents a Directive, which couples it to some specific code in the background. Instead of you having to add your text or image elements with HTML tags, we're going to use another element called <b>tatool-stimulus</b> which takes care of this for us. Our new template code should now look like this.</p>
+<p>It's time we get to edit our Executable template, which is represented as a HTML file. Until now our template only contained the mandatory <b>&lt;tatool></b> element. This element represents an angularJS directive, which couples it to specific code in the background. Instead of you having to add your text or image elements with HTML tags, we're going to use another element called <b>&lt;tatool-stimulus></b> which takes care of this for us. Our new template code should now look like this.</p>
 
 <h4>myExecutable.html</h4>
-<pre class="line-numbers" data-line="1,2"><code class="language-markup">&lt;tatool>
-  &lt;tatool-stimulus id="centeredExecutable" service="stimulus">&lt;/tatool-stimulus>
+<pre class="line-numbers" data-line="2"><code class="language-markup">&lt;tatool>
+  &lt;tatool-stimulus id="centeredExecutable" service="stimulusService">&lt;/tatool-stimulus>
 &lt;/tatool>
 </code></pre>
 
-<p>We added the id attribute with the value <i>centeredExecutable</i> on <b>line 2</b> as a simple way to position the stimulus at the center of the screen. If you wish to do any other positioning, you can simply assign your own id or class and define the necessary CSS yourself. As you can see, we've also added an attribute <i>service</i> to our tatool-stimulus element on <b>line 2</b> and provided the value <i>stimulus</i>. This will allow us to create an interface for our Executable service and controller to access the template in the next step.</p>
+<p>We added the id attribute with the value <i>centeredExecutable</i> on <b>line 2</b> as a simple way to position the stimulus at the center of the screen. If you wish to do any other positioning, you can simply assign your own id or class and define the necessary CSS yourself. As you can see, we've also added an attribute <i>service</i> to our tatool-stimulus element on <b>line 2</b> and provided the custom value <i>stimulusService</i>. This will allow us to create an interface for our Executable service and controller to access the template in the next step.</p>
 
-<p>The value <i>stimulus</i> is currently not referencing anything. Let's change this now by extending our Executable service with new logic to create a stimuls service and setting a stimulus.</p>
+<p>The value <i>stimulusService</i> is currently not referencing anything. Let's change this now by extending our Executable service with new logic to create a stimuls service and setting a stimulus from our stimulus file.</p>
 
 <h4>myExecutable.service.js</h4>
-<pre class="line-numbers" data-line="1-2,9,11,25-29"><code class="language-javascript">tatool.factory('myExecutable', [ 'tatoolExecutable', 'tatoolStimulusService',
-  function (tatoolExecutable, tatoolStimulusService) {  
+<pre class="line-numbers" data-line="1-2,9,11,25-29"><code class="language-javascript">tatool.factory('myExecutable', [ 'executableUtils', 'stimulusServiceFactory',
+  function (executableUtils, stimulusServiceFactory) {  
     
-    var MyExecutable = tatoolExecutable.createExecutable();
+    var MyExecutable = executableUtils.createExecutable();
 
     MyExecutable.prototype.init = function() {
-      var promise = tatoolExecutable.createPromise();
+      var promise = executableUtils.createPromise();
 
       this.counter = 0;
 
-      this.tatoolStimulus = tatoolStimulusService.createStimulus(this.stimuliPath);
+      this.stimulusService = stimulusServiceFactory.createService(this.stimuliPath);
 
       var self = this;
-      tatoolExecutable.getCSVResource(this.stimuliFile, true, this.stimuliPath).then(
+      executableUtils.getCSVResource(this.stimuliFile, true, this.stimuliPath).then(
         function(list) {
           self.stimuliList = list;
           promise.resolve();
@@ -43,42 +43,42 @@
 
     // custom method to get the next stimulus out of our stimuliList
     MyExecutable.prototype.createStimulus = function() {
-      var stimulus = tatoolExecutable.getNext(this.stimuliList, this.counter);
-      this.tatoolStimulus.set(stimulus);
+      var stimulus = executableUtils.getNext(this.stimuliList, this.counter);
+      this.stimulusService.set(stimulus);
       this.counter++;
     };
 
     MyExecutable.prototype.stopExecution = function() {
-      tatoolExecutable.stop();
+      executableUtils.stop();
     };
 
     return MyExecutable;
   }]);
 </code></pre>
 
-<p>We've added a new dependency to the tatoolStimulusService on <b>line 1/2</b>. Remember that you always need to define a dependency twice, once as a string in the array and once as a parameter in the main function. On <b>line 9</b> we defined a counter variable which will help us to navigate through the list of stimuli and should always be reset at the beginning of a Session to 0 (remember the first position of an Array is 0). On <b>line 11</b> of our <i>init()</i> method we're creating a stimulus service and store it in the variable <i>this.tatoolStimulus</i>. The method <i>createStimulus()</i> expects one parameter: the stimuli path to locate the underlying stimuli files (e.g. images). We're going to provide our Property <i>stimuliPath</i> again, as that's where we stored our image files.</p>
+<p>We've added a new dependency to the stimulusServiceFactory on <b>line 1/2</b>. Remember that you always need to define a dependency twice, once as a string in the array and once as a parameter in the main function. On <b>line 9</b> we defined a counter variable which will help us to navigate through the list of stimuli and should always be reset at the beginning of a Session to 0 (remember the first position of an Array is 0). On <b>line 11</b> of our <i>init()</i> method we're creating a stimulus service and store it in the variable <i>this.stimulusService</i>. The method <i>createService()</i> expects one parameter: the stimuli path to locate the underlying stimuli files (e.g. images). We're going to provide our Property <i>stimuliPath</i> again, as that's where we stored our image files.</p>
 
-<p>On <b>line 26-30</b> we've introduced a new custom method called <i>createStimulus()</i> which is using the tatoolExecutable helper function <i>getNext()</i> on <b>line 27</b> to get a stimulus at a specific position of our list. The method expects a list of stimuli (array) as a first parameter and a custom counter as the second parameter. On <b>line 28</b> we set the returned stimulus to our stimulus service. Finally, on <b>line 29</b> we increment our internal counter by 1 to make sure that we access the next stimuli, the next time the createStimulus method gets called.</p>
+<p>On <b>line 26-30</b> we've introduced a new custom method called <i>createStimulus()</i> which is using the executableUtils helper method <i>getNext()</i> on <b>line 27</b> to get a stimulus at a specific position of our list. The method expects a list of stimuli (array) as a first parameter and the index to return as the second parameter. On <b>line 28</b> we set the returned stimulus to our stimulusService. Finally, on <b>line 29</b> we increment our internal counter by 1 to make sure that we get the next stimuli the next time the createStimulus method gets called.</p>
 
-<p>That's it for the changes needed in our Executable service. If you remember, we've created the tatoolStimulus service which we're going to use in our template, but currently these two are not linked. That's when our controller comes into play. The controller will bridge the gap to make our tatoolStimulus service available in the template as the variable stimulus. At the same time the controller is also the place where we want to initiate the creation of a stimuli and trigger the actual display.</p>
+<p>That's it for the changes needed in our Executable service. We've created the stimulusService service which we're ultimately going to use in our template, but currently these two are not linked. That's when our controller comes into play. The controller will bridge the gap to make our stimulusService available in the template as the variable stimulusService. At the same time the controller is also the place where we want to initiate the creation of a stimuli and trigger the actual display.</p>
 
 <h4>myExecutable.ctrl.js</h4>
 <pre class="line-numbers" data-line="4,7,9,10"><code class="language-javascript">tatool.controller('myExecutableCtrl', [ '$scope', 'service',
   function ($scope, service) {
 
-    $scope.stimulus = service.tatoolStimulus;
+    $scope.stimulusService = service.stimulusService;
     
     $scope.start = function() {
       service.createStimulus();
 
-      service.tatoolStimulus.show();
+      service.stimulusService.show();
       //service.stopExecution();
     }
 
   }]);
 </code></pre>
 
-<p>On <b>line 4</b> we assign the tatoolStimulus service we've created in our Executable service to the $scope variable <i>stimulus</i>. If you remember <i>stimulus</i> was the value of the service attribute we've provided in the template. Now we've bridged the gap and the tatoolStimulus service is linked to our template.</p>
+<p>On <b>line 4</b> we assign the stimulusService we've created in our Executable service to the $scope variable <i>stimulusService</i>. If you remember <i>stimulusService</i> was the value of the service attribute we've provided in the template. Now we've bridged the gap and the stimulusService is linked to our template.</p>
 
 <div class="hint">
   <div class="icon red"><i class="fa fa-lightbulb-o fa-2x"></i></div> 
@@ -87,11 +87,9 @@
   </div>
 </div>
 
-<p>On <b>line 7</b> we call our custom method <i>createStimulus()</i> of our Executable service, which will take care of setting the current stimulus. The only thing left to do now is to display the stimulus on screen. We can take care of that by calling the method <i>show()</i> of the tatoolStimulus service on <b>line 9</b>. Notice that we've commented out <b>line 10</b> for now, as otherwise the Executable would finish before displaying anything on screen.</p>
+<p>On <b>line 7</b> we call our custom method <i>createStimulus()</i> of our Executable service, which will take care of setting the current stimulus. The only thing left to do now is to display the stimulus on screen. We can take care of that by calling the method <i>show()</i> of the stimulusService on <b>line 9</b>. Notice that we've commented out <b>line 10</b> for now, as otherwise the Executable would finish before displaying anything on screen.</p>
 
 <p>When you execute your Module after these changes, one stimulus should be displayed at the center of the screen. The Module will stop and wait afterwards as we've commented out the call to our <i>stopExecution()</i> method.</p>
-
-<iframe width="560" height="315" src="//www.youtube.com/embed/ywmSjawkGzg" frameborder="0" allowfullscreen></iframe>
 
 <hr class="hr-red">
 

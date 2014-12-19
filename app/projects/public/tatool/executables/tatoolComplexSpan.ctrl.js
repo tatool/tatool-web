@@ -1,15 +1,15 @@
 'use strict';
 
 tatool
-  .controller('tatoolComplexSpanCtrl', [ '$scope', '$log', 'service', 
-    function ($scope, $log, service) {
+  .controller('tatoolComplexSpanCtrl', [ '$scope', 'service', 
+    function ($scope, service) {
 
-    $scope.stimulus = service.tatoolStimulus;
-    $scope.input = service.tatoolInput;
+    $scope.stimulusService = service.stimulusService;
+    $scope.inputService = service.inputService;
 
     $scope.start = function() {
-      service.tatoolInput.hide();
-      service.tatoolInput.disable();
+      service.inputService.hide();
+      service.inputService.disable();
 
       switch (service.getPhase()) {
         case 'INIT':
@@ -26,7 +26,7 @@ tatool
       }
     };
 
-    // Displays memoranda on screen for a given amount of time
+    // Display memoranda on screen for a given amount of time
     function memorisationPhase() {
       // increment response counter
       service.memCounter++;
@@ -41,12 +41,12 @@ tatool
 
       // start timer and show memoranda
       service.timerDisplayMemoranda.start(memorisationTimeUp);
-      service.tatoolStimulus.show();
+      service.stimulusService.show();
     }
 
     // Remove memoranda from screen and display next or stop executable
     function memorisationTimeUp() {
-      service.tatoolStimulus.hide();
+      service.stimulusService.hide();
       if (service.getPhase() == 'MEMORISATION') {
         service.timerIntervalMemoranda.start(memorisationPhase);
       } else {
@@ -54,31 +54,30 @@ tatool
       }
     }
 
-    // Displays question to recall memoranda
+    // Display question to recall memoranda
     function recallPhase() {
       // increment response counter
       service.respCounter++;
 
-      // display recall queue
       var stimulusText = 'Stimulus ' + service.respCounter + ' ?';
       service.setRecallStimulus(stimulusText);
 
-      service.startTime = service.tatoolStimulus.show();      
-      service.tatoolInput.show();
-      service.tatoolInput.enable();
+      service.startTime = service.stimulusService.show();      
+      service.inputService.show();
+      service.inputService.enable();
     }
 
-    // Captures user input
+    // Capture user input
     $scope.inputAction = function(input, timing, event) {
-      service.tatoolInput.disable();
-      service.tatoolInput.hide();
-      service.tatoolStimulus.hide();
+      service.inputService.disable();
+      service.inputService.hide();
+      service.stimulusService.hide();
 
       service.endTime = timing;
       processResponse(input.givenResponse);
     };
 
-    // Provide our executable service with the response and time of response
+    // Provide service with the response and time of response
     function processResponse(givenResponse) {
       if (service.respCounter < service.stimulus.stimulusCount) {
         service.addTrial(givenResponse).then(recallPhase);

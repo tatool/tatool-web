@@ -1,10 +1,9 @@
 'use strict';
 
 tatool
-  .factory('tatoolComplexSpan', [ 'executableUtils', 'dbUtils', 'timerUtils', 'tatoolPhase', 'stimulusServiceFactory', 'inputServiceFactory',
-    function (executableUtils, dbUtils, timerUtils, tatoolPhase, stimulusServiceFactory, inputServiceFactory) {  
+  .factory('tatoolComplexSpan', [ 'executableUtils', 'dbUtils', 'timerUtils', 'stimulusServiceFactory', 'inputServiceFactory',
+    function (executableUtils, dbUtils, timerUtils, stimulusServiceFactory, inputServiceFactory) {  
 
-    // Define our executable service constructor which will be called once for every instance
     var ComplexNumExecutable = executableUtils.createExecutable();
 
     ComplexNumExecutable.prototype.init = function() {
@@ -16,14 +15,14 @@ tatool
         promise.reject('Invalid property settings for Executable tatoolComplexSpan. Expected property <b>stimuliPath</b> of type Path.');
       }
 
-      this.tatoolStimulus = stimulusServiceFactory.createService(this.stimuliPath);
-      this.tatoolInput = inputServiceFactory.createService();
+      this.stimulusService = stimulusServiceFactory.createService(this.stimuliPath);
+      this.inputService = inputServiceFactory.createService();
 
       this.timerDisplayMemoranda = timerUtils.createTimer(800, true, this);
       this.timerIntervalMemoranda = timerUtils.createTimer(400, false, this);
 
       // trial counter property
-      this.counter = -1;
+      this.counter = 0;
 
       // prepare stimuliFile
       if (this.stimuliFile) {
@@ -43,11 +42,12 @@ tatool
 
     // process stimuli file according to random property
     ComplexNumExecutable.prototype.processStimuliFile = function(list, promise) {
-      if (this.random === 'full') {
+      if (this.randomisation === 'full') {
         this.stimuliList = executableUtils.shuffle(list);
       } else {
         this.stimuliList = list;
       }
+      this.totalStimuli = list.length;
       promise.resolve();
     };
 
@@ -59,33 +59,35 @@ tatool
       this.digits = [];
       this.memCounter = 0;
       this.respCounter = 0;
-      this.counter++;
 
       // reset counter to 0 if > no. of stimuli
-      if (this.counter >= this.stimuliList.length) {
+      if (this.counter >= this.totalStimuli) {
         this.counter = 0;
+        if (this.randomisation === 'full') {
+          this.stimuliList = executableUtils.shuffle(this.stimuliList);
+        }
       }
 
       var stimulus = null;
-      if (this.random === 'full') {
+      if (this.randomisation === 'full') {
         stimulus = this.createRandomStimulus();
       } else {
         stimulus = this.createNonRandomStimulus();
       }
 
       if (stimulus === null) {
-        executableUtils.fail('Error creating stimulus in Executable tatoolStroop. No more stimuli available in current stimuliList.');
+        executableUtils.fail('Error creating stimulus in Executable tatoolComplexSpan. No more stimuli available in current stimuliList.');
       } else {
         this.stimulus = stimulus;
       }
 
-      // generate new list of digits
-      //this.generateDigits();
+      // increment stimulus index counter
+      this.counter++;
     };
 
     ComplexNumExecutable.prototype.createRandomStimulus = function() {
-      // get random stimulus
-      var  randomStimulus = executableUtils.getRandom(this.stimuliList);
+      // get next ranom stimulus
+      var  randomStimulus = executableUtils.getNext(this.stimuliList, this.counter);
       return randomStimulus;
     };
 
@@ -96,11 +98,11 @@ tatool
     };
 
     ComplexNumExecutable.prototype.setStimulus = function() {
-      this.tatoolStimulus.set({ stimulusValueType: this.stimulus['stimulusValueType' + this.memCounter], stimulusValue: this.stimulus['stimulusValue' + this.memCounter] });
+      this.stimulusService.set({ stimulusValueType: this.stimulus['stimulusValueType' + this.memCounter], stimulusValue: this.stimulus['stimulusValue' + this.memCounter] });
     };
 
     ComplexNumExecutable.prototype.setRecallStimulus = function(text) {
-      this.tatoolStimulus.setText({ stimulusValue: text });
+      this.stimulusService.setText({ stimulusValue: text });
     };
 
     ComplexNumExecutable.prototype.generateDigits = function() {
@@ -142,7 +144,6 @@ tatool
       executableUtils.stop();
     };
 
-    // Return our service object
     return ComplexNumExecutable;
 
   }]);

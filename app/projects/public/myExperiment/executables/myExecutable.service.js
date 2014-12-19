@@ -1,4 +1,4 @@
-tatool.factory('myExecutable', [ 'executableUtils', 'stimulusServiceFactory', 'inputServiceFactory', 'dbUtils',
+tatool.factory('myExecutable',['executableUtils', 'stimulusServiceFactory', 'inputServiceFactory', 'dbUtils',
   function (executableUtils, stimulusServiceFactory, inputServiceFactory, dbUtils) {  
     
     var MyExecutable = executableUtils.createExecutable();
@@ -7,8 +7,8 @@ tatool.factory('myExecutable', [ 'executableUtils', 'stimulusServiceFactory', 'i
       var promise = executableUtils.createPromise();
 
       this.counter = 0;
-      this.tatoolStimulus = stimulusServiceFactory.createService(this.stimuliPath);
-      this.tatoolInput = inputServiceFactory.createService(this.stimuliPath);
+      this.stimulusService = stimulusServiceFactory.createService(this.stimuliPath);
+      this.inputService = inputServiceFactory.createService(this.stimuliPath);
 
       var self = this;
       executableUtils.getCSVResource(this.stimuliFile, true, this.stimuliPath).then(
@@ -24,7 +24,7 @@ tatool.factory('myExecutable', [ 'executableUtils', 'stimulusServiceFactory', 'i
 
     MyExecutable.prototype.createStimulus = function() {
       var stimulus = executableUtils.getNext(this.stimuliList, this.counter);
-      this.tatoolStimulus.set(stimulus);
+      this.stimulusService.set(stimulus);
       this.counter++;
 
       this.trial = {};

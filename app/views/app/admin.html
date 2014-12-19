@@ -41,7 +41,7 @@
                 <th><b>Username</b></th>
                 <th><b>Name/Affiliation</b></th>
                 <th width="100px"><i class="fa fa-cube fa-lg"></i><br>Modules</th>
-                <th width="100px"><i class="fa fa-cogs fa-lg"></i><br>Developer</th>
+                <th width="100px"><i class="fa fa-cogs fa-lg"></i><br>Editor</th>
                 <th width="100px"><i class="fa fa-bar-chart fa-lg"></i><br>Analytics</th>
                 <th width="100px"><i class="fa fa-lock fa-lg"></i><br>Admin</th>
                 <th width="110px"><b>Actions</b></th>
@@ -70,9 +70,11 @@
 
             <div class="actionHeader">
               <form class="form-inline pull-right" role="form">
-                <div class="form-group has-feedback">
-                <input type="text" class="form-control" id="searchProject" ng-model="query.project" ng-change="setProjectFilter()">
-                <span class="form-control-feedback"><i class="fa fa-times pointer" ng-click="removeProjectFilter()"></i></span>
+                <div class="input-group">
+                  <input type="text" class="form-control" id="searchProject" ng-model="query.project" ng-change="setProjectFilter()" placeholder="Search Project...">
+                  <span class="input-group-btn">
+                    <button type="button" class="btn btn-default button-up" ng-click="removeProjectFilter()"><i class="fa fa-times"></i></button>
+                  </span>
                 </div>
               </form>
               <div class="btn btn-tatool" ng-click="addProject()">Add Project</div>
@@ -90,8 +92,8 @@
               <tbody>
                 <tr ng-repeat="project in projects | filter:{ $: filterProject } | orderBy:'name'">
                   <td> 
-                    <span ng-if="project.access === 'public'"><i class="fa fa-globe fa-lg fa-fw green" tooltip="Public project" tooltip-placement="top"></i> </span>
-                    <span ng-if="project.access === 'private'"><i class="fa fa-lock fa-lg fa-fw red" tooltip="Private project" tooltip-placement="top"></i> </span>
+                    <span ng-if="project.access === 'public'"><i class="fa fa-globe fa-lg fa-fw" tooltip="Public project" tooltip-placement="top"></i> </span>
+                    <span ng-if="project.access === 'private'"><i class="fa fa-lock fa-lg fa-fw" tooltip="Private project" tooltip-placement="top"></i> </span>
                     {{project.name}} 
                   </td>
                   <td> {{project.email}}</td>
