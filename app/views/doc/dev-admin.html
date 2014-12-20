@@ -1,24 +1,24 @@
 <h2>Administration</h2>
 <p>It's important to familiarise yourself with the functionality offered by the Administrator role, as this will help you to manage Users and Projects of your local Tatool instance whenever you need to.</p>
 
-<p>The first time Tatool is started, a default Admin user will be added to allow you to login and setup your own users (see <a ui-sref="doc({page: 'dev-getting-started.html'})">Getting Started</a> for more details). You can safely delete the default Admin user as long as you provide another user with the Admin role. If you end up deleting all Admin users you can simply restart the server and the default Admin user will be added again.</p>
+<p>The first time Tatool is started, a default Admin user will be created to allow you to login and setup your own users (see <a ui-sref="doc({page: 'dev-getting-started.html'})">Getting Started</a> for more details). You can safely delete the default Admin user as long as you provide another user with the Admin role. If you end up deleting all Admin users, simply restart the server and the default Admin user will be created again.</p>
 
 <hr class="hr-red">
 
 <h4 id="property">User Management<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h4>
 
-<p>In order to use Tatool, you'll need to have a user and password assigned to you. When running Tatool in lab mode there is no user registration feature. The only person able to add/edit/remove users is the Administrator. When logged in as an Administrator, you'll have access to the Admin tab in the top navigation which will lead you to the User Management screen.</p>
+<p>To use Tatool, you'll need a user name and password assigned to you. When running Tatool in lab mode, there is no user registration feature, and the only person allowed to register users is the admin user (admin@tatool-web.com by default). When logged in as an admin, you'll have access to the Admin tab in the top navigation which will lead you to the User Management screen.</p>
 
-<p>On the User Management screen you can add, edit or delete users. The most important part is the role assignment for every user. Tatool supports the following Roles:</p>
+<p>On the User Management screen you can add, edit or delete users. Most importantly, you can assign roles to all users. Tatool distinguishes the following roles:</p>
 
 <ul class="docContentList">
-<li><b class="red">Modules: </b> Access to the Modules tab which allows installing and running Modules. Every user should have this role assigned.</li>
+<li><b class="red">Modules: </b> Access to the Modules tab allowing for installing and running Modules. Every user should have this role assigned.</li>
 
-<li><b class="red">Editor: </b> Access to the Editor tab which allows to create and publish Modules.</li>
+<li><b class="red">Editor: </b> Access to the Editor tab allowing for creating and publishing Modules.</li>
 
-<li><b class="red">Analytics: </b> Access to the Analytics tab which allows to monitor usage of published Modules.</li>
+<li><b class="red">Analytics: </b> Access to the Analytics tab allowing for monitoring usage of published Modules.</li>
 
-<li><b class="red">Admin: </b> Access to the Admin tab which allows to manage Users and Projects.</li>
+<li><b class="red">Admin: </b> Access to the Admin tab allowing for managing Users and Projects.</li>
 
 </ul>
 
@@ -26,38 +26,33 @@
 
 <h4 id="property">Project Management<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h4>
 
-<p>A Project groups all the files needed for a specific experiment into one folder. For example, every Executable is part of a Project, and every stimuli file or stimulus you use is part of a Project. There is one special type of Project which is called <i>External Resource</i> which does what it says: it represents a resource from an external source (e.g., some http address) instead of a local Tatool Project.</p>
+<p>A Project groups all the files needed for a specific experiment into one folder. For example, every Executable is part of a Project, and every stimuli file or stimulus you use is part of a Project. A special type of a Project is the <i>External Resource</i>, which does precisely what it says: it represents a resource from an external source (e.g., some http address) instead of a local Tatool Project.</p>
 
-<p>An Administrator can add/edit/remove Projects. A Project is defined by the following attributes whereas the Name, Access and Owner property can't be changed after the Project is created:</p>
+<p>Admins can add, edit, and delete Projects. A Project is defined by the following attributes (note that the Name, Access and Owner property can't be changed once the Project is created):</p>
 
 <ul class="docContentList">
-<li><b class="red">Name:</b> A unique name which will represent this Project (= folder name)</li>
-<li><b class="red">Access:</b> A Project can either be <b>Public</b> which means every developer can have access to its resources, or it can be <b>Private</b> which means only the owner of the Project can use its resources.</li>
-<li><b class="red">Owner:</b> The owner of a Project represents the login email of the user owning a Project.</li>
-<li><b class="red">Description:</b> Allows to provide a small description of this Project. This will be displayed in the Module Editor whenever you select a Project.</li>
-<li><b class="red">Executables (JSON):</b> If you're planning on having your own Executables as part of a Project you can provide their details as a JSON String. This allows you to select the Executables from a dropdown list in the Module Editor. The JSON string is an array of objects whereby every object has the property <i>customType</i> identifying the Executable Service name and a small <i>description</i> which will be shown in the Module Editor:<br>
-<pre><code class="language-javascript">[ { "customType" : "myExecutable", "description" : "A small description of the Executable" }, 
-{ "customType" : "myOtherExecutable", "description" : "A small description for this Executable" } ]
+<li><b class="red">Name:</b> A unique name which will represent this Project (i.e., the folder name)</li>
+<li><b class="red">Access:</b> A Project can either be <b>Public</b>, which means every developer can access its resources, or it can be <b>Private</b>, meaning only the owner of the Project can access its resources.</li>
+<li><b class="red">Owner:</b> The owner of a Project is the login email of the user owning that Project.</li>
+<li><b class="red">Description:</b> A short description of the Project. This will be displayed in the Module Editor whenever you select a Project.</li>
+<li><b class="red">Executables (JSON):</b> If you're planning on having your own Executables as part of a Project, you can provide their details as a JSON String. This allows you to select the Executables from a dropdown list in the Module Editor. The JSON string is an array of objects, in which every object has the property <i>customType</i> identifying the Executable Service name and a short <i>description</i> which will be shown in the Module Editor:<br>
+<pre><code class="language-javascript">[ { "customType" : "myExecutable", "description" : "A short description of the Executable" }, 
+{ "customType" : "myOtherExecutable", "description" : "A short description of the Executable" } ]
 </code></pre>
 </li>
 </ul>
 
-
-<p>In order to physically add resources (e.g. Executables, stimuli files) to a specific Project, you'll have to open the tatool-web folder on the server running your Tatool instance. Within that folder you'll find the corresponding Project folders under /app/projects/*. Every Project folder contains 4 mandatory sub-folders that have to be used to save specific file types:</p>
+<p>In order to physically add resources (e.g. Executables, stimuli files) to a specific Project, you'll have to open the tatool-web folder on the server running your Tatool instance. Within that folder you'll find the corresponding Project folders under /app/projects/*. Every Project folder comprise 4 mandatory sub-folders that contain specific types of files:</p>
 
 <ul class="docContentList">
 <li><b class="red">executables:</b> Tatool will search for your custom Executables within this folder.</li>
-
 <li><b class="red">instructions:</b> The Tatool Instruction Executable will search for instruction html files within this folder.</li>
-
 <li><b class="red">modules:</b> A folder for you to keep any Module files belonging to a specific Project.</li>
-
 <li><b class="red">stimuli:</b> A folder to keep any stimuli files provided by a Project.</li>
-
 </ul>
 
 <hr class="hr-red">
 
 <h3>What's Next?<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
 
-<p>Learn more about the architecture of Executables. To proceed, please go to <a ui-sref="doc({page: 'dev-executable.html'})">Executable</a>.</p>
+<p>You're now ready to learn about Executables. First, you'll get some background information about their architecture. To proceed, please go to <a ui-sref="doc({page: 'dev-executable.html'})">Executable</a>.</p>
