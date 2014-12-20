@@ -16,7 +16,7 @@ tatool
         service.timer.start(countDown);
       } else {
         service.resetCountDown();
-        service.timer.start(service.stopExecutable());
+        service.timer.start(service.stopExecutable);
       }
     }
 
