@@ -11,10 +11,11 @@ tatool
     
     function countDown() {
       service.countDownFrom--;
-      $scope.countdown = service.countDownFrom;
       if (service.countDownFrom >= 1) {
         service.timer.start(countDown);
+        $scope.countdown = service.countDownFrom;
       } else {
+        $scope.countdown = service.goText;
         service.resetCountDown();
         service.timer.start(service.stopExecutable);
       }

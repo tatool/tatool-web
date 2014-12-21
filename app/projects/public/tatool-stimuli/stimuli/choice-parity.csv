@@ -1,0 +1,9 @@
+stimulusValue;stimulusValueType;stimulusValueColor;stimulusType;correctResponse;keyCode
+1;text;;odd;odd;ArrowLeft
+2;text;;even;even;ArrowRight
+3;text;;odd;odd;ArrowLeft
+4;text;;even;even;ArrowRight
+6;text;;even;even;ArrowRight
+7;text;;odd;odd;ArrowLeft
+8;text;;even;even;ArrowRight
+9;text;;odd;odd;ArrowLeft

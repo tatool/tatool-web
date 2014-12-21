@@ -166,7 +166,7 @@ angular.module('tatool.module')
 
       $http.get( path + res.resourceType + '/' + res.resourceName + '?token=' + token)
         .success(function (data) {
-          var csv = Papa.parse(data, {header: header, dynamicTyping: true});
+          var csv = Papa.parse(data, {header: header, dynamicTyping: true, skipEmptyLines: true});
           if (header && stimuliPath) {
             getImages(csv.data, deferred, stimuliPath);
           } else {
@@ -188,7 +188,7 @@ angular.module('tatool.module')
 
       $http.get(resUrl)
         .success(function (data) {
-          var csv = Papa.parse(data, {header: header, dynamicTyping: true});
+          var csv = Papa.parse(data, {header: header, dynamicTyping: true, skipEmptyLines: true});
           if (header && stimuliPath) {
             getImages(csv.data, deferred, stimuliPath);
           } else {

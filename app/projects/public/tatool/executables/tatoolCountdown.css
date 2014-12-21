@@ -1,5 +1,20 @@
 .countdown {
-  font-size: 700%;
+  font-size: 650%;
   color:black;
   text-shadow: 0px 1px 2px #a5a5a5;
+  position: relative;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.countdownBg {
+  border: 5px solid #aaa;
+  background: #f8f8f8;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
 }

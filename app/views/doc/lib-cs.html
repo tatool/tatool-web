@@ -1,12 +1,32 @@
 <h2>Complex Span Task</h2>
 
-<p>The Complex Span allows you to apply the <a href="http://en.wikipedia.org/wiki/Memory_span" target="_blank">Memory span</a> paradigm.</p>
+<p>The Complex Span task allows you to apply the <a href="http://en.wikipedia.org/wiki/Memory_span#From_simple_span_to_complex_span" target="_blank">Memory span</a> paradigm.</p>
 
 <ul id="docPageNav">
+  <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('executable')">Executable</a></li>
   <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('properties')">Properties</a></li>
   <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('stimuli')">Stimuli File</a></li>
   <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('download')">Download</a></li>
 </ul>
+
+<hr class="hr-red">
+
+<h3 id="executable">Executable<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
+
+<p>Use the following settings in the Module Editor to use this type of task. </p>
+
+<table class="table table-condensed table-bordered">
+  <tbody>
+    <tr>
+      <td class="cellB">Project</td>
+      <td>tatool</td>
+    </tr>
+    <tr>
+      <td class="cellB">Executable Type</td>
+      <td>tatoolComplexSpan</td>
+    </tr>
+  </tbody>
+</table>
 
 <hr class="hr-red">
 
@@ -75,7 +95,30 @@
 
 <h3 id="stimuli">Stimuli File<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
 
-<p>This task requires a Stimuli File to run. In order to allow n Memoranda per Trial you can use the usual Stimulus properties and append a counter at the end (e.g. stimulusValue1). The Stimuli File should contain the following columns.</p>
+<p>This task requires a Stimuli File to run. In order to allow n Memoranda per Trial you can use the usual Stimulus properties and add an index at the end (e.g. stimulusValue1). The Stimuli File should contain the following columns.</p>
+
+<h4>Available Stimuli Files</h4>
+
+<table class="table table-striped table-condensed table-bordered">
+  <thead>
+    <tr>
+      <th>Project</th>
+      <th>Type</th>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="cellB">tatool-stimuli</td>
+      <td>stimuli</td>
+      <td><a href="https://raw.githubusercontent.com/tatool/tatool-web/master/app/projects/public/tatool-stimuli/stimuli/complexSpan-digits.csv" target="_blank">complexSpan-digits.csv</a></td>
+      <td>Uses numbers (2 digits) as memoranda.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4>Stimuli File Structure</h4>
 
 <table class="table table-striped table-condensed table-bordered">
   <thead>
@@ -113,21 +156,6 @@
     </tr>
   </tbody>
 </table>
-
-<h4>Example (allows up to 5 Memoranda)</h4>
-<pre><code class="language-javascript">stimulusCount;stimulusValue1;stimulusValueType1;correctResponse1;stimulusValue2;stimulusValueType2;correctResponse2;stimulusValue3;stimulusValueType3;correctResponse3;stimulusValue4;stimulusValueType4;correctResponse4;stimulusValue5;stimulusValueType5;correctResponse5
-3;20;text;20;54;text;54;18;text;18
-4;72;text;72;26;text;26;87;text;87;94;text;94
-5;18;text;18;10;text;10;29;text;29;30;text;30;62;text;62
-3;84;text;84;63;text;63;25;text;25
-4;95;text;95;13;text;13;85;text;85;72;text;72
-3;58;text;58;60;text;60;84;text;84
-5;64;text;64;33;text;33;54;text;54;98;text;98;32;text;32
-4;99;text;99;41;text;41;70;text;70;73;text;73
-3;66;text;66;25;text;25;12;text;12
-5;15;text;15;11;text;11;89;text;89;36;text;36;52;text;52
-3;37;text;37;76;text;76;32;text;32
-</code></pre>
 
 <hr class="hr-red">
 

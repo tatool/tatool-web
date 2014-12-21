@@ -4,7 +4,7 @@
 
         <div ng-switch on="stimulus.data.stimulusValueType">
           <div ng-switch-when="image">
-            <img class="imageStimulusValue" draggable="false" ng-src="{{stimulus.stimulusImage}}">
+            <img class="imageStimulusValue" draggable="false" ng-src="{{stimulus.stimulusImage}}" ng-class="stimulus.stimulusClass">
           </div>
           <div ng-switch-when="text" ng-style="stimulus.stimulusStyle" ng-class="stimulus.stimulusClass">
             <div class="textStimulusValue"><span>{{stimulus.data.stimulusValue}}</span></div>

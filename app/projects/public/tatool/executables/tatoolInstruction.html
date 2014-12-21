@@ -1,10 +1,11 @@
 <tatool id="topExecutable">
 
-	<!-- Include of instruction -->
+	<!-- Include instruction -->
+    <img ng-src="{{currentImage}}"></img>
 	<div ng-include="currentPage"></div>
 
 	<!-- Pagination -->
-	<div>
+	<div ng-show="showPagination">
 		<ul class="nav">
 			<li>
 				<a class="page" ng-click="go(-1)">
@@ -25,7 +26,7 @@
 	</div>
 
   <!-- Keyboard input -->
-  <tatool-input service="input" userInput="inputAction(input, timing, event)">
+  <tatool-input service="inputService" userInput="inputAction(input, timing, event)">
     <tatool-key code="ArrowLeft" response="back" hide></tatool-key>
     <tatool-key code="ArrowRight" response="next" hide></tatool-key>
   </tatool-input>

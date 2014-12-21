@@ -8,7 +8,7 @@
 			"executables" : [ 
 				{ "customType" : "tatoolInstruction", "description" : "Instruction Task" }, 
 				{ "customType" : "tatoolCountdown", "description" : "A Countdown Task" }, 
-				{ "customType" : "tatoolStroop", "description" : "A Stroop Task" }, 
+				{ "customType" : "tatoolChoiceReaction", "description" : "Supports the typical Choice Reaction task paradigm." }, 
 				{ "customType" : "tatoolComplexSpan", "description" : "A ComplexSpan Task" }
 			]
 		},

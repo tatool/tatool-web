@@ -1,20 +1,21 @@
 'use strict';
 
 tatool
-  .controller('tatoolInstructionCtrl', ['$scope', '$log', '$state', '$window', 'service', 'userService', 'moduleService',
-    function ($scope, $log, $state, $window, service, userService, moduleService) {
-    
-    $window.focus();
+  .controller('tatoolInstructionCtrl', ['$scope', 'service', 'moduleService',
+    function ($scope, service, moduleService) {
 
     // initialize template variables
-    $scope.userName = userService.getUserName() ? userService.getUserName() : '';
     $scope.moduleName = moduleService.getModuleName() ? moduleService.getModuleName() : '';
     $scope.moduleAuthor = moduleService.getModuleAuthor() ? moduleService.getModuleAuthor() : '';
     $scope.moduleVersion = moduleService.getModuleVersion() ? moduleService.getModuleVersion() : '';
     $scope.sessionNr = moduleService.getMaxSessionId() ? moduleService.getMaxSessionId() : '';
     $scope.moduleProperties = moduleService.getModuleProperties() ? moduleService.getModuleProperties() : {};
 
-    $scope.input = service.input;
+    $scope.inputService = service.inputService;
+
+    $scope.currentPage = '';
+    $scope.currentImage = '';
+    $scope.showPagination = false;
 
     // start instruction
     $scope.start = function() {
@@ -22,8 +23,16 @@ tatool
         $scope.currentIndex = 0;
         $scope.urls = service.pages.propertyValue;
         $scope.currentPage = $scope.urls[$scope.currentIndex].resourceName;
-        service.input.hide();
-        service.input.enable();
+        service.inputService.hide();
+        service.inputService.enable();
+        $scope.showPagination = true;
+      } else if (service.images && service.images.propertyValue.length > 0) {
+        $scope.currentIndex = 0;
+        $scope.urls = service.imageUrls;
+        $scope.currentImage = $scope.urls[$scope.currentIndex];
+        service.inputService.hide();
+        service.inputService.enable();
+        $scope.showPagination = true;
       } else {
         service.stopExecutable();
       }
@@ -42,12 +51,12 @@ tatool
     $scope.go = function(index) {
       if (index > 0 && $scope.currentIndex < ($scope.urls.length - 1)) {
         $scope.currentIndex += index;
-        $scope.currentPage = $scope.urls[$scope.currentIndex].resourceName;
+        changeInstruction($scope.currentIndex);
       } else if (index < 0 && $scope.currentIndex > 0) {
         $scope.currentIndex += index;
-        $scope.currentPage = $scope.urls[$scope.currentIndex].resourceName;
+        changeInstruction($scope.currentIndex);
       } else if (index > 0 && $scope.currentIndex === ($scope.urls.length - 1)) {
-        service.input.disable();
+        service.inputService.disable();
         service.stopExecutable();
       }
     };
@@ -55,7 +64,17 @@ tatool
     // jump to specific page
     $scope.jump = function(index) {
       $scope.currentIndex = index;
-      $scope.currentPage = $scope.urls[$scope.currentIndex].resourceName;
+      changeInstruction($scope.currentIndex);
     };
+
+    function changeInstruction(index) {
+      if (service.pages) {
+        $scope.currentPage = $scope.urls[index].resourceName;
+      } else if (service.images) {
+        $scope.currentImage = $scope.urls[index];
+      } else {
+        console.error('Error: missing pages or images Property.');
+      }
+    }
 
   }]);

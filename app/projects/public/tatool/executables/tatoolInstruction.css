@@ -135,11 +135,11 @@
 
 /* Instruction Text Formatting */
 #tatoolFormat {
-
+font-size:1.5em; 
 }
 
 #tatoolFormat h1 {
-font-size:2.2em; 
+font-size:150%; 
 font-weight:bold; 
 color:#cc3300;
 text-align:center;
@@ -148,7 +148,7 @@ margin-bottom:25px;
 }
 
 #tatoolFormat h2 {
-font-size:1.8em; 
+font-size:120%; 
 font-weight:bold; 
 color:#cc3300;
 text-align:center;
@@ -158,7 +158,6 @@ margin-bottom:25px;
 
 #tatoolFormat p {
 line-height: 120%;
-font-size:1.5em; 
 text-align:left;
 margin-top:20px;
 }
@@ -176,5 +175,5 @@ font-weight:bold;
 .highlight_big_red {
 color:#cc3300;
 font-weight:bold; 
-font-size:1.9em; 
+font-size:110%; 
 }

@@ -1,15 +1,15 @@
 'use strict';
 
 tatool
-  .factory('tatoolStroop', [ 'executableUtils', 'dbUtils', 'timerUtils', 'stimulusServiceFactory', 'inputServiceFactory',
+  .factory('tatoolChoiceReaction', [ 'executableUtils', 'dbUtils', 'timerUtils', 'stimulusServiceFactory', 'inputServiceFactory',
     function (executableUtils, dbUtils, timerUtils, stimulusServiceFactory, inputServiceFactory) {
 
-    var StroopExecutable = executableUtils.createExecutable();
+    var ChoiceReaction = executableUtils.createExecutable();
 
     var DISPLAY_DURATION_DEFAULT = 2000;
 
     //  Initialze variables at the start of every session
-    StroopExecutable.prototype.init = function() {
+    ChoiceReaction.prototype.init = function() {
       var deferred = executableUtils.createPromise();
 
       if (!this.showKeys) {
@@ -25,7 +25,7 @@ tatool
       }
       
       if (!this.stimuliPath) {
-        deferred.reject('Invalid property settings for Executable tatoolStroop. Expected property <b>stimuliPath</b> of type Path.');
+        deferred.reject('Invalid property settings for Executable tatoolChoiceReaction. Expected property <b>stimuliPath</b> of type Path.');
       }
 
       // template properties
@@ -48,14 +48,14 @@ tatool
             deferred.reject('Resource not found: ' + self.stimuliFile.resourceName);
           });
       } else {
-        deferred.reject('Invalid property settings for Executable tatoolStroop. Expected property <b>stimuliFile</b> of type Resource.');
+        deferred.reject('Invalid property settings for Executable tatoolChoiceReaction. Expected property <b>stimuliFile</b> of type Resource.');
       }
 
       return deferred;
     };
 
     // process stimuli file according to randomisation property
-    StroopExecutable.prototype.processStimuliFile = function(list, deferred) {
+    ChoiceReaction.prototype.processStimuliFile = function(list, deferred) {
       if (this.randomisation === 'full-condition') {
         this.stimuliList = this.splitStimuliList(list);
       } else if (this.randomisation === 'full') {
@@ -70,7 +70,7 @@ tatool
     };
 
     // Splitting the stimuliList according to stimulusType for full-condition and randomise
-    StroopExecutable.prototype.splitStimuliList = function(list) {
+    ChoiceReaction.prototype.splitStimuliList = function(list) {
       var newList = {};
       for (var i = 0; i < list.length; i++) {
         var stimulusType = list[i].stimulusType; 
@@ -84,21 +84,22 @@ tatool
     };
 
     // Adding keyInputs and show by default
-    StroopExecutable.prototype.setupInputKeys = function(list) {
+    ChoiceReaction.prototype.setupInputKeys = function(list) {
       var keyCodes = [];
       for (var i = 0; i < list.length; i++) {
-        if (keyCodes.indexOf(list[i].keyCode) === -1) {
+        if (keyCodes.indexOf(list[i].keyCode) === -1 && list[i].keyCode !== undefined) {
+          console.log(list[i].keyCode)
           keyCodes.push(list[i].keyCode);
           this.inputService.addInputKey(list[i].keyCode, list[i].correctResponse, list[i].keyLabel, list[i].keyLabelType, !this.showKeys.propertyValue);
         }
       }
       if (keyCodes.length === 0) {
-        executableUtils.fail('Error creating input in Executable tatoolStroop. No keyCode provided in stimuliFile.');
+        executableUtils.fail('Error creating input template for Executable tatoolChoiceReaction. No keyCode provided in stimuliFile.');
       }
     };
 
     // Create stimulus and set properties
-    StroopExecutable.prototype.createStimulus = function() {
+    ChoiceReaction.prototype.createStimulus = function() {
       // reset executable properties
       this.startTime = 0;
       this.endTime = 0;
@@ -128,8 +129,9 @@ tatool
       }
 
       if (stimulus === null) {
-        executableUtils.fail('Error creating stimulus in Executable tatoolStroop. No more stimuli available in current stimuliList.');
+        executableUtils.fail('Error creating stimulus in Executable tatoolChoiceReaction. No more stimuli available in current stimuliList.');
       } else {
+        this.trial.stimulusValue = stimulus.stimulusValue;
         this.trial.stimulusType = stimulus.stimulusType;
         this.trial.correctResponse = stimulus.correctResponse;
         this.stimulusService.set(stimulus);
@@ -139,7 +141,7 @@ tatool
       this.counter++;
     };
 
-    StroopExecutable.prototype.createRandomConditionStimulus = function() {
+    ChoiceReaction.prototype.createRandomConditionStimulus = function() {
       // get random stimuliType with replacement
       var stimuliType = executableUtils.getRandomReplace(this.stimuliList);
 
@@ -148,20 +150,20 @@ tatool
       return randomStimulus;
     };
 
-    StroopExecutable.prototype.createRandomStimulus = function() {
+    ChoiceReaction.prototype.createRandomStimulus = function() {
       // get random stimulus out of selected stimuliType
       var  randomStimulus = executableUtils.getNext(this.stimuliList, this.counter);
       return randomStimulus;
     };
 
-    StroopExecutable.prototype.createNonRandomStimulus = function() {
+    ChoiceReaction.prototype.createNonRandomStimulus = function() {
       // get stimulus next replacement
       var nonRandomStimulus = executableUtils.getNext(this.stimuliList, this.counter);
       return nonRandomStimulus;
     };
 
     // Process given response and stop executable
-    StroopExecutable.prototype.processResponse = function(givenResponse) {
+    ChoiceReaction.prototype.processResponse = function(givenResponse) {
       this.trial.reactionTime = this.endTime - this.startTime;
       this.trial.givenResponse = givenResponse;
       if (this.trial.correctResponse == this.trial.givenResponse) {
@@ -172,6 +174,6 @@ tatool
       dbUtils.saveTrial(this.trial).then(executableUtils.stop);
     };
 
-    return StroopExecutable;
+    return ChoiceReaction;
 
   }]);

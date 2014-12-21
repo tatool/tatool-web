@@ -18,10 +18,10 @@ tatool
                 $templateCache.put(page.resourceName, template);
                 callback();
               }, function(error) {
-                callback('Could not find instruction "' + page.resourceName + '" in instruction "' + self.name + '".');
+                callback('Could not find page "' + page.resourceName + '" in instruction "' + self.name + '".');
               });
           } else {
-            callback('External HTML resources are currently not supported by this executable.<br><br><li>' + page.resourceName);
+            callback('The Instruction Executable currently doesn\'t support External HTML resources<br><br><li>' + page.resourceName);
           }
         }, function(err) {
           if( err ) {
@@ -30,11 +30,26 @@ tatool
             deferred.resolve();
           }
         });
+      } else if (this.images && this.images.propertyValue && this.images.propertyValue.length > 0) {
+        this.imageUrls = [];
+        async.each(this.images.propertyValue, function(image, callback) {
+          var imgUrl = executableUtils.getResourcePath(image);
+          self.imageUrls.push(imgUrl);
+          var img = new Image();
+          img.src = imgUrl;
+          callback();
+        }, function(err) {
+          if( err ) {
+            deferred.reject(err);
+          } else {
+            deferred.resolve();
+          }
+        });
       } else {
-        deferred.reject('Invalid property settings for Executable tatoolInstruction. Expected property <b>pages</b> of type Array (Resource).');
+        deferred.reject('Invalid property settings for Executable tatoolInstruction. Expected property <b>pages</b> or <b>images</b> of type Array (Resource).');
       }
 
-      this.input = inputServiceFactory.createService();
+      this.inputService = inputServiceFactory.createService();
 
       return deferred;
     };

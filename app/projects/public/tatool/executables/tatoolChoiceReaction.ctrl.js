@@ -1,7 +1,7 @@
 'use strict';
 
 tatool
-  .controller('tatoolStroopCtrl', [ '$scope', 'service',
+  .controller('tatoolChoiceReactionCtrl', [ '$scope', 'service',
     function ($scope, service) {
 
     // Make the stimulus service available for the <tatool-stimulus> directive
