@@ -5,11 +5,12 @@
 			"access" : "public", 
 			"email" : "info@tatool.ch",
 			"description" : "default tatool project", 
-			"executables" : [ 
-				{ "customType" : "tatoolInstruction", "description" : "Instruction Task" }, 
-				{ "customType" : "tatoolCountdown", "description" : "A Countdown Task" }, 
-				{ "customType" : "tatoolChoiceReaction", "description" : "Supports the typical Choice Reaction task paradigm." }, 
-				{ "customType" : "tatoolComplexSpan", "description" : "A ComplexSpan Task" }
+			"executables" : [
+				{ "customType" : "tatoolChoiceReaction", "description" : "Choice Reaction Time Task" },
+				{ "customType" : "tatoolCountdown", "description" : "Countdown Task" },
+				{ "customType" : "tatoolComplexSpan", "description" : "ComplexSpan Task" },
+				{ "customType" : "tatoolInstruction", "description" : "Instruction Task" },
+				{ "customType" : "tatoolObjectLocation", "description" : "Object Location Memory Task" }
 			]
 		},
 		{ 
