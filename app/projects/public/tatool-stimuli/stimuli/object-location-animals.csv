@@ -1,0 +1,5 @@
+stimulusCount;stimulusValue1;stimulusValueType1;correctResponse1;gridPosition1;stimulusValue2;stimulusValueType2;correctResponse2;gridPosition2;stimulusValue3;stimulusValueType3;correctResponse3;gridPosition3;stimulusValue4;stimulusValueType4;correctResponse4;gridPosition4
+2;animal-bear_96x96.png;image;2;2;animal-bird_96x96.png;image;5;5;;;;;;;;
+2;animal-donkey_96x96.png;image;3;3;animal-penguin_96x96.png;image;1;1;;;;;;;;
+3;animal-rabbit_96x96.png;image;4;4;animal-rhino_96x96.png;image;6;6;animal-panda_96x96.png;image;2;2;;;;
+4;animal-pig_96x96.png;image;9;9;animal-elephant_96x96.png;image;5;5;animal-duck_96x96.png;image;3;3;animal-cow_96x96.png;image;2;2

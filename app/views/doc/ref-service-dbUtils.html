@@ -81,11 +81,12 @@ var currentLevel = dbUtils.getSessionProperty(this, 'currentLevel');
 
 <hr>
 
-<p><b class="red">saveTrial(trial)</b> - returns the trial object that has been saved</p>
+<p><b class="red">saveTrial(trial, showStatusFeedback)</b> - returns the trial object that has been saved</p>
 <p>Saves a trial object to the database. A trial object represents one line in your data export.</p>
 
 <p><b>Parameters</b><br>
-<i>trial</i>: the trial object that should be saved to the database</p>
+<i>trial</i>: the trial object that should be saved to the database<br>
+<i>showStatusFeedback</i>: boolean value indicating whether the feedback status panel should be updated (<b>default: true</b>)</p>
 
 <pre><code class="language-javascript">// create new trial object
 var trial = {};

@@ -611,7 +611,7 @@ angular.module('tatool.module').directive('tatoolDrop', function() {
 
           // change sourceCell to point to new grid and add at target position
           sourceCell.grid = scope.grid;
-          scope.grid.addCellAtPosition(targetCellId, sourceCell).refresh();
+          scope.grid.addCellAtPosition(targetCellId, sourceCell.data).refresh();
           scope.$apply();
         }
 

@@ -17,7 +17,7 @@ angular.module('tatool.module')
       return currentTrials;
     };
 
-    trialService.addTrial = function(trial) {
+    trialService.addTrial = function(trial, showStatusFeedback) {
       var deferred = $q.defer();
       var trialTime = new Date().getTime();
       var _id = trial.moduleId + '_' + ('000000'+ trial.sessionId ).slice(-6) + '_' + trialTime;
@@ -28,7 +28,8 @@ angular.module('tatool.module')
       currentTrials.push(newTrial);
 
       // broadcast event for everyone interested in a finished trial
-      $rootScope.$broadcast(tatoolPhase.TRIAL_SAVE, newTrial);
+      showStatusFeedback = (showStatusFeedback === false) ? false : true;
+      $rootScope.$broadcast(tatoolPhase.TRIAL_SAVE, newTrial, showStatusFeedback);
 
       // save to db
       trialDataService.addTrial(newTrial).then(function(data) {

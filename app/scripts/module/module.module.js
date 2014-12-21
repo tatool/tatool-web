@@ -23,6 +23,9 @@ angular.module('tatool.module', ['tatool', 'tatool.auth', 'angular-progress-arc'
     TRIAL_SAVE: 'TRIAL_SAVE',
     LEVEL_CHANGE: 'LEVEL_CHANGE'
   })
+  .constant('statusUpdate', {
+    FEEDBACK: 'FEEDBACK'
+  })
   .config(['$stateProvider', '$urlRouterProvider', '$templateCacheProvider', 'cfgModule', function ($stateProvider, $urlRouterProvider, $templateCacheProvider, cfgModule) {
 
     $urlRouterProvider.otherwise('/');

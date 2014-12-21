@@ -1,17 +1,22 @@
 'use strict';
 
 angular.module('tatool.module')
-  .controller('StatusPanelCtrl', ['$scope', '$rootScope', '$log', '$timeout', '$interval', 'statusPanelService', 'status', 'tatoolPhase', 'cfgModule',
-    function ($scope, $rootScope, $log, $timeout, $interval, statusPanelService, status, tatoolPhase, cfgModule) {
+  .controller('StatusPanelCtrl', ['$scope', '$rootScope', '$log', '$timeout', '$interval', 'statusPanelService', 'status', 'tatoolPhase', 'cfgModule', 'statusUpdate',
+    function ($scope, $rootScope, $log, $timeout, $interval, statusPanelService, status, tatoolPhase, cfgModule, statusUpdate) {
 
     $scope.imgPath = cfgModule.MODULE_IMG_PATH;
     
     // listening to real-time events which should update ui immediately
-    $scope.$on(tatoolPhase.TRIAL_SAVE, function(arg, trial) {
-      $scope.feedback = statusPanelService.updateFeedback(trial.score);
+    $scope.$on(tatoolPhase.TRIAL_SAVE, function(arg, trial, showStatusFeedback) {
+      if (showStatusFeedback) {
+        $scope.feedback = statusPanelService.updateFeedback(trial.score);
+      }
     });
     $scope.$on(tatoolPhase.LEVEL_CHANGE, function(arg, currentLevel) {
       statusPanelService.updateLevel(currentLevel);
+    });
+    $scope.$on(statusUpdate.FEEDBACK, function(arg, score) {
+      $scope.feedback = statusPanelService.updateFeedback(score);
     });
 
     if (status) {
@@ -45,6 +50,4 @@ angular.module('tatool.module')
       }
     );
     
-
-
   }]);

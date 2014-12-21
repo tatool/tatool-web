@@ -35,13 +35,13 @@ angular.module('tatool.module')
     };
     
     // add new trial after extending it with base properties
-    utils.saveTrial = function(trial) {
+    utils.saveTrial = function(trial, showStatusFeedback) {
       trial.moduleId = moduleService.getModuleId();
       trial.sessionId = moduleService.getMaxSessionId();
       trial.trialId = moduleService.getNextTrialId();
       var currentExecutable = contextService.getProperty('currentExecutable');
       trial.executableId = (currentExecutable.name) ? currentExecutable.name : currentExecutable.customType;
-      return trialService.addTrial(trial);
+      return trialService.addTrial(trial, showStatusFeedback);
     };
 
     return utils;

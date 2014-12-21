@@ -88,7 +88,6 @@ tatool
       var keyCodes = [];
       for (var i = 0; i < list.length; i++) {
         if (keyCodes.indexOf(list[i].keyCode) === -1 && list[i].keyCode !== undefined) {
-          console.log(list[i].keyCode)
           keyCodes.push(list[i].keyCode);
           this.inputService.addInputKey(list[i].keyCode, list[i].correctResponse, list[i].keyLabel, list[i].keyLabelType, !this.showKeys.propertyValue);
         }
