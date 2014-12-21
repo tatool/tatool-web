@@ -1,27 +1,45 @@
 <h2>Create Stimuli</h2>
 
-<p>In this section we're going to create a stimuli file and the corresponding stimuli to be used by our Executable and make sure they're available in our Project.</p>
+<p>In this section, we're going to create a stimuli file and the corresponding stimuli to be used by our Executable, and make sure they're available in our Project.</p>
 
 <hr class="hr-red">
 
-<p>A stimuli file represents the list of stimuli properties you'd like to use in your Executable. A stimulus can be anything from a single character, a word, a digit, an image, a video or an audio file. As long as you can show/play the stimulus on a HTML page, it should be fine to use with Tatool. The stimuli file should be a <a href="http://en.wikipedia.org/wiki/Comma-separated_values" target="_blank">CSV</a> (Comma-separated values) file.</p>
+<p>A stimuli file represents the list of stimuli properties you'd like to use in your Executable. A stimulus can be anything from a single character, a word, a digit, an image, a video, or an audio file. Generally, as long as you can show or play the stimulus on a HTML page, it should be fine to use with Tatool. The stimuli file should be a <a href="http://en.wikipedia.org/wiki/Comma-separated_values" target="_blank">CSV</a> (comma-separated values) file.</p>
 
 <p>In order for the CSV file to be used with Tatool, you should follow these conventions:<br>
   <ul class="docContentList">
     <li>Use either <b>comma (,) or semicolon (;)</b> as your delimiter. Tatool will try to detect the delimiter automatically.</li>
-    <li>Use a <b>header line</b>, as it will simplify the access to the different columns of your stimulus later on.</li>
-    <li>Use <b><a href="http://en.wikipedia.org/wiki/CamelCase" target="_blank">lowerCamelCase</a></b> for the header columns, as it will simplify the access to the different columns of your stimulus later on.</li>
+    <li>Use <b>headers</b> (i.e., column names), as it will simplify the access to the different columns of your stimulus later on.</li>
+    <li>Use <b>lowerCamelCase</b> for the headers, as it will simplify the access to the different columns of your stimulus later on.</li>
   </ul>
 </p>
 
-<p>For our purpose let's create a stimuli file for a <a href="http://en.wikipedia.org/wiki/Eriksen_flanker_task" target="_blank">Flanker Task</a>. A stimulus is defined as being congruent, incongruent or neutral (<i>stimulusType</i>). We'll need to define whether the items in our stimulus are going to be text or image values (<i>stimulusValueType</i>) (e.g. character, digit, arrow) and what their values (<i>stimulusValue</i>) are going to be (e.g. 'A', 'congruent-left.png'). As a last property, we'll have to define the correct response (<i>correctResponse</i>) in order to compare the response given by the user with the expected response to provide some user feedback.</p>
+<p>For the purpose of this tutorial, let's create a stimuli file for a <a href="http://en.wikipedia.org/wiki/Eriksen_flanker_task" target="_blank">Flanker Task</a>. In this task, participants are asked to react to a central target (e.g., an arrow pointing either to the left or right) which is surrounded by flankers on each side (see figure below). The flankers are either congruent with the target (e.g., arrows pointing in the same direction as the target), incongruent with the target (e.g., arrows pointing in the opposite direction than the target), or neutral (e.g., squares instead of arrows). Participants are expected to respond slower to incongruent than neutral stimuli (interference effect), and faster to congruent than neutral stimuli (facilitation effect).</p>
 
 <p>
   <img src="../../images/doc/figure-flanker.png" class="internal"><br>
   <i>Example arrow stimuli</i>
 </p>
 
-<p>We end up with a stimuli file that will look similar to this:</p>
+<p>In our Flanker task, we'll present images of arrow Flanker stimuli as those shown above, and participants will have to indicate whether the central target arrow points to the left or the right. Every possible combination of the condition (congruent, incongruent, or neutral) and pointing direction (left or right) results in 6 images. You can create your own images or use the ones provided in your local Tatool installation.</p>
+
+<p>
+  <img src="../../images/doc/flanker-incongruent-left.png" class="internal"><br>
+  <i>Example stimulus image (incongruent-left.png)</i>
+</p>
+
+<p>For the stimuli file, we have to define four properties, the stimulusType, the stimulusValueType, the stimulusValue, and the correctResponse. The <i>stimulusType</i> refers to the condition reflected by the stimulus. For the <i>stimulusValueType</i>, we need to determine whether the stimulus is a text or an image. The <i>stimulusValue</i> refers to the specific stimulus such as the string or the image file name (e.g., 'A', 'congruent-left.png'). Finally, we have to define the correct response (<i>correctResponse</i>) in order to compare the response given by the user with the expected response to compute a score and to provide positive or negative feedback.</p>
+
+<p>In our example, these four properties can take on the following values:
+<ul class="docContentList">
+	<li><b class="red">stimulusType:</b> congruent, incongruent, or neutral</li>
+	<li><b class="red">stimulusValueType:</b> image</li>
+	<li><b class="red">stimulusValue:</b> congruent-left.png, congruent-right.png, incongruent-left.png, incongruent-right.png, neutral-left.png, or neutral-right.png</li>
+	<li><b class="red">correctResponse:</b> left or right</li>
+</ul>
+</p>
+
+<p>You can create your own stimuli file or use the example already provided in your local Tatool installation. The stimuli file you end up with should look similar to this:</p>
 
 <pre><code class="language-bash">stimulusType;stimulusValue;stimulusValueType;correctResponse
 congruent;congruent-right.png;image;right
@@ -37,14 +55,7 @@ neutral;neutral-left.png;image;left
 ...
 </code></pre>
 
-<p>You can create your own stimuli file or use the example already provided in your local Tatool installation. At the same time we also have to create our actual stimuli which we've decided are going to be images. There's going to be a total of 6 images for every possible combination of left/right and congruent/incongruent/neutral stimuli types. You again can create your own images or use the ones provided in your local Tatool installation.</p>
-
-<p>
-  <img src="../../images/doc/flanker-incongruent-left.png" class="internal"><br>
-  <i>Example stimulus image (incongruent-left.png)</i>
-</p>
-
-<p>In order to use the stimuli files in our Executable, we'll have to save/copy all stimuli related files into our Project stimuli sub-folder (<b>app/projects/public/myExperiment/stimuli</b>) of our local Tatool installation.</p>
+<p>In order to use the images and the stimuli file in our Executable, they have to be located in the Project stimuli sub-folder (<b>app/projects/public/myExperiment/stimuli</b>) of the local Tatool installation. If you created your own files, make sure to copy/paste them to this folder.</p>
 
 <hr class="hr-red">
 
