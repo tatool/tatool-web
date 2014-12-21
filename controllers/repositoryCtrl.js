@@ -20,7 +20,6 @@ var insert = function(module, res) {
   var today = new Date();
 
   // set all required technical fields (overriding anything set by the user)
-  module.moduleVersion++;
   module.updated_at = today;
 
   // remove runtime information as it's not needed in repository
@@ -41,10 +40,11 @@ var update = function(entry, module, res) {
   var today = new Date();
   
   // update technical fields
-  entry.moduleVersion++;
   entry.updated_at = today;
 
   // update user defined information
+  entry.moduleVersion = module.moduleVersion;
+  entry.publishedModuleVersion = module.publishedModuleVersion;
   entry.moduleType = module.moduleType;
   entry.moduleDefinition = module.moduleDefinition;
   entry.moduleName = module.moduleName;

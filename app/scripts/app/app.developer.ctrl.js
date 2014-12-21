@@ -105,6 +105,8 @@ angular.module('tatool.app')
       });
 
       modalInstance.result.then(function() {
+        // increment module version
+        module.moduleVersion++;
         moduleDataService.addModule(module).then(function() {
           setAlert('success', 'Module successfully saved.');
           initModules();
@@ -125,6 +127,7 @@ angular.module('tatool.app')
         startSpinner();
         moduleDataService.unpublishModule(module.moduleId).then(function() {
           module.moduleType = '';
+          module.publishedModuleVersion = 0;
           stopSpinner();
         }, function(err) {
           $log.error(err);
@@ -162,6 +165,10 @@ angular.module('tatool.app')
       }
     };
 
+    $scope.changeModuleType = function(module) {
+      module.moduleVersion++;
+    };
+
     $scope.repositoryInvite = function(moduleId) {
       hideAlert();
       moduleDataService.getRepositoryModule(moduleId).then(function(module) {
@@ -192,6 +199,7 @@ angular.module('tatool.app')
       startSpinner();
 
       moduleDataService.publishModule(module.moduleId, module.moduleType).then(function() {
+        module.publishedModuleVersion = module.moduleVersion;
         stopSpinner();
         setAlert('success', 'Module <b>\'' + module.moduleName + '\'</b> was published successfully.');
       }, function(err) {

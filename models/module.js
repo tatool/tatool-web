@@ -52,7 +52,11 @@ var Module = new Schema({
       type: String,
       required: true
     },
-    moduleVersion: {    // automatically incremented when published to repository
+    moduleVersion: {    // current module version
+      type: String,
+      required: true
+    },
+    publishedModuleVersion: {    // currently published module version
       type: String,
       required: true
     },

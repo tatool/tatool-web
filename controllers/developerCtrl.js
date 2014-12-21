@@ -30,7 +30,8 @@ var insert = function(req, res) {
 
   // set all required technical fields (overriding anything set by the user)
   module.email = req.user.email;
-  module.moduleVersion = 0;
+  module.moduleVersion = 1;
+  module.publishedModuleVersion = 0;
   module.created_by = req.user.email;
   module.created_at = today;
   module.updated_at = today;
@@ -64,6 +65,9 @@ var update = function(req, res, module) {
       if (!module.moduleType && req.body.moduleType !== '') {
         initAnalytics = true;
       }
+
+      // update technical information
+      module.moduleVersion = req.body.moduleVersion;
 
       // update user defined information
       module.moduleType = req.body.moduleType;
@@ -144,7 +148,9 @@ exports.publish = function(req, res) {
       res.status(500).send(err);
     } else {
       if (module) {
-        
+
+
+        module.publishedModuleVersion = module.moduleVersion;
         module.moduleType = req.params.moduleType;
         if (module.moduleType !== 'private') {
           module.invites = undefined;
@@ -174,6 +180,7 @@ exports.unpublish = function(req, res) {
 
         module.moduleType = '';
         module.invites = undefined;
+        module.publishedModuleVersion = 0;
         module.save(function(err, data) {
           if (err) {
             res.status(500).send(err);

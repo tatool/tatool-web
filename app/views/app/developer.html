@@ -84,14 +84,14 @@
 
                   <div class="moduleType">
                     <label class="radio-inline">
-                      <input type="radio" ng-model="module.moduleType" value="public"> Public
+                      <input type="radio" ng-model="module.moduleType" ng-change="changeModuleType(module)" value="public"> Public
                     </label>
                     <label class="radio-inline">
-                      <input type="radio" ng-model="module.moduleType" value="private"> Private
+                      <input type="radio" ng-model="module.moduleType" ng-change="changeModuleType(module)" value="private"> Private
                     </label>
                   </div>
                   <div class="buttonbar">
-                    <div class="btn btn-tatool-green" ng-click="publishModule($event, module)"><i class="fa fa-cloud-upload"></i> Publish</div>
+                    <div class="btn btn-tatool-green" ng-click="publishModule($event, module)" ng-disabled="module.moduleVersion === module.publishedModuleVersion" ng-class="{'btn-tatool-green-disabled': module.moduleVersion === module.publishedModuleVersion}"><i class="fa fa-cloud-upload"></i> {{(module.moduleVersion === module.publishedModuleVersion) ? 'Published' : 'Publish'}}</div>
                     <div ng-if="module.moduleType==='private'" class="btn btn-tatool-off" ng-click="repositoryInvite(module.moduleId)"><i class="fa fa-users"></i> Invite</div>
                   </div>
                  </div>
