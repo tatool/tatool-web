@@ -2,7 +2,14 @@
 
 <p>In this section we're going to improve the readability and maintainability of our Executable by externalising the resource and path definitions of our stimuli file and stimuli path into Properties. A Property will allow you to set the values through the Module Editor instead of having to change the underlying code every time you want to use different stimuli.</p>
 
+<ul id="docPageNav">
+  <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('module')">Adding Properties to the Module</a></li>
+  <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('service')">Adding Properties to the Executable Service</a></li>
+</ul>
+
 <hr class="hr-red">
+
+<h3 id="module">Adding Properties to the Module<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
 
 <p>We're going to use the Module Editor to add the following two Custom Properties to our Module.</p>
 
@@ -25,12 +32,14 @@
     <li><b>Type:</b> stimuli</li>
   </ul>
 </p>
-
+<p>This short video shows you how to use the Module Editor to add Properties:</p>
 <iframe width="560" height="315" src="//www.youtube.com/embed/0iumkEAsF-k" frameborder="0" allowfullscreen></iframe>
 
 <hr class="hr-red">
 
-<p>Now we can make use of these Properties in our Executable Service code, where we previously manually defined the resource and path location. We can remove the two variable definitions of stimuliFile and stimuliPath and use the Properties instead. Properties are always available on your current object (this). As you can see on <b>line 6</b> below, we can now access the Properties with this.stimuliFile and this.stimuliPath. From now on you can easily swap your stimuli file or allow other users to use their own stimuli files by using the Module Editor alone.</p>
+<h3 id="service">Adding Properties to the Executable Service<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
+
+<p>Now we can make use of these Properties in our Executable Service code, where we previously manually defined the resource and path location. We can remove the two variable definitions of stimuliFile and stimuliPath and use the Properties instead. Properties are always available on your current object (accessible through <i>this</i>). As you can see on <b>line 6</b> below, we can now access the Properties with this.stimuliFile and this.stimuliPath. From now on you can easily use different stimuli files or allow other users to use their own stimuli files with the Module Editor.</p>
 
 <h4>myExecutable.service.js</h4>
 <pre class="line-numbers"><code class="language-javascript">MyExecutable.prototype.init = function() {
@@ -54,4 +63,4 @@
 
 <h3>What's Next?<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
 
-<p>As a next step, we're going to add the necessary code to display our stimuli on screen. To proceed, please go to <a ui-sref="doc({page: 'dev-executable-display-stimuli.html'})">Display Stimuli</a>.</p>
+<p>Add the necessary code to display the stimuli on the screen. To proceed, please go to <a ui-sref="doc({page: 'dev-executable-display-stimuli.html'})">Display Stimuli</a>.</p>
