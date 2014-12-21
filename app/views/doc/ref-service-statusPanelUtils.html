@@ -1,0 +1,27 @@
+<h2>statusPanelUtils</h2>
+
+<p>The statusPanelUtils service offers methods that allow you to interact with the Tatool status panels. The most common methods are used update the status panel values.
+</p>
+
+<ul id="docPageNav">
+  <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('status')">Status Panel Methods</a></li>
+</ul>
+
+<hr class="hr-red">
+
+<h4 id="status">Status Panel Methods<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h4>
+
+<p><b>When to use the Status Panel Methods?</b><br>
+Tatool takes care of updating the Status Panel by its own or by the help of customized handlers. Usually you'll not have to manually update a status panel value. See the methods below to learn how and when to use them.</p>
+<hr>
+
+<p><b class="red">setFeedback(score)</b> - (no return value)</p>
+<p>Used to manually update the feedback status panel to display a <i>correct</i> or a <i>wrong</i> feedback. The feedback status panel is automatically updated as soon as a trial object is saved with the help of the <a ui-sref="doc({page: 'ref-service-dbUtils.html'})">dbUtils</a> service. If you're not saving a trial or want to update the feedback at a different time within your Executable, you can use this method instead.</p>
+
+<p><b>Parameters</b><br>
+<i>score</i>: integer value indicating the score (> 0 will show a <i>correct</i> feedback and 0 will show a <i>wrong</i> feedback)
+</p>
+
+<pre><code class="language-javascript">// update the feedback within an Executable
+statusPanelUtils.setFeedback(1);
+</code></pre>

@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('tatool.module')
-  .factory('statusPanelService', [ '$log', '$rootScope', '$timeout', 'tatoolPhase', 'statusUpdate',
-    function ($log, $rootScope, $timeout, tatoolPhase, statusUpdate) {
+  .factory('statusPanelService', [ '$log', '$rootScope', '$timeout', 'tatoolPhase',
+    function ($log, $rootScope, $timeout, tatoolPhase) {
 
 	var service = {};
 
@@ -12,14 +12,6 @@ angular.module('tatool.module')
     service.updateTimer(0);
   });
 
-  // PUBLIC methods
-  service.setFeedback = function(feedback) {
-    $rootScope.$broadcast(statusUpdate.FEEDBACK, feedback);
-  };
-
-
-  // PRIVATE methods
-	
   // level panel
 	service.updateLevel = function(currentLevel) {
     if (service.currentLevel !== currentLevel && service.currentLevel) {

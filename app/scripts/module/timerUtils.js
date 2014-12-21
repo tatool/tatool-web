@@ -3,7 +3,6 @@
 angular.module('tatool.module')
   .factory('timerUtils', ['$log', '$timeout', '$interval', 'statusPanelService', 'executableUtils',
     function ($log, $timeout, $interval, statusPanelService, executableUtils) {
-    $log.debug('TimerService: initialized');
 
     var timerUtils = {};
 

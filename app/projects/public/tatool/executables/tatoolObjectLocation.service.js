@@ -1,8 +1,8 @@
 'use strict';
 
 tatool
-  .factory('tatoolObjectLocation', [ 'executableUtils', 'dbUtils', 'timerUtils', 'gridServiceFactory', 'inputServiceFactory', 'statusPanelService',
-    function (executableUtils, dbUtils, timerUtils, gridServiceFactory, inputServiceFactory, statusPanelService) {
+  .factory('tatoolObjectLocation', [ 'executableUtils', 'dbUtils', 'timerUtils', 'gridServiceFactory', 'inputServiceFactory', 'statusPanelUtils',
+    function (executableUtils, dbUtils, timerUtils, gridServiceFactory, inputServiceFactory, statusPanelUtils) {
 
     var ChoiceReaction = executableUtils.createExecutable();
 

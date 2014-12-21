@@ -129,6 +129,8 @@ tatool
     // Process given response and stop executable
     ComplexNumExecutable.prototype.addTrial = function(givenResponse) {
       this.trial = {};
+      this.trial.trialNo = this.counter;
+      this.trial.setSize = this.stimulus.stimulusCount;
       this.trial.reactionTime = this.endTime - this.startTime;
       this.trial.givenResponse = givenResponse;
       this.trial.correctResponse = this.stimulus['correctResponse' + this.respCounter];
