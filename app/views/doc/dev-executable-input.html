@@ -1,10 +1,18 @@
 <h2>Record Input</h2>
 
-<p>This section will show how to capture user input by listening to keyboard input or mouse-clicks. We're going to extend our previous code with some additional logic in the template, service and controller.</p>
+<p>This section will show how to capture user input by listening to keyboard input or mouse-clicks. For this purpose, we extend our previous code in the Template, Service and Controller with some additional logic.</p>
+
+<ul id="docPageNav">
+  <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('template')">Adding Input Components to the Template</a></li>
+  <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('service')">Adding an Input Service</a></li>
+  <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('controller')">Controller</a></li>
+</ul>
 
 <hr class="hr-red">
 
-<p>As we want to be able to display keys/buttons on screen, we're going to make use of the <b>&lt;tatool-input></b> element which allows us to display keys/buttons/textfields as a method of user interaction and trigger some action at the time of user input. Take a look at the extended template below.</p>
+<h3 id="template">Adding Input Components to the Template<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
+
+<p>As a method of user interaction that triggers a specific action at the time of user input, we can display buttons or a text field. For this purpose, we use the <code>&lt;tatool-input></code>. Take a look at the extended Template below:</p>
 
 <h4>myExecutable.html</h4>
 <pre class="line-numbers" data-line="4-7"><code class="language-markup">&lt;tatool>
@@ -17,9 +25,22 @@
 &lt;/tatool>
 </code></pre>
 
-<p>We've introduced the &lt;tatool-input> element on <b>line 4</b>, provided the predefined id <i>bottomExecutable</i> which will make sure the input will be displayed at the bottom of the screen. We again provide a <i>service</i> attribute and give it the custom value <i>inputService</i>, which we'll be linking to the inputService of our Executable later on. The last attribute <i>userInput</i> expects a function name with the three parameters <i>input, timing, event</i>. This is the function that should be called once the user has pressed a key or clicked on a button.</p>
+<p>We add the <code>&lt;tatool-input></code> element on <b>line 4</b> with the predefined id <code>bottomExecutable</code> to display the input component at the bottom of the screen. As before, we enter a <code>service</code> attribute, but this time we give it the custom value <code>inputService</code> which will be the variable name of our service in the Executable Service later on. The last attribute <code>userInput</code> expects the name of a function (we call it <code>inputAction</code>) with the three parameters <code>input, timing, event</code>. This is the function that will be called once the user has pressed a key or clicked on a button.</p>
 
-<p>Similar to the &lt;tatool-stimulus> element we're going to extend our Executable service now by adding a new dependency to the <b>inputServiceFactory</b>. See the updated code below.</p>
+<div class="hint">
+  <div class="icon red"><i class="fa fa-lightbulb-o fa-2x"></i></div> 
+  <div class="text">
+    <p>You can choose any custom variable names (e.g., <code>buttonService</code> instead of <code>inputService</code>), but keep in mind that you'll have to stick to these names later in the Controller. To make your code more consistent, we recommend to also stick to the same variable names in the Service.</p>
+  </div>
+</div>
+
+<p>Next, we have to specify the response keys (<b>lines 6-7</b>). In our Flanker Task, participants have to decide whether an arrow points to the left or to the right, so we choose the left and the right arrow keys as possible response keys. Alternatively, participants can click on the buttons displayed on the screen. To get an idea which other keys you can select, have a look at the list of KeyCodes in the <a ui-sref="doc({page: 'ref-directive-tatoolInput.html'})">Tatool Input</a> reference.</p>
+
+<hr class="hr-red">
+
+<h3 id="service">Adding an Input Service<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
+
+<p>Remember that when we added the <code>&lt;tatool-stimulus></code> element in the section <a ui-sref="doc({page: 'dev-executable-display-stimuli.html'})">Display Stimuli</a>, we had to add a new dependency in our Executable Service. The same is required now for the <code>&lt;tatool-input></code> element. This time, we add a new dependency to the <code>inputServiceFactory</code>. See the updated code below:</p>
 
 <h4>myExecutable.service.js</h4>
 <pre class="line-numbers" data-line="1-2,11"><code class="language-javascript">tatool.factory('myExecutable', [ 'executableUtils', 'stimulusServiceFactory', 'inputServiceFactory',
@@ -61,9 +82,13 @@
   }]);
 </code></pre>
 
-<p>We've added the new dependency to the inputServiceFactory on <b>line 1/2</b>. On <b>line 11</b> we create a new input service and provide the only required parameter stimuli path, which would be used in case we wanted to display images on our keys.</p>
+<p>We add the new dependency to the <code>inputServiceFactory</code> on <b>lines 1 and 2</b>. On <b>line 11</b>, we create a new input service on the Executable object (using <code>this</code>) and provide the only required parameter, the stimuli path. The stimuli path would be used if we'd like to display images on the buttons, in which case we'd have to provide the according parameters in the Template (see the <a ui-sref="doc({page: 'ref-directive-tatoolInput.html'})">Tatool Input</a> reference).</p>
 
-<p>And finally we're going to extend our controller with the functionality to listen to user input from the template.</p>
+<hr class="hr-red">
+
+<h3 id="controller">Controller<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
+
+<p>Finally, we're going to extend our controller with the functionality to listen to user input from the template.</p>
 
 <h4>myExecutable.ctrl.js</h4>
 <pre class="line-numbers" data-line="5,10-11, 16-20"><code class="language-javascript">tatool.controller('myExecutableCtrl', [ '$scope', 'service',
@@ -90,21 +115,21 @@
   }]);
 </code></pre>
 
-<p>On <b>line 5</b> we assign the inputService we've created in our Executable service to the $scope variable <i>inputService</i>. If you remember <i>inputService</i> was the value of the service attribute we've provided in the template. Now we've bridged the gap and the inputService is linked to our template.</p>
+<p>On <b>line 5</b>, we assign the inputService we created in our Executable Service above to the <code>$scope</code> variable <code>inputService</code>. Remember, <code>inputService</code> was the value of the service attribute we've provided in the Template. Now we've bridged the gap and linked the <code>inputService</code> to our Template.</p>
 
 <div class="hint">
   <div class="icon red"><i class="fa fa-lightbulb-o fa-2x"></i></div> 
   <div class="text">
-    <p>All variables/functions assigned to the <b>$scope</b> object will be accessible in the Executable template.</p>
+    <p>All variables and functions assigned to the <code>$scope</code> object will be accessible in the Executable Template.</p>
   </div>
 </div>
 
-<p>As part of our <i>start()</i> method on <b>line 10/11</b> we add a call to display our input buttons on screen with the <i>show()</i> method and activate the user input by calling the <i>enable()</i> method. The <i>show()</i> method is optional as you might choose not to display any buttons if the user has to respond by keyboard only. Finally on <b>line 16</b> we add the function <i>inputAction()</i> to the $scope service. Within the function we make sure that the user input is deactivated by calling the method <i>disable()</i> and also hide our stimulus by calling the method <i>hide()</i>. On <b>line 19</b> we call our <i>stopExecution()</i> method which will make sure, that once a key is pressed, the current execution is stopped.</p>
+<p>As part of our <code>start()</code> method, we add a call to display our input buttons on the screen with the <code>show()</code> method and activate the user input by calling the <code>enable()</code> method on <b>lines 10 and 11</b>. If you want the user to respond via key press only and choose not to display any buttons, you can simply drop the optional <code>show()</code> method. Finally, on <b>line 16</b>, we add the function <code>inputAction()</code> to the <code>$scope</code> object. Within this function, we have to make sure that the user input is deactivated by calling the method <code>disable()</code>, and then hide our stimulus by calling the method <code>hide()</code>. On <b>line 19</b>, we call our <code>stopExecution()</code> method which will stop the current execution once a key is pressed.</p>
 
-<p>Let's change our Module to execute our Executable several times (e.g. 3 times) instead of once. When we now execute our Module, we should be able to press the left/right arrow key to finish the current trial and go to the next trial.</p>
+<p>Let's edit our Module now so that it executes our Executable several times (e.g., 3 times) instead of only once. When we now execute our Module, we should be able to press the left or right arrow key to finish the current trial and proceed to the next one.</p>
 
 <hr class="hr-red">
 
 <h3>What's Next?<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
 
-<p>As a next step, we're going to make sure that we actually store the user response and some additional properties. To proceed, please go to <a ui-sref="doc({page: 'dev-executable-data.html'})">Store Data</a>.</p>
+<p>We now want to actually store the user response and some additional properties. To proceed, please go to <a ui-sref="doc({page: 'dev-executable-data.html'})">Store Data</a>.</p>
