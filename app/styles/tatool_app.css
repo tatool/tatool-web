@@ -35,6 +35,12 @@ a.info:hover {
   cursor: pointer;
 }
 
+/* overwrite code styling to be monospaced font */
+code {
+  font-family: "Courier New", Courier, monospace;
+  background-color: transparent;
+}
+
 /* General classes to change font color */
 .green {
   color: #1a882a;

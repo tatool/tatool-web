@@ -63,7 +63,7 @@ tatool
       // increment response counter
       service.respCounter++;
 
-      var stimulusText = 'Stimulus ' + service.respCounter + ' ?';
+      var stimulusText = service.recallText + ' ' + service.respCounter + ' ?';
       service.setRecallStimulus(stimulusText);
 
       service.startTime = service.stimulusService.show();      

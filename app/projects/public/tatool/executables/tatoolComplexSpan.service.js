@@ -8,6 +8,7 @@ tatool
 
     var DISPLAY_DURATION_DEFAULT = 800;
     var INTERVAL_DURATION_DEFAULT = 400;
+    var RECALL_TEXT_DEFAULT = 'Stimulus';
 
     ComplexNumExecutable.prototype.init = function() {
       var promise = executableUtils.createPromise();
@@ -25,6 +26,7 @@ tatool
       }
 
       // template properties
+      this.recallText = (this.recallText ) ? this.recallText : RECALL_TEXT_DEFAULT;
       this.stimulusService = stimulusServiceFactory.createService(this.stimuliPath);
       this.inputService = inputServiceFactory.createService();
 
