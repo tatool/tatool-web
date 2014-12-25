@@ -3,9 +3,14 @@
 
 <p>The first time Tatool is started, a default Admin user will be created to allow you to login and setup your own users (see <a ui-sref="doc({page: 'dev-getting-started.html'})">Getting Started</a> for more details). You can safely delete the default Admin user as long as you provide another user with the Admin role. If you end up deleting all Admin users, simply restart the server and the default Admin user will be created again.</p>
 
+<ul id="docPageNav">
+  <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('user')">User Management</a></li>
+  <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('project')">Project Management</a></li>
+</ul>
+
 <hr class="hr-red">
 
-<h4 id="property">User Management<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h4>
+<h3 id="user">User Management<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
 
 <p>To use Tatool, you'll need a user name and password assigned to you. When running Tatool in lab mode, there is no user registration feature, and the only person allowed to register users is the admin user (admin@tatool-web.com by default). When logged in as an admin, you'll have access to the Admin tab in the top navigation which will lead you to the User Management screen.</p>
 
@@ -24,7 +29,7 @@
 
 <hr class="hr-red">
 
-<h4 id="property">Project Management<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h4>
+<h3 id="project">Project Management<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
 
 <p>A Project groups all the files needed for a specific experiment into one folder. For example, every Executable is part of a Project, and every stimuli file or stimulus you use is part of a Project. A special type of a Project is the <i>External Resource</i>, which does precisely what it says: it represents a resource from an external source (e.g., some http address) instead of a local Tatool Project.</p>
 

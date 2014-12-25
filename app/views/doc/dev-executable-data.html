@@ -1,10 +1,10 @@
 <h2>Store Data</h2>
 
-<p>As a final step we're going to add some functionality to our Executable to store the users response to our stimuli. In the case of Tatool, this means we're going to create a Trial and store it to the database. This will make it available for the data export.</p>
+<p>As a final step, we're going to store the responses the user gave to our stimuli. In Tatool, this means to create a Trial and store it to the database, thereby making it available for data export.</p>
 
 <hr class="hr-red">
 
-<p>Before we're going to implement a Trial object and store it, let's capture some more information we want to store. For this purpose we're going to extend our controller as follows.</p>
+<p>Before we can store any data, we have to capture the information we want to store. For this purpose, we're going to extend our Controller as follows:</p>
 
 <h4>myExecutable.ctrl.js</h4>
 <pre class="line-numbers" data-line="13,19-20"><code class="language-javascript">tatool.controller('myExecutableCtrl', [ '$scope', 'service',
@@ -32,7 +32,7 @@
   }]);
 </code></pre>
 
-<p>On <b>line 13</b> we've created a variable called <i>startTime</i> on our service object and assign it the return value of the <i>show()</i> method. This method returns a timestamp in milliseconds of when the stimulus has been shown. On <b>line 19</b> we're assigning the <i>timing</i> variable to a new variabled called <i>endTime</i> on our service object. These two timestamps will allow us to calculate the most accurate reaction time. On <b>line 20</b> we call a new custom method <i>processResponse()</i> on our service, which we're going to create in a bit. Notice that we removed the call to the <i>stopExecution()</i> method, as we're going to do this now as part of our <i>processResponse()</i> method.</p>
+<p>First, we want to measure the time it took the user to respond to the stimulus. Therefore, on <b>line 13</b>, we create a variable called <code>startTime</code> on our service object and assign it the return value of the <code>show()</code> method. This will return a timestamp in milliseconds of when the stimulus has been shown. On <b>line 19</b>, we create a matching <code>endTime</code> variable on our service object and assign it the <code>timing</code> variable that is a parameter of the current function. It contains the timestamp in milliseconds of when the user gave an input (i.e., pressed the key or clicked on the button). We'll use the two timestamps later to calculate the most accurate reaction time possible. On <b>line 20</b>, we call a new custom method <i>processResponse()</i> on our service, which we're going to create in a bit. Note that we removed the call to the <code>stopExecution()</code> method, as we'll do this now as part of our <i>processResponse()</i> method.</p>
 
 <p>With this extra logic in place let's move to our Executable service and implement the new method.</p>
 
@@ -87,9 +87,9 @@
   }]);
 </code></pre>
  
-<p>First of all we're going to add the service <b>dbUtils</b> as a new dependency on <b>line 1/2</b>. On <b>line 30</b> we create a new Trial as a simple JavaScript object with the assignment of an empty object {}. This will serve as our container where we can add any data we want to store for the current execution. Usually you'll want to add the three properties defined on <b>line 31-33</b> to store the basic information on which stimulus was presented, what type of stimuli it was and what the correct response for the stimulus was. We can get all this information from our stimulus object, since that's what we've provided in our stimuliFile.</p>
+<p>First of all, we add the service <code>dbUtils</code> as a new dependency on <b>lines 1 and 2</b>. On <b>line 31</b>, we create a new Trial as a simple JavaScript object with the assignment of an empty object <code>{}</code>. This will serve as our container that we can fill with any data we want to store for the current execution. In most cases, you'll probably want to store the three properties defined on <b>lines 32-34</b> that contain the basic stimulus information (which stimulus was presented, its type, and the correct respones to it). We can get all the information from our stimulus object, because that's what we've provided in our stimuliFile.</p>
 
-<p>On <b>line 36</b> we create a new custom method called <i>processResponse()</i> with one argument <i>response</i>. Our controller will call this method after the user has provided a response by clicking the button or pressing the left/right arrow keys. On <b>line 37-43</b> we add some more data to our trial object. We're calculating the time elapsed between stimulus onset and user feedback and store it as the <i>reactionTime</i>. The response provided by the user is stored as <i>givenResponse</i> and with some additional logic we create a variable <i>score</i> which will be set to 1 if the response was correct and 0 otherwise. Finally on <b>line 44</b> we're using the <b>dbUtils</b> service to save our Trial object to the datbase. The <i>saveTrial</i> object returns a Promise which is why we're calling the <i>then</i> method to let the Promise know that as soon as it has finished saving the trial, it can call the executableUtils <i>stop()</i> method to finish the current execution.</p>
+<p>Next, on <b>line 36</b>, we create a new custom method called <code>processResponse()</code> with one argument <code>response</code>. That's the method we already referred to on line 20 in our Controller above. The controller will call this method after the user has provided a response by clicking the button or pressing the left or right arrow key. On <b>lines 38-44</b>, we add some more data to our Trial object. First, we calculate the time that elapsed between stimulus onset and user feedback and store it as the <code>reactionTime</code>. The response provided by the user is stored as <code>givenResponse</code>. Now that we know both the correct and the given response, we can derive a <code>score</code>. We set the score to 1 if the response was correct, and otherwise we set it to 0. Finally, on <b>line 45</b>, we use the <code>dbUtils</code> service to save our Trial object to the database. The <code>saveTrial</code> object returns a Promise. Therefore, we call the <code>then</code> method to let the Promise know that as soon as it has finished saving the trial, it can call the <code>stop()</code> method provided by the <code>executableUtils</code> to finish the current execution.</p>
 
 <p>We can now execute our Module again and take a look at the export data afterwards to see whether all our data has been saved correctly.</p>
 
@@ -97,4 +97,4 @@
 
 <h3>What's Next?<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
 
-<p>Proceed to <a ui-sref="doc({page: 'dev-executable-additional.html'})">Additional Steps</a> to see what else could be done to improve your Executable.</p>
+<p>That's it, the Flanker Task is done! Now you can take a look at some <a ui-sref="doc({page: 'dev-executable-additional.html'})">Additional Steps</a> to see what else you could do to modify your Executable.</p>
