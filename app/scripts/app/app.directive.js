@@ -28,12 +28,12 @@ angular.module('tatool.app').directive('tree', ['RecursionHelper', function(Recu
     template:
         '<div ng-switch on="element.tatoolType">' +
           '<div ng-switch-when="Executable">' +
-            '<li ng-click="topFunc(element, index, parent);highlightElement()" ng-class="{\'active\' : highlight.key === myId}">' +
+            '<li ng-click="topFunc(element, index, parent);highlightElement()" ng-class="{\'active\' : highlight.key === element.name}">' +
               '<i class="fa fa-play-circle"></i> {{ (element.customType) ? element.customType : element.tatoolType }}' +
             '</li>' +
           '</div>' +
           '<div ng-switch-when="List">' +
-            '<li ng-click="topFunc(element, index, parent);highlightElement()" ng-class="{\'active\' : highlight.key === myId}">' +
+            '<li ng-click="topFunc(element, index, parent);highlightElement()" ng-class="{\'active\' : highlight.key === element.name}">' +
               '<i class="fa fa-list"></i> {{ element.tatoolType }}' +
             '</li>' +
             '<ul>' +
@@ -41,7 +41,7 @@ angular.module('tatool.app').directive('tree', ['RecursionHelper', function(Recu
             '</ul>' +
           '</div>' +
           '<div ng-switch-when="Dual">' +
-            '<li ng-click="topFunc(element, index, parent);highlightElement()" ng-class="{\'active\' : highlight.key === myId}">' +
+            '<li ng-click="topFunc(element, index, parent);highlightElement()" ng-class="{\'active\' : highlight.key === element.name}">' +
               '<i class="fa fa-list-ol"></i> {{ element.tatoolType }}' +
             '</li>' +
               '<ul>' +
@@ -58,10 +58,10 @@ angular.module('tatool.app').directive('tree', ['RecursionHelper', function(Recu
     compile: function(element) {
       return RecursionHelper.compile(element, function(scope) {
 
-        scope.myId = uuid();
+        //scope.myId = uuid();
 
         scope.highlightElement = function() {
-          scope.highlight.key = scope.myId;
+          scope.highlight.key = scope.element.name; //scope.myId;
         };
       });
     }

@@ -100,6 +100,7 @@ angular.module('tatool.app')
         hideAlert();
         var list = {
           'tatoolType': 'List',
+          'name': (Math.random().toString(36)+'00000000000000000').slice(2,16+2),
           'iterator': { 'customType' : 'ListIterator', 'numIterations' : '1' },
           'handlers': [  ],
           'children': [  ]
@@ -121,6 +122,7 @@ angular.module('tatool.app')
         hideAlert();
         var list = {
           'tatoolType': 'Dual',
+          'name': (Math.random().toString(36)+'00000000000000000').slice(2,16+2),
           'iterator': { 'customType' : 'ListIterator', 'numIterations' : '1' },
           'handlers': [  ],
           'children': { }
@@ -158,8 +160,6 @@ angular.module('tatool.app')
             }
           }
         }
-
-        $scope.highlightId.key = '';
       };
 
       $scope.moveElementDown = function(element, index, parent) {
@@ -182,8 +182,6 @@ angular.module('tatool.app')
             }
           }
         }
-
-        $scope.highlightId.key = '';
       };
 
       $scope.deleteElement = function(element, index, parent) {
@@ -192,9 +190,11 @@ angular.module('tatool.app')
           if (parent.tatoolType === 'Dual') {
             delete parent.children[index];
             $scope.elementType = VIEW_PATH + 'edit_module.html';
+            $scope.highlightId.key = 'module';
           } else {
             parent.children.splice(index, 1);
             $scope.elementType = VIEW_PATH + 'edit_module.html';
+            $scope.highlightId.key = 'module';
           }
         }
       };
