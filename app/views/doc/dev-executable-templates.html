@@ -33,6 +33,13 @@
 </code></pre>
 <p>The tatool.factory() method in <b>line 1</b> will instantiate our Service for us. Because we're going to have multiple Services, we need to assign a unique name to our Service. The first argument of the tatool.factory() method defines just that name. Use <a href="http://en.wikipedia.org/wiki/CamelCase" target="_blank">lowerCamelCase</a> to name your Executable Service and make sure that you use the exact same name as you used to prefix your filename. In our case the filename is 'myExecutable.service.js', so the name of our Executable Service has to be 'myExecutable'. The naming is very important because Tatool will look for the file according to the name you've given in your Service, and will fail to locate the file if they don't match.</p>
 
+<div class="hint">
+  <div class="icon red"><i class="fa fa-lightbulb-o fa-2x"></i></div> 
+  <div class="text">
+    <p>The <b>filenames</b> for an Executable need to follow the Tatool naming convention in order to be recognized. The service has to be called <b>[Service name].service.js</b>, the controller <b>[Service name].ctrl.js</b> and the template <b>[Service name].html</b>.</p>
+  </div>
+</div>
+
 <p>The second argument of the tatool.factory() method is an array [] containing the dependencies and, as the last entry on <b>line 2</b>, the main function. As you can see, we've already added the dependency 'executableUtils' which is a service provided by Tatool. Every dependency has to occur twice, once as a String entry in the array, and once as an argument in the main function. In case you have multiple dependencies, take care that the order of the dependencies matches.</p>
 
 <p>On <b>line 4</b> we create an <a href="http://en.wikipedia.org/wiki/Instance_%28computer_science%29" target="_blank">instance</a> of our Executable with the help of the executableUtils Service, and on <b>line 15</b> we return that instance. Remember that every Service is created only once per Session and, therefore, things we create in here will persist across the execution of trials. Hence, wherever we will use this Executable Service, it will always return this one instance that we've just created.</p>

@@ -2,7 +2,14 @@
 
 <p>This section will introduce you to how to display your stimuli on the screen. Tatool provides some helper services that make displaying stimuli easy.</p>
 
+<ul id="docPageNav">
+  <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('display')">Adding Stimulus Display</a></li>
+  <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('style')">Styling Stimulus Display</a></li>
+</ul>
+
 <hr class="hr-red">
+
+<h3 id="display">Adding Stimulus Display<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
 
 <p>It's time we get to edit our Executable template which is represented as an HTML file. So far, our template contains only the mandatory <code>&lt;tatool></code> element. This element represents an angularJS directive, which couples it to specific code in the background. Instead of adding text or image elements with HTML tags, we're going to use another element called <code>&lt;tatool-stimulus></code> which takes care of this.</p>
 
@@ -92,6 +99,33 @@
 <p>On <b>line 7</b>, we call our custom method <code>createStimulus()</code> from our Executable service which will take care of setting the current stimulus. The only thing left to do now is to display the stimulus on the screen. We can take care of that by calling the method <code>show()</code> of the <code>stimulusService</code> on <b>line 9</b>.</p>
 
 <p>When you execute your Module after these changes, one stimulus should be displayed at the center of the screen. Note that we commented out the call to our <code>stopExecution()</code> on <b>line 10</b> for now, as otherwise the Executable would finish before you could see anything on the screen. Therefore, the Module will simply stop after displaying the stimulus and wait.</p>
+
+<hr class="hr-red">
+
+<h3 id="style">Styling Stimulus Display<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
+
+<p>As mentioned earlier the actual style of your stimulus (e.g., font color, background color, border, position) can be changed to your liking with the help of <a href="http://en.wikipedia.org/wiki/Cascading_Style_Sheets" target="_blank">Cascading Style Sheets (CSS)</a>. By default every Tatool will look for a CSS file accompanying your Executable with following the naming convention <i>myExecutable.css</i>. Don't worry if you don't want to change the style you don't have to provide such a file.</p>
+
+<p>Once you're up to speed with what CSS is and how the syntax works, you can try changing the look of your stimuli. As we've used images in this tutorial, one possible style could be adding a colored border around the image.</p>
+
+<p>Start by creating your CSS file and copy/save it into the Project executables sub-folder (<b>app/projects/public/myExperiment/executables</b>) of your local Tatool installation where your put your other Executable related files.</p>
+
+<h4>myExecutable.css</h4>
+<pre class="line-numbers"><code class="language-css">.stimulusImage {
+  border: 1px solid #a5a5a5;
+}
+</code></pre>
+
+<p>We added one simple CSS class called <code>stimulusImage</code> to our file and provided one rule on <b>line 2</b> which should add a solid grayish border with a thickness of 1 pixel. Now that we've created our CSS class it's time to apply it in our Template.</p>
+
+<h4>myExecutable.html</h4>
+<pre class="line-numbers" data-line="2"><code class="language-markup">&lt;tatool>
+  &lt;tatool-stimulus id="centeredExecutable" service="stimulusService" class="stimulusImage">&lt;/tatool-stimulus>
+&lt;/tatool>
+</code></pre>
+
+<p>We've extended our original Template from above by adding the attribute <code>class</code> to our stimulus element with the value of our class <code>stimulusImage</code>. That's it, when you rerun your task you should now see the new border around your stimulus image.</p>
+
 
 <hr class="hr-red">
 
