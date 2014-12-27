@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('tatool.module')
-  .factory('gridServiceFactory', [ '$log', '$rootScope', 'executableUtils', '$timeout', function ($log, $rootScope, executableUtils, $timeout) {
+  .factory('gridServiceFactory', [ '$log', '$rootScope', 'executableUtils', function ($log, $rootScope, executableUtils) {
 
     // Define our executable service constructor which will be called once for every instance
     var gridServiceFactory = {};

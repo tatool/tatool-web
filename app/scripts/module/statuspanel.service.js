@@ -24,7 +24,7 @@ angular.module('tatool.module')
 	};
 
   // feedback panel
-  service.updateFeedback = function(feedback, immediate) {
+  service.updateFeedback = function(feedback) {
     if (feedback === undefined) {
       service.feedback = null;
     } else if (feedback >= 1) {
@@ -42,6 +42,8 @@ angular.module('tatool.module')
 
   service.updateTimer = function(timerStatus) {
     service.timerProgress = timerStatus.progress;
+    // necessary due to calls outside of angular context
+    $rootScope.$evalAsync();
   };
 
   // Return our service object

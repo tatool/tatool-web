@@ -82,5 +82,5 @@ angular.module('tatool.app', ['tatool', 'tatool.auth', 'tatool.common', 'ngAnima
     return function(input, start) {
         start = +start; //parse to int
         return input.slice(start);
-    }
+      };
   });

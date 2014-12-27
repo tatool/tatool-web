@@ -1,7 +1,5 @@
 'use strict';
 
-/* global uuid */
-
 angular.module('tatool.app').directive('customOnChange', function() {
   return {
     restrict: 'A',
@@ -58,10 +56,8 @@ angular.module('tatool.app').directive('tree', ['RecursionHelper', function(Recu
     compile: function(element) {
       return RecursionHelper.compile(element, function(scope) {
 
-        //scope.myId = uuid();
-
         scope.highlightElement = function() {
-          scope.highlight.key = scope.element.name; //scope.myId;
+          scope.highlight.key = scope.element.name;
         };
       });
     }

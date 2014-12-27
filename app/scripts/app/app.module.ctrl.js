@@ -52,7 +52,7 @@ angular.module('tatool.app')
           } else {
             $scope.modules.push(data[i]);
             moduleIds.push(data[i].moduleId);
-          } 
+          }
         }
 
         // run auto export on installed modules
@@ -67,7 +67,7 @@ angular.module('tatool.app')
             }
           }
 
-          $scope.repoPaging.numPerPage = Math.ceil($scope.repository.length/$scope.repoPaging.pageSize);  
+          $scope.repoPaging.numPerPage = Math.ceil($scope.repository.length/$scope.repoPaging.pageSize);
           $scope.repoPaging.currentPage = 0;
           stopSpinner();
         }, function(error) {

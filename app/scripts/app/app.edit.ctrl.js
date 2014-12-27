@@ -76,10 +76,11 @@ angular.module('tatool.app')
 
       $scope.addNewExecutable = function(element) {
         hideAlert();
+        var elementName = (Math.random().toString(36)+'00000000000000000').slice(2,16+2);
         var executable = {
           'tatoolType': 'Executable',
           'customType': '',
-          'name': (Math.random().toString(36)+'00000000000000000').slice(2,16+2),
+          'name': elementName,
           'blankInterval': 0,
           'fixationInterval': 0
         };

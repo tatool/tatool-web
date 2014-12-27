@@ -74,15 +74,23 @@ angular.module('tatool.module')
 
       // start visual timer if required
       if (this.visual) {
-        this.visualTimer = $interval(updateVisualTimer.bind(this), VISUAL_TIMER_INTERVAL, this.duration/VISUAL_TIMER_INTERVAL);
+        //this.visualTimer = $interval(updateVisualTimer.bind(this), VISUAL_TIMER_INTERVAL, this.duration/VISUAL_TIMER_INTERVAL);
+        this.visualTimer = window.requestAnimationFrame(updateVisualTimer.bind(this));
       }
       return executableUtils.getTiming();
     };
     /*jshint -W040 */
-    function updateVisualTimer() {
-      if (this.timerStatus.progress < 0.99) {
-        this.timerStatus.progress += this.progressUpdate;
+    function updateVisualTimer(time) {
+      if (!this.startTime) {
+        this.startTime = time;
+        this.updateTimer = true;
+      }
+      //if (this.timerStatus.progress < 0.99) {
+      if (this.updateTimer && this.timerStatus.progress < 0.99) {
+        //this.timerStatus.progress += this.progressUpdate;
+        this.timerStatus.progress = ((time-this.startTime)/this.duration);
         this.notifyVisualTimer(this.timerStatus);
+        this.visualTimer = window.requestAnimationFrame(updateVisualTimer.bind(this));
       }
     }
     /*jshint +W040 */
@@ -91,7 +99,10 @@ angular.module('tatool.module')
     Timer.prototype.stop = function() {
       $timeout.cancel(this.actualTimer);
       if (this.visual) {
-        $interval.cancel(this.visualTimer);
+        //$interval.cancel(this.visualTimer);
+        window.cancelAnimationFrame(this.visualTimer);
+        this.updateTimer = false;
+        this.startTime = null;
       }
       return executableUtils.getTiming();
     };
@@ -103,7 +114,10 @@ angular.module('tatool.module')
 
     // cleans up the visual timer by setting end values
     Timer.prototype.endVisualTimer = function() {
-      $interval.cancel(this.visualTimer);
+      window.cancelAnimationFrame(this.visualTimer);
+      this.updateTimer = false;
+      this.startTime = null;
+      //$interval.cancel(this.visualTimer);
       this.timerStatus.progress = 1;
       this.notifyVisualTimer(this.timerStatus);
     };

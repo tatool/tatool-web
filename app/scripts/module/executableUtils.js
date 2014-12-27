@@ -74,7 +74,7 @@ angular.module('tatool.module')
         performance.msNow         ||
         performance.oNow          ||
         performance.mozNow        ||
-        function() { return new Date().getTime(); };
+        function() { return Date.now(); };
       })();
       return performance.now();
     };

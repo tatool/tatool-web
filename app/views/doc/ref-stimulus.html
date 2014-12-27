@@ -1,0 +1,72 @@
+<h2>Stimulus</h2>
+
+<p>A Stimulus is represented as a simple JavaScript object in Tatool. In order to use your stimuli objects with some of the services offered by Tatool (e.g. <a ui-sref="doc({page: 'ref-directive-tatoolStimulus.html'})">Tatool Stimulus</a>, <a ui-sref="doc({page: 'ref-directive-tatoolGrid.html'})">Tatool Grid</a>), we recommend using the following naming conventions for your properties.
+</p>
+
+<p>By following this guidelines you can also make sure that someone else can quickly understand the structure of your stimuli files.</p>
+
+<hr class="hr-red">
+
+<h3 id="howto">Common Stimulus Properties<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
+
+<table class="table table-striped table-condensed table-bordered">
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Values</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="cellB">stimulusValue</td>
+      <td>[String]</td>
+      <td>The value to be displayed on screen. This could either be a text or an image filename. </td>
+    </tr>
+    <tr>
+      <td class="cellB">stimulusValueType</td>
+      <td>text/image/circle/square</td>
+      <td>Defines the type of the value in order for Tatool to know how to handle the display.</td>
+    </tr>
+    <tr>
+      <td class="cellB">stimulusType</td>
+      <td>[String]</td>
+      <td>Used to group stimuli into a specific category (e.g. congruent, incongruent).</td>
+    </tr>
+    <tr>
+      <td class="cellB">stimulusClass</td>
+      <td>[String]</td>
+      <td>A CSS class name that can be applied to a stimulus.</td>
+    </tr>
+    <tr>
+      <td class="cellB">stimulusValueColor</td>
+      <td>[Color name/Color hex]</td>
+      <td>A generic field to be used to set the color of a text stimulus.</td>
+    </tr>
+    <tr>
+      <td class="cellB">correctResponse</td>
+      <td>[String]</td>
+      <td>The expected correct response to a stimulus which can be used to compare to the given response.</td>
+    </tr>
+    <tr>
+      <td class="cellB">gridPosition</td>
+      <td>[Integer]</td>
+      <td>Indicates the position of a stimuli inside a <a ui-sref="doc({page: 'ref-directive-tatoolGrid.html'})">Tatool Grid</a>.</td>
+    </tr>
+    <tr>
+      <td class="cellB">keyCode</td>
+      <td>[KeyCode]</td>
+      <td>Indicates the keyCode associated with the correct response for this stimulus.</td>
+    </tr>
+    <tr>
+      <td class="cellB">keyLabel</td>
+      <td>[String]</td>
+      <td>An alternate label to display on the input key. Can either be text or an image filename.</td>
+    </tr>
+    <tr>
+      <td class="cellB">keyLabelType</td>
+      <td>text/image</td>
+      <td>The internal Tatool key label type in order to control the display type.</td>
+    </tr>
+  </tbody>
+</table>

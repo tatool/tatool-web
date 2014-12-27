@@ -48,6 +48,9 @@ code {
 .red {
   color: #cd2b00;
 }
+.big {
+  font-size: 120%;
+}
 
 /* fixes inline alignment of button and input fields*/
 .button-up {
