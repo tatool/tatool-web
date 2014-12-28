@@ -1,6 +1,6 @@
-<h2>Complex Span Task</h2>
+<h2>Memory Span Task</h2>
 
-<p>The Complex Span task allows you to apply the <a href="http://en.wikipedia.org/wiki/Memory_span#From_simple_span_to_complex_span" target="_blank">Memory span</a> paradigm.</p>
+<p>The Memory Span task allows you to apply the <a href="http://en.wikipedia.org/wiki/Memory_span" target="_blank">Memory span</a> paradigm.</p>
 
 <ul id="docPageNav">
   <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('executable')">Executable</a></li>
@@ -23,10 +23,17 @@
     </tr>
     <tr>
       <td class="cellB">Executable Type</td>
-      <td>tatoolComplexSpan</td>
+      <td>tatoolMemorySpan</td>
     </tr>
   </tbody>
 </table>
+
+<div class="hint">
+  <div class="icon red"><i class="fa fa-lightbulb-o fa-2x"></i></div> 
+  <div class="text">
+    <p>The Memory Span Executable has to be used as the <b>primary Executable of a Dual Element</b> in order for it to work properly.</p>
+  </div>
+</div>
 
 <hr class="hr-red">
 
@@ -60,11 +67,11 @@
       <td>A stimuli path where to load any resources from (stimuli images, input key images)</td>
     </tr>
     <tr>
-      <td class="cellB">timerEnabled</td>
+      <td class="cellB">suspendAfterEachItem</td>
       <td>Boolean</td>
       <td>true</td>
       <td>No</td>
-      <td>Enables or disables timer used to display memoranda. Should always be enabled as disabling it will not allow the task to continue.</td>
+      <td>Configures the Executable to suspend after each memoranda (true) or after all memoranda (false). Allows to implement the Complex Span paradigm or Brown-Peterson paradigm.</td>
     </tr>
     <tr>
       <td class="cellB">displayDuration</td>
@@ -85,7 +92,7 @@
       <td>String</td>
       <td>(none)</td>
       <td>No</td>
-      <td>Defines the randomisation criteria. If no value is set no randomisation is applied. The following values are allowed:<br>
+      <td>Defines the randomisation criteria. If the property is not set, no randomisation is applied. The following values are allowed:<br>
         <b>full:</b> fully randomises stimuli (no duplicates until all stimuli are shown once)</td>
     </tr>
     <tr>
@@ -93,7 +100,7 @@
       <td>String</td>
       <td>Stimulus</td>
       <td>No</td>
-      <td>Text to display for the recall phase. Text will always receive the number of the current recall stimulus as suffix (e.g. Stimulus 1).</td>
+      <td>Text to display for the recall phase. Text will always receive the number of the current recall stimulus as a suffix (e.g. Stimulus 1).</td>
     </tr>
   </tbody>
 </table>
@@ -119,8 +126,8 @@
     <tr>
       <td class="cellB">tatool-stimuli</td>
       <td>stimuli</td>
-      <td><a href="https://raw.githubusercontent.com/tatool/tatool-web/master/app/projects/public/tatool-stimuli/stimuli/complexSpan-digits.csv" target="_blank">complexSpan-digits.csv</a></td>
-      <td>Uses numbers (2 digits) as memoranda.</td>
+      <td><a href="https://raw.githubusercontent.com/tatool/tatool-web/master/app/projects/public/tatool-stimuli/stimuli/memorySpan-digits.csv" target="_blank">memorySpan-digits.csv</a></td>
+      <td>Uses 2 digit numbers as memoranda with different span (3-5).</td>
     </tr>
   </tbody>
 </table>

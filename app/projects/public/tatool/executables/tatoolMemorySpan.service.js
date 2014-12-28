@@ -1,22 +1,26 @@
 'use strict';
 
 tatool
-  .factory('tatoolComplexSpan', [ 'executableUtils', 'dbUtils', 'timerUtils', 'stimulusServiceFactory', 'inputServiceFactory',
+  .factory('tatoolMemorySpan', [ 'executableUtils', 'dbUtils', 'timerUtils', 'stimulusServiceFactory', 'inputServiceFactory',
     function (executableUtils, dbUtils, timerUtils, stimulusServiceFactory, inputServiceFactory) {  
 
-    var ComplexNumExecutable = executableUtils.createExecutable();
+    var MemorySpanExecutable = executableUtils.createExecutable();
 
     var DISPLAY_DURATION_DEFAULT = 800;
     var INTERVAL_DURATION_DEFAULT = 400;
     var RECALL_TEXT_DEFAULT = 'Stimulus';
 
-    ComplexNumExecutable.prototype.init = function() {
+    MemorySpanExecutable.prototype.init = function() {
       var promise = executableUtils.createPromise();
 
       this.phase = 'INIT';
 
+      if (!this.suspendAfterEachItem) {
+        this.suspendAfterEachItem = { propertyValue: true };
+      }
+
       if (!this.stimuliPath) {
-        promise.reject('Invalid property settings for Executable tatoolComplexSpan. Expected property <b>stimuliPath</b> of type Path.');
+        promise.reject('Invalid property settings for Executable tatoolMemorySpan. Expected property <b>stimuliPath</b> of type Path.');
       }
 
       if (!this.timerEnabled) {
@@ -49,14 +53,14 @@ tatool
             promise.reject('Resource not found: ' + self.stimuliFile.resourceName);
           });
       } else {
-        promise.reject('Invalid property settings for Executable tatoolComplexSpan. Expected property <b>stimuliFile</b> of type Resource.');
+        promise.reject('Invalid property settings for Executable tatoolMemorySpan. Expected property <b>stimuliFile</b> of type Resource.');
       }
       
       return promise;
     };
 
     // process stimuli file according to random property
-    ComplexNumExecutable.prototype.processStimuliFile = function(list, promise) {
+    MemorySpanExecutable.prototype.processStimuliFile = function(list, promise) {
       if (this.randomisation === 'full') {
         this.stimuliList = executableUtils.shuffle(list);
       } else {
@@ -67,7 +71,7 @@ tatool
     };
 
     // Create stimulus and set properties
-    ComplexNumExecutable.prototype.createStimulus = function() {
+    MemorySpanExecutable.prototype.createStimulus = function() {
       // reset executable properties
       this.startTime = 0;
       this.endTime = 0;
@@ -91,7 +95,7 @@ tatool
       }
 
       if (stimulus === null) {
-        executableUtils.fail('Error creating stimulus in Executable tatoolComplexSpan. No more stimuli available in current stimuliList.');
+        executableUtils.fail('Error creating stimulus in Executable tatoolMemorySpan. No more stimuli available in current stimuliList.');
       } else {
         this.stimulus = stimulus;
       }
@@ -100,36 +104,36 @@ tatool
       this.counter++;
     };
 
-    ComplexNumExecutable.prototype.createRandomStimulus = function() {
+    MemorySpanExecutable.prototype.createRandomStimulus = function() {
       // get next ranom stimulus
       var  randomStimulus = executableUtils.getNext(this.stimuliList, this.counter);
       return randomStimulus;
     };
 
-    ComplexNumExecutable.prototype.createNonRandomStimulus = function() {
+    MemorySpanExecutable.prototype.createNonRandomStimulus = function() {
       // get next stimulus
       var nonRandomStimulus = executableUtils.getNext(this.stimuliList, this.counter);
       return nonRandomStimulus;
     };
 
-    ComplexNumExecutable.prototype.setStimulus = function() {
+    MemorySpanExecutable.prototype.setStimulus = function() {
       this.stimulusService.set({ stimulusValueType: this.stimulus['stimulusValueType' + this.memCounter], stimulusValue: this.stimulus['stimulusValue' + this.memCounter] });
     };
 
-    ComplexNumExecutable.prototype.setRecallStimulus = function(text) {
+    MemorySpanExecutable.prototype.setRecallStimulus = function(text) {
       this.stimulusService.setText({ stimulusValue: text });
     };
 
-    ComplexNumExecutable.prototype.getPhase = function() {
+    MemorySpanExecutable.prototype.getPhase = function() {
       return this.phase;
     };
 
-    ComplexNumExecutable.prototype.setPhase = function(phase) {
+    MemorySpanExecutable.prototype.setPhase = function(phase) {
       this.phase = phase;
     };
 
     // Process given response and stop executable
-    ComplexNumExecutable.prototype.addTrial = function(givenResponse) {
+    MemorySpanExecutable.prototype.addTrial = function(givenResponse) {
       this.trial = {};
       this.trial.trialNo = this.counter;
       this.trial.setSize = this.stimulus.stimulusCount;
@@ -146,10 +150,14 @@ tatool
       return dbUtils.saveTrial(this.trial);
     };
 
-    ComplexNumExecutable.prototype.stopExecution = function() {
+    MemorySpanExecutable.prototype.stopExecution = function() {
       executableUtils.stop();
     };
 
-    return ComplexNumExecutable;
+    MemorySpanExecutable.prototype.suspendExecution = function() {
+      executableUtils.suspend();
+    };
+
+    return MemorySpanExecutable;
 
   }]);

@@ -75,8 +75,8 @@
     <div ng-switch="property.propertyType">
 
       <div ng-switch-when="ArrayString">
-        <label for="name" class="col-sm-3 control-label">{{property.propertyName}}</label>
-        <div class="col-sm-9">
+        <label for="name" class="col-sm-4 control-label">{{property.propertyName}}</label>
+        <div class="col-sm-8">
           <div class="form-group col-sm-12">
             <div class="btn-group" role="group" aria-label="...">
               <button type="button" class="btn btn-danger button-up" ng-click="deleteProperty(element, property)"><i class="fa fa-times"></i></button>
@@ -96,8 +96,8 @@
       </div>
 
       <div ng-switch-when="Resource">
-        <label for="{{property.propertyName}}" class="col-sm-3 control-label">{{property.propertyName}}</label>
-        <div class="col-sm-9">
+        <label for="{{property.propertyName}}" class="col-sm-4 control-label">{{property.propertyName}}</label>
+        <div class="col-sm-8">
           <div class="input-group">
             <span class="input-group-btn">
               <button type="button" class="btn btn-danger button-up" ng-click="deleteProperty(element, property)"><i class="fa fa-times"></i></button>
@@ -111,8 +111,8 @@
       </div>
 
       <div ng-switch-when="Path">
-        <label for="{{property.propertyName}}" class="col-sm-3 control-label">{{property.propertyName}}</label>
-        <div class="col-sm-9">
+        <label for="{{property.propertyName}}" class="col-sm-4 control-label">{{property.propertyName}}</label>
+        <div class="col-sm-8">
           <div class="input-group">
             <span class="input-group-btn">
               <button type="button" class="btn btn-danger button-up" ng-click="deleteProperty(element, property)"><i class="fa fa-times"></i></button>
@@ -134,8 +134,8 @@
       </div>
 
       <div ng-switch-when="ArrayResource">
-        <label for="name" class="col-sm-3 control-label">{{property.propertyName}}</label>
-        <div class="col-sm-9">
+        <label for="name" class="col-sm-4 control-label">{{property.propertyName}}</label>
+        <div class="col-sm-8">
           <div class="form-group col-sm-12">
             <div class="btn-group" role="group" aria-label="...">
               <button type="button" class="btn btn-danger button-up" ng-click="deleteProperty(element, property)"><i class="fa fa-times"></i></button>
@@ -157,8 +157,8 @@
       </div>
 
       <div ng-switch-when="Boolean">
-        <label for="{{property.propertyName}}" class="col-sm-3 control-label">{{property.propertyName}}</label>
-        <div class="col-sm-9">
+        <label for="{{property.propertyName}}" class="col-sm-4 control-label">{{property.propertyName}}</label>
+        <div class="col-sm-8">
 
           <button type="button" class="btn btn-danger button-up" ng-click="deleteProperty(element, property)"><i class="fa fa-times"></i></button>
               <span>
@@ -174,8 +174,8 @@
       </div>
 
       <div ng-switch-default>
-        <label for="{{property.propertyName}}" class="col-sm-3 control-label">{{property.propertyName}}</label>
-        <div class="col-sm-9">
+        <label for="{{property.propertyName}}" class="col-sm-4 control-label">{{property.propertyName}}</label>
+        <div class="col-sm-8">
           <div class="input-group">
             <span class="input-group-btn">
               <button type="button" class="btn btn-danger button-up" ng-click="deleteProperty(element, property)"><i class="fa fa-times"></i></button>
@@ -189,8 +189,8 @@
   </div>
 
   <div class="form-group">
-    <label for="name" class="col-sm-3 control-label"></label>
-    <div class="col-sm-9">
+    <label for="name" class="col-sm-4 control-label"></label>
+    <div class="col-sm-8">
       <button type="button" class="btn btn-default" ng-click="addProperty(element, elementIndex, elementParent)"><i class="fa fa-plus-square-o"></i> New Property</button>
     </div>
   </div>

@@ -227,6 +227,9 @@ angular.module('tatool.module')
     // Used to signal the executor that it can continue running through the elementStack
     obj.stopExecutable = function() {
       if (this.exec) {
+        var currentExecutable = contextService.getProperty('currentExecutable');
+        currentExecutable.dual = null;
+
         this.finishExecutable();
 
         // inform the executor that the execution should continue with the next element
@@ -244,7 +247,6 @@ angular.module('tatool.module')
         currentExecutable.dual = 'SUSPENDED';
 
         this.finishExecutable();
-
         // inform the executor that the execution should continue with the next element
         this.exec.resolve();
       } else {

@@ -1,0 +1,83 @@
+<h2>Brown-Peterson Task</h2>
+
+<p>The Brown-Peterson task allows you to ...</p>
+
+<ul id="docPageNav">
+  <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('element')">Element</a></li>
+  <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('executable')">Executables</a></li>
+  <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('properties')">Properties</a></li>
+  <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('stimuli')">Stimuli File</a></li>
+  <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('download')">Download</a></li>
+</ul>
+
+<hr class="hr-red">
+
+<h3 id="element">Element<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
+
+<p>Use a <a ui-sref="doc({page: 'ref-elements.html'})">Dual Element</a> as the parent element in order to create the Complex Span paradigm.</p>
+
+<hr class="hr-red">
+
+<h3 id="executable">Executables<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
+
+<p>Use the following settings in the Module Editor to use this type of task. </p>
+
+<h4>Memory Span (primary)</h3>
+<table class="table table-condensed table-bordered">
+  <tbody>
+    <tr>
+      <td class="cellB">Project</td>
+      <td>tatool</td>
+    </tr>
+    <tr>
+      <td class="cellB">Executable Type</td>
+      <td>tatoolMemorySpan</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4>Processing (secondary)</h3>
+<table class="table table-condensed table-bordered">
+  <tbody>
+    <tr>
+      <td class="cellB">Project</td>
+      <td>tatool</td>
+    </tr>
+    <tr>
+      <td class="cellB">Executable Type</td>
+      <td>tatoolChoiceReaction</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="hint">
+  <div class="icon red"><i class="fa fa-lightbulb-o fa-2x"></i></div> 
+  <div class="text">
+    <p>The Memory Span Executable has to be used as the <b>primary Executable of a Dual Element</b> in order for it to work properly.</p>
+  </div>
+</div>
+
+<hr class="hr-red">
+
+<h3 id="properties">Properties<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
+
+<p>The following Properties can be provided in the Module Editor to change the behaviour of the task.</p>
+
+<p><a ui-sref="doc({page: 'lib-memory-span.html'})">Memory Span Task</a><br>
+Note that you have to set the Property <code>suspendAfterEachItem</code> to <code>false</code>.</p>
+
+<p><a ui-sref="doc({page: 'lib-choice-reactiontime.html'})">Choice Reaction Time Task</a></p>
+
+<hr class="hr-red">
+
+<h3 id="stimuli">Stimuli File<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
+
+<p><a ui-sref="doc({page: 'lib-memory-span.html'})">Memory Span Task</a></p>
+
+<p><a ui-sref="doc({page: 'lib-choice-reactiontime.html'})">Choice Reaction Time Task</a></p>
+
+<hr class="hr-red">
+
+<h3 id="download">Download<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
+
+<p>You can access the source code (Service, Controller, Template, CSS) for both Executables in our <a href="https://github.com/tatool/tatool-web/tree/master/app/projects/public/tatool/executables" target="_blank">github repository</a>.</p>

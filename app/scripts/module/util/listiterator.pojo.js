@@ -57,9 +57,11 @@ ListIterator.prototype.createIterator = function(currentStack) {
       i:       1,
       hasNext: function() {
         if (this.i === 4 && currentElement.primary.dual === 'SUSPENDED') {
-          this.i = 1;
+          this.i = 2;
+          currentElement.primary.dual = null;
           return true;
         } else if (this.i === 4 && currentElement.primary.dual !== 'SUSPENDED') {
+          this.i = 1;
           return false;
         } else if (this.i < 4) {
           return true;
@@ -68,6 +70,10 @@ ListIterator.prototype.createIterator = function(currentStack) {
       next:   function() {
         if (this.i === 1 || this.i === 3) {
           this.i++;
+          return currentElement.primary;
+        } else if (!currentElement.secondary) {
+          // in case of no secondary element, skip to primary
+          this.i = 4;
           return currentElement.primary;
         } else {
           this.i++;

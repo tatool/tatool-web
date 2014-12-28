@@ -1,7 +1,7 @@
 'use strict';
 
 tatool
-  .controller('tatoolComplexSpanCtrl', [ '$scope', 'service', 
+  .controller('tatoolMemorySpanCtrl', [ '$scope', 'service', 
     function ($scope, service) {
 
     $scope.stimulusService = service.stimulusService;
@@ -49,12 +49,18 @@ tatool
     // Remove memoranda from screen and display next or stop executable
     function memorisationTimeUp() {
       service.stimulusService.hide();
-      if (service.getPhase() == 'MEMORISATION') {
-        if (service.timerEnabled.propertyValue === true) {
-          service.timerIntervalMemoranda.start(memorisationPhase);
-        }
+      if (service.suspendAfterEachItem.propertyValue) {
+        // suspend after each item
+        service.suspendExecution();
       } else {
-        service.stopExecution();
+        if (service.getPhase() == 'MEMORISATION') {
+          if (service.timerEnabled.propertyValue === true) {
+            service.timerIntervalMemoranda.start(memorisationPhase);
+          }
+        } else {
+          // suspend after all items
+          service.suspendExecution();
+        }
       }
     }
 

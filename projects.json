@@ -8,7 +8,7 @@
 			"executables" : [
 				{ "customType" : "tatoolChoiceReaction", "description" : "Choice Reaction Time Task" },
 				{ "customType" : "tatoolCountdown", "description" : "Countdown Task" },
-				{ "customType" : "tatoolComplexSpan", "description" : "ComplexSpan Task" },
+				{ "customType" : "tatoolMemorySpan", "description" : "Memory Span Task" },
 				{ "customType" : "tatoolInstruction", "description" : "Instruction Task" },
 				{ "customType" : "tatoolObjectLocation", "description" : "Object Location Memory Task" }
 			]
