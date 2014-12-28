@@ -1,0 +1,21 @@
+<h2>Building Tatool Web</h2>
+
+<hr>
+<p>Tatool Web uses <b>gulp</b> for nodejs for the <b>build process automation</b>. Details about the tasks (concat, minify, copy) in the build process can be found in gulpfile.js.</p>
+<pre><code class="language-bash">$> gulp build
+</code></pre>
+
+<hr>
+<p>Run Tatool in <b>lab mode</b>, which deactivates the registration and email features and adds a default admin user.</p>
+<pre><code class="language-bash">$> npm start
+
+# alternatively you can call node directly
+$> node server.js lab prod
+</code></pre>
+
+<hr>
+<p>If you're looking to run Tatool Web on a webserver or in development mode, you'll have to provide the following two configuration parameters:</p>
+<pre><code class="language-bash"># [mode] : lab / server
+# [environment] : dev / prod
+$> node server.js [mode] [environment]
+</code></pre>

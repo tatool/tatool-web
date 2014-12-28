@@ -15,7 +15,7 @@ var projects = require('./projects');
 // server setup
 var app = express();
 app.set('port', process.env.PORT || 3000);
-app.set('env', process.env.NODE_ENV || 'development');
+app.set('env', process.env.NODE_ENV || process.argv[3] || 'prod');
 app.set('jwt_secret', process.env.JWT_SECRET || 'secret');
 app.set('projects_path', process.env.PROJECTS_PATH || __dirname + '/app/projects/');
 app.set('resource_user', process.env.RESOURCE_USER || 'tatool');
@@ -41,7 +41,7 @@ var commonCtrl = require('./controllers/commonCtrl');
 mongoose.connect( process.env.MONGOLAB_URI || 'mongodb://localhost/tatool-web' );
 
 //logging setup
-if (app.get('env') === 'development') {
+if (app.get('env') === 'dev') {
   app.use(logger('dev'));
 }
 
@@ -136,7 +136,7 @@ app.post('/user/devaccount', userController.signupDev);
 app.get('/data/user/:token', analyticsCtrl.getUserData);
 
 // Tatool Web Client
-app.use(express.static(path.join(__dirname, (app.get('env') === 'production')? 'dist' : 'app')));
+app.use(express.static(path.join(__dirname, (app.get('env') === 'dev') ? 'app' : 'dist')));
 
 // send 404 if no match found
 app.use(function(req, res, next){
