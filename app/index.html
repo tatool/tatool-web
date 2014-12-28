@@ -10,23 +10,16 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
 
-    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-    <!-- build:css styles/vendor.css -->
-    <!-- bower:css -->
     <link rel="stylesheet" href="bower_components/angular-ui-select/dist/select.css" />
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
-    <!-- endbower -->
-    <!-- endbuild -->
-    <!-- build:css({.tmp,app}) styles/main.css -->
+    <link rel="stylesheet" href="styles/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" href="styles/prism.css">
+
+    <!-- build:css styles/tatool-app.min.css -->
     <link rel="stylesheet" href="styles/reset.css">
     <link rel="stylesheet" href="styles/tatool_app.css">
     <link rel="stylesheet" href="styles/tatool_auth.css">
-    <link rel="stylesheet" href="styles/font-awesome/css/font-awesome.css">
     <!-- endbuild -->
-
-
-    <link rel="stylesheet" href="styles/prism.css">
-
 
     <link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800' rel='stylesheet' type='text/css'>
@@ -51,8 +44,6 @@
     <script src="bower_components/json3/lib/json3.min.js"></script>
     <![endif]-->
 
-    <!-- build:js scripts/vendor.js -->
-    <!-- bower:js -->
     <script src="bower_components/angular-resource/angular-resource.js"></script>
     <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="bower_components/angular-animate/angular-animate.js"></script>
@@ -73,32 +64,29 @@
     <script src="bower_components/headjs/dist/1.0.0/head.min.js"></script>
     <script src="bower_components/papaparse/papaparse.js"></script>
     <script src="bower_components/datejs/build/production/date.min.js"></script>
-    <!-- endbower -->
-    <!-- endbuild -->
-
-    <script type="text/javascript" src="scripts/common/util/prism.js"></script>
 
     <script src="bower_components/script.js/dist/script.js"></script>   
     <script src="bower_components/lz-string/libs/release/lz-string-1.3.3-min.js"></script> 
     <script src="bower_components/async/lib/async.js"></script>
     <script src="bower_components/jqueryui-touch-punch/jquery.ui.touch-punch.js"></script>
+    <script src="scripts/common/util/prism.js"></script>
+    <script src="scripts/common/util/uuid.js"></script>
+    <script src="scripts/common/util/sha1.js"></script>
+    <script src="scripts/common/util/download.js"></script>
 
-        <!-- build:js({.tmp,app}) scripts/scripts.js -->
-        <script src="scripts/app.js"></script>
-        <script src="scripts/app/app.module.js"></script>
+        <!-- build:js scripts/tatool-app.min.js -->
+        <script src="scripts/modules/app.js"></script>
+        <script src="scripts/modules/app.module.js"></script>
         <script src="scripts/app/app.directive.js"></script>
-        <script src="scripts/auth/auth.module.js"></script>
+        <script src="scripts/modules/auth.module.js"></script>
         <script src="scripts/auth/user.service.js"></script>
         <script src="scripts/auth/auth.interceptor.js"></script>
         <script src="scripts/auth/auth.service.js"></script>
         <script src="scripts/auth/auth.login.ctrl.js"></script>
-        <script src="scripts/common/common.module.js"></script>
+        <script src="scripts/modules/common.module.js"></script>
         <script src="scripts/common/message.service.js"></script>
         <script src="scripts/common/spinner.service.js"></script>
         <script src="scripts/common/module.pojo.js"></script>
-        <script src="scripts/common/uuid.js"></script>
-        <script src="scripts/common/util/sha1.js"></script>
-        <script src="scripts/common/util/download.js"></script>
         <script src="scripts/app/module.creator.service.js"></script>
         <script src="scripts/app/app.main.ctrl.js"></script>
         <script src="scripts/app/app.module.ctrl.js"></script>

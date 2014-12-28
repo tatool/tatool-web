@@ -1,6 +1,6 @@
 // server
 var express = require('express');
-//var compress = require('compression');
+var compress = require('compression');
 var os = require('os');
 var path = require('path');
 var bodyParser = require('body-parser');
@@ -15,6 +15,7 @@ var projects = require('./projects');
 // server setup
 var app = express();
 app.set('port', process.env.PORT || 3000);
+app.set('env', process.env.NODE_ENV || 'development');
 app.set('jwt_secret', process.env.JWT_SECRET || 'secret');
 app.set('projects_path', process.env.PROJECTS_PATH || __dirname + '/app/projects/');
 app.set('resource_user', process.env.RESOURCE_USER || 'tatool');
@@ -40,10 +41,12 @@ var commonCtrl = require('./controllers/commonCtrl');
 mongoose.connect( process.env.MONGOLAB_URI || 'mongodb://localhost/tatool-web' );
 
 //logging setup
-app.use(logger('dev'));
+if (app.get('env') === 'development') {
+  app.use(logger('dev'));
+}
 
 //compression
-//app.use(compress());
+app.use(compress());
 app.use(favicon(__dirname + '/app/images/app/tatool_icon.ico'));
 
 // parse json and urlencoded body
@@ -133,7 +136,7 @@ app.post('/user/devaccount', userController.signupDev);
 app.get('/data/user/:token', analyticsCtrl.getUserData);
 
 // Tatool Web Client
-app.use(express.static(path.join(__dirname, 'app')));
+app.use(express.static(path.join(__dirname, (app.get('env') === 'production')? 'dist' : 'app')));
 
 // send 404 if no match found
 app.use(function(req, res, next){

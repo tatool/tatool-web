@@ -1,4 +1,7 @@
+'use strict';
+/*jshint -W079 */
 var Session = function(sessionId, sessionStartTime) {
+  /*jshint +W079 */
   this.sessionId = sessionId;
   this.startTime = sessionStartTime;
   this.endTime = null;
@@ -38,8 +41,8 @@ Session.prototype.getProperty = function(name, propertyKey) {
 
 Session.prototype.getNextTrialId = function() {
   return ++this.maxTrialId;
-}
+};
 
 Session.prototype.getMaxTrialId = function() {
   return this.maxTrialId;
-}
+};

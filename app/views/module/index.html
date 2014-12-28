@@ -9,19 +9,18 @@
     <title></title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
-    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-    <!-- build:css styles/vendor.css -->
-    <!-- bower:css -->
+
     <link rel="stylesheet" href="../../bower_components/bootstrap/dist/css/bootstrap.css" />
-    <!-- endbower -->
-    <!-- endbuild -->
-    <!-- build:css({.tmp,app}) styles/main.css -->
+
+    <!-- build:css ../../styles/tatool-module.min.css -->
     <link rel="stylesheet" href="../../styles/reset.css">
     <link rel="stylesheet" href="../../styles/tatool_module.css">
+    <!-- endbuild -->
+
     <link rel="stylesheet" href="../../styles/font-awesome/css/font-awesome.css">
     <link rel="stylesheet" href="../../fonts/module/leaguegothic-regular-webfont.css">
     <link rel="stylesheet" href="../../fonts/module/tatool-icons.css">
-    <!-- endbuild -->
+
   </head>
   <body ng-app="tatool.module" ng-controller="MainCtrl" ng-keydown="keyPress($event);" ng-mousedown="mousePress($event);" ng-strict-di>
     <!--[if lt IE 7]>
@@ -39,8 +38,6 @@
     <script src="bower_components/json3/lib/json3.min.js"></script>
     <![endif]-->
 
-    <!-- build:js scripts/vendor.js -->
-    <!-- bower:js -->
     <script src="../../bower_components/jquery/dist/jquery.js"></script>
     <script src="../../bower_components/angular/angular.js"></script>
     <script src="../../bower_components/json3/lib/json3.js"></script>
@@ -57,28 +54,28 @@
     <script src="../../bower_components/angular-base64/angular-base64.min.js"></script>
     <script src="../../bower_components/headjs/dist/1.0.0/head.load.js"></script>
     <script src="../../bower_components/papaparse/papaparse.js"></script>
-    <!-- endbower -->
-    <!-- endbuild -->
 
-        <!-- build:js({.tmp,app}) scripts/scripts.js -->
+
+    <script src="../../scripts/common/util/sha1.js"></script>
+
+        <!-- build:js scripts/tatool-module.min.js -->
         <script src="../../bower_components/async/lib/async.js"></script>
-        <script src="../../scripts/app.js"></script>
+        <script src="../../scripts/modules/app.js"></script>
         <script src="../../scripts/module.data.service.js"></script>
         <script src="../../scripts/trial.data.service.js"></script>
         <script src="../../scripts/user.data.service.js"></script>
-        <script src="../../scripts/module/module.module.js"></script>
+        <script src="../../scripts/modules/module.module.js"></script>
         <script src="../../scripts/module/main.ctrl.js"></script>
         <script src="../../scripts/module/module.service.js"></script>
         <script src="../../scripts/module/trial.service.js"></script>
-        <script src="../../scripts/auth/auth.module.js"></script>
+        <script src="../../scripts/modules/auth.module.js"></script>
         <script src="../../scripts/auth/user.service.js"></script>
         <script src="../../scripts/auth/auth.interceptor.js"></script>
         <script src="../../scripts/auth/auth.service.js"></script>
-        <script src="../../scripts/common/common.module.js"></script>
+        <script src="../../scripts/modules/common.module.js"></script>
         <script src="../../scripts/common/message.service.js"></script>
         <script src="../../scripts/common/spinner.service.js"></script>
         <script src="../../scripts/common/module.pojo.js"></script>
-        <script src="../../scripts/common/util/sha1.js"></script>
         <script src="../../scripts/module/util/session.pojo.js"></script>
         <script src="../../scripts/module/util/listiterator.pojo.js"></script>
         <script src="../../scripts/module/util/keycodes.js"></script>
@@ -96,8 +93,8 @@
         <script src="../../scripts/module/statuspanel.ctrl.js"></script>
         <script src="../../scripts/module/statuspanel.service.js"></script>
         <script src="../../scripts/module/errorhandler.service.js"></script>
-        <script src="../../scripts/module/handler/level.handler.service.js"></script>
-        <script src="../../scripts/module/handler/trialcount.handler.service.js"></script>
+        <script src="../../scripts/module/level.handler.service.js"></script>
+        <script src="../../scripts/module/trialcount.handler.service.js"></script>
         <script src="../../scripts/module/module.directive.js"></script>
         <script src="../../scripts/module/gridServiceFactory.js"></script>
         <script src="../../scripts/module/stimulusServiceFactory.js"></script>

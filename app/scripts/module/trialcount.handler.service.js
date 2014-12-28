@@ -12,11 +12,11 @@ angular.module('tatool.module')
 
     // listens to phase changes and triggers the handler
     TrialCountHandler.prototype.processPhase = function(phase) {
-      if (phase == tatoolPhase.SESSION_START) {
-        this.trialCounter = 1
-      } else if (phase == tatoolPhase.EXECUTABLE_START) {
+      if (phase === tatoolPhase.SESSION_START) {
+        this.trialCounter = 1;
+      } else if (phase === tatoolPhase.EXECUTABLE_START) {
         this.updateStatusPanel();
-      } else if (phase == tatoolPhase.EXECUTABLE_END) {
+      } else if (phase === tatoolPhase.EXECUTABLE_END) {
         this.processCounter();
       }
     };

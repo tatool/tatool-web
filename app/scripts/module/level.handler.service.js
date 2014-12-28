@@ -19,19 +19,15 @@ angular.module('tatool.module')
 
     // listens to phase changes and triggers the handler
     LevelHandler.prototype.processPhase = function(phase) {
-      if (phase == tatoolPhase.SESSION_START) {
+      if (phase === tatoolPhase.SESSION_START) {
         // get values from module
-        this.counter = (moduleService.getModuleProperty(this, 'counter') != undefined) 
-                          ? moduleService.getModuleProperty(this, 'counter') : 0;
-        this.totalScore = (moduleService.getModuleProperty(this, 'totalScore') != undefined) 
-                            ? moduleService.getModuleProperty(this, 'totalScore') : 0;
-        this.maxScore = (moduleService.getModuleProperty(this, 'maxScore') != undefined) 
-                            ? moduleService.getModuleProperty(this, 'maxScore') : 0;
-        this.currentLevel = (moduleService.getModuleProperty(this, 'currentLevel') != undefined) 
-                              ? moduleService.getModuleProperty(this, 'currentLevel') : 1;
-      } else if (phase == tatoolPhase.EXECUTABLE_START) {
+        this.counter = (moduleService.getModuleProperty(this, 'counter') !== undefined) ? moduleService.getModuleProperty(this, 'counter') : 0;
+        this.totalScore = (moduleService.getModuleProperty(this, 'totalScore') !== undefined) ? moduleService.getModuleProperty(this, 'totalScore') : 0;
+        this.maxScore = (moduleService.getModuleProperty(this, 'maxScore') !== undefined) ? moduleService.getModuleProperty(this, 'maxScore') : 0;
+        this.currentLevel = (moduleService.getModuleProperty(this, 'currentLevel') !== undefined) ? moduleService.getModuleProperty(this, 'currentLevel') : 1;
+      } else if (phase === tatoolPhase.EXECUTABLE_START) {
         this.updateStatusPanel();
-      } else if (phase == tatoolPhase.EXECUTABLE_END) {
+      } else if (phase === tatoolPhase.EXECUTABLE_END) {
         this.processItems();
       }
     };
@@ -52,7 +48,7 @@ angular.module('tatool.module')
       // if all child elements are completed (especially dual elements), process level
       if (handlerService.allDualsCompleted(this)) {
         this.counter++;
-        if (this.counter == this.benchmarkSampleSize) {
+        if (this.counter === this.benchmarkSampleSize) {
           var performance = this.totalScore / this.maxScore;
           if (performance >= this.benchmark) {
             this.currentLevel++;

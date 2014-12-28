@@ -1,3 +1,4 @@
+'use strict';
 
 var ListIterator = function() {
     this.executedIterations = 0;
@@ -6,7 +7,7 @@ var ListIterator = function() {
 
 // logic to select the next element
 ListIterator.prototype.selectNextElement = function(currentStack) {
-  if (this.iter == null || !this.iter.hasNext()) {
+  if (this.iter === null || !this.iter.hasNext()) {
     if (this.canCreateIterator()) {
       this.createIterator(currentStack);
       this.executedIterations++;
@@ -17,7 +18,7 @@ ListIterator.prototype.selectNextElement = function(currentStack) {
   }
 
   // check whether we can push another element according to the iterator
-  if (this.iter == null) {
+  if (this.iter === null) {
     return false;
   }
      
@@ -50,7 +51,7 @@ ListIterator.prototype.createIterator = function(currentStack) {
       next:   function() {
         return currentElement[this.i++];
       }
-    }
+    };
   } else {
     this.iter = {
       i:       1,
@@ -69,10 +70,10 @@ ListIterator.prototype.createIterator = function(currentStack) {
           this.i++;
           return currentElement.primary;
         } else {
-          this.i++
+          this.i++;
           return currentElement.secondary;
         }
       }
-    }
+    };
   }
 };

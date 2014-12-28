@@ -1,3 +1,5 @@
+/* global KeyCodes */
+/*jshint -W020 */
 KeyCodes = {
     BackSpace           : 8  ,
     Tab                 : 9  ,
@@ -99,3 +101,4 @@ KeyCodes = {
     BracketClose        : 221,
     SingleQuote         : 222 
 };
+/*jshint +W020 */
