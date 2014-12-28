@@ -1,39 +1,50 @@
 <h2>Elements</h2>
 
-<p>Elements are used to group Executables in different ways and are the building blocks of a Module. For example, let's say you'd want to execute Executable A followed by Executable B. You can use a List Element for this purpose which allows you to execute the containing Executables in sequence. Elements can also be nested allowing you to create complex execution sequences. Additionally Elements are used to define the number of iterations of an Executable.</p>
+<p>Elements are the building blocks of a Module and used to group Executables in different ways. For example, let's say you'd want to execute Executable A followed by Executable B. You can use a List Element for this purpose which allows you to execute the containing Executables in that sequence. Elements can also be nested, allowing you to create more complex execution sequences. In addition, Elements are used to define the number of iterations of an Executable (e.g., the number of trials of an experimental task) .</p>
 
-<p>Tatool currently supports the following Elements with its Module Editor.</p>
+<p>Tatool currently supports the following Elements with its Module Editor:</p>
+<ul id="docPageNav">
+  <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('list')">List Element</a></li>
+  <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('dual')">Dual Element</a></li>
+</ul>
 
 <hr class="hr-red">
 
-<h3 id="howto">List Element<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
+<h3 id="list">List Element<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
 
-<p>The List Element allows you to execute any contained Element or Executable sequentially for a number of times. The order of execution is always sequential. For example in the figure below the Module consists of a ListElement 1 which contains Executable A, Executable B and another ListElement 2 which contains n more Executables. Tatool would execute the Module in sequential order for three times as ListElement 1 is set to 3 iterations.</p>
-
-<p>[ListElement 1: <b>Iteration 1</b>] > Executable A > Executable B > [ListElement 2] > ...
-<br>[ListElement 1: <b>Iteration 2</b>] > Executable A > Executable B > [ListElement 2] > ...
-<br>[ListElement 1: <b>Iteration 3</b>] > Executable A > Executable B > [ListElement 2] > ...</p>
+<p>A List Element can contain any number of Elements or Executables that will be executed sequentially (one after another in the order as they are listed) for a specified number of times. For example, the Module in the Figure below consists of a ListElement 1 which contains Executable A, Executable B and another ListElement 2 which in turn contains n more Executables. Note that ListElement 1 is set to 3 iterations. Therefore, Tatool would execute the Module in sequential order for three times.</p>
 
 <p>
   <img src="../../images/doc/figure-elements-list.png" class="internal"><br>
   <i>Example List Element</i>
 </p>
 
+<p>The execution sequence of the example above would be as follows:</p>
+<p>[ListElement 1: <b>Iteration 1</b>] > Executable A > Executable B > [ListElement 2] > ...
+<br>[ListElement 1: <b>Iteration 2</b>] > Executable A > Executable B > [ListElement 2] > ...
+<br>[ListElement 1: <b>Iteration 3</b>] > Executable A > Executable B > [ListElement 2] > ...</p>
+
+
 <hr class="hr-red">
 
-<h3 id="howto">Dual Element<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
+<h3 id="dual">Dual Element<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
 
-<p>The Dual Element allows you to implement the execution scenario needed for a complex span/dual task. This involves setting a primary and a secondary Executable/Element. The execution order is usually primary > secondary > primary which allows for a memorisation, distraction and recall phase. By implementing a dual task with the Dual Element you can easily replace the secondary task instead of implementing two distinct tasks in one Executable.</p>
+<p>The Dual Element allows you to implement the execution scenario needed for a dual task (cf. the <a ui-sref="doc({page: 'lib-bp.html'})">Brown-Peterson task</a> in Tatool's Task Library). As their name implies, dual tasks are combinations of two distinct tasks (e.g., a digit span and a parity judgment task). Instead of having to implement these two tasks within one single Executable (what would make the code unnecessarily complex and difficult to reuse), the Dual Element allows you to easily combine two separate Executables. This involves setting a primary and a secondary Executable/Element. The default execution order is primary > secondary > primary. For example, the first execution of the primary element is the presentation of a list of digits to be memorised, followed by one or more executions of a secondary parity judgment task. Afterward, the primary Executable is executed again, prompting the user to recall the digits memorised in the beginning.</p>
 
-<p>[DualElement 1: <b>Iteration 1</b>] > Executable A > Executable B > Executable A
-<br>[DualElement 1: <b>Iteration 2</b>] > Executable A > Executable B > Executable A</p>
+<p>The Figure below illustrates the default sequence of events in a Dual Element. The complete DualElement 1 is iterated two times, reflecting two trials. Executable A is selected as primary element (1), and Executable B as secondary element (2). In this Figure, Executable B is executed only once. To execute it multiple times, use a ListElement as secondary element that contains Executable B and is iterated for as many times as you like it to.</p>
 
 <p>
   <img src="../../images/doc/figure-elements-dual.png" class="internal"><br>
   <i>Example Dual Element</i>
 </p>
 
+<p>The execution sequence of the example above would be as follows:</p>
+<p>[DualElement 1: <b>Iteration 1</b>] > Executable A > Executable B > Executable A
+<br>[DualElement 1: <b>Iteration 2</b>] > Executable A > Executable B > Executable A</p>
+
+<p>Some tasks, such as the <a ui-sref="doc({page: 'lib-cs.html'})">complex span task</a> require a to switch between multiple times between the primary and the secondary element before executing the final phase of the primary element. Following the example from above, this would mean that each memorandum (i.e., execution of the primary element) is followed by a parity judgment (i.e., execution of the secondary element), and then followed by the next memorandum (i.e., switching back to the primary element again). Only when all memoranda from the list have been presented, the primary element goes into the recall phase. </p>
+
 <p>
-  The Dual Element allows for additional recursion by calling the <code>suspend()</code> method available in the executableUtils service instead of the usual <code>stop()</code> method as part of your primary Executable. As long as you call the <code>suspend()</code> method, the Dual Element will execute the secondary Element and come back to the primary Element. One iteration is finished as soon as you call <code>stop()</code> on the primary Element.
+  The Dual Element allows for such additional recursion (i.e., switching several times back and forth between the primary and the secondary element) by calling the <code>suspend()</code> method (available in the executableUtils service) instead of the usual <code>stop()</code> method as part of the primary Executable. As long as you call the <code>suspend()</code> method, the Dual Element will execute the secondary Element and come back to the primary Element. One iteration is finished as soon as you call <code>stop()</code> on the primary Element.
 </p>
 
