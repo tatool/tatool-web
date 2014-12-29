@@ -85,14 +85,9 @@ tatool
 
     // Adding keyInputs and show by default
     ChoiceReaction.prototype.setupInputKeys = function(list) {
-      var keyCodes = [];
-      for (var i = 0; i < list.length; i++) {
-        if (keyCodes.indexOf(list[i].keyCode) === -1 && list[i].keyCode !== undefined) {
-          keyCodes.push(list[i].keyCode);
-          this.inputService.addInputKey(list[i].keyCode, list[i].correctResponse, list[i].keyLabel, list[i].keyLabelType, !this.showKeys.propertyValue);
-        }
-      }
-      if (keyCodes.length === 0) {
+      var keys = this.inputService.addInputKeys(list, !this.showKeys.propertyValue);
+
+      if (keys.length === 0) {
         executableUtils.fail('Error creating input template for Executable tatoolChoiceReaction. No keyCode provided in stimuliFile.');
       }
     };

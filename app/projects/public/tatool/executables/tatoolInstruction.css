@@ -136,6 +136,7 @@
 /* Instruction Text Formatting */
 #tatoolFormat {
 font-size:1.5em; 
+text-align: left;
 }
 
 #tatoolFormat h1 {
@@ -160,6 +161,20 @@ margin-bottom:25px;
 line-height: 120%;
 text-align:left;
 margin-top:20px;
+}
+
+#tatoolFormat ul {
+  list-style-type: disc;
+  list-style-position: inside;
+  list-style-image: none;
+  padding: 0;
+  margin: 0;
+}
+
+#tatoolFormat ul li {
+  padding-left: 15px;
+  line-height: 140%;
+  margin-bottom: 8px;
 }
 
 .highlight_black {

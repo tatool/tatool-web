@@ -267,7 +267,7 @@
 <p>Creates a new input service object that can be used to manipulate any user input action. The stimuli path parameter can be used to let the service know where to access resources (e.g. images).</p>
 
 <p><b>Parameters</b><br>
-<i>stimuliPath</i>: a Path Property object (see <a ui-sref="doc({page: 'ref-properties.html'})">Properties</a> for more details)
+<code>stimuliPath</code>: a Path Property object (see <a ui-sref="doc({page: 'ref-properties.html'})">Properties</a> for more details)
 </p>
 
 <pre><code class="language-javascript">// create a new input service in your executable service
@@ -284,15 +284,15 @@ this.inputService = inputServiceFactory.createService(this.stimuliPath);
 
 <p><b class="red">addInputKey(keyCode, givenResponse, label, labelType, hide)</b> - returns the input service object.</p>
 
-<p>Adds a new input element which can either be a key input and/or a button input. By default if you provide a <i>keyCode</i>, the label of the key will be similar to what you see on your keyboard. If you want a different label or if you don't assign a keyCode, you should pass in your own <i>label</i> with the label parameter. When providing the label you'll also have to provide the <i>labelType</i> parameter indicating whether the label should be interpreted as text or as an image resource.
-Every key can have one response value assigned to it which can be passed in as the <i>givenResponse</i> parameter. Additionally, if you don't want the key to be visible, you can set the <i>hide</i> parameter to true.</p>
+<p>Adds a new input element which can either be a key input and/or a button input. By default if you provide a <code>keyCode</code>, the label of the key will be similar to what you see on your keyboard. If you want a different label or if you don't assign a keyCode, you should pass in your own <code>label</code> with the label parameter. When providing the label you'll also have to provide the <code>labelType</code> parameter indicating whether the label should be interpreted as text or as an image resource.
+Every key can have one response value assigned to it which can be passed in as the <code>givenResponse</code> parameter. Additionally, if you don't want the key to be visible, you can set the <code>hide</code> parameter to true.</p>
 
 <p><b>Parameters</b><br>
-<i>keyCode</i>: a string value according to the allowed set of KeyCodes in the list above (e.g. 'ArrowRight') <br>
-<i>givenResponse</i>: a string value representing the response value of this key/button<br>
-<i>label</i>: an alternate label for a visible key<br>
-<i>labelType</i>: defines whether label is a string ('text') or an image ('image')<br>
-<i>hide</i>: a boolean value indicating whether this key should always be hidden<br>
+<code>keyCode</code>: a string value according to the allowed set of KeyCodes in the list above (e.g. 'ArrowRight') <br>
+<code>givenResponse</code>: a string value representing the response value of this key/button<br>
+<code>label</code>: an alternate label for a visible key<br>
+<code>labelType</code>: defines whether label is a string ('text') or an image ('image')<br>
+<code>hide</code>: a boolean value indicating whether this key should always be hidden<br>
 </p>
 
 <pre><code class="language-javascript">// add a new key listening to the ArrowRight key
@@ -306,12 +306,65 @@ inputService.addInputKey('ArrowRight', 'blue', null, null, false);
 
 <hr>
 
+<p><b class="red">addInputKeys(array, hide)</b> - returns the keys that have been added successfully.</p>
+
+<p>Allows you to add multiple keys from an array of objects. If your stimuli file contains columns with key information, you can provide it directly as an input array for this method. The key information will be extracted automatically and no duplicate keyCodes are added.</p>
+
+<p><b>Parameters</b><br>
+<code>array</code>: an array of key objects<br>
+<code>hide</code>: a boolean value indicating whether the keys should be hidden or not<br>
+</p>
+
+<p><b>Key Object</b><br>
+<table class="table table-striped table-condensed table-bordered">
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Value</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="cellB">keyCode</td>
+      <td>[KeyCode]</td>
+      <td>The correct keyCode to press from the list of available KeyCodes (see Tatool Input Service).</td>
+    </tr>
+    <tr>
+      <td class="cellB">correctResponse</td>
+      <td>[string]</td>
+      <td>The response value of the key.</td>
+    </tr>
+    <tr>
+      <td class="cellB">keyIndex</td>
+      <td>[number]</td>
+      <td>Defines the position of the key starting at 0. The smaller the number, the further left a key will appear.</td>
+    </tr>
+    <tr>
+      <td class="cellB">keyLabel</td>
+      <td>[string]</td>
+      <td>An alternate label to display on the input key. Can either be text or an image filename.</td>
+    </tr>
+    <tr>
+      <td class="cellB">keyLabelType</td>
+      <td>text/image</td>
+      <td>The internal Tatool key value type in order to control the display type.</td>
+    </tr>
+  </tbody>
+</table>
+
+<pre><code class="language-javascript">// add new keys from specified array
+inputService.addInputKeys(this.stimuliList, false);
+</code></pre>
+
+<hr>
+
 <p><b class="red">removeInputKey(keyCode)</b> - returns the input service object.</p>
 
 <p>Removes an input key identified by the keyCode.</p>
 
 <p><b>Parameters</b><br>
-<i>keyCode</i>: a string value according to the allowed set of KeyCodes in the list above (e.g. 'ArrowRight')
+<code>keyCode</code>: a string value according to the allowed set of KeyCodes in the list above (e.g. 'ArrowRight')
 </p>
 
 <pre><code class="language-javascript">// remove the ArrowRight key

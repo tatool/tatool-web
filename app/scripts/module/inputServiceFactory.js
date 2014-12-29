@@ -46,6 +46,39 @@ angular.module('tatool.module')
         return this;
       };
 
+      // Add list of keys in correct order
+      this.addInputKeys = function(list, hide) {
+        var keys = [];
+        var keyCodes = {};
+        var keyCounter = 0;
+
+        // extract key information from stimuli list
+        for (var i = 0; i < list.length; i++) {
+          if (!(list[i].keyCode in keyCodes)) {
+            keyCodes[list[i].keyCode] = { keyCode: list[i].keyCode, keyLabel: list[i].keyLabel, keyLabelType: list[i].keyLabelType, keyIndex: list[i].keyIndex, correctResponse: list[i].correctResponse };;
+          }
+        }
+
+        // order keys according to keyIndex if provided
+        angular.forEach(keyCodes, function(key) {
+          if (key.keyIndex) {
+            keys[key.keyIndex] = key;
+          } else {
+            keys[keyCounter] = key;
+            keyCounter++;
+          }
+        });
+
+        // add keys to inputService
+        for (var j=0; j < keys.length; j++) {
+          if (keys[j]) {
+            this.addInputKey(keys[j].keyCode, keys[j].correctResponse, keys[j].keyLabel, keys[j].keyLabelType, hide);
+          }
+        }
+
+        return keys;
+      };
+
       // private method used by the tatoolInput directive to register manually added keys in the template
       this._registerStaticKey = function(keyCode, givenResponse) {
         var obj = {};
