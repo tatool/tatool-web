@@ -4,6 +4,8 @@ tatool
   .controller('tatoolInstructionCtrl', ['$scope', 'service', 'moduleService',
     function ($scope, service, moduleService) {
 
+    var PROJECTS_PATH = '../../projects/';
+
     // initialize template variables
     $scope.moduleName = moduleService.getModuleName() ? moduleService.getModuleName() : '';
     $scope.moduleAuthor = moduleService.getModuleAuthor() ? moduleService.getModuleAuthor() : '';
@@ -22,6 +24,7 @@ tatool
       if (service.pages && service.pages.propertyValue.length > 0) {
         $scope.currentIndex = 0;
         $scope.urls = service.pages.propertyValue;
+        $scope.currentFolder = getImagePath($scope.urls[$scope.currentIndex].project);
         $scope.currentPage = $scope.urls[$scope.currentIndex].resourceName;
         service.inputService.hide();
         service.inputService.enable();
@@ -67,8 +70,13 @@ tatool
       changeInstruction($scope.currentIndex);
     };
 
+    function getImagePath(project) {
+      return PROJECTS_PATH + project.access + '/' + project.name + '/instructions';
+    }
+
     function changeInstruction(index) {
       if (service.pages) {
+        $scope.currentFolder = getImagePath($scope.urls[index].project);
         $scope.currentPage = $scope.urls[index].resourceName;
       } else if (service.images) {
         $scope.currentImage = $scope.urls[index];

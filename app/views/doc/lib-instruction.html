@@ -103,6 +103,10 @@
       <td class="cellB">moduleProperties</td>
       <td>JavaScript object representing all available moduleProperties. In order to access the Module Property <i>currentLevel</i> of a LevelHandler with the name <i>level</i> you would use <i>moduleProperties.level.currentLevel<i>.</td>
     </tr>
+    <tr>
+      <td class="cellB">currentFolder</td>
+      <td>The folder of your current instruction file. Can be used to reference images available in the same folder. Only available for HTML pages.</td>
+    </tr>
   </tbody>
 </table>
 
@@ -116,6 +120,8 @@
       You're currently in Session &lt;span class='highlight_red'>{{sessionNr}}&lt;/span> of 10 Sessions.
     &lt;/center>
   &lt;/p>
+
+  &lt;img src="{{currentFolder}}/welcome.gif">
 
 &lt;/div>
 </code></pre>

@@ -38,7 +38,7 @@
                   <div class="btn btn-tatool" ng-click="installModule(module)" ng-switch-when="update"><i class="fa fa-download"></i> Update</div>
                   <div class="btn btn-tatool" ng-click="startModule(module)" ng-switch-default><i class="fa fa-play-circle"></i> Start</div>
                 </span>
-                <div id="dropdownExport" class="btn-group" dropdown ng-if="exporterEnabled">
+                <div id="dropdownExport" class="btn-group" dropdown ng-if="exporterEnabled(module)">
                   <button id="dropdownExportButton" class="btn btn-tatool-off dropdown-toggle" dropdown-toggle>Export <span class="caret"></span></button>
                   <ul class="dropdown-menu" role="menu" id="dropdownExport" >
                     <li class="exporterName" ng-click="doExport($event, module, exporter.mode, exporter.target)" ng-repeat="exporter in module.moduleDefinition.export | filter:filterExporterValues | orderBy:'mode'">
