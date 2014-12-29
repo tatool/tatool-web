@@ -6,10 +6,12 @@ var tatool = angular.module('tatool', ['ui.bootstrap', 'ui.router'])
     APP_MODE_USER: 'user',
     APP_MODE_DEVELOPER: 'developer',
   })
-  .config(['$stateProvider', '$urlRouterProvider', '$provide', '$controllerProvider',
-    function ($stateProvider, $urlRouterProvider, $provide, $controllerProvider) {
+  .config(['$stateProvider', '$urlRouterProvider', '$provide', '$controllerProvider', '$logProvider',
+    function ($stateProvider, $urlRouterProvider, $provide, $controllerProvider, $logProvider) {
 
     //userDataServiceProvider.setProvider(cfg.MODE);
+
+    $logProvider.debugEnabled(false);
 
     tatool.controller = $controllerProvider.register;
     tatool.factory = $provide.factory;
