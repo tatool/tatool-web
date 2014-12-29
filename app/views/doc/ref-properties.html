@@ -1,10 +1,10 @@
 <h2>Properties</h2>
 
-<p>There are two different types of Properties available in Tatool. This page describes the Properties that can be customized with the help of the Module Editor. If you're looking for Module or Session Properties as part of your Executable/Handler code, take a look at the reference page of the dbUtils service instead.</p>
+<p>There are two different types of Properties available in Tatool. This page describes the Properties that can be customised with the Module Editor. If you're looking for Module or Session Properties as part of your Executable or Handler code, take a look at the reference page of the <a ui-sref="doc({page: 'ref-service-dbUtils.html'})">dbUtils service</a> instead.</p>
 
-<p>A Property is defined as a key-value pair which is mostly used to make your Executables more generic and easier to work with. The key of a Property is a property name, and the value can be a given value of a specified type (String, Array, Resource, Path, Boolean, Array etc.). For example, defining (hardcoding) the name of a stimuli file in your task would mean you'd have to write a new Executable each time you'd like to use the same paradigm just with different stimuli. Instead, you can create a Property called stimuliFile of the type String, which allows for reusing the Executable by simply replacing the name of your new stimuliFile quickly within the Tatool Module Editor.</p>
+<p>A Property is defined as a key-value pair which is predominantly used to make your Executables more generic and easier to work with. The key of a Property is its name, and the value is a given value of a specified type (String, Array, Resource, Path, Boolean, Array etc.). For example, defining the name of a stimuli file in your task (i.e., hardcoding it) would mean you'd have to write a new Executable each time you'd like to use the same paradigm but with other stimuli. Instead, you can create a Property called <code>stimuliFile</code> of the type <code>String</code> and reuse the Executable by easily and quickly replacing the name of your new <code>stimuliFile</code> with the Tatool Module Editor.</p>
 
-<p>Properties that have been added with the Module Editor can be accessed in your Exectuable Service as properties of the current object (this) with the propertyName. The following line would print out the details of the Resource Property <i>stimuliFile</i> to the console:</p>
+<p>Properties set in the Module Editor can be accessed in your Executable Service as properties of the current object (<code>this</code>) with its name (<code>propertyName</code>). For example, the following line would print out the details of the Resource Property <code>stimuliFile</code> to the console:</p>
 
 <pre><code class="language-javascript">console.log(this.stimuliFile);
 </code></pre>
@@ -13,17 +13,17 @@
 
 <h3 id="howto">Property Types<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
 
-<p>The following property types are available within Tatool and can be customized with the help of the Module Editor.</p>
+<p>The following property types are available in Tatool and can be customised with the Module Editor:</p>
 
 <p><b>String</b><br>
-Allows you to provide a short text, letter or digit to be used within the Executable code. A String property is represented as a String object in JavaScript and can therefore be used according to its rules.</p>
+Allows you to provide a short text, letter or digit to be used in the Executable code. A String property is represented as a String object in JavaScript.</p>
 
 <pre><code class="language-javascript">var stringProperty = 'Please answer the question.';
 var anotherStringProperty = '250';
 </code></pre>
 
 <p><b>Boolean</b><br>
-Allows you to provide true or false value (1/0) to be used within the Executable code. A Boolean property is represented as a simple JavaScript object with the following structure.</p>
+Allows you to provide the value <code>true</code> or <code>false</code> (1/0) to be used in the Executable code. A Boolean property is represented as a simple JavaScript object with the following structure:</p>
 
 <pre><code class="language-javascript">var booleanProperty = {
   propertyType: 'Boolean',
@@ -32,9 +32,9 @@ Allows you to provide true or false value (1/0) to be used within the Executable
 </code></pre>
 
 <p><b>Resource</b><br>
-Allows you to provide a specific <b>file resource</b> to be used within the Executable code (e.g. stimuli file). A Resource property is represented as a simple JavaScript object. The required properties of the object differ between project (tatool internal folders) and external (web address) resources.</p>
+Allows you to provide a specific file resource to be used in the Executable code (e.g., stimuli file). A Resource property is represented as a simple JavaScript object. The required properties of the object are different for project (tatool internal folders) and external (web address) resources.</p>
 
-<i>Project Resource:</i><br>
+<p><i>Project Resource:</i></p>
 <pre><code class="language-javascript">var projectResourceProperty = {
   propertyType: 'Resource',
   project:{
@@ -48,7 +48,7 @@ Allows you to provide a specific <b>file resource</b> to be used within the Exec
 // will be resolved to the local resource {path to projects folder}/public/tatool-stimuli/stimuli/myFile.csv
 </code></pre>
 
-<i>External Resource:</i><br>
+<p><i>External Resource:</i></p>
 <pre><code class="language-javascript">var externalResourceProperty = {
   propertyType: 'Resource',
   project:{
@@ -59,10 +59,11 @@ Allows you to provide a specific <b>file resource</b> to be used within the Exec
 };
 </code></pre>
 
-<p><b>Path</b><br>
-Allows you to provide a path resource to be used within the Executable code (e.g. path to access stimuli images). A Path property is represented as a simple JavaScript object. The required properties of the object differ between project (tatool internal folders) and external (web address) paths.</p>
 
-<i>Project Path:</i><br>
+<p><b>Path</b><br>
+Allows you to provide a path resource to be used in the Executable code (e.g., the path to access stimuli images). A Path property is represented as a simple JavaScript object. The required properties of the object are different for project (tatool internal folders) and external (web address) paths.</p>
+
+<p><i>Project Path:</i></p>
 <pre><code class="language-javascript">var projectPathProperty = {
   propertyType: 'Path',
   project:{
@@ -75,7 +76,7 @@ Allows you to provide a path resource to be used within the Executable code (e.g
 // will be resolved to the local path {path to projects folder}/public/tatool-stimuli/stimuli/
 </code></pre>
 
-<i>External Path:</i><br>
+<p><i>External Path:</i></p>
 <pre><code class="language-javascript">var externalPathProperty = {
   propertyType: 'Path',
   project:{
@@ -87,7 +88,7 @@ Allows you to provide a path resource to be used within the Executable code (e.g
 </code></pre>
 
 <p><b>Array (String)</b><br>
-Allows you to provide a string array to be used within the Executable code (e.g. list of image names). An Array (String) property is represented as a simple JavaScript object with the following structure.</p>
+Allows you to provide a string array to be used in the Executable code (e.g., a list of image names). An Array (String) property is represented as a simple JavaScript object with the following structure:</p>
 
 <pre><code class="language-javascript">var arrayStringProperty = {
   propertyType: 'ArrayString',
@@ -100,9 +101,9 @@ Allows you to provide a string array to be used within the Executable code (e.g.
 </code></pre>
 
 <p><b>Array (Resource)</b><br>
-Allows you to provide a resource array to be used within the Executable code (e.g. list of html files). An Array (Resource) property can contain up to n Resources. An Array (Resource) property is represented as a simple JavaScript object. The required properties of the object differ between project (tatool internal folders) and external (web address) resources.</p>
+Allows you to provide a resource array to be used in the Executable code (e.g., a list of HTML files). An Array (Resource) property can contain up to <i>n</i> Resources. An Array (Resource) property is represented as a simple JavaScript object. The required properties of the object are different for project (tatool internal folders) and external (web address) resources.</p>
 
-<i>Project Array (Resource):</i><br>
+<p><i>Project Array (Resource):</i></p>
 <pre><code class="language-javascript">var projectArrayResourceProperty = {
   propertyType: 'ArrayResource',
   propertyValue: [
@@ -128,7 +129,7 @@ Allows you to provide a resource array to be used within the Executable code (e.
 };
 </code></pre>
 
-<i>External Array (Resource):</i><br>
+<p><i>External Array (Resource):</i></p>
 <pre><code class="language-javascript">var externalArrayResourceProperty = {
   propertyType: 'ArrayResource',
   propertyValue: [
