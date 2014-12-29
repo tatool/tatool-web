@@ -348,7 +348,6 @@ angular.module('tatool.app')
       newModule.setModuleAuthor(moduleDefinition.author);
       newModule.setModuleDefinition(moduleDefinition);
       newModule.setModuleLabel(moduleDefinition.label);
-      newModule.setProject(moduleDefinition.project);
 
       $scope.editModule(newModule);
     };

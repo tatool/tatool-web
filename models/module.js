@@ -34,10 +34,6 @@ var Module = new Schema({
       type: String,
       required: false
     },
-    project: {          // defines the project path for resources
-      name: String,   
-      access: String     
-    },
     invites: {          // defines details for private repository module (invite, users)
       type: Schema.Types.Mixed,
       required: false    

@@ -73,7 +73,6 @@ angular.module('tatool.app')
             newModule.setModuleAuthor(moduleDefinition.author);
             newModule.setModuleDefinition(moduleDefinition);
             newModule.setModuleLabel(moduleDefinition.label);
-            newModule.setProject(moduleDefinition.project);
 
             // store module
             moduleDataService.addModule(newModule).then( function() {

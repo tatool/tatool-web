@@ -62,7 +62,7 @@ angular.module('tatool.module')
 
     // Handle wrong state changes by stopping the current module
     $scope.$on('$stateChangeError', function (event, fromState, toState) {
-      console.log('failure in state change:', toState);
+      $log.error('Error in stateChange', toState);
       executor.stopModule(false);
       event.preventDefault();
     });

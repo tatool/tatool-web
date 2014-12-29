@@ -62,7 +62,7 @@ var update = function(entry, module, res) {
 };
 
 exports.getAll = function(req, res) {
-  Module.find({ moduleType: 'public' }, function(err, entries) {
+  Module.find({ moduleType: 'public' }, { moduleDefinition: 0, email: 0, created_by: 0, sessions: 0, moduleProperties: 0, invites: 0 }, function(err, entries) {
     if (err) {
       res.status(500).send(err);
     } else {
@@ -82,7 +82,7 @@ exports.get = function(req, res) {
         } else {
           if (entry.created_by === req.user.email) { // owner of private module: OK
             res.json(entry);
-          } else if (entry.invites) { // inited to private module: OK
+          } else if (entry.invites) { // invited to private module: OK
 
             var users = entry.invites.users;
             var exists = false;

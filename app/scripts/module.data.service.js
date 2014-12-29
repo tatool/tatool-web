@@ -269,7 +269,6 @@ angular.module('tatool')
           deferred.resolve(data);
         })
         .error(function (error) {
-          console.log(error.data);
           deferred.reject(error.message);
         });
 

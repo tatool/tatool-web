@@ -39,6 +39,7 @@ var insert = function(req, res) {
         module.updated_at = today;
         module.invites = undefined;
         module.moduleStatus = 'ready';
+        module.created_by = module.moduleAuthor;
 
         Module.create(module, function(err, result) {
           if (err) {
@@ -73,11 +74,12 @@ var update = function(req, res, userModule) {
         userModule.updated_at = today;
         userModule.moduleStatus = 'ready';
         userModule.invites = undefined;
+        userModule.moduleVersion = module.moduleVersion;
+        userModule.publishedModuleVersion = module.publishedModuleVersion;
 
         // update user defined information
         userModule.moduleType = module.moduleType;
         userModule.moduleLabel = module.moduleLabel;
-        userModule.project = module.project;
         userModule.moduleDefinition = module.moduleDefinition;
         userModule.moduleName = module.moduleName;
         userModule.moduleAuthor = module.moduleAuthor;

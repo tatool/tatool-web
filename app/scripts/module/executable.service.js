@@ -28,8 +28,8 @@ angular.module('tatool.module')
       numExecutables = 0;
       mode = $window.sessionStorage.getItem('mode');
 
-      // override moduleProject with details given in module
-      moduleProject = moduleService.getProject();
+      // set default module project (currently static static)
+      moduleProject = {};
       moduleProject.name = (moduleProject.name) ? moduleProject.name : cfgModule.MODULE_DEFAULT_PROJECT;
       moduleProject.access = (moduleProject.access) ? moduleProject.access : 'public';
 

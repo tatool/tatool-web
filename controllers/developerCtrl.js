@@ -72,7 +72,6 @@ var update = function(req, res, module) {
       // update user defined information
       module.moduleType = req.body.moduleType;
       module.moduleLabel = req.body.moduleLabel;
-      module.project = req.body.project;
       module.moduleDefinition = req.body.moduleDefinition;
       module.moduleName = req.body.moduleName;
       module.moduleAuthor = req.body.moduleAuthor;

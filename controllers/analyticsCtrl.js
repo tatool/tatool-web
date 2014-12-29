@@ -32,7 +32,7 @@ exports.initAnalytics = function(module) {
           }
         });
       } else {
-        deferred.resolve({ message: 'Analytics already available for module.'});
+        deferred.resolve({ message: 'Analytics already available for this module.'});
       }
     }
   });

@@ -5,7 +5,6 @@ var Module = function(moduleId) {
   this.moduleId = moduleId;
   this.moduleName = '';
   this.moduleLabel = '';
-  this.project = {};
   this.moduleAuthor = '';
   this.moduleVersion = '';
   this.moduleProperties = {};
@@ -21,15 +20,12 @@ Module.prototype.getName = function() {
   return this.moduleName;
 };
 
+// get the module label
 Module.prototype.getLabel = function() {
   return this.moduleLabel;
 };
 
-Module.prototype.getProject = function() {
-  return this.project;
-};
-
-    // get the module ID
+// get the module ID
 Module.prototype.getId = function() {
   return this.moduleId;
 };
@@ -70,11 +66,6 @@ Module.prototype.setModuleName = function(moduleName) {
 // sets the module label
 Module.prototype.setModuleLabel = function(moduleLabel) {
   this.moduleLabel = moduleLabel;
-};
-
-// sets the project for the module
-Module.prototype.setProject = function(project) {
-  this.project = project;
 };
 
 // sets the module author

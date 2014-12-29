@@ -34,7 +34,10 @@
               <h2>{{module.moduleName}}</h2>
               <h3>{{module.moduleAuthor}}</h3>
               <div class="buttonbar">
-                <div class="btn btn-tatool" ng-click="startModule(module)"><i class="fa fa-play-circle"></i> Start</div>
+                <span ng-switch on="module.moduleStatus" ng-cloak>
+                  <div class="btn btn-tatool" ng-click="installModule(module)" ng-switch-when="update"><i class="fa fa-download"></i> Update</div>
+                  <div class="btn btn-tatool" ng-click="startModule(module)" ng-switch-default><i class="fa fa-play-circle"></i> Start</div>
+                </span>
                 <div id="dropdownExport" class="btn-group" dropdown ng-if="exporterEnabled">
                   <button id="dropdownExportButton" class="btn btn-tatool-off dropdown-toggle" dropdown-toggle>Export <span class="caret"></span></button>
                   <ul class="dropdown-menu" role="menu" id="dropdownExport" >

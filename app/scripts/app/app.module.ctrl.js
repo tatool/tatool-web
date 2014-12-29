@@ -44,14 +44,17 @@ angular.module('tatool.app')
         $scope.modules = [];
         $scope.invites = [];
         var moduleIds = [];
+        var installedModules = {};
 
         for (var i = 0; i < data.length; i++) {
           if (data[i].moduleType === 'private' && data[i].moduleStatus === 'invite') {
             $scope.invites.push(data[i]);
-            moduleIds.push(data[i].moduleId);
           } else {
             $scope.modules.push(data[i]);
             moduleIds.push(data[i].moduleId);
+            installedModules[data[i].moduleId] = {};
+            installedModules[data[i].moduleId].currentVersion = parseInt(data[i].moduleVersion);
+            installedModules[data[i].moduleId].moduleIndex = i;
           }
         }
 
@@ -62,10 +65,18 @@ angular.module('tatool.app')
         moduleDataService.getRepositoryModules().then( function(data) {
           $scope.repository = [];
           for (var i = 0; i < data.length; i++) {
-            if (moduleIds.indexOf(data[i].moduleId) === -1) {
+            var index = moduleIds.indexOf(data[i].moduleId);
+            if (index === -1) {
               $scope.repository.push(data[i]);
+            } else {
+              // display update button if new version available in repository
+              if (installedModules[data[i].moduleId].currentVersion < parseInt(data[i].moduleVersion)) {
+                $scope.modules[installedModules[data[i].moduleId].moduleIndex].moduleStatus = 'update';
+              }
             }
           }
+
+          installedModules = null;
 
           $scope.repoPaging.numPerPage = Math.ceil($scope.repository.length/$scope.repoPaging.pageSize);
           $scope.repoPaging.currentPage = 0;

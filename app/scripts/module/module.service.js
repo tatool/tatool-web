@@ -19,7 +19,6 @@ angular.module('tatool.module')
             $log.debug('Module has been opened: ' + data.moduleId);
             module = new Module(moduleId);
             angular.extend(module, data);
-            // open trials db
             q.resolve(module);
           }, function(error) {
             $log.debug('Module could not be opened: ' + error);
@@ -52,10 +51,6 @@ angular.module('tatool.module')
 
     moduleService.getModuleName = function() {
       return module.getName();
-    };
-
-    moduleService.getProject = function() {
-      return module.getProject();
     };
 
     moduleService.getModuleAuthor = function() {
