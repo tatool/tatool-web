@@ -163,6 +163,10 @@ text-align:left;
 margin-top:20px;
 }
 
+#tatoolFormat p.center {
+text-align:center;
+}
+
 #tatoolFormat ul {
   list-style-type: disc;
   list-style-position: inside;

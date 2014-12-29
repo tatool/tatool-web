@@ -1,7 +1,7 @@
 {
   "name":"Stroop Test",
   "author":"Tatool",
-  "label":"stroopFlanker",
+  "label":"stroopTest",
   "export":[
     {
       "mode":"upload",
@@ -21,6 +21,9 @@
       "customType":"ListIterator",
       "numIterations":1
     },
+	"handlers": [
+		{ "customType": "levelHandler", "name": "level" }
+	],
     "children":[
       {
         "tatoolType":"Executable",
@@ -65,7 +68,7 @@
           "numIterations":"20"
         },
         "handlers":[
-
+			{ "customType": "trialCountHandler", "name": "counter" }
         ],
         "children":[
           {
