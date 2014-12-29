@@ -1,8 +1,8 @@
 <h2>Utility Services</h2>
 
-<p>Tatool offers a set of utility services that help you when developing your own Executables/Handlers. The Services offer methods that can be used to access files, prepare stimuli, store trials, etc.. You can also create your own Services, offering custom reusable code for your Executables/Handlers.</p>
+<p>Tatool offers a set of utility services that are useful when you develop your own Executables or Handlers. The utility services offer methods that can be used to access files, prepare stimuli, store trials, and more. You can also create your own services, offering custom reusable code for your Executables or Handlers. Currently, the utility services comprise <code>dbUtils</code>, <code>executableUtils</code>, <code>statusPanelUtils</code>, and <code>timerUtils</code>.</p>
 
-<p>In order to use any of the utility Services, you'll need to add the dependency to your Executable Service or Controller. The following example shows you how to make use of the additional utility service called <i>dbUtils</i> in your Executable Service.</p>
+<p>In order to use any of the utility services, you need to add the dependency to your Executable Service or Controller. The following code shows you an example that uses the utility service called <code>dbUtils</code> in your Executable Service:</p>
 
 <h4>myExecutable.service.js</h4>
 <pre class="line-numbers"><code class="line-numbers language-javascript">tatool.factory('myExecutable', [ 'executableUtils', 'dbUtils',

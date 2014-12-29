@@ -1,6 +1,6 @@
 <h2>executableUtils</h2>
 
-<p>The executableUtils service is the main service that every Executable Service will depend on as it's being used to create an Executable and stop it. The service offers a lot more methods that are essential while developing your tasks.
+<p>The <code>executableUtils</code> service is creates and stops Executables, therefore every Executable Service will depend on it. In addition, the service offers multiple more methods that are essential for developing tasks.
 </p>
 
 <ul id="docPageNav">
@@ -12,13 +12,14 @@
 
 <hr class="hr-red">
 
-<h4 id="general">General Methods<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h4>
+<h3 id="general">General Methods<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
 
 <hr>
 
-<p><b class="red">createExecutable()</b> - returns an executable object that can be instantiated by Tatool</p>
-<p>Used as part of any Executable Service to create a new instance of your Executable. The returned value of this method is ultimately what needs to be returned by your Executable Service.</p>
+<p><b class="red">createExecutable()</b> - returns an Executable object that can be instantiated by Tatool</p>
+<p>Creates a new instance of your Executable and is therefore part of every Executable Service. The returned value of this method need to be returned by your Executable Service.</p>
 
+<p><b>Example</b></p>
 <pre><code class="language-javascript">tatool.factory('myExecutable', [ 'executableUtils',
   function (executableUtils) {  
 
@@ -32,46 +33,51 @@
 <hr>
 
 <p><b class="red">stop()</b> - (no return value)</p>
-<p>Stops the execution of the current Executable. The Executor will kick in again and decide what will be executed next (e.g. another iteration of the same Executable or the next Executable, etc.)</p>
+<p>Stops the execution of the current Executable. After stopping the current Executable, the Executor will kick in and decide what will be executed next (e.g., another iteration of the same Executable, or the next Executable).</p>
 
+<p><b>Example</b></p>
 <pre><code class="language-javascript">executableUtils.stop();
 </code></pre>
 
 <hr>
 
 <p><b class="red">suspend()</b> - (no return value)</p>
-<p>Used in combination with a Dual Element to inform the Executor that the primary Executable has finished and the secondary Element/Executable can be executed. Afterwards the Executor will return to execute the primary Executable again.</p>
+<p>Used in combination with a Dual Element to inform the Executor that the primary Executable has finished and the secondary Element/Executable can be executed. Afterward, the Executor will execute the primary Executable again.</p>
 
+<p><b>Example</b></p>
 <pre><code class="language-javascript">executableUtils.suspend();
 </code></pre>
 
 <hr>
 
 <p><b class="red">fail(error)</b> - (no return value)</p>
-<p>Used to signal the Executor that the execution of the current Executable has failed due to an error. The Executor will stop executing the Module and return the home screen and display the error message provided. The Session Property <i>complete</i> will automatically be set to 0 (incomplete).</p>
+<p>Signals the Executor that the execution of the current Executable has failed due to an error. The Executor will stop executing the Module, return to the home screen and display the error message provided. The Session Property <code>complete</code> will automatically be set to 0 (incomplete).</p>
 
 <p><b>Parameters</b><br>
-<i>error</i>: a String message that will be displayed as an error message after the Module has been stopped.</p>
+<code>error</code>: a String message that will be displayed as an error message after the Module has been stopped.</p>
 
+<p><b>Example</b></p>
 <pre><code class="language-javascript">executableUtils.fail('Error reading stimuli. Invalid stimulusType provided.');
 </code></pre>
 
 <hr>
 
 <p><b class="red">stopModule(sessionComplete)</b> - (no return value)</p>
-<p>Used to signal the Executor that the current Module should be stopped immediately. This will automatically trigger the required stop() method for the current Executable.The Session Property <i>complete</i> will be set according to the value provided.</p>
+<p>Signals the Executor that the current Module should be stopped immediately. This will automatically trigger the required <code>stop()</code> method for the current Executable. The Session Property <code>complete</code> will be set according to the value provided.</p>
 
 <p><b>Parameters</b><br>
-<i>sessionComplete</i>: a Boolean value indicating whether the current Session should be set to 1 (complete) or 0 (incomplete)</p>
+<code>sessionComplete</code>: A Boolean value determining whether the current Session should be set to 1 (complete) or 0 (incomplete)</p>
 
+<p><b>Example</b></p>
 <pre><code class="language-javascript">executableUtils.stopModule(true);
 </code></pre>
 
 <hr>
 
-<p><b class="red">createPromise()</b> - a promise/deferred object that can be used to implement asynchronous behavior</p>
-<p>Used within the init() method of an Executable Service to immediately return a response for Tatool. The promise/deferred object allows for proper implementation of asynchronous behavior (e.g. background loading of a stimuli file, preloading of images, etc.). For people familiar with AngularJS, this is a simple call to $q.defer().</p>
+<p><b class="red">createPromise()</b> - a promise/deferred object that can be used to implement asynchronous behaviour</p>
+<p>Used within the init() method of an Executable Service to immediately return a response for Tatool. The promise/deferred object allows for proper implementation of asynchronous behaviour (e.g., background loading of a stimuli file, or preloading of images). For people familiar with AngularJS, this is a simple call to <code>$q.defer()</code>.</p>
 
+<p><b>Example</b></p>
 <pre><code class="language-javascript">MyExecutable.prototype.init = function() {
   var promise = executableUtils.createPromise();
 
@@ -84,16 +90,17 @@
 <hr>
 
 
-
-<h4 id="timing">Timing Methods<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h4>
+<h3 id="timing">Timing Methods<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
 
 <hr>
 
 <p><b class="red">getTiming()</b> - returns a timestamp in sub-millisecond precision</p>
-<p>Allows you to get a timestamp that can be used to measure reaction times. In order to do so you'll have to take two timestamp values, at the start and at the end, and then calculate the difference (endTime-starTime).</p>
-<p><b>Important:</b> Most display and input Services provided by Tatool already return a timestamp when calling specific methods (e.g. show(), inputAction()). It is recommended to use these values if possible, as they will be more accurate and closer to the actual event you're trying to capture.</p>
-<p>Returns the number of milliseconds elapsed since either the browser navigationStart event or the UNIX epoch, depending on availability. Where the browser supports <i>performance</i> it uses that as it is more accurate (microsoeconds will be returned in the fractional part) and more reliable as it does not rely on the system time. Where <i>performance</i> is not available, it will fall back to Date().getTime() (e.g. < Safari 8).</p>
+<p>Returns a timestamp that can be used to measure reaction times. To derive reaction time, you have to take two timestamp values, at the start and at the end, and then compute the difference (end - start time).</p>
+<p><b>Important:</b> Most display and input services provided by Tatool already return a timestamp when calling specific methods (e.g., <code>show()</code> or <code>inputAction()</code>). It is recommended to use these values if possible, as they will be more accurate and closer to the actual event you're trying to capture.</p>
+<p><b>What Exactly Is Returned?</b><br>
+When the browser supports <code>performance</code>, the method returns the number of milliseconds elapsed since the browser's <code>navigationStart</code> event. Otherwise, if <code>performance</code> isn't supported, Tatool will fall back to <code>Date().now()</code> (e.g., < Safari 8) and return the number of milliseconds elapsed since the UNIX epoch. Using the browser's <code>navigationStart</code> event is the preferred method as it is more precise (microseconds will be returned in the fractional part) and more reliable (because it doesn't rely on the system time).</p>
 
+<p><b>Example</b></p>
 <pre><code class="language-javascript">var startTime = executableUtils.getTiming();
 // do something
 var endTime = executableUtils.getTiming();
@@ -101,33 +108,33 @@ var reactionTime = endTime - startTime;
 </code></pre>
 
 
+<hr>
+
+<h3 id="resource">Resource Handling Methods<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
 
 <hr>
 
-<h4 id="resource">Resource Handling Methods<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h4>
-
-<hr>
-
-<p><b class="red">getResourcePath(resource)</b> - returns the string representation of the full url to a specific resource (internal/external)</p>
-<p>Can be used in case the full url of a resource is required. For example in order to embed the URL in your custom template.</p>
+<p><b class="red">getResourcePath(resource)</b> - returns the String representation of the full URL to a specific resource (internal/external)</p>
+<p>Used in case the full URL of a resource is required, for example when embedding the URL in your custom Template.</p>
 
 <p><b>Parameters</b><br>
-<i>resource</i>: a Resource Property object (see <a ui-sref="doc({page: 'ref-properties.html'})">Properties</a> for more details)</p>
+<code>resource</code>: A Resource Property object (see <a ui-sref="doc({page: 'ref-properties.html'})">Properties</a> for more details).</p>
 
-
+<p><b>Example</b></p>
 <pre><code class="language-javascript">var imageSource = executableUtils.getResourcePath(resource);
 </code></pre>
 
 <hr>
 
 <p><b class="red">getResource(resource)</b> - returns the content of a resource (internal/external)</p>
-<p>Can be used to return the content of a file as a String value.</p>
+<p>Returns the content of a file as a String value.</p>
 
 <p><b>Important:</b> Use the method getCSVResource() in case you're reading a CSV file, as this will additionally preprocess the data and provide the data already as an array.</p>
 
 <p><b>Parameters</b><br>
-<i>resource</i>: a Resource Property object (see <a ui-sref="doc({page: 'ref-properties.html'})">Properties</a> for more details)</p>
+<code>resource</code>: A Resource Property object (see <a ui-sref="doc({page: 'ref-properties.html'})">Properties</a> for more details).</p>
 
+<p><b>Example</b></p>
 <pre><code class="language-javascript">var promise = executableUtils.createPromise();
 var self = this;
 executableUtils.getResource(this.textFile).then(
@@ -142,16 +149,17 @@ executableUtils.getResource(this.textFile).then(
 
 <hr>
 
-<p><b class="red">getCSVResource(resource, hasHeader, stimuliPath)</b> - returns an array of objects (=lines) based on a CSV resource (internal/external)</p>
-<p>Can be used to read a CSV file that needs to be accessed within the Executable. It is recommended to use a header as this will allow you to access the data with the key provided in your column header.</p>
+<p><b class="red">getCSVResource(resource, hasHeader, stimuliPath)</b> - returns an array of objects (= lines) based on a CSV resource (internal/external)</p>
+<p>Reads a CSV file that needs to be accessed within the Executable. It is recommended to use column headers which can be used as keys to access the data directly. </p>
 
-<p><b>Important:</b> By using the common Tatool Stimulus representation in your csv file, you can make sure that any image files are preloaded at the time of processing the stimuliFile. Requires the columns <i>stimulusValueType</i> and <i>stimulusValue</i> whereas the valueType should be <i>image</i> and the value should be the image filename e.g. <i>stimulus_01.png</i>.</p>
+<p><b>Important:</b> By following Tatool's naming conventions (see <a ui-sref="doc({page: 'ref-stimulus.html'})">Stimulus</a> reference page) in your CSV file, you can make sure that all image files are preloaded at the time of processing the <code>stimuliFile</code>. This requires the columns <code>stimulusValueType</code> (set to <code>image</code>) and <code>stimulusValue</code> (the actual image filename, e.g., <code>stimulus_01.png</code>).</p>
 
 <p><b>Parameters</b><br>
-<i>resource</i>: a Resource Property object (see <a ui-sref="doc({page: 'ref-properties.html'})">Properties</a> for more details)<br>
-<i>hasHeader</i>: a Boolean value indicating whether the CSV file contains a header row (true) or not (false)<br>
-<i>stimuliPath</i>: a Path Property object (see <a ui-sref="doc({page: 'ref-properties.html'})">Properties</a> for more details)</p>
+<code>resource</code>: A Resource Property object (see <a ui-sref="doc({page: 'ref-properties.html'})">Properties</a> for more details).<br>
+<code>hasHeader</code>: A Boolean value determining whether the CSV file contains a header row (<code>true</code>) or not (<code>false</code>).<br>
+<code>stimuliPath</code>: A Path Property object (see <a ui-sref="doc({page: 'ref-properties.html'})">Properties</a> for more details).</p>
 
+<p><b>Example</b></p>
 <pre><code class="language-javascript">var promise = executableUtils.createPromise();
 var self = this;
 executableUtils.getCSVResource(this.stimuliFile, true, this.stimuliPath).then(
@@ -170,10 +178,9 @@ console.log(this.stimuliList.get(0).stimulusValue);
 </code></pre>
 
 
-
 <hr>
 
-<h4 id="stimuli">Stimuli Processing Methods<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h4>
+<h3 id="stimuli">Stimuli Processing Methods<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
 
 <hr>
 
@@ -181,9 +188,10 @@ console.log(this.stimuliList.get(0).stimulusValue);
 <p>Returns a random integer between min and max (both inclusive).</p>
 
 <p><b>Parameters</b><br>
-<i>min</i>: the minimum for the interval<br>
-<i>max</i>: the maximum for the interval</p>
+<code>min</code>: The minimum of the interval.<br>
+<code>max</code>: The maximum of the interval.</p>
 
+<p><b>Example</b></p>
 <pre><code class="language-javascript">// return a random int between 0 and the maximum number of stimuli in our list - 1
 executableUtils.getRandomInt(0, this.stimuliList.length - 1);
 </code></pre>
@@ -191,11 +199,12 @@ executableUtils.getRandomInt(0, this.stimuliList.length - 1);
 <hr>
 
 <p><b class="red">getRandom(obj)</b> - returns a random element out of an array or random property out of an object <b>without replacement</b></p>
-<p>Used to randomly select elements out of an array. The element will be removed after selection to make sure we don't draw any duplicates.</p>
+<p>Randomly selects elements from an array. The element will be removed after selection to make sure not to draw any duplicates.</p>
 
 <p><b>Parameters</b><br>
-<i>obj</i>: the array or object to randomly pick from</p>
+<code>obj</code>: The array or object to randomly pick from.</p>
 
+<p><b>Example</b></p>
 <pre><code class="language-javascript">// return a random stimulus from our list and remove it to avoid duplicates
 var stimulus = executableUtils.getRandom(this.stimuliList);
 </code></pre>
@@ -203,24 +212,26 @@ var stimulus = executableUtils.getRandom(this.stimuliList);
 <hr>
 
 <p><b class="red">getRandomReplace(obj)</b> - returns a random element out of an array or random property out of an object <b>with replacement</b></p>
-<p>Used to randomly select elements out of an array. The element will not be removed from the array/object.</p>
+<p>Randomly selects elements from an array. The element will not be removed from the array/object.</p>
 
 <p><b>Parameters</b><br>
-<i>obj</i>: the array or object to randomly pick from</p>
+<code>obj</code>: the array or object to randomly pick from</p>
 
+<p><b>Example</b></p>
 <pre><code class="language-javascript">// return a random stimulus from our list
 var stimulus = executableUtils.getRandomReplace(this.stimuliList);
 </code></pre>
 
 <hr>
 
-<p><b class="red">getNext(obj, counter)</b> - returns the element at the given position <b>with replacement</b></p>
-<p>Used to sequentially select elements out of an array. The element will not be removed from the array/object.</p>
+<p><b class="red">getNext(obj, counter)</b> - returns the element at the given position</p>
+<p>Sequentially selects elements from an array. The element will not be removed from the array/object.</p>
 
 <p><b>Parameters</b><br>
-<i>obj</i>: the array or object to select from<br>
-<i>counter</i>: integer value indicating the position to return</p>
+<code>obj</code>: The array or object to select from.<br>
+<code>counter</code>: Integer value indicating the position to return.</p>
 
+<p><b>Example</b></p>
 <pre><code class="language-javascript">// return the stimulus at position 12 of our stimuliList array
 var counter = 12;
 var stimulus = executableUtils.getNext(this.stimuliList, counter);
@@ -229,13 +240,12 @@ var stimulus = executableUtils.getNext(this.stimuliList, counter);
 <hr>
 
 <p><b class="red">shuffle(array)</b> - returns the shuffled array</p>
-<p>Used to randomly shuffle the elements of an array.</p>
+<p>Randomly shuffles the elements of an array.</p>
 
 <p><b>Parameters</b><br>
-<i>array</i>: the array to shuffle</p>
+<i>array</i>: The array to shuffle.</p>
 
+<p><b>Example</b></p>
 <pre><code class="language-javascript">// shuffle the stimuli in our stimuliList
 var shuffleStimuli = executableUtils.shuffle(this.stimuliList);
 </code></pre>
-
-<hr>
