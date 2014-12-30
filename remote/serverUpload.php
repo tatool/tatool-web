@@ -25,7 +25,7 @@ header("Content-Type: application/json");
 $raw = file_get_contents("php://input");
 $json = json_decode($raw);
 
-if ((!isset($json->moduleId) || is_null($json->moduleId)) || (!isset($json->sessionId) || is_null($json->sessionId)) ) {
+if ((!isset($json->moduleId) || is_null($json->moduleId)) || (!isset($json->sessionId) || is_null($json->sessionId)) || (!isset($json->userCode) || is_null($json->userCode)) ) {
 	header('HTTP/1.1 500 Internal Server Error');
 	echo json_decode("{'message': 'Missing data!'}");
 	exit;
@@ -33,13 +33,16 @@ if ((!isset($json->moduleId) || is_null($json->moduleId)) || (!isset($json->sess
 
 $user = filter_var($json->userCode, FILTER_SANITIZE_STRING);
 $moduleId = filter_var($json->moduleId, FILTER_SANITIZE_STRING);
+$moduleLabel = filter_var($json->moduleLabel, FILTER_SANITIZE_STRING);
 $sessionId = str_pad($json->sessionId, 6, "0", STR_PAD_LEFT);
 $data = LZString::decompressFromBase64($json->trialData);
 $path = "/home/outerlim/tatoolweb/" . $moduleId . "/";
-$filename = $moduleId . "_" . $user . "_" . $sessionId;
+$filename = (is_null($moduleLabel) ? $moduleId : $moduleLabel) . "_" . $user . "_" . $sessionId;
 $zipFilename = $moduleId . "_" . $user . '.zip';
 $timestamp = ""; 
 $extension = ".csv";
+
+
 
 // create target module directory if it doesn't exist yet
 if (!file_exists($path)) {

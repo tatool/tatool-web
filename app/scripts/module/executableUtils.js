@@ -211,6 +211,10 @@ angular.module('tatool.module')
             if (images.indexOf(stimulus[key.replace('Type', '')]) === -1) {
               images.push(stimulus[key.replace('Type', '')]);
             }
+          } else if (key.indexOf('keyLabelType') >= 0 && value === 'image') {
+            if (images.indexOf(stimulus[key.replace('Type', '')]) === -1) {
+              images.push(stimulus[key.replace('Type', '')]);
+            }
           }
         });
         callback();

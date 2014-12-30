@@ -7,7 +7,7 @@ var AdmZip = require('adm-zip');
 // redirect to remote upload if configured
 exports.createFile = function(req, module, mode, res) {
   if (req.app.get('remote_url')) {
-    var data = { 'trialData': req.body.trialData, 'moduleId': req.params.moduleId, 'sessionId': req.params.sessionId, 'userCode': req.user.code };
+    var data = { 'trialData': req.body.trialData, 'moduleId': req.params.moduleId, 'sessionId': req.params.sessionId, 'userCode': req.user.code, 'moduleLabel': module.moduleLabel };
 
     var options = {
       uri: req.app.get('remote_url') + req.app.get('remote_upload'),
