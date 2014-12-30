@@ -6,9 +6,7 @@ angular.module('tatool.app')
 
       var VIEW_PATH = '../../views/app/';
 
-      var EXECUTABLE_STATIC_PROPERTIES = ['tatoolType', 'customType', 'name', 'blankInterval', 'fixationInterval', 'status', 'project'];
-
-      var HANDLER_STATIC_PROPERTIES = ['customType', 'name'];
+      var PROTECTED_PROPERTIES = ['tatoolType', 'customType', 'name', 'blankInterval', 'fixationInterval', 'status', 'project'];
 
       $scope.resourceTypes = ['stimuli', 'instructions'];
 
@@ -51,17 +49,12 @@ angular.module('tatool.app')
       };
 
       // populate scope variable with custom properties (executable or handler properties)
-      function loadCustomProperties(element, context) {
+      function loadCustomProperties(element) {
         $scope.customProperties = [];
         angular.forEach(element, function(value, key) {
           if (key.substring(0,1) !== '$') {
-            if (context === 'executable' && EXECUTABLE_STATIC_PROPERTIES.indexOf(key) === -1) {
-              var obj = {};
-              obj.propertyName = key;
-              obj.propertyType = value.propertyType; 
-              $scope.customProperties.push(obj);
-            } else if (context === 'handler' && HANDLER_STATIC_PROPERTIES.indexOf(key) === -1) {
-              var obj = {};
+            var obj = {};
+            if (PROTECTED_PROPERTIES.indexOf(key) === -1) {
               obj.propertyName = key;
               obj.propertyType = value.propertyType; 
               $scope.customProperties.push(obj);
@@ -73,7 +66,7 @@ angular.module('tatool.app')
       // checks whether a property name already exists
       function customPropertyExists(propertyName) {
         var exists = false;
-        angular.forEach($scope.customProperties, function(value, key) {
+        angular.forEach($scope.customProperties, function(value) {
           if (value.propertyName === propertyName) {
             exists = true;
           } 
@@ -421,8 +414,8 @@ angular.module('tatool.app')
                 if (!propertyName || propertyName === '' || propertyName.indexOf(' ') >= 0 || !isNaN(parseInt(propertyName))) {
                   setAlert('danger', 'Invalid or missing Property name.');
                   $scope.$apply();
-                } else if ( (EXECUTABLE_STATIC_PROPERTIES.indexOf(propertyName) !== -1) || customPropertyExists(propertyName) ) {
-                  setAlert('danger', 'Property name is already in use.');
+                } else if ( (PROTECTED_PROPERTIES.indexOf(propertyName) !== -1) || customPropertyExists(propertyName) ) {
+                  setAlert('danger', 'Property name is protected or already in use.');
                   $scope.$apply();
                 } else {
                   insertProperty(element, propertyName, propertyType, context);
@@ -540,9 +533,6 @@ angular.module('tatool.app')
                 var handlerType = $('input[name=\'type\']:checked').val();
                 if (!handlerName || handlerName === '' || handlerName.indexOf(' ') >= 0 || !isNaN(parseInt(handlerName))) {
                   setAlert('danger', 'Invalid or missing Handler name.');
-                  $scope.$apply();
-                } else if ( (HANDLER_STATIC_PROPERTIES.indexOf(propertyName) !== -1) || customPropertyExists(propertyName) ) {
-                  setAlert('danger', 'Property name is already in use.');
                   $scope.$apply();
                 } else {
                   insertHandler(element, handlerName, handlerType);
