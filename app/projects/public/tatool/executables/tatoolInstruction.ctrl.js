@@ -24,7 +24,6 @@ tatool
       if (service.pages && service.pages.propertyValue.length > 0) {
         $scope.currentIndex = 0;
         $scope.urls = service.pages.propertyValue;
-        $scope.currentFolder = getImagePath($scope.urls[$scope.currentIndex].project);
         $scope.currentPage = $scope.urls[$scope.currentIndex].resourceName;
         service.inputService.hide();
         service.inputService.enable();
@@ -76,7 +75,6 @@ tatool
 
     function changeInstruction(index) {
       if (service.pages) {
-        $scope.currentFolder = getImagePath($scope.urls[index].project);
         $scope.currentPage = $scope.urls[index].resourceName;
       } else if (service.images) {
         $scope.currentImage = $scope.urls[index];

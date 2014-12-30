@@ -15,7 +15,13 @@ tatool
         async.each(this.pages.propertyValue, function(page, callback) {
           if (page.project.access !== 'external') {
             executableUtils.getResource(page).then(function(template) {
-                $templateCache.put(page.resourceName, template);
+                // parse HTML for images and replace with proper resource path
+                var parsedTemplate = $('<div/>').append(template);
+                parsedTemplate.find('img').prop('src',function() {
+                  var res = { project: page.project, resourceType: 'instructions', resourceName: this.getAttribute('src')};
+                  return executableUtils.getResourcePath(res);
+                });
+                $templateCache.put(page.resourceName, parsedTemplate);
                 callback();
               }, function(error) {
                 callback('Could not find page "' + page.resourceName + '" in instruction "' + self.name + '".');
