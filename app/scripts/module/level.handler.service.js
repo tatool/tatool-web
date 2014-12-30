@@ -15,6 +15,7 @@ angular.module('tatool.module')
       // preset properties that can be overwritten by properties in module file
       this.benchmarkSampleSize = 3;
       this.benchmark = 0.6;
+      this.allowLevelDown = { propertyType: 'Boolean', propertyValue: false};
     };
 
     // listens to phase changes and triggers the handler
@@ -48,10 +49,13 @@ angular.module('tatool.module')
       // if all child elements are completed (especially dual elements), process level
       if (handlerService.allDualsCompleted(this)) {
         this.counter++;
-        if (this.counter === this.benchmarkSampleSize) {
+        if (this.counter >= this.benchmarkSampleSize) {
           var performance = this.totalScore / this.maxScore;
           if (performance >= this.benchmark) {
             this.currentLevel++;
+            $rootScope.$broadcast(tatoolPhase.LEVEL_CHANGE, this.currentLevel);
+          } else if (this.allowLevelDown.propertyValue && this.currentLevel > 1) {
+            this.currentLevel--;
             $rootScope.$broadcast(tatoolPhase.LEVEL_CHANGE, this.currentLevel);
           }
           this.counter = 0;

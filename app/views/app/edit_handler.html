@@ -1,0 +1,164 @@
+<b><a href ng-click="returnTo('element')">Element</a> > Handler</b>
+
+<br><br>
+
+<div>
+
+  <form class="form-horizontal">
+
+  <div class="form-group">
+    <div class="form-group">
+      <label for="name" class="col-sm-3 control-label">Type
+        <a class="info" tooltip="The Handler type defines which code to execute." tooltip-placement="right"><i class="fa fa-info-circle"></i></a>
+      </label>
+      <div class="col-sm-9">
+        <input type="text" class="form-control" ng-model="handler.customType" readonly>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="form-group">
+      <label for="name" class="col-sm-3 control-label">Name
+        <a class="info" tooltip="The handler name to uniquely identify a Handler." tooltip-placement="right"><i class="fa fa-info-circle"></i></a>
+      </label>
+      <div class="col-sm-9">
+        <input type="text" class="form-control" ng-model="handler.name">
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Display custom properties -->
+  <hr>
+  <b>Custom Properties</b> <a class="info" tooltip="Set custom properties depending on the Handler type. Take a look at the Tatool Reference in order to know what Properties are supported by this Handler." tooltip-placement="right"><i class="fa fa-info-circle"></i></a>
+  <br><br>
+
+  <div class="form-group" ng-repeat="property in customProperties">
+    <div ng-switch="property.propertyType">
+
+      <div ng-switch-when="ArrayString">
+        <label for="name" class="col-sm-4 control-label">{{property.propertyName}}</label>
+        <div class="col-sm-8">
+          <div class="form-group col-sm-12">
+            <div class="btn-group" role="group" aria-label="...">
+              <button type="button" class="btn btn-danger button-up" ng-click="deleteProperty(handler, property, 'handler')"><i class="fa fa-times"></i></button>
+              <button type="button" class="btn btn-success button-up" ng-click="addEntry(handler, property, 'handler')"><i class="fa fa-plus"></i></button>
+            </div>
+          </div>
+          <div class="form-group col-sm-12" ng-repeat="entry in handler[property.propertyName].propertyValue track by $index">
+
+            <div class="input-group">
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-danger button-up" ng-click="deleteEntry(handler, property, $index, 'handler')"><i class="fa fa-times"></i></button>
+              </span>
+              <input type="text" class="form-control" id="{{entry}}" ng-model="handler[property.propertyName].propertyValue[$index]">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div ng-switch-when="Resource">
+        <label for="{{property.propertyName}}" class="col-sm-4 control-label">{{property.propertyName}}</label>
+        <div class="col-sm-8">
+          <div class="input-group">
+            <span class="input-group-btn">
+              <button type="button" class="btn btn-danger button-up" ng-click="deleteProperty(handler, property, 'handler')"><i class="fa fa-times"></i></button>
+            </span>
+            <input type="text" class="form-control" id="{{property.propertyName}}" ng-model="handler[property.propertyName].resourceName" readonly>
+            <span class="input-group-btn">
+              <button type="button" class="btn btn-primary button-up" ng-click="editHandlerProperty(handler, property)"><i class="fa fa-pencil-square-o"></i></button>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div ng-switch-when="Path">
+        <label for="{{property.propertyName}}" class="col-sm-4 control-label">{{property.propertyName}}</label>
+        <div class="col-sm-8">
+          <div class="input-group">
+            <span class="input-group-btn">
+              <button type="button" class="btn btn-danger button-up" ng-click="deleteProperty(handler, property, 'handler')"><i class="fa fa-times"></i></button>
+            </span>
+            <div ng-switch on="handler[property.propertyName].project.access">
+              <div ng-switch-when="external">
+                <input type="text" class="form-control" id="{{property.propertyName}}" ng-model="handler[property.propertyName].resourcePath" readonly>
+              </div>
+              <div ng-switch-default>
+                <input type="text" class="form-control" id="{{property.propertyName}}" ng-value="'project: ' + handler[property.propertyName].project.name + '/' + handler[property.propertyName].resourceType" readonly>
+              </div>
+            </div>
+            
+            <span class="input-group-btn">
+              <button type="button" class="btn btn-primary button-up" ng-click="editHandlerPathProperty(handler, property)"><i class="fa fa-pencil-square-o"></i></button>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div ng-switch-when="ArrayResource">
+        <label for="name" class="col-sm-4 control-label">{{property.propertyName}}</label>
+        <div class="col-sm-8">
+          <div class="form-group col-sm-12">
+            <div class="btn-group" role="group" aria-label="...">
+              <button type="button" class="btn btn-danger button-up" ng-click="deleteProperty(handler, property, 'handler')"><i class="fa fa-times"></i></button>
+              <button type="button" class="btn btn-success button-up" ng-click="addEntry(handler, property, 'handler')"><i class="fa fa-plus"></i></button>
+            </div>
+          </div>
+          <div class="form-group col-sm-12" ng-repeat="entry in handler[property.propertyName].propertyValue track by $index">
+                <div class="input-group">
+                  <span class="input-group-btn">
+                    <button type="button" class="btn btn-danger button-up" ng-click="deleteEntry(handler, property, $index, 'handler')"><i class="fa fa-times"></i></button>
+                  </span>
+                  <input type="text" class="form-control" id="{{entry}}" ng-model="handler[property.propertyName].propertyValue[$index].resourceName" readonly>
+                  <span class="input-group-btn">
+                    <button type="button" class="btn btn-primary button-up" ng-click="editHandlerProperty(handler, property, $index)"><i class="fa fa-pencil-square-o"></i></button>
+                  </span>
+                </div>
+          </div>
+        </div>
+      </div>
+
+      <div ng-switch-when="Boolean">
+        <label for="{{property.propertyName}}" class="col-sm-4 control-label">{{property.propertyName}}</label>
+        <div class="col-sm-8">
+
+          <button type="button" class="btn btn-danger button-up" ng-click="deleteProperty(handler, property, 'handler')"><i class="fa fa-times"></i></button>
+              <span>
+                &nbsp;&nbsp;&nbsp;
+              </span>
+              <label class="radio-inline radio-inline-up">
+                <input type="radio" ng-model="handler[property.propertyName].propertyValue" name="{{property.propertyName}}" value="true" ng-value="true"> Yes
+              </label>
+              <label class="radio-inline radio-inline-up">
+                <input type="radio" ng-model="handler[property.propertyName].propertyValue" name="{{property.propertyName}}" value="false" ng-value="false"> No
+              </label>
+        </div>
+      </div>
+
+      <div ng-switch-default>
+        <label for="{{property.propertyName}}" class="col-sm-4 control-label">{{property.propertyName}}</label>
+        <div class="col-sm-8">
+          <div class="input-group">
+            <span class="input-group-btn">
+              <button type="button" class="btn btn-danger button-up" ng-click="deleteProperty(handler, property, 'handler')"><i class="fa fa-times"></i></button>
+            </span>
+            <input type="text" class="form-control" id="{{entry}}" ng-model="handler[property.propertyName]" > 
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="name" class="col-sm-4 control-label"></label>
+    <div class="col-sm-8">
+      <button type="button" class="btn btn-default" ng-click="addProperty(handler, 'handler')"><i class="fa fa-plus-square-o"></i> Add Property</button>
+    </div>
+  </div>
+
+  
+</form>
+
+</div>

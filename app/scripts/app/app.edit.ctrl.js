@@ -8,6 +8,8 @@ angular.module('tatool.app')
 
       var EXECUTABLE_STATIC_PROPERTIES = ['tatoolType', 'customType', 'name', 'blankInterval', 'fixationInterval', 'status', 'project'];
 
+      var HANDLER_STATIC_PROPERTIES = ['customType', 'name'];
+
       $scope.resourceTypes = ['stimuli', 'instructions'];
 
       $scope.module = module;
@@ -43,25 +45,40 @@ angular.module('tatool.app')
           $scope.elementType = VIEW_PATH + 'edit_list.html';
         } else if (element.tatoolType === 'Executable') {
           // prepare custom properties
-          loadCustomProperties(element);
+          loadCustomProperties(element, 'executable');
           $scope.elementType = VIEW_PATH + 'edit_executable.html';
         }
       };
 
-      // populate scope variable with custom properties
-      function loadCustomProperties(element) {
+      // populate scope variable with custom properties (executable or handler properties)
+      function loadCustomProperties(element, context) {
         $scope.customProperties = [];
         angular.forEach(element, function(value, key) {
           if (key.substring(0,1) !== '$') {
-            if (EXECUTABLE_STATIC_PROPERTIES.indexOf(key) === -1) {
+            if (context === 'executable' && EXECUTABLE_STATIC_PROPERTIES.indexOf(key) === -1) {
               var obj = {};
               obj.propertyName = key;
-              obj.propertyType = value.propertyType; //Object.prototype.toString.call( value );
-              //obj.disabled = (obj.propertyType === '[object Object]') ? true : false;
+              obj.propertyType = value.propertyType; 
+              $scope.customProperties.push(obj);
+            } else if (context === 'handler' && HANDLER_STATIC_PROPERTIES.indexOf(key) === -1) {
+              var obj = {};
+              obj.propertyName = key;
+              obj.propertyType = value.propertyType; 
               $scope.customProperties.push(obj);
             }
           }
         });
+      }
+
+      // checks whether a property name already exists
+      function customPropertyExists(propertyName) {
+        var exists = false;
+        angular.forEach($scope.customProperties, function(value, key) {
+          if (value.propertyName === propertyName) {
+            exists = true;
+          } 
+        });
+        return exists;
       }
 
       // filters valid exporter in editor
@@ -232,7 +249,6 @@ angular.module('tatool.app')
               }
             }
           }
-          
         }
 
         $scope.elementType = VIEW_PATH + 'edit_executable_select.html';
@@ -271,11 +287,18 @@ angular.module('tatool.app')
       $scope.returnTo = function(string) {
         if (string === 'executable') {
           $scope.elementType = VIEW_PATH + 'edit_executable.html';
+        } else if (string === 'element') {
+          $scope.elementType = VIEW_PATH + 'edit_list.html';
+        } else if (string === 'handler') {
+          $scope.elementType = VIEW_PATH + 'edit_handler.html';
         }
       };
 
 
 
+      /*******************/
+      // EXECUTABLE PROPERTY METHODS
+      /*******************/
 
       $scope.editProperty = function(property, $index) {
         $scope.currentProject = {};
@@ -337,14 +360,16 @@ angular.module('tatool.app')
 
 
 
-      // Property Management
-      $scope.deleteProperty = function(element, property) {
+      /*******************/
+      // GENERIC PROPERTY METHODS
+      /*******************/
+      $scope.deleteProperty = function(element, property, context) {
         hideAlert();
         delete element[property.propertyName];
-        loadCustomProperties(element);
+        loadCustomProperties(element, context);
       };
 
-      $scope.addProperty = function(element) {
+      $scope.addProperty = function(element, context) {
         hideAlert();
         var box = bootbox.dialog({
           title: '<b>Add new Property</b>',
@@ -394,10 +419,13 @@ angular.module('tatool.app')
                 var propertyName = $('#newPropertyName').val();
                 var propertyType = $('input[name=\'type\']:checked').val();
                 if (!propertyName || propertyName === '' || propertyName.indexOf(' ') >= 0 || !isNaN(parseInt(propertyName))) {
-                  setAlert('danger', 'Invalid property name or missing.');
+                  setAlert('danger', 'Invalid or missing Property name.');
+                  $scope.$apply();
+                } else if ( (EXECUTABLE_STATIC_PROPERTIES.indexOf(propertyName) !== -1) || customPropertyExists(propertyName) ) {
+                  setAlert('danger', 'Property name is already in use.');
                   $scope.$apply();
                 } else {
-                  insertProperty(element, propertyName, propertyType);
+                  insertProperty(element, propertyName, propertyType, context);
                 }
               }
             },
@@ -420,7 +448,7 @@ angular.module('tatool.app')
         });
       };
 
-      function insertProperty(element, propertyName, propertyType) {
+      function insertProperty(element, propertyName, propertyType, context) {
         if (propertyType === 'ArrayString') {
           element[propertyName] = {};
           element[propertyName].propertyType = propertyType;
@@ -443,11 +471,11 @@ angular.module('tatool.app')
           element[propertyName] = '';
         }
 
-        loadCustomProperties(element);
+        loadCustomProperties(element, context);
         $scope.$apply();
       }
 
-      $scope.addEntry = function(element, property) {
+      $scope.addEntry = function(element, property, context) {
         hideAlert();
         if (property.propertyType === 'ArrayString') {
           element[property.propertyName].propertyValue.push('');
@@ -459,14 +487,155 @@ angular.module('tatool.app')
           }
           element[property.propertyName].propertyValue.push(res);
         }
-        loadCustomProperties(element);
+        loadCustomProperties(element, context);
       };
 
-      $scope.deleteEntry = function(element, property, index) {
+      $scope.deleteEntry = function(element, property, index, context) {
         hideAlert();
         element[property.propertyName].propertyValue.splice(index, 1);
-        loadCustomProperties(element);
+        loadCustomProperties(element, context);
       };
+
+      /*******************/
+      // HANDLER METHODS
+      /*******************/
+
+      $scope.deleteHandler = function(element, handler, index) {
+        hideAlert();
+        element.handlers.splice(index, 1);
+      };
+
+      $scope.addHandler = function(element) {
+        hideAlert();
+        var box = bootbox.dialog({
+          title: '<b>Add new Handler</b>',
+          message: '<div class="row">  ' +
+                    '<div class="col-md-12"> ' +
+                    '<form class="form-horizontal"> ' +
+                    '<div class="form-group"> ' +
+                    '<label class="col-md-4 control-label" for="name">Handler Name</label> ' +
+                    '<div class="col-md-4"> ' +
+                    '<input id="newHandlerName" name="newHandlerName" type="text" class="form-control input-md"> ' +
+                    '</div> ' +
+                    '</div> ' +
+                    '<div class="form-group"> ' +
+                    '<label class="col-md-4 control-label" for="type">Handler Type</label> ' +
+                    '<div class="col-md-7">' +
+                    '<div class="radio"> <label for="trialCountHandler"> ' +
+                    '<input type="radio" name="type" id="trialCountHandler" value="trialCountHandler" checked="checked"> ' +
+                    'Trial Counter for Status Panel (trialCountHandler) </label> ' +
+                    '</div>' +
+                    '<div class="radio"> <label for="levelHandler"> ' +
+                    '<input type="radio" name="type" id="levelHandler" value="levelHandler"> ' +
+                    'Level Algorithm for Status Panel (levelHandler) </label> ' +
+                    '</div>' +
+                    '</div> </div>' +
+                    '</form> </div>  </div>',
+          buttons: {
+            main: {
+              label: 'Ok',
+              className: 'btn-default',
+              callback: function () {
+                var handlerName = $('#newHandlerName').val();
+                var handlerType = $('input[name=\'type\']:checked').val();
+                if (!handlerName || handlerName === '' || handlerName.indexOf(' ') >= 0 || !isNaN(parseInt(handlerName))) {
+                  setAlert('danger', 'Invalid or missing Handler name.');
+                  $scope.$apply();
+                } else if ( (HANDLER_STATIC_PROPERTIES.indexOf(propertyName) !== -1) || customPropertyExists(propertyName) ) {
+                  setAlert('danger', 'Property name is already in use.');
+                  $scope.$apply();
+                } else {
+                  insertHandler(element, handlerName, handlerType);
+                }
+              }
+            },
+            cancel: {
+              label: 'Cancel',
+              className: 'btn-default'
+            }
+          }
+        });
+
+        box.bind('shown.bs.modal', function(){
+          $('#newHandlerName').focus();
+        });
+
+        $('#newHandlerName').keypress(function(e) {
+          if(e.which === 13) {
+            e.preventDefault();
+            $('button[data-bb-handler="main"]').focus().click();
+          }
+        });
+      };
+
+      function insertHandler(element, handlerName, handlerType) {
+        if (!element.handlers) {
+          element.handlers = [];
+        }
+        var handler = {};
+        handler.name = handlerName;
+        handler.customType = handlerType;
+        element.handlers.push(handler);
+        $scope.$apply();
+      }
+
+      $scope.editHandler = function(handler) {
+        $scope.handler = handler;
+        loadCustomProperties(handler, 'handler');
+        $scope.elementType = VIEW_PATH + 'edit_handler.html';
+      };
+
+      $scope.editHandlerProperty = function(handler, property, $index) {
+        $scope.currentProject = {};
+        $scope.customProperty = {};
+        if ($index >= 0) {
+          $scope.customProperty = handler[property.propertyName].propertyValue[$index];
+        } else {
+          $scope.customProperty = handler[property.propertyName];
+        }
+
+        if ($scope.customProperty.project) {
+          for (var i=0; i < $scope.projects.length; i++) {
+            if ($scope.projects[i].name === $scope.customProperty.project.name && $scope.projects[i].access === $scope.customProperty.project.access) {
+              $scope.currentProject = $scope.projects[i];
+              break;
+            }
+          }
+        } else {
+          $scope.currentProject = {};
+        }
+
+        $scope.elementType = VIEW_PATH + 'edit_handler_property.html';
+        $scope.currentProperty = property;
+      };
+
+      $scope.editHandlerPathProperty = function(handler, property, $index) {
+        $scope.customProperty = {};
+        if ($index >= 0) {
+          $scope.customProperty = handler[property.propertyName].propertyValue[$index];
+        } else {
+          $scope.customProperty = handler[property.propertyName];
+        }
+
+        if ($scope.customProperty.project) {
+          for (var i=0; i < $scope.projects.length; i++) {
+            if ($scope.projects[i].name === $scope.customProperty.project.name && $scope.projects[i].access === $scope.customProperty.project.access) {
+              $scope.currentProject = $scope.projects[i];
+              break;
+            }
+          }
+        } else {
+          $scope.currentProject = {};
+        }
+
+        $scope.elementType = VIEW_PATH + 'edit_handler_property_path.html';
+        $scope.currentProperty = property;
+      };
+
+
+      /*******************/
+      // GENERAL METHODS
+      /*******************/
 
       $scope.download = function () {
         // copy higher level descriptive properties to moduleDefinition
@@ -488,6 +657,12 @@ angular.module('tatool.app')
           $scope.returnTo('executable');
         } else if ($scope.elementType === VIEW_PATH + 'edit_executable_property_path.html') {
           $scope.returnTo('executable');
+        } else if ($scope.elementType === VIEW_PATH + 'edit_handler.html') {
+          $scope.returnTo('element');
+        } else if ($scope.elementType === VIEW_PATH + 'edit_handler_property.html') {
+          $scope.returnTo('handler');
+        } else if ($scope.elementType === VIEW_PATH + 'edit_handler_property_path.html') {
+          $scope.returnTo('handler');
         } else {
           // copy higher level descriptive properties to moduleDefinition
           module.moduleDefinition.name = module.moduleName;

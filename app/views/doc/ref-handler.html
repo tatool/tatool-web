@@ -2,25 +2,4 @@
 
 <p>Handlers are used to provide your Modules with reusable functionality. Instead of duplicating the same code in different Executables, you can extract the logic and make it available for multiple Executables, allowing them to share the same state. A simple example for this is a Handler called trialCountHandler, which does what the name suggests: it counts trials and allows you to display the information on screen independent of the Executable.</p>
 
-<p>Handlers are attached to an Element in a Module, which makes the shared functionality available for all child elements. The current Module Editor doesn't support Handlers yet which is why you'll have to add them manually within a Module File. The following example shows how to manually add Handlers on <b>line 10-13</b>. Every Handler object has a <code>customType</code> property to define the service to load and a unique custom <code>name</code>.</p>
-
-<pre class="line-numbers" data-line="10-13"><code class="line-numbers language-javascript">{
-  "name": "My Module",
-  "author": "Tatool",
-  "label": "myModule",
-  "moduleHierarchy": {
-    "tatoolType": "List",
-    "iterator": { 
-      "customType" : "ListIterator", "numIterations" : "12" 
-    },
-    "handlers": [ 
-      { "customType" : "levelHandler", "name" : "level" }, 
-      { "customType" : "trialCountHandler", "name" : "counter" } 
-    ],
-    "children": 
-      [
-        ...
-      ]
-  }
-}
-</code></pre>
+<p>Handlers are attached to an Element in a Module, which makes the shared functionality available for all child elements. Handlers can be added in the Module Editor. Similiar to Executables, Handlers also support custom Properties which allows you to configure specific behaviour from within the Module Editor.</p>

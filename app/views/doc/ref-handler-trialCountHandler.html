@@ -1,18 +1,51 @@
 <h2>trialCountHandler</h2>
 
-<p>The trialCountHandler can be used in combination with the counter status panel that can be activated for every Executable. The trialCountHandler provides the values for the counter status panel who takes care of displaying the values on screen.</p>
+<p>The trialCountHandler can be used in combination with the counter status panel which can be set for every Executable. The trialCountHandler provides the values for the counter status panel.</p>
 
 <p>The trial counter will always be reset to 1 at the beginning of a new session. Within a session the counter will be incremented by 1 after every execution of an Executable defined as a child of the current Element, regardless of whether a trial object is saved. In the case of a Dual Element, the counter will only increment after one iteration has completed (e.g. primary, secondary, primary). The counter status panel will be updated at the beginning of every new execution and should therefore show the count of the current trial.</p>
 
-<hr>
+<ul id="docPageNav">
+  <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('handler-properties')">Handler Properties</a></li>
+  <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('module-properties')">Module/Session Properties</a></li>
+</ul>
 
-<h4>Variables<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h4>
 
-<p>The levelHandler has no variables for customization within a Module.</p>
+<hr class="hr-red">
 
+<h3 id="handler-properties">Handler Properties<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
 
-<hr>
+<p>The following Properties can be provided in the Module Editor to change the behaviour of the handler.</p>
 
-<h4>Module/Session Properties<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h4>
+<table class="table table-striped table-condensed table-bordered">
+  <thead>
+    <tr>
+      <th>Property Name</th>
+      <th>Property Type</th>
+      <th>Default</th>
+      <th>Mandatory</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="cellB">trialCounterStart</td>
+      <td>String</td>
+      <td>1</td>
+      <td>No</td>
+      <td>The number to start counting from.</td>
+    </tr>
+    <tr>
+      <td class="cellB">reverse</td>
+      <td>Boolean</td>
+      <td>false</td>
+      <td>No</td>
+      <td>Indicating whether the trial counter should count in reverse (<code>true</code>) or not (<code>false</code>).</td>
+    </tr>
+  </tbody>
+</table>
 
-<p>The trialCountHandler doesn't save any data to the database and will lose all information at the end of every a session.</p>
+<hr class="hr-red">
+
+<h3 id="module-properties">Module/Session Properties<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
+
+<p>The trialCountHandler doesn't save any data and will lose all information at the end of every a session.</p>

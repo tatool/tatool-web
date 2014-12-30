@@ -1,0 +1,50 @@
+<b><a href ng-click="returnTo('element')">Element</a> > <a href ng-click="returnTo('handler')">Handler</a>  > Edit Property</b>
+
+<br><br>
+
+<div>
+
+  <form class="form-horizontal">
+
+  <div class="form-group">
+    <label for="name" class="col-sm-3 control-label">Project
+      <a class="info" tooltip="The resource project or external resource." tooltip-placement="right"><i class="fa fa-info-circle"></i></a>
+    </label>
+    <div class="col-sm-9">
+      <ui-select ng-model="currentProject" theme="bootstrap" ng-disabled="disabled" on-select="chooseResourceProject($item, $model)">
+        <ui-select-match placeholder="Select project...">{{$select.selected.name}}</ui-select-match>
+        <ui-select-choices group-by="groupByProjectAccess" repeat="project in projects | filter: $select.search">
+          <span ng-bind-html="project.name | highlight: $select.search"></span>
+        </ui-select-choices>
+      </ui-select><br>
+      <small><b>Description:</b> {{currentProject.description}}</small>
+    </div>
+  </div>
+
+  <div class="form-group" ng-if="currentProject.access !== 'external'">
+    <label for="name" class="col-sm-3 control-label">Type
+      <a class="info" tooltip="The resource type." tooltip-placement="right"><i class="fa fa-info-circle"></i></a>
+    </label>
+    <div class="col-sm-9">
+      <ui-select ng-model="customProperty.resourceType" theme="bootstrap" ng-disabled="disabled">
+        <ui-select-match placeholder="Select type...">{{$select.selected}}</ui-select-match>
+        <ui-select-choices repeat="resourceType in resourceTypes | filter: $select.search">
+          <span ng-bind-html="resourceType | highlight: $select.search"></span>
+        </ui-select-choices>
+      </ui-select><br>
+    </div>
+  </div>
+
+  <div class="form-group" ng-if="currentProject.access === 'external'">
+    <label for="name" class="col-sm-3 control-label">Path
+      <a class="info" tooltip="The resource file name." tooltip-placement="right"><i class="fa fa-info-circle"></i></a>
+    </label>
+    <div class="col-sm-9">
+      <input type="text" class="form-control" ng-model="customProperty.resourcePath">
+    </div>
+  </div>
+  <br><br>
+  
+</form>
+
+</div>
