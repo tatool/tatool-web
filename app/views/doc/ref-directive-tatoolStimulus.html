@@ -1,6 +1,6 @@
 <h2>Tatool Stimulus</h2>
 <p>The <code>tatool-stimulus</code> template arranged and displays a stimulus on the screen and offers a mouse click interaction feature. If you want to display multiple stimuli simultaneously, take a look at the <a ui-sref="doc({page: 'ref-directive-tatoolGrid.html'})">tatool-grid</a> template that offers more functionality for that purpose. For capturing keyboard input, use the <a ui-sref="doc({page: 'ref-directive-tatoolInput.html'})">tatool-input</a> template.</p> 
-<p>As with all templates, you have to add the HTML element to your Executable Template, and to add the template service as a dependency in order to use the component in your executable.</p>
+<p>As with all templates, you have to add the HTML element to your Executable Template, and to add the template service as a dependency in order to use the component in your Executable.</p>
 
 <ul id="docPageNav">
   <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('howto')">Quick: How to Use It</a></li>
@@ -194,7 +194,7 @@ stimulusService.setImage(data);
 <hr>
 
 <p><b class="red">show()</b> - returns the timestamp at which the stimulus has been set to visible.</p>
-<p>Changes the visibility of your stimulus to 'visible' and returns the timestamp which you can use to measure reaction times. As most functions that manipulate the stimulus return the stimulus service object itself, you can chain the <code>show()</code> call to your previous call as in the last line in the following example:</p>
+<p>Changes the visibility of your stimulus to 'visible' and returns the timestamp which you can use to measure reaction times. As most methods that manipulate the stimulus return the stimulus service object itself, you can chain the <code>show()</code> call to your previous call as in the last line in the following example:</p>
 
 <p><b>Example</b></p>
 <pre><code class="language-javascript">stimulusService.show();
