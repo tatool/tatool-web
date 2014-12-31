@@ -1,8 +1,8 @@
 <h2>Tatool Input</h2>
-<p>The tatool-input template allows you to easily capture user input from the users keyboard, mouse or touch interfaces. You can decide whether you want to display visual buttons or hide them to just allow keyboard inputs. As with all templates, in order to use it, you'll have to add the HTML element to your executable template and add the input service as a dependency in order to use the component in your executable.</p>
+<p>The <code>tatool-input</code> template allows you to easily capture user input from the user's keyboard, mouse or touch interfaces. For keyboard input, you can choose to display visual buttons, or to hide them, thereby allowing interaction via key press only. As with all templates, you have to add the HTML element to your Executable Template, and to add the template service as a dependency in order to use the component in your executable.</p>
 
 <ul id="docPageNav">
-  <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('howto')">Quick: How to use it</a></li>
+  <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('howto')">Quick: How to Use It</a></li>
   <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('introduction')">Introduction</a></li>
   <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('input-element')">&lt;tatool-input&gt; element</a></li>
   <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('key-element')">&lt;tatool-key&gt; element</a></li>
@@ -13,9 +13,9 @@
 
 <hr class="hr-red">
 
-<h3 id="howto">Quick: How to use it <span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
+<h3 id="howto">Quick: How to Use It<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
 
-<p><b>1.</b> Add the tatool-input element to the html template of your executable.</p>
+<p><b>1.</b> Add the <code>tatool-input</code> element to the HTML template of your Executable.</p>
 
 <pre><code class="language-markup">&lt;tatool-input 
   service="inputService" 
@@ -24,7 +24,7 @@
 &lt;/tatool-input>
 </code></pre>
 
-<p><b>2.</b> Add the inputServiceFactory as a new dependency to your executable service.</p>
+<p><b>2.</b> Add the <code>inputServiceFactory</code> as a new dependency to your Executable Service.</p>
 
 <pre><code class="language-javascript">tatool
 .factory('myExecutable', [ 'executableUtils', 'inputServiceFactory', 
@@ -32,7 +32,7 @@
   ...
 </code></pre>
 
-<p><b>3.</b> Start by creating a new input service with the help of the inputServiceFactory.</p>
+<p><b>3.</b> Create a new input service with the <code>inputServiceFactory</code>.</p>
 
 <pre><code class="language-javascript">MyExecutable.prototype.init = function() {
   // create a new input service
@@ -40,7 +40,7 @@
 };
 </code></pre>
 
-<p><b>4.</b> At the very beginning of your controller make the new input service available to your template by assigning it to the $scope property which you defined in step 1 as 'inputService'.</p>
+<p><b>4.</b> At the very beginning of your Controller code, make the new input service available to your template by assigning it to the <code>$scope</code> property which you defined in Step 1 as <code>'inputService'</code>.</p>
 
 <pre><code class="language-javascript">tatool.controller('myExecutable', [ '$scope', 'service', 
   function ($scope, service) {
@@ -62,13 +62,13 @@
 
 <h3 id="introduction">Introduction <span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
 
-<p>It's time to capture some user input in our experimental tasks. User input can happen in different forms. The tatool-input template allows you to capture keyboard inputs and/or mouseClick (button) inputs. Whether you want to setup your keys upfront or dynamically during your task, the tatool-input template offers both features.</p>
+<p>Probably all experimental tasks require some form of user interaction, with the user responding to the stimuli in some way. This user input can happen in different forms. The <code>tatool-input</code> template allows you to capture inputs via keyboard, and/or inputs via mouse click (or touch) on buttons. To simplify terminology, we'll always refer to the input options as <i>keys</i>, independent of the true underlying input source (key or button press). The <code>tatool-input</code> template offers the possibility to either setup the keys upfront in your Executable Template, or dynamically during your task in your Executable Service.</p>
 
 <hr class="hr-red">
 
 <h3 id="input-element">&lt;tatool-input&gt; element <span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
 
-<p>The following attributes can be provided when using the tatool-input element in your executable template html.</p>
+<p>The following attributes can be provided when using the <code>tatool-input</code> element in your Executable Template HTML.</p>
 
 <table class="table table-striped table-condensed table-bordered">
   <thead>
@@ -82,12 +82,12 @@
     <tr>
       <td class="cellB">service</td>
       <td>[input service object]</td>
-      <td>expects a input service object created by the inputServiceFactory</td>
+      <td>Expects an input service object created by the <code>inputServiceFactory</code>.</td>
     </tr>
     <tr>
       <td class="cellB">userInput</td>
       <td>[function(input,timing,$event)]</td>
-      <td>custom function to call on key down or mouse click on button. The input object represents the key object that has been added, the timing represents the timestamp when the key/button has been pressed and the $event is the underlying event object from angularJS.</td>
+      <td>Custom function to call on key down or on mouse click on button. The input object represents the key object that has been added, the timing represents the timestamp when the key/button has been pressed, and the <code>$event</code> is the underlying event object from angularJS.</td>
     </tr>
   </tbody>
 </table>
@@ -96,7 +96,7 @@
 
 <h3 id="key-element">&lt;tatool-key&gt; element <span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
 
-<p>The following attributes can be provided when using the tatool-key element in your executable template html. This element can only be used as a child element of &lt;tatool-input>.</p>
+<p>The following attributes can be provided when using the <code>tatool-key</code> element in your Executable Template HTML. This element can only be used as a child element of <code>&lt;tatool-input></code>.</p>
 
 <table class="table table-striped table-condensed table-bordered">
   <thead>
@@ -110,27 +110,27 @@
     <tr>
       <td class="cellB">code</td>
       <td>[keycode string]</td>
-      <td>string value indicating the assigned keyCode as defined in the list of possible KeyCodes</td>
+      <td>String value indicating the assigned <code>keyCode</code> as defined in the list of possible <code>KeyCodes</code>.</td>
     </tr>
     <tr>
       <td class="cellB">response</td>
       <td>[string]</td>
-      <td>response value assigned to this key</td>
+      <td>Response value assigned to this key.</td>
     </tr>
     <tr>
       <td class="cellB">label</td>
       <td>[string]</td>
-      <td>label to be displayed on the visual key</td>
+      <td>Label to be displayed on the visual button.</td>
     </tr>
     <tr>
       <td class="cellB">image</td>
       <td>[filename string]</td>
-      <td>image to be displayed on the visual key (tatool-input service requires stimuliPath)</td>
+      <td>Image to be displayed on the visual button (note that <code>tatool-input</code> service requires <code>stimuliPath</code>)</td>
     </tr>
     <tr>
       <td class="cellB">hide</td>
       <td></td>
-      <td>attribute without value to indicate whether the key should be visible or hidden</td>
+      <td>Attribute to indicate that the button should be hidden.</td>
     </tr>
   </tbody>
 </table>
@@ -139,115 +139,126 @@
 
 <h3 id="text-element">&lt;tatool-text&gt; element <span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
 
-<p>Adds a text input field which can be used to allow a user to provide an arbitrary response. The text input will trigger the defined userInput function as soon as the user presses the <b>Enter</b> key. This element can only be used as a child element of &lt;tatool-input>.</p>
+<p>Adds a text input field which allows a user to enter a text response. The text input will trigger the defined <code>userInput()</code> method as soon as the user presses <b>Enter</b>. This element can only be used as a child element of <code>&lt;tatool-input></code>.</p>
 
 <hr class="hr-red">
 
 <h3 id="keycodes">KeyCodes<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
 
-<p>The following KeyCodes are available when setting up your input to listen for keyboard input.</p>
+<p>The following <code>KeyCodes</code> are available when setting up your keys to listen for keyboard input:</p>
+<p><b>Alphanumeric Keys:</b></p>
+<pre><code class="language-javascript">
+  A
+  B
+  C
+  D
+  E
+  F
+  G
+  H
+  I
+  J
+  K
+  L
+  M
+  N
+  O
+  P
+  Q
+  R
+  S
+  T
+  U
+  V
+  W
+  X
+  Y
+  Z
+  
+  Digit0
+  Digit1
+  Digit2
+  Digit3
+  Digit4
+  Digit5
+  Digit6
+  Digit7
+  Digit8
+  Digit9
+  
+  Numpad0
+  Numpad1
+  Numpad2
+  Numpad3
+  Numpad4
+  Numpad5
+  Numpad6
+  Numpad7
+  Numpad8
+  Numpad9
+</code></pre>
 
-<pre><code class="language-javascript">KeyCodes = {
-  BackSpace:8,
-  Tab:9,
-  Enter:13,
-  Shift:16,
-  Ctrl:17,
-  Alt:18,
-  PauseBreak:19,
-  CapsLock:20,
-  Esc:27,
-  Space:32,
-  PageUp:33,
-  PageDown:34,
-  End:35,
-  Home:36,
-  ArrowLeft:37,
-  ArrowUp:38,
-  ArrowRight:39,
-  ArrowDown:40,
-  Insert:45,
-  Delete:46,
-  Digit0:48,
-  Digit1:49,
-  Digit2:50,
-  Digit3:51,
-  Digit4:52,
-  Digit5:53,
-  Digit6:54,
-  Digit7:55,
-  Digit8:56,
-  Digit9:57,
-  A:65,
-  B:66,
-  C:67,
-  D:68,
-  E:69,
-  F:70,
-  G:71,
-  H:72,
-  I:73,
-  J:74,
-  K:75,
-  L:76,
-  M:77,
-  N:78,
-  O:79,
-  P:80,
-  Q:81,
-  R:82,
-  S:83,
-  T:84,
-  U:85,
-  V:86,
-  W:87,
-  X:88,
-  Y:89,
-  Z:90,
-  WindowLeft:91,
-  WindowRight:92,
-  SelectKey:93,
-  Numpad0:96,
-  Numpad1:97,
-  Numpad2:98,
-  Numpad3:99,
-  Numpad4:100,
-  Numpad5:101,
-  Numpad6:102,
-  Numpad7:103,
-  Numpad8:104,
-  Numpad9:105,
-  Multiply:106,
-  Add:107,
-  Subtract:109,
-  DecimalPoint:110,
-  Divide:111,
-  F1:112,
-  F2:113,
-  F3:114,
-  F4:115,
-  F5:116,
-  F6:117,
-  F7:118,
-  F8:119,
-  F9:120,
-  F10:121,
-  F11:122,
-  F12:123,
-  NumLock:144,
-  ScrollLock:145,
-  SemiColon:186,
-  Equal:187,
-  Comma:188,
-  Dash:189,
-  Period:190,
-  ForwardSlash:191,
-  GraveAccent:192,
-  BracketOpen:219,
-  BackSlash:220,
-  BracketClose:221,
-  SingleQuote:222
-};
+<p><b>Arrow Keys:</b></p>
+<pre><code class="language-javascript">
+  ArrowLeft
+  ArrowUp
+  ArrowRight
+  ArrowDown
+</code></pre>
+
+<p><b>Special and Function Keys:</b></p>
+<pre><code class="language-javascript">
+  Enter
+  Space
+  
+  BackSpace
+  Tab
+  Shift
+  Ctrl
+  Alt
+  PauseBreak
+  CapsLock
+  PageUp
+  PageDown
+  End
+  Home
+  Insert
+  Delete
+  WindowLeft
+  WindowRight
+  SelectKey
+  Multiply
+  Add
+  Subtract
+  DecimalPoint
+  Divide
+  
+  F1
+  F2
+  F3
+  F4
+  F5
+  F6
+  F7
+  F8
+  F9
+  F10
+  F11
+  F12
+  
+  NumLock
+  ScrollLock
+  SemiColon
+  Equal
+  Comma
+  Dash
+  Period
+  ForwardSlash
+  GraveAccent
+  BracketOpen
+  BackSlash
+  BracketClose
+  SingleQuote
 </code></pre>
 
 
@@ -259,12 +270,12 @@
 
 <h4>inputServiceFactory<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h4>
 
-<p>With the help of the inputServiceFactory you can create a new input service. The following reference lists all available methods and some example code.</p>
+<p>Creates a new input service. The reference below lists all available methods and some examples.</p>
 
 <hr>
 
 <p><b class="red">createService(stimuliPath)</b> - returns a new input service object.</p>
-<p>Creates a new input service object that can be used to manipulate any user input action. The stimuli path parameter can be used to let the service know where to access resources (e.g. images).</p>
+<p>Creates a new input service object that can be used to manipulate user input action. The parameter <code>stimuliPath</code> can be used to let the service know where to access resources (e.g., images).</p>
 
 <p><b>Parameters</b><br>
 <code>stimuliPath</code>: a Path Property object (see <a ui-sref="doc({page: 'ref-properties.html'})">Properties</a> for more details)
@@ -278,29 +289,31 @@ this.inputService = inputServiceFactory.createService(this.stimuliPath);
 
 <h4>Input Service<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h4>
 
-<p>It is important to remember that the input template only starts capturing user events after calling the enable() function. This allows you to enable user input as you see it fit in your executable.</p>
+<p>Important: Remember that the input template only starts capturing user events after calling <code>enable()</code>. This allows you to enable user input as you see fit in your Executable.</p>
 
 <hr>
 
 <p><b class="red">addInputKey(keyCode, givenResponse, label, labelType, hide)</b> - returns the input service object.</p>
 
-<p>Adds a new input element which can either be a key input and/or a button input. By default if you provide a <code>keyCode</code>, the label of the key will be similar to what you see on your keyboard. If you want a different label or if you don't assign a keyCode, you should pass in your own <code>label</code> with the label parameter. When providing the label you'll also have to provide the <code>labelType</code> parameter indicating whether the label should be interpreted as text or as an image resource.
-Every key can have one response value assigned to it which can be passed in as the <code>givenResponse</code> parameter. Additionally, if you don't want the key to be visible, you can set the <code>hide</code> parameter to true.</p>
+<p>Adds a new input element which can either be a key input and/or a button input. By default, when you provide a <code>keyCode</code>, the label of the key (i.e., the button) will be similar to what you see on your keyboard. If you want a different label or if you don't assign a <code>keyCode</code>, pass your own <code>label</code> with the label parameter. When providing the label, you'll also have to provide the <code>labelType</code> parameter indicating whether the label should be interpreted as text or as an image resource.<br>
+Every key can have one response value assigned to it which is passed as the <code>givenResponse</code> parameter. In addition, if you don't want the key to be visualised as button, you can set the <code>hide</code> parameter to true.</p>
 
 <p><b>Parameters</b><br>
-<code>keyCode</code>: a string value according to the allowed set of KeyCodes in the list above (e.g. 'ArrowRight') <br>
-<code>givenResponse</code>: a string value representing the response value of this key/button<br>
-<code>label</code>: an alternate label for a visible key<br>
-<code>labelType</code>: defines whether label is a string ('text') or an image ('image')<br>
-<code>hide</code>: a boolean value indicating whether this key should always be hidden<br>
+<code>keyCode</code>: A string value according to the allowed set of <code>KeyCodes</code> in the list above (e.g., 'ArrowRight'). <br>
+<code>givenResponse</code>: A string value representing the response value of this key.<br>
+<code>label</code>: An alternative label for a visible key (i.e., button).<br>
+<code>labelType</code>: Defines whether label is a string ('text') or an image ('image').<br>
+<code>hide</code>: A boolean value indicating whether this key should be hidden.<br>
 </p>
 
+<p><b>Example</b></p>
 <pre><code class="language-javascript">// add a new key listening to the ArrowRight key
 inputService.addInputKey('ArrowRight', 'blue', null, null, false);
 </code></pre>
 
-<p>Alternatively you can also provide the possible keys in your html template upfront. This will still allow you to control the behavior from your executable with the input service and reduce the required code. For the possible attributes see <a href ng-click="scrollTo('key-attributes')">&lt;tatool-key&gt; attributes</a>.</p>
+<p>Alternatively, you can also provide the possible keys in your HTML Executable Template upfront. This will still allow you to control the behavior from your Executable with the input service and reduce the required code. For the possible attributes see <a href ng-click="scrollTo('key-attributes')">&lt;tatool-key&gt; attributes</a>.</p>
 
+<p><b>Example</b></p>
 <pre><code class="language-markup">&lt;tatool-key code="ArrowLeft" response="blue">&lt;/tatool-key>
 </code></pre>
 
@@ -308,11 +321,11 @@ inputService.addInputKey('ArrowRight', 'blue', null, null, false);
 
 <p><b class="red">addInputKeys(array, hide)</b> - returns the keys that have been added successfully.</p>
 
-<p>Allows you to add multiple keys from an array of objects. If your stimuli file contains columns with key information, you can provide it directly as an input array for this method. The key information will be extracted automatically and no duplicate keyCodes are added.</p>
+<p>Adds multiple keys from an array of objects. If your stimuli file contains columns with key information, you can provide it directly as an input array for this method. The key information will be extracted automatically without adding duplicate <code>keyCodes</code>.</p>
 
 <p><b>Parameters</b><br>
-<code>array</code>: an array of key objects<br>
-<code>hide</code>: a boolean value indicating whether the keys should be hidden or not<br>
+<code>array</code>: An array of key objects.<br>
+<code>hide</code>: A boolean value indicating whether the keys should be hidden.<br>
 </p>
 
 <p><b>Key Object</b><br>
@@ -328,10 +341,10 @@ inputService.addInputKey('ArrowRight', 'blue', null, null, false);
     <tr>
       <td class="cellB">keyCode</td>
       <td>[KeyCode]</td>
-      <td>The correct keyCode to press from the list of available KeyCodes (see Tatool Input Service).</td>
+      <td>The <code>keyCode</code> to press from the list of available <code>KeyCodes</code> (see above).</td>
     </tr>
     <tr>
-      <td class="cellB">correctResponse</td>
+      <td class="cellB">response</td>
       <td>[string]</td>
       <td>The response value of the key.</td>
     </tr>
@@ -343,16 +356,17 @@ inputService.addInputKey('ArrowRight', 'blue', null, null, false);
     <tr>
       <td class="cellB">keyLabel</td>
       <td>[string]</td>
-      <td>An alternate label to display on the input key. Can either be text or an image filename.</td>
+      <td>An alternate label to display on the input key. Can be text or an image filename.</td>
     </tr>
     <tr>
       <td class="cellB">keyLabelType</td>
       <td>text/image</td>
-      <td>The internal Tatool key value type in order to control the display type.</td>
+      <td>The internal Tatool key label type for Tatool to know how to display it.</td>
     </tr>
   </tbody>
 </table>
 
+<p><b>Example</b></p>
 <pre><code class="language-javascript">// add new keys from specified array
 inputService.addInputKeys(this.stimuliList, false);
 </code></pre>
@@ -361,12 +375,13 @@ inputService.addInputKeys(this.stimuliList, false);
 
 <p><b class="red">removeInputKey(keyCode)</b> - returns the input service object.</p>
 
-<p>Removes an input key identified by the keyCode.</p>
+<p>Removes an input key identified by the <code>keyCode</code>.</p>
 
 <p><b>Parameters</b><br>
-<code>keyCode</code>: a string value according to the allowed set of KeyCodes in the list above (e.g. 'ArrowRight')
+<code>keyCode</code>: A string value according to the allowed set of <code>KeyCodes</code> in the list above (e.g., 'ArrowRight').
 </p>
 
+<p><b>Example</b></p>
 <pre><code class="language-javascript">// remove the ArrowRight key
 inputService.removeInputKey('ArrowRight');
 </code></pre>
@@ -377,6 +392,7 @@ inputService.removeInputKey('ArrowRight');
 
 <p>Removes all input keys.</p>
 
+<p><b>Example</b></p>
 <pre><code class="language-javascript">// remove all keys
 inputService.removeAllInputKeys();
 </code></pre>
@@ -385,8 +401,9 @@ inputService.removeAllInputKeys();
 
 <p><b class="red">enable()</b> - returns the timestamp when the input has been enabled.</p>
 
-<p>Once enabled the service will listen to user input and trigger the provided userInput function.</p>
+<p>Once enabled, the service will listen to user input and trigger the provided <code>userInput()</code> method.</p>
 
+<p><b>Example</b></p>
 <pre><code class="language-javascript">// enable user input
 inputService.enable();
 </code></pre>
@@ -395,8 +412,9 @@ inputService.enable();
 
 <p><b class="red">disable()</b> - returns the timestamp when the input has been disabled.</p>
 
-<p>Once disabled the service will no longer listen to any user input.</p>
+<p>Once disabled, the service will no longer listen to any user input.</p>
 
+<p><b>Example</b></p>
 <pre><code class="language-javascript">// disable user input
 inputService.disable();
 </code></pre>
@@ -407,6 +425,7 @@ inputService.disable();
 
 <p>Display any key/button assigned to the service.</p>
 
+<p><b>Example</b></p>
 <pre><code class="language-javascript">// show all input keys
 inputService.show();
 // add new key and show
@@ -419,6 +438,7 @@ inputService.addInputKey('Digit0', 0, null, false).show();
 
 <p>Hide any key/button assigned to the service.</p>
 
+<p><b>Example</b></p>
 <pre><code class="language-javascript">// hide all input keys
 inputService.hide();
 </code></pre>

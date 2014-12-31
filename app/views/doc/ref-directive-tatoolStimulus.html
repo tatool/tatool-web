@@ -1,6 +1,6 @@
 <h2>Tatool Stimulus</h2>
-<p>The <code>tatool-stimulus</code> template arranged and displays a stimulus on the screen and offers a mouseclick interaction feature. If you want to display multiple stimuli simultaneously, take a look at the <a ui-sref="doc({page: 'ref-directive-tatoolGrid.html'})">tatool-grid</a> template that offers more functionality for that purpose. For capturing keyboard input, use the <a ui-sref="doc({page: 'ref-directive-tatoolInput.html'})">tatool-input</a> template.</p> 
-<p>As with all templates, you have to add the HTML element to your executable template, and to add the template service as a dependency in order to use the component in your executable.</p>
+<p>The <code>tatool-stimulus</code> template arranged and displays a stimulus on the screen and offers a mouse click interaction feature. If you want to display multiple stimuli simultaneously, take a look at the <a ui-sref="doc({page: 'ref-directive-tatoolGrid.html'})">tatool-grid</a> template that offers more functionality for that purpose. For capturing keyboard input, use the <a ui-sref="doc({page: 'ref-directive-tatoolInput.html'})">tatool-input</a> template.</p> 
+<p>As with all templates, you have to add the HTML element to your Executable Template, and to add the template service as a dependency in order to use the component in your executable.</p>
 
 <ul id="docPageNav">
   <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('howto')">Quick: How to Use It</a></li>
@@ -52,13 +52,13 @@
 
 <h3 id="introduction">Introduction <span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
 
-<p>When you want to create an experimental task, you'll most likely want to display something on the screen for the user to interact with. That something can be a digit, a word, an image or even some audio or video content. To simplify the code to display something on screen, Tatool offers the <code>tatool-stimulus</code> template. It allows you to do what you've done so many times before: display a stimulus! As the name already states, this template allows you to present ONE and only one stimulus at a time. But don't worry, you can add multiple separate stimulus templates to your task allowing you to interact with multiple stimuli at a time. However, in that case you might want to take a look at the <a ui-sref="doc({page: 'ref-directive-tatoolGrid.html'})">tatool-grid</a> template which facilitates displaying multiple stimuli at different positions. The <code>tatool-stimulus</code> template offers one interaction option, which is a 'mouseclick' informing you when a user clicked on which stimulus. If you want to capture keyboard events, take a look at the <a ui-sref="doc({page: 'ref-directive-tatoolInput.html'})">tatool-input</a> template.</p>
+<p>When you want to create an experimental task, you'll most likely want to display something on the screen for the user to interact with. That something can be a digit, a word, an image or even some audio or video content. To simplify the code to display something on screen, Tatool offers the <code>tatool-stimulus</code> template. It allows you to do what you've done so many times before: display a stimulus! As the name already states, this template allows you to present ONE and only one stimulus at a time. But don't worry, you can add multiple separate stimulus templates to your task allowing you to interact with multiple stimuli at a time. However, in that case you might want to take a look at the <a ui-sref="doc({page: 'ref-directive-tatoolGrid.html'})">tatool-grid</a> template which facilitates displaying multiple stimuli at different positions. The <code>tatool-stimulus</code> template offers one interaction option, which is a 'mouse click' informing you when a user clicked on which stimulus. If you want to capture keyboard events, take a look at the <a ui-sref="doc({page: 'ref-directive-tatoolInput.html'})">tatool-input</a> template.</p>
 
 <hr class="hr-red">
 
 <h3 id="element">The &lt;tatool-stimulus&gt; element <span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
 
-<p>The following attributes can be provided when using the <code>tatool-stimulus</code> element in your executable template HTML.</p>
+<p>The following attributes can be provided when using the <code>tatool-stimulus</code> element in your Executable Template HTML.</p>
 
 <table class="table table-striped table-condensed table-bordered">
   <thead>
@@ -77,7 +77,7 @@
     <tr>
       <td class="cellB">stimulusClick</td>
       <td>[function(stimulus, timing, $event)]</td>
-      <td>Custom function to call at mouseclick on stimulus. Parameter names are predefined.</td>
+      <td>Custom function to call at mouse click on stimulus. Parameter names are predefined.</td>
     </tr>
   </tbody>
 </table>
@@ -90,12 +90,12 @@
 
 <h4>stimulusServiceFactory<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h4>
 
-<p>Creates a new stimulus service. The following reference lists all available methods and some examples.</p>
+<p>Creates a new stimulus service. The reference below lists all available methods and some examples.</p>
 
 <hr>
 
 <p><b class="red">createService(stimuliPath)</b> - returns a new stimulus service object.</p>
-<p>Creates a new stimulus service object that can be used to manipulate one stimulus. The stimuli path parameter can be used to let the service know where to access resources (e.g., images).</p>
+<p>Creates a new stimulus service object that can be used to manipulate one stimulus. The parameter <code>stimuliPath</code> can be used to let the service know where to access resources (e.g., images).</p>
 
 <p><b>Parameters</b><br>
 <code>stimuliPath</code>: A Path Property object (see <a ui-sref="doc({page: 'ref-properties.html'})">Properties</a> for more details).
