@@ -55,7 +55,7 @@ angular.module('tatool.module')
         // extract key information from stimuli list
         for (var i = 0; i < list.length; i++) {
           if (!(list[i].keyCode in keyCodes)) {
-            keyCodes[list[i].keyCode] = { keyCode: list[i].keyCode, keyLabel: list[i].keyLabel, keyLabelType: list[i].keyLabelType, keyIndex: list[i].keyIndex, correctResponse: list[i].correctResponse };
+            keyCodes[list[i].keyCode] = { keyCode: list[i].keyCode, keyLabel: list[i].keyLabel, keyLabelType: list[i].keyLabelType, keyIndex: list[i].keyIndex, response: list[i].response };
           }
         }
 
@@ -72,7 +72,7 @@ angular.module('tatool.module')
         // add keys to inputService
         for (var j=0; j < keys.length; j++) {
           if (keys[j]) {
-            this.addInputKey(keys[j].keyCode, keys[j].correctResponse, keys[j].keyLabel, keys[j].keyLabelType, hide);
+            this.addInputKey(keys[j].keyCode, keys[j].response, keys[j].keyLabel, keys[j].keyLabelType, hide);
           }
         }
 

@@ -1,8 +1,5 @@
 <!doctype html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<html class="no-js">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -20,6 +17,8 @@
     <link rel="stylesheet" href="styles/prism.css">
     <!-- endbuild -->
     <link rel="stylesheet" href="styles/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" href="fonts/module/leaguegothic-regular-webfont.css">
+    <link rel="stylesheet" href="fonts/module/tatool-icons.css">
 
     <!-- build:css styles/tatool-app.min.css -->
     <link rel="stylesheet" href="styles/reset.css">
@@ -27,7 +26,6 @@
     <link rel="stylesheet" href="styles/tatool_auth.css">
     <!-- endbuild -->
 
-    <link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800' rel='stylesheet' type='text/css'>
 
     <!-- build:js scripts/vendor/jquery.min.js -->
@@ -39,20 +37,11 @@
 
   </head>
   <body ng-app="tatool.app" ng-controller="MainCtrl" ng-strict-di>
-    <!--[if lt IE 7]>
-      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-    <![endif]-->
-    <!-- Add your site or application content here -->
 
     <div tatool-spinner="{radius:25, width:8, length: 18}" spinner-key="loadingSpinner"></div>
 
     <!-- Content -->
     <div ui-view style="height: 100%;"></div>
-
-    <!--[if lt IE 9]>
-    <script src="bower_components/es5-shim/es5-shim.js"></script>
-    <script src="bower_components/json3/lib/json3.min.js"></script>
-    <![endif]-->
 
     <!-- build:js scripts/vendor/vendor.min.js -->
     <script src="bower_components/angular-resource/angular-resource.js"></script>
@@ -85,7 +74,6 @@
     <script src="scripts/common/util/sha1.js"></script>
     <script src="scripts/common/util/download.js"></script>
     <!-- endbuild -->
-
 
         <!-- build:js scripts/tatool-app.min.js -->
         <script src="scripts/modules/app.js"></script>
