@@ -10,7 +10,9 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
 
+    <!-- build:css ../../styles/vendor/bootstrap.min.css -->
     <link rel="stylesheet" href="../../bower_components/bootstrap/dist/css/bootstrap.css" />
+    <!-- endbuild -->
 
     <!-- build:css ../../styles/tatool-module.min.css -->
     <link rel="stylesheet" href="../../styles/reset.css">
@@ -20,6 +22,13 @@
     <link rel="stylesheet" href="../../styles/font-awesome/css/font-awesome.css">
     <link rel="stylesheet" href="../../fonts/module/leaguegothic-regular-webfont.css">
     <link rel="stylesheet" href="../../fonts/module/tatool-icons.css">
+
+    <!-- build:js ../../scripts/vendor/jquery.min.js -->
+    <script src="../../bower_components/jquery/dist/jquery.js"></script>
+    <!-- endbuild -->
+    <!-- build:js ../../scripts/vendor/angular.min.js -->
+    <script src="../../bower_components/angular/angular.js"></script>
+    <!-- endbuild -->
 
   </head>
   <body ng-app="tatool.module" ng-controller="MainCtrl" ng-keydown="keyPress($event);" ng-mousedown="mousePress($event);" ng-strict-di>
@@ -38,8 +47,7 @@
     <script src="bower_components/json3/lib/json3.min.js"></script>
     <![endif]-->
 
-    <script src="../../bower_components/jquery/dist/jquery.js"></script>
-    <script src="../../bower_components/angular/angular.js"></script>
+    <!-- build:js ../../scripts/vendor/vendor.min.js -->
     <script src="../../bower_components/json3/lib/json3.js"></script>
     <script src="../../bower_components/bootstrap/dist/js/bootstrap.js"></script>
     <script src="../../bower_components/angular-resource/angular-resource.js"></script>
@@ -54,12 +62,11 @@
     <script src="../../bower_components/angular-base64/angular-base64.min.js"></script>
     <script src="../../bower_components/headjs/dist/1.0.0/head.load.js"></script>
     <script src="../../bower_components/papaparse/papaparse.js"></script>
-
-
+    <script src="../../bower_components/async/lib/async.js"></script>
     <script src="../../scripts/common/util/sha1.js"></script>
+    <!-- endbuild -->
 
-        <!-- build:js scripts/tatool-module.min.js -->
-        <script src="../../bower_components/async/lib/async.js"></script>
+        <!-- build:js ../../scripts/tatool-module.min.js -->
         <script src="../../scripts/modules/app.js"></script>
         <script src="../../scripts/module.data.service.js"></script>
         <script src="../../scripts/trial.data.service.js"></script>

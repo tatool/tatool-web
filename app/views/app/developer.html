@@ -27,13 +27,17 @@
       <accordion-group is-open="accordionStatus.develop">
         <accordion-heading>
           EDITOR
-          <i class="glyphicon" ng-class="{'glyphicon-chevron-down': accordionStatus.develop, 'glyphicon-chevron-right': !accordionStatus.develop}"></i>
+          <i class="fa fa-chevron-right" ng-class="{'fa fa-chevron-down red': accordionStatus.develop, 'fa fa-chevron-right': !accordionStatus.develop}"></i>
           
         </accordion-heading>
         <div id="modules">
 
           <div class="tile tileDev" ng-class="{'tileHighlight': module.moduleId == highlightModuleId}" ng-repeat="module in modules | orderBy:'moduleName'" ng-if="!!modules.length">
-            <div class="icon"><i class="fa fa-cog fa-4x"></i> <span ng-if="module.maxSessionId"><small>Sessions<br></small> <b class="sessionNum">{{module.maxSessionId}}</b></span></div>
+            <div class="icon">
+              <i class="fa fa-cog fa-4x"></i> 
+              <span ng-if="module.maxSessionId"><small>Sessions<br></small> <b class="sessionNum">{{module.maxSessionId}}</b></span><br><br>
+              <div class="btn btn-tatool-off" ng-click="resetModuleData(module)" ng-if="module.maxSessionId"><i class="fa fa-refresh"></i> Reset</div>
+            </div>
             <div class="content">
               <h2>{{module.moduleName}}</h2>
               <h3>{{module.moduleAuthor}}</h3>

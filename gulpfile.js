@@ -6,7 +6,8 @@ jshint = require('gulp-jshint'),
 uglify = require('gulp-uglify'),
 minifyCSS = require('gulp-minify-css'),
 notify = require('gulp-notify'),
-usemin = require('gulp-usemin');
+usemin = require('gulp-usemin'),
+mainBowerFiles = require('main-bower-files');
 
 // tasks
 gulp.task('clean', function(cb) {
@@ -60,7 +61,9 @@ gulp.task('minify-js-module', ['clean'], function() {
         'app/scripts/modules/common.module.js',
         'app/scripts/modules/auth.module.js',
         'app/scripts/modules/module.module.js', 
-        'app/scripts/*.js', 
+        'app/scripts/module.data.service.js', 
+        'app/scripts/trial.data.service.js', 
+        'app/scripts/user.data.service.js', 
         'app/scripts/common/*.js',
         'app/scripts/module/util/*.js',
         'app/scripts/auth/*.js',
@@ -72,6 +75,44 @@ gulp.task('minify-js-module', ['clean'], function() {
     .pipe(uglify())
     .pipe(gulp.dest('./dist/scripts'))
 });
+
+gulp.task('minify-js-vendor', ['clean'], function() {
+  gulp.src([
+        'app/bower_components/jquery-ui/jquery-ui.js',
+        'app/bower_components/angular-animate/angular-animate.js',
+        'app/bower_components/angular-base64/angular-base64.js',
+        'app/bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
+        'app/bower_components/angular-progress-arc/angular-progress-arc.js',
+        'app/bower_components/angular-resource/angular-resource.js',
+        'app/bower_components/angular-route/angular-route.js',
+        'app/bower_components/angular-sanitize/angular-sanitize.js',
+        'app/bower_components/angular-ui-router/release/angular-ui-router.js',
+        'app/bower_components/angular-ui-select/dist/select.js',
+        'app/bower_components/json3/lib/json3.js',
+        'app/bower_components/bootstrap/dist/js/bootstrap.js',
+        'app/bower_components/bootbox/bootbox.js',
+        'app/bower_components/idb-wrapper/idbstore.js',
+        'app/bower_components/screenfull/dist/screenfull.js',
+        'app/bower_components/spin.js/spin.js',
+        'app/bower_components/headjs/dist/1.0.0/head.js',
+        'app/bower_components/papaparse/papaparse.js',
+        'app/bower_components/datejs/build/production/date.js',
+        'app/bower_components/script.js/dist/script.js',
+        'app/bower_components/lz-string/libs/release/lz-string-1.3.3-min.js',
+        'app/bower_components/async/lib/async.js',
+        'app/bower_components/jqueryui-touch-punch/jquery.ui.touch-punch.js',
+        'app/scripts/common/util/prism.js',
+        'app/scripts/common/util/uuid.js',
+        'app/scripts/common/util/sha1.js',
+        'app/scripts/common/util/download.js'
+        ])
+    .pipe(concat('vendor.js'))
+    .pipe(gulp.dest('./dist/scripts/vendor'))
+    .pipe(rename({suffix: '.min'}))
+    .pipe(uglify())
+    .pipe(gulp.dest('./dist/scripts/vendor'))
+});
+
 
 gulp.task('copy-bower-components', ['clean'], function () {
   gulp.src('./app/bower_components/**')
@@ -93,14 +134,17 @@ gulp.task('copy-projects', ['clean'], function () {
     .pipe(gulp.dest('./dist/projects'));
 });
 
-gulp.task('copy-js', ['clean'], function () {
-  gulp.src('./app/scripts/common/util/*.js')
-    .pipe(gulp.dest('./dist/scripts/common/util/'));
+gulp.task('copy-js-vendor', ['clean'], function () {
+  gulp.src(['./app/bower_components/angular/angular.min.js',
+      './app/bower_components/jquery/dist/jquery.min.js'])
+    .pipe(gulp.dest('./dist/scripts/vendor/'));
 });
 
-gulp.task('copy-css', ['clean'], function () {
-  gulp.src('./app/styles/prism.css')
-    .pipe(gulp.dest('./dist/styles/'));
+gulp.task('copy-css-vendor', ['clean'], function () {
+  gulp.src(['./app/bower_components/angular-ui-select/dist/select.min.css',
+      './app/bower_components/bootstrap/dist/css/bootstrap.min.css',
+      './app/styles/prism.css'])
+    .pipe(gulp.dest('./dist/styles/vendor/'));
 });
 
 gulp.task('copy-icons', ['clean'], function () {
@@ -138,7 +182,7 @@ gulp.task('default',
 
 // build task
 gulp.task('build',
-  ['lint', 'minify-css-app', 'minify-css-module', 'minify-js-app', 'minify-js-module',
-  'copy-bower-components', 'copy-images', 'copy-views', 'copy-projects', 'copy-fonts', 'copy-css', 'copy-js', 'copy-icons',
+  ['lint', 'minify-css-app', 'minify-css-module', 'minify-js-app', 'minify-js-module', 'minify-js-vendor',
+  'copy-bower-components', 'copy-images', 'copy-views', 'copy-projects', 'copy-fonts', 'copy-css-vendor', 'copy-js-vendor', 'copy-icons',
   'usemin-app', 'usemin-module' ]
 );

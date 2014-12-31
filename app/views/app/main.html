@@ -25,7 +25,7 @@
       <accordion-group is-open="accordionStatus.installed">
         <accordion-heading>
           MY MODULES
-          <i class="glyphicon" ng-class="{'glyphicon-chevron-down': accordionStatus.installed, 'glyphicon-chevron-right': !accordionStatus.installed}"></i>
+          <i class="fa fa-chevron-right" ng-class="{'fa fa-chevron-down red': accordionStatus.installed, 'fa fa-chevron-right': !accordionStatus.installed}"></i>
         </accordion-heading>
         <div id="modules">
           <div class="tile" ng-class="{'tileHighlight': module.moduleId == highlightModuleId}" ng-repeat="module in modules | orderBy:'moduleName' | filter:{ $: filterModule }" ng-if="!!modules.length">
@@ -66,7 +66,7 @@
       <accordion-group is-open="accordionStatus.invites">
         <accordion-heading ng-class="'tatool-panel-heading'">
           INVITES 
-          <i class="glyphicon" ng-class="{'glyphicon-chevron-down': accordionStatus.invites, 'glyphicon-chevron-right': !accordionStatus.invites}"></i>
+          <i class="fa fa-chevron-right" ng-class="{'fa fa-chevron-down red': accordionStatus.invites, 'fa fa-chevron-right': !accordionStatus.invites}"></i>
         </accordion-heading>
         <div id="modules">
           <div class="tile" ng-repeat="module in invites | orderBy:'created_at':true | filter:{ $: filterModule }" ng-if="!!invites.length">
@@ -94,7 +94,7 @@
       <accordion-group is-open="accordionStatus.public">
         <accordion-heading ng-class="'tatool-panel-heading'">
           PUBLIC 
-          <i class="glyphicon" ng-class="{'glyphicon-chevron-down': accordionStatus.public, 'glyphicon-chevron-right': !accordionStatus.public}"></i>
+          <i class="fa fa-chevron-right" ng-class="{'fa fa-chevron-down red': accordionStatus.public, 'fa fa-chevron-right': !accordionStatus.public}"></i>
         </accordion-heading>
         <div id="modules">
           <div class="tile" ng-class="{'tileHighlight': module.moduleId == highlightModuleId}" ng-repeat="module in repository | orderBy:'created_at':true | startFrom:repoPaging.currentPage*repoPaging.pageSize | limitTo:repoPaging.pageSize | filter:{ $: filterModule }" ng-if="!!repository.length">

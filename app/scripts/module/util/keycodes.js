@@ -1,6 +1,7 @@
 /* global KeyCodes */
-/*jshint -W020 */
-KeyCodes = {
+/* exported KeyCodes */
+/*jshint -W079 */
+var KeyCodes = {
     BackSpace           : 8  ,
     Tab                 : 9  ,
     Enter               : 13 ,
@@ -101,4 +102,4 @@ KeyCodes = {
     BracketClose        : 221,
     SingleQuote         : 222 
 };
-/*jshint +W020 */
+/*jshint +W079 */

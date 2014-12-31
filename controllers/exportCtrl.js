@@ -66,7 +66,6 @@ exports.createLocalFile = function(req, module, mode, res) {
               zip.addLocalFile(uploadPath + filename + sessionId + timestamp + extension);
               zip.writeZip(uploadPath + zipFilename + zipExtension);
               
-              console.log('zip', uploadPath + filename + sessionId + timestamp + extension);
               res.json({ message: 'Trials successfully uploaded.' });
             });
 

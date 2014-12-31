@@ -4,8 +4,8 @@
 /* global uuid */
 
 angular.module('tatool.app')
-  .controller('DeveloperCtrl', ['$scope', '$q', '$timeout', '$window', '$rootScope', '$location',  '$state', '$http', '$log', '$modal', '$sce', 'moduleDataService', 'cfg', 'authService', 'userService', 'moduleCreatorService', 'exportService', 'spinnerService',
-    function ($scope, $q, $timeout, $window, $rootScope, $location, $state, $http, $log, $modal, $sce, moduleDataService, cfg, authService, userService, moduleCreatorService, exportService, spinnerService) {
+  .controller('DeveloperCtrl', ['$scope', '$q', '$timeout', '$window', '$rootScope', '$location',  '$state', '$http', '$log', '$modal', '$sce', 'moduleDataService', 'cfg', 'authService', 'userService', 'moduleCreatorService', 'exportService', 'spinnerService', 'trialDataService',
+    function ($scope, $q, $timeout, $window, $rootScope, $location, $state, $http, $log, $modal, $sce, moduleDataService, cfg, authService, userService, moduleCreatorService, exportService, spinnerService, trialDataService) {
 
     $scope.modules = [];
     $scope.alert = {};
@@ -257,6 +257,45 @@ angular.module('tatool.app')
               label: 'OK',
               className: 'btn-default',
               callback: runDelete
+            },
+            cancel: {
+              label: 'Cancel',
+              className: 'btn-default'
+            }
+          }
+        });
+    };
+
+    // reset module data
+    $scope.resetModuleData = function(module) {
+      hideAlert();
+
+      function runReset() {
+
+        module.maxSessionId = 0;
+        module.sessions = {};
+        module.moduleProperties = {};
+
+        trialDataService.deleteModuleTrials(userService.getUserName(), module.moduleId, cfg.APP_MODE_DEVELOPER).then(
+          function() {
+            moduleDataService.addModule(module).then(function() {
+              setAlert('success', 'Module successfully reset.');
+            }, function(error) {
+              setAlert('danger', error);
+            });
+          }, function(error) {
+            setAlert('danger', error);
+          });
+      }
+
+      bootbox.dialog({
+          message: 'This will clear all trial and session data associated with this Module. Are you sure you want to continue?',
+          title: '<b>Tatool</b>',
+          buttons: {
+            ok: {
+              label: 'OK',
+              className: 'btn-default',
+              callback: runReset
             },
             cancel: {
               label: 'Cancel',
