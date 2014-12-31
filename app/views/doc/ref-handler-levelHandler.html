@@ -1,8 +1,8 @@
 <h2>levelHandler</h2>
 
-<p>The levelHandler can be used in combination with the level status panel which can be set for every Executable. The levelHandler provides the values for the level status panel.</p>
+<p>The <code>levelHandler</code> provides the values for the level status panel and can be set for every Executable.</p>
 
-<p>The levelHandler will always retrieve the latest level, counter, score at the beginning of a session. Within a session the counter will execute the level algorithm after every execution of an Executable, regardless of whether a trial object is saved. In the case of a Dual Element, the algorithm will only be executed after one iteration has completed (e.g. primary, secondary, primary). The level status panel will be updated at the beginning of every new execution and should therefore show the current level.</p>
+<p>The <code>levelHandler</code> always retrieves the latest level, counter, score at the beginning of a Session. During a Session, the counter executes the level algorithm after every execution of an Executable, regardless of whether a Trial object is saved. In the case of a Dual Element, the algorithm will only be executed after one complete iteration (i.e., primary, secondary, primary). The level status panel is updated at the beginning of every new execution and should therefore show the current level.</p>
 
 <ul id="docPageNav">
   <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('handler-properties')">Handler Properties</a></li>
@@ -31,14 +31,14 @@
       <td>String</td>
       <td>3</td>
       <td>No</td>
-      <td>Number indicating the interval of when the level algorithm should be calculate the performance and trigger a level-up/level-down event (number of trials).</td>
+      <td>Number indicating the interval of when the level algorithm should compute the performance and trigger a level-up/level-down event (number of trials).</td>
     </tr>
     <tr>
       <td class="cellB">benchmark</td>
       <td>String</td>
       <td>0.6</td>
       <td>No</td>
-      <td>Float value between 0 and 1 indicating what percentage of correct answers (performance = totalScore / maxScore) must be achieved for a level-up. If performance >= benchmark, a level up will be triggered and if lower a level down will be triggered (depends on Property <code>allowLevelDown</code>).</td>
+      <td>Float value between 0 and 1 indicating what percentage of correct answers (performance = totalScore / maxScore) must be achieved for a level-up. If performance greater or equal to the <code>benchmark</code>, a level-up will be triggered. If performance is lower than the <code>benchmark</code> a level down will be triggered (depends on Property <code>allowLevelDown</code>).</td>
     </tr>
     <tr>
       <td class="cellB">allowLevelDown</td>
@@ -55,7 +55,7 @@
 
 <h3 id="module-properties">Module/Session Properties<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
 
-<p>The levelHandler stores the following Module Properties to keep track of the level information across multiple sessions.</p>
+<p>The levelHandler stores the following Module Properties to keep track of the level information across multiple sessions:</p>
 
 <table class="table table-striped table-condensed table-bordered">
   <thead>
@@ -75,7 +75,7 @@
     </tr>
     <tr>
       <td class="cellB">maxScore</td>
-      <td>The summed up maximum score possible over the last interval of trials (<code>benchmarkSampleSize</code>). The max score is set to 1 by default for every trial.</td>
+      <td>The summed up maximum score possible over the last interval of trials (<code>benchmarkSampleSize</code>). The <code>maxScore</code> is set to 1 by default for every trial.</td>
     </tr>
     <tr>
       <td class="cellB">currentLevel</td>
