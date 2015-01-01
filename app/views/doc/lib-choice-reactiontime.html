@@ -1,6 +1,6 @@
-<h2>Choice Reaction Time Task</h2>
+<h2>Choice Reaction Time Paradigm</h2>
 
-<p>The Choice Reaction Time task allows you to apply any arbitrary <a href="http://en.wikipedia.org/wiki/Eriksen_flanker_task" target="_blank">choice react time</a> paradigm.</p>
+<p>In the Choice Reaction Time paradigm, participants have to respond to as stimulus as quickly and as accurately as possible. Typically, stimuli have to be classified regarding two categories (e.g., decide whether a digit is odd or even). Tatool's implementation allows you to use 1 to <i>n</i> response options.</p>
 
 <ul id="docPageNav">
   <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('executable')">Executable</a></li>
@@ -13,7 +13,7 @@
 
 <h3 id="executable">Executable<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
 
-<p>Use the following settings in the Module Editor to use this type of task. </p>
+<p>Use the following settings in the Module Editor for this type of task: </p>
 
 <table class="table table-condensed table-bordered">
   <tbody>
@@ -33,7 +33,7 @@
 
 <h3 id="properties">Properties<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
 
-<p>The following Properties can be provided in the Module Editor to change the behaviour of the task.</p>
+<p>The following Properties can be provided in the Module Editor to change the behaviour of the task:</p>
 
 <table class="table table-striped table-condensed table-bordered">
   <thead>
@@ -51,35 +51,35 @@
       <td>Resource</td>
       <td>-</td>
       <td class="cellB">Yes</td>
-      <td>A stimuli file expecting stimuli according to the Tatool Stimulus definition</td>
+      <td>A stimuli file expecting stimuli according to the Tatool Stimulus definition.</td>
     </tr>
     <tr>
       <td class="cellB">stimuliPath</td>
       <td>Path</td>
       <td>-</td>
       <td class="cellB">Yes</td>
-      <td>A stimuli path where to load any resources from (stimuli images, input key images)</td>
+      <td>A stimuli path where to load any resources from (stimuli images, input key images).</td>
     </tr>
     <tr>
       <td class="cellB">showKeys</td>
       <td>Boolean</td>
       <td>true</td>
       <td>No</td>
-      <td>Shows or hides defined input keys</td>
+      <td>Shows or hides defined input keys.</td>
     </tr>
     <tr>
       <td class="cellB">timerEnabled</td>
       <td>Boolean</td>
       <td>false</td>
       <td>No</td>
-      <td>Enables or disables timer to display stimulus</td>
+      <td>Enables or disables timer to display stimulus.</td>
     </tr>
     <tr>
       <td class="cellB">displayDuration</td>
       <td>String</td>
       <td>2000</td>
       <td>No</td>
-      <td>Timer duration in ms to wait for user feedback before stopping</td>
+      <td>Timer duration in ms to wait for user feedback before stopping.</td>
     </tr>
     <tr>
       <td class="cellB">randomisation</td>
@@ -88,7 +88,7 @@
       <td>No</td>
       <td>Defines the randomisation criteria. If no value is set no randomisation is applied. The following values are allowed:<br>
         <b>full:</b> fully randomises stimuli (no duplicates until all stimuli are shown once)<br>
-        <b>full-condition:</b> randomise with even random distribution of stimulusType (duplicates allowed)</td>
+        <b>full-condition:</b> randomise with equal proportion of stimulusType (duplicates allowed)</td>
     </tr>
   </tbody>
 </table>
@@ -97,7 +97,7 @@
 
 <h3 id="stimuli">Stimuli File<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
 
-<p>This task requires a Stimuli File to run. If you're looking to randomise your stimuli within Tatoool, you'll only have to provide every possible combination once. By setting the number of iterations you can control the number of trials. The Stimuli File should contain the following columns.</p>
+<p>This task requires a Stimuli File to run. If you're using Tatool's randomisation feature, you only need to provide every possible combination once. By setting the number of iterations you can control the number of trials. The stimuli file should contain the following columns.</p>
 
 <h4>Available Stimuli Files</h4>
 
@@ -148,13 +148,13 @@
       <td class="cellB">stimulusValueType</td>
       <td>text/image/circle/square</td>
       <td class="cellB">Yes</td>
-      <td>The internal Tatool stimulus value type in order to control the display type.</td>
+      <td>The internal Tatool stimulus value type for Tatool to know how to display it.</td>
     </tr>
     <tr>
       <td class="cellB">stimulusType</td>
       <td>(String)</td>
       <td class="cellB">Yes</td>
-      <td>Categorize stimulus according to custom groups (e.g. congruent, incongruent, neutral).</td>
+      <td>Categorize stimulus according to custom group or condition (e.g., congruent, incongruent, neutral).</td>
     </tr>
     <tr>
       <td class="cellB">correctResponse</td>
@@ -166,31 +166,31 @@
       <td class="cellB">keyCode</td>
       <td>(KeyCode)</td>
       <td class="cellB">Yes</td>
-      <td>The correct keyCode to press from the list of available KeyCodes (see <a ui-sref="doc({page: 'ref-directive-tatoolInput.html'})">Tatool Input Service</a>).</td>
+      <td>The correct <code>keyCode</code> to press from the list of available <code>KeyCodes</code> (see <a ui-sref="doc({page: 'ref-directive-tatoolInput.html'})">Tatool Input Service</a>).</td>
     </tr>
     <tr>
       <td class="cellB">keyLabel</td>
       <td>(String)/(Image Filename)</td>
       <td>No</td>
-      <td>An alternate label to display on the input key. Can either be text or an image filename.</td>
+      <td>An alternative label to display on the input key. Can either be text or an image filename.</td>
     </tr>
     <tr>
       <td class="cellB">keyLabelType</td>
       <td>text/image</td>
       <td>No</td>
-      <td>The internal Tatool key value type in order to control the display type.</td>
+      <td>The internal Tatool key label type for Tatool to know how to display it.</td>
     </tr>
     <tr>
       <td class="cellB">keyIndex</td>
       <td>(Number)</td>
       <td>No</td>
-      <td>Defines the position of the key starting at 0. The smaller the number, the further left the key will appear.</td>
+      <td>Defines the position of the key, starting at 0. The smaller the number, the further left the key will appear.</td>
     </tr>
     <tr>
       <td class="cellB">stimulusValueColor</td>
       <td>(String)/(Hex Color)</td>
       <td>No</td>
-      <td>An optional color value for text/circle/square stimulusValueType. Can either be an HTML color string or a Hex Code starting with #.</td>
+      <td>An optional colour value for text/circle/square stimulusValueType. Can either be an HTML colour string or a Hex Code starting with #.</td>
     </tr>
   </tbody>
 </table>
@@ -201,4 +201,4 @@
 
 <h3 id="download">Download<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
 
-<p>You can access the source code (Service, Controller, Template, CSS) for this Executable in our <a href="https://github.com/tatool/tatool-web/tree/master/app/projects/public/tatool/executables" target="_blank">github repository</a>.</p>
+<p>You can access the source code (Service, Controller, Template, CSS) for this Executable in our <a href="https://github.com/tatool/tatool-web/tree/master/app/projects/public/tatool/executables" target="_blank">GitHub repository</a>.</p>
