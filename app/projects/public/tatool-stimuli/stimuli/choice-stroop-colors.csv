@@ -8,6 +8,6 @@ green;text;red;incongruent;red;ArrowLeft;stroop-color-left.png;image;0;red
 blue;text;red;incongruent;red;ArrowLeft;stroop-color-left.png;image;0;red
 green;text;blue;incongruent;blue;ArrowRight;stroop-color-right.png;image;2;blue
 red;text;blue;incongruent;blue;ArrowRight;stroop-color-right.png;image;2;blue
-red;circle;red;neutral;red;ArrowLeft;stroop-color-left.png;image;0;red
-green;circle;green;neutral;green;ArrowDown;stroop-color-down.png;image;1;green
-blue;circle;blue;neutral;blue;ArrowRight;stroop-color-right.png;image;2;blue
+####;text;red;neutral;red;ArrowLeft;stroop-color-left.png;image;0;red
+####;text;green;neutral;green;ArrowDown;stroop-color-down.png;image;1;green
+####;text;blue;neutral;blue;ArrowRight;stroop-color-right.png;image;2;blue
