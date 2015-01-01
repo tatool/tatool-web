@@ -1,6 +1,6 @@
-<h2>Instruction Task</h2>
+<h2>Instruction</h2>
 
-<p>The Instruction task can be used to display image/HTML files displaying arbitrary content. The main use case would be the display of a series of images/pages instructing the user on the goal of the next task. The Instruction task offers a pagination navigation allowing a user to either go to the next or previous image/page or jump to a specific image/page. The Instruction task currently doesn't allow HTML pages from external resources.</p>
+<p>The primary purpose of this Executable is to display slides with instructions, but it can be used to present any arbitrary content using images or HTML files. It offers a pagination navigation allowing a user to either go to the next or previous slide, or to jump to a specific slide. The Instruction Executable currently doesn't allow HTML pages from external resources.</p>
 
 <ul id="docPageNav">
   <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('executable')">Executable</a></li>
@@ -14,7 +14,7 @@
 
 <h3 id="executable">Executable<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
 
-<p>Use the following settings in the Module Editor to use this type of task. </p>
+<p>Use the following settings in the Module Editor for this type of task: </p>
 
 <table class="table table-condensed table-bordered">
   <tbody>
@@ -33,7 +33,7 @@
 
 <h3 id="properties">Properties<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
 
-<p>The following Properties can be provided in the Module Editor to change the behaviour of the task. An Instruction task can either have a pages or an images array but not both.</p>
+<p>The Instruction Executable can either draw from an array of HTML pages or an array of images, but not both. The following Properties can be provided in the Module Editor to change the behaviour of the task: </p>
 
 <table class="table table-striped table-condensed table-bordered">
   <thead>
@@ -67,13 +67,13 @@
 
 <h3 id="stimuli">Stimuli File<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
 
-<p>This task does not support the use of a Stimuli File.</p>
+<p>This task does not support the use of a stimuli file.</p>
 
 <hr class="hr-red">
 
-<h3 id="html">HTML customization<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
+<h3 id="html">HTML customisation<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
 
-<p>The Intsruction task offers a set of template variables that can be embedded in your HTML instructions to allow for dynamic content. The following template variables are currently supported:</p>
+<p>The Instruction Executable offers a set of template variables that can be embedded in your HTML instructions to allow for dynamic content. The following template variables are currently supported:</p>
 
 <table class="table table-striped table-condensed table-bordered">
   <thead>
@@ -97,11 +97,11 @@
     </tr>
     <tr>
       <td class="cellB">sessionNr</td>
-      <td>The current session id.</td>
+      <td>The current Session ID.</td>
     </tr>
     <tr>
       <td class="cellB">moduleProperties</td>
-      <td>JavaScript object representing all available moduleProperties. In order to access the Module Property <i>currentLevel</i> of a LevelHandler with the name <i>level</i> you would use <i>moduleProperties.level.currentLevel<i>.</td>
+      <td>JavaScript object representing all available moduleProperties. For example, to access the Module Property <code>currentLevel</code> of a level handler with the name <code>level</code> you would use <code>moduleProperties.level.currentLevel</code>.</td>
     </tr>
   </tbody>
 </table>
@@ -126,4 +126,4 @@
 
 <h3 id="download">Download<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
 
-<p>You can access the source code (Service, Controller, Template, CSS) for this Executable in our <a href="https://github.com/tatool/tatool-web/tree/master/app/projects/public/tatool/executables" target="_blank">github repository</a>.</p>
+<p>You can access the source code (Service, Controller, Template, CSS) for this Executable in our <a href="https://github.com/tatool/tatool-web/tree/master/app/projects/public/tatool/executables" target="_blank">GitHub repository</a>.</p>

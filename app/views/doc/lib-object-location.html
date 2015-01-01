@@ -1,6 +1,6 @@
-<h2>Object Location Memory Task</h2>
+<h2>Object-Location Memory</h2>
 
-<p>The Object Location Memory task ...</p>
+<p>In the Object-Location Memory paradigm, participants are asked to memorise stimuli that are presented sequentially at different locations on the screen. Immediately afterward, participants are asked to drag and drop the stimuli to the positions they were previously presented at.</p>
 
 <ul id="docPageNav">
   <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('executable')">Executable</a></li>
@@ -13,7 +13,7 @@
 
 <h3 id="executable">Executable<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
 
-<p>Use the following settings in the Module Editor to use this type of task. </p>
+<p>Use the following settings in the Module Editor for this type of task: </p>
 
 <table class="table table-condensed table-bordered">
   <tbody>
@@ -32,7 +32,7 @@
 
 <h3 id="properties">Properties<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
 
-<p>The following Properties can be provided in the Module Editor to change the behaviour of the task.</p>
+<p>The following Properties can be provided in the Module Editor to change the behaviour of the task:</p>
 
 <table class="table table-striped table-condensed table-bordered">
   <thead>
@@ -50,21 +50,21 @@
       <td>Resource</td>
       <td>-</td>
       <td class="cellB">Yes</td>
-      <td>A stimuli file expecting stimuli according to the Tatool Stimulus definition</td>
+      <td>A stimuli file expecting stimuli according to the Tatool Stimulus definition.</td>
     </tr>
     <tr>
       <td class="cellB">stimuliPath</td>
       <td>Path</td>
       <td>-</td>
       <td class="cellB">Yes</td>
-      <td>A stimuli path where to load any resources from (stimuli images, input key images)</td>
+      <td>A stimuli path where to load any resources from (stimuli images, input key images.)</td>
     </tr>
     <tr>
       <td class="cellB">displayDuration</td>
       <td>String</td>
       <td>2000</td>
       <td>No</td>
-      <td>Display duration for memoranda.</td>
+      <td>Display duration for each memorandum.</td>
     </tr>
     <tr>
       <td class="cellB">intervalDuration</td>
@@ -95,7 +95,7 @@
 
 <h3 id="stimuli">Stimuli File<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
 
-<p>This task requires a Stimuli File to run. In order to allow n Memoranda per Trial you can use the usual Stimulus properties and add an index at the end (e.g. stimulusValue1). The Stimuli File should contain the following columns.</p>
+<p>This task requires a stimuli file to run. To allow set sizes / list lengths of <i>n</i> memoranda per trial, you can use the usual stimulus properties and add an index at the end (e.g., stimulusValue1). The stimuli file has to contain the columns specified in the Stimuli File Structure below.</p>
 
 <h4>Available Stimuli Files</h4>
 
@@ -113,7 +113,7 @@
       <td class="cellB">tatool-stimuli</td>
       <td>stimuli</td>
       <td><a href="https://raw.githubusercontent.com/tatool/tatool-web/master/app/projects/public/tatool-stimuli/stimuli/objectLocation-animals.csv" target="_blank">objectLocation-animals.csv</a></td>
-      <td>Display animal images to memorise and recall.</td>
+      <td>Displays animal images to memorise and recall.</td>
     </tr>
   </tbody>
 </table>
@@ -134,7 +134,7 @@
       <td class="cellB">stimulusCount</td>
       <td>(String)</td>
       <td class="cellB">Yes</td>
-      <td>Number of memoranda in this trial.</td>
+      <td>Set size / list length (i.e., number of memoranda) in this trial.</td>
     </tr>
     <tr>
       <td class="cellB">stimulusValue[n]</td>
@@ -146,19 +146,19 @@
       <td class="cellB">stimulusValueType[n]</td>
       <td>text/image/circle/square</td>
       <td class="cellB">Yes</td>
-      <td>The stimulus value type in order to identify how to display the value.</td>
+      <td>The stimulus value type for Tatool to know how to display it.</td>
     </tr>
     <tr>
       <td class="cellB">correctResponse[n]</td>
       <td>(String)</td>
       <td class="cellB">Yes</td>
-      <td>The correct response for this memoranda (gridPosition).</td>
+      <td>The correct response for this memorandum.</td>
     </tr>
     <tr>
       <td class="cellB">gridPosition[n]</td>
       <td>(String)</td>
       <td class="cellB">Yes</td>
-      <td>The grid position for this memoranda.</td>
+      <td>The grid position for this memorandum.</td>
     </tr>
   </tbody>
 </table>
@@ -167,4 +167,4 @@
 
 <h3 id="download">Download<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
 
-<p>You can access the source code (Service, Controller, Template, CSS) for this Executable in our <a href="https://github.com/tatool/tatool-web/tree/master/app/projects/public/tatool/executables" target="_blank">github repository</a>.</p>
+<p>You can access the source code (Service, Controller, Template, CSS) for this Executable in our <a href="https://github.com/tatool/tatool-web/tree/master/app/projects/public/tatool/executables" target="_blank">GitHub repository</a>.</p>
