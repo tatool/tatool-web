@@ -1,4 +1,0 @@
-stimulusValue;stimulusValueType;stimulusValueColor;stimulusType;correctResponse;keyCode;keyLabel;keyLabelType
-bear_96x96.png;image;;neutral;green;ArrowDown;a;text
-bird_96x96.png;image;;neutral;red;ArrowLeft;bird_96x96.png;image
-penguin_96x96.png;image;;neutral;blue;ArrowRight;;image
