@@ -4,7 +4,7 @@
 			"name" : "tatool", 
 			"access" : "public", 
 			"email" : "info@tatool.ch",
-			"description" : "default tatool project", 
+			"description" : "The official Tatool executables project.", 
 			"executables" : [
 				{ "customType" : "tatoolChoiceReaction", "description" : "Choice Reaction Time Task" },
 				{ "customType" : "tatoolCountdown", "description" : "Countdown Task" },
@@ -17,7 +17,7 @@
 			"access" : "public", 
 			"name" : "tatool-stimuli", 
 			"email" : "info@tatool.ch",
-			"description" : "The official tatool stimuli project containing different stimuli data for everyone to use.", 
+			"description" : "The official Tatool stimuli project containing different stimuli data for reuse.", 
 			"executables" : [ ]
 		}
 	]
