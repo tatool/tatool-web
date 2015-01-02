@@ -1,20 +1,53 @@
-<h2>Export Data</h2>
+<h2>Editor</h2>
 
-<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+<p>The Editor is a convenient way to quickly and easily create experiments. The Editor interface consists of two parts, the module navigation on the left side and the module/element settings on the right side. Move your mouse over the Tooltip icons to get brief descriptions of each field.</p>
 
 <ul id="docPageNav">
-  <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('service')">Lorem Ipsum</a></li>
-  <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('controller')">Lorem Ipsum</a></li>
+  <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('settings')">Module Settings</a></li>
+  <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('elements')">Elements & Handlers</a></li>
+  <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('executables')">Executables</a></li>
+  <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('publish')">Publish</a></li>
 </ul>
 
 <hr class="hr-red">
 
-<h3 id="architecture">Lorem Ipsum<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
+<h3 id="settings">Module Settings<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
+<p>The module setting comprise the basic module information (name, author, label), and the module behaviour settings. All module configurations are stored in <a href="http://en.wikipedia.org/wiki/JSON" target = "_blank">JSON</a> format. To easily exchange modules with other researchers, you can download a JSON file by clicking on the download button. 
+The module that you create with the Editor, is saved as a JSON file. To download the JSON module file, click on the <i>download</i> button.</p>
 
-<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+<p><img src="../../images/doc/screen-editor-module.png" class="internal"><br>
+  <i>Module Navigation (left half) and Settings (right half)</i></p>
 
 <hr class="hr-red">
 
-<h3>What's Next?<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
+<h3 id="elements">Elements and Handlers<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
 
-<p>Lorem ipsum dolor sit amet. To proceed, please go to <a href ng-click="goPage('dev-first-executable.html')">LOREM IPSUM</a>.</p>
+<p><a ui-sref="doc({page: 'ref-elements.html'})">Elements</a> (List or Dual Elements) group your Executables and can be executed for <i>n</i> iterations. <a ui-sref="doc({page: 'ref-handler.html'})">Handlers</a> are also set on the level of elements, which makes their functionality available to any child Executables or elements (e.g., another List Element). To see what properties can be set for the handlers, have a look at the <a ui-sref="doc({page: 'ref-handler.html'})">handlers reference</a>.</p>
+
+<p><img src="../../images/doc/screen-editor-element.png" class="internal"><br>
+  <i>Element and Handler Settings</i></p>
+  
+<p><img src="../../images/doc/screen-editor-handler.png" class="internal"><br>
+  <i>Specification of Handler Settings and Properties</i></p>
+
+<hr class="hr-red">
+
+<h3 id="executables">Executables<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
+
+<p>Executables can be understood as experimental paradigms. They are hence the most important component of your experiment. Browse our <a ui-sref="doc({page: 'main-lib.html'})">Task Library</a> to see which tasks are available. All of these tasks allow you to use your own stimuli, and most of them are so highly generic that you can tailor them to your needs tweaking their properties. The properties are listed for each task in the Task Library.</p> 
+
+<p>You can also <a ui-sref="doc({page: 'main-dev.html'})">develop your own tasks</a>. If you're willing to share your Executables with other researchers, we'll be happy to host them for you for free! Otherwise, you can either run Tatool in offline lab mode (see <a ui-sref="doc({page: 'dev-getting-started.html'})">here</a>), host in on your own web server running Tatool, or we can host it for you in exchange for a small donation helping to cover our fixed hosting costs.</p>
+
+<p><img src="../../images/doc/screen-editor-executable.png" class="internal"><br>
+  <i>Specification of Executables And Their Properties</i></p>
+
+<hr class="hr-red">
+
+<h3 id="publish">Publish<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
+
+<p>To go live with your experiment, you can publish it with a simple click on <i>Publish</i> (make sure you activated the <i>Repository</i>). You can choose whether you want to make the module available to all registered Tatool users by selecting it to be <i>Public</i>, or to invite only a specified sample of participants that are personally invited by selecting it to be <i>Private</i>. You can <i>Edit</i> your module any time, but have to <i>Publish</i> it again to make changes available to your users. Once you published such changes, users that have added your module first have to update it before they can execute it. This allows for dynamic adjustment as it might be required during piloting.</p> 
+
+<p><b>Note:</b> To make sure that we have sufficient web space for everyone, we currently limit the number of simultaneously published modules per researcher to <b>3</b> at a time.</p>
+
+<p><img src="../../images/doc/screen-editor-publish.png" class="internal"><br>
+  <i>Publishing Modules</i></p>
