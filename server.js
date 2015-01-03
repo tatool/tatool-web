@@ -26,6 +26,7 @@ app.set('remote_upload', process.env.REMOTE_UPLOAD);
 app.set('remote_download', process.env.REMOTE_DOWNLOAD);
 app.set('override_upload_dir', false);
 app.set('module_limit', 3);
+app.set('editor_user', 'info@tatool.ch');
 
 // dependencies
 var userController = require('./controllers/user');
