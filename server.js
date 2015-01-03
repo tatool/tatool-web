@@ -24,9 +24,9 @@ app.set('captcha_private_key', process.env.RECAPTCHA_PRIVATE_KEY || '');
 app.set('remote_url', process.env.REMOTE_URL);
 app.set('remote_upload', process.env.REMOTE_UPLOAD);
 app.set('remote_download', process.env.REMOTE_DOWNLOAD);
+app.set('editor_user', process.env.EDITOR_USER || '');
 app.set('override_upload_dir', false);
 app.set('module_limit', 3);
-app.set('editor_user', 'info@tatool.ch');
 
 // dependencies
 var userController = require('./controllers/user');
