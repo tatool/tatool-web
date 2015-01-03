@@ -8,3 +8,4 @@ uploads
 .env
 .envprod
 app/projects/private/*
+app/views/ga.html
