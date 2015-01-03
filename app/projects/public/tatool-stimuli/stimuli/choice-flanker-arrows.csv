@@ -1,7 +1,7 @@
-stimulusType;stimulusValue;stimulusValueType;correctResponse;keyCode;response
-congruent;arrows-congruent-left.png;image;left;ArrowLeft;left
-congruent;arrows-congruent-right.png;image;right;ArrowRight;right
-incongruent;arrows-incongruent-right.png;image;right;ArrowRight;right
-incongruent;arrows-incongruent-left.png;image;left;ArrowLeft;left
-neutral;arrows-neutral-left.png;image;left;ArrowLeft;left
-neutral;arrows-neutral-right.png;image;right;ArrowRight;right
+stimulusType;stimulusValue;stimulusValueType;correctResponse;keyCode;response;keyIndex
+congruent;arrows-congruent-left.png;image;left;ArrowLeft;left;0
+congruent;arrows-congruent-right.png;image;right;ArrowRight;right;1
+incongruent;arrows-incongruent-right.png;image;right;ArrowRight;right;1
+incongruent;arrows-incongruent-left.png;image;left;ArrowLeft;left;0
+neutral;arrows-neutral-left.png;image;left;ArrowLeft;left;0
+neutral;arrows-neutral-right.png;image;right;ArrowRight;right;1
