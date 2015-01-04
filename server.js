@@ -1,4 +1,5 @@
 // server
+require('newrelic');
 var express = require('express');
 var compress = require('compression');
 var os = require('os');
