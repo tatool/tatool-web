@@ -197,18 +197,20 @@ exports.remove = function(req, res) {
 };
 
 var deleteAnalyticsData = function(req, res) {
+
+  var moduleId = req.params.moduleId.replace(/\//g, '');
+
   if (req.app.get('remote_url')) {
     var options = {
-      uri: req.app.get('remote_url') + req.app.get('remote_delete') + '?moduleId=' + req.params.moduleId,
+      uri: req.app.get('remote_url') + req.app.get('remote_delete') + '?moduleId=' + moduleId,
       method: 'GET'
     };
-
     request(options)
       .auth(req.app.get('resource_user'), req.app.get('resource_pw'), true)
         .pipe(res);
-        
+
   } else {
-    var analyticsPath = 'uploads/user/' + req.params.moduleId;
+    var analyticsPath = 'uploads/user/' + moduleId;
     rmdir(analyticsPath, function(error){
       if (error) {
         res.status(500).send(err);

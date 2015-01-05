@@ -16,7 +16,7 @@ if ((!isset($moduleId) || is_null($moduleId))) {
   exit;
 }
 
-$path = "/home/outerlim/tatoolweb-stage/" . $moduleId;
+$path = "/home/outerlim/tatoolweb/" . $moduleId;
 
 // check if path exists
 if (file_exists($path)) {
