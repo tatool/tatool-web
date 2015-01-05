@@ -51,7 +51,6 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js lab",
-    "test": "grunt test",
     "postinstall": "bower install && gulp build"
   },
   "devDependencies": {
