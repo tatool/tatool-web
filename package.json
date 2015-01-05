@@ -1,6 +1,6 @@
 {
   "name": "tatool-web",
-  "version": "0.1",
+  "version": "0.1.0",
   "description": "Tatool - open-source experiment software for researchers",
   "repository": {
     "type": "git",
