@@ -5,6 +5,7 @@ var Q = require('q');
 var uuid = require('node-uuid');
 var fs = require('fs');
 var request = require('request');
+var rmdir = require('rimraf');
 
 exports.initAnalytics = function(module) {
   var deferred = Q.defer();
@@ -190,9 +191,32 @@ exports.remove = function(req, res) {
     if (err) {
       res.status(500).send(err);
     } else {
-      res.json();
+      deleteAnalyticsData(req, res);
     }
   });
+};
+
+var deleteAnalyticsData = function(req, res) {
+  if (req.app.get('remote_url')) {
+    var options = {
+      uri: req.app.get('remote_url') + req.app.get('remote_delete') + '?moduleId=' + req.params.moduleId,
+      method: 'GET'
+    };
+
+    request(options)
+      .auth(req.app.get('resource_user'), req.app.get('resource_pw'), true)
+        .pipe(res);
+        
+  } else {
+    var analyticsPath = 'uploads/user/' + req.params.moduleId;
+    rmdir(analyticsPath, function(error){
+      if (error) {
+        res.status(500).send(err);
+      } else {
+        res.json();
+      }
+    });
+  }
 };
 
 exports.getUserDataDownloadToken = function(req, res) {
@@ -216,6 +240,8 @@ exports.getUserDataDownloadToken = function(req, res) {
         fileToken.token = token;
         fileToken.file = file;
         fileToken.fileName = niceFileName + '.zip';
+        fileToken.created_at = Date.now();
+        fileToken.created_by = req.user.email;
 
         if (req.app.get('remote_url')) {
           fileToken.save(function(err, data) {
@@ -249,6 +275,7 @@ exports.getUserDataDownloadToken = function(req, res) {
 };
 
 exports.getUserData = function(req, res) {
+
   if (req.app.get('remote_url')) {
     DownloadToken.findOneAndRemove({ token: req.params.token }, function(err, data) {
       if (err) {

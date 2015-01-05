@@ -27,13 +27,44 @@ exports.updateUser = function(req, res) {
       user.roles = req.body.roles;
       user.updated_at = new Date();
 
-      user.save(function(err) {
-        if (err) {
-          res.status(500).json({ message: 'Update of user failed.', data: err });
-        } else {
-          res.json({ message: 'User successfully updated.', data: user });
+      var isAdmin = false;
+      for (var i = 0; i < user.roles.length; i++) {
+        if (user.roles[i] === 'admin') {
+          isAdmin = true;
+          break;
         }
-      });
+      }
+
+      // only allow one admin user
+      if (isAdmin) {
+        User.findOne({ roles: { $in: ['admin'] } }, function(err, adminUser) {
+          if (err) {
+            res.status(500).send(err);
+          } else {
+
+            if (adminUser) {
+              res.status(500).json({ message: 'Admin role is already assigned to another user. There can be only one!'});
+            } else {
+              user.save(function(err) {
+                if (err) {
+                  res.status(500).json({ message: 'Update of user failed.', data: err });
+                } else {
+                  res.json({ message: 'User successfully updated.', data: user });
+                }
+              });
+            }
+
+          }
+        });
+      } else {
+        user.save(function(err) {
+          if (err) {
+            res.status(500).json({ message: 'Update of user failed.', data: err });
+          } else {
+            res.json({ message: 'User successfully updated.', data: user });
+          }
+        });
+      }
 
     } else {
       // Create a new user

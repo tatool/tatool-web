@@ -23,7 +23,9 @@ angular.module('tatool.app')
           $scope.highlightUserEmail = data.data.email;
           $timeout(function() { $scope.highlightUserEmail = null; }, 500);
         }, function(err) {
+          setAlert('danger', err);
           $log.error(err);
+          initUsers();
         });
       };
 

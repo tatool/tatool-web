@@ -13,6 +13,14 @@ var DownloadToken = new mongoose.Schema({
     fileName: {
       type: String,
       required: true
+    },
+    created_at: {
+      type: Date,
+      required: true
+    },
+    created_by: {
+      type: String,
+      required: true
     }
 });
 
