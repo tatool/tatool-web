@@ -21,7 +21,8 @@ angular.module('tatool.module', ['tatool', 'tatool.auth', 'angular-progress-arc'
     EXECUTABLE_START: 'EXECUTABLE_START',
     EXECUTABLE_END: 'EXECUTABLE_END',
     TRIAL_SAVE: 'TRIAL_SAVE',
-    LEVEL_CHANGE: 'LEVEL_CHANGE'
+    LEVEL_CHANGE: 'LEVEL_CHANGE',
+    MOUSE_CURSOR: 'MOUSE_CURSOR'
   })
   .constant('statusUpdate', {
     FEEDBACK: 'FEEDBACK'

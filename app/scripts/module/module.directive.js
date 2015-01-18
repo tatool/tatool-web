@@ -220,6 +220,11 @@ angular.module('tatool.module').directive('tatoolText', [ function() {
     link: function (scope, element, attr, tatoolInputCtrl) {
       tatoolInputCtrl.addTextKey('Enter', '', 'tatoolInputText');
       $('#tatoolInputText').focus();
+
+      // keep focus
+      $(document).on("click", function() {
+        $("#tatoolInputText").focus();
+      });
     },
     template: '<input type="text" class="textInput" id="tatoolInputText">'
   };

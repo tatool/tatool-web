@@ -30,8 +30,8 @@
   </head>
   <body ng-app="tatool.module" ng-controller="MainCtrl" ng-keydown="keyPress($event);" ng-mousedown="mousePress($event);" ng-strict-di>
 
-    <!-- Add your site or application content here -->
-    <div id="moduleContainer">
+    <!-- Module content -->
+    <div id="moduleContainer" ng-class="{true:'hideCursor'}[hideMouseCursor]">
       <div ui-view></div>
     </div>
 

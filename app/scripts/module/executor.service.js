@@ -214,6 +214,10 @@ angular.module('tatool.module')
       });
       var params = { moduleId: moduleService.getModuleId(), type: 'executable', url: url, status: statusEnabled };
 
+      // trigger mouse cursor visibility
+      var hideMouseCursor = (currentExecutable.hideMouseCursor) ? currentExecutable.hideMouseCursor : false;
+      broadcastPhaseChange(tatoolPhase.MOUSE_CURSOR, hideMouseCursor);
+
       // focus window to make sure we're receiving user input
       $window.focus();
 

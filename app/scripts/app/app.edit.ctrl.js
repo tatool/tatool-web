@@ -6,7 +6,7 @@ angular.module('tatool.app')
 
       var VIEW_PATH = '../../views/app/';
 
-      var PROTECTED_PROPERTIES = ['tatoolType', 'customType', 'name', 'blankInterval', 'fixationInterval', 'status', 'project'];
+      var PROTECTED_PROPERTIES = ['tatoolType', 'customType', 'name', 'blankInterval', 'fixationInterval', 'status', 'project', 'hideMouseCursor'];
 
       $scope.resourceTypes = ['stimuli', 'instructions'];
 
@@ -18,7 +18,7 @@ angular.module('tatool.app')
       $scope.highlightId = {key: 'module'};
 
       $scope.alert = {};
-      $scope.elementType = '../../views/app/edit_module.html';
+      $scope.elementType = VIEW_PATH + 'edit_module.html';
       $scope.projects = [];
       $scope.executables = [];
 
@@ -29,7 +29,7 @@ angular.module('tatool.app')
       $scope.openModule = function() {
         hideAlert();
         $scope.highlightId.key = 'module';
-        $scope.elementType = '../../views/app/edit_module.html';
+        $scope.elementType = VIEW_PATH + 'edit_module.html';
       };
 
       $scope.openElement = function(element, index, parent) {

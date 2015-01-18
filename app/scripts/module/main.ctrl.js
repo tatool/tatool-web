@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('tatool.module')
-  .controller('MainCtrl', ['$rootScope','$scope', '$log', '$timeout', '$state', '$window', 'moduleService', 'userService', 'moduleDataService', 'trialDataService', 'executor', 'cfgModule', 'executableUtils',
-    function ($rootScope, $scope, $log, $timeout, $state, $window, moduleService, userService, moduleDataService, trialDataService, executor, cfgModule, executableUtils) {
+  .controller('MainCtrl', ['$rootScope','$scope', '$log', '$timeout', '$state', '$window', 'moduleService', 'userService', 'moduleDataService', 'trialDataService', 'executor', 'cfgModule', 'executableUtils', 'tatoolPhase',
+    function ($rootScope, $scope, $log, $timeout, $state, $window, moduleService, userService, moduleDataService, trialDataService, executor, cfgModule, executableUtils, tatoolPhase) {
 
     $scope.alert = { type: 'danger', msg: '', visible: false };
 
@@ -14,6 +14,9 @@ angular.module('tatool.module')
     $window.sessionStorage.removeItem('moduleId');
 
     $log.debug('Running module (' + mode +'): ' + moduleId);
+
+    // don't hide mouse cursor by default
+    $scope.hideMouseCursor = false;
 
     // Handle global key press
     $scope.keyPress = function($event){
@@ -65,6 +68,15 @@ angular.module('tatool.module')
       $log.error('Error in stateChange', toState);
       executor.stopModule(false);
       event.preventDefault();
+    });
+
+    // Handle change of mouse cursor visibility triggered by executor
+    $scope.$on(tatoolPhase.MOUSE_CURSOR, function(state, hideMouseCursor) {
+      if (hideMouseCursor) {
+        $scope.hideMouseCursor = true;
+      } else {
+        $scope.hideMouseCursor = false;
+      }
     });
 
     function loadModule() {
