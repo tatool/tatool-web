@@ -74,16 +74,21 @@ angular.module('tatool.app')
     };
 
     $scope.showDetails = function(user) {
-      $modal.open({
-        templateUrl: 'views/app/analytics_user.html',
-        controller: 'AnalyticsUserCtrl',
-        size: 'lg',
-        resolve: {
-          user: function () {
-            return user;
+      $scope.hideAlert();
+      if (!user.maxSessionId) {
+        setAlert('info', 'There is no session data available yet for this subject.');
+      } else {
+        $modal.open({
+          templateUrl: 'views/app/analytics_user.html',
+          controller: 'AnalyticsUserCtrl',
+          size: 'lg',
+          resolve: {
+            user: function () {
+              return user;
+            }
           }
-        }
-      });
+        });
+      }
     };
 
     $scope.downloadData = function(user, module) {
