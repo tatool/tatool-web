@@ -222,8 +222,8 @@ angular.module('tatool.module').directive('tatoolText', [ function() {
       $('#tatoolInputText').focus();
 
       // keep focus
-      $(document).on("click", function() {
-        $("#tatoolInputText").focus();
+      $(document).on('click', function() {
+        $('#tatoolInputText').focus();
       });
     },
     template: '<input type="text" class="textInput" id="tatoolInputText">'
