@@ -6,11 +6,40 @@
 			"email" : "info@tatool.ch",
 			"description" : "The official Tatool executables project.", 
 			"executables" : [
-				{ "customType" : "tatoolChoiceReaction", "description" : "Choice Reaction Time Task" },
-				{ "customType" : "tatoolCountdown", "description" : "Countdown Task" },
-				{ "customType" : "tatoolMemorySpan", "description" : "Memory Span Task" },
-				{ "customType" : "tatoolInstruction", "description" : "Instruction Task" },
-				{ "customType" : "tatoolObjectLocation", "description" : "Object Location Memory Task" }
+				{ "customType" : "tatoolChoiceReaction", "description" : "Choice Reaction Time Task", "customProperties": [
+					{ "propertyName": "stimuliPath", "propertyType": "Path" },
+					{ "propertyName": "stimuliFile", "propertyType": "Resource" },
+					{ "propertyName": "showKeys", "propertyType": "Boolean" },
+					{ "propertyName": "timerEnabled", "propertyType": "Boolean" },
+					{ "propertyName": "displayDuration" },
+					{ "propertyName": "randomisation" }
+				] },
+				{ "customType" : "tatoolCountdown", "description" : "Countdown Task", "customProperties": [
+					{ "propertyName": "countdown" },
+					{ "propertyName": "interval" },
+					{ "propertyName": "goText" }
+				] },
+				{ "customType" : "tatoolMemorySpan", "description" : "Memory Span Task", "customProperties": [
+					{ "propertyName": "stimuliPath", "propertyType": "Path" },
+					{ "propertyName": "stimuliFile", "propertyType": "Resource" },
+					{ "propertyName": "suspendAfterEachItem", "propertyType": "Boolean" },
+					{ "propertyName": "displayDuration" },
+					{ "propertyName": "intervalDuration" },
+					{ "propertyName": "randomisation" },
+					{ "propertyName": "recallText" }
+				] },
+				{ "customType" : "tatoolInstruction", "description" : "Instruction Task", "customProperties": [
+					{ "propertyName": "pages", "propertyType": "ArrayResource" },
+					{ "propertyName": "images", "propertyType": "ArrayResource" }
+				] },
+				{ "customType" : "tatoolObjectLocation", "description" : "Object Location Memory Task", "customProperties": [
+					{ "propertyName": "stimuliPath", "propertyType": "Path" },
+					{ "propertyName": "stimuliFile", "propertyType": "Resource" },
+					{ "propertyName": "displayDuration" },
+					{ "propertyName": "intervalDuration" },
+					{ "propertyName": "feedbackDuration" },
+					{ "propertyName": "randomisation" }
+				] }
 			]
 		},
 		{ 

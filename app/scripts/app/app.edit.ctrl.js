@@ -63,6 +63,17 @@ angular.module('tatool.app')
         });
       }
 
+      function addCustomPropertiesFromProject(element) {
+        if ($scope.currentExecutable.customProperties) {
+          for (var i = 0; i < $scope.currentExecutable.customProperties.length; i++) {
+            var customProperty = $scope.currentExecutable.customProperties[i];
+            if (!(customProperty.propertyName in element)) {
+              insertProperty(element, customProperty.propertyName, customProperty.propertyType)
+            }
+          }
+        }
+      }
+
       // checks whether a property name already exists
       function customPropertyExists(propertyName) {
         var exists = false;
@@ -412,13 +423,14 @@ angular.module('tatool.app')
                 var propertyName = $('#newPropertyName').val();
                 var propertyType = $('input[name=\'type\']:checked').val();
                 if (!propertyName || propertyName === '' || propertyName.indexOf(' ') >= 0 || !isNaN(parseInt(propertyName))) {
-                  setAlert('danger', 'Invalid or missing Property name.');
+                  setAlert('danger', 'Invalid or missing Property name. Please use lowerCamelCase notation for custom Property names.');
                   $scope.$apply();
                 } else if ( (PROTECTED_PROPERTIES.indexOf(propertyName) !== -1) || customPropertyExists(propertyName) ) {
-                  setAlert('danger', 'Property name is protected or already in use.');
+                  setAlert('danger', 'Property name is protected or already in use. Please use a different name.');
                   $scope.$apply();
                 } else {
                   insertProperty(element, propertyName, propertyType, context);
+                  refreshProperties(element);
                 }
               }
             },
@@ -440,6 +452,11 @@ angular.module('tatool.app')
           }
         });
       };
+
+      function refreshProperties(element) {
+        loadCustomProperties(element);
+        $scope.$apply();
+      }
 
       function insertProperty(element, propertyName, propertyType, context) {
         if (propertyType === 'ArrayString') {
@@ -463,9 +480,6 @@ angular.module('tatool.app')
         } else {
           element[propertyName] = '';
         }
-
-        loadCustomProperties(element, context);
-        $scope.$apply();
       }
 
       $scope.addEntry = function(element, property, context) {
@@ -642,6 +656,8 @@ angular.module('tatool.app')
 
       $scope.ok = function () {
         if ($scope.elementType === VIEW_PATH + 'edit_executable_select.html') {
+          addCustomPropertiesFromProject($scope.element);
+          loadCustomProperties($scope.element);
           $scope.returnTo('executable');
         } else if ($scope.elementType === VIEW_PATH + 'edit_executable_property.html') {
           $scope.returnTo('executable');

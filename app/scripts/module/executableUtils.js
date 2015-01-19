@@ -4,7 +4,7 @@
 /* global async */
 
 angular.module('tatool.module')
-  .service('executableUtils', [ '$q', '$http', function ($q, $http) {
+  .service('executableUtils', [ '$q', '$http', '$log', function ($q, $http, $log) {
 
     var utils = {};
 
@@ -88,6 +88,11 @@ angular.module('tatool.module')
     };
 
     var getResourcePath = function(res) {
+      if (!res.project) {
+        $log.error('Could not get resource path due to missing project information for resource: ', res);
+        utils.fail('Could not get resource path due to missing project information for resource: ' + JSON.stringify(res));
+        return null;
+      }
       if (res.project.access === 'external') {
         if (res.resourcePath) {
           return res.resourcePath + res.resourceName;

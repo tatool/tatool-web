@@ -13,7 +13,7 @@
     <div class="col-sm-9">
       <ui-select ng-model="currentProject" theme="bootstrap" ng-disabled="disabled" on-select="chooseProject($item, $model)">
         <ui-select-match placeholder="Select project...">{{$select.selected.name}}</ui-select-match>
-        <ui-select-choices group-by="groupByProjectAccess" repeat="project in projects | filter: $select.search | filter: { access: '!external' }">
+        <ui-select-choices group-by="groupByProjectAccess" repeat="project in projects | filter: $select.search | filter: { access: '!external' } | orderBy:'name'">
           <span ng-bind-html="project.name | highlight: $select.search"></span>
         </ui-select-choices>
       </ui-select><br>
@@ -28,7 +28,7 @@
     <div class="col-sm-9">
       <ui-select ng-model="currentExecutable" theme="bootstrap" ng-disabled="disabled" on-select="chooseExecutable($item, $model)">
         <ui-select-match placeholder="Select executable type...">{{$select.selected.customType}}</ui-select-match>
-        <ui-select-choices repeat="executable in currentProject.executables | filter: $select.search">
+        <ui-select-choices repeat="executable in currentProject.executables | filter: $select.search | orderBy:'customType'">
           <span ng-bind-html="executable.customType | highlight: $select.search"></span>
         </ui-select-choices>
       </ui-select><br>

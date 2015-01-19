@@ -264,7 +264,7 @@ angular.module('tatool.app')
                     '<label class="col-md-4 control-label" for="name">Executables (JSON)</label> ' +
                     '<div class="col-md-8"> ' +
                     '<textarea id="executables" name="executables" class="form-control input-sm" rows="10"></textarea>' +
-                    '<small><b>Format:</b> [ { "customType" : "executable1" }, <br>{ "customType" : "executable2" } ]</small>' +
+                    '<small><b>Format:</b> [ { "customType" : "executable1", "description": "Small executable description", "customProperties": [ { "propertyName": "booleanProperty", "propertyType": "Boolean" } ] }, <br>{ "customType" : "executable2" } ]</small>' +
                     '</div> ' +
                     '</div> ' +
                     '</div> ' +
@@ -414,7 +414,7 @@ angular.module('tatool.app')
                     '<label class="col-md-4 control-label" for="name">Executables (JSON)</label> ' +
                     '<div class="col-md-8"> ' +
                     '<textarea id="executables" name="executables" class="form-control input-sm" rows="10">' + JSON.stringify(project.executables) + '</textarea>' +
-                    '<small><b>Format:</b> [ { "customType" : "executable1" }, <br>{ "customType" : "executable2" } ]</small>' +
+                    '<small><b>Format:</b> [ { "customType" : "executable1", "description": "Small executable description", "customProperties": [ { "propertyName": "booleanProperty", "propertyType": "Boolean" } ] }, <br>{ "customType" : "executable2" } ]</small>' +
                     '</div> ' +
                     '</div> ' +
                     '</div> ' +

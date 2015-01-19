@@ -40,14 +40,30 @@
 <li><b class="red">Access:</b> A Project can either be <b>Public</b>, which means every developer can access its resources, or it can be <b>Private</b>, meaning only the owner of the Project can access its resources.</li>
 <li><b class="red">Owner:</b> The owner of a Project is the login email of the user owning that Project.</li>
 <li><b class="red">Description:</b> A short description of the Project. This will be displayed in the Module Editor whenever you select a Project.</li>
-<li><b class="red">Executables (JSON):</b> If you're planning on having your own Executables as part of a Project, you can provide their details as a JSON String. This allows you to select the Executables from a dropdown list in the Module Editor. The JSON string is an array of objects, in which every object has the property <i>customType</i> identifying the Executable Service name and a short <i>description</i> which will be shown in the Module Editor:<br>
-<pre><code class="language-javascript">[ { "customType" : "myExecutable", "description" : "A short description of the Executable" }, 
-{ "customType" : "myOtherExecutable", "description" : "A short description of the Executable" } ]
+<li><b class="red">Executables (JSON):</b> If you're planning on having your own Executables as part of a Project, you can provide their details as a JSON String. This allows you to select the Executables from a dropdown list in the Module Editor and auto adds the provided custom Properties. The JSON string is an array of objects, in which every object has the property <i>customType</i> identifying the Executable Service name and a short <i>description</i> which is visible in the Module Editor. Additionally, you can provide the property <i>customProperties</i> which is an array of objects with the properties <i>propertyName</i> and <i>propertyType</i> each.<br>
+<pre><code class="language-javascript">[ 
+  { 
+    "customType" : "myExecutable", 
+    "description" : "A short description of the Executable", 
+    "customProperties": [
+      { "propertyName" : "pathProperty", "propertyType": "Path" },
+      { "propertyName" : "resourceProperty", "propertyType": "Resource" }
+      { "propertyName" : "booleanProperty", "propertyType": "Boolean" }
+      { "propertyName" : "arrayProperty", "propertyType": "Array" }
+      { "propertyName" : "arrayResourceProperty", "propertyType": "ArrayResource" }
+      { "propertyName" : "stringProperty" },
+    ] 
+  }, 
+  { 
+    "customType" : "myOtherExecutable", 
+    "description" : "A short description of the Executable" 
+  } 
+]
 </code></pre>
 </li>
 </ul>
 
-<p>In order to physically add resources (e.g. Executables, stimuli files) to a specific Project, you'll have to open the tatool-web folder on the server running your Tatool instance. Within that folder you'll find the corresponding Project folders under /app/projects/*. Every Project folder comprise 4 mandatory sub-folders that contain specific types of files:</p>
+<p>In order to physically add resources (e.g. Executables, stimuli files) to a specific Project, you'll have to open the tatool-web folder on the server running your Tatool instance. Within that folder you'll find the corresponding Project folders under /app/projects/*. Every Project folder comprises 4 mandatory sub-folders that contain specific types of files:</p>
 
 <ul class="docContentList">
 <li><b class="red">executables:</b> Tatool will search for your custom Executables within this folder.</li>
