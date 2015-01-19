@@ -68,7 +68,7 @@ angular.module('tatool.app')
           for (var i = 0; i < $scope.currentExecutable.customProperties.length; i++) {
             var customProperty = $scope.currentExecutable.customProperties[i];
             if (!(customProperty.propertyName in element)) {
-              insertProperty(element, customProperty.propertyName, customProperty.propertyType)
+              insertProperty(element, customProperty.propertyName, customProperty.propertyType);
             }
           }
         }
@@ -458,7 +458,7 @@ angular.module('tatool.app')
         $scope.$apply();
       }
 
-      function insertProperty(element, propertyName, propertyType, context) {
+      function insertProperty(element, propertyName, propertyType) {
         if (propertyType === 'ArrayString') {
           element[propertyName] = {};
           element[propertyName].propertyType = propertyType;
