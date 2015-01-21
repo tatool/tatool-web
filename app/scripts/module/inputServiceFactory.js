@@ -43,7 +43,16 @@ angular.module('tatool.module')
         if (this.keyInputOrder.indexOf(KeyCodes[keyCode]) === -1) {
           this.keyInputOrder.push(KeyCodes[keyCode]);
         }
+
+        // trigger a refresh in our directive
+        this.refreshKeys();
+
         return this;
+      };
+
+      // Refresh for keys added before directive is loaded. Will be overridden by directive method as soon as its loaded
+      this.refreshKeys = function() {
+
       };
 
       // Add list of keys in correct order
@@ -79,7 +88,7 @@ angular.module('tatool.module')
         return keys;
       };
 
-      // private method used by the tatoolInput directive to register manually added keys in the template
+      // private method used by the tatoolInput directive to register static keys in the template
       this._registerStaticKey = function(keyCode, givenResponse) {
         var obj = {};
         obj.givenResponse = givenResponse;
@@ -90,7 +99,7 @@ angular.module('tatool.module')
         return this;
       };
 
-      // private method used by the tatoolInput directive to register manually added text keys in the template
+      // private method used by the tatoolInput directive to register static text keys in the template
       this._registerStaticTextKey = function(keyCode, givenResponse, textInputId) {
         var obj = {};
         obj.givenResponse = '';

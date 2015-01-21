@@ -71,18 +71,21 @@ angular.module('tatool.module').directive('tatoolInput', ['$log', '$templateCach
       scope.show = false;
       $('#tatoolInputText').attr('disabled', true);
 
-      // add key directives for dynamically added keys in the order they have been added
-      angular.forEach(scope.service.keyInputOrder, function(keyCode) {
-        var value = scope.service.registeredKeyInputs[keyCode];
-        if (value.dynamic) {
-          var label = (value.labelType === 'text' && value.label) ? ' label="' + value.label + '"' : '';
-          var image = (value.labelType === 'image' && value.label) ? ' image="' + value.label + '"' : '';
-          var hide = (value.hide) ? ' hide' : '';
-          var keyEl = angular.element('<tatool-key code="'+ value.keyCode +'" response="'+ value.givenResponse + '"' + label + image + hide + ' dynamic="true"></tatool-key>');
-          element.children(':first').append(keyEl);
-          $compile(keyEl)(scope);
-        }
-      });
+      // add key directives for dynamically added keys in correct order
+      scope.service.refreshKeys = function() {
+        element.children(':first').children('[dynamic]').remove();
+        angular.forEach(scope.service.keyInputOrder, function(keyCode) {
+          var value = scope.service.registeredKeyInputs[keyCode];
+          if (value.dynamic) {
+            var label = (value.labelType === 'text' && value.label) ? ' label="' + value.label + '"' : '';
+            var image = (value.labelType === 'image' && value.label) ? ' image="' + value.label + '"' : '';
+            var hide = (value.hide) ? ' hide' : '';
+            var keyEl = angular.element('<tatool-key code="'+ value.keyCode +'" response="'+ value.givenResponse + '"' + label + image + hide + ' dynamic="true"></tatool-key>');
+            element.children(':first').append(keyEl);
+            $compile(keyEl)(scope);
+          }
+        });
+      };
 
       // remove dynamically added keys
       scope.service.removeInputKey = function(keyCode) {
@@ -133,6 +136,8 @@ angular.module('tatool.module').directive('tatoolInput', ['$log', '$templateCach
         $('#tatoolInputText').attr('disabled', true);
         return executableUtils.getTiming();
       };
+
+      scope.service.refreshKeys();
 
       element.on('$destroy', function() {
         watcher();
