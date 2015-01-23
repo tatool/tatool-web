@@ -34,6 +34,7 @@
               <h2>{{module.moduleName}}</h2>
               <h3>{{module.moduleAuthor}}</h3>
               <div class="buttonbar">
+                <a ng-click="showDescription(module)" class="btn btn-tatool-blue" tooltip="Show a description for this Module." tooltip-placement="bottom" ng-if="module.moduleDescription"><i class="fa fa-file-text-o"></i></a>
                 <span ng-switch on="module.moduleStatus" ng-cloak>
                   <div class="btn btn-tatool" ng-click="installModule(module)" ng-switch-when="update"><i class="fa fa-download"></i> Update</div>
                   <div class="btn btn-tatool" ng-click="startModule(module)" ng-switch-default><i class="fa fa-play-circle"></i> Start</div>
@@ -75,6 +76,7 @@
               <h2>{{module.moduleName}}</h2>
               <h3>{{module.moduleAuthor}}</h3>
               <div class="buttonbar">
+                <a ng-click="showDescription(module)" class="btn btn-tatool-blue" tooltip="Show a description for this Module." tooltip-placement="bottom" ng-if="module.moduleDescription"><i class="fa fa-file-text-o"></i></a>
                 <div class="btn btn-tatool-green" ng-click="replyInvite(module, 'accepted')"><i class="fa fa-thumbs-up"></i> Accept</div>
                 <div class="btn btn-tatool" ng-click="replyInvite(module, 'declined')"><i class="fa fa-thumbs-down"></i> Decline</div>
               </div>
@@ -103,6 +105,7 @@
               <h2>{{module.moduleName}}</h2>
               <h3>{{module.moduleAuthor}}</h3>
               <div class="buttonbar">
+                <a ng-click="showDescription(module)" class="btn btn-tatool-blue" tooltip="Show a description for this Module." tooltip-placement="bottom" ng-if="module.moduleDescription"><i class="fa fa-file-text-o"></i></a>
                 <div class="btn btn-tatool" ng-click="installModule(module)"><i class="fa fa-download"></i> Add</div>
               </div>
             </div>

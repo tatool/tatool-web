@@ -50,6 +50,7 @@ var update = function(entry, module, res) {
   entry.moduleName = module.moduleName;
   entry.moduleAuthor = module.moduleAuthor;
   entry.moduleIcon = module.moduleIcon;
+  entry.moduleDescription = module.moduleDescription;
   entry.markModified('moduleDefinition');
 
   entry.save(function(err, data) {

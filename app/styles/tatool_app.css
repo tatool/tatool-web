@@ -51,6 +51,9 @@ code {
 .big {
   font-size: 120%;
 }
+.blue {
+  color: #626db3;
+}
 
 /* fixes inline alignment of button and input fields*/
 .button-up {
@@ -561,7 +564,7 @@ a.accordion-toggle:hover {
 #modules .tile {
 	position: relative;
 	float: left;
-	width: 20em;
+	width: 21em;
   height: 7em;
 	margin-bottom: 1em;
 	margin-right: 0.8em;
@@ -607,7 +610,7 @@ a.accordion-toggle:hover {
 	color: #494949;
 	line-height: 1.35em;
   height: 100%;
-	width: 13em;
+	width: 14em;
 	text-align: left;
   font-size: 100%;
 }
@@ -666,6 +669,23 @@ a.accordion-toggle:hover {
   color: #494949;
 }
 
+/* Module description formatting */
+
+#moduleDescription {
+  font-size: 90%;
+}
+#moduleDescription h1 {
+  font-size: 120%;
+  font-weight: bold;
+}
+#moduleDescription h2 {
+  font-size: 105%;
+  font-weight: bold;
+}
+.author {
+  font-size: 80%;
+}
+
 
 /* Invite Modal */
 #inviteModal {
@@ -693,6 +713,17 @@ a.accordion-toggle:hover {
 .btn-tatool:hover {
 	color: #fff;
   background-color: #a23f22;
+}
+
+.btn-tatool-blue {
+  color: #fff;
+  background-color: #337ab7;
+  border-color: #2b6495;
+  padding: 3px 7px;
+}
+.btn-tatool-blue:hover {
+  color: #fff;
+  background-color: #286090;
 }
 
 .btn-tatool-green {

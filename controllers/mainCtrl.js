@@ -84,6 +84,7 @@ var update = function(req, res, userModule) {
         userModule.moduleName = module.moduleName;
         userModule.moduleAuthor = module.moduleAuthor;
         userModule.moduleIcon = module.moduleIcon;
+        userModule.moduleDescription = module.moduleDescription;
         userModule.markModified('moduleDefinition');
 
         userModule.save(function(err, data) {

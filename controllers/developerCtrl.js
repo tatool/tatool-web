@@ -76,6 +76,7 @@ var update = function(req, res, module) {
       module.moduleName = req.body.moduleName;
       module.moduleAuthor = req.body.moduleAuthor;
       module.moduleIcon = req.body.moduleIcon;
+      module.moduleDescription = req.body.moduleDescription;
       module.markModified('moduleDefinition');
 
       // update runtime information

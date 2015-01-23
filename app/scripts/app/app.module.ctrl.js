@@ -46,6 +46,7 @@ angular.module('tatool.app')
         var moduleIds = [];
         var installedModules = {};
 
+        var readyInstalled = 0;
         for (var i = 0; i < data.length; i++) {
           if (data[i].moduleType === 'private' && data[i].moduleStatus === 'invite') {
             $scope.invites.push(data[i]);
@@ -54,7 +55,8 @@ angular.module('tatool.app')
             moduleIds.push(data[i].moduleId);
             installedModules[data[i].moduleId] = {};
             installedModules[data[i].moduleId].currentVersion = parseInt(data[i].moduleVersion);
-            installedModules[data[i].moduleId].moduleIndex = i;
+            installedModules[data[i].moduleId].moduleIndex = readyInstalled;
+            readyInstalled++;
           }
         }
 
@@ -301,6 +303,28 @@ angular.module('tatool.app')
       
       // start moduleRunner
       $state.go('run');
+    };
+
+    // show module description
+    $scope.showDescription = function(module) {
+      hideAlert();
+
+      function removeScript(strCode) {
+        var html = $(strCode.bold()); 
+        html.find('script').remove();
+        return html.html();
+      }
+
+      bootbox.dialog({
+          message: '<div id="moduleDescription">' + removeScript(module.moduleDescription) + '</div>',
+          title: '<b>' + module.moduleName + '</b><br><span class="author">' + module.moduleAuthor + '</span>',
+          buttons: {
+            ok: {
+              label: 'Close',
+              className: 'btn-default'
+            }
+          }
+        });
     };
 
     $scope.setModuleFilter = function() {

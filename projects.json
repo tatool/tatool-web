@@ -39,6 +39,29 @@
 					{ "propertyName": "intervalDuration" },
 					{ "propertyName": "feedbackDuration" },
 					{ "propertyName": "randomisation" }
+				] },
+				{ "customType" : "tatoolCode", "description" : "Code Task", "customProperties": [
+					{ "propertyName": "inputText" },
+					{ "propertyName": "exactCodeLength" },
+					{ "propertyName": "minCodeLength" }
+				] },
+				{ "customType" : "tatoolShifting", "description" : "Shifting Task", "customProperties": [
+					{ "propertyName": "stimuliPath", "propertyType": "Path" },
+					{ "propertyName": "stimuliFile", "propertyType": "Resource" },
+					{ "propertyName": "showKeys", "propertyType": "Boolean" },
+					{ "propertyName": "timerEnabled", "propertyType": "Boolean" },
+					{ "propertyName": "displayDuration" },
+					{ "propertyName": "displayCueDuration" },
+					{ "propertyName": "randomisation" }
+				] },
+				{ "customType" : "tatoolSimon", "description" : "Simon Task", "customProperties": [
+					{ "propertyName": "stimuliPath", "propertyType": "Path" },
+					{ "propertyName": "stimuliFile", "propertyType": "Resource" },
+					{ "propertyName": "showKeys", "propertyType": "Boolean" },
+					{ "propertyName": "timerEnabled", "propertyType": "Boolean" },
+					{ "propertyName": "displayDuration" },
+					{ "propertyName": "displayCrossDuration" },
+					{ "propertyName": "randomisation" }
 				] }
 			]
 		},
