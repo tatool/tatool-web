@@ -1,0 +1,9 @@
+.wrapper {
+  color: #000;
+  font-size: 250%;
+  text-shadow: 0px 1px 2px #a2c9b2;
+}
+
+.errorIcon {
+  color : #cc0000;
+}

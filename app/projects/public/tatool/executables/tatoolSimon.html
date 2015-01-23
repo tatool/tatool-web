@@ -1,0 +1,17 @@
+<tatool>
+
+  <div id="wrapper">
+    <div class="divContentLeft">
+      <tatool-stimulus service="stimulusServiceLeft" class="stimulus"></tatool-stimulus>
+    </div>
+    <div class="divCenter">
+      <p ng-show="displayCross">+</p>
+    </div>
+    <div class="divContentRight">
+      <tatool-stimulus service="stimulusServiceRight" class="stimulus"></tatool-stimulus>
+    </div>
+  </div>
+
+  <tatool-input id="bottomExecutable" service="inputService" userInput="inputAction(input, timing, event)"></tatool-input>
+  
+</tatool>
