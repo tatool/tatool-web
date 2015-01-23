@@ -5,27 +5,27 @@
 <div>
   <form class="form-horizontal" role="form" ng-submit="saveModule()">
   <div class="form-group">
-    <label for="name" class="col-sm-3 control-label">Name 
+    <label for="moduleName" class="col-sm-3 control-label">Name * 
       <a class="info" tooltip="The name of your module will be visible for everyone once published." tooltip-placement="right"><i class="fa fa-info-circle"></i></a>
     </label>
     <div class="col-sm-9">
-      <input type="text" class="form-control" id="name" ng-model="module.moduleName" ng-required="true" auto-focus>
+      <input type="text" class="form-control" id="moduleName" ng-model="module.moduleName" ng-required="true" auto-focus>
     </div>
   </div>
   <div class="form-group">
-    <label for="author" class="col-sm-3 control-label">Author
+    <label for="moduleAuthor" class="col-sm-3 control-label">Author *
       <a class="info" tooltip="Author name will be visible for everyone once published." tooltip-placement="right"><i class="fa fa-info-circle"></i></a>
     </label>
     <div class="col-sm-9">
-      <input type="text" class="form-control" id="author" ng-model="module.moduleAuthor">
+      <input type="text" class="form-control" id="moduleAuthor" ng-model="module.moduleAuthor">
     </div>
   </div>
   <div class="form-group">
-    <label for="label" class="col-sm-3 control-label">Label
+    <label for="moduleLabel" class="col-sm-3 control-label">Label *
       <a class="info" tooltip="Internal shorthand name for your module, which will be used to name any export files." tooltip-placement="right"><i class="fa fa-info-circle"></i></a>
     </label>
     <div class="col-sm-9">
-      <input type="text" class="form-control" id="label" ng-model="module.moduleLabel">
+      <input type="text" class="form-control" id="moduleLabel" ng-model="module.moduleLabel">
     </div>
   </div>
   <div class="form-group">

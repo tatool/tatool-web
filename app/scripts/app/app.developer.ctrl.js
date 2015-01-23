@@ -289,7 +289,7 @@ angular.module('tatool.app')
       }
 
       bootbox.dialog({
-          message: 'This will clear all trial and session data associated with this Module. Are you sure you want to continue?',
+          message: 'This will clear all of your trial and session data associated with this Module. Are you sure you want to continue?',
           title: '<b>Tatool</b>',
           buttons: {
             ok: {

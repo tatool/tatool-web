@@ -208,17 +208,38 @@ angular.module('tatool.app')
 
       $scope.deleteElement = function(element, index, parent) {
         hideAlert();
-        if (parent) {
-          if (parent.tatoolType === 'Dual') {
-            delete parent.children[index];
-            $scope.elementType = VIEW_PATH + 'edit_module.html';
-            $scope.highlightId.key = 'module';
-          } else {
-            parent.children.splice(index, 1);
-            $scope.elementType = VIEW_PATH + 'edit_module.html';
-            $scope.highlightId.key = 'module';
+
+        function runDelete() {
+          if (parent) {
+            if (parent.tatoolType === 'Dual') {
+              delete parent.children[index];
+              $scope.elementType = VIEW_PATH + 'edit_module.html';
+              $scope.highlightId.key = 'module';
+            } else {
+              parent.children.splice(index, 1);
+              $scope.elementType = VIEW_PATH + 'edit_module.html';
+              $scope.highlightId.key = 'module';
+            }
+            $scope.$apply();
           }
         }
+
+      bootbox.dialog({
+          message: 'Are you sure you want to delete this Element and all of its child Elements?',
+          title: '<b>Tatool</b>',
+          buttons: {
+            ok: {
+              label: 'OK',
+              className: 'btn-default',
+              callback: runDelete
+            },
+            cancel: {
+              label: 'Cancel',
+              className: 'btn-default'
+            }
+          }
+        });
+
       };
 
       function getProjects() {
@@ -295,6 +316,8 @@ angular.module('tatool.app')
           $scope.elementType = VIEW_PATH + 'edit_list.html';
         } else if (string === 'handler') {
           $scope.elementType = VIEW_PATH + 'edit_handler.html';
+        } else if (string === 'module') {
+          $scope.elementType = VIEW_PATH + 'edit_module.html';
         }
       };
 
@@ -381,13 +404,13 @@ angular.module('tatool.app')
                     '<div class="col-md-12"> ' +
                     '<form class="form-horizontal"> ' +
                     '<div class="form-group"> ' +
-                    '<label class="col-md-4 control-label" for="name">Property Name</label> ' +
+                    '<label class="col-md-4 control-label" for="name">Property Name *</label> ' +
                     '<div class="col-md-4"> ' +
                     '<input id="newPropertyName" name="newPropertyName" type="text" class="form-control input-md"> ' +
                     '</div> ' +
                     '</div> ' +
                     '<div class="form-group"> ' +
-                    '<label class="col-md-4 control-label" for="type">Property Type</label> ' +
+                    '<label class="col-md-4 control-label" for="type">Property Type *</label> ' +
                     '<div class="col-md-4">' +
                     '<div class="radio"> <label for="type-string"> ' +
                     '<input type="radio" name="type" id="type-string" value="String" checked="checked"> ' +
@@ -520,13 +543,13 @@ angular.module('tatool.app')
                     '<div class="col-md-12"> ' +
                     '<form class="form-horizontal"> ' +
                     '<div class="form-group"> ' +
-                    '<label class="col-md-4 control-label" for="name">Handler Name</label> ' +
+                    '<label class="col-md-4 control-label" for="name">Handler Name *</label> ' +
                     '<div class="col-md-4"> ' +
                     '<input id="newHandlerName" name="newHandlerName" type="text" class="form-control input-md"> ' +
                     '</div> ' +
                     '</div> ' +
                     '<div class="form-group"> ' +
-                    '<label class="col-md-4 control-label" for="type">Handler Type</label> ' +
+                    '<label class="col-md-4 control-label" for="type">Handler Type *</label> ' +
                     '<div class="col-md-7">' +
                     '<div class="radio"> <label for="trialCountHandler"> ' +
                     '<input type="radio" name="type" id="trialCountHandler" value="trialCountHandler" checked="checked"> ' +
@@ -546,7 +569,7 @@ angular.module('tatool.app')
                 var handlerName = $('#newHandlerName').val();
                 var handlerType = $('input[name=\'type\']:checked').val();
                 if (!handlerName || handlerName === '' || handlerName.indexOf(' ') >= 0 || !isNaN(parseInt(handlerName))) {
-                  setAlert('danger', 'Invalid or missing Handler name.');
+                  setAlert('danger', 'Invalid or missing Handler name. Please use lowerCamelCase notation for Handler names.');
                   $scope.$apply();
                 } else {
                   insertHandler(element, handlerName, handlerType);
@@ -655,28 +678,89 @@ angular.module('tatool.app')
       };
 
       $scope.ok = function () {
-        if ($scope.elementType === VIEW_PATH + 'edit_executable_select.html') {
-          addCustomPropertiesFromProject($scope.element);
-          loadCustomProperties($scope.element);
-          $scope.returnTo('executable');
-        } else if ($scope.elementType === VIEW_PATH + 'edit_executable_property.html') {
-          $scope.returnTo('executable');
-        } else if ($scope.elementType === VIEW_PATH + 'edit_executable_property_path.html') {
-          $scope.returnTo('executable');
-        } else if ($scope.elementType === VIEW_PATH + 'edit_handler.html') {
-          $scope.returnTo('element');
-        } else if ($scope.elementType === VIEW_PATH + 'edit_handler_property.html') {
-          $scope.returnTo('handler');
-        } else if ($scope.elementType === VIEW_PATH + 'edit_handler_property_path.html') {
-          $scope.returnTo('handler');
+        if (!validateModule()) {
+          // invalid module
         } else {
-          // copy higher level descriptive properties to moduleDefinition
-          module.moduleDefinition.name = module.moduleName;
-          module.moduleDefinition.author = module.moduleAuthor;
-          module.moduleDefinition.label = module.moduleLabel;
-          $modalInstance.close();
+          if ($scope.elementType === VIEW_PATH + 'edit_executable_select.html') {
+            addCustomPropertiesFromProject($scope.element);
+            loadCustomProperties($scope.element);
+            $scope.returnTo('executable');
+          } else if ($scope.elementType === VIEW_PATH + 'edit_executable_property.html') {
+            $scope.returnTo('executable');
+          } else if ($scope.elementType === VIEW_PATH + 'edit_executable_property_path.html') {
+            $scope.returnTo('executable');
+          } else if ($scope.elementType === VIEW_PATH + 'edit_handler.html') {
+            $scope.returnTo('element');
+          } else if ($scope.elementType === VIEW_PATH + 'edit_handler_property.html') {
+            $scope.returnTo('handler');
+          } else if ($scope.elementType === VIEW_PATH + 'edit_handler_property_path.html') {
+            $scope.returnTo('handler');
+          } else {
+            // copy higher level descriptive properties to moduleDefinition
+            module.moduleDefinition.name = module.moduleName;
+            module.moduleDefinition.author = module.moduleAuthor;
+            module.moduleDefinition.label = module.moduleLabel;
+            $modalInstance.close();
+          }
         }
       };
+
+      // module validation functions
+      // general settings that will have to be set manually by the user before being able to save
+      function validateModule() {
+        if (!module.moduleName || module.moduleName === '') {
+          $scope.returnTo('module');
+          $scope.highlightId.key = 'module';
+          setAlert('danger', 'A Module Name is required.');
+          $('#moduleName').focus();
+          return false;
+        } else if (!module.moduleAuthor || module.moduleAuthor === '') {
+          $scope.returnTo('module');
+          $scope.highlightId.key = 'module';
+          setAlert('danger', 'A Module Author is required.');
+          $('#moduleAuthor').focus();
+          return false;
+        } else if (!module.moduleLabel || module.moduleLabel === '') {
+          $scope.returnTo('module');
+          $scope.highlightId.key = 'module';
+          setAlert('danger', 'A Module Label is required.');
+          $('#moduleLabel').focus();
+          return false;
+        } else {
+          validateHierarchy(module.moduleDefinition.moduleHierarchy);
+          return true;
+        }
+      }
+
+      // add default values for mandatory properties if not provided
+      function validateHierarchy(element) {
+        if (element.tatoolType === 'List' || element.tatoolType === 'Dual') {
+
+          // add default numIterations of 1
+          if(!element.iterator.numIterations || element.iterator.numIterations === '') {
+            element.iterator.numIterations = 1;
+          } 
+
+          // add default handler names if not provided
+          if (element.handlers && element.handlers.length > 0) {
+            for (var i = 0; i < element.handlers.length; i++) {
+              if(!element.handlers[i].name || element.handlers[i].name === '') {
+                element.handlers[i].name = (Math.random().toString(36)+'00000000000000000').slice(2,16+2);
+              }
+            }
+          }
+
+          angular.forEach(element.children, function(value) {
+            validateHierarchy(value);
+          });
+        } else if (element.tatoolType === 'Executable') {
+
+          // add default executable name if not provided
+          if(!element.name || element.name === '') {
+            element.name = (Math.random().toString(36)+'00000000000000000').slice(2,16+2);
+          }
+        }
+      }
 
       $scope.cancel = function () {
         $modalInstance.dismiss('cancel');
