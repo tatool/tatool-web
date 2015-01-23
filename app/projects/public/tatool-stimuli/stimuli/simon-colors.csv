@@ -1,0 +1,5 @@
+stimulusType;stimulusValue;stimulusValueType;stimulusPosition;correctResponse;keyCode;keyLabel;keyLabelType;response;keyIndex
+congruent;simon_green.png;image;left;green;ArrowLeft;simon_green_left.png;image;green;0
+incongruent;simon_green.png;image;right;green;ArrowLeft;simon_green_left.png;image;green;0
+congruent;simon_red.png;image;right;red;ArrowRight;simon_red_right.png;image;red;1
+incongruent;simon_red.png;image;left;red;ArrowRight;simon_red_right.png;image;red;1

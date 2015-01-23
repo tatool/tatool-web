@@ -1,0 +1,10 @@
+stimulusType;stimulusValue;stimulusValueType;cueValue;cueValueType;correctResponse;shiftingType;keyCode1;keyLabel1;keyLabelType1;response1;keyIndex1;keyCode2;keyLabel2;keyLabelType2;response2;keyIndex2
+parity;2;text;Parity;text;even;start;ArrowLeft;odd;text;odd;0;ArrowRight;even;text;even;1
+magnitude;3;text;Magnitude;text;less;switch;ArrowLeft;less;text;less;0;ArrowRight;greater;text;greater;1
+parity;6;text;Parity;text;even;switch;ArrowLeft;odd;text;odd;0;ArrowRight;even;text;even;1
+parity;3;text;Parity;text;odd;repetition;ArrowLeft;odd;text;odd;0;ArrowRight;even;text;even;1
+magnitude;9;text;Magnitude;text;greater;switch;ArrowLeft;less;text;less;0;ArrowRight;greater;text;greater;1
+magnitude;7;text;Magnitude;text;greater;repetition;ArrowLeft;less;text;less;0;ArrowRight;greater;text;greater;1
+parity;1;text;Parity;text;odd;switch;ArrowLeft;odd;text;odd;0;ArrowRight;even;text;even;1
+parity;6;text;Parity;text;even;repetition;ArrowLeft;odd;text;odd;0;ArrowRight;even;text;even;1
+magnitude;4;text;Magnitude;text;less;switch;ArrowLeft;less;text;less;0;ArrowRight;greater;text;greater;1

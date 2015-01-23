@@ -39,7 +39,7 @@ tatool
     // Called by timer when time elapsed without user input
     function timerUp() {
       service.inputService.disable();
-      service.endTime = service.stimulusService.hide();
+      service.endTime = service.currentStimulusService.hide();
       service.processResponse('');
     }
 

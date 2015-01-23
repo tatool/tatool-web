@@ -113,14 +113,17 @@ tatool
       this.trial.reactionTime = 0;
       this.trial.score = null;
 
-      // pick stimulus to display
+      // pick stimulus to display and set shiftingType from stimulus file or dynamically
       var stimulus = null;
       if (this.randomisation === 'full-condition') {
         stimulus = this.createRandomConditionStimulus();
+        this.trial.shiftingType = (!this.lastStimulus) ? 'start' : (stimulus.stimulusType === this.lastStimulus.stimulusType) ? 'repetition' : 'switch';
       } else if (this.randomisation === 'full') {
         stimulus = this.createRandomStimulus();
+        this.trial.shiftingType = (!this.lastStimulus) ? 'start' : (stimulus.stimulusType === this.lastStimulus.stimulusType) ? 'repetition' : 'switch';
       } else {
         stimulus = this.createNonRandomStimulus();
+        this.trial.shiftingType = stimulus.shiftingType;
       }
 
       if (stimulus === null) {
@@ -128,12 +131,14 @@ tatool
       } else {
         this.trial.stimulusValue = stimulus.stimulusValue;
         this.trial.stimulusType = stimulus.stimulusType;
-        this.trial.shiftingType = stimulus.shiftingType;
         this.trial.correctResponse = stimulus.correctResponse;
+
         var cue = {stimulusValue: stimulus.cueValue, stimulusValueType: stimulus.cueValueType, stimulusValueColor: stimulus.cueValueColor };
         this.cueService.set(cue);
         this.stimulusService.set(stimulus);
         this.setupInputKeys(stimulus);
+
+        this.lastStimulus = stimulus;
       }
 
       // increment trial index counter
