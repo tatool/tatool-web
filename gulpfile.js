@@ -146,6 +146,12 @@ gulp.task('copy-css-vendor', ['clean'], function () {
     .pipe(gulp.dest('./dist/styles/vendor/'));
 });
 
+// stand-alone copy required due to bug which would leave the target file empty!
+gulp.task('copy-css-select', ['clean'], function () {
+  gulp.src(['./app/bower_components/angular-ui-select/dist/select.min.css'])
+    .pipe(gulp.dest('./dist/styles/vendor/'));
+});
+
 gulp.task('copy-icons', ['clean'], function () {
   gulp.src('./app/styles/font-awesome/**/*')
     .pipe(gulp.dest('./dist/styles/font-awesome/'));
@@ -182,6 +188,6 @@ gulp.task('default',
 // build task
 gulp.task('build',
   ['lint', 'minify-css-app', 'minify-css-module', 'minify-js-app', 'minify-js-module', 'minify-js-vendor',
-  'copy-bower-components', 'copy-images', 'copy-views', 'copy-projects', 'copy-fonts', 'copy-css-vendor', 'copy-js-vendor', 'copy-icons',
+  'copy-bower-components', 'copy-images', 'copy-views', 'copy-projects', 'copy-fonts', 'copy-css-vendor', 'copy-css-select', 'copy-js-vendor', 'copy-icons',
   'usemin-app', 'usemin-module' ]
 );
