@@ -203,7 +203,7 @@ angular.module('tatool.module')
     var runExecutable = function(currentExecutable) {
       broadcastPhaseChange(tatoolPhase.EXECUTABLE_START, elementStack.stack);
 
-      var url = currentExecutable.customType + '.html';
+      var url = 'executables/' + currentExecutable.customType + '.html';
 
       // check for status panel settings
       var statusEnabled = false;

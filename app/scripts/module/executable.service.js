@@ -149,9 +149,9 @@ angular.module('tatool.module')
           angular.extend(executable, executableJson);
           self.registerExecutable(executable.name, executable);
 
-          // load html template of executable
+          // load html template of executable and add to templateCache with prefix
           $http.get(templatePath).success( function(template) {
-            $templateCache.put(executableTpl, template);
+            $templateCache.put('executables/' + executableTpl, template);
             deferred.resolve(executable);
           }).error( function(error) {
             deferred.reject(error);
