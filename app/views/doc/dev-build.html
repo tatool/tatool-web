@@ -10,11 +10,11 @@
 <pre><code class="language-bash">$> npm start
 
 # alternatively you can call node directly
-$> node server.js lab prod
+$> node server.js lab dev
 </code></pre>
 
 <hr>
-<p>If you want to run Tatool Web on a webserver or in development mode, you'll have to provide the following two configuration parameters:</p>
+<p>If you want to run Tatool Web on a webserver or in production mode, you'll have to provide the following two configuration parameters. The environment parameter will direct Tatool Web to either access your development version (app directory) or the built version (dist directory). In order to use the built version you must run <code>npm install</code> first.</p>
 <pre><code class="language-bash"># [mode] : lab / server
 # [environment] : dev / prod
 $> node server.js [mode] [environment]
