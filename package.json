@@ -50,7 +50,7 @@
   },
   "main": "server.js",
   "scripts": {
-    "start": "node server.js lab",
+    "start": "node server.js lab dev",
     "postinstall": "bower install && gulp build"
   },
   "devDependencies": {
