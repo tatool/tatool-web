@@ -6,8 +6,7 @@ jshint = require('gulp-jshint'),
 uglify = require('gulp-uglify'),
 minifyCSS = require('gulp-minify-css'),
 notify = require('gulp-notify'),
-usemin = require('gulp-usemin'),
-mainBowerFiles = require('main-bower-files');
+usemin = require('gulp-usemin');
 
 // tasks
 gulp.task('clean', function(cb) {
