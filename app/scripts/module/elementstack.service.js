@@ -128,6 +128,7 @@ angular.module('tatool.module')
           });
         }
       }
+      
       if ('iterator' in element) {
         var iteratorType = element.iterator.customType;
         var iterator = new $window[iteratorType]();

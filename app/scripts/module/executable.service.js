@@ -28,7 +28,7 @@ angular.module('tatool.module')
       numExecutables = 0;
       mode = $window.sessionStorage.getItem('mode');
 
-      // set default module project (currently static static)
+      // set default module project (static)
       moduleProject = {};
       moduleProject.name = (moduleProject.name) ? moduleProject.name : cfgModule.MODULE_DEFAULT_PROJECT;
       moduleProject.access = (moduleProject.access) ? moduleProject.access : 'public';
@@ -89,7 +89,7 @@ angular.module('tatool.module')
       var deferred = $q.defer();
       var self = this;
 
-      // check if moduleProject should be overriden by executable project
+      // check if executable project is given, otherwise use default
       var project = {};
       if (executableJson.project) {
         project.access = executableJson.project.access;
@@ -166,8 +166,11 @@ angular.module('tatool.module')
 
     // register an executable
     executableService.registerExecutable = function(name, executable) {
-      executables[name] = executable;
-      numExecutables++;
+      // make sure we don't overwrite an existing executable
+      if (!(name in executables)) {
+        executables[name] = executable;
+        numExecutables++;
+      }
     };
 
     // get a specific executable
