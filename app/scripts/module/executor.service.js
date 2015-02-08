@@ -62,7 +62,7 @@ angular.module('tatool.module')
 
       // closing the open session
       if (obj.currentSessionId !== 0) {
-        moduleService.setSessionEndTime(util.getDateTime());
+        moduleService.setSessionEndTime(util.getCurrentDate());
         if (sessionComplete) {
           moduleService.setSessionComplete();
         }

@@ -5,6 +5,10 @@ angular.module('tatool.module')
 
     var util = {};
 
+    util.getCurrentDate = function() {
+      return new Date();
+    };
+
     util.getDateTime = function() {
       var currentDate = new Date();
       return currentDate.today() + ' ' + currentDate.timeNow();

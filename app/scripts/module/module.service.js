@@ -107,7 +107,7 @@ angular.module('tatool.module')
 
     moduleService.createSession = function() {
       var sessionId = this.getNextSessionId();
-      session = new Session(sessionId, util.getDateTime());
+      session = new Session(sessionId, util.getCurrentDate());
       module.addSession(session);
       return sessionId;
     };
