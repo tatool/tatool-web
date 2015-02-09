@@ -24,6 +24,7 @@ exports.updateUser = function(req, res) {
     if (err) res.status(500).send(err);
 
     if (user) {
+      var oldRoles = user.roles;
       user.roles = req.body.roles;
       user.updated_at = new Date();
 
@@ -36,7 +37,7 @@ exports.updateUser = function(req, res) {
       }
 
       // only allow one admin user
-      if (isAdmin) {
+      if (isAdmin && oldRoles.indexOf('admin') === -1) {
         User.findOne({ roles: { $in: ['admin'] } }, function(err, adminUser) {
           if (err) {
             res.status(500).send(err);

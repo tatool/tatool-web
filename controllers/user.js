@@ -265,24 +265,40 @@ exports.registerAdmin = function() {
 
     if (!result) {
 
-      // Create admin user
-      var user = new User();
-      user.email = 'admin@tatool-web.com';
-      user.password = '1234';
-      user.roles.push('user');
-      user.roles.push('admin');
-      user.verified = true;
-      user.fullName = '';
-      user.affiliation = '';
-      user.token = '';
-      user.updated_at = new Date();
+      User.findOne( { email: 'admin@tatool-web.com' }, function(err, adminAccount) {
+        if (err) console.log('Admin registration failed. Please make sure the database is running.');
 
-      Counter.getUserCode(function (err, userCode) {
-        if (err) {
-          console.log('Admin registration failed. Please make sure the database is running.');
+        if (!adminAccount) {
+          // Create admin user
+          var user = new User();
+          user.email = 'admin@tatool-web.com';
+          user.password = '1234';
+          user.roles.push('user');
+          user.roles.push('admin');
+          user.verified = true;
+          user.fullName = '';
+          user.affiliation = '';
+          user.token = '';
+          user.updated_at = new Date();
+
+          Counter.getUserCode(function (err, userCode) {
+            if (err) {
+              console.log('Admin registration failed. Please make sure the database is running.');
+            } else {
+              user.code = userCode.next;
+              user.save(function(err) {
+                if (err) {
+                  console.log('Admin registration failed. Please make sure the database is running.');
+                } else {
+                  console.log('Admin registration successful. Login with the user admin@tatool-web.com and change the password immediately.');
+                }
+              });
+            }
+          }); 
         } else {
-          user.code = userCode.next;
-          user.save(function(err) {
+          // update admin user
+          adminAccount.roles = ['user', 'admin'];
+          adminAccount.save(function(err) {
             if (err) {
               console.log('Admin registration failed. Please make sure the database is running.');
             } else {
@@ -290,7 +306,9 @@ exports.registerAdmin = function() {
             }
           });
         }
-      }); 
+
+      });
+      
     }
   });
 };
