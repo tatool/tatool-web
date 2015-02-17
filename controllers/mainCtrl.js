@@ -39,7 +39,7 @@ var insert = function(req, res) {
         module.updated_at = today;
         module.invites = undefined;
         module.moduleStatus = 'ready';
-        module.created_by = module.moduleAuthor;
+        module.created_by = module.created_by;
 
         Module.create(module, function(err, result) {
           if (err) {
@@ -305,8 +305,14 @@ exports.getResource = function(req, res) {
     if (err) {
       res.status(500).send(err);
     } else if (module.length === 1) {
+
+      var accessType = req.params.projectAccess;
+      if (req.params.projectAccess === 'private') {
+        accessType = req.params.projectAccess + '/' + module[0].created_by; 
+      }
+
       if (projectsPath.substring(0, 4) !== 'http') {
-        var file = projectsPath + req.params.projectAccess + '/' + req.params.projectName + '/' + req.params.resourceType + '/' + req.params.resourceName;
+        var file = projectsPath + accessType + '/' + req.params.projectName + '/' + req.params.resourceType + '/' + req.params.resourceName;
         fs.exists(file, function(exists) {
           if (exists) {
             res.download(file);
@@ -315,7 +321,7 @@ exports.getResource = function(req, res) {
           }
         });
       } else {
-        request(projectsPath + req.params.projectAccess + '/' + req.params.projectName + '/' + req.params.resourceType + '/' + req.params.resourceName)
+        request(projectsPath + accessType + '/' + req.params.projectName + '/' + req.params.resourceType + '/' + req.params.resourceName)
           .auth(req.app.get('resource_user'), req.app.get('resource_pw'), true)
             .pipe(res);
       }
