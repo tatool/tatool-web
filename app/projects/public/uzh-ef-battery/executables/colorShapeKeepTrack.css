@@ -1,0 +1,23 @@
+.emptyCell, .emptyCellStatic {
+  font-size: 300%;
+  background-color: transparent;
+  border: 0;
+  display: table-cell;
+  vertical-align: middle;
+  margin: 0;
+  padding: 8px;
+}
+
+.fillCell, .fillCellStatic {
+  font-size: 300%;
+  background-color: transparent;
+  border: 0;
+  display: table-cell;
+  vertical-align: middle;
+  margin: 0;
+  padding: 8px;
+  outline: 0px solid #7c7c7c;
+}
+.fillCell:hover {
+  cursor: pointer;
+}

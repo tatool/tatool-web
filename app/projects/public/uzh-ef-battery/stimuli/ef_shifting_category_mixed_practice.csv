@@ -1,0 +1,13 @@
+stimulusType;stimulusValue;stimulusValueType;cueValue;cueValueType;correctResponse;shiftingType;keyCode1;keyLabel1;keyLabelType1;response1;keyIndex1;keyCode2;keyLabel2;keyLabelType2;response2;keyIndex2
+animacy;g-ll-16.png;image;shifting_animacy.png;image;object;start;ArrowLeft;shifting_animal.png;image;animal;0;ArrowRight;shifting_object.png;image;object;1
+football;k-ll-3.png;image;shifting_football.png;image;smaller;switch;ArrowLeft;shifting_smaller.png;image;smaller;0;ArrowRight;shifting_greater.png;image;greater;1
+animacy;k-l-8.png;image;shifting_animacy.png;image;animal;switch;ArrowLeft;shifting_animal.png;image;animal;0;ArrowRight;shifting_object.png;image;object;1
+animacy;k-ll-12.png;image;shifting_animacy.png;image;object;repetition;ArrowLeft;shifting_animal.png;image;animal;0;ArrowRight;shifting_object.png;image;object;1
+football;k-ll-7.png;image;shifting_football.png;image;smaller;switch;ArrowLeft;shifting_smaller.png;image;smaller;0;ArrowRight;shifting_greater.png;image;greater;1
+football;k-l-15.png;image;shifting_football.png;image;smaller;repetition;ArrowLeft;shifting_smaller.png;image;smaller;0;ArrowRight;shifting_greater.png;image;greater;1
+animacy;g-ll-13.png;image;shifting_animacy.png;image;object;switch;ArrowLeft;shifting_animal.png;image;animal;0;ArrowRight;shifting_object.png;image;object;1
+animacy;k-l-2.png;image;shifting_animacy.png;image;animal;repetition;ArrowLeft;shifting_animal.png;image;animal;0;ArrowRight;shifting_object.png;image;object;1
+football;g-l-11.png;image;shifting_football.png;image;greater;switch;ArrowLeft;shifting_smaller.png;image;smaller;0;ArrowRight;shifting_greater.png;image;greater;1
+football;g-l-14.png;image;shifting_football.png;image;greater;repetition;ArrowLeft;shifting_smaller.png;image;smaller;0;ArrowRight;shifting_greater.png;image;greater;1
+football;g-ll-4.png;image;shifting_football.png;image;greater;repetition;ArrowLeft;shifting_smaller.png;image;smaller;0;ArrowRight;shifting_greater.png;image;greater;1
+animacy;g-l-4.png;image;shifting_animacy.png;image;animal;switch;ArrowLeft;shifting_animal.png;image;animal;0;ArrowRight;shifting_object.png;image;object;1

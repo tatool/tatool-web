@@ -1,0 +1,13 @@
+stimulusType;stimulusValue;stimulusValueType;correctResponse;keyCode;response;keyIndex
+congruent;4444;text;4;Digit4;4;3
+neutral;XXX;text;3;Digit3;3;2
+incongruent;3333;text;4;Digit4;4;3
+neutral;XXXX;text;4;Digit4;4;3
+congruent;1;text;1;Digit1;1;0
+incongruent;2;text;1;Digit1;1;0
+neutral;XX;text;2;Digit2;2;1
+congruent;333;text;3;Digit3;3;2
+neutral;X;text;1;Digit1;1;0
+incongruent;11;text;2;Digit2;2;1
+congruent;22;text;2;Digit2;2;1
+incongruent;444;text;3;Digit3;3;2
