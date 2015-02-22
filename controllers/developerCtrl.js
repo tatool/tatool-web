@@ -250,7 +250,6 @@ exports.getResource = function(req, res) {
       }
 
       if (projectsPath.substring(0, 4) !== 'http') {
-
         var file = projectsPath + accessType + '/' + req.params.projectName + '/' + req.params.resourceType + '/' + req.params.resourceName;
         fs.exists(file, function(exists) {
           if (exists) {

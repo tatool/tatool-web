@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('tatool.module')
-  .factory('stimulusServiceFactory', [ '$log', 'executableUtils', function ($log, executableUtils) {
+  .factory('stimulusServiceFactory', [ '$log', '$sce', 'executableUtils', function ($log, $sce, executableUtils) {
 
     var stimulusServiceFactory = {};
 
@@ -33,6 +33,11 @@ angular.module('tatool.module')
           resource.resourceName = this.data.stimulusValue;
           var imgSrc = executableUtils.getResourcePath(resource);
           this.stimulusImage = imgSrc;
+        }
+
+        // prepare video source
+        if (this.data.stimulusValueType === 'video') {
+          this.stimulusVideo = $sce.trustAsResourceUrl(this.data.stimulusValue);
         }
         
         if (this.data.stimulusClass !== undefined) {

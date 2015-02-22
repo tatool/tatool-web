@@ -9,6 +9,9 @@
           <div ng-switch-when="text" ng-style="stimulus.stimulusStyle" ng-class="stimulus.stimulusClass">
             <div class="textStimulusValue"><span>{{stimulus.data.stimulusValue}}</span></div>
           </div>
+          <div ng-switch-when="video">
+            <video id="videoStimulus" class="video-js vjs-default-skin vjs-big-play-centered"></video>
+          </div>
           <div ng-switch-when="circle">
             <div class="circle" ng-style="stimulus.stimulusStyle"> </div>
           </div>

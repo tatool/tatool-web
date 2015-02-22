@@ -1,6 +1,7 @@
 'use strict';
 
 /* global KeyCodes */
+/* global videojs */
 
 /**
   <tatool> 
@@ -241,7 +242,7 @@ angular.module('tatool.module').directive('tatoolText', [ function() {
   <tatool-stimulus> 
   Directive to display a stimulus.
 **/
-angular.module('tatool.module').directive('tatoolStimulus', ['$log', '$templateCache', 'cfgModule', 'executableUtils', function($log, $templateCache, cfgModule, executableUtils) {
+angular.module('tatool.module').directive('tatoolStimulus', ['$log', '$templateCache', '$timeout', '$q', 'cfgModule', 'executableUtils', function($log, $templateCache, $timeout, $q, cfgModule, executableUtils) {
   return {
     restrict: 'E',
     scope: {
@@ -252,9 +253,10 @@ angular.module('tatool.module').directive('tatoolStimulus', ['$log', '$templateC
 
       // hide by default
       scope.show = false;
+      scope.stimulus = scope.service;
+      var videoPlayer = null;
 
       scope.service.show = function() {
-        scope.stimulus = scope.service;
         scope.show = true;
         return executableUtils.getTiming();
       };
@@ -262,6 +264,34 @@ angular.module('tatool.module').directive('tatoolStimulus', ['$log', '$templateC
       scope.service.hide = function() {
         scope.show = false;
         return executableUtils.getTiming();
+      };
+
+      // initialize video player
+      scope.service.initVideoPlayer = function(options) {
+        var deferred = $q.defer();
+        $timeout(function() { 
+          videoPlayer = videojs('videoStimulus', options);
+          videoPlayer.src(scope.stimulus.stimulusVideo.toString());
+          deferred.resolve(videoPlayer);
+        }, 0);
+        return deferred.promise;
+      };
+
+      scope.service.playVideo = function() {
+        if (scope.stimulus.data.stimulusValueType === 'video' && videoPlayer !== null) {
+          videoPlayer.play();
+        } else {
+          console.error('The video player has not been initialized. Call the initPlayer() method before using the player (returns a promise).');
+        }
+      };
+
+      scope.service.pauseVideo = function() {
+        videoPlayer.pause();
+      };
+
+      // return video player to allow direct use of video.js api
+      scope.service.getVideoPlayer = function() {
+        return videoPlayer;
       };
 
       scope.stimulusClickEvent = function($event, stimulus) {
@@ -273,7 +303,9 @@ angular.module('tatool.module').directive('tatoolStimulus', ['$log', '$templateC
       };
 
       element.on('$destroy', function() {
-        
+        if (videoPlayer !== null) {
+          videoPlayer.dispose();
+        }
       });
     },
     template: $templateCache.get('tatoolStimulus.html')

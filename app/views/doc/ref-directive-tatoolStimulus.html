@@ -52,7 +52,7 @@
 
 <h3 id="introduction">Introduction <span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
 
-<p>When you want to create an experimental task, you'll most likely want to display something on the screen for the user to interact with. That something can be a digit, a word, an image or even some audio or video content. To simplify the code to display something on screen, Tatool offers the <code>tatool-stimulus</code> template. It allows you to do what you've done so many times before: display a stimulus! As the name already states, this template allows you to present ONE and only one stimulus at a time. But don't worry, you can add multiple separate stimulus templates to your task allowing you to interact with multiple stimuli at a time. However, in that case you might want to take a look at the <a ui-sref="doc({page: 'ref-directive-tatoolGrid.html'})">tatool-grid</a> template which facilitates displaying multiple stimuli at different positions. The <code>tatool-stimulus</code> template offers one interaction option, which is a 'mouse click' informing you when a user clicked on which stimulus. If you want to capture keyboard events, take a look at the <a ui-sref="doc({page: 'ref-directive-tatoolInput.html'})">tatool-input</a> template.</p>
+<p>When you want to create an experimental task, you'll most likely want to display something on the screen for the user to interact with. That something can be a digit, a word, an image or a video. To simplify the code to display something on screen, Tatool offers the <code>tatool-stimulus</code> template. It allows you to do what you've done so many times before: display a stimulus! As the name already states, this template allows you to present ONE and only one stimulus at a time. But don't worry, you can add multiple separate stimulus templates to your task allowing you to interact with multiple stimuli at a time. However, in that case you might want to take a look at the <a ui-sref="doc({page: 'ref-directive-tatoolGrid.html'})">tatool-grid</a> template which facilitates displaying multiple stimuli at different positions. The <code>tatool-stimulus</code> template offers one interaction option, which is a 'mouse click' informing you when a user clicked on which stimulus. If you want to capture keyboard events, take a look at the <a ui-sref="doc({page: 'ref-directive-tatoolInput.html'})">tatool-input</a> template.</p>
 
 <hr class="hr-red">
 
@@ -134,12 +134,12 @@ this.stimulusService = stimulusServiceFactory.createService(this.stimuliPath);
     <tr>
       <td class="cellB">stimulusValueType</td>
       <td>yes</td>
-      <td>the stimulus value type (text/image/circle/square)</td>
+      <td>the stimulus value type (text/image/video/circle/square)</td>
     </tr>
     <tr>
       <td class="cellB">stimulusValue</td>
       <td>yes</td>
-      <td>The stimulus value (depending on <code>stimulusValueType</code> either a text or an image filename).</td>
+      <td>The stimulus value (depending on <code>stimulusValueType</code> either a text or an image/video filename).</td>
     </tr>
     <tr>
       <td class="cellB">stimulusValueColor</td>
@@ -209,6 +209,47 @@ stimulusService.set(data).show();
 
 <p><b>Example</b></p>
 <pre><code class="language-javascript">stimulusService.hide();
+</code></pre>
+
+<hr>
+
+<p><b class="red">initVideoPlayer(options)</b> - returns a promise.</p>
+<p>Initializes the video player element. This method has to be called before you can use the video player methods offered by the stimulus service. The <code>options</code> object is a simple JavaScript object containing the options to be used during the initialization of the player. For a list of available options see the <a href="https://github.com/videojs/video.js/blob/stable/docs/guides/options.md" target="_blank">documentation of options</a> on the website of the video.js library.</p>
+
+<p><b>Example</b></p>
+<pre><code class="language-javascript">var options = { "autoplay": false, "preload": "auto", "width": 560, "height": 320, "controls": false };
+stimulusService.initVideoPlayer(options).then(function(player) {
+  service.stimulusService.show();
+  service.stimulusService.play();
+});
+</code></pre>
+
+<hr>
+
+<p><b class="red">getVideoPlayer()</b> - returns the video.js player object.</p>
+<p>Returns the video player object that can be used to directly access the video.js API. For a <a href="https://github.com/videojs/video.js/blob/master/docs/api/vjs.Player.md" target="_blank">documentation of the video.js API</a> see the website of the video.js library.</p>
+
+<p><b>Example</b></p>
+<pre><code class="language-javascript">var videoPlayer = stimulusService.getVideoPlayer();
+videoPlayer.play();
+</code></pre>
+
+<hr>
+
+<p><b class="red">playVideo()</b> - plays the video.</p>
+<p>Plays the video.</p>
+
+<p><b>Example</b></p>
+<pre><code class="language-javascript">stimulusService.playVideo();
+</code></pre>
+
+<hr>
+
+<p><b class="red">pauseVideo()</b> - pauses the video.</p>
+<p>Pauses the video.</p>
+
+<p><b>Example</b></p>
+<pre><code class="language-javascript">stimulusService.pauseVideo();
 </code></pre>
 
 <p><span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></p>

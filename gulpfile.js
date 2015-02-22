@@ -135,14 +135,16 @@ gulp.task('copy-projects', ['clean'], function () {
 
 gulp.task('copy-js-vendor', ['clean'], function () {
   gulp.src(['./app/bower_components/angular/angular.min.js',
-      './app/bower_components/jquery/dist/jquery.min.js'])
+      './app/bower_components/jquery/dist/jquery.min.js',
+      './app/bower_components/video.js/dist/video-js/video.js'])
     .pipe(gulp.dest('./dist/scripts/vendor/'));
 });
 
 gulp.task('copy-css-vendor', ['clean'], function () {
   gulp.src(['./app/bower_components/angular-ui-select/dist/select.min.css',
       './app/bower_components/bootstrap/dist/css/bootstrap.min.css',
-      './app/styles/prism.css'])
+      './app/styles/prism.css',
+      './app/bower_components/video.js/dist/video-js/video-js.min.css'])
     .pipe(gulp.dest('./dist/styles/vendor/'));
 });
 
@@ -160,6 +162,11 @@ gulp.task('copy-icons', ['clean'], function () {
 gulp.task('copy-fonts', ['clean'], function () {
   gulp.src('./app/fonts/**')
     .pipe(gulp.dest('./dist/fonts'));
+});
+
+gulp.task('copy-video-fonts', ['clean'], function () {
+  gulp.src('./app/bower_components/video.js/dist/video-js/font/*')
+    .pipe(gulp.dest('./dist/styles/vendor/font/'));
 });
 
 gulp.task('usemin-app', ['clean'], function() {
@@ -188,6 +195,6 @@ gulp.task('default',
 // build task
 gulp.task('build',
   ['lint', 'minify-css-app', 'minify-css-module', 'minify-js-app', 'minify-js-module', 'minify-js-vendor',
-  'copy-bower-components', 'copy-images', 'copy-views', 'copy-projects', 'copy-fonts', 'copy-css-vendor', 'copy-css-select', 'copy-js-vendor', 'copy-icons',
+  'copy-bower-components', 'copy-images', 'copy-views', 'copy-projects', 'copy-fonts', 'copy-video-fonts', 'copy-css-vendor', 'copy-css-select', 'copy-js-vendor', 'copy-icons',
   'usemin-app', 'usemin-module' ]
 );
