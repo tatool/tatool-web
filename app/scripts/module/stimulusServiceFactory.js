@@ -37,7 +37,10 @@ angular.module('tatool.module')
 
         // prepare video source
         if (this.data.stimulusValueType === 'video') {
-          this.stimulusVideo = $sce.trustAsResourceUrl(this.data.stimulusValue);
+          var resource = this.stimuliPath;
+          resource.resourceName = this.data.stimulusValue;
+          var videoSrc = executableUtils.getResourcePath(resource);
+          this.stimulusVideo = videoSrc;
         }
         
         if (this.data.stimulusClass !== undefined) {
