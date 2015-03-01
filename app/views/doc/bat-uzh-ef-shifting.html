@@ -39,7 +39,7 @@ In the published version of the test battery, the tasks are presented in a <b>sa
     </tr>
     <tr>
       <td class="cellB">Executable Type</td>
-      <td>tatoolSimon</td>
+      <td>tatoolShifting</td>
     </tr>
   </tbody>
 </table>
@@ -48,7 +48,7 @@ In the published version of the test battery, the tasks are presented in a <b>sa
 
 <h4>Properties</h4>
 
-<p>See <a ui-sref="doc({page: 'lib-simon.html'})">Simon Task</a> in the Task Library for a description of the Properties that can be provided in the Module Editor to change the behaviour of the task.<br><br>
+<p>See <a ui-sref="doc({page: 'lib-shifting.html'})">Shifting Task</a> in the Task Library for a description of the Properties that can be provided in the Module Editor to change the behaviour of the task.<br><br>
 
 The following values for the Properties were used in the publication:</p>
 
@@ -81,8 +81,8 @@ The following values for the Properties were used in the publication:</p>
       <td>N/A (not set)</td>
     </tr>
     <tr>
-      <td class="cellB">displayCrossDuration</td>
-      <td>250</td>
+      <td class="cellB">displayCueDuration</td>
+      <td>150</td>
     </tr>
     <tr>
       <td class="cellB">randomisation</td>
@@ -95,7 +95,7 @@ The following values for the Properties were used in the publication:</p>
 
 <h4>Stimuli Files</h4>
 
-<p>See <a ui-sref="doc({page: 'lib-simon.html'})">Simon Task</a> in the Task Library for possible alternative stimuli files.<br><br>
+<p>See <a ui-sref="doc({page: 'lib-shifting.html'})">Shifting Task</a> in the Task Library for possible alternative stimuli files.<br><br>
 
 The following stimuli files were used in the publication:</p>
 
@@ -111,21 +111,86 @@ The following stimuli files were used in the publication:</p>
   </thead>
   <tbody>
     <tr>
-	  <td class="cellB">Practice Trials</td>
+	  <td class="cellB">Practice Trials for Single-Task Block 1</td>
       <td>uzh-ef-battery</td>
       <td>stimuli</td>
-      <td><a href="https://raw.githubusercontent.com/tatool/tatool-web/master/app/projects/public/uzh-ef-battery/stimuli/ef_inhibition_simon_practice.csv" target="_blank">ef_inhibition_simon_practice.csv</a></td>
-      <td>12 practices trials.</td>
+      <td><a href="https://raw.githubusercontent.com/tatool/tatool-web/master/app/projects/public/uzh-ef-battery/stimuli/ef_shifting_figural_single_shape_practice.csv" target="_blank">ef_shifting_figural_single_shape_practice.csv</a></td>
+      <td>12 practice trials.</td>
     </tr>
     <tr>
-	  <td class="cellB">Test Trials</td>
+	  <td class="cellB">Test Trials for 1st Run of Single Task 1</td>
       <td>uzh-ef-battery</td>
       <td>stimuli</td>
-      <td><a href="https://raw.githubusercontent.com/tatool/tatool-web/master/app/projects/public/uzh-ef-battery/stimuli/ef_inhibition_simon.csv" target="_blank">ef_inhibition_simon.csv</a></td>
-      <td>200 test trials.</td>
+      <td><a href="https://raw.githubusercontent.com/tatool/tatool-web/master/app/projects/public/uzh-ef-battery/stimuli/ef_shifting_figural_single_shape_1.csv" target="_blank">ef_shifting_figural_single_shape_1.csv</a></td>
+      <td>64 test trials.</td>
+    </tr>
+	<tr>
+	  <td class="cellB">Practice Trials for Single-Task Block 2</td>
+      <td>uzh-ef-battery</td>
+      <td>stimuli</td>
+      <td><a href="https://raw.githubusercontent.com/tatool/tatool-web/master/app/projects/public/uzh-ef-battery/stimuli/ef_shifting_figural_single_color_practice.csv" target="_blank">ef_shifting_figural_single_color_practice.csv</a></td>
+      <td>12 practice trials.</td>
+    </tr>
+    <tr>
+	  <td class="cellB">Test Trials for 1st Run of Single Task 2</td>
+      <td>uzh-ef-battery</td>
+      <td>stimuli</td>
+      <td><a href="https://raw.githubusercontent.com/tatool/tatool-web/master/app/projects/public/uzh-ef-battery/stimuli/ef_shifting_figural_single_color_1.csv" target="_blank">ef_shifting_figural_single_color_1.csv</a></td>
+      <td>64 test trials.</td>
+    </tr>
+	<tr>
+	  <td class="cellB">Practice Trials for Mixed-Tasks Block</td>
+      <td>uzh-ef-battery</td>
+      <td>stimuli</td>
+      <td><a href="https://raw.githubusercontent.com/tatool/tatool-web/master/app/projects/public/uzh-ef-battery/stimuli/ef_shifting_figural_mixed_practice.csv" target="_blank">ef_shifting_figural_mixed_practice.csv</a></td>
+      <td>12 practice trials.</td>
+    </tr>
+    <tr>
+	  <td class="cellB">Test Trials for Mixed-Tasks Block</td>
+      <td>uzh-ef-battery</td>
+      <td>stimuli</td>
+      <td><a href="https://raw.githubusercontent.com/tatool/tatool-web/master/app/projects/public/uzh-ef-battery/stimuli/ef_shifting_figural_mixed.csv" target="_blank">ef_shifting_figural_mixed.csv</a></td>
+      <td>129 test trials.</td>
+    </tr>
+	<tr>
+	  <td class="cellB">Test Trials for 2nd Run of Single Task 2</td>
+      <td>uzh-ef-battery</td>
+      <td>stimuli</td>
+      <td><a href="https://raw.githubusercontent.com/tatool/tatool-web/master/app/projects/public/uzh-ef-battery/stimuli/ef_shifting_figural_single_color_2.csv" target="_blank">ef_shifting_figural_single_color_2.csv</a></td>
+      <td>64 test trials.</td>
+    </tr>
+    <tr>
+	  <td class="cellB">Test Trials for 2nd Run of Single Task 1</td>
+      <td>uzh-ef-battery</td>
+      <td>stimuli</td>
+      <td><a href="https://raw.githubusercontent.com/tatool/tatool-web/master/app/projects/public/uzh-ef-battery/stimuli/ef_shifting_figural_single_shape_2.csv" target="_blank">ef_shifting_figural_single_shape_2.csv</a></td>
+      <td>64 test trials.</td>
     </tr>
   </tbody>
 </table>
+
+<h4>Instructions</h4>
+<p>The following instruction pages can be used with the Executable:</p>
+<ul class="docContentList">
+	<li>shifting_fig_general_01.htm</li>
+	<li>shifting_fig_single_shape_01.htm</li>
+	<li>shifting_fig_single_shape_02.htm</li>
+	<li>shifting_fig_single_shape_03.htm</li>
+	<li>shifting_fig_single_shape_04.htm</li>
+	<li>shifting_fig_single_color_01.htm</li>
+	<li>shifting_fig_single_color_02.htm</li>
+	<li>shifting_fig_single_color_03.htm</li>
+	<li>shifting_fig_single_color_04.htm</li>
+	<li>shifting_fig_mixed_01.htm</li>
+	<li>shifting_fig_mixed_02.htm</li>
+	<li>shifting_fig_mixed_03.htm</li>
+	<li>shifting_fig_mixed_04.htm</li>
+	<li>shifting_fig_mixed_05.htm</li>
+	<li>shifting_fig_single_color_05.htm</li>
+	<li>shifting_fig_single_color_06.htm</li>
+	<li>shifting_fig_single_shape_05.htm</li>
+	<li>shifting_fig_single_shape_06.htm</li>
+</ul>
 
 <hr class="hr-red">
 
@@ -143,7 +208,7 @@ The following stimuli files were used in the publication:</p>
     </tr>
     <tr>
       <td class="cellB">Executable Type</td>
-      <td>tatoolChoiceReaction</td>
+      <td>tatoolShifting</td>
     </tr>
   </tbody>
 </table>
@@ -152,7 +217,7 @@ The following stimuli files were used in the publication:</p>
 
 <h4>Properties</h4>
 
-<p>See <a ui-sref="doc({page: 'lib-flanker.html'})">Flanker Task</a> in the Task Library for a description of the Properties that can be provided in the Module Editor to change the behaviour of the task.<br><br>
+<p>See <a ui-sref="doc({page: 'lib-shifting.html'})">Shifting Task</a> in the Task Library for a description of the Properties that can be provided in the Module Editor to change the behaviour of the task.<br><br>
 
 The following values for the Properties were used in the publication:</p>
 
@@ -185,6 +250,10 @@ The following values for the Properties were used in the publication:</p>
       <td>N/A (not set)</td>
     </tr>
     <tr>
+      <td class="cellB">displayCueDuration</td>
+      <td>150</td>
+    </tr>
+    <tr>
       <td class="cellB">randomisation</td>
       <td>N/A (not set)</td>
     </tr>
@@ -195,7 +264,7 @@ The following values for the Properties were used in the publication:</p>
 
 <h4>Stimuli Files</h4>
 
-<p>See <a ui-sref="doc({page: 'lib-flanker.html'})">Flanker Task</a> in the Task Library  for possible alternative stimuli files.<br><br>
+<p>See <a ui-sref="doc({page: 'lib-shifting.html'})">Shifting Task</a> in the Task Library  for possible alternative stimuli files.<br><br>
 
 The following stimuli files were used in the publication:</p>
 
@@ -211,21 +280,86 @@ The following stimuli files were used in the publication:</p>
   </thead>
   <tbody>
     <tr>
-	  <td class="cellB">Practice Trials</td>
+	  <td class="cellB">Practice Trials for Single-Task Block 1</td>
       <td>uzh-ef-battery</td>
       <td>stimuli</td>
-      <td><a href="https://raw.githubusercontent.com/tatool/tatool-web/master/app/projects/public/uzh-ef-battery/stimuli/ef_inhibition_flanker_practice.csv" target="_blank">ef_inhibition_flanker_practice.csv</a></td>
-      <td>12 practices trials.</td>
+      <td><a href="https://raw.githubusercontent.com/tatool/tatool-web/master/app/projects/public/uzh-ef-battery/stimuli/ef_shifting_category_single_animacy_practice.csv" target="_blank">ef_shifting_category_single_animacy_practice.csv</a></td>
+      <td>12 practice trials.</td>
     </tr>
     <tr>
-	  <td class="cellB">Test Trials</td>
+	  <td class="cellB">Test Trials for 1st Run of Single Task 1</td>
       <td>uzh-ef-battery</td>
       <td>stimuli</td>
-      <td><a href="https://raw.githubusercontent.com/tatool/tatool-web/master/app/projects/public/uzh-ef-battery/stimuli/ef_inhibition_flanker.csv" target="_blank">ef_inhibition_flanker.csv</a></td>
-      <td>144 test trials.</td>
+      <td><a href="https://raw.githubusercontent.com/tatool/tatool-web/master/app/projects/public/uzh-ef-battery/stimuli/ef_shifting_category_single_animacy_1.csv" target="_blank">ef_shifting_category_single_animacy_1.csv</a></td>
+      <td>64 test trials.</td>
+    </tr>
+	<tr>
+	  <td class="cellB">Practice Trials for Single-Task Block 2</td>
+      <td>uzh-ef-battery</td>
+      <td>stimuli</td>
+      <td><a href="https://raw.githubusercontent.com/tatool/tatool-web/master/app/projects/public/uzh-ef-battery/stimuli/ef_shifting_category_single_size_practice.csv" target="_blank">ef_shifting_category_single_size_practice.csv</a></td>
+      <td>12 practice trials.</td>
+    </tr>
+    <tr>
+	  <td class="cellB">Test Trials for 1st Run of Single Task 2</td>
+      <td>uzh-ef-battery</td>
+      <td>stimuli</td>
+      <td><a href="https://raw.githubusercontent.com/tatool/tatool-web/master/app/projects/public/uzh-ef-battery/stimuli/ef_shifting_category_single_size_1.csv" target="_blank">ef_shifting_category_single_size_1.csv</a></td>
+      <td>64 test trials.</td>
+    </tr>
+	<tr>
+	  <td class="cellB">Practice Trials for Mixed-Tasks Block</td>
+      <td>uzh-ef-battery</td>
+      <td>stimuli</td>
+      <td><a href="https://raw.githubusercontent.com/tatool/tatool-web/master/app/projects/public/uzh-ef-battery/stimuli/ef_shifting_category_mixed_practice.csv" target="_blank">ef_shifting_category_mixed_practice.csv</a></td>
+      <td>12 practice trials.</td>
+    </tr>
+    <tr>
+	  <td class="cellB">Test Trials for Mixed-Tasks Block</td>
+      <td>uzh-ef-battery</td>
+      <td>stimuli</td>
+      <td><a href="https://raw.githubusercontent.com/tatool/tatool-web/master/app/projects/public/uzh-ef-battery/stimuli/ef_shifting_category_mixed.csv" target="_blank">ef_shifting_category_mixed.csv</a></td>
+      <td>129 test trials.</td>
+    </tr>
+	<tr>
+	  <td class="cellB">Test Trials for 2nd Run of Single Task 2</td>
+      <td>uzh-ef-battery</td>
+      <td>stimuli</td>
+      <td><a href="https://raw.githubusercontent.com/tatool/tatool-web/master/app/projects/public/uzh-ef-battery/stimuli/ef_shifting_category_single_color_2.csv" target="_blank">ef_shifting_category_single_color_2.csv</a></td>
+      <td>64 test trials.</td>
+    </tr>
+    <tr>
+	  <td class="cellB">Test Trials for 2nd Run of Single Task 1</td>
+      <td>uzh-ef-battery</td>
+      <td>stimuli</td>
+      <td><a href="https://raw.githubusercontent.com/tatool/tatool-web/master/app/projects/public/uzh-ef-battery/stimuli/ef_shifting_category_single_shape_2.csv" target="_blank">ef_shifting_category_single_shape_2.csv</a></td>
+      <td>64 test trials.</td>
     </tr>
   </tbody>
 </table>
+
+<h4>Instructions</h4>
+<p>The following instruction pages can be used with the Executable:</p>
+<ul class="docContentList">
+	<li>shifting_cat_general_01.htm</li>
+	<li>shifting_cat_single_animacy_01.htm</li>
+	<li>shifting_cat_single_animacy_02.htm</li>
+	<li>shifting_cat_single_animacy_03.htm</li>
+	<li>shifting_cat_single_animacy_04.htm</li>
+	<li>shifting_cat_single_size_01.htm</li>
+	<li>shifting_cat_single_size_02.htm</li>
+	<li>shifting_cat_single_size_03.htm</li>
+	<li>shifting_cat_single_size_04.htm</li>
+	<li>shifting_cat_mixed_01.htm</li>
+	<li>shifting_cat_mixed_02.htm</li>
+	<li>shifting_cat_mixed_03.htm</li>
+	<li>shifting_cat_mixed_04.htm</li>
+	<li>shifting_cat_mixed_05.htm</li>
+	<li>shifting_cat_single_size_05.htm</li>
+	<li>shifting_cat_single_size_06.htm</li>
+	<li>shifting_cat_single_animacy_05.htm</li>
+	<li>shifting_cat_single_animacy_06.htm</li>
+</ul>
 
 <hr class="hr-red">
 
@@ -243,7 +377,7 @@ The following stimuli files were used in the publication:</p>
     </tr>
     <tr>
       <td class="cellB">Executable Type</td>
-      <td>tatoolChoiceReaction</td>
+      <td>tatoolShifting</td>
     </tr>
   </tbody>
 </table>
@@ -252,7 +386,7 @@ The following stimuli files were used in the publication:</p>
 
 <h4>Properties</h4>
 
-<p>See <a ui-sref="doc({page: 'lib-stroop.html'})">Stroop Task</a> in the Task Library for a description of the Properties that can be provided in the Module Editor to change the behaviour of the task.<br><br>
+<p>See <a ui-sref="doc({page: 'lib-shifting.html'})">Shifting Task</a> in the Task Library for a description of the Properties that can be provided in the Module Editor to change the behaviour of the task.<br><br>
 
 The following values for the Properties were used in the publication:</p>
 
@@ -285,6 +419,10 @@ The following values for the Properties were used in the publication:</p>
       <td>N/A (not set)</td>
     </tr>
     <tr>
+      <td class="cellB">displayCueDuration</td>
+      <td>150</td>
+    </tr>
+    <tr>
       <td class="cellB">randomisation</td>
       <td>N/A (not set)</td>
     </tr>
@@ -295,7 +433,7 @@ The following values for the Properties were used in the publication:</p>
 
 <h4>Stimuli Files</h4>
 
-<p>See <a ui-sref="doc({page: 'lib-stroop.html'})">Stroop Task</a> in the Task Library  for possible alternative stimuli files.<br><br>
+<p>See <a ui-sref="doc({page: 'lib-shifting.html'})">Shifting Task</a> in the Task Library  for possible alternative stimuli files.<br><br>
 
 The following stimuli files were used in the publication:</p>
 
@@ -311,21 +449,86 @@ The following stimuli files were used in the publication:</p>
   </thead>
   <tbody>
     <tr>
-	  <td class="cellB">Practice Trials</td>
+	  <td class="cellB">Practice Trials for Single-Task Block 1</td>
       <td>uzh-ef-battery</td>
       <td>stimuli</td>
-      <td><a href="https://raw.githubusercontent.com/tatool/tatool-web/master/app/projects/public/uzh-ef-battery/stimuli/ef_inhibition_stroop_practice.csv" target="_blank">ef_inhibition_stroop_practice.csv</a></td>
-      <td>12 practices trials.</td>
+      <td><a href="https://raw.githubusercontent.com/tatool/tatool-web/master/app/projects/public/uzh-ef-battery/stimuli/ef_shifting_numerical_single_parity_practice.csv" target="_blank">ef_shifting_numerical_single_parity_practice.csv</a></td>
+      <td>12 practice trials.</td>
     </tr>
     <tr>
-	  <td class="cellB">Test Trials</td>
+	  <td class="cellB">Test Trials for 1st Run of Single Task 1</td>
       <td>uzh-ef-battery</td>
       <td>stimuli</td>
-      <td><a href="https://raw.githubusercontent.com/tatool/tatool-web/master/app/projects/public/uzh-ef-battery/stimuli/ef_inhibition_stroop.csv" target="_blank">ef_inhibition_stroop.csv</a></td>
-      <td>144 test trials.</td>
+      <td><a href="https://raw.githubusercontent.com/tatool/tatool-web/master/app/projects/public/uzh-ef-battery/stimuli/ef_shifting_numerical_single_parity_1.csv" target="_blank">ef_shifting_numerical_single_parity_1.csv</a></td>
+      <td>64 test trials.</td>
+    </tr>
+	<tr>
+	  <td class="cellB">Practice Trials for Single-Task Block 2</td>
+      <td>uzh-ef-battery</td>
+      <td>stimuli</td>
+      <td><a href="https://raw.githubusercontent.com/tatool/tatool-web/master/app/projects/public/uzh-ef-battery/stimuli/ef_shifting_numerical_single_magnitude_practice.csv" target="_blank">ef_shifting_numerical_single_magnitude_practice.csv</a></td>
+      <td>12 practice trials.</td>
+    </tr>
+    <tr>
+	  <td class="cellB">Test Trials for 1st Run of Single Task 2</td>
+      <td>uzh-ef-battery</td>
+      <td>stimuli</td>
+      <td><a href="https://raw.githubusercontent.com/tatool/tatool-web/master/app/projects/public/uzh-ef-battery/stimuli/ef_shifting_numerical_single_magnitude_1.csv" target="_blank">ef_shifting_numerical_single_magnitude_1.csv</a></td>
+      <td>64 test trials.</td>
+    </tr>
+	<tr>
+	  <td class="cellB">Practice Trials for Mixed-Tasks Block</td>
+      <td>uzh-ef-battery</td>
+      <td>stimuli</td>
+      <td><a href="https://raw.githubusercontent.com/tatool/tatool-web/master/app/projects/public/uzh-ef-battery/stimuli/ef_shifting_numerical_mixed_practice.csv" target="_blank">ef_shifting_numerical_mixed_practice.csv</a></td>
+      <td>12 practice trials.</td>
+    </tr>
+    <tr>
+	  <td class="cellB">Test Trials for Mixed-Tasks Block</td>
+      <td>uzh-ef-battery</td>
+      <td>stimuli</td>
+      <td><a href="https://raw.githubusercontent.com/tatool/tatool-web/master/app/projects/public/uzh-ef-battery/stimuli/ef_shifting_numerical_mixed.csv" target="_blank">ef_shifting_numerical_mixed.csv</a></td>
+      <td>129 test trials.</td>
+    </tr>
+	<tr>
+	  <td class="cellB">Test Trials for 2nd Run of Single Task 2</td>
+      <td>uzh-ef-battery</td>
+      <td>stimuli</td>
+      <td><a href="https://raw.githubusercontent.com/tatool/tatool-web/master/app/projects/public/uzh-ef-battery/stimuli/ef_shifting_numerical_single_magnitude_2.csv" target="_blank">ef_shifting_numerical_single_magnitude_2.csv</a></td>
+      <td>64 test trials.</td>
+    </tr>
+    <tr>
+	  <td class="cellB">Test Trials for 2nd Run of Single Task 1</td>
+      <td>uzh-ef-battery</td>
+      <td>stimuli</td>
+      <td><a href="https://raw.githubusercontent.com/tatool/tatool-web/master/app/projects/public/uzh-ef-battery/stimuli/ef_shifting_numerical_single_parity_2.csv" target="_blank">ef_shifting_numerical_single_parity_2.csv</a></td>
+      <td>64 test trials.</td>
     </tr>
   </tbody>
 </table>
+
+<h4>Instructions</h4>
+<p>The following instruction pages can be used with the Executable:</p>
+<ul class="docContentList">
+	<li>shifting_num_general_01.htm</li>
+	<li>shifting_num_single_parity_01.htm</li>
+	<li>shifting_num_single_parity_02.htm</li>
+	<li>shifting_num_single_parity_03.htm</li>
+	<li>shifting_num_single_parity_04.htm</li>
+	<li>shifting_num_single_magnitude_01.htm</li>
+	<li>shifting_num_single_magnitude_02.htm</li>
+	<li>shifting_num_single_magnitude_03.htm</li>
+	<li>shifting_num_single_magnitude_04.htm</li>
+	<li>shifting_num_mixed_01.htm</li>
+	<li>shifting_num_mixed_02.htm</li>
+	<li>shifting_num_mixed_03.htm</li>
+	<li>shifting_num_mixed_04.htm</li>
+	<li>shifting_num_mixed_05.htm</li>
+	<li>shifting_num_single_magnitude_05.htm</li>
+	<li>shifting_num_single_magnitude_06.htm</li>
+	<li>shifting_num_single_parity_05.htm</li>
+	<li>shifting_num_single_parity_06.htm</li>
+</ul>
 
 <hr class="hr-red">
 
