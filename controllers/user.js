@@ -238,8 +238,8 @@ exports.verifyUser = function(req, res) {
 exports.signupDev = function(req, res) {
 
   var message = {
-      email: 'info@tatool.ch',
-      name: 'info@tatool.ch',
+      email: process.env.SENDER_EMAIL,
+      name: process.env.SENDER_EMAIL,
       subject: 'Developer Signup',
       template: 'developer-signup-email',
       user: req.body.userName,
@@ -343,7 +343,7 @@ function sendVerificationEmail(options, done) {
   if (process.env.POSTMARK_API_KEY) {
     var deliver = function (textBody, htmlBody) {
         postmark.send({
-            'From': 'tatool-web@tatool.ch',
+            'From': process.env.SENDER_EMAIL,
             'To': options.email,
             'Subject': options.subject,
             'TextBody': textBody,
@@ -370,7 +370,7 @@ function sendVerificationEmail(options, done) {
 
     var deliver = function(textBody) {
       transporter.sendMail({
-        from: 'tatool-web@tatool.ch',
+        from: process.env.SENDER_EMAIL,
         to: options.email,
         subject: options.subject,
         text: textBody
