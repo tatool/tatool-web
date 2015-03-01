@@ -29,17 +29,17 @@ angular.module('tatool.module')
 
         // prepare image source
         if (this.data.stimulusValueType === 'image') {
-          var resource = this.stimuliPath;
-          resource.resourceName = this.data.stimulusValue;
-          var imgSrc = executableUtils.getResourcePath(resource);
+          var imgResource = this.stimuliPath;
+          imgResource.resourceName = this.data.stimulusValue;
+          var imgSrc = executableUtils.getResourcePath(imgResource);
           this.stimulusImage = imgSrc;
         }
 
         // prepare video source
         if (this.data.stimulusValueType === 'video') {
-          var resource = this.stimuliPath;
-          resource.resourceName = this.data.stimulusValue;
-          var videoSrc = executableUtils.getResourcePath(resource);
+          var videoResource = this.stimuliPath;
+          videoResource.resourceName = this.data.stimulusValue;
+          var videoSrc = executableUtils.getResourcePath(videoResource);
           this.stimulusVideo = videoSrc;
         }
         
