@@ -220,7 +220,7 @@ stimulusService.set(data).show();
 <pre><code class="language-javascript">var options = { "autoplay": false, "preload": "auto", "width": 560, "height": 320, "controls": false };
 stimulusService.initVideoPlayer(options).then(function(player) {
   service.stimulusService.show();
-  service.stimulusService.play();
+  service.stimulusService.playVideo();
 });
 </code></pre>
 
@@ -231,7 +231,7 @@ stimulusService.initVideoPlayer(options).then(function(player) {
 
 <p><b>Example</b></p>
 <pre><code class="language-javascript">var videoPlayer = stimulusService.getVideoPlayer();
-videoPlayer.play();
+videoPlayer.playVideo();
 </code></pre>
 
 <hr>
