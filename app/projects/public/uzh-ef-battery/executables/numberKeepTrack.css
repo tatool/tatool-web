@@ -1,0 +1,23 @@
+.emptyCell, .emptyCellStatic {
+  font-size: 500%;
+  font-weight: bold;
+  background-color: transparent;
+  border: 0;
+  display: table-cell;
+  vertical-align: middle;
+  margin: 0;
+  padding: 0;
+}
+
+.red {
+  color: #FF0000;
+}
+.blue {
+  color: #3300FF;
+}
+.green {
+  color: #00FF00;
+}
+.orange {
+  color: #FF9900;
+}

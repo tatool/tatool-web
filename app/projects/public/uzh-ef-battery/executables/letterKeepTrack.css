@@ -1,0 +1,10 @@
+.emptyCell, .emptyCellStatic {
+  font-size: 350%;
+  font-weight: bold;
+  background-color: transparent;
+  border: 1px solid #999;
+  display: table-cell;
+  vertical-align: middle;
+  margin: 0;
+  padding: 0;
+}
