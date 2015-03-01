@@ -677,31 +677,33 @@ angular.module('tatool.app')
         download(exportModule, filename + '.json', 'text/plain'); // triggers file download (has issues on Safari)
       };
 
+      $scope.saveAndBack = function () {
+        if ($scope.elementType === VIEW_PATH + 'edit_executable_select.html') {
+          addCustomPropertiesFromProject($scope.element);
+          loadCustomProperties($scope.element);
+          $scope.returnTo('executable');
+        } else if ($scope.elementType === VIEW_PATH + 'edit_executable_property.html') {
+          $scope.returnTo('executable');
+        } else if ($scope.elementType === VIEW_PATH + 'edit_executable_property_path.html') {
+          $scope.returnTo('executable');
+        } else if ($scope.elementType === VIEW_PATH + 'edit_handler.html') {
+          $scope.returnTo('element');
+        } else if ($scope.elementType === VIEW_PATH + 'edit_handler_property.html') {
+          $scope.returnTo('handler');
+        } else if ($scope.elementType === VIEW_PATH + 'edit_handler_property_path.html') {
+          $scope.returnTo('handler');
+        } 
+      };
+
       $scope.ok = function () {
         if (!validateModule()) {
           // invalid module
         } else {
-          if ($scope.elementType === VIEW_PATH + 'edit_executable_select.html') {
-            addCustomPropertiesFromProject($scope.element);
-            loadCustomProperties($scope.element);
-            $scope.returnTo('executable');
-          } else if ($scope.elementType === VIEW_PATH + 'edit_executable_property.html') {
-            $scope.returnTo('executable');
-          } else if ($scope.elementType === VIEW_PATH + 'edit_executable_property_path.html') {
-            $scope.returnTo('executable');
-          } else if ($scope.elementType === VIEW_PATH + 'edit_handler.html') {
-            $scope.returnTo('element');
-          } else if ($scope.elementType === VIEW_PATH + 'edit_handler_property.html') {
-            $scope.returnTo('handler');
-          } else if ($scope.elementType === VIEW_PATH + 'edit_handler_property_path.html') {
-            $scope.returnTo('handler');
-          } else {
-            // copy higher level descriptive properties to moduleDefinition
-            module.moduleDefinition.name = module.moduleName;
-            module.moduleDefinition.author = module.moduleAuthor;
-            module.moduleDefinition.label = module.moduleLabel;
-            $modalInstance.close();
-          }
+          // copy higher level descriptive properties to moduleDefinition
+          module.moduleDefinition.name = module.moduleName;
+          module.moduleDefinition.author = module.moduleAuthor;
+          module.moduleDefinition.label = module.moduleLabel;
+          $modalInstance.close();
         }
       };
 
@@ -763,7 +765,25 @@ angular.module('tatool.app')
       }
 
       $scope.cancel = function () {
-        $modalInstance.dismiss('cancel');
+        function dismiss() {
+          $modalInstance.dismiss('cancel');
+        }
+
+        bootbox.dialog({
+          message: 'Are you sure you want to exit without saving your changes?',
+          title: '<b>Tatool</b>',
+          buttons: {
+            ok: {
+              label: 'Yes',
+              className: 'btn-default',
+              callback: dismiss
+            },
+            cancel: {
+              label: 'No',
+              className: 'btn-default'
+            }
+          }
+        });
       };
 
       var setAlert = function(alertType, alertMessage) {

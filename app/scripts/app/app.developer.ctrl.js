@@ -97,6 +97,7 @@ angular.module('tatool.app')
         controller: 'EditCtrl',
         size: 'lg',
         keyboard: false,
+        backdrop : 'static',
         resolve: {
           module: function () {
             return module;
