@@ -68,8 +68,15 @@ angular.module('tatool.app')
       };
 
       if (page === 'start') {
+        $scope.parentPage = 'start';
         $state.go('doc', {page: 'main-start.html'});
       } else if (page !== '') {
+        var strArr = page.split('-');
+        if (strArr[0] === 'main') {
+          $scope.parentPage = strArr[1].split('.')[0];
+        } else {
+          $scope.parentPage = strArr[0];
+        }
         $scope.docPage = 'views/doc/' + page;
         $timeout(function() {$scope.scrollTo('top'); }, 0);
       }

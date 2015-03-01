@@ -8,36 +8,34 @@
   <div id="docNavigation">
   <ul>
   <li ui-sref-active="active"><a ui-sref="doc({page: 'main-start.html'})"><b>Start</b></a></li>
-    <ul class="subNav">
+    <ul class="subNav" ng-show="parentPage==='start'">
 	<li ui-sref-active="active"><i class="fa fa-angle-right"></i> <a ui-sref="doc({page: 'start-glossary.html'})">Glossary</a></li>
 	 <br>
     </ul>
     <li ui-sref-active="active"><a ui-sref="doc({page: 'main-about.html'})"><b>About</b></a></li>
-    <ul class="subNav">
+    <ul class="subNav" ng-show="parentPage==='about'">
       <li ui-sref-active="active"><i class="fa fa-angle-right"></i> <a ui-sref="doc({page: 'about-cite.html'})">How to cite</a></li>
-	  <li ui-sref-active="active"><i class="fa fa-angle-right"></i> <a ui-sref="doc({page: 'about-publications.html'})">Publications</a></li>
-	  <li ui-sref-active="active"><i class="fa fa-angle-right"></i> <a ui-sref="doc({page: 'about-license.html'})">License</a></li>
-	  <br>
+	    <li ui-sref-active="active"><i class="fa fa-angle-right"></i> <a ui-sref="doc({page: 'about-publications.html'})">Publications</a></li>
+	    <li ui-sref-active="active"><i class="fa fa-angle-right"></i> <a ui-sref="doc({page: 'about-license.html'})">License</a></li>
+	    <br>
     </ul>
 	<li ui-sref-active="active"><a ui-sref="doc({page: 'main-community.html'})"><b>Community</b></a></li>
-	  <ul class="subNav">
-		<li><i class="fa fa-angle-right"></i> <a href="http://www.tatool.ch/forum" target="_blank">Forum</a></li>
-        <li ui-sref-active="active"><i class="fa fa-angle-right"></i> <a ui-sref="doc({page: 'community-contribute.html'})">Contribute</a></li>
-      </ul>
-	  <br>
-
+	  <ul class="subNav" ng-show="parentPage==='community'">
+		  <li><i class="fa fa-angle-right"></i> <a href="http://www.tatool.ch/forum" target="_blank">Forum</a></li>
+      <li ui-sref-active="active"><i class="fa fa-angle-right"></i> <a ui-sref="doc({page: 'community-contribute.html'})">Contribute</a></li>
+      <br>
+    </ul>
     <li ui-sref-active="active"><a ui-sref="doc({page: 'main-use.html'})"><b>Using Tatool Web</b></a></li>
-    <ul class="subNav">
+    <ul class="subNav" ng-show="parentPage==='use'">
       <li ui-sref-active="active"><i class="fa fa-angle-right"></i> <a ui-sref="doc({page: 'use-modules.html'})">Modules</a></li>
       <li ui-sref-active="active"><i class="fa fa-angle-right"></i> <a ui-sref="doc({page: 'use-editor.html'})">Editor</a></li>
       <li ui-sref-active="active"><i class="fa fa-angle-right"></i> <a ui-sref="doc({page: 'use-analytics.html'})">Analytics</a></li>
       <li ui-sref-active="active"><i class="fa fa-angle-right"></i> <a ui-sref="doc({page: 'use-admin.html'})">Admin</a></li>
+      <br>
     </ul>
-    <br>
     <li ui-sref-active="active"><a ui-sref="doc({page: 'main-faq.html'})"><b>FAQ</b></a></li>
-    <br>
     <li ui-sref-active="active"><a ui-sref="doc({page: 'main-lib.html'})"><b>Task Library</b></a></li>
-    <ul class="subNav">
+    <ul class="subNav" ng-show="parentPage==='lib'">
       <li ui-sref-active="active"><i class="fa fa-angle-right"></i> <a ui-sref="doc({page: 'lib-brown-peterson.html'})">Brown-Peterson</a></li>
       <li ui-sref-active="active"><i class="fa fa-angle-right"></i> <a ui-sref="doc({page: 'lib-choice-reactiontime.html'})">Choice Reaction Time</a></li>
       <li ui-sref-active="active"><i class="fa fa-angle-right"></i> <a ui-sref="doc({page: 'lib-code.html'})">Code</a></li>
@@ -50,20 +48,20 @@
       <li ui-sref-active="active"><i class="fa fa-angle-right"></i> <a ui-sref="doc({page: 'lib-shifting.html'})">Shifting</a></li>
       <li ui-sref-active="active"><i class="fa fa-angle-right"></i> <a ui-sref="doc({page: 'lib-simon.html'})">Simon</a></li>
       <li ui-sref-active="active"><i class="fa fa-angle-right"></i> <a ui-sref="doc({page: 'lib-stroop.html'})">Stroop</a></li>
+      <br>
     </ul>
-	<br>
     <li ui-sref-active="active"><a ui-sref="doc({page: 'main-bat.html'})"><b>Task Batteries</b></a></li>
-    <ul class="subNav">
-	<li ui-sref-active="active"><i class="fa fa-angle-right"></i> <a ui-sref="doc({page: 'bat-uzh-ef.html'})">UZH-EF</a></li>
-		<ul class="subNav">
+    <ul class="subNav" ng-show="parentPage==='bat'">
+	    <li ui-sref-active="active"><i class="fa fa-angle-right"></i> <a ui-sref="doc({page: 'bat-uzh-ef.html'})">UZH-EF</a></li>
+		  <ul class="subNav">
         <li ui-sref-active="active"><i class="fa fa-angle-right"></i> <a ui-sref="doc({page: 'bat-uzh-ef-inhibition.html'})">Inhibition</a></li>
-		<li ui-sref-active="active"><i class="fa fa-angle-right"></i> <a ui-sref="doc({page: 'bat-uzh-ef-shifting.html'})">Shifting</a></li>
-		<li ui-sref-active="active"><i class="fa fa-angle-right"></i> <a ui-sref="doc({page: 'bat-uzh-ef-updating.html'})">Updating</a></li>
-		</ul>
-	</ul>
-    <br>
+		    <li ui-sref-active="active"><i class="fa fa-angle-right"></i> <a ui-sref="doc({page: 'bat-uzh-ef-shifting.html'})">Shifting</a></li>
+		    <li ui-sref-active="active"><i class="fa fa-angle-right"></i> <a ui-sref="doc({page: 'bat-uzh-ef-updating.html'})">Updating</a></li>
+		  </ul>
+      <br>
+	  </ul>
     <li ui-sref-active="active"><a ui-sref="doc({page: 'main-dev.html'})"><b>Development</b></a></li>
-    <ul class="subNav">
+    <ul class="subNav" ng-show="parentPage==='dev'">
       <li ui-sref-active="active"><i class="fa fa-angle-right"></i> <a ui-sref="doc({page: 'dev-basics.html'})">Basics</a></li>
       <li ui-sref-active="active"><i class="fa fa-angle-right"></i> <a ui-sref="doc({page: 'dev-getting-started.html'})">Getting Started</a></li>  
 	    <li ui-sref-active="active"><i class="fa fa-angle-right"></i> <a ui-sref="doc({page: 'dev-admin.html'})">Administration</a></li>
@@ -80,10 +78,10 @@
         <li ui-sref-active="active"><i class="fa fa-angle-right"></i> <a ui-sref="doc({page: 'dev-executable-additional.html'})">Additional Steps</a></li>
       </ul>
       <li ui-sref-active="active"><i class="fa fa-angle-right"></i> <a ui-sref="doc({page: 'dev-build.html'})">Build Tatool</a></li>
+      <br>
     </ul>
-  <br>
     <li ui-sref-active="active"><a ui-sref="doc({page: 'main-ref.html'})"><b>Reference</b></a></li>
-      <ul class="subNav">
+      <ul class="subNav" ng-show="parentPage==='ref'">
         <li ui-sref-active="active"><i class="fa fa-angle-right"></i> <a ui-sref="doc({page: 'ref-elements.html'})">Elements</a></li>
         <li ui-sref-active="active"><i class="fa fa-angle-right"></i> <a ui-sref="doc({page: 'ref-properties.html'})">Properties</a></li>
         <li ui-sref-active="active"><i class="fa fa-angle-right"></i> <a ui-sref="doc({page: 'ref-stimulus.html'})">Stimulus</a></li>
@@ -105,7 +103,6 @@
         <ul class="subNav">
 		  <li ui-sref-active="active"><i class="fa fa-angle-right"></i> <a ui-sref="doc({page: 'ref-handler-levelHandler.html'})">levelHandler</a></li>
           <li ui-sref-active="active"><i class="fa fa-angle-right"></i> <a ui-sref="doc({page: 'ref-handler-trialCountHandler.html'})">trialCountHandler</a></li>
-          
         </ul>
       </ul>
   </ul>
