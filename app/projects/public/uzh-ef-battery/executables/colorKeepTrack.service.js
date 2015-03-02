@@ -115,7 +115,7 @@ tatool
         this.gridService.addCellAtPosition((iLeft * 5) + 1, {
           stimulusValue: SHAPES[this.stimulus['shape']] + '_' + COLORS[(iLeft + 1)] + IMG_EXTENSION, 
           stimulusValueType: 'image',
-          gridCellClass: 'fillCell',
+          gridCellClass: 'colorKeepTrack_fillCell',
           color: COLORS[(iLeft + 1)]
         });
       }
@@ -124,7 +124,7 @@ tatool
         this.gridService.addCellAtPosition((iRight * 5) + 5, {
           stimulusValue: SHAPES[this.stimulus['shape']] + '_' + COLORS[(iRight + 6)] + IMG_EXTENSION, 
           stimulusValueType: 'image',
-          gridCellClass: 'fillCell',
+          gridCellClass: 'colorKeepTrack_fillCell',
           color: COLORS[(iRight + 6)]
         });
       }

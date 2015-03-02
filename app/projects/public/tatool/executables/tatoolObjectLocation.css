@@ -1,4 +1,4 @@
-.fillCell, .fillCellStatic {
+.tatoolObjectLocation_fillCell, .tatoolObjectLocation_fillCellStatic {
   font-size: 300%;
   background-color: #ededed;
   border: 2px solid #999;
@@ -9,7 +9,7 @@
   outline: 0px solid #7c7c7c;
 }
 
-.fillCorrectStatic {
+.tatoolObjectLocation_fillCorrectStatic {
   font-size: 300%;
   background-color: #cbeece;
   border: 2px solid #1a7522;
@@ -19,7 +19,7 @@
   padding: 5px;
   outline: 0px solid #7c7c7c;
 }
-.fillWrongStatic {
+.tatoolObjectLocation_fillWrongStatic {
   font-size: 300%;
   background-color: #eecbcb;
   border: 2px solid #cc3300;
@@ -30,7 +30,7 @@
   outline: 0px solid #7c7c7c;
 }
 
-.fillCell:hover {
+.tatoolObjectLocation_fillCell:hover {
   border: 2px solid #7c7c7c;
   outline: 4px solid #7c7c7c;
   cursor: pointer;
@@ -38,7 +38,7 @@
   transition:outline 0.1s;
 }
 
-.emptyCell, .emptyCellStatic {
+.tatoolObjectLocation_emptyCell, .tatoolObjectLocation_emptyCellStatic {
   font-size: 300%;
   background-color: transparent;
   border: 2px solid #999;

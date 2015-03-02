@@ -86,7 +86,7 @@ tatool
         this.srcGridService.addCellAtPosition(i, {
           stimulusValue: this.stimulus['stimulusValue' + i], 
           stimulusValueType: this.stimulus['stimulusValueType' + i],
-          gridCellClass: 'fillCell',
+          gridCellClass: 'tatoolObjectLocation_fillCell',
           correctResponse: this.stimulus['correctResponse' + i],
         });
       }

@@ -1,4 +1,4 @@
-.emptyCell, .emptyCellStatic {
+.numberKeepTrack_emptyCell, .numberKeepTrack_emptyCellStatic {
   font-size: 500%;
   font-weight: bold;
   background-color: transparent;
@@ -9,15 +9,15 @@
   padding: 0;
 }
 
-.red {
+.numberKeepTrack_red {
   color: #FF0000;
 }
-.blue {
+.numberKeepTrack_blue {
   color: #3300FF;
 }
-.green {
+.numberKeepTrack_green {
   color: #00FF00;
 }
-.orange {
+.numberKeepTrack_orange {
   color: #FF9900;
 }

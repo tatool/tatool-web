@@ -97,7 +97,7 @@ tatool
         this.gridService.addCellAtPosition((i+1), {
           stimulusValue: this.stimulus['item' + i], 
           stimulusValueType: 'text',
-          gridCellClass: 'emptyCell ' + COLORS[i]
+          gridCellClass: 'numberKeepTrack_emptyCell ' + 'numberKeepTrack_' + COLORS[i]
         });
       }
     };
@@ -110,7 +110,7 @@ tatool
       this.gridService.addCellAtPosition(1, {
         stimulusValue: this.stimulus['digit'], 
         stimulusValueType: 'text',
-        gridCellClass: 'emptyCell ' + COLORS[this.stimulus['color']]
+        gridCellClass: 'numberKeepTrack_emptyCell ' + 'numberKeepTrack_' + COLORS[this.stimulus['color']]
       });
 
       if (this.updateStep === this.stimulus['listlength']) {
@@ -128,7 +128,7 @@ tatool
       this.gridService.addCellAtPosition(1, {
         stimulusValue: 'Digit?', 
         stimulusValueType: 'text',
-        gridCellClass: 'emptyCell ' + COLORS[this.stimulus['color']]
+        gridCellClass: 'numberKeepTrack_emptyCell ' + 'numberKeepTrack_' + COLORS[this.stimulus['color']]
       });
 
       if (this.recallStep === this.stimulus['listlength']) {

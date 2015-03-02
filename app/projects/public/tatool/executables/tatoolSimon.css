@@ -1,4 +1,4 @@
-#wrapper {
+#tatoolSimon_wrapper {
   position: absolute;
   left: 50%;
   top: 50%;
@@ -10,7 +10,7 @@
   display: table;
 }
 
-.divCenter {
+.tatoolSimon_divCenter {
   display: table-cell;
   width: 20%;
   color: #000;
@@ -20,7 +20,7 @@
   padding: 0;
   margin: 0;
 }
-.divContentLeft {
+.tatoolSimon_divContentLeft {
   display: table-cell;
   width: 40%;
   text-align: left;
@@ -28,7 +28,7 @@
   margin: 0;
   padding-left: 50px;
 }
-.divContentRight {
+.tatoolSimon_divContentRight {
   display: table-cell;
   width: 40%;
   text-align: right;

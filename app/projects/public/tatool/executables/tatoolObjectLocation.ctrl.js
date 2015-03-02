@@ -56,7 +56,7 @@ tatool
     $scope.userDrop = function(dragCell, dropCell) {
       // change target grid cell style
       var tgtCell = service.tgtGridService.getCell(dropCell.gridPosition);
-      tgtCell.gridCellClass = 'fillCellStatic';
+      tgtCell.gridCellClass = 'tatoolObjectLocation_fillCellStatic';
 
       if(service.srcGridService.getCells().length > 0) {
         service.processResponse(dragCell, dropCell);
@@ -71,9 +71,9 @@ tatool
       for (var i = 0; i < cells.length; i++) {
         var cell = cells[i];
         if (cell.data.correctResponse === cell.gridPosition) {
-          cell.gridCellClass = 'fillCorrectStatic';
+          cell.gridCellClass = 'tatoolObjectLocation_fillCorrectStatic';
         } else {
-          cell.gridCellClass = 'fillWrongStatic';
+          cell.gridCellClass = 'tatoolObjectLocation_fillWrongStatic';
         }
       }
       service.timerFeedbackRecall.start(service.stopExecution);

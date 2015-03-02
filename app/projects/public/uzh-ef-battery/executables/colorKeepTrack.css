@@ -1,4 +1,4 @@
-.emptyCell, .emptyCellStatic {
+.colorKeepTrack_emptyCell, .colorKeepTrack_emptyCellStatic {
   font-size: 300%;
   background-color: transparent;
   border: 0;
@@ -8,7 +8,7 @@
   padding: 8px;
 }
 
-.fillCell, .fillCellStatic {
+.colorKeepTrack_fillCell, .colorKeepTrack_fillCellStatic {
   font-size: 300%;
   background-color: transparent;
   border: 0;
@@ -16,8 +16,7 @@
   vertical-align: middle;
   margin: 0;
   padding: 8px;
-  outline: 0px solid #7c7c7c;
 }
-.fillCell:hover {
+.colorKeepTrack_fillCell:hover {
   cursor: pointer;
 }

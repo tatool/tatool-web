@@ -1,4 +1,4 @@
-.countdown {
+.tatoolCountdown_countdown {
   font-size: 650%;
   color:black;
   text-shadow: 0px 1px 2px #a5a5a5;
@@ -9,7 +9,7 @@
   transform: translateY(-50%);
 }
 
-.countdownBg {
+.tatoolCountdown_countdownBg {
   border: 5px solid #aaa;
   background: #f8f8f8;
   width: 300px;

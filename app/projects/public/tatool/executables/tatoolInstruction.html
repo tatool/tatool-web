@@ -8,18 +8,18 @@
 	<div ng-show="showPagination">
 		<ul class="nav">
 			<li>
-				<a class="page" ng-click="go(-1)">
-					<div class='paginationArrowLeft'><i class='icon-left-open'></i></div>
+				<a class="tatoolInstruction_page" ng-click="go(-1)">
+					<div class='tatoolInstruction_paginationArrowLeft'><i class='icon-left-open'></i></div>
 				</a>
 			</li>
     		<li ng-repeat="url in urls track by $index">
-        		<a class="page" ng-class="{pageActive: $index==currentIndex}" ng-click="jump($index)">
-        			<div class='paginationDigit'>{{$index+1}}</div>
+        		<a class="tatoolInstruction_page" ng-class="{tatoolInstruction_pageActive: $index==currentIndex}" ng-click="jump($index)">
+        			<div class='tatoolInstruction_paginationDigit'>{{$index+1}}</div>
         		</a>
     		</li>
     		<li>
-    			<a class="page" ng-click="go(1)">
-    				<div class='paginationArrowRight'><i class='icon-right-open'></i></div>
+    			<a class="tatoolInstruction_page" ng-click="go(1)">
+    				<div class='tatoolInstruction_paginationArrowRight'><i class='icon-right-open'></i></div>
     			</a>
     		</li>
 		</ul>
