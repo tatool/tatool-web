@@ -54,26 +54,30 @@ ListIterator.prototype.createIterator = function(currentStack) {
     };
   } else {
     this.iter = {
-      i:       1,
+      i:       0,
       hasNext: function() {
-        if (this.i === 4 && currentElement.primary.dual === 'SUSPENDED') {
-          this.i = 2;
-          currentElement.primary.dual = null;
+        if (this.i === 3 && currentElement.primary.dual === 'SUSPENDED') { 
+          // multiple loops (1-2-1-2...)
           return true;
-        } else if (this.i === 4 && currentElement.primary.dual !== 'SUSPENDED') {
-          this.i = 1;
+        } else if (this.i === 3 && currentElement.primary.dual !== 'SUSPENDED') { 
+          // simple loop (1-2-1)
           return false;
-        } else if (this.i < 4) {
+        } else if (this.i < 3) {
           return true;
         }
       },
       next:   function() {
-        if (this.i === 1 || this.i === 3) {
+        if (this.i === 0 || this.i === 2) {
           this.i++;
           return currentElement.primary;
+        } else if (this.i === 3 && currentElement.primary.dual === 'SUSPENDED' && currentElement.secondary) { 
+          // multiple loops (1-2-1-2...)
+          this.i = 2;
+          currentElement.primary.dual = null;
+          return currentElement.secondary;
         } else if (!currentElement.secondary) {
-          // in case of no secondary element, skip to primary
-          this.i = 4;
+          // in case of no secondary element, skip to primary again
+          this.i = 3;
           return currentElement.primary;
         } else {
           this.i++;
