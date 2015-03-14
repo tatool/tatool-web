@@ -46,7 +46,7 @@ tatool
         executableUtils.getCSVResource(this.stimuliFile, true, this.stimuliPath).then(function(list) {
             self.stimuliList = list;
             self.totalStimuli = list.length;
-            deferred.resolve();
+            self.preloadImages(deferred, self.stimuliPath);
           }, function(error) {
             deferred.reject('Resource not found: ' + self.stimuliFile.resourceName);
           });
@@ -55,6 +55,32 @@ tatool
       }
 
       return deferred;
+    };
+
+    // manually preload images
+    ColorKeepTrack.prototype.preloadImages = function(deferred, stimuliPath) {
+      var images = [];
+
+      for (var s = 0; s < SHAPES.length; s++) {
+        for (var c = 0; c < COLORS.length; c++) {
+          var imgName = SHAPES[s] + '_' + COLORS[c] + '.png';
+          images.push(imgName);
+        }
+      }
+
+      async.each(images, function(image, callback) {
+        var img = new Image();
+        var resource = stimuliPath;
+        resource.resourceName = image;
+        img.src = executableUtils.getResourcePath(resource);
+        callback();
+      }, function(err) {
+        if( err ) {
+          deferred.reject(err);
+        } else {
+          deferred.resolve();
+        }
+      });
     };
 
     // Create stimulus and set properties
