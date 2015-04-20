@@ -173,7 +173,7 @@ gulp.task('usemin-app', ['clean'], function() {
   gulp.src('./app/index.html')
     .pipe(usemin({
       css: [minifyCSS(), 'concat'],
-      js: [uglify(), 'concat']
+      js: [uglify().on('error', function(e) { console.log('\x07',e.message); return this.end(); }), 'concat']
     }))
     .pipe(gulp.dest('./dist/'));
 });
@@ -182,7 +182,7 @@ gulp.task('usemin-module', ['clean'], function() {
   gulp.src('./app/views/module/index.html')
     .pipe(usemin({
       css: [minifyCSS(), 'concat'],
-      js: [uglify(), 'concat']
+      js: [uglify().on('error', function(e) { console.log('\x07',e.message); return this.end(); }), 'concat']
     }))
     .pipe(gulp.dest('./dist/views/module/'));
 });
