@@ -88,7 +88,7 @@ angular.module('tatool.module')
 
       this.addCellAtPosition = function(position, cell) {
         var newCell = {};
-        if (!cell instanceof Cell) {
+        if (cell instanceof Cell) {
           newCell = this.initCell(cell);
         } else {
           newCell = cell;
