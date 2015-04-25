@@ -669,6 +669,7 @@ angular.module('tatool.app')
         module.moduleDefinition.name = module.moduleName;
         module.moduleDefinition.author = module.moduleAuthor;
         module.moduleDefinition.label = module.moduleLabel;
+        module.moduleDefinition.description = module.moduleDescription;
 
         // prepare export
         var exportModule = JSON.stringify(module.moduleDefinition);

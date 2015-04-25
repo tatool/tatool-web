@@ -83,6 +83,11 @@ Module.prototype.setModuleDefinition = function(moduleDefinition) {
   this.moduleDefinition = moduleDefinition;
 };
 
+// sets the module label
+Module.prototype.setModuleDescription = function(moduleDescription) {
+  this.moduleDescription = moduleDescription;
+};
+
 // sets the module package url
 Module.prototype.setModulePackagePath = function(packagePath) {
   this.modulePackagePath = packagePath;
