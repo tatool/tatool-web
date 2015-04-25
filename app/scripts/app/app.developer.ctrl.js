@@ -214,7 +214,7 @@ angular.module('tatool.app')
       var msg = 'The module can be accessed with the following URL:<br><br><span class="publicUrl">';
       msg += url;
       msg += '</span><br><br>By providing the query parameter <b>extid</b>, you can pass in an external id to identify the requestor.';
-      msg += 'The external id will be visible under Analytics.<br><br><span class="publicUrl">';
+      msg += 'The external id will be visible in the Analytics tab.<br><br><span class="publicUrl">';
       msg += url;
       msg += '?extid=[xyz]</span>';
       bootbox.dialog({
