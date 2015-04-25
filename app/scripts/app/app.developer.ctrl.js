@@ -398,6 +398,7 @@ angular.module('tatool.app')
         fullscreen : false,
         moduleHierarchy: {
           tatoolType: 'List',
+          label: 'Hierarchy',
           iterator: { customType: 'ListIterator', numIterations: 1 },
           children: []
         }

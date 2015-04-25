@@ -32,7 +32,7 @@ angular.module('tatool.app').directive('tree', ['RecursionHelper', function(Recu
           '</div>' +
           '<div ng-switch-when="List">' +
             '<li ng-click="topFunc(element, index, parent);highlightElement()" ng-class="{\'active\' : highlight.key === element.name}">' +
-              '<i class="fa fa-list"></i> {{ element.tatoolType }}' +
+              '<i class="fa fa-list"></i> {{ (element.label) ? element.label : element.tatoolType }}' +
             '</li>' +
             '<ul>' +
               '<tree element="child" ng-repeat="child in element.children track by $index" index="{{$index}}" parent="element" onElementClick="topFunc(element, index, parent)" top-func="topFunc" highlight="highlight"></tree>' +
@@ -40,7 +40,7 @@ angular.module('tatool.app').directive('tree', ['RecursionHelper', function(Recu
           '</div>' +
           '<div ng-switch-when="Dual">' +
             '<li ng-click="topFunc(element, index, parent);highlightElement()" ng-class="{\'active\' : highlight.key === element.name}">' +
-              '<i class="fa fa-list-ol"></i> {{ element.tatoolType }}' +
+              '<i class="fa fa-list-ol"></i> {{ (element.label) ? element.label : element.tatoolType }}' +
             '</li>' +
               '<ul>' +
                 '<tree element="element.children.primary" index="primary" parent="element" onElementClick="topFunc(element, index, parent)" top-func="topFunc" highlight="highlight"></tree>' +
