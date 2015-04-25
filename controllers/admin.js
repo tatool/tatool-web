@@ -10,7 +10,7 @@ var mkdirp = require('mkdirp');
 var rmdir = require('rimraf');
 
 exports.getUsers = function(req, res) {
-  User.find( function(err, users) {
+  User.find( { tempUser: null }, function(err, users) {
     if (err) {
       res.status(500).send(err);
     } else {

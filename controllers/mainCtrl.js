@@ -3,6 +3,7 @@ var Repository = require('../models/module').repositoryModule;
 var exportCtrl = require('../controllers/exportCtrl');
 var repositoryCtrl = require('../controllers/repositoryCtrl');
 var analyticsCtrl = require('../controllers/analyticsCtrl');
+var userCtrl = require('../controllers/user'); 
 var request = require('request');
 var crypto = require('crypto');
 var fs = require('fs');
@@ -106,6 +107,41 @@ var update = function(req, res, userModule) {
   });
 };
 
+// Get a public module
+exports.getPublic = function(req, res) {
+  Repository.findOne({ moduleId: req.params.moduleId, moduleType: 'public' }, function(err, module) {
+    if (err) {
+      res.status(500).send(err);
+    } else {
+      if (module) {
+        res.json(module);
+      } else {
+        res.status(404).json({message: 'No module found'});
+      }
+    }
+  });
+};
+
+// Adding a new public module
+exports.installPublic = function(req, res) {
+  Repository.findOne({ moduleId: req.params.moduleId, moduleType: 'public' }, function(err, module) {
+    if (err) {
+      res.status(500).send(err);
+    } else {
+      if (module) {
+        userCtrl.createTempUser(req, res).then(function(user) {
+          var token = user.createToken(req.app.get('jwt_secret'));
+          res.json({ token: token, roles: user.roles, code: user.code });
+        }, function(error) {
+          res.status(500).json(error);
+        });
+      } else {
+        res.status(404).json({message: 'No module found'});
+      }
+    }
+  });
+};
+
 // Adding a new invite module to user db - triggered from repository
 exports.addInvite = function(req, repositoryModule) {
   var deferred = Q.defer();
@@ -197,6 +233,13 @@ exports.save = function(req, res) {
       res.status(500).send(err);
     } else {
       if (module) {
+
+        // remember sessiontoken to enrich analytics
+        if (module.sessionToken) {
+          module.lastSessionToken = module.sessionToken;
+        }
+        req.body.sessionToken = module.lastSessionToken;
+
         // update technical fields
         module.updated_at = today;
         module.sessionToken = undefined;  // unset session token to invalidate resources

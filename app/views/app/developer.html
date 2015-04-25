@@ -96,6 +96,7 @@
                   </div>
                   <div class="buttonbar">
                     <div class="btn btn-tatool-green" ng-click="publishModule($event, module)" ng-disabled="module.moduleVersion === module.publishedModuleVersion" ng-class="{'btn-tatool-green-disabled': module.moduleVersion === module.publishedModuleVersion}"><i class="fa fa-cloud-upload"></i> {{(module.moduleVersion === module.publishedModuleVersion) ? 'Published' : 'Publish'}}</div>
+                    <a ng-if="module.moduleType==='public'" href="" class='publicUrlLabel' ng-click="showPublicUrl(module.moduleId)">Show URL</a>
                     <div ng-if="module.moduleType==='private'" class="btn btn-tatool-off" ng-click="repositoryInvite(module.moduleId)"><i class="fa fa-users"></i> Invite</div>
                   </div>
                  </div>

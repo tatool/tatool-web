@@ -5,13 +5,14 @@ var tatool = angular.module('tatool', ['ui.bootstrap', 'ui.router'])
     MODE: 'REMOTE', // LOCAL or REMOTE
     APP_MODE_USER: 'user',
     APP_MODE_DEVELOPER: 'developer',
+    APP_MODE_PUBLIC: 'public'
   })
   .config(['$stateProvider', '$urlRouterProvider', '$provide', '$controllerProvider', '$logProvider',
     function ($stateProvider, $urlRouterProvider, $provide, $controllerProvider, $logProvider) {
 
     //userDataServiceProvider.setProvider(cfg.MODE);
 
-    $logProvider.debugEnabled(false);
+    $logProvider.debugEnabled(true);
 
     tatool.controller = $controllerProvider.register;
     tatool.factory = $provide.factory;

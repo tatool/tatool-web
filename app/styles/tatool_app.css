@@ -226,6 +226,28 @@ a.github-icon {
 /** ---------
     MAIN PAGE
 -----------**/
+
+#publicModule {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin: 0 auto;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
+  text-align: center;
+  vertical-align: middle;
+}
+
+#publicModule .publicModuleText {
+  font-size: 190%;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.large {
+  font-size: 200%;
+}
+
 #startBanner {
   height: 230px;
   font-family: 'Open Sans', sans-serif;
@@ -613,6 +635,20 @@ a.accordion-toggle:hover {
 	width: 14em;
 	text-align: left;
   font-size: 100%;
+}
+
+
+#modules .publicUrlLabel {
+  font-size: 75%;
+  color: black;
+  border-bottom: 1px dashed #999;
+  text-decoration: none;
+}
+
+.publicUrl {
+  font-size: 85%;
+  font-weight: bold;
+  color: black;
 }
 
 #modules h2 {

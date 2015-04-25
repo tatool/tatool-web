@@ -16,10 +16,15 @@ angular.module('tatool.module')
       } else {
         moduleDataService.getModule(moduleId).then(
           function(data) {
-            $log.debug('Module has been opened: ' + data.moduleId);
-            module = new Module(moduleId);
-            angular.extend(module, data);
-            q.resolve(module);
+            if (data === null) {
+              $log.debug('Module could not be found');
+              q.reject('Module could not be found.');
+            } else {
+              $log.debug('Module has been opened: ' + data.moduleId);
+              module = new Module(moduleId);
+              angular.extend(module, data);
+              q.resolve(module);
+            }
           }, function(error) {
             $log.debug('Module could not be opened: ' + error);
             q.reject(error);

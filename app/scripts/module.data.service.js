@@ -64,6 +64,24 @@ angular.module('tatool')
       return deferred.promise;
     };
 
+    // get a public module
+    data.getPublicModule = function(moduleId) {
+      var deferred = $q.defer();
+
+      $http.get('/public/' + moduleId)
+        .success(function (data) {
+          if (data === 'null') {
+            data = null;
+          }
+          deferred.resolve(data);
+        })
+        .error(function (error) {
+          deferred.reject(error.message);
+        });
+
+      return deferred.promise;
+    };
+
     // get a module from the repository by its moduleId
     data.getRepositoryModule = function(moduleId) {
       var deferred = $q.defer();

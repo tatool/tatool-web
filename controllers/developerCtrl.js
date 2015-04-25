@@ -259,6 +259,7 @@ exports.getResource = function(req, res) {
           }
         });
       } else {
+        console.log(projectsPath + accessType + '/' + req.params.projectName + '/' + req.params.resourceType + '/' + req.params.resourceName);
         request(projectsPath + accessType + '/' + req.params.projectName + '/' + req.params.resourceType + '/' + req.params.resourceName)
           .auth(req.app.get('resource_user'), req.app.get('resource_pw'), true)
             .pipe(res);

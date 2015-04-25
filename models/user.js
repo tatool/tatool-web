@@ -29,6 +29,14 @@ var User = new Schema({
       type: Number,
       required: true
     },
+    tempUser: {
+      type: Boolean,
+      required: false
+    },
+    extid: {
+      type: String,
+      required: false
+    },
     fullName: {
       type: String,
       required: false
@@ -78,6 +86,7 @@ User.methods.createToken = function(secret) {
     _id: this._id,
     email: this.email,
     code: this.code,
+    extid: this.extid,
     roles: this.roles
   }, secret, { 
     expiresInMinutes: 60*8 

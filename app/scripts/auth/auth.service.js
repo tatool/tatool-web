@@ -139,6 +139,21 @@ angular.module('tatool.auth')
       });
     return deferred.promise;
   };
+
+  authService.publicLogin = function (moduleId, extid) {
+    var deferred = $q.defer();
+   
+    $http.get('/public/login/' + moduleId + '?extid=' + extid)
+      .success(function (data) {
+        userService.createSession(data.code.toString(), data.token, data.roles, data.code);
+        deferred.resolve(data.module);
+      })
+      .error(function (error) {
+        deferred.reject(error);
+      });
+
+    return deferred.promise;
+  };
   
   return authService;
 

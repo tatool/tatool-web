@@ -6,7 +6,7 @@ var jwt = require('jsonwebtoken');
 
 passport.use(new BasicStrategy(
   function(userName, userPassword, callback) {
-    User.findOne({ email: userName }, function (err, user) {
+    User.findOne({ email: userName, tempUser: null }, function (err, user) {
 
       if (err) { return callback(err); }
 
@@ -49,7 +49,7 @@ exports.isAuthenticated = function(req, res, next) {
 exports.hasRole = function(req, res, next) {
   var requestedRole = req.url.split('/')[1];
 
-  if (requestedRole === 'login' || requestedRole === 'register') {
+  if (requestedRole === 'login' || requestedRole === 'register' || requestedRole === 'public') {
     next();
   } else {
     if (req.user.roles.indexOf(requestedRole) !== -1) {

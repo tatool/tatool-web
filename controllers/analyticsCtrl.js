@@ -62,6 +62,8 @@ exports.addAnalyticsUser = function(req, module) {
           var newData = {};
           newData.email = req.user.email;
           newData.code = req.user.code;
+          newData.extid = req.user.extid;
+
           newData.moduleType = module.moduleType;
           newData.maxSessionId = module.maxSessionId;
           newData.moduleProperties = module.moduleProperties;
@@ -114,6 +116,7 @@ exports.addAnalyticsData = function(req) {
           module.userData[i].maxSessionId = req.body.maxSessionId;
           module.userData[i].moduleProperties = req.body.moduleProperties;
           module.userData[i].sessions = req.body.sessions;
+          module.userData[i].sessionToken = req.body.sessionToken;
           module.userData[i].updated_at = new Date();
           module.markModified('userData');
 
@@ -130,6 +133,8 @@ exports.addAnalyticsData = function(req) {
           var newData = {};
           newData.email = req.user.email;
           newData.code = req.user.code;
+          newData.extid = req.user.extid;
+          newData.sessionToken = req.body.sessionToken;
           newData.moduleType = req.body.moduleType;
           newData.maxSessionId = req.body.maxSessionId;
           newData.moduleProperties = req.body.moduleProperties;

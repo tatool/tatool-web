@@ -64,6 +64,10 @@ var Module = new Schema({
       type: String,
       required: false
     },
+    lastSessionToken: { // previsou session token assigned to module
+      type: String,
+      required: false
+    },
     created_by: {       // owner of module will be set at time of creation and can't be changed
       type: String,
       required: true

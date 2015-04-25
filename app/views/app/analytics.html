@@ -39,6 +39,8 @@
       <thead>
         <tr>
           <th width="300"><b>Subject</b></th>
+          <th><b>External ID</b></th>
+          <th><b>Session Token</b></th>
           <th><b>Sessions</b></th>
           <th><b>Last Update</b></th>
           <th width="110px"></th>
@@ -47,6 +49,8 @@
       <tbody>
         <tr ng-repeat="user in currentModule.userData | orderBy:'code'">
           <td> <b>{{user.code}}</b> <span ng-if="showEmail === 1 && user.email !== ''">({{user.email}})</span></td>
+          <td align="center"> {{user.extid}}<br></td>
+          <td align="center"> {{user.sessionToken}}<br></td>
           <td align="center"> {{user.maxSessionId}}<br></td>
           <td align="center"> {{formatDate(user.updated_at)}}<br></td>
           <td align="center"> 
@@ -55,7 +59,7 @@
           </td>
         </tr>
         <tr ng-if="currentModule.userData.length === 0">
-          <td colspan="4"> No data available </td>
+          <td colspan="6"> No data available </td>
         </tr>
       </tbody>
     </table>

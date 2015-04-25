@@ -21,6 +21,7 @@ var app = express();
 app.set('port', process.env.PORT || 3000);
 app.set('env', process.env.NODE_ENV || process.argv[3] || 'prod');
 app.set('jwt_secret', process.env.JWT_SECRET || 'secret');
+
 app.set('projects_path', process.env.PROJECTS_PATH || __dirname + '/app/projects/');
 app.set('resource_user', process.env.RESOURCE_USER || 'tatool');
 app.set('resource_pw', process.env.RESOURCE_PW || 'secret');
@@ -76,6 +77,14 @@ router.post('/user/modules/:moduleId/trials/:sessionId', mainCtrl.addTrials);
 router.get('/user/modules/:moduleId/resources/token', mainCtrl.getResourceToken);
 router.get('/user/projects', commonCtrl.getProjects);
 app.get('/user/resources/:projectAccess/:projectName/:resourceType/:resourceName', mainCtrl.getResource); // NO JWT CHECK
+
+// Public Modules
+router.post('/public/modules/:moduleId/install', mainCtrl.install);
+router.post('/public/modules/:moduleId', mainCtrl.save);
+router.get('/public/modules/:moduleId', mainCtrl.get);
+router.post('/public/modules/:moduleId/trials/:sessionId', mainCtrl.addTrials);
+router.get('/public/modules/:moduleId/resources/token', mainCtrl.getResourceToken);
+app.get('/public/resources/:projectAccess/:projectName/:resourceType/:resourceName', mainCtrl.getResource); // NO JWT CHECK
 
 // Repository Modules
 router.get('/user/repository', repositoryCtrl.getAll);
@@ -140,6 +149,10 @@ app.post('/user/reset/:token', userController.updatePassword);
 app.post('/user/captcha', userController.verifyCaptcha);
 app.post('/user/devaccount', userController.signupDev);
 app.get('/data/user/:token', analyticsCtrl.getUserData);
+
+// open API for public module
+app.get('/public/:moduleId', mainCtrl.getPublic);
+app.get('/public/login/:moduleId', mainCtrl.installPublic);
 
 // Tatool Web Client
 app.use(express.static(path.join(__dirname, (app.get('env') === 'dev') ? 'app' : 'dist')));

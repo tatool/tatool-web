@@ -91,8 +91,10 @@ angular.module('tatool.module')
       function onModuleError(data) {
         $scope.alert.msg = data;
         $scope.alert.visible = true;
-      }
 
+        executor.exitModule('Unknown error');
+      }
+      
       moduleService.openModule(userService.getUserName(), moduleId).then(onModuleSuccess, onModuleError);
     }
 

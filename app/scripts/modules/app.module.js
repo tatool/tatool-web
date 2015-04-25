@@ -76,6 +76,34 @@ angular.module('tatool.app', ['tatool', 'tatool.auth', 'tatool.common', 'ngAnima
             }
           }]
         }
+      }).state('public', {
+        url: '/public/:moduleId?extid',
+        templateUrl: 'views/app/public_start.html',
+        controller: 'PublicStartCtrl',
+        resolve: {
+          extid: ['$state', '$stateParams', function($state, $stateParams) {
+            if (!$stateParams.extid) {
+              return '';
+            } else {
+              return $stateParams.extid;
+            }
+          }],
+          moduleId: ['$state', '$stateParams', function($state, $stateParams) {
+            if (!$stateParams.moduleId) {
+              return '';
+            } else {
+              return $stateParams.moduleId;
+            }
+          }]
+        }
+      }).state('publicRun', {
+        url: '/public/run',
+        templateUrl: 'views/app/run.html',
+        controller: 'PublicRunCtrl'
+      }).state('publicEnd', {
+        url: '/public/end',
+        templateUrl: 'views/app/public_end.html',
+        controller: 'PublicEndCtrl'
       });
   }])
   .filter('startFrom', function() {

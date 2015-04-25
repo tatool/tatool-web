@@ -7,6 +7,7 @@ var postmark = require("postmark")(process.env.POSTMARK_API_KEY);
 var nodemailer = require('nodemailer');
 var smtpTransport = require('nodemailer-smtp-transport');
 var ejs = require("ejs");
+var Q = require('q');
 
 // register new user and send verification email
 exports.register = function(req, res) {
@@ -55,7 +56,7 @@ exports.register = function(req, res) {
                   if (req.body.devAccess) {
                     exports.signupDev(req, res);
                   } else {
-                    res.json({ message: 'User successfully added to the db!' });
+                    res.json({ message: 'User successfully added!' });
                   }
                 }
               });
@@ -67,6 +68,41 @@ exports.register = function(req, res) {
       res.status(500).json({ message: 'The email address is already registered.' });
     }
   });
+};
+
+// creates a temp user for public modules
+exports.createTempUser = function(req, res) {
+  var deferred = Q.defer();
+
+  // Create a new temp user
+  var user = new User();
+
+  user.roles.push('user');
+  user.verified = true;
+  user.tempUser = true;
+  if (req.query.extid && req.query.extid !== '') {
+    user.extid = req.query.extid;
+  }
+  user.updated_at = new Date();
+
+  Counter.getUserCode(function (err, userCode) {
+    if (err) {
+      deferred.reject({ message: 'User registration failed.', data: err });
+    } else {
+      user.code = userCode.next;
+      user.email = userCode.next.toString();
+      user.password = userCode.next;
+      user.save(function(err) {
+        if (err) {
+          deferred.reject({ message: 'User registration failed.', data: err });
+        } else {
+          deferred.resolve(user);
+        }
+      });
+    }
+  }); 
+
+  return deferred.promise;
 };
 
 exports.verifyCaptcha = function(req, res) {
