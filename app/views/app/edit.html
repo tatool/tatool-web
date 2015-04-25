@@ -15,7 +15,7 @@
     <div id="moduleEditor">
       <div id="moduleTree">
         <ul class="tree">
-          <li ng-click="openModule()" ng-class="{'active': highlightId.key === 'module'}"><i class="fa fa-cube"></i> <b>Module</b></li>
+          <li ng-click="openModule()" ng-class="{'active': highlightId.key === 'module'}"><i class="fa fa-cube"></i> <b>General Settings</b></li>
           <tree element="module.moduleDefinition.moduleHierarchy" on-element-click="openElement(element, index, parent)" top-func="openElement" highlight="highlightId">        
           </tree>
         </ul>
