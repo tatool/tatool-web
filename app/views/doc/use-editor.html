@@ -12,10 +12,10 @@
 <hr class="hr-red">
 
 <h3 id="settings">Module Settings<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
-<p>The module setting comprise the basic module information (name, author, label), and the module behaviour settings. All module configurations are stored in <a href="http://en.wikipedia.org/wiki/JSON" target = "_blank">JSON</a> format. To easily exchange modules with other researchers, you can download a JSON file by clicking on the download button.</p>
+<p>The module setting comprise the basic module information (name, author, label), and the module behaviour settings. All module configurations are stored in <a href="http://en.wikipedia.org/wiki/JSON" target = "_blank">JSON</a> format. To easily exchange modules with other researchers, you can download a JSON file by clicking on the <b>Download</b> button at the bottom of the Editor dialog.</p>
 
 <p><img src="../../images/doc/screen-editor-module.png" class="internal"><br>
-  <i>Module Navigation (left half) and Settings (right half)</i></p>
+  <i>Module Navigation (left) and Settings (right)</i></p>
 
 <hr class="hr-red">
 
@@ -44,9 +44,27 @@
 
 <h3 id="publish">Publish<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
 
-<p>To go live with your experiment, you can publish it with a simple click on <i>Publish</i> (make sure you activated the <i>Repository</i>). You can choose whether you want to make the module available to all registered Tatool users by selecting it to be <i>Public</i>, or to invite only a specified sample of participants that are personally invited by selecting it to be <i>Private</i>. You can <i>Edit</i> your module any time, but have to <i>Publish</i> it again to make changes available to your users. Once you published such changes, users that have added your module first have to update it before they can execute it. This allows for dynamic adjustment as it might be required during piloting.</p> 
+<p>The Tatool Web Repository allows you to go live with your experiment with a few clicks of a button. After activating the Repository for your module, you'll have the opportunity of publishing your module as <b>Public</b> or <b>Private</b>.</p>
+
+<p>A <b>Public</b> module not only allows every Tatool Web user to execute your module but it'll also allow you to share your module with people not registered with Tatool Web via a public URL (click on the Show URL link to get your custom link). This feature is required for Tatool Web to be used with Amazone Mechanical Turk.</p>
+
+<p>A <b>Private</b> module only allows a user defined list of Tatool Web users to see and execute your module. In order to invite users you'll first have to Publish the module. After the module has been published you can define your users list by clicking on the Invite button next to the Publish button. </p>
+
+<p>You can <i>Edit</i> your module any time, but have to <i>Publish</i> it again to make changes available to your users. Once you published such changes, users that have added your module first have to update it before they can execute it. This allows for dynamic adjustment as it might be required during piloting.</p> 
 
 <p><b>Note:</b> To make sure that we have sufficient web space for everyone, we currently limit the number of simultaneously published modules per researcher to <b>3</b> at a time.</p>
 
 <p><img src="../../images/doc/screen-editor-publish.png" class="internal"><br>
   <i>Publishing Modules</i></p>
+
+<table>
+  <tr>
+    <td width="300">
+  <p><img src="../../images/doc/screen-editor-publish-public.png" class="internal"><br>
+  <i>Public Module</i></p>
+</td>
+<td width="300">
+  <p><img src="../../images/doc/screen-editor-publish-private.png" class="internal"><br>
+  <i>Private Module</i></p>
+</td>
+</table>
