@@ -1,25 +1,25 @@
 <h2>Amazon Mechnical Turk</h2>
 
-<p>Tatool Web supports the use of Amazon Mechanical Turk (Mturk) for your experiments. In order to setup a HIT on Amazon Mturk you'll have to publish your module in Tatool Web as a public module to allow access without a Tatool Web Account. Find your Module URL by clicking on the <b>Show URL</b> link next to the Publish button and note it for later. Remember that your experiment should not be in breach with the <a href="https://www.mturk.com/mturk/help?helpPage=policies" target="_blank" class="external">Mturk Policies</a>.</p>
+<p>Tatool Web supports the use of Amazon Mechanical Turk (Mturk) for your experiments. To setup a HIT on Amazon Mturk, you have to publish your module in Tatool Web as a <b>public</b> module which allows access without a Tatool Web account. Get your module's URL by clicking on the <b>Show URL</b> link next to the <i>Publish</i> button and note it for later. Remember that your experiment has to conform to the <a href="https://www.mturk.com/mturk/help?helpPage=policies" target="_blank" class="external">Mturk Policies</a>.</p>
 
 <ul id="docPageNav">
-  <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('setup')">Setup of an Mturk Project</a></li>
-  <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('code')">Provide Module Completion Code</a></li>
+  <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('setup')">Setting up an Mturk Project</a></li>
+  <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('code')">Providing a Module Completion Code</a></li>
   <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('result')">Comparing Mturk/Tatool Results</a></li>
 </ul>
 
 <hr class="hr-red">
 
-<h3 id="setup">Setup of an Mturk Project<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
+<h3 id="setup">Setting up an Mturk Project<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
 
-<p>Once you've setup your Mturk requester account you can go ahead and create a new project. Choose the predefined <b>Survey Link</b> layout as a starting point.</p>
+<p>Once you have an Mturk requester account, you can go ahead and create a new project. Choose the predefined <b>Survey Link</b> layout as a starting point.</p>
 
 <p>
   <img src="../../images/doc/screen-mturk-project.png" class="internal"><br>
-  <i>Create Project of type Survey Link</i>
+  <i>Create a project of type Survey Link</i>
 </p>
 <br>
-<p>After you've entered all required properties, you can go ahead and edit the layout and add/change the text as required. As a final step you'll have to replace the link to your survey by clicking on the <b>Source</b> button in the editor pane.</p>
+<p>After you have entered all required properties, you can go ahead and edit the layout and add/change the text as required. As a final step, you need to replace the link to your survey by clicking on the <b>Source</b> button in the editor pane.</p>
 
 <p>
   <img src="../../images/doc/screen-mturk-layout.png" class="internal"><br>
@@ -27,14 +27,14 @@
 </p>
 
 <br>
-<p>Find the link definition highlighted in the screenshot below and replace it with the code snippet provided below. Remember to substitute the link at the beginning of the code snippet with your personal module URL.</p>
+<p>Find the link definition highlighted in the screenshot below, and replace it with the complete code snippet from below. Remember to substitute the link at the beginning of the code snippet with your personal module URL.</p>
 
 <p>
   <img src="../../images/doc/screen-mturk-source.png" class="internal"><br>
-  <i>Replace Link with code</i>
+  <i>Replace link with code</i>
 </p>
 
-<p><b>Replace Link with the following code and substitute the value for tatoolLink with your Module URL.</b></p>
+<p><b>Replace the link with the following code, and substitute the value for tatoolLink with the module URL. You can retrieve your module's URL by clicking on the <b>Show URL</b> link next to the <i>Publish</i> button in the Modules tab.</b></p>
 <pre><code class="language-javascript">&lt;!-- Replace the value for tatoolLink with your Tatool Web URL (without the extid) -->
 &lt;script type="text/javascript" language="JavaScript">
   var tatoolLink = "http://www.tatool-web.com/#/public/xxxxx";
@@ -69,9 +69,9 @@
 
 <hr class="hr-red">
 
-<h3 id="code">Provide Module Completion Code<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
+<h3 id="code">Providing a Module Completion Code<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
 
-<p>Once an Mturk worker has accepted and completed your module, he'll automatically be provided with a <b>unique session code</b> to enter and submit as part of your HIT. No need for you to add anything special to your module.</p>
+<p>Once an Mturk worker has accepted and completed your module, Tatool Web will automatically provide a <b>unique session code</b> that the Mturk worker can submit as part of your HIT; there's no need for you to add anything special to your module.</p>
 
 <p>
   <img src="../../images/doc/screen-mturk-session.png" class="internal"><br>
@@ -82,7 +82,7 @@
 
 <h3 id="result">Comparing Mturk/Tatool Results<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
 
-<p>To approve/reject payments to your Mturk workers you can simply to compare the Mturk Results and the Tatool Web Analytics overview. Both screens provide the <b>Worker ID (=External ID)</b> and the <b>Surveycode (=Session Token)</b> to confirm a successful participation. It's up to you to do additional checks to see whether the data provided (number of trials or number of points) fulfill your HIT requirements. Make sure to clearly state your requirements in the Mturk HIT.</p>
+<p>To approve/reject payments to your Mturk workers, you can simply compare the Mturk Results and the Tatool Web Analytics overview. Both screens provide the <b>Worker ID (= External ID)</b> and the <b>Surveycode (= Session Token)</b> to confirm a successful participation. You have also immediate access to the data, allowing you to do additional checks on the data provided (number of trials or number of points), depending on the HIT requirements you set. Make sure to clearly state your requirements in the Mturk HIT.</p>
 
 <p>
   <img src="../../images/doc/screen-mturk-result.png" class="internal"><br>
