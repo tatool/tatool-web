@@ -143,9 +143,7 @@ angular.module('tatool.app')
             if(!('primary' in element.children)) {
               validationMessage(null, 'primary', element.children);
             }
-            if(!('secondary' in element.children)) {
-              validationMessage(null, 'secondary', element.children);
-            }
+            // secondary not required
           }
           // Executable rules
         } else if (element.tatoolType === 'Executable') {
