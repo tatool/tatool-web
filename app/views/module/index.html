@@ -35,7 +35,7 @@
     <script src="../../bower_components/video.js/dist/video-js/video.js"></script>
     <!-- endbuild -->
   </head>
-  <body ng-app="tatool.module" ng-controller="MainCtrl" ng-keydown="keyPress($event);" ng-mousedown="mousePress($event);" ng-strict-di>
+  <body ng-app="tatool.module" ng-controller="MainCtrl" ng-keydown="keyPress($event);" ng-mousedown="mousePress($event);" ng-class="executableName" ng-strict-di>
 
     <!-- Module content -->
     <div id="moduleContainer" ng-class="{true:'hideCursor'}[hideMouseCursor]">

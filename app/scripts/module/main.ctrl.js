@@ -79,6 +79,11 @@ angular.module('tatool.module')
       }
     });
 
+    // Handle executable specific css class
+    $scope.$on(tatoolPhase.EXECUTABLE_START, function(state, stack) {
+      $scope.executableName = stack.peek().name;
+    });
+
     function loadModule() {
 
       function onModuleSuccess(data) {
