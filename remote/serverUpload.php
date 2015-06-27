@@ -1,5 +1,5 @@
 <?php
-require("../LZString.php");
+require("config.php");
 
 // respond to preflights
 if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
@@ -36,7 +36,7 @@ $moduleId = filter_var($json->moduleId, FILTER_SANITIZE_STRING);
 $moduleLabel = filter_var($json->moduleLabel, FILTER_SANITIZE_STRING);
 $sessionId = str_pad($json->sessionId, 6, "0", STR_PAD_LEFT);
 $data = LZString::decompressFromBase64($json->trialData);
-$path = "/home/outerlim/tatoolweb/" . $moduleId . "/";
+$path = $tatoolwebpath . $moduleId . "/";
 $filename = (is_null($moduleLabel) ? $moduleId : $moduleLabel) . "_" . $user . "_" . $sessionId;
 $zipFilename = $moduleId . "_" . $user . '.zip';
 $timestamp = ""; 

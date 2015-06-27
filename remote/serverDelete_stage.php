@@ -1,4 +1,5 @@
 <?php
+require("config_stage.php");
 
 // Provide headers for CORS
 header("Access-Control-Allow-Origin: *");
@@ -16,7 +17,7 @@ if ((!isset($moduleId) || is_null($moduleId))) {
   exit;
 }
 
-$path = "/home/outerlim/tatoolweb-stage/" . $moduleId;
+$path = $tatoolwebpath . $moduleId;
 
 // check if path exists
 if (file_exists($path)) {
