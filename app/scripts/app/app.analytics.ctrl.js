@@ -7,7 +7,9 @@ angular.module('tatool.app')
 
     $scope.currentModule = null;
 
-    $scope.showEmail = 0;
+    $scope.showDetail = { 
+        email: false 
+    };
 
     function initAnalytics() {
       // Initialize installed modules
