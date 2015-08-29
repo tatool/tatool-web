@@ -107,9 +107,9 @@ var update = function(req, res, userModule) {
   });
 };
 
-// Get a public module
+// Get a public URL module
 exports.getPublic = function(req, res) {
-  Repository.findOne({ moduleId: req.params.moduleId, moduleType: 'public' }, function(err, module) {
+  Repository.findOne({ moduleId: req.params.moduleId }, function(err, module) {
     if (err) {
       res.status(500).send(err);
     } else {
@@ -122,9 +122,9 @@ exports.getPublic = function(req, res) {
   });
 };
 
-// Adding a new public module
+// Adding a new public URL module
 exports.installPublic = function(req, res) {
-  Repository.findOne({ moduleId: req.params.moduleId, moduleType: 'public' }, function(err, module) {
+  Repository.findOne({ moduleId: req.params.moduleId }, function(err, module) {
     if (err) {
       res.status(500).send(err);
     } else {
