@@ -6,11 +6,16 @@
 **/
 
 angular.module('tatool.module')
-  .factory('dbUtils', ['$log', 'moduleService', 'contextService', 'trialService',
-    function ($log, moduleService, contextService, trialService) {
+  .factory('dbUtils', ['$log', 'moduleService', 'contextService', 'trialService', 'handlerService',
+    function ($log, moduleService, contextService, trialService, handlerService) {
     $log.debug('DB: initialized');
 
     var utils = {};
+
+    // get a handler element
+    utils.getHandler = function(handlerName) {
+      return handlerService.getHandler(handlerName);
+    };
 
     // set a module property (element, key and value)
     utils.setModuleProperty = function(element, propertyKey, propertyValue) {
