@@ -7,6 +7,7 @@
   <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('elements')">Elements & Handlers</a></li>
   <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('executables')">Executables</a></li>
   <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('publish')">Publish</a></li>
+  <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('export')">Export & Import</a></li>
 </ul>
 
 <hr class="hr-red">
@@ -44,11 +45,12 @@
 
 <h3 id="publish">Publish<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
 
-<p>The Tatool Web Repository allows you to go live with your experiment with a few clicks of a button. After activating the Repository for your module, you can publish your module as <b>Public</b> or <b>Private</b>.</p>
+<p>The Tatool Web Repository allows you to go live with your experiment with a few clicks. After activating the Repository for your module, you can publish your module as <b>Public</b> or <b>Private</b>.</p>
 
-<p>A <b>Public</b> module can be executed by all Tatool Web users. Public modules come also with a URL (click on <i>Show URL</i> to get your custom link) that allows for sharing your experiment with any prospective participants without having them to sign up on Tatool Web. Note that to run your experiment with <b>Amazon Mechanical Turk</b>, you need to publish your module as <i>public</i>.</p>
+<p>A <b>Public</b> module can be executed by all Tatool Web users. Public modules come also with a URL (click on <i>Show URL</i> to get your custom link) that allows for sharing your experiment with any prospective participants without having them to sign up on Tatool Web (e.g. for <b>Amazon Mechanical Turk</b>).</p>
 
-<p>A <b>Private</b> module restricts visibility and execution of the module to a custom-defined list of Tatool Web users. After publishing the module, you can invite Tatool Web users by clicking on the <i>Invite</i> button next to the <i>Publish</i> button. </p>
+<p>A <b>Private</b> module restricts visibility and execution of the module to a custom-defined list of Tatool Web users. After publishing the module, you can invite Tatool Web users by clicking on the <i>Invite</i> button next to the <i>Publish</i> button. The email addresses entered in the invite screen need to be Tatool Web accounts. As soon as the invited user logs into Tatool Web he/she will see a pending invitation for a Module. After accepting the invitation you'll see the change od the invitation status on the invite screen.<br>
+Private modules come also with a URL (click on <i>Show URL</i> to get your custom link) that allows for sharing your experiment with any prospective participants without having them to sign up on Tatool Web (e.g. for <b>Amazon Mechanical Turk</b>).</p>
 
 <p>You can <i>Edit</i> your module at any time, but have to <i>Publish</i> it again to make the changes available to your users. Once you published such changes, users that have added your module first have to update it before they can execute it again. This allows for dynamic adjustments as it might be required during piloting your experiments.</p> 
 
@@ -68,3 +70,17 @@
   <i>Private Module</i></p>
 </td>
 </table>
+
+<hr class="hr-red">
+
+<h3 id="export">Export & Import<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
+
+<p>You can export your module's settings as a JSON file, and import a module from a JSON file. To duplicate a module, simply export it to JSON and then import that file. You can then make whatever changes are necessary.</p>
+
+<p><b>How to export/backup your module as JSON</b><br>
+On the Editor screen, click on the <i>Edit</i> button of the module you want to export, then within the Edit interface for that module, click the <i>Download</i> button at the bottom. This will allow you to save a *.json file which contains all of your module's settings.</p>
+
+<p>Note that the <i>Export</i> button on the Editor screen is for exporting your data, not your module's settings.</p>
+
+<p><b>How to import a module from JSON</b><br>
+The <i>Open</i> button at the top right of the Editor screen allows you to create a module from a *.json file, such as one that you previously exported. An imported Module will always create a new entry and never replace an existing module (even if they have the same name).</p>
