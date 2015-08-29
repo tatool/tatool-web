@@ -97,7 +97,7 @@ gulp.task('minify-js-vendor', ['clean'], function() {
         'app/bower_components/papaparse/papaparse.js',
         'app/bower_components/datejs/build/production/date.js',
         'app/bower_components/script.js/dist/script.js',
-        'app/bower_components/lz-string/libs/release/lz-string-1.3.3-min.js',
+        'app/bower_components/lz-string/libs/lz-string.min.js',
         'app/bower_components/async/lib/async.js',
         'app/bower_components/jqueryui-touch-punch/jquery.ui.touch-punch.js',
         'app/scripts/common/util/prism.js',
