@@ -1,6 +1,6 @@
 <div id="tatoolStimulus" ng-class="stimulus.stimulusClass" ng-show="show">
 
-  <div ng-if="stimulus.data.stimulusValueType!==undefined">
+  <div ng-if="stimulus.data.stimulusValueType!==undefined" ng-click="stimulusClickEvent($event, stimulus)">
 
         <div ng-switch on="stimulus.data.stimulusValueType">
           <div ng-switch-when="image">
