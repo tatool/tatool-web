@@ -10,6 +10,7 @@
 }
 
 .tatoolCountdown_countdownBg {
+  font-size: 100%;
   border: 5px solid #aaa;
   background: #f8f8f8;
   width: 300px;

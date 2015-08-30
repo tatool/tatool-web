@@ -104,7 +104,7 @@
 
 <h3 id="style">Styling Stimulus Display<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
 
-<p>As mentioned earlier, the actual style of your stimulus (e.g., font colour, background colour, border, position) can be changed to your liking with the help of <a href="http://en.wikipedia.org/wiki/Cascading_Style_Sheets" target="_blank">Cascading Style Sheets (CSS)</a>. By default, Tatool will look for a CSS file accompanying your Executable with following the naming convention <i>myExecutable.css</i>. Don't worry, if you're happy with the style as it is, you don't have to provide such a file.</p>
+<p>As mentioned earlier, the actual style of your stimulus (e.g., font colour, background colour, border, position) can be changed to your liking with the help of <a href="http://en.wikipedia.org/wiki/Cascading_Style_Sheets" target="_blank">Cascading Style Sheets (CSS)</a>. By default, Tatool will look for a CSS file accompanying your Executable with the naming convention <i>myExecutable.css</i>. Don't worry, if you're happy with the style as it is, you don't have to provide such a file.</p>
 
 <p>Introducing CSS here would go beyond the scope of this documentation, but there are tons of excellent tutorials on the web, for example the <a href="http://www.codecademy.com/en/tracks/web" target="_blank">interactive course</a> by Codecademy. The Mozilla Developer Network provides a comprehensive <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference" target="_blank">CSS reference</a>. Once you're up to speed with what CSS is and how the syntax works, you can try changing the look of your stimuli. As an example, we'll now add a coloured border around the images presented in our Flanker Task.</p>
 
@@ -116,7 +116,7 @@
 }
 </code></pre>
 
-<p>We add a simple CSS class to the CSS file and call it <code>stimulusImage</code>. All it takes is to providee one rule on <b>line 2</b> that adds a solid grayish border with a thickness of 1 pixel. Now that we've created our CSS class, it's time to apply it to our Template.</p>
+<p>We add a simple CSS class to the CSS file and call it <code>stimulusImage</code>. All it takes is to provide one rule on <b>line 2</b> that adds a solid grayish border with a thickness of 1 pixel. Now that we've created our CSS class, it's time to apply it to our Template.</p>
 
 <h4>myExecutable.html</h4>
 <pre class="line-numbers" data-line="2"><code class="language-markup">&lt;tatool>
@@ -126,6 +126,12 @@
 
 <p>To apply the CSS class, we have to extend the original Template from above by adding the attribute <code>class</code> to our stimulus element and assign it the value of our class <code>stimulusImage</code>. That's it, when you rerun your task, you should now see the new border around the stimulus image.</p>
 
+<div class="hint">
+  <div class="icon red"><i class="fa fa-lightbulb-o fa-2x"></i></div> 
+  <div class="text">
+    <p>To change the entire display of an Executable (for example, to change its background color), you can add a CSS class with the same name that you use for the Executable in the <b>Name</b> field in the Editor.</p>
+  </div>
+</div>
 
 <hr class="hr-red">
 
