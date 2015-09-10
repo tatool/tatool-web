@@ -2,7 +2,7 @@
 
 angular.module('tatool.app')
   .controller('AdminCtrl', ['$scope', '$q', '$http', '$log', '$timeout', '$sce', 'userDataService', 'moduleDataService', 'spinnerService',
-    function ($scope, $q, $http, $log, $timeout, $sce, userDataService, moduleDataService, spinnerService) {
+    function($scope, $q, $http, $log, $timeout, $sce, userDataService, moduleDataService, spinnerService) {
 
       $scope.users = [];
 
@@ -16,12 +16,19 @@ angular.module('tatool.app')
 
       $scope.filterProject = '';
 
+      $scope.userPaging = {
+        currentPage: 0,
+        pageSize: 25
+      };
+
       $scope.updateUser = function(user) {
         $scope.hideAlert();
 
-        userDataService.addUser(user).then( function(data) {
+        userDataService.addUser(user).then(function(data) {
           $scope.highlightUserEmail = data.data.email;
-          $timeout(function() { $scope.highlightUserEmail = null; }, 500);
+          $timeout(function() {
+            $scope.highlightUserEmail = null;
+          }, 500);
         }, function(err) {
           setAlert('danger', err);
           $log.error(err);
@@ -31,35 +38,35 @@ angular.module('tatool.app')
 
       $scope.addUser = function() {
         $scope.hideAlert();
-        var box =bootbox.dialog({
+        var box = bootbox.dialog({
           title: '<b>Add User</b>',
           message: '<div class="row">  ' +
-                    '<div class="col-md-12"> ' +
-                    '<form class="form-horizontal"> ' +
-                    '<div class="form-group"> ' +
-                    '<label class="col-md-4 control-label" for="name">Email</label> ' +
-                    '<div class="col-md-5"> ' +
-                    '<input id="email" name="email" type="email" class="form-control input-md" ng-required ng-model="usermail"> ' +
-                    '</div> ' +
-                    '</div> ' +
-                    '<div class="form-group"> ' +
-                    '<label class="col-md-4 control-label" for="name">Password</label> ' +
-                    '<div class="col-md-5"> ' +
-                    '<input id="password" name="password" type="password" class="form-control input-md" ng-required> ' +
-                    '</div> ' +
-                    '</div> ' +
-                    '<div class="form-group"> ' +
-                    '<label class="col-md-4 control-label" for="name">Retype Password</label> ' +
-                    '<div class="col-md-5"> ' +
-                    '<input id="password2" name="password2" type="password" class="form-control input-md" required> ' +
-                    '</div> ' +
-                    '</div> ' +
-                    '</form> </div> </div>',
+            '<div class="col-md-12"> ' +
+            '<form class="form-horizontal"> ' +
+            '<div class="form-group"> ' +
+            '<label class="col-md-4 control-label" for="name">Email</label> ' +
+            '<div class="col-md-5"> ' +
+            '<input id="email" name="email" type="email" class="form-control input-md" ng-required ng-model="usermail"> ' +
+            '</div> ' +
+            '</div> ' +
+            '<div class="form-group"> ' +
+            '<label class="col-md-4 control-label" for="name">Password</label> ' +
+            '<div class="col-md-5"> ' +
+            '<input id="password" name="password" type="password" class="form-control input-md" ng-required> ' +
+            '</div> ' +
+            '</div> ' +
+            '<div class="form-group"> ' +
+            '<label class="col-md-4 control-label" for="name">Retype Password</label> ' +
+            '<div class="col-md-5"> ' +
+            '<input id="password2" name="password2" type="password" class="form-control input-md" required> ' +
+            '</div> ' +
+            '</div> ' +
+            '</form> </div> </div>',
           buttons: {
             main: {
               label: 'Ok',
               className: 'btn-default',
-              callback: function () {
+              callback: function() {
                 var re = /\S+@\S+\.\S+/;
                 var email = $('#email').val();
                 var password = $('#password').val();
@@ -79,12 +86,12 @@ angular.module('tatool.app')
           }
         });
 
-        box.bind('shown.bs.modal', function(){
+        box.bind('shown.bs.modal', function() {
           $('#email').focus();
         });
 
         $('#password2').keypress(function(e) {
-          if(e.which === 13) {
+          if (e.which === 13) {
             e.preventDefault();
             $('button[data-bb-handler="main"]').focus().click();
           }
@@ -95,8 +102,8 @@ angular.module('tatool.app')
         var user = {};
         user.email = email;
         user.password = password;
-        userDataService.addUser(user).then( function() {
-          setAlert('info', 'User '+ user.email + ' has been added.');
+        userDataService.addUser(user).then(function() {
+          setAlert('info', 'User ' + user.email + ' has been added.');
           initUsers();
         }, function(err) {
           $log.error(err);
@@ -105,35 +112,35 @@ angular.module('tatool.app')
 
       $scope.changePassword = function(user) {
         $scope.hideAlert();
-        var box =bootbox.dialog({
+        var box = bootbox.dialog({
           title: '<b>Change Password</b>',
           message: '<div class="row">  ' +
-                    '<div class="col-md-12"> ' +
-                    '<form class="form-horizontal"> ' +
-                    '<div class="form-group"> ' +
-                    '<label class="col-md-4 control-label" for="name">Email</label> ' +
-                    '<div class="col-md-5"> ' +
-                    '<p class="form-control-static"><b>' + user.email + '</b></p>' +
-                    '</div> ' +
-                    '</div> ' +
-                    '<div class="form-group"> ' +
-                    '<label class="col-md-4 control-label" for="name">Password</label> ' +
-                    '<div class="col-md-5"> ' +
-                    '<input id="password" name="password" type="password" class="form-control input-md" ng-required> ' +
-                    '</div> ' +
-                    '</div> ' +
-                    '<div class="form-group"> ' +
-                    '<label class="col-md-4 control-label" for="name">Retype Password</label> ' +
-                    '<div class="col-md-5"> ' +
-                    '<input id="password2" name="password2" type="password" class="form-control input-md" required> ' +
-                    '</div> ' +
-                    '</div> ' +
-                    '</form> </div> </div>',
+            '<div class="col-md-12"> ' +
+            '<form class="form-horizontal"> ' +
+            '<div class="form-group"> ' +
+            '<label class="col-md-4 control-label" for="name">Email</label> ' +
+            '<div class="col-md-5"> ' +
+            '<p class="form-control-static"><b>' + user.email + '</b></p>' +
+            '</div> ' +
+            '</div> ' +
+            '<div class="form-group"> ' +
+            '<label class="col-md-4 control-label" for="name">Password</label> ' +
+            '<div class="col-md-5"> ' +
+            '<input id="password" name="password" type="password" class="form-control input-md" ng-required> ' +
+            '</div> ' +
+            '</div> ' +
+            '<div class="form-group"> ' +
+            '<label class="col-md-4 control-label" for="name">Retype Password</label> ' +
+            '<div class="col-md-5"> ' +
+            '<input id="password2" name="password2" type="password" class="form-control input-md" required> ' +
+            '</div> ' +
+            '</div> ' +
+            '</form> </div> </div>',
           buttons: {
             main: {
               label: 'Ok',
               className: 'btn-default',
-              callback: function () {
+              callback: function() {
                 var password = $('#password').val();
                 var password2 = $('#password2').val();
                 if (password !== password2 || password === '') {
@@ -151,12 +158,12 @@ angular.module('tatool.app')
           }
         });
 
-        box.bind('shown.bs.modal', function(){
+        box.bind('shown.bs.modal', function() {
           $('#password').focus();
         });
 
         $('#password2').keypress(function(e) {
-          if(e.which === 13) {
+          if (e.which === 13) {
             e.preventDefault();
             $('button[data-bb-handler="main"]').focus().click();
           }
@@ -165,9 +172,11 @@ angular.module('tatool.app')
 
       function changeUserPassword(user, password) {
         user.password = password;
-        userDataService.updatePassword(user).then( function() {
+        userDataService.updatePassword(user).then(function() {
           $scope.highlightUserEmail = user.email;
-          $timeout(function() { $scope.highlightUserEmail = null; }, 500);
+          $timeout(function() {
+            $scope.highlightUserEmail = null;
+          }, 500);
         }, function(err) {
           $log.error(err);
         });
@@ -177,14 +186,14 @@ angular.module('tatool.app')
         $scope.hideAlert();
 
         function runDelete() {
-          userDataService.deleteUser(user).then( function() {
-            setAlert('info', 'User '+ user.email + ' has been deleted.');
+          userDataService.deleteUser(user).then(function() {
+            setAlert('info', 'User ' + user.email + ' has been deleted.');
             initUsers();
           }, function(err) {
             $log.error(err);
           });
         }
-        
+
         bootbox.dialog({
           message: 'Are you sure you want to delete the user <b>\'' + user.email + '\'</b>?<br>All modules associated with this user will also be deleted.',
           title: '<b>Delete User</b>',
@@ -204,8 +213,10 @@ angular.module('tatool.app')
 
       function initUsers() {
         startSpinner('Loading users...');
-        userDataService.getUsers().then( function(data) {
+        userDataService.getUsers().then(function(data) {
           $scope.users = data;
+          $scope.userPaging.numPerPage = Math.ceil($scope.users.length / $scope.userPaging.pageSize);
+          $scope.userPaging.currentPage = 0;
           stopSpinner();
         }, function(error) {
           $log.error(error);
@@ -220,60 +231,60 @@ angular.module('tatool.app')
 
       $scope.addProject = function() {
         $scope.hideAlert();
-        var box =bootbox.dialog({
+        var box = bootbox.dialog({
           title: '<b>Add Project</b>',
           message: '<div class="row">  ' +
-                    '<div class="col-md-12"> ' +
-                    '<form class="form-horizontal"> ' +
-                    '<div class="form-group"> ' +
-                    '<label class="col-md-4 control-label" for="name">Name</label> ' +
-                    '<div class="col-md-6"> ' +
-                    '<input id="name" name="name" type="text" class="form-control input-md" ng-required> ' +
-                    '</div> ' +
-                    '</div> ' +
+            '<div class="col-md-12"> ' +
+            '<form class="form-horizontal"> ' +
+            '<div class="form-group"> ' +
+            '<label class="col-md-4 control-label" for="name">Name</label> ' +
+            '<div class="col-md-6"> ' +
+            '<input id="name" name="name" type="text" class="form-control input-md" ng-required> ' +
+            '</div> ' +
+            '</div> ' +
 
-                    '<div class="form-group"> ' +
-                    '<label class="col-md-4 control-label" for="name">Access</label> ' +
-                    '<div class="col-md-6"> ' +
-                    '<div class="radio"> <label for="access-public"> ' +
-                    '<input type="radio" name="access" id="access-public" value="public" checked> ' +
-                    'Public </label> ' +
-                    '</div>' +
-                    '<div class="radio"> <label for="access-private"> ' +
-                    '<input type="radio" name="access" id="access-private" value="private"> ' +
-                    'Private </label> ' +
-                    '</div>' +
-                    '</div> ' +
-                    '</div> ' +
+          '<div class="form-group"> ' +
+            '<label class="col-md-4 control-label" for="name">Access</label> ' +
+            '<div class="col-md-6"> ' +
+            '<div class="radio"> <label for="access-public"> ' +
+            '<input type="radio" name="access" id="access-public" value="public" checked> ' +
+            'Public </label> ' +
+            '</div>' +
+            '<div class="radio"> <label for="access-private"> ' +
+            '<input type="radio" name="access" id="access-private" value="private"> ' +
+            'Private </label> ' +
+            '</div>' +
+            '</div> ' +
+            '</div> ' +
 
-                    '<div class="form-group"> ' +
-                    '<label class="col-md-4 control-label" for="name">Owner</label> ' +
-                    '<div class="col-md-6"> ' +
-                    '<input id="owner" name="owner" type="text" class="form-control input-md" ng-required> ' +
-                    '</div> ' +
-                    '</div> ' +
+          '<div class="form-group"> ' +
+            '<label class="col-md-4 control-label" for="name">Owner</label> ' +
+            '<div class="col-md-6"> ' +
+            '<input id="owner" name="owner" type="text" class="form-control input-md" ng-required> ' +
+            '</div> ' +
+            '</div> ' +
 
-                    '<div class="form-group"> ' +
-                    '<label class="col-md-4 control-label" for="name">Description</label> ' +
-                    '<div class="col-md-6"> ' +
-                    '<input id="description" name="description" type="text" class="form-control input-md"> ' +
-                    '</div> ' +
-                    '</div> ' +
+          '<div class="form-group"> ' +
+            '<label class="col-md-4 control-label" for="name">Description</label> ' +
+            '<div class="col-md-6"> ' +
+            '<input id="description" name="description" type="text" class="form-control input-md"> ' +
+            '</div> ' +
+            '</div> ' +
 
-                    '<div class="form-group"> ' +
-                    '<label class="col-md-4 control-label" for="name">Executables (JSON)</label> ' +
-                    '<div class="col-md-8"> ' +
-                    '<textarea id="executables" name="executables" class="form-control input-sm" rows="10"></textarea>' +
-                    '<small><b>Format:</b> [ { "customType" : "executable1", "description": "Small executable description", "customProperties": [ { "propertyName": "booleanProperty", "propertyType": "Boolean" } ] }, <br>{ "customType" : "executable2" } ]</small>' +
-                    '</div> ' +
-                    '</div> ' +
-                    '</div> ' +
-                    '</form> </div> </div>',
+          '<div class="form-group"> ' +
+            '<label class="col-md-4 control-label" for="name">Executables (JSON)</label> ' +
+            '<div class="col-md-8"> ' +
+            '<textarea id="executables" name="executables" class="form-control input-sm" rows="10"></textarea>' +
+            '<small><b>Format:</b> [ { "customType" : "executable1", "description": "Small executable description", "customProperties": [ { "propertyName": "booleanProperty", "propertyType": "Boolean" } ] }, <br>{ "customType" : "executable2" } ]</small>' +
+            '</div> ' +
+            '</div> ' +
+            '</div> ' +
+            '</form> </div> </div>',
           buttons: {
             main: {
               label: 'Ok',
               className: 'btn-default',
-              callback: function () {
+              callback: function() {
                 var project = {};
                 project.name = $('#name').val();
                 project.access = $('input[name=\'access\']:checked').val();
@@ -295,12 +306,12 @@ angular.module('tatool.app')
           }
         });
 
-        box.bind('shown.bs.modal', function(){
+        box.bind('shown.bs.modal', function() {
           $('#name').focus();
         });
 
         $('#description').keypress(function(e) {
-          if(e.which === 13) {
+          if (e.which === 13) {
             e.preventDefault();
             $('button[data-bb-handler="main"]').focus().click();
           }
@@ -311,7 +322,7 @@ angular.module('tatool.app')
         var uniqueProject = true;
         var jsonParse = true;
 
-        for (var i=0; i < $scope.projects.length; i++) {
+        for (var i = 0; i < $scope.projects.length; i++) {
           if (project.name === $scope.projects[i].name && project.access === $scope.projects[i].access) {
             uniqueProject = false;
             break;
@@ -327,8 +338,8 @@ angular.module('tatool.app')
         }
 
         if (uniqueProject && jsonParse) {
-          moduleDataService.addProject(project).then( function() {
-            setAlert('success', 'Project '+ project.name + ' has been added.');
+          moduleDataService.addProject(project).then(function() {
+            setAlert('success', 'Project ' + project.name + ' has been added.');
             getProjects();
           }, function(err) {
             $log.error(err);
@@ -349,14 +360,14 @@ angular.module('tatool.app')
         $scope.hideAlert();
 
         function runDelete() {
-          moduleDataService.deleteProject(project).then( function() {
-            setAlert('info', 'Project '+ project.name + ' has been deleted.');
+          moduleDataService.deleteProject(project).then(function() {
+            setAlert('info', 'Project ' + project.name + ' has been deleted.');
             getProjects();
           }, function(err) {
             $log.error(err);
           });
         }
-        
+
         bootbox.dialog({
           message: 'Are you sure you want to delete the project <b>\'' + project.name + '\'</b>?<br>All files in the project folder will be deleted.',
           title: '<b>Delete Project</b>',
@@ -377,53 +388,53 @@ angular.module('tatool.app')
 
       $scope.editProject = function(project) {
         $scope.hideAlert();
-        var box =bootbox.dialog({
+        var box = bootbox.dialog({
           title: '<b>Edit Project</b>',
           message: '<div class="row">  ' +
-                    '<div class="col-md-12"> ' +
-                    '<form class="form-horizontal"> ' +
-                    '<div class="form-group"> ' +
-                    '<label class="col-md-4 control-label" for="name">Name</label> ' +
-                    '<div class="col-md-6"> ' +
-                    '<p class="form-control-static"><b>' + project.name + '</b></p>' +
-                    '</div> ' +
-                    '</div> ' +
+            '<div class="col-md-12"> ' +
+            '<form class="form-horizontal"> ' +
+            '<div class="form-group"> ' +
+            '<label class="col-md-4 control-label" for="name">Name</label> ' +
+            '<div class="col-md-6"> ' +
+            '<p class="form-control-static"><b>' + project.name + '</b></p>' +
+            '</div> ' +
+            '</div> ' +
 
-                    '<div class="form-group"> ' +
-                    '<label class="col-md-4 control-label" for="name">Access</label> ' +
-                    '<div class="col-md-6"> ' +
-                    '<p class="form-control-static"><b>' + project.access + '</b></p>' +
-                    '</div> ' +
-                    '</div> ' +
+          '<div class="form-group"> ' +
+            '<label class="col-md-4 control-label" for="name">Access</label> ' +
+            '<div class="col-md-6"> ' +
+            '<p class="form-control-static"><b>' + project.access + '</b></p>' +
+            '</div> ' +
+            '</div> ' +
 
-                    '<div class="form-group"> ' +
-                    '<label class="col-md-4 control-label" for="name">Owner</label> ' +
-                    '<div class="col-md-6"> ' +
-                    '<p class="form-control-static"><b>' + project.email + '</b></p>' +
-                    '</div> ' +
-                    '</div> ' +
+          '<div class="form-group"> ' +
+            '<label class="col-md-4 control-label" for="name">Owner</label> ' +
+            '<div class="col-md-6"> ' +
+            '<p class="form-control-static"><b>' + project.email + '</b></p>' +
+            '</div> ' +
+            '</div> ' +
 
-                    '<div class="form-group"> ' +
-                    '<label class="col-md-4 control-label" for="name">Description</label> ' +
-                    '<div class="col-md-6"> ' +
-                    '<input id="description" name="description" type="text" class="form-control input-md" value="' + project.description + '"> ' +
-                    '</div> ' +
-                    '</div> ' +
+          '<div class="form-group"> ' +
+            '<label class="col-md-4 control-label" for="name">Description</label> ' +
+            '<div class="col-md-6"> ' +
+            '<input id="description" name="description" type="text" class="form-control input-md" value="' + project.description + '"> ' +
+            '</div> ' +
+            '</div> ' +
 
-                    '<div class="form-group"> ' +
-                    '<label class="col-md-4 control-label" for="name">Executables (JSON)</label> ' +
-                    '<div class="col-md-8"> ' +
-                    '<textarea id="executables" name="executables" class="form-control input-sm" rows="10">' + JSON.stringify(project.executables) + '</textarea>' +
-                    '<small><b>Format:</b> [ { "customType" : "executable1", "description": "Small executable description", "customProperties": [ { "propertyName": "booleanProperty", "propertyType": "Boolean" } ] }, <br>{ "customType" : "executable2" } ]</small>' +
-                    '</div> ' +
-                    '</div> ' +
-                    '</div> ' +
-                    '</form> </div> </div>',
+          '<div class="form-group"> ' +
+            '<label class="col-md-4 control-label" for="name">Executables (JSON)</label> ' +
+            '<div class="col-md-8"> ' +
+            '<textarea id="executables" name="executables" class="form-control input-sm" rows="10">' + JSON.stringify(project.executables) + '</textarea>' +
+            '<small><b>Format:</b> [ { "customType" : "executable1", "description": "Small executable description", "customProperties": [ { "propertyName": "booleanProperty", "propertyType": "Boolean" } ] }, <br>{ "customType" : "executable2" } ]</small>' +
+            '</div> ' +
+            '</div> ' +
+            '</div> ' +
+            '</form> </div> </div>',
           buttons: {
             main: {
               label: 'Ok',
               className: 'btn-default',
-              callback: function () {
+              callback: function() {
                 project.description = $('#description').val();
                 project.executables = $('#executables').val().replace(/\r?\n/g, '');
                 updateProject(project);
@@ -436,12 +447,12 @@ angular.module('tatool.app')
           }
         });
 
-        box.bind('shown.bs.modal', function(){
+        box.bind('shown.bs.modal', function() {
           $('#description').focus();
         });
 
         $('#description').keypress(function(e) {
-          if(e.which === 13) {
+          if (e.which === 13) {
             e.preventDefault();
             $('button[data-bb-handler="main"]').focus().click();
           }
@@ -459,8 +470,8 @@ angular.module('tatool.app')
         }
 
         if (jsonParse) {
-          moduleDataService.addProject(project).then( function() {
-            setAlert('success', 'Project '+ project.name + ' has been saved.');
+          moduleDataService.addProject(project).then(function() {
+            setAlert('success', 'Project ' + project.name + ' has been saved.');
             getProjects();
           }, function(err) {
             $log.error(err);
@@ -500,7 +511,13 @@ angular.module('tatool.app')
       $scope.removeUserFilter = function() {
         $scope.query.user = '';
         $scope.filterUser = '';
+        $scope.userPaging.currentPage = 0;
       };
+
+      $scope.$watch('query.user', function(newVal, oldVal) {
+        $scope.userPaging.numPerPage = Math.ceil($scope.users.length / $scope.userPaging.pageSize);
+        $scope.userPaging.currentPage = 0;
+      }, true);
 
       $scope.setProjectFilter = function() {
         if ($scope.query.project.length >= 2) {
@@ -536,4 +553,5 @@ angular.module('tatool.app')
         spinnerService.stop('loadingSpinner');
       }
 
-    }]);
+    }
+  ]);

@@ -49,7 +49,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr ng-repeat="user in users | filter:{ $: filterUser } | orderBy:'email'" ng-class="{'success': user.email === highlightUserEmail}" >
+                <tr ng-repeat="user in users | filter:{ $: filterUser } | orderBy:'email' | startFrom:userPaging.currentPage*userPaging.pageSize | limitTo:userPaging.pageSize" ng-class="{'success': user.email === highlightUserEmail}" >
                 <td> {{user.email}}</td>
                 <td> {{user.fullName}}<br><span ng-if="user.affiliation">({{user.affiliation}})</span></td>
                 <td align="center" ng-repeat="role in roles"> <input type="checkbox" checklist-model="user.roles" checklist-value="role"> </td>
@@ -61,6 +61,15 @@
                 </tr>
               </tbody>
             </table>
+            <div class="pull-right" ng-show="users.length > 0">
+              <button class="btn btn-default" ng-disabled="userPaging.currentPage == 0" ng-click="userPaging.currentPage=userPaging.currentPage-1">
+                <i class="fa fa-chevron-left"></i>
+              </button>
+              {{(userPaging.numPerPage == 0) ? userPaging.currentPage : userPaging.currentPage+1}}/{{userPaging.numPerPage}}
+              <button class="btn btn-default" ng-disabled="userPaging.currentPage >= userPaging.numPerPage - 1" ng-click="userPaging.currentPage=userPaging.currentPage+1">
+                <i class="fa fa-chevron-right"></i>
+              </button>
+            </div>
 
           </tab>
           <tab select="hideAlert()">
