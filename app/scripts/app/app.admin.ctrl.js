@@ -514,7 +514,7 @@ angular.module('tatool.app')
         $scope.userPaging.currentPage = 0;
       };
 
-      $scope.$watch('query.user', function(newVal, oldVal) {
+      $scope.$watch('query.user', function() {
         $scope.userPaging.numPerPage = Math.ceil($scope.users.length / $scope.userPaging.pageSize);
         $scope.userPaging.currentPage = 0;
       }, true);
