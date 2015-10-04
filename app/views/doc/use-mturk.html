@@ -1,6 +1,6 @@
 <h2>Amazon Mechnical Turk</h2>
 
-<p>Tatool Web supports the use of Amazon Mechanical Turk (Mturk) for your experiments. To setup a HIT on Amazon Mturk, you have to publish your module in Tatool Web as a <b>public</b> module which allows access without a Tatool Web account. Get your module's URL by clicking on the <b>Show URL</b> link next to the <i>Publish</i> button and note it for later. Remember that your experiment has to conform to the <a href="https://www.mturk.com/mturk/help?helpPage=policies" target="_blank" class="external">Mturk Policies</a>.</p>
+<p>Tatool Web supports the use of Amazon Mechanical Turk (Mturk) for your experiments. To setup a HIT on Amazon Mturk, you have to publish your module in Tatool Web as a <b>public</b> or <b>private</b> module which allows access without a Tatool Web account. Get your module's URL by clicking on the <b>Show URL</b> link next to the <i>Publish</i> button and note it for later. Remember that your experiment has to conform to the <a href="https://www.mturk.com/mturk/help?helpPage=policies" target="_blank" class="external">Mturk Policies</a>.</p>
 
 <ul id="docPageNav">
   <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('setup')">Setting up an Mturk Project</a></li>
@@ -19,7 +19,7 @@
   <i>Create a project of type Survey Link</i>
 </p>
 <br>
-<p>After you have entered all required properties, you can go ahead and edit the layout and add/change the text as required. As a final step, you need to replace the link to your survey by clicking on the <b>Source</b> button in the editor pane.</p>
+<p>After you have entered all required properties, you can go ahead and edit the layout and add/change the text as required. As a final step, you need to replace the link to your survey/experiment by clicking on the <b>Source</b> button in the editor pane.</p>
 
 <p>
   <img src="../../images/doc/screen-mturk-layout.png" class="internal"><br>
@@ -34,7 +34,7 @@
   <i>Replace link with code</i>
 </p>
 
-<p><b>Replace the link with the following code, and substitute the value for tatoolLink with the module URL. You can retrieve your module's URL by clicking on the <b>Show URL</b> link next to the <i>Publish</i> button in the Modules tab.</b></p>
+<p><b>Replace the link with the following code, and substitute the value for the variable tatoolLink with the module URL. You can retrieve your module's URL by clicking on the <b>Show URL</b> link next to the <i>Publish</i> button in the Modules tab.</b></p>
 <pre><code class="language-javascript">&lt;!-- Replace the value for tatoolLink with your Tatool Web URL (without the extid) -->
 &lt;script type="text/javascript" language="JavaScript">
   var tatoolLink = "http://www.tatool-web.com/#/public/xxxxx";
@@ -71,7 +71,7 @@
 
 <h3 id="code">Providing a Module Completion Code<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
 
-<p>Once an Mturk worker has accepted and completed your module, Tatool Web will automatically provide a <b>unique session code</b> that the Mturk worker can submit as part of your HIT; there's no need for you to add anything special to your module.</p>
+<p>Once an Mturk worker has accepted and completed your module, Tatool Web will automatically provide a <b>unique session code</b> that the Mturk worker can submit as part of your HIT; there's no need for you to add anything to your module.</p>
 
 <p>
   <img src="../../images/doc/screen-mturk-session.png" class="internal"><br>
