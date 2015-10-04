@@ -115,7 +115,18 @@ exports.addAnalyticsData = function(req) {
         if (exists > -1) {
           module.userData[i].maxSessionId = req.body.maxSessionId;
           module.userData[i].moduleProperties = req.body.moduleProperties;
-          module.userData[i].sessions = req.body.sessions;
+
+          // only overwrite sessions if same session start time
+          for (var sessionId in req.body.sessions) {
+            if (module.userData[i].sessions.hasOwnProperty(sessionId)) {
+              if (req.body.sessions[sessionId].startTime == module.userData[i].sessions[sessionId].startTime) {
+                module.userData[i].sessions[sessionId] = req.body.sessions[sessionId];
+              }
+            } else {
+              module.userData[i].sessions[sessionId] = req.body.sessions[sessionId];
+            }
+          }
+
           module.userData[i].sessionToken = req.body.sessionToken;
           module.userData[i].updated_at = new Date();
           module.markModified('userData');

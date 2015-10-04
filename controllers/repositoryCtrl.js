@@ -51,6 +51,7 @@ var update = function(entry, module, res) {
   entry.moduleAuthor = module.moduleAuthor;
   entry.moduleIcon = module.moduleIcon;
   entry.moduleDescription = module.moduleDescription;
+  entry.moduleMaxSessions = module.moduleMaxSessions;
   entry.markModified('moduleDefinition');
 
   entry.save(function(err, data) {

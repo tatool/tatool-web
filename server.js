@@ -43,6 +43,7 @@ var analyticsCtrl = require('./controllers/analyticsCtrl');
 var authController = require('./controllers/auth')
 var adminController = require('./controllers/admin');
 var commonCtrl = require('./controllers/commonCtrl');
+var logCtrl = require('./controllers/logCtrl');
 
 // db
 mongoose.connect( process.env.MONGOLAB_URI || 'mongodb://localhost/tatool-web' );

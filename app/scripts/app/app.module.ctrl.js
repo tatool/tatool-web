@@ -291,18 +291,23 @@ angular.module('tatool.app')
 
     // function to initiate start of a module and handover to tatool.module
     $scope.startModule = function(module) {
-      // set the moduleId as a session property
-      $window.sessionStorage.setItem('moduleId', module.moduleId);
-      $window.sessionStorage.setItem('mode', cfg.APP_MODE_USER);
+      // check for session limit
+      if (module.moduleMaxSessions && (module.maxSessionId >= module.moduleMaxSessions)) {
+        setAlert('danger', 'You have already completed all ' + module.moduleMaxSessions + ' Sessions of this Module.');
+      } else {
+        // set the moduleId as a session property
+        $window.sessionStorage.setItem('moduleId', module.moduleId);
+        $window.sessionStorage.setItem('mode', cfg.APP_MODE_USER);
 
-      // switch to fullscreen if available and enabled in module
-      var fullscreen = module.moduleDefinition.fullscreen ? module.moduleDefinition.fullscreen : false;
-      if (fullscreen && screenfull.enabled) {
-        screenfull.request();
-      }
+        // switch to fullscreen if available and enabled in module
+        var fullscreen = module.moduleDefinition.fullscreen ? module.moduleDefinition.fullscreen : false;
+        if (fullscreen && screenfull.enabled) {
+          screenfull.request();
+        }
       
-      // start moduleRunner
-      $state.go('run');
+        // start moduleRunner
+        $state.go('run');
+      }
     };
 
     // show module description

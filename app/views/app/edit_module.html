@@ -37,6 +37,14 @@
     </div>
   </div>
   <div class="form-group">
+    <label for="moduleLabel" class="col-sm-3 control-label">No Sessions
+      <a class="info" tooltip="Define the number of Sessions allowed for this Module. Leave empty if you don't want to limit the number of Sessions." tooltip-placement="right"><i class="fa fa-info-circle"></i></a>
+    </label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control" min="0" id="moduleLabel" ng-model="module.moduleMaxSessions">
+    </div>
+  </div>
+  <div class="form-group">
     <label for="label" class="col-sm-3 control-label">Escape
       <a class="info" tooltip="Allow the user to exit the module by pressing the Esc key." tooltip-placement="right"><i class="fa fa-info-circle"></i></a>
     </label>

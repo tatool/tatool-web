@@ -4,6 +4,7 @@ var exportCtrl = require('../controllers/exportCtrl');
 var repositoryCtrl = require('../controllers/repositoryCtrl');
 var analyticsCtrl = require('../controllers/analyticsCtrl');
 var userCtrl = require('../controllers/user'); 
+var logCtrl = require('../controllers/logCtrl'); 
 var request = require('request');
 var crypto = require('crypto');
 var fs = require('fs');
@@ -35,23 +36,45 @@ var insert = function(req, res) {
       if (module) {
 
         // update technical fields
-        module._id = undefined;
+        delete module._id;
         module.email = req.user.email;
         module.updated_at = today;
         module.invites = undefined;
         module.moduleStatus = 'ready';
         module.created_by = module.created_by;
 
-        Module.create(module, function(err, result) {
-          if (err) {
-            res.status(500).send(err);
-          } else {
-            analyticsCtrl.addAnalyticsUser(req, module).then(function(data) {
-              res.json(module);
-            }, function(error) {
-              res.status(500).json({ message: 'Error adding analytics data.'});
+        // get log entry
+        logCtrl.getLogMaxSessionId(req).then(function(maxSessionId) {
+
+            if (module.moduleMaxSessions) {
+              module.maxSessionId = maxSessionId;
+            }
+
+            // add module
+            Module.create(module, function(err, result) {
+              if (err) {
+                res.status(500).send(err);
+              } else {
+
+                // add analytics user
+                analyticsCtrl.addAnalyticsUser(req, module).then(function(data) {
+
+                  // add log entry
+                  logCtrl.addLogEntry(req).then(function() {
+                    res.json(module);
+                  }, function(error) {
+                    res.status(500).json({ message: 'Error adding logs data.'});
+                  });
+
+                }, function(error) {
+                  res.status(500).json({ message: 'Error adding analytics data.'});
+                });
+
+              }
             });
-          }
+
+          }, function(error) {
+            res.status(500).json({ message: 'Error accessing logs data.'});
         });
 
       } else {
@@ -86,6 +109,7 @@ var update = function(req, res, userModule) {
         userModule.moduleAuthor = module.moduleAuthor;
         userModule.moduleIcon = module.moduleIcon;
         userModule.moduleDescription = module.moduleDescription;
+        userModule.moduleMaxSessions = module.moduleMaxSessions;
         userModule.markModified('moduleDefinition');
 
         userModule.save(function(err, data) {
@@ -122,7 +146,7 @@ exports.getPublic = function(req, res) {
   });
 };
 
-// Adding a new public URL module
+// Adding a new module from an URL
 exports.installPublic = function(req, res) {
   Repository.findOne({ moduleId: req.params.moduleId }, function(err, module) {
     if (err) {
@@ -256,7 +280,11 @@ exports.save = function(req, res) {
             res.status(500).send(err);
           } else {
             analyticsCtrl.addAnalyticsData(req).then(function(data) {
-              res.json(module);
+              logCtrl.updateModuleLogEntry(req).then(function() {
+                res.json(module);
+              }, function(error) {
+                res.status(500).json({ message: 'Error adding logs data.'});
+              });
             }, function(error) {
               res.status(500).json({ message: 'Error adding analytics data.'});
             });

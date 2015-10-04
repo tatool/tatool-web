@@ -77,6 +77,7 @@ var update = function(req, res, module) {
       module.moduleAuthor = req.body.moduleAuthor;
       module.moduleIcon = req.body.moduleIcon;
       module.moduleDescription = req.body.moduleDescription;
+      module.moduleMaxSessions = req.body.moduleMaxSessions;
       module.markModified('moduleDefinition');
 
       // update runtime information
