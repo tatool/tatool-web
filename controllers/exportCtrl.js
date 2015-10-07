@@ -1,8 +1,8 @@
 var fs = require('fs');
+var archiver = require('archiver');
 var mkdirp = require("mkdirp");
 var LZString = require("lz-string");
 var request = require('request');
-var AdmZip = require('adm-zip');
 
 // redirect to remote upload if configured
 exports.createFile = function(req, module, mode, res) {
@@ -53,20 +53,22 @@ exports.createLocalFile = function(req, module, mode, res) {
           if (err) {
             return res.status(500).json(err);
           } else {
+            var output = fs.createWriteStream(uploadPath + zipFilename + zipExtension, {'flags': 'w'});
+            var zip = archiver('zip');
+            zip.pipe(output);
+              
+            zip.bulk([{src: [uploadPath + filename + '*.csv'], dest: '', expand: true, flatten: true}]).finalize();
 
-            fs.exists(uploadPath + zipFilename + zipExtension, function(exists) {
-              var zip = null;
-              if (!exists) {
-                zip = new AdmZip();
-                zip.writeZip(uploadPath + zipFilename + zipExtension);
-              } else {
-                zip = new AdmZip(uploadPath + zipFilename + zipExtension);
-              }
-              
-              zip.addLocalFile(uploadPath + filename + sessionId + timestamp + extension);
-              zip.writeZip(uploadPath + zipFilename + zipExtension);
-              
+            // currently node-archive doesn't support appending to an existing zip
+            //var csvFile = filename + sessionId + timestamp + extension;
+            //zip.append(fs.createReadStream(uploadPath + csvFile), { name: csvFile }).finalize();
+
+            output.on('close', function() {
               res.json({ message: 'Trials successfully uploaded.' });
+            });
+
+            zip.on('error', function(err) {
+              return res.status(500).json(err);
             });
 
           }

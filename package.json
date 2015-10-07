@@ -7,7 +7,7 @@
     "url": "http://github.com/tatool/tatool-web.git"
   },
   "dependencies": {
-    "adm-zip": "0.4.4",
+    "archiver": "0.15.1",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "1.10.0",
     "bower": "1.4.1",
