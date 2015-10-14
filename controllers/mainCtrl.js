@@ -36,7 +36,8 @@ var insert = function(req, res) {
       if (module) {
 
         // update technical fields
-        delete module._id;
+        module = module.toObject(); // required in order to delete module
+        delete module['_id'];
         module.email = req.user.email;
         module.updated_at = today;
         module.invites = undefined;
@@ -58,7 +59,6 @@ var insert = function(req, res) {
 
                 // add analytics user
                 analyticsCtrl.addAnalyticsUser(req, module).then(function(data) {
-
                   // add log entry
                   logCtrl.addLogEntry(req).then(function() {
                     res.json(module);
