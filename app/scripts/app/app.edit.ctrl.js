@@ -123,7 +123,7 @@ angular.module('tatool.app')
         var list = {
           'tatoolType': 'List',
           'name': (Math.random().toString(36)+'00000000000000000').slice(2,16+2),
-          'iterator': { 'customType' : 'ListIterator', 'numIterations' : '1' },
+          'iterator': { 'customType' : 'ListIterator', 'numIterations' : 1 },
           'handlers': [  ],
           'children': [  ]
         };
@@ -145,7 +145,7 @@ angular.module('tatool.app')
         var list = {
           'tatoolType': 'Dual',
           'name': (Math.random().toString(36)+'00000000000000000').slice(2,16+2),
-          'iterator': { 'customType' : 'ListIterator', 'numIterations' : '1' },
+          'iterator': { 'customType' : 'ListIterator', 'numIterations' : 1 },
           'handlers': [  ],
           'children': { }
         };
