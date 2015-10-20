@@ -51,7 +51,7 @@
         "name":"cbkuycvmzba3v7vi",
         "iterator":{
           "customType":"ListIterator",
-          "numIterations":"1"
+          "numIterations":1
         },
         "handlers":[
 
@@ -97,7 +97,7 @@
             "name":"m9ip31gkp90jxlxr",
             "iterator":{
               "customType":"ListIterator",
-              "numIterations":"10"
+              "numIterations":10
             },
             "handlers":[
 
@@ -170,7 +170,7 @@
         "name":"krbqhxn9nqtwqaor",
         "iterator":{
           "customType":"ListIterator",
-          "numIterations":"1"
+          "numIterations":1
         },
         "handlers":[
 
@@ -216,7 +216,7 @@
             "name":"89ermor6rvi2uik9",
             "iterator":{
               "customType":"ListIterator",
-              "numIterations":"10"
+              "numIterations":10
             },
             "handlers":[
 

@@ -19,7 +19,7 @@
     "tatoolType":"List",
     "iterator":{
       "customType":"ListIterator",
-      "numIterations":"1"
+      "numIterations":1
     },
     "handlers":[
 
@@ -73,7 +73,7 @@
         "name":"squq4uboijh8h0k9",
         "iterator":{
           "customType":"ListIterator",
-          "numIterations":"20"
+          "numIterations":20
         },
         "handlers":[
           {
