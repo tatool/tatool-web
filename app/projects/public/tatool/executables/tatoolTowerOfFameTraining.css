@@ -1,0 +1,22 @@
+.stimulusText {
+  font-size: 200%;
+  font: Helvetica, Arial, Sans-Serif; 
+}
+
+/* Executable */
+#radioInput {
+  text-align: left;
+  width:500px; 
+  margin:0px auto; 
+}
+
+.inputTitle {
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.inputButton {
+  text-align: center;
+  width:500px; 
+  margin:0px auto; 
+}
