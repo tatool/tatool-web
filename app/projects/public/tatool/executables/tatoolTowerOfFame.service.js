@@ -1,4 +1,4 @@
-tatool.factory('towerOfFame', ['executableUtils', 'stimulusServiceFactory', 'inputServiceFactory', 'dbUtils', 'timerUtils',
+tatool.factory('tatoolTowerOfFame', ['executableUtils', 'stimulusServiceFactory', 'inputServiceFactory', 'dbUtils', 'timerUtils',
   function(executableUtils, stimulusServiceFactory, inputServiceFactory, dbUtils, timerUtils) {
 
     var TowerOfFame = executableUtils.createExecutable();

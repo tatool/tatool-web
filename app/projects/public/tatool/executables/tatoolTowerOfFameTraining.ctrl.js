@@ -1,4 +1,4 @@
-tatool.controller('towerOfFameTrainingCtrl', ['$scope', 'service', 'executableUtils',
+tatool.controller('tatoolTowerOfFameTrainingCtrl', ['$scope', 'service', 'executableUtils',
   function($scope, service, executableUtils) {
     
     $scope.stimulusService = service.stimulusService;
