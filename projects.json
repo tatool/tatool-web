@@ -62,6 +62,13 @@
 					{ "propertyName": "displayDuration" },
 					{ "propertyName": "displayCrossDuration" },
 					{ "propertyName": "randomisation" }
+				] },
+				{ "customType" : "tatoolCorsiBlock", "description" : "Corsi Block", "customProperties": [
+					{ "propertyName": "stimuliPath", "propertyType": "Path" },
+					{ "propertyName": "stimuliFile", "propertyType": "Resource" },
+					{ "propertyName": "displayDuration" },
+					{ "propertyName": "intervalDuration" },
+					{ "propertyName": "randomisation" }
 				] }
 			]
 		},
