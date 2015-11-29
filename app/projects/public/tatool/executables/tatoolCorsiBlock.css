@@ -1,0 +1,37 @@
+.tatoolCorsiBlock_emptyCell, .tatoolCorsiBlock_emptyCellStatic {
+  font-size: 300%;
+  background-color: transparent;
+  border: 1px solid #999;
+  display: table-cell;
+  vertical-align: middle;
+  margin: 0;
+  padding: 5px;
+  outline: 0px solid #999;
+}
+.tatoolCorsiBlock_fillCell, .tatoolCorsiBlock_fillCellStatic {
+  font-size: 300%;
+  background-color: #0073cf;
+  border: 1px solid #0073cf;
+  display: table-cell;
+  vertical-align: middle;
+  margin: 0;
+  padding: 5px;
+}
+.tatoolCorsiBlock_recallCell {
+  font-size: 300%;
+  background-color: #ececec;
+  border: 1px solid #999;
+  display: table-cell;
+  vertical-align: middle;
+  margin: 0;
+  padding: 5px;
+}
+.tatoolCorsiBlock_clickCell, .tatoolCorsiBlock_clickCellStatic {
+  font-size: 300%;
+  background-color: #b2b2b2;
+  border: 1px solid #b2b2b2;
+  display: table-cell;
+  vertical-align: middle;
+  margin: 0;
+  padding: 5px;
+}
