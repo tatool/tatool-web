@@ -13,7 +13,7 @@ tatool.factory('snarcweek',['executableUtils', 'stimulusServiceFactory', 'inputS
       var self = this;
       executableUtils.getCSVResource(this.stimuliFile, true, this.stimuliPath).then(
         function(list) {
-          self.stimuliList = list;
+          self.stimuliList = executableUtils.shuffle(list);
           promise.resolve();
         }, function(error) {
           promise.reject(error);
