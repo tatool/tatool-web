@@ -1,7 +1,9 @@
-tatool.factory('snarcweek',['executableUtils', 'stimulusServiceFactory', 'inputServiceFactory', 'dbUtils',
-  function (executableUtils, stimulusServiceFactory, inputServiceFactory, dbUtils) {
+tatool.factory('snarcweek',['executableUtils', 'timerUtils', 'stimulusServiceFactory', 'inputServiceFactory', 'dbUtils',
+  function (executableUtils, timerUtils, stimulusServiceFactory, inputServiceFactory, dbUtils) {
 
     var SNARCweek = executableUtils.createExecutable();
+
+    var DISPLAY_DURATION_DEFAULT = 2000;
 
     SNARCweek.prototype.init = function() {
       var promise = executableUtils.createPromise();
@@ -10,6 +12,7 @@ tatool.factory('snarcweek',['executableUtils', 'stimulusServiceFactory', 'inputS
       this.stimulusService = stimulusServiceFactory.createService(this.stimuliPath);
       this.inputService = inputServiceFactory.createService(this.stimuliPath);
 
+      //The stimuli list is a CSV explained in Tatool UI
       var self = this;
       executableUtils.getCSVResource(this.stimuliFile, true, this.stimuliPath).then(
         function(list) {
@@ -18,6 +21,11 @@ tatool.factory('snarcweek',['executableUtils', 'stimulusServiceFactory', 'inputS
         }, function(error) {
           promise.reject(error);
         });
+
+      //Create a timer object in the Executable service init method
+      this.displayDuration = (this.displayDuration ) ? this.displayDuration : DISPLAY_DURATION_DEFAULT;
+      this.timer = timerUtils.createTimer(this.displayDuration, true, this);
+
 
       //Create an array of the names of the days of the week
       this.days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
