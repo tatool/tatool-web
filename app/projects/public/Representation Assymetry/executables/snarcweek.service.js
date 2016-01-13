@@ -45,15 +45,17 @@ tatool.factory('snarcweek',['executableUtils', 'stimulusServiceFactory', 'inputS
       } else if (daynum>6) {
           daynum -=7;
       }
-      //Show a day in name (ex: "Wednesday") instead of a number (3)
-      stimulus.stimulusValue = this.days[daynum];
 
       //Keep a record
       this.trial = {};
       this.trial.today = this.today;
       this.trial.stimulusType = stimulus.stimulusType;
       this.trial.stimulusValue = daynum;
+      this.trial.stimulusDistance = stimulus.stimulusValue;
       this.trial.correctResponse = stimulus.correctResponse;
+
+      //Show a day in name (ex: "Wednesday") instead of a number (3)
+      stimulus.stimulusValue = this.days[daynum];
 
       this.stimulusService.set(stimulus);
       this.counter++;
