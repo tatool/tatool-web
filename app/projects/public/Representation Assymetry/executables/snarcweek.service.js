@@ -65,7 +65,7 @@ tatool.factory('snarcweek',['executableUtils', 'timerUtils', 'stimulusServiceFac
       //Show a day in name (ex: "Wednesday") instead of a number (3)
       stimulus.stimulusValue = this.days[daynum];
 
-      this.stimulusService.set(stimulus);
+      this.stimulusService.setText(stimulus);
       this.counter++;
 
     };
