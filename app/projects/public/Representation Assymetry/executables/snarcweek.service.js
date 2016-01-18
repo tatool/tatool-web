@@ -26,6 +26,11 @@ tatool.factory('snarcweek',['executableUtils', 'timerUtils', 'stimulusServiceFac
       this.displayDuration = (this.displayDuration ) ? this.displayDuration : DISPLAY_DURATION_DEFAULT;
       this.timer = timerUtils.createTimer(this.displayDuration, true, this);
 
+      //Configure input
+      this.keyCode1 = "ArrowLeft";
+      this.keyCode2 = "ArrowRight";
+      this.keyLabelType1 = "text";
+      this.keyLabelType2 = "text";
 
       //Create an array of the names of the days of the week
       this.days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
@@ -37,6 +42,26 @@ tatool.factory('snarcweek',['executableUtils', 'timerUtils', 'stimulusServiceFac
       this.today = this.d.getDay();
 
       return promise;
+    };
+
+    SNARCweek.prototype.setupInputKeys = function(stimulus) {
+
+        //Depends on the condition
+        if(this.stimuliFile.resourceName=="daysoftheweekA.csv") {
+            this.response1 = "Past";
+            this.response2 = "Future";
+            this.keyLabel1 = "Past < ";
+            this.keyLabel2 = "> Future ";
+        } else {
+            this.response2 = "Past";
+            this.response1 = "Future";
+            this.keyLabel2 = "> Past ";
+            this.keyLabel1 = " Future <";
+        }
+
+        //Create the buttons
+        this.inputService.addInputKey(this.keyCode1, this.response1, this.keyLabel1, this.keyLabelType1);
+        this.inputService.addInputKey(this.keyCode2, this.response2, this.keyLabel2, this.keyLabelType2);
     };
 
     SNARCweek.prototype.createStimulus = function() {
@@ -64,8 +89,10 @@ tatool.factory('snarcweek',['executableUtils', 'timerUtils', 'stimulusServiceFac
 
       //Show a day in name (ex: "Wednesday") instead of a number (3)
       stimulus.stimulusValue = this.days[daynum];
-
       this.stimulusService.setText(stimulus);
+
+      //Add the keys at the buttom
+      this.setupInputKeys(stimulus)
       this.counter++;
 
     };
