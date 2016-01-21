@@ -8,7 +8,8 @@ tatool.factory('snarcweek',['executableUtils', 'timerUtils', 'stimulusServiceFac
     SNARCweek.prototype.init = function() {
       var promise = executableUtils.createPromise();
 
-      this.counter = 0;
+      counter = 0;
+      ncorrect = 0;
       this.stimulusService = stimulusServiceFactory.createService(this.stimuliPath);
       this.inputService = inputServiceFactory.createService(this.stimuliPath);
 
@@ -66,9 +67,7 @@ tatool.factory('snarcweek',['executableUtils', 'timerUtils', 'stimulusServiceFac
 
     SNARCweek.prototype.createStimulus = function() {
       //Get the stimulus
-      var stimulus = executableUtils.getNext(this.stimuliList, this.counter);
-
-      console.log(stimulus);
+      var stimulus = executableUtils.getNext(this.stimuliList, counter);
 
       //Stimulus is relative to today
       daynum = (this.today + stimulus.stimulusValue);
@@ -93,7 +92,7 @@ tatool.factory('snarcweek',['executableUtils', 'timerUtils', 'stimulusServiceFac
 
       //Add the keys at the buttom
       this.setupInputKeys(stimulus)
-      this.counter++;
+      counter++;
 
     };
 
@@ -102,6 +101,7 @@ tatool.factory('snarcweek',['executableUtils', 'timerUtils', 'stimulusServiceFac
       this.trial.givenResponse = response;
       if (this.trial.correctResponse == this.trial.givenResponse) {
         this.trial.score = 1;
+        ncorrect++;
       } else {
         this.trial.score = 0;
       }
