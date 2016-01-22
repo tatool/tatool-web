@@ -1,6 +1,6 @@
 tatool.factory('myExecutable',['executableUtils', 'stimulusServiceFactory', 'inputServiceFactory', 'dbUtils',
-  function (executableUtils, stimulusServiceFactory, inputServiceFactory, dbUtils) {
-
+  function (executableUtils, stimulusServiceFactory, inputServiceFactory, dbUtils) {  
+    
     var MyExecutable = executableUtils.createExecutable();
 
     MyExecutable.prototype.init = function() {
@@ -34,7 +34,7 @@ tatool.factory('myExecutable',['executableUtils', 'stimulusServiceFactory', 'inp
     };
 
     MyExecutable.prototype.processResponse = function(response) {
-      this.trial.reactionTime = this.endTime - this.startTime;
+      this.trial.reactionTime = this.endTime - this.startTime; 
       this.trial.givenResponse = response;
       if (this.trial.correctResponse == this.trial.givenResponse) {
         this.trial.score = 1;
@@ -42,10 +42,6 @@ tatool.factory('myExecutable',['executableUtils', 'stimulusServiceFactory', 'inp
         this.trial.score = 0;
       }
       dbUtils.saveTrial(this.trial).then(executableUtils.stop);
-    };
-
-    MyExecutable.prototype.stopExecution = function() {
-      executableUtils.stop();
     };
 
     return MyExecutable;

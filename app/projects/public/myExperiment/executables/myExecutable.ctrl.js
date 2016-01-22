@@ -3,7 +3,7 @@ tatool.controller('myExecutableCtrl', [ '$scope', 'service',
 
     $scope.stimulusService = service.stimulusService;
     $scope.inputService = service.inputService;
-
+    
     $scope.start = function() {
       service.createStimulus();
 
