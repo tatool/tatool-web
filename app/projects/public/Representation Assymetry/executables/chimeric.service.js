@@ -35,7 +35,7 @@ tatool.factory('chimeric',['executableUtils', 'timerUtils', 'stimulusServiceFact
       var keys = this.inputService.addInputKeys(list, !this.showKeys.propertyValue);
 
       if (keys.length === 0) {
-        executableUtils.fail('Error creating input template for Executable tatoolSimon. No keyCode provided in stimuliFile.');
+        executableUtils.fail('Error creating input template for Executable chimeric. No keyCode provided in stimuliFile.');
       }
     };
 
@@ -49,8 +49,7 @@ tatool.factory('chimeric',['executableUtils', 'timerUtils', 'stimulusServiceFact
       this.trial.stimulusValue = stimulus.stimulusValue;
 
       //Show the image
-      this.stimulusService.setImage(stimulus.stimulusValue);
-
+      this.stimulusService.setImage(stimulus);
       this.counter++;
 
     };
