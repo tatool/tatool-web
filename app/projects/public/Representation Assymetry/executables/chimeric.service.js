@@ -9,8 +9,7 @@ tatool.factory('chimeric',['executableUtils', 'timerUtils', 'stimulusServiceFact
       var promise = executableUtils.createPromise();
 
       this.counter = 0;
-      this.stimulusServiceUp = stimulusServiceFactory.createService(this.stimuliPath);
-      this.stimulusServiceDown = stimulusServiceFactory.createService(this.stimuliPath);
+      this.stimulusService = stimulusServiceFactory.createService(this.stimuliPath);
       this.inputService = inputServiceFactory.createService(this.stimuliPath);
 
       //The stimuli list is a CSV explained in Tatool UI
@@ -36,7 +35,7 @@ tatool.factory('chimeric',['executableUtils', 'timerUtils', 'stimulusServiceFact
       var keys = this.inputService.addInputKeys(list, !this.showKeys.propertyValue);
 
       if (keys.length === 0) {
-        executableUtils.fail('Error creating input template for Executable chimeric. No keyCode provided in stimuliFile.');
+        executableUtils.fail('Error creating input template for Executable tatoolSimon. No keyCode provided in stimuliFile.');
       }
     };
 
@@ -47,13 +46,10 @@ tatool.factory('chimeric',['executableUtils', 'timerUtils', 'stimulusServiceFact
       //Keep a record
       this.trial = {};
       this.trial.stimulusType = stimulus.stimulusType;
-      this.trial.topImage = stimulus.stimulusValue1;
+      this.trial.stimulusValue = stimulus.stimulusValue;
 
-      //Show the images
-      var imagetop = {stimulusValue: stimulus.stimulusValue1};
-      var imagedown = {stimulusValue: stimulus.stimulusValue2};
-      this.stimulusServiceUp.setImage(imagetop);
-      this.stimulusServiceDown.setImage(imagedown);
+      //Show the image
+      this.stimulusService.setImage(stimulus.stimulusValue);
 
       this.counter++;
 

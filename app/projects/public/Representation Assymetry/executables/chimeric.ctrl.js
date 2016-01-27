@@ -1,8 +1,7 @@
 tatool.controller('chimericCtrl', [ '$scope', 'service',
   function ($scope, service) {
 
-    $scope.stimulusServiceUp = service.stimulusServiceUp;
-    $scope.stimulusServiceDown = service.stimulusServiceDown;
+    $scope.stimulusService = service.stimulusService;
     $scope.inputService = service.inputService;
 
     $scope.start = function() {
@@ -15,23 +14,20 @@ tatool.controller('chimericCtrl', [ '$scope', 'service',
       service.timer.start(timerUp);
 
       //Start the real timing
-      service.stimulusServiceUp.show();
-      service.startTime = service.stimulusServiceDown.show();
+      service.startTime = service.stimulusService.show();
 
     };
 
     // Called by timer when time elapsed without user input
     function timerUp() {
       service.inputService.disable();
-      service.endTime = service.stimulusServiceUp.hide();
-      service.stimulusServiceDown.hide();
+      service.endTime = service.stimulusService.hide();
       service.processResponse('');
     }
 
     $scope.inputAction = function(input, timing, event) {
       service.inputService.disable();
-      service.stimulusServiceUp.hide();
-      service.stimulusServiceDown.hide();
+      service.stimulusService.hide();
       service.endTime = timing;
       service.processResponse(input.givenResponse);
     };
