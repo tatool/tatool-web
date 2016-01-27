@@ -17,11 +17,14 @@ tatool.factory('chimeric',['executableUtils', 'timerUtils', 'stimulusServiceFact
       executableUtils.getCSVResource(this.stimuliFile, true, this.stimuliPath).then(
         function(list) {
           self.stimuliList = executableUtils.shuffle(list);
-          self.setupInputKeys(list);
           promise.resolve();
         }, function(error) {
           promise.reject(error);
         });
+
+      //Allow only these answers
+      this.keyCode1 = "ArrowUp";
+      this.keyCode2 = "ArrowDown";
 
       //Create a timer object in the Executable service init method
       this.displayDuration = (this.displayDuration ) ? this.displayDuration : DISPLAY_DURATION_DEFAULT;
@@ -31,12 +34,20 @@ tatool.factory('chimeric',['executableUtils', 'timerUtils', 'stimulusServiceFact
     };
 
     // Adding keyInputs and show by default
-    chimeric.prototype.setupInputKeys = function(list) {
-      var keys = this.inputService.addInputKeys(list, !this.showKeys.propertyValue);
+    chimeric.prototype.setupInputKeys = function(stimulus) {
+        //Answer mapping depends on condition.
+        //Condition UpLeft means : happy is left side of the upper image
+        if (stimulus.stimulusType=="UpLeft"){
+            this.response1 = "Left";
+            this.response2 = "Right";
+        } else {
+            this.response1 = "Right";
+            this.response2 = "Left";
+        }
 
-      if (keys.length === 0) {
-        executableUtils.fail('Error creating input template for Executable chimeric. No keyCode provided in stimuliFile.');
-      }
+        //Create the buttons
+        this.inputService.addInputKey(this.keyCode1, this.response1, null, null, !this.showKeys.propertyValue);
+        this.inputService.addInputKey(this.keyCode2, this.response2, null, null, !this.showKeys.propertyValue);
     };
 
     chimeric.prototype.createStimulus = function() {
@@ -47,6 +58,8 @@ tatool.factory('chimeric',['executableUtils', 'timerUtils', 'stimulusServiceFact
       this.trial = {};
       this.trial.stimulusType = stimulus.stimulusType;
       this.trial.stimulusValue = stimulus.stimulusValue;
+
+      this.setupInputKeys(stimulus);
 
       //Show the image
       this.stimulusService.setImage(stimulus);
