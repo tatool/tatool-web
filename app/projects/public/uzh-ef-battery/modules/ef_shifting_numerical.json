@@ -6,13 +6,13 @@
       {  
          "mode":"upload",
          "auto":true,
-         "enabled":false,
-         "$$hashKey":"object:16686"
+         "enabled":true,
+         "$$hashKey":"object:8132"
       },
       {  
          "mode":"download",
          "enabled":true,
-         "$$hashKey":"object:16479"
+         "$$hashKey":"object:7863"
       }
    ],
    "allowEscapeKey":true,
@@ -29,7 +29,7 @@
             "name":"v80fq6pxp8tfn7b9",
             "iterator":{  
                "customType":"ListIterator",
-               "numIterations":"1"
+               "numIterations":1
             },
             "handlers":[  
 
@@ -84,14 +84,15 @@
                   },
                   "hideMouseCursor":false
                }
-            ]
+            ],
+            "label":"Instruction"
          },
          {  
             "tatoolType":"List",
             "name":"y9tzj37dpge3ik90",
             "iterator":{  
                "customType":"ListIterator",
-               "numIterations":"1"
+               "numIterations":1
             },
             "handlers":[  
 
@@ -111,14 +112,15 @@
                   "interval":"1000",
                   "hideMouseCursor":true
                }
-            ]
+            ],
+            "label":"Countdown"
          },
          {  
             "tatoolType":"List",
             "name":"fwbxosx43tqhbyb9",
             "iterator":{  
                "customType":"ListIterator",
-               "numIterations":"12"
+               "numIterations":12
             },
             "handlers":[  
 
@@ -166,7 +168,8 @@
                   },
                   "hideMouseCursor":true
                }
-            ]
+            ],
+            "label":"Single parity practice"
          },
          {  
             "tatoolType":"List",
@@ -204,7 +207,8 @@
                   },
                   "hideMouseCursor":false
                }
-            ]
+            ],
+            "label":"Instruction"
          },
          {  
             "tatoolType":"List",
@@ -231,14 +235,15 @@
                   "countdown":"3",
                   "interval":"1000"
                }
-            ]
+            ],
+            "label":"Countdown"
          },
          {  
             "tatoolType":"List",
             "name":"60j80jyos4kuik90",
             "iterator":{  
                "customType":"ListIterator",
-               "numIterations":"64"
+               "numIterations":64
             },
             "handlers":[  
 
@@ -266,7 +271,7 @@
                   "stimuliFile":{  
                      "propertyType":"Resource",
                      "project":{  
-                        "name":"tatool",
+                        "name":"uzh-ef-battery",
                         "access":"public"
                      },
                      "resourceName":"ef_shifting_numerical_single_parity_1.csv",
@@ -283,7 +288,8 @@
                   "displayCueDuration":"150",
                   "hideMouseCursor":true
                }
-            ]
+            ],
+            "label":"Single parity"
          },
          {  
             "tatoolType":"List",
@@ -337,7 +343,8 @@
                   },
                   "hideMouseCursor":false
                }
-            ]
+            ],
+            "label":"Instruction"
          },
          {  
             "tatoolType":"List",
@@ -364,14 +371,15 @@
                   "interval":"1000",
                   "hideMouseCursor":true
                }
-            ]
+            ],
+            "label":"Countdown"
          },
          {  
             "tatoolType":"List",
             "name":"53ka7sf6lm6j38fr",
             "iterator":{  
                "customType":"ListIterator",
-               "numIterations":"12"
+               "numIterations":12
             },
             "handlers":[  
 
@@ -419,7 +427,8 @@
                      "feedbackPanel":true
                   }
                }
-            ]
+            ],
+            "label":"Single magnitude practice"
          },
          {  
             "tatoolType":"List",
@@ -456,7 +465,8 @@
                      ]
                   }
                }
-            ]
+            ],
+            "label":"Instruction"
          },
          {  
             "tatoolType":"List",
@@ -483,14 +493,15 @@
                   "countdown":"3",
                   "interval":"1000"
                }
-            ]
+            ],
+            "label":"Countdown"
          },
          {  
             "tatoolType":"List",
             "name":"qesqiwnnxparwwmi",
             "iterator":{  
                "customType":"ListIterator",
-               "numIterations":"64"
+               "numIterations":64
             },
             "handlers":[  
 
@@ -535,7 +546,8 @@
                   "displayCueDuration":"150",
                   "hideMouseCursor":true
                }
-            ]
+            ],
+            "label":"Single magnitude"
          },
          {  
             "tatoolType":"List",
@@ -596,7 +608,8 @@
                      ]
                   }
                }
-            ]
+            ],
+            "label":"Instruction"
          },
          {  
             "tatoolType":"List",
@@ -623,14 +636,15 @@
                   "interval":"1000",
                   "hideMouseCursor":true
                }
-            ]
+            ],
+            "label":"Countdown"
          },
          {  
             "tatoolType":"List",
             "name":"5z5drc12hfgbke29",
             "iterator":{  
                "customType":"ListIterator",
-               "numIterations":"12"
+               "numIterations":12
             },
             "handlers":[  
 
@@ -678,7 +692,8 @@
                   },
                   "hideMouseCursor":true
                }
-            ]
+            ],
+            "label":"Mixed practice"
          },
          {  
             "tatoolType":"List",
@@ -715,7 +730,8 @@
                      ]
                   }
                }
-            ]
+            ],
+            "label":"Instruction"
          },
          {  
             "tatoolType":"List",
@@ -742,14 +758,15 @@
                   "interval":"1000",
                   "hideMouseCursor":true
                }
-            ]
+            ],
+            "label":"Countdown"
          },
          {  
             "tatoolType":"List",
             "name":"3o7b0agioro7ds4i",
             "iterator":{  
                "customType":"ListIterator",
-               "numIterations":"129"
+               "numIterations":129
             },
             "handlers":[  
 
@@ -794,7 +811,8 @@
                   "displayCueDuration":"150",
                   "hideMouseCursor":true
                }
-            ]
+            ],
+            "label":"Mixed"
          },
          {  
             "tatoolType":"List",
@@ -840,7 +858,8 @@
                   },
                   "hideMouseCursor":false
                }
-            ]
+            ],
+            "label":"Instruction"
          },
          {  
             "tatoolType":"List",
@@ -867,14 +886,15 @@
                   "interval":"1000",
                   "hideMouseCursor":true
                }
-            ]
+            ],
+            "label":"Countdown"
          },
          {  
             "tatoolType":"List",
             "name":"zi2u5tuvye6d2t90",
             "iterator":{  
                "customType":"ListIterator",
-               "numIterations":"64"
+               "numIterations":64
             },
             "handlers":[  
 
@@ -902,7 +922,11 @@
                   "stimuliFile":{  
                      "propertyType":"Resource",
                      "resourceType":"stimuli",
-                     "resourceName":"ef_shifting_numerical_single_magnitude_2.csv"
+                     "resourceName":"ef_shifting_numerical_single_magnitude_2.csv",
+                     "project":{  
+                        "name":"uzh-ef-battery",
+                        "access":"public"
+                     }
                   },
                   "showKeys":{  
                      "propertyType":"Boolean",
@@ -915,7 +939,8 @@
                   "displayCueDuration":"150",
                   "hideMouseCursor":true
                }
-            ]
+            ],
+            "label":"Single magnitude"
          },
          {  
             "tatoolType":"List",
@@ -960,14 +985,15 @@
                      ]
                   }
                }
-            ]
+            ],
+            "label":"Instruction"
          },
          {  
             "tatoolType":"List",
             "name":"yszkk1kyuvea5rk9",
             "iterator":{  
                "customType":"ListIterator",
-               "numIterations":"1"
+               "numIterations":1
             },
             "handlers":[  
 
@@ -987,7 +1013,8 @@
                   "countdown":"3",
                   "interval":"1000"
                }
-            ]
+            ],
+            "label":"Countdown"
          },
          {  
             "tatoolType":"List",
@@ -1039,8 +1066,11 @@
                   "displayCueDuration":"150",
                   "hideMouseCursor":true
                }
-            ]
+            ],
+            "label":"Single parity"
          }
-      ]
-   }
+      ],
+      "label":"Task List"
+   },
+   "description":"Parity-Magnitude Shifting task from von Bastian, C. C. Souza, A. S., & Gade, M. (in press). No evidence for bilingual cognitive advantages: A test of four hypotheses. Journal of Experimental Psychology: General. doi: 10.1037/xge0000120"
 }

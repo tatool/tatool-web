@@ -6,13 +6,13 @@
       {  
          "mode":"upload",
          "auto":true,
-         "enabled":false,
-         "$$hashKey":"object:16436"
+         "enabled":true,
+         "$$hashKey":"object:7170"
       },
       {  
          "mode":"download",
          "enabled":true,
-         "$$hashKey":"object:16237"
+         "$$hashKey":"object:6892"
       }
    ],
    "allowEscapeKey":true,
@@ -25,11 +25,25 @@
       },
       "children":[  
          {  
+            "tatoolType":"Executable",
+            "customType":"tatoolCode",
+            "name":"code",
+            "blankInterval":0,
+            "fixationInterval":0,
+            "project":{  
+               "name":"tatool",
+               "access":"public"
+            },
+            "inputText":"'Code'",
+            "exactCodeLength":"3",
+            "minCodeLength":"3"
+         },
+         {  
             "tatoolType":"List",
             "name":"v80fq6pxp8tfn7b9",
             "iterator":{  
                "customType":"ListIterator",
-               "numIterations":"1"
+               "numIterations":1
             },
             "handlers":[  
 
@@ -84,14 +98,15 @@
                   },
                   "hideMouseCursor":false
                }
-            ]
+            ],
+            "label":"Instruction"
          },
          {  
             "tatoolType":"List",
             "name":"y9tzj37dpge3ik90",
             "iterator":{  
                "customType":"ListIterator",
-               "numIterations":"1"
+               "numIterations":1
             },
             "handlers":[  
 
@@ -111,14 +126,15 @@
                   "interval":"1000",
                   "hideMouseCursor":true
                }
-            ]
+            ],
+            "label":"Countdown"
          },
          {  
             "tatoolType":"List",
             "name":"fwbxosx43tqhbyb9",
             "iterator":{  
                "customType":"ListIterator",
-               "numIterations":"12"
+               "numIterations":12
             },
             "handlers":[  
 
@@ -166,14 +182,15 @@
                   },
                   "hideMouseCursor":true
                }
-            ]
+            ],
+            "label":"Single shape practice"
          },
          {  
             "tatoolType":"List",
             "name":"11c17gor8xyo80k9",
             "iterator":{  
                "customType":"ListIterator",
-               "numIterations":"1"
+               "numIterations":1
             },
             "handlers":[  
 
@@ -204,14 +221,15 @@
                   },
                   "hideMouseCursor":false
                }
-            ]
+            ],
+            "label":"Instruction"
          },
          {  
             "tatoolType":"List",
             "name":"93ft3zf7uf7833di",
             "iterator":{  
                "customType":"ListIterator",
-               "numIterations":"1"
+               "numIterations":1
             },
             "handlers":[  
 
@@ -231,14 +249,15 @@
                   "countdown":"3",
                   "interval":"1000"
                }
-            ]
+            ],
+            "label":"Countdown"
          },
          {  
             "tatoolType":"List",
             "name":"60j80jyos4kuik90",
             "iterator":{  
                "customType":"ListIterator",
-               "numIterations":"64"
+               "numIterations":64
             },
             "handlers":[  
 
@@ -266,7 +285,7 @@
                   "stimuliFile":{  
                      "propertyType":"Resource",
                      "project":{  
-                        "name":"tatool",
+                        "name":"uzh-ef-battery",
                         "access":"public"
                      },
                      "resourceName":"ef_shifting_figural_single_shape_1.csv",
@@ -283,14 +302,15 @@
                   "displayCueDuration":"150",
                   "hideMouseCursor":true
                }
-            ]
+            ],
+            "label":"Single shape"
          },
          {  
             "tatoolType":"List",
             "name":"52ros6tadqtihpvi",
             "iterator":{  
                "customType":"ListIterator",
-               "numIterations":"1"
+               "numIterations":1
             },
             "handlers":[  
 
@@ -337,14 +357,15 @@
                   },
                   "hideMouseCursor":false
                }
-            ]
+            ],
+            "label":"Instruction"
          },
          {  
             "tatoolType":"List",
             "name":"hdinehya1vukrzfr",
             "iterator":{  
                "customType":"ListIterator",
-               "numIterations":"1"
+               "numIterations":1
             },
             "handlers":[  
 
@@ -364,14 +385,15 @@
                   "interval":"1000",
                   "hideMouseCursor":true
                }
-            ]
+            ],
+            "label":"Countdown"
          },
          {  
             "tatoolType":"List",
             "name":"53ka7sf6lm6j38fr",
             "iterator":{  
                "customType":"ListIterator",
-               "numIterations":"12"
+               "numIterations":12
             },
             "handlers":[  
 
@@ -419,14 +441,15 @@
                      "feedbackPanel":true
                   }
                }
-            ]
+            ],
+            "label":"Single color practice"
          },
          {  
             "tatoolType":"List",
             "name":"d2gx63giot9vbo6r",
             "iterator":{  
                "customType":"ListIterator",
-               "numIterations":"1"
+               "numIterations":1
             },
             "handlers":[  
 
@@ -456,14 +479,15 @@
                      ]
                   }
                }
-            ]
+            ],
+            "label":"Instruction"
          },
          {  
             "tatoolType":"List",
             "name":"q5941idkl1dlhaor",
             "iterator":{  
                "customType":"ListIterator",
-               "numIterations":"1"
+               "numIterations":1
             },
             "handlers":[  
 
@@ -483,14 +507,15 @@
                   "countdown":"3",
                   "interval":"1000"
                }
-            ]
+            ],
+            "label":"Countdown"
          },
          {  
             "tatoolType":"List",
             "name":"qesqiwnnxparwwmi",
             "iterator":{  
                "customType":"ListIterator",
-               "numIterations":"64"
+               "numIterations":64
             },
             "handlers":[  
 
@@ -535,14 +560,15 @@
                   "displayCueDuration":"150",
                   "hideMouseCursor":true
                }
-            ]
+            ],
+            "label":"Single color"
          },
          {  
             "tatoolType":"List",
             "name":"i0h9xpcw3ll680k9",
             "iterator":{  
                "customType":"ListIterator",
-               "numIterations":"1"
+               "numIterations":1
             },
             "handlers":[  
 
@@ -596,14 +622,15 @@
                      ]
                   }
                }
-            ]
+            ],
+            "label":"Instruction"
          },
          {  
             "tatoolType":"List",
             "name":"dh7842tkb9c3ow29",
             "iterator":{  
                "customType":"ListIterator",
-               "numIterations":"1"
+               "numIterations":1
             },
             "handlers":[  
 
@@ -623,14 +650,15 @@
                   "interval":"1000",
                   "hideMouseCursor":true
                }
-            ]
+            ],
+            "label":"Countdown"
          },
          {  
             "tatoolType":"List",
             "name":"5z5drc12hfgbke29",
             "iterator":{  
                "customType":"ListIterator",
-               "numIterations":"12"
+               "numIterations":12
             },
             "handlers":[  
 
@@ -678,7 +706,8 @@
                   },
                   "hideMouseCursor":true
                }
-            ]
+            ],
+            "label":"Mixed practice"
          },
          {  
             "tatoolType":"List",
@@ -715,7 +744,8 @@
                      ]
                   }
                }
-            ]
+            ],
+            "label":"Instruction"
          },
          {  
             "tatoolType":"List",
@@ -742,14 +772,15 @@
                   "interval":"1000",
                   "hideMouseCursor":true
                }
-            ]
+            ],
+            "label":"Countdown"
          },
          {  
             "tatoolType":"List",
             "name":"3o7b0agioro7ds4i",
             "iterator":{  
                "customType":"ListIterator",
-               "numIterations":"129"
+               "numIterations":129
             },
             "handlers":[  
 
@@ -794,7 +825,8 @@
                   "displayCueDuration":"150",
                   "hideMouseCursor":true
                }
-            ]
+            ],
+            "label":"Mixed"
          },
          {  
             "tatoolType":"List",
@@ -840,7 +872,8 @@
                   },
                   "hideMouseCursor":false
                }
-            ]
+            ],
+            "label":"Instruction"
          },
          {  
             "tatoolType":"List",
@@ -867,14 +900,15 @@
                   "interval":"1000",
                   "hideMouseCursor":true
                }
-            ]
+            ],
+            "label":"Countdown"
          },
          {  
             "tatoolType":"List",
             "name":"zi2u5tuvye6d2t90",
             "iterator":{  
                "customType":"ListIterator",
-               "numIterations":"64"
+               "numIterations":64
             },
             "handlers":[  
 
@@ -902,7 +936,11 @@
                   "stimuliFile":{  
                      "propertyType":"Resource",
                      "resourceType":"stimuli",
-                     "resourceName":"ef_shifting_figural_single_color_2.csv"
+                     "resourceName":"ef_shifting_figural_single_shape_2.csv",
+                     "project":{  
+                        "name":"uzh-ef-battery",
+                        "access":"public"
+                     }
                   },
                   "showKeys":{  
                      "propertyType":"Boolean",
@@ -915,7 +953,8 @@
                   "displayCueDuration":"150",
                   "hideMouseCursor":true
                }
-            ]
+            ],
+            "label":"Single color"
          },
          {  
             "tatoolType":"List",
@@ -960,7 +999,8 @@
                      ]
                   }
                }
-            ]
+            ],
+            "label":"Instruction"
          },
          {  
             "tatoolType":"List",
@@ -987,7 +1027,8 @@
                   "countdown":"3",
                   "interval":"1000"
                }
-            ]
+            ],
+            "label":"Countdown"
          },
          {  
             "tatoolType":"List",
@@ -1039,8 +1080,11 @@
                   "displayCueDuration":"150",
                   "hideMouseCursor":true
                }
-            ]
+            ],
+            "label":"Single shape"
          }
-      ]
-   }
+      ],
+      "label":"Task List"
+   },
+   "description":"Shape-Color Shifting task from von Bastian, C. C. Souza, A. S., & Gade, M. (in press). No evidence for bilingual cognitive advantages: A test of four hypotheses. Journal of Experimental Psychology: General. doi: 10.1037/xge0000120"
 }
