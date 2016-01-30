@@ -89,7 +89,7 @@ User.methods.createToken = function(secret) {
     extid: this.extid,
     roles: this.roles
   }, secret, { 
-    expiresInMinutes: 60*8 
+    expiresIn: 28800 
   });
   return token;
 };

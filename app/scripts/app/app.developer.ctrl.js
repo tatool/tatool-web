@@ -14,6 +14,20 @@ angular.module('tatool.app')
       'develop': true
     };
 
+    var setAlert = function(alertType, alertMessage) {
+      $scope.alert = {};
+      $scope.alert.type = alertType;
+      $scope.alert.msg = $sce.trustAsHtml(alertMessage);
+      $scope.alert.visible = true;
+      document.body.scrollTop = document.documentElement.scrollTop = 0;
+    };
+
+    var hideAlert = function() {
+      $scope.alert = {};
+      $scope.alert.visible = false;
+      $scope.alert.msg = '';
+    };
+
     function startSpinner(text) {
       spinnerService.spin('loadingSpinner', text);
     }
@@ -233,6 +247,23 @@ angular.module('tatool.app')
     $scope.deleteModule = function(module) {
       hideAlert();
 
+      function onModuleDelete() {
+        initModules();
+      }
+
+      function onModuleDeleteError(result) {
+        bootbox.dialog({
+          message: result,
+          title: '<b>Tatool</b>',
+          buttons: {
+            success: {
+              label: 'OK',
+              className: 'btn-default'
+            }
+          }
+        });
+      }
+
       function runDelete() {
         // if published then unpublish first
         if (module.moduleType === 'public' || module.moduleType === 'private') {
@@ -251,23 +282,6 @@ angular.module('tatool.app')
         } else {
           moduleDataService.deleteModule(userService.getUserName(), module.moduleId).then(onModuleDelete, onModuleDeleteError);
         }
-      }
-
-      function onModuleDelete() {
-        initModules();
-      }
-
-      function onModuleDeleteError(result) {
-        bootbox.dialog({
-          message: result,
-          title: '<b>Tatool</b>',
-          buttons: {
-            success: {
-              label: 'OK',
-              className: 'btn-default'
-            }
-          }
-        });
       }
 
       bootbox.dialog({
@@ -411,19 +425,6 @@ angular.module('tatool.app')
       newModule.setModuleLabel(moduleDefinition.label);
 
       $scope.editModule(newModule);
-    };
-
-    var setAlert = function(alertType, alertMessage) {
-      $scope.alert = {};
-      $scope.alert.type = alertType;
-      $scope.alert.msg = $sce.trustAsHtml(alertMessage);
-      $scope.alert.visible = true;
-    };
-
-    var hideAlert = function() {
-      $scope.alert = {};
-      $scope.alert.visible = false;
-      $scope.alert.msg = '';
     };
 
     $scope.hideAlert = hideAlert;

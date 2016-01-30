@@ -350,6 +350,7 @@ angular.module('tatool.app')
       $scope.alert.type = alertType;
       $scope.alert.msg = $sce.trustAsHtml(alertMessage);
       $scope.alert.visible = true;
+      document.body.scrollTop = document.documentElement.scrollTop = 0;
     };
 
     var hideAlert = function() {

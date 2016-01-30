@@ -60,12 +60,6 @@ var update = function(req, res, module) {
     } else if (result.length >= req.app.get('module_limit') && !module.moduleType && req.body.moduleType !== '' && req.user.email !== req.app.get('editor_user')) {
       res.status(500).send({ message: 'The number of simultaneously published modules per researcher is currently restricted to ' + req.app.get('module_limit') + '.'});
     } else {
-      // check whether repository has been enabled - initiate analytics
-      var initAnalytics = false;
-      if (!module.moduleType && req.body.moduleType !== '') {
-        initAnalytics = true;
-      }
-
       // update technical information
       module.moduleVersion = req.body.moduleVersion;
 
@@ -87,7 +81,7 @@ var update = function(req, res, module) {
       module.markModified('moduleProperties');
       module.markModified('sessions');
 
-      if (initAnalytics) {
+      if (req.body.moduleType !== '') {
         analyticsCtrl.initAnalytics(module).then(function() {
           module.save(function(err, data) {
             if (err) {

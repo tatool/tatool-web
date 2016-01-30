@@ -48,6 +48,7 @@ var update = function(entry, module, res) {
   entry.moduleType = module.moduleType;
   entry.moduleDefinition = module.moduleDefinition;
   entry.moduleName = module.moduleName;
+  entry.moduleLabel = module.moduleLabel;
   entry.moduleAuthor = module.moduleAuthor;
   entry.moduleIcon = module.moduleIcon;
   entry.moduleDescription = module.moduleDescription;
