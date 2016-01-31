@@ -25,7 +25,7 @@
 
 <p>Type the following command in your terminal window and make sure you get a response indicating your version of nodeJS. If you don't see the version of your nodeJS, something went wrong with your installation and you'll need to fix it first.</p>
 <pre><code class="language-javascript">$> node --version
-v0.10.35
+v4.2.6
 </code></pre>
 
 <hr class="hr-red">
@@ -36,7 +36,7 @@ v0.10.35
 
 <p>Type the following command in your terminal window and make sure you get a response indicating your version of Git. If you don't see the version, something went wrong with your installation and you'll need to fix it first.</p>
 <pre><code class="language-javascript">$> git version
-git version 1.8.0.msysgit.0
+git version 2.7.0.windows.1
 </code></pre>
 
 <hr class="hr-red">
@@ -56,7 +56,7 @@ MongoDB shell version: 3.0.4
 
 <h3 id="tatool">Install Tatool<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
 
-<p><img src="../../images/app/tatool_logo.png" width="200"><br><br>Get the latest download of Tatool from our <a href="http://github.com/tatool/tatool-web" target="_blank">GitHub repository</a>. If you're familiar with Git, we recommend you clone the tatool-web repository, otherwise you can simply download a ZIP file by clicking on the "Download ZIP" button on the right hand side menu on GitHub.</p>
+<p><img src="../../images/app/tatool_logo.png" width="200"><br><br>Get the latest download of Tatool from our <a href="http://github.com/tatool/tatool-web" target="_blank">GitHub repository</a>. If you're familiar with Git, we recommend you clone the tatool-web repository, otherwise you can simply download a ZIP file by clicking on the "Download ZIP" button in the top menu on GitHub.</p>
 
 <p>After having downloaded/extracted the tatool-web code to where you want to run Tatool from, you'll have to run a few commands to properly install all dependencies.</p>
 
@@ -69,7 +69,7 @@ The second command checks whether your installation of bower was successful. If 
 <pre><code class="language-javascript">$tatool-web> npm install -g bower
 ...
 $tatool-web> bower -version
-1.4.1
+1.7.2
 </code></pre>
 
 <p><b>3.</b> Enter the first command to install the <b>gulp plugin</b> for nodejs. Gulp is used to build tatool-web.<br>
@@ -81,10 +81,20 @@ $tatool-web> gulp -version
 [20:38:17] Local version undefined
 </code></pre>
 
-<p><b>4.</b> Run <b>npm install</b> to install Tatool. The command will run bower to download all dependencies and gulp to build the code. On Mac OSX you might need to run this with the <b>sudo</b> command. The installation might take a while the first time.</p>
+<p><b>4.</b> Run <b>npm install</b> to install Tatool. The command will run bower to download all dependencies and gulp to build the code. On Mac OSX you might need to run this with the <b>sudo</b> command. The installation might take a while the first time. You might also need to run it twice for the first time to make sure everything gets downloaded and built.</p>
 <pre><code class="language-javascript">$tatool-web> npm install
 ...
 </code></pre>
+
+<div class="hint">
+  <div class="icon red"><i class="fa fa-lightbulb-o fa-2x"></i></div> 
+  <div class="text">
+    <p>In case you see a bunch of <b>ECONNRESET</b> error messages during your installation you can run the following command first to make sure node is using the correct URL to download all dependencies:
+    <pre><code class="language-javascript">npm config set registry http://registry.npmjs.org/
+</code></pre> </p>
+  </div>
+</div>
+
 
 <hr class="hr-red">
 
@@ -103,8 +113,9 @@ $mongodb\bin> mongod --dbpath [your data directory path]
 <pre><code class="language-javascript">$> cd tatool-web
 $tatool-web> npm start
 ...
-Running tatool in LAB mode.
+
 You can access tatool on hostname:3000
+Running tatool in LAB mode.
 </code></pre>
 
 <p><b>3.</b> Access your Tatool instance by opening the url <a href="http://127.0.0.1:3000" target="_blank">http://127.0.0.1:3000</a> in your browser. You should now see the Tatool start page.</p>
