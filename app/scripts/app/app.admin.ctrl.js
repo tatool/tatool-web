@@ -20,6 +20,63 @@ angular.module('tatool.app')
         currentPage: 0,
         pageSize: 25
       };
+      
+      function setAlert(alertType, alertMessage) {
+        $scope.alert = {};
+        $scope.alert.type = alertType;
+        $scope.alert.msg = $sce.trustAsHtml(alertMessage);
+        $scope.alert.visible = true;
+      }
+
+      $scope.hideAlert = function() {
+        $scope.alert = {};
+        $scope.alert.visible = false;
+        $scope.alert.msg = '';
+      };
+
+      function startSpinner(text) {
+        spinnerService.spin('loadingSpinner', text);
+      }
+
+      function stopSpinner() {
+        spinnerService.stop('loadingSpinner');
+      }
+
+      function getProjects() {
+        startSpinner('Loading users...');
+        moduleDataService.getAllProjects().then(function(data) {
+          $scope.projects = data;
+          stopSpinner();
+        }, function(err) {
+          stopSpinner();
+          $log.error(err);
+        });
+      }
+
+      function initUsers() {
+        startSpinner('Loading users...');
+        userDataService.getUsers().then(function(data) {
+          $scope.users = data;
+          $scope.userPaging.numPerPage = Math.ceil($scope.users.length / $scope.userPaging.pageSize);
+          $scope.userPaging.currentPage = 0;
+          stopSpinner();
+        }, function(error) {
+          $log.error(error);
+          stopSpinner();
+        });
+      }
+
+      function insertUser(email, password) {
+        var user = {};
+        user.email = email;
+        user.password = password;
+        userDataService.addUser(user).then(function() {
+          setAlert('info', 'User ' + user.email + ' has been added.');
+          initUsers();
+        }, function(err) {
+          $log.error(err);
+        });
+      }
 
       $scope.updateUser = function(user) {
         $scope.hideAlert();
@@ -98,13 +155,13 @@ angular.module('tatool.app')
         });
       };
 
-      function insertUser(email, password) {
-        var user = {};
-        user.email = email;
+      function changeUserPassword(user, password) {
         user.password = password;
-        userDataService.addUser(user).then(function() {
-          setAlert('info', 'User ' + user.email + ' has been added.');
-          initUsers();
+        userDataService.updatePassword(user).then(function() {
+          $scope.highlightUserEmail = user.email;
+          $timeout(function() {
+            $scope.highlightUserEmail = null;
+          }, 500);
         }, function(err) {
           $log.error(err);
         });
@@ -170,18 +227,6 @@ angular.module('tatool.app')
         });
       };
 
-      function changeUserPassword(user, password) {
-        user.password = password;
-        userDataService.updatePassword(user).then(function() {
-          $scope.highlightUserEmail = user.email;
-          $timeout(function() {
-            $scope.highlightUserEmail = null;
-          }, 500);
-        }, function(err) {
-          $log.error(err);
-        });
-      }
-
       $scope.deleteUser = function(user) {
         $scope.hideAlert();
 
@@ -211,23 +256,46 @@ angular.module('tatool.app')
         });
       };
 
-      function initUsers() {
-        startSpinner('Loading users...');
-        userDataService.getUsers().then(function(data) {
-          $scope.users = data;
-          $scope.userPaging.numPerPage = Math.ceil($scope.users.length / $scope.userPaging.pageSize);
-          $scope.userPaging.currentPage = 0;
-          stopSpinner();
-        }, function(error) {
-          $log.error(error);
-          stopSpinner();
-        });
-      }
-
       // query modules db and display
       userDataService.openUsersDB(initUsers);
 
+      function insertProject(project) {
+        var uniqueProject = true;
+        var jsonParse = true;
 
+        for (var i = 0; i < $scope.projects.length; i++) {
+          if (project.name === $scope.projects[i].name && project.access === $scope.projects[i].access) {
+            uniqueProject = false;
+            break;
+          }
+        }
+
+        project.description = (project.description) ? project.description : '';
+        project.email = (project.email) ? project.email : '';
+        try {
+          project.executables = (project.executables) ? JSON.parse(project.executables) : [];
+        } catch (e) {
+          jsonParse = false;
+        }
+
+        if (uniqueProject && jsonParse) {
+          moduleDataService.addProject(project).then(function() {
+            setAlert('success', 'Project ' + project.name + ' has been added.');
+            getProjects();
+          }, function(err) {
+            $log.error(err);
+          });
+        } else if (!uniqueProject) {
+          setAlert('danger', 'There already exists a project with this name and access type.');
+          $scope.$apply();
+        } else if (!jsonParse) {
+          setAlert('danger', 'The executables are not in proper JSON format.');
+          $scope.$apply();
+        } else {
+          setAlert('danger', 'Unknown error');
+          $scope.$apply();
+        }
+      }
 
       $scope.addProject = function() {
         $scope.hideAlert();
@@ -318,44 +386,6 @@ angular.module('tatool.app')
         });
       };
 
-      function insertProject(project) {
-        var uniqueProject = true;
-        var jsonParse = true;
-
-        for (var i = 0; i < $scope.projects.length; i++) {
-          if (project.name === $scope.projects[i].name && project.access === $scope.projects[i].access) {
-            uniqueProject = false;
-            break;
-          }
-        }
-
-        project.description = (project.description) ? project.description : '';
-        project.email = (project.email) ? project.email : '';
-        try {
-          project.executables = (project.executables) ? JSON.parse(project.executables) : [];
-        } catch (e) {
-          jsonParse = false;
-        }
-
-        if (uniqueProject && jsonParse) {
-          moduleDataService.addProject(project).then(function() {
-            setAlert('success', 'Project ' + project.name + ' has been added.');
-            getProjects();
-          }, function(err) {
-            $log.error(err);
-          });
-        } else if (!uniqueProject) {
-          setAlert('danger', 'There already exists a project with this name and access type.');
-          $scope.$apply();
-        } else if (!jsonParse) {
-          setAlert('danger', 'The executables are not in proper JSON format.');
-          $scope.$apply();
-        } else {
-          setAlert('danger', 'Unknown error');
-          $scope.$apply();
-        }
-      }
-
       $scope.deleteProject = function(project) {
         $scope.hideAlert();
 
@@ -385,6 +415,31 @@ angular.module('tatool.app')
         });
       };
 
+      function updateProject(project) {
+        var jsonParse = true;
+
+        project.description = (project.description) ? project.description : '';
+        try {
+          project.executables = (project.executables) ? JSON.parse(project.executables) : [];
+        } catch (e) {
+          jsonParse = false;
+        }
+
+        if (jsonParse) {
+          moduleDataService.addProject(project).then(function() {
+            setAlert('success', 'Project ' + project.name + ' has been saved.');
+            getProjects();
+          }, function(err) {
+            $log.error(err);
+          });
+        } else if (!jsonParse) {
+          setAlert('danger', 'The executables are not in proper JSON format.');
+          $scope.$apply();
+        } else {
+          setAlert('danger', 'Unknown error');
+          $scope.$apply();
+        }
+      }
 
       $scope.editProject = function(project) {
         $scope.hideAlert();
@@ -459,43 +514,6 @@ angular.module('tatool.app')
         });
       };
 
-      function updateProject(project) {
-        var jsonParse = true;
-
-        project.description = (project.description) ? project.description : '';
-        try {
-          project.executables = (project.executables) ? JSON.parse(project.executables) : [];
-        } catch (e) {
-          jsonParse = false;
-        }
-
-        if (jsonParse) {
-          moduleDataService.addProject(project).then(function() {
-            setAlert('success', 'Project ' + project.name + ' has been saved.');
-            getProjects();
-          }, function(err) {
-            $log.error(err);
-          });
-        } else if (!jsonParse) {
-          setAlert('danger', 'The executables are not in proper JSON format.');
-          $scope.$apply();
-        } else {
-          setAlert('danger', 'Unknown error');
-          $scope.$apply();
-        }
-      }
-
-      function getProjects() {
-        startSpinner('Loading users...');
-        moduleDataService.getAllProjects().then(function(data) {
-          $scope.projects = data;
-          stopSpinner();
-        }, function(err) {
-          stopSpinner();
-          $log.error(err);
-        });
-      }
-
       // loading all projects from tatool
       moduleDataService.openModulesDB(null, 'user', getProjects);
 
@@ -531,27 +549,6 @@ angular.module('tatool.app')
         $scope.query.project = '';
         $scope.filterProject = '';
       };
-
-      function setAlert(alertType, alertMessage) {
-        $scope.alert = {};
-        $scope.alert.type = alertType;
-        $scope.alert.msg = $sce.trustAsHtml(alertMessage);
-        $scope.alert.visible = true;
-      }
-
-      $scope.hideAlert = function() {
-        $scope.alert = {};
-        $scope.alert.visible = false;
-        $scope.alert.msg = '';
-      };
-
-      function startSpinner(text) {
-        spinnerService.spin('loadingSpinner', text);
-      }
-
-      function stopSpinner() {
-        spinnerService.stop('loadingSpinner');
-      }
 
     }
   ]);

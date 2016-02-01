@@ -726,7 +726,7 @@ angular.module('tatool.app')
         } else if (!module.moduleLabel || module.moduleLabel === '') {
           $scope.returnTo('module');
           $scope.highlightId.key = 'module';
-          setAlert('danger', 'A Module Label is required.');
+          setAlert('danger', 'Please enter a valid Module Label (alphanumeric characters and no whitespace).');
           $('#moduleLabel').focus();
           return false;
         } else {
@@ -792,6 +792,7 @@ angular.module('tatool.app')
         $scope.alert.type = alertType;
         $scope.alert.msg = $sce.trustAsHtml(alertMessage);
         $scope.alert.visible = true;
+        document.body.scrollTop = document.documentElement.scrollTop = 0;
       };
 
       var hideAlert = function() {
