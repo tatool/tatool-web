@@ -69,6 +69,18 @@
 					{ "propertyName": "displayDuration" },
 					{ "propertyName": "intervalDuration" },
 					{ "propertyName": "randomisation" }
+				] },
+				{ "customType" : "tatoolTowerOfFame", "description" : "Tower Of Fame", "customProperties": [
+					{ "propertyName": "stimuliPath", "propertyType": "Path" },
+					{ "propertyName": "stimuliFile", "propertyType": "Resource" },
+					{ "propertyName": "displayDuration" },
+					{ "propertyName": "intervalDuration" }
+				] },
+				{ "customType" : "tatoolTowerOfFameTraining", "description" : "Tower Of Fame (Training)", "customProperties": [
+					{ "propertyName": "stimuliPath", "propertyType": "Path" },
+					{ "propertyName": "stimuliFile", "propertyType": "Resource" },
+					{ "propertyName": "displayDuration" },
+					{ "propertyName": "intervalDuration" }
 				] }
 			]
 		},

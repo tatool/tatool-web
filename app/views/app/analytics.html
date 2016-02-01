@@ -38,16 +38,46 @@
     <table ng-if="currentModule.userData" class="table table-bordered table-striped table-hover table-condensed table-small">
       <thead>
         <tr>
-          <th width="300"><b>Subject</b></th>
-          <th><b>External ID</b></th>
-          <th><b>Session Token</b></th>
-          <th><b>Sessions</b></th>
-          <th><b>Last Update</b></th>
+          <th width="300">
+            <a href="" ng-click="sortType = 'code'; sortReverse = !sortReverse">
+              <b>Subject</b>
+              <span ng-show="sortType == 'code' && !sortReverse" class="fa fa-caret-down"></span>
+              <span ng-show="sortType == 'code' && sortReverse" class="fa fa-caret-up"></span>
+            </a>
+          </th>
+          <th>
+            <a href="" ng-click="sortType = 'extid'; sortReverse = !sortReverse">
+              <b>External ID</b>
+              <span ng-show="sortType == 'extid' && !sortReverse" class="fa fa-caret-down"></span>
+              <span ng-show="sortType == 'extid' && sortReverse" class="fa fa-caret-up"></span>
+            </a>
+          </th>
+          <th>
+            <a href="" ng-click="sortType = 'sessionToken'; sortReverse = !sortReverse">
+              <b>Session Token</b>
+              <span ng-show="sortType == 'sessionToken' && !sortReverse" class="fa fa-caret-down"></span>
+              <span ng-show="sortType == 'sessionToken' && sortReverse" class="fa fa-caret-up"></span>
+            </a>
+          </th>
+          <th>
+            <a href="" ng-click="sortType = 'maxSessionId'; sortReverse = !sortReverse">
+              <b>Sessions</b>
+              <span ng-show="sortType == 'maxSessionId' && !sortReverse" class="fa fa-caret-down"></span>
+              <span ng-show="sortType == 'maxSessionId' && sortReverse" class="fa fa-caret-up"></span>
+            </a>
+          </th>
+          <th>
+            <a href="" ng-click="sortType = 'updated_at'; sortReverse = !sortReverse">
+              <b>Last Update</b>
+              <span ng-show="sortType == 'updated_at' && !sortReverse" class="fa fa-caret-down"></span>
+              <span ng-show="sortType == 'updated_at' && sortReverse" class="fa fa-caret-up"></span>
+            </a>
+          </th>
           <th width="110px"></th>
         </tr>
       </thead>
       <tbody>
-        <tr ng-repeat="user in currentModule.userData | orderBy:'code'">
+        <tr ng-repeat="user in currentModule.userData | orderBy:sortType:sortReverse">
           <td> <b>{{user.code}}</b> <span ng-if="showDetail.email && user.email !== ''">({{user.email}})</span></td>
           <td align="center"> {{user.extid}}<br></td>
           <td align="center"> {{user.sessionToken}}<br></td>

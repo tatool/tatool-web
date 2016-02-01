@@ -57,9 +57,10 @@ exports.createLocalFile = function(req, module, mode, res) {
             var zip = archiver('zip');
             zip.pipe(output);
               
-            zip.bulk([{src: [uploadPath + filename + '*.csv'], dest: '', expand: true, flatten: true}]).finalize();
+            zip.bulk([{src: [uploadPath + '*' + req.user.code + '*.csv'], dest: '', expand: true, flatten: true}]).finalize();
 
             // currently node-archive doesn't support appending to an existing zip
+            // https://github.com/archiverjs/node-archiver/issues/23
             //var csvFile = filename + sessionId + timestamp + extension;
             //zip.append(fs.createReadStream(uploadPath + csvFile), { name: csvFile }).finalize();
 

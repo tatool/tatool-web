@@ -1,6 +1,6 @@
 /* global KeyCodes */
 /* exported KeyCodes */
-/*jshint -W079 */
+/* jshint -W079 */
 var KeyCodes = {
     BackSpace           : 8  ,
     Tab                 : 9  ,

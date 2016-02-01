@@ -33,7 +33,16 @@ exports.initAnalytics = function(module) {
           }
         });
       } else {
-        deferred.resolve({ message: 'Analytics already available for this module.'});
+        moduleStats.moduleName = module.moduleName;
+        moduleStats.moduleLabel = module.moduleLabel;
+
+        moduleStats.save(function(err, data) {
+          if (err) {
+            deferred.reject('Could not initialize analytics.');
+          } else {
+            deferred.resolve();
+          }
+        });
       }
     }
   });

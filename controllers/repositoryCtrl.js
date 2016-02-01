@@ -48,6 +48,7 @@ var update = function(entry, module, res) {
   entry.moduleType = module.moduleType;
   entry.moduleDefinition = module.moduleDefinition;
   entry.moduleName = module.moduleName;
+  entry.moduleLabel = module.moduleLabel;
   entry.moduleAuthor = module.moduleAuthor;
   entry.moduleIcon = module.moduleIcon;
   entry.moduleDescription = module.moduleDescription;
@@ -64,7 +65,8 @@ var update = function(entry, module, res) {
 };
 
 exports.getAll = function(req, res) {
-  Module.find({ moduleType: 'public' }, { moduleDefinition: 0, email: 0, created_by: 0, sessions: 0, moduleProperties: 0, invites: 0 }, function(err, entries) {
+  Module.find({ $or: [ { moduleType: 'public' }, {$and: [{ moduleType: 'private' }, {"invites.users": { $elemMatch: { email: req.user.email } } }] } ] }
+    , { moduleDefinition: 0, email: 0, created_by: 0, sessions: 0, moduleProperties: 0, invites: 0 }, function(err, entries) {
     if (err) {
       res.status(500).send(err);
     } else {

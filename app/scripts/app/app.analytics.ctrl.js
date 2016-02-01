@@ -11,6 +11,25 @@ angular.module('tatool.app')
         email: false 
     };
 
+    $scope.sortType = 'code';
+    $scope.sortReverse = false;
+
+    function setAlert(alertType, alertMessage) {
+      $scope.alert = {};
+      $scope.alert.type = alertType;
+      $scope.alert.msg = $sce.trustAsHtml(alertMessage);
+      $scope.alert.visible = true;
+      document.body.scrollTop = document.documentElement.scrollTop = 0;
+    }
+    
+    function startSpinner(text) {
+      spinnerService.spin('loadingSpinner', text);
+    }
+
+    function stopSpinner() {
+      spinnerService.stop('loadingSpinner');
+    }
+
     function initAnalytics() {
       // Initialize installed modules
       moduleDataService.getAllModuleAnalytics().then( function(data) {
@@ -22,6 +41,7 @@ angular.module('tatool.app')
           $scope.selectedModule = {};
           $scope.selectedModule.moduleId = $scope.modules[0].moduleId;
           $scope.selectedModule.moduleName = $scope.modules[0].moduleName;
+          $scope.selectedModule.created_at = $scope.modules[0].created_at;
           $scope.chooseModule($scope.selectedModule);
         }
       }, function(error) {
@@ -102,13 +122,6 @@ angular.module('tatool.app')
       });
     };
 
-    function setAlert(alertType, alertMessage) {
-      $scope.alert = {};
-      $scope.alert.type = alertType;
-      $scope.alert.msg = $sce.trustAsHtml(alertMessage);
-      $scope.alert.visible = true;
-    }
-
     $scope.hideAlert = function() {
       $scope.alert = {};
       $scope.alert.visible = false;
@@ -118,13 +131,5 @@ angular.module('tatool.app')
     $scope.formatDate = function(date) {
       return new Date(Date.parse(date)).toLocaleString();
     };
-
-    function startSpinner(text) {
-      spinnerService.spin('loadingSpinner', text);
-    }
-
-    function stopSpinner() {
-      spinnerService.stop('loadingSpinner');
-    }
 
   }]);
