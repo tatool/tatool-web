@@ -1,4 +1,4 @@
-tatool.controller('snarcweekCtrl', [ '$scope', 'service',
+tatool.controller('stearcweekCtrl', [ '$scope', 'service',
   function ($scope, service) {
 
     $scope.stimulusService = service.stimulusService;

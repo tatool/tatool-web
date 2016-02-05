@@ -1,11 +1,11 @@
-tatool.factory('snarcweek',['executableUtils', 'timerUtils', 'stimulusServiceFactory', 'inputServiceFactory', 'dbUtils',
+tatool.factory('stearcweek',['executableUtils', 'timerUtils', 'stimulusServiceFactory', 'inputServiceFactory', 'dbUtils',
   function (executableUtils, timerUtils, stimulusServiceFactory, inputServiceFactory, dbUtils) {
 
-    var SNARCweek = executableUtils.createExecutable();
+    var STEARCweek = executableUtils.createExecutable();
 
     var DISPLAY_DURATION_DEFAULT = 2000;
 
-    SNARCweek.prototype.init = function() {
+    STEARCweek.prototype.init = function() {
       var promise = executableUtils.createPromise();
 
 
@@ -63,7 +63,7 @@ tatool.factory('snarcweek',['executableUtils', 'timerUtils', 'stimulusServiceFac
     };
 
     // process stimuli file according to randomisation property
-    SNARCweek.prototype.processStimuliFile = function(list, promise) {
+    STEARCweek.prototype.processStimuliFile = function(list, promise) {
       if (this.randomisation === 'full-condition') {
         this.stimuliList = this.splitStimuliList(list);
       } else if (this.randomisation === 'full') {
@@ -76,7 +76,7 @@ tatool.factory('snarcweek',['executableUtils', 'timerUtils', 'stimulusServiceFac
     };
 
     // Splitting the stimuliList according to stimulusType for full-condition and randomise
-    SNARCweek.prototype.splitStimuliList = function(list) {
+    STEARCweek.prototype.splitStimuliList = function(list) {
       var newList = {};
       for (var i = 0; i < list.length; i++) {
         var stimulusType = list[i].stimulusType;
@@ -88,7 +88,7 @@ tatool.factory('snarcweek',['executableUtils', 'timerUtils', 'stimulusServiceFac
       return newList;
     };
 
-    SNARCweek.prototype.setupInputKeys = function(stimulus) {
+    STEARCweek.prototype.setupInputKeys = function(stimulus) {
 
         //Depends on the condition
         if(this.condition=="LtoR") {
@@ -108,7 +108,7 @@ tatool.factory('snarcweek',['executableUtils', 'timerUtils', 'stimulusServiceFac
         this.inputService.addInputKey(this.keyCode2, this.response2, this.keyLabel2, this.keyLabelType2);
     };
 
-    SNARCweek.prototype.createStimulus = function() {
+    STEARCweek.prototype.createStimulus = function() {
 
       // randcond (random generated number at start of session) XOR condtype (according to ABBA)
       if(randcond ^ this.condtype.propertyValue){
@@ -152,7 +152,7 @@ tatool.factory('snarcweek',['executableUtils', 'timerUtils', 'stimulusServiceFac
       counter++;
     };
 
-    SNARCweek.prototype.processResponse = function(response) {
+    STEARCweek.prototype.processResponse = function(response) {
       this.trial.reactionTime = this.endTime - this.startTime;
       this.trial.givenResponse = response;
       if (this.trial.correctResponse == this.trial.givenResponse) {
@@ -164,9 +164,9 @@ tatool.factory('snarcweek',['executableUtils', 'timerUtils', 'stimulusServiceFac
       dbUtils.saveTrial(this.trial).then(executableUtils.stop);
     };
 
-    SNARCweek.prototype.stopExecution = function() {
+    STEARCweek.prototype.stopExecution = function() {
       executableUtils.stop();
     };
 
-    return SNARCweek;
+    return STEARCweek;
   }]);
