@@ -8,8 +8,24 @@ tatool.factory('snarcweek',['executableUtils', 'timerUtils', 'stimulusServiceFac
     SNARCweek.prototype.init = function() {
       var promise = executableUtils.createPromise();
 
-      counter = 0;
+      counter = 5;
       ncorrect = 0;
+
+      //randomise which condition starts first
+      var firsttime = false;
+      try {
+          if (this.randcond)
+              firsttime = false;
+      } catch(e) {
+          firsttime = true;
+
+      }
+      if (!firsttime){
+        randcond = Math.round(Math.random());
+      }
+
+
+
       this.stimulusService = stimulusServiceFactory.createService(this.stimuliPath);
       this.inputService = inputServiceFactory.createService(this.stimuliPath);
 
@@ -17,10 +33,9 @@ tatool.factory('snarcweek',['executableUtils', 'timerUtils', 'stimulusServiceFac
       var self = this;
       executableUtils.getCSVResource(this.stimuliFile, true, this.stimuliPath).then(
         function(list) {
-          self.stimuliList = executableUtils.shuffle(list);
-          promise.resolve();
+            self.processStimuliFile(list, promise);
         }, function(error) {
-          promise.reject(error);
+            promise.reject(error);
         });
 
       //Create a timer object in the Executable service init method
@@ -45,10 +60,36 @@ tatool.factory('snarcweek',['executableUtils', 'timerUtils', 'stimulusServiceFac
       return promise;
     };
 
+    // process stimuli file according to randomisation property
+    SNARCweek.prototype.processStimuliFile = function(list, promise) {
+      if (this.randomisation === 'full-condition') {
+        this.stimuliList = this.splitStimuliList(list);
+      } else if (this.randomisation === 'full') {
+        this.stimuliList = executableUtils.shuffle(list);
+      } else {
+        this.stimuliList = list;
+      }
+
+      promise.resolve();
+    };
+
+    // Splitting the stimuliList according to stimulusType for full-condition and randomise
+    SNARCweek.prototype.splitStimuliList = function(list) {
+      var newList = {};
+      for (var i = 0; i < list.length; i++) {
+        var stimulusType = list[i].stimulusType;
+        if(!newList[stimulusType]) {
+          newList[stimulusType] = [];
+        }
+        newList[stimulusType].push(list[i]);
+      }
+      return newList;
+    };
+
     SNARCweek.prototype.setupInputKeys = function(stimulus) {
 
         //Depends on the condition
-        if(this.stimuliFile.resourceName=="daysoftheweekA.csv") {
+        if(this.condition=="LtoR") {
             this.response1 = "Past";
             this.response2 = "Future";
             this.keyLabel1 = "Past < ";
@@ -66,11 +107,24 @@ tatool.factory('snarcweek',['executableUtils', 'timerUtils', 'stimulusServiceFac
     };
 
     SNARCweek.prototype.createStimulus = function() {
-      //Get the stimulus
-      var stimulus = executableUtils.getNext(this.stimuliList, counter);
 
+      // randcond (random generated number at start of session) XOR condtype (according to ABBA)
+      if(randcond ^ this.condtype.propertyValue){
+          this.condition = "LtoR";
+      } else {
+          this.condition = "RtoL";
+      }
+
+      // reset counter to 0 if > no. of total stimuli
+      if (counter >= 4) {
+        counter = 0;
+        this.nextstimuli = executableUtils.shuffle(this.stimuliList[this.condition]);
+      }
+
+      //Get the stimulus
+      var stimulus = executableUtils.getNext(this.nextstimuli, counter);
       //Stimulus is relative to today
-      daynum = (this.today + stimulus.stimulusValue);
+      daynum = (this.today + stimulus.relativeDay);
       //Days of the week only between 0 and 6
       if (daynum<0) {
           daynum += 7;
@@ -82,8 +136,8 @@ tatool.factory('snarcweek',['executableUtils', 'timerUtils', 'stimulusServiceFac
       this.trial = {};
       this.trial.today = this.today;
       this.trial.stimulusType = stimulus.stimulusType;
-      this.trial.stimulusValue = daynum;
-      this.trial.stimulusDistance = stimulus.stimulusValue;
+      this.trial.dayofweek = daynum;
+      this.trial.relativeDay = stimulus.relativeDay;
       this.trial.correctResponse = stimulus.correctResponse;
 
       //Show a day in name (ex: "Wednesday") instead of a number (3)
