@@ -3,7 +3,7 @@
 <h2>Run 2/4</h2>
 
 <p>Good! <span class='highlight_red'>Now we will inverse the answers</span> compared to what you did earlier</p>
-<!-- Add condition specific instruction -->
+<p id="condB"></p>
 
 <p>All the rest stays the same.</p>
 
@@ -14,3 +14,11 @@
 		arrow key </span> to start the second run.
 </p>
 </div>
+<script>
+	if(randcond){
+		var instrB = "Press the left key if the day is in the Future and the right key if the day is in the Past.";
+	}else{
+		var instrB = "Press the left key if the day is in the Past and the right key if the day is in the Future.";
+	};
+	document.getElementById("condB").innerHTML = instrB;
+</script>
