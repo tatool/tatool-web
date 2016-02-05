@@ -8,7 +8,9 @@ tatool.factory('snarcweek',['executableUtils', 'timerUtils', 'stimulusServiceFac
     SNARCweek.prototype.init = function() {
       var promise = executableUtils.createPromise();
 
-      counter = 5;
+
+      this.fours = 5;
+      counter = 0;
       ncorrect = 0;
 
       //randomise which condition starts first
@@ -114,15 +116,15 @@ tatool.factory('snarcweek',['executableUtils', 'timerUtils', 'stimulusServiceFac
       } else {
           this.condition = "RtoL";
       }
-
-      // reset counter to 0 if > no. of total stimuli
-      if (counter >= 4) {
-        counter = 0;
+      console.log(this.condition);
+      // reset this.fours to 0 if > no. of total stimuli
+      if (this.fours >= 4) {
+        this.fours = 0;
         this.nextstimuli = executableUtils.shuffle(this.stimuliList[this.condition]);
       }
 
       //Get the stimulus
-      var stimulus = executableUtils.getNext(this.nextstimuli, counter);
+      var stimulus = executableUtils.getNext(this.nextstimuli, this.fours);
       //Stimulus is relative to today
       daynum = (this.today + stimulus.relativeDay);
       //Days of the week only between 0 and 6
@@ -146,8 +148,8 @@ tatool.factory('snarcweek',['executableUtils', 'timerUtils', 'stimulusServiceFac
 
       //Add the keys at the buttom
       this.setupInputKeys(stimulus)
+      this.fours++;
       counter++;
-
     };
 
     SNARCweek.prototype.processResponse = function(response) {
