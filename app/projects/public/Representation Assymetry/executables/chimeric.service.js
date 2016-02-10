@@ -1,5 +1,5 @@
-tatool.factory('chimeric',['executableUtils', 'timerUtils', 'stimulusServiceFactory', 'inputServiceFactory', 'dbUtils',
-  function (executableUtils, timerUtils, stimulusServiceFactory, inputServiceFactory, dbUtils) {
+tatool.factory('chimeric',['executableUtils', 'timerUtils', 'gridServiceFactory', 'inputServiceFactory', 'dbUtils',
+  function (executableUtils, timerUtils, gridServiceFactory, inputServiceFactory, dbUtils) {
 
     var chimeric = executableUtils.createExecutable();
 
@@ -9,7 +9,7 @@ tatool.factory('chimeric',['executableUtils', 'timerUtils', 'stimulusServiceFact
       var promise = executableUtils.createPromise();
 
       this.counter = 0;
-      this.stimulusService = stimulusServiceFactory.createService(this.stimuliPath);
+      this.gridService = gridServiceFactory.createService(2, 1, 'gridService', this.stimuliPath);
       this.inputService = inputServiceFactory.createService(this.stimuliPath);
 
       //The stimuli list is a CSV explained in Tatool UI
@@ -36,8 +36,8 @@ tatool.factory('chimeric',['executableUtils', 'timerUtils', 'stimulusServiceFact
     // Adding keyInputs and show by default
     chimeric.prototype.setupInputKeys = function(stimulus) {
         //Answer mapping depends on condition.
-        //Condition UpLeft means : happy is left side of the upper image
-        if (stimulus.stimulusType=="UpLeft"){
+        //Condition Up means : happy is left side of the upper image
+        if (stimulus.stimulusType=="Up"){
             this.response1 = "Left";
             this.response2 = "Right";
         } else {
@@ -61,8 +61,27 @@ tatool.factory('chimeric',['executableUtils', 'timerUtils', 'stimulusServiceFact
 
       this.setupInputKeys(stimulus);
 
+      this.celltop = {};
+      this.celltop.gridPosition = 1;
+      this.celltop.stimulusValue = stimulus.stimulusValue;
+      this.celltop.stimulusValueType = 'image';
+      this.celltop.gridCellClass = 'chimericStraight';
+
+      this.cellbottom = {};
+      this.cellbottom.gridPosition = 2;
+      this.cellbottom.stimulusValue = stimulus.stimulusValue;
+      this.cellbottom.stimulusValueType = 'image';
+      this.cellbottom.gridCellClass = 'chimericStraight';
+
+      if (stimulus.stimulusType=="Up"){
+          this.cellbottom.gridCellClass = 'chimericReversed';
+      } else {
+          this.celltop.gridCellClass = 'chimericReversed';
+      }
+
       //Show the image
-      this.stimulusService.setImage(stimulus);
+      this.gridService.addCell(this.celltop);
+      this.gridService.addCell(this.cellbottom);
       this.counter++;
 
     };
