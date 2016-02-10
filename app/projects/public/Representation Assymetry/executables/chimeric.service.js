@@ -86,9 +86,10 @@ tatool.factory('chimeric',['executableUtils', 'timerUtils', 'gridServiceFactory'
 
     };
 
-    chimeric.prototype.processResponse = function(response) {
+    chimeric.prototype.processResponse = function(response, inputMethod) {
       this.trial.reactionTime = this.endTime - this.startTime;
       this.trial.givenResponse = response;
+      this.trial.inputMethod = inputMethod;
       dbUtils.saveTrial(this.trial).then(executableUtils.stop);
     };
 

@@ -8,7 +8,7 @@ tatool.controller('chimericCtrl', [ '$scope', 'service',
       service.createStimulus();
 
       service.inputService.show();
-      
+
       service.startTime = service.gridService.show();
       displayStimulus();
 
@@ -33,7 +33,20 @@ tatool.controller('chimericCtrl', [ '$scope', 'service',
       service.inputService.disable();
       service.gridService.clear().refresh();
       service.endTime = timing;
-      service.processResponse(input.givenResponse);
+      service.processResponse(input.givenResponse, 'key');
     };
+
+    $scope.userClick = function(cell, timing, $event) {
+      console.log(cell.gridCellClass);
+      if(cell.gridCellClass=="chimericStraight"){
+          var response = "Left" ;
+      } else {
+          var response = "Right" ;
+      }
+      service.inputService.disable();
+      service.gridService.clear().refresh();
+      service.endTime = timing;
+      service.processResponse(response, 'click');
+    }
 
   }]);
