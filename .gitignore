@@ -9,3 +9,4 @@ uploads
 .envprod
 app/projects/private/*
 newrelic_agent.log
+*.png
