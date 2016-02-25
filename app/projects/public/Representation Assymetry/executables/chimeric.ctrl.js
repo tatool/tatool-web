@@ -37,7 +37,6 @@ tatool.controller('chimericCtrl', [ '$scope', 'service',
     };
 
     $scope.userClick = function(cell, timing, $event) {
-      console.log(cell.gridCellClass);
       if(cell.gridCellClass=="chimericStraight"){
           var response = "Left" ;
       } else {
