@@ -6,7 +6,21 @@
 
 <p>We will inverse again the answer, so that it is the same as the first run.</p>
 
-<p id="condA"></p>
+<center>
+	<table>
+		<tr>
+			<td style="padding:10px; background-color:#e7e7e7; text-align:center">Press the <strong>left
+					arrow key</strong> if the day is in the <strong id="leftA"></strong>. <br> <br>
+				<img src="key_arrow_L.png">
+			</td>
+			<td width="25"></td>
+			<td style="padding:10px; background-color:#e7e7e7; text-align:center">Press the <strong>right
+					arrow key </strong>if the day is in the <strong id="rightA"></strong>. <br>
+				<br> <img src="key_arrow_R.png">
+			</td>
+		</tr>
+	</table>
+</center>
 
 <p>Please answer as fast as you can, while still answering correctly</p>
 
@@ -17,9 +31,12 @@
 </div>
 <script>
 	if(randcond){
-		var instrA = "Press the left key if the day is in the Past and the right key if the day is in the Future.";
+		var leftA = "Past";
+		var rightA = "Future";
 	}else{
-		var instrA = "Press the left key if the day is in the Future and the right key if the day is in the Past.";
+		var leftA = "Future";
+		var rightA = "Past";
 	};
-	document.getElementById("condA").innerHTML = instrA;
+	document.getElementById("leftA").innerHTML = leftA;
+	document.getElementById("rightA").innerHTML = rightA;
 </script>

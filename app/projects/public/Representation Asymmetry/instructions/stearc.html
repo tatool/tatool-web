@@ -4,7 +4,23 @@
 
 <p>For the first task, you will see a day of the week written in the center of the screen. You will
 	have to tell whether this day is in next (future) or previous (past) two days.</p>
-<p class="highlight_red" id="condA"></p>
+
+
+<center>
+	<table>
+		<tr>
+			<td style="padding:10px; background-color:#e7e7e7; text-align:center">Press the <strong>left
+					arrow key</strong> if the day is in the <strong id="leftA"></strong>. <br> <br>
+				<img src="key_arrow_L.png">
+			</td>
+			<td width="25"></td>
+			<td style="padding:10px; background-color:#e7e7e7; text-align:center">Press the <strong>right
+					arrow key </strong>if the day is in the <strong id="rightA"></strong>. <br>
+				<br> <img src="key_arrow_R.png">
+			</td>
+		</tr>
+	</table>
+</center>
 
 <p>You will now start with a practice trial. Your answers now won't be recorded. Its only purpose is to make sure you know how the task work.</p>
 
@@ -19,9 +35,12 @@
 </div>
 <script>
 	if(randcond){
-		var instrA = "Press the left key if the day is in the Past and the right key if the day is in the Future.";
+		var leftA = "Past";
+		var rightA = "Future";
 	}else{
-		var instrA = "Press the left key if the day is in the Future and the right key if the day is in the Past.";
+		var leftA = "Future";
+		var rightA = "Past";
 	};
-	document.getElementById("condA").innerHTML = instrA;
+	document.getElementById("leftA").innerHTML = leftA;
+	document.getElementById("rightA").innerHTML = rightA;
 </script>

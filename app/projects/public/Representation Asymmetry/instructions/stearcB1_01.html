@@ -3,7 +3,22 @@
 <h2>Run 2/4</h2>
 
 <p>Good! <span class='highlight_red'>Now we will inverse the answers</span> compared to what you did earlier</p>
-<p id="condB"></p>
+
+<center>
+	<table>
+		<tr>
+			<td style="padding:10px; background-color:#e7e7e7; text-align:center">Press the <strong>left
+					arrow key</strong> if the day is in the <strong id="leftB"></strong>. <br> <br>
+				<img src="key_arrow_L.png">
+			</td>
+			<td width="25"></td>
+			<td style="padding:10px; background-color:#e7e7e7; text-align:center">Press the <strong>right
+					arrow key </strong>if the day is in the <strong id="rightB"></strong>. <br>
+				<br> <img src="key_arrow_R.png">
+			</td>
+		</tr>
+	</table>
+</center>
 
 <p>All the rest stays the same.</p>
 
@@ -16,9 +31,12 @@
 </div>
 <script>
 	if(randcond){
-		var instrB = "Press the left key if the day is in the Future and the right key if the day is in the Past.";
+		var leftB = "Future";
+		var rightB = "Past";
 	}else{
-		var instrB = "Press the left key if the day is in the Past and the right key if the day is in the Future.";
+		var leftB = "Past";
+		var rightB = "Future";
 	};
-	document.getElementById("condB").innerHTML = instrB;
+	document.getElementById("leftB").innerHTML = leftB;
+	document.getElementById("rightB").innerHTML = rightB;
 </script>
