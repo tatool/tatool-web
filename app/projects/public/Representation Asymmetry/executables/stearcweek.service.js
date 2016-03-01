@@ -118,6 +118,7 @@ function (executableUtils, timerUtils, stimulusServiceFactory, inputServiceFacto
             newList = executableUtils.shuffle(newList[this.condition]);
 
             var repeat = 0;
+            var infiniteSafety = 0;
 
             var finalList = [];
             finalList[0] = newList.shift();
@@ -126,6 +127,15 @@ function (executableUtils, timerUtils, stimulusServiceFactory, inputServiceFacto
                     if (repeat==1){
                         while (newList[0].relativeDay==finalList[finalList.length-1].relativeDay) {
                             newList = executableUtils.shuffle(newList);
+                            infiniteSafety++;
+                            if (infiniteSafety > 10) {
+                                newList = newList.concat(finalList)
+                                newList = executableUtils.shuffle(newList);
+                                finalList = [];
+                                finalList[0] = newList.shift();
+                                console.log('reached infinity :' + newList);
+                                break;
+                            }
                         }
                         repeat = 0;
                     } else {
@@ -133,6 +143,7 @@ function (executableUtils, timerUtils, stimulusServiceFactory, inputServiceFacto
                     }
                 }
                 finalList[finalList.length] = newList.shift();
+                infiniteSafety = 0;
             }
 
             return finalList;
