@@ -16,16 +16,16 @@ tatool.factory('stearcweek',['executableUtils', 'timerUtils', 'stimulusServiceFa
       //randomise which condition starts first
       var firsttime = false;
       try {
-          if (this.randcond)
+          if (randcond)
               firsttime = false;
       } catch(e) {
           firsttime = true;
 
       }
-      if (!firsttime){
+      if (firsttime){
         randcond = Math.round(Math.random());
       }
-
+      console.log('randcond :' + randcond)
 
 
       this.stimulusService = stimulusServiceFactory.createService(this.stimuliPath);
