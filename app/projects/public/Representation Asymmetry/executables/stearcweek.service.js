@@ -94,7 +94,7 @@ tatool.factory('stearcweek',['executableUtils', 'timerUtils', 'stimulusServiceFa
       var newList = {};
       for (var i = 0; i < list.length; i++) {
         var stimulusType = list[i].stimulusType;
-        if(!newList[stimulusType]) {
+        if (!newList[stimulusType]) {
           newList[stimulusType] = [];
         }
         newList[stimulusType].push(list[i]);
@@ -109,7 +109,7 @@ tatool.factory('stearcweek',['executableUtils', 'timerUtils', 'stimulusServiceFa
       var newList = {};
       for (var i = 0; i < list.length; i++) {
         var stimulusType = list[i].stimulusType;
-        if(!newList[stimulusType]) {
+        if (!newList[stimulusType]) {
           newList[stimulusType] = [];
         }
         newList[stimulusType].push(list[i]);
@@ -117,21 +117,25 @@ tatool.factory('stearcweek',['executableUtils', 'timerUtils', 'stimulusServiceFa
 
       newList = executableUtils.shuffle(newList[this.condition]);
 
-    //   var repeat = 0;
-    //
-    //   finalList = newList["RtoL"].shift();
-    //   for (var i = 1; i < newList["RtoL"].length; i++) {
-    //       if(newList["RtoL"][i].relativeDay==newList["RtoL"][i-1].relativeDay) {
-    //           if(repeat==1){
-    //               executable
-    //           }
-    //
-    //           repeat = 1
-    //       }
-    //   }
+      var repeat = 0;
 
+      var finalList = [];
+      finalList[0] = newList.shift();
+      while (newList.length > 0) {
+          if (newList[0].relativeDay===finalList[finalList.length-1].relativeDay) {
+              if (repeat==1){
+                  while (newList[0].relativeDay==finalList[finalList.length-1].relativeDay) {
+                      newList = executableUtils.shuffle(newList);
+                  }
+                  repeat = 0;
+              } else {
+                  repeat = 1;
+              }
+          }
+          finalList[finalList.length] = newList.shift();
+      }
 
-      return newList;
+      return finalList;
     };
 
     STEARCweek.prototype.setupInputKeys = function(stimulus) {
