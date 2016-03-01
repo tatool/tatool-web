@@ -9,8 +9,7 @@ tatool.factory('stearcweek',['executableUtils', 'timerUtils', 'stimulusServiceFa
       var promise = executableUtils.createPromise();
 
 
-      this.fours = 5;
-      counter = 0;
+      this.counter = 0;
       ncorrect = 0;
 
       //randomise which condition starts first
@@ -25,8 +24,23 @@ tatool.factory('stearcweek',['executableUtils', 'timerUtils', 'stimulusServiceFa
       if (firsttime){
         randcond = Math.round(Math.random());
       }
-      console.log('randcond :' + randcond)
 
+      // randcond (random generated number at start of session) XOR condtype (according to ABBA)
+      if(randcond ^ this.condtype.propertyValue){
+          this.condition = "LtoR";
+          // Profit to create specific keyboard answers
+          this.response1 = "Past";
+          this.response2 = "Future";
+          this.keyLabel1 = "Past < ";
+          this.keyLabel2 = "> Future ";
+      } else {
+          this.condition = "RtoL";
+          // Profit to create specific keyboard answers
+          this.response2 = "Past";
+          this.response1 = "Future";
+          this.keyLabel2 = "> Past ";
+          this.keyLabel1 = " Future <";
+      }
 
       this.stimulusService = stimulusServiceFactory.createService(this.stimuliPath);
       this.inputService = inputServiceFactory.createService(this.stimuliPath);
@@ -64,10 +78,10 @@ tatool.factory('stearcweek',['executableUtils', 'timerUtils', 'stimulusServiceFa
 
     // process stimuli file according to randomisation property
     STEARCweek.prototype.processStimuliFile = function(list, promise) {
-      if (this.randomisation === 'full-condition') {
+      if (this.randomisation === 'full') {
         this.stimuliList = this.splitStimuliList(list);
-      } else if (this.randomisation === 'full') {
-        this.stimuliList = executableUtils.shuffle(list);
+    } else if (this.randomisation === 'pseudo') {
+        this.stimuliList = this.pseudoStimuliList(list);
       } else {
         this.stimuliList = list;
       }
@@ -85,24 +99,42 @@ tatool.factory('stearcweek',['executableUtils', 'timerUtils', 'stimulusServiceFa
         }
         newList[stimulusType].push(list[i]);
       }
+
+      newList = executableUtils.shuffle(newList[this.condition]);
+
+      return newList;
+    };
+
+    STEARCweek.prototype.pseudoStimuliList = function(list) {
+      var newList = {};
+      for (var i = 0; i < list.length; i++) {
+        var stimulusType = list[i].stimulusType;
+        if(!newList[stimulusType]) {
+          newList[stimulusType] = [];
+        }
+        newList[stimulusType].push(list[i]);
+      }
+
+      newList = executableUtils.shuffle(newList[this.condition]);
+
+    //   var repeat = 0;
+    //
+    //   finalList = newList["RtoL"].shift();
+    //   for (var i = 1; i < newList["RtoL"].length; i++) {
+    //       if(newList["RtoL"][i].relativeDay==newList["RtoL"][i-1].relativeDay) {
+    //           if(repeat==1){
+    //               executable
+    //           }
+    //
+    //           repeat = 1
+    //       }
+    //   }
+
+
       return newList;
     };
 
     STEARCweek.prototype.setupInputKeys = function(stimulus) {
-
-        //Depends on the condition
-        if(this.condition=="LtoR") {
-            this.response1 = "Past";
-            this.response2 = "Future";
-            this.keyLabel1 = "Past < ";
-            this.keyLabel2 = "> Future ";
-        } else {
-            this.response2 = "Past";
-            this.response1 = "Future";
-            this.keyLabel2 = "> Past ";
-            this.keyLabel1 = " Future <";
-        }
-
         //Create the buttons
         this.inputService.addInputKey(this.keyCode1, this.response1, this.keyLabel1, this.keyLabelType1);
         this.inputService.addInputKey(this.keyCode2, this.response2, this.keyLabel2, this.keyLabelType2);
@@ -110,21 +142,9 @@ tatool.factory('stearcweek',['executableUtils', 'timerUtils', 'stimulusServiceFa
 
     STEARCweek.prototype.createStimulus = function() {
 
-      // randcond (random generated number at start of session) XOR condtype (according to ABBA)
-      if(randcond ^ this.condtype.propertyValue){
-          this.condition = "LtoR";
-      } else {
-          this.condition = "RtoL";
-      }
-      console.log(this.condition);
-      // reset this.fours to 0 if > no. of total stimuli
-      if (this.fours >= 4) {
-        this.fours = 0;
-        this.nextstimuli = executableUtils.shuffle(this.stimuliList[this.condition]);
-      }
 
       //Get the stimulus
-      var stimulus = executableUtils.getNext(this.nextstimuli, this.fours);
+      var stimulus = executableUtils.getNext(this.stimuliList, this.counter);
       //Stimulus is relative to today
       daynum = (this.today + stimulus.relativeDay);
       //Days of the week only between 0 and 6
@@ -148,8 +168,7 @@ tatool.factory('stearcweek',['executableUtils', 'timerUtils', 'stimulusServiceFa
 
       //Add the keys at the buttom
       this.setupInputKeys(stimulus)
-      this.fours++;
-      counter++;
+      this.counter++;
     };
 
     STEARCweek.prototype.processResponse = function(response) {
@@ -157,7 +176,7 @@ tatool.factory('stearcweek',['executableUtils', 'timerUtils', 'stimulusServiceFa
       this.trial.givenResponse = response;
       if (this.trial.correctResponse == this.trial.givenResponse) {
         this.trial.score = 1;
-        ncorrect++;
+        ncorrect++; //Use only for practice trial
       } else {
         this.trial.score = 0;
       }
