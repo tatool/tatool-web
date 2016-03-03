@@ -7,12 +7,12 @@
          "mode":"upload",
          "auto":true,
          "enabled":true,
-         "$$hashKey":"object:5656"
+         "$$hashKey":"object:1245"
       },
       {
          "mode":"download",
          "enabled":true,
-         "$$hashKey":"object:5544"
+         "$$hashKey":"object:1133"
       }
    ],
    "allowEscapeKey":false,
@@ -724,21 +724,21 @@
                         "stimuliFile":{
                            "propertyType":"Resource",
                            "project":{
-                              "name":"Representation Asymmetry",
-                              "access":"public"
+                              "name":"External Resource",
+                              "access":"external"
                            },
-                           "resourceName":"chimeric.csv",
+                           "resourceName":"https://dl.dropboxusercontent.com/u/1299023/chimeric.csv",
                            "resourceType":"stimuli"
                         },
                         "stimuliPath":{
                            "propertyType":"Path",
                            "project":{
-                              "name":"Representation Asymmetry",
-                              "access":"public"
+                              "name":"External Resource",
+                              "access":"external"
                            },
                            "resourceName":"",
                            "resourceType":"stimuli",
-                           "resourcePath":"https://dl.dropboxusercontent.com/sh/03cqjg5zxuj3jfl/AAA-eQcsemnBBJAaT14wtttca?dl=0"
+                           "resourcePath":"https://dl.dropboxusercontent.com/u/1299023/"
                         },
                         "displayDuration":"5000",
                         "status":{
