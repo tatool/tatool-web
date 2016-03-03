@@ -6,7 +6,7 @@ function (executableUtils, timerUtils, stimulusServiceFactory, inputServiceFacto
     var DISPLAY_DURATION_DEFAULT = 2000;
 
     STEARCweek.prototype.init = function() {
-        var promise = executableUtils.createPromise();
+        var deferred = executableUtils.createPromise();
 
 
         this.counter = 0;
@@ -49,9 +49,9 @@ function (executableUtils, timerUtils, stimulusServiceFactory, inputServiceFacto
         var self = this;
         executableUtils.getCSVResource(this.stimuliFile, true, this.stimuliPath).then(
             function(list) {
-                self.processStimuliFile(list, promise);
+                self.processStimuliFile(list, deferred);
             }, function(error) {
-                promise.reject(error);
+                deferred.reject(error);
             });
 
             //Create a timer object in the Executable service init method
@@ -73,11 +73,11 @@ function (executableUtils, timerUtils, stimulusServiceFactory, inputServiceFacto
             //Day of the week (in number) of today
             this.today = this.d.getDay();
 
-            return promise;
+            return deferred;
         };
 
         // process stimuli file according to randomisation property
-        STEARCweek.prototype.processStimuliFile = function(list, promise) {
+        STEARCweek.prototype.processStimuliFile = function(list, deferred) {
             if (this.randomisation === 'full') {
                 this.stimuliList = this.splitStimuliList(list);
             } else if (this.randomisation === 'pseudo') {
@@ -86,7 +86,7 @@ function (executableUtils, timerUtils, stimulusServiceFactory, inputServiceFacto
                 this.stimuliList = list;
             }
 
-            promise.resolve();
+            deferred.resolve();
         };
 
         // Splitting the stimuliList according to stimulusType for full-condition and randomise
@@ -133,7 +133,6 @@ function (executableUtils, timerUtils, stimulusServiceFactory, inputServiceFacto
                                 newList = executableUtils.shuffle(newList);
                                 finalList = [];
                                 finalList[0] = newList.shift();
-                                console.log('reached infinity :' + newList);
                                 break;
                             }
                         }
