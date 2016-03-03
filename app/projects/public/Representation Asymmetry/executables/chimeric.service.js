@@ -1,3 +1,5 @@
+'use strict'
+
 tatool.factory('chimeric',['executableUtils', 'timerUtils', 'gridServiceFactory', 'inputServiceFactory', 'dbUtils',
 function (executableUtils, timerUtils, gridServiceFactory, inputServiceFactory, dbUtils) {
 
@@ -6,21 +8,30 @@ function (executableUtils, timerUtils, gridServiceFactory, inputServiceFactory, 
     var DISPLAY_DURATION_DEFAULT = 2000;
 
     chimeric.prototype.init = function() {
-        var promise = executableUtils.createPromise();
+        var deferred = executableUtils.createPromise();
 
         this.counter = 0;
         this.gridService = gridServiceFactory.createService(2, 1, 'gridService', this.stimuliPath);
         this.inputService = inputServiceFactory.createService(this.stimuliPath);
 
+        if (!this.stimuliPath) {
+          deferred.reject('Invalid property settings for Executable chimeric. Expected property <b>stimuliPath</b> of type Path.');
+        }
+
         //The stimuli list is a CSV explained in Tatool UI
-        var self = this;
-        executableUtils.getCSVResource(this.stimuliFile, true, this.stimuliPath).then(
-            function(list) {
-                self.stimuliList = executableUtils.shuffle(list);
-                promise.resolve();
-            }, function(error) {
-                promise.reject(error);
-            });
+        if (this.stimuliFile) {
+            var self = this;
+            executableUtils.getCSVResource(this.stimuliFile, true, this.stimuliPath).then(
+                function(list) {
+                    self.stimuliList = executableUtils.shuffle(list);
+                    deferred.resolve();
+                }, function(error) {
+                    deferred.reject('Resource not found: ' + self.stimuliFile.resourceName);
+                });
+        } else {
+            deferred.reject('Invalid property settings for Executable chimeric. Expected property <b>stimuliFile</b> of type Resource.');
+
+        }
 
             //Allow only these answers
             this.keyCode1 = "ArrowUp";
@@ -30,7 +41,7 @@ function (executableUtils, timerUtils, gridServiceFactory, inputServiceFactory, 
             this.displayDuration = (this.displayDuration ) ? this.displayDuration : DISPLAY_DURATION_DEFAULT;
             this.timer = timerUtils.createTimer(this.displayDuration, true, this);
 
-            return promise;
+            return deferred;
         };
 
         // Adding keyInputs and show by default
