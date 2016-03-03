@@ -7,6 +7,7 @@ function ($scope, service) {
     $scope.start = function() {
         service.createStimulus();
 
+        // Show the keys at the bottom and allow answers
         service.inputService.show();
         service.inputService.enable();
 
@@ -22,7 +23,7 @@ function ($scope, service) {
     function timerUp() {
         service.inputService.disable();
         service.endTime = service.stimulusService.hide();
-        service.processResponse('');
+        service.processResponse('NA');
     }
 
     $scope.inputAction = function(input, timing, event) {

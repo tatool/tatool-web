@@ -5,24 +5,32 @@ function (executableUtils, timerUtils, gridServiceFactory, inputServiceFactory, 
 
     var chimeric = executableUtils.createExecutable();
 
+    // Fallback parameter is case nothing is set in the module
     var DISPLAY_DURATION_DEFAULT = 2000;
 
     chimeric.prototype.init = function() {
         var deferred = executableUtils.createPromise();
 
+        // Trial counter
         this.counter = 0;
+
+        // Tatool template stimulus grid
         this.gridService = gridServiceFactory.createService(2, 1, 'gridService', this.stimuliPath);
+
+        // Tatool template inputs (key and mouse)
         this.inputService = inputServiceFactory.createService(this.stimuliPath);
 
+        // Need a Path defined in the module
         if (!this.stimuliPath) {
           deferred.reject('Invalid property settings for Executable chimeric. Expected property <b>stimuliPath</b> of type Path.');
         }
 
-        //The stimuli list is a CSV explained in Tatool UI
+        //The stimuli list is a CSV not hosted on Github
         if (this.stimuliFile) {
             var self = this;
             executableUtils.getCSVResource(this.stimuliFile, true, this.stimuliPath).then(
                 function(list) {
+                    // Random presentation order of the stimuli
                     self.stimuliList = executableUtils.shuffle(list);
                     deferred.resolve();
                 }, function(error) {
@@ -37,7 +45,7 @@ function (executableUtils, timerUtils, gridServiceFactory, inputServiceFactory, 
             this.keyCode1 = "ArrowUp";
             this.keyCode2 = "ArrowDown";
 
-            //Create a timer object in the Executable service init method
+            //Create a timer object for a visual timer
             this.displayDuration = (this.displayDuration ) ? this.displayDuration : DISPLAY_DURATION_DEFAULT;
             this.timer = timerUtils.createTimer(this.displayDuration, true, this);
 
@@ -70,8 +78,10 @@ function (executableUtils, timerUtils, gridServiceFactory, inputServiceFactory, 
             this.trial.stimulusType = stimulus.stimulusType;
             this.trial.stimulusValue = stimulus.stimulusValue;
 
+            // See above for the function
             this.setupInputKeys(stimulus);
 
+            // Create a grid of two vertical cells
             this.celltop = {};
             this.celltop.gridPosition = 1;
             this.celltop.stimulusValue = stimulus.stimulusValue;
@@ -84,13 +94,14 @@ function (executableUtils, timerUtils, gridServiceFactory, inputServiceFactory, 
             this.cellbottom.stimulusValueType = 'image';
             this.cellbottom.gridCellClass = 'chimericStraight';
 
+            // Mirror one of the image trough CSS
             if (stimulus.stimulusType=="Up"){
                 this.cellbottom.gridCellClass = 'chimericReversed';
             } else {
                 this.celltop.gridCellClass = 'chimericReversed';
             }
 
-            //Show the image
+            //Show the images
             this.gridService.addCell(this.celltop);
             this.gridService.addCell(this.cellbottom);
             this.counter++;

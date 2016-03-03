@@ -8,11 +8,11 @@ function (executableUtils, timerUtils, stimulusServiceFactory, inputServiceFacto
     STEARCweek.prototype.init = function() {
         var deferred = executableUtils.createPromise();
 
-
+        // Stimulus counter. One for each module name (3 in total: practice, A & B)
         this.counter = 0;
-        ncorrect = 0;
+        ncorrect = 0; // Used only for feedback at the end of practice
 
-        //randomise which condition starts first
+        // Randomise which condition starts first (but do it only once)
         var firsttime = false;
         try {
             if (randcond)
@@ -26,6 +26,7 @@ function (executableUtils, timerUtils, stimulusServiceFactory, inputServiceFacto
         }
 
         // randcond (random generated number at start of session) XOR condtype (according to ABBA)
+        // condtype is created in the Module
         if(randcond ^ this.condtype.propertyValue){
             this.condition = "LtoR";
             // Profit to create specific keyboard answers
@@ -54,7 +55,7 @@ function (executableUtils, timerUtils, stimulusServiceFactory, inputServiceFacto
                 deferred.reject(error);
             });
 
-            //Create a timer object in the Executable service init method
+            //Create a timer object visible on top of the screen
             this.displayDuration = (this.displayDuration ) ? this.displayDuration : DISPLAY_DURATION_DEFAULT;
             this.timer = timerUtils.createTimer(this.displayDuration, true, this);
 
@@ -89,7 +90,7 @@ function (executableUtils, timerUtils, stimulusServiceFactory, inputServiceFacto
             deferred.resolve();
         };
 
-        // Splitting the stimuliList according to stimulusType for full-condition and randomise
+        // Use only the right condition in a random order
         STEARCweek.prototype.splitStimuliList = function(list) {
             var newList = {};
             for (var i = 0; i < list.length; i++) {
@@ -105,6 +106,7 @@ function (executableUtils, timerUtils, stimulusServiceFactory, inputServiceFacto
             return newList;
         };
 
+        // Use only the right condition, randomly, but avoid more than 2 repetitions
         STEARCweek.prototype.pseudoStimuliList = function(list) {
             var newList = {};
             for (var i = 0; i < list.length; i++) {
@@ -127,6 +129,10 @@ function (executableUtils, timerUtils, stimulusServiceFactory, inputServiceFacto
                     if (repeat==1){
                         while (newList[0].relativeDay==finalList[finalList.length-1].relativeDay) {
                             newList = executableUtils.shuffle(newList);
+
+                            // Have you tried ten times and still bad?
+                            // It means there's not enough options anymore or
+                            // you are at Monte-Carlo
                             infiniteSafety++;
                             if (infiniteSafety > 10) {
                                 newList = newList.concat(finalList)
@@ -146,12 +152,6 @@ function (executableUtils, timerUtils, stimulusServiceFactory, inputServiceFacto
             }
 
             return finalList;
-        };
-
-        STEARCweek.prototype.setupInputKeys = function(stimulus) {
-            //Create the buttons
-            this.inputService.addInputKey(this.keyCode1, this.response1, this.keyLabel1, this.keyLabelType1);
-            this.inputService.addInputKey(this.keyCode2, this.response2, this.keyLabel2, this.keyLabelType2);
         };
 
         STEARCweek.prototype.createStimulus = function() {
@@ -181,7 +181,9 @@ function (executableUtils, timerUtils, stimulusServiceFactory, inputServiceFacto
             this.stimulusService.setText(stimulus);
 
             //Add the keys at the buttom
-            this.setupInputKeys(stimulus)
+            this.inputService.addInputKey(this.keyCode1, this.response1, this.keyLabel1, this.keyLabelType1);
+            this.inputService.addInputKey(this.keyCode2, this.response2, this.keyLabel2, this.keyLabelType2);
+
             this.counter++;
         };
 
