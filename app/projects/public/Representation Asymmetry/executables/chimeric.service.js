@@ -109,7 +109,11 @@ function (executableUtils, timerUtils, gridServiceFactory, inputServiceFactory, 
         };
 
         chimeric.prototype.processResponse = function(response, inputMethod) {
-            this.trial.reactionTime = this.endTime - this.startTime;
+            if(response=='Timeout'){
+                this.trial.reactionTime = 'NA';
+            } else {
+                this.trial.reactionTime = this.endTime - this.startTime;
+            }
             this.trial.givenResponse = response;
             this.trial.inputMethod = inputMethod;
             dbUtils.saveTrial(this.trial).then(executableUtils.stop);
