@@ -210,6 +210,7 @@ angular.module('tatool.module')
     // loops through a stimuli file and collects all image file names
     var getImages = function(list, deferred, stimuliPath) {
       var images = [];
+      var imagefile = /png$|jpg$|jpeg$|svg$|gif$|/i;
       async.each(list, function(stimulus, callback) {
         angular.forEach(stimulus, function(value, key) {
           if (key.indexOf('stimulusValueType') >= 0 && value === 'image') {
@@ -219,6 +220,14 @@ angular.module('tatool.module')
           } else if (key.indexOf('keyLabelType') >= 0 && value === 'image') {
             if (images.indexOf(stimulus[key.replace('Type', '')]) === -1) {
               images.push(stimulus[key.replace('Type', '')]);
+            }
+          } else if (key.indexOf('stimulusValue') >= 0 && imagefile.test(value)) {
+            if (images.indexOf(stimulus[key]) === -1) {
+              images.push(stimulus[key]);
+            }
+          } else if (key.indexOf('keyLabel') >= 0 && imagefile.test(value)) {
+            if (images.indexOf(stimulus[key]) === -1) {
+              images.push(stimulus[key]);
             }
           }
         });
