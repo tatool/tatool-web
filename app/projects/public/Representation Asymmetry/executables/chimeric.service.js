@@ -111,10 +111,27 @@ function (executableUtils, timerUtils, gridServiceFactory, inputServiceFactory, 
         chimeric.prototype.processResponse = function(response, inputMethod) {
             if(response=='Timeout'){
                 this.trial.reactionTime = 'NA';
+                this.trial.key = 'NA';
             } else {
                 this.trial.reactionTime = this.endTime - this.startTime;
+                if (this.trial.stimulusType=="Up"){
+                    if(response=="Left")
+                    {
+                        this.trial.key = "Up"
+                    } else {
+                        this.trial.key = "Down"
+                    }
+                } else {
+                    if(response=="Left")
+                    {
+                        this.trial.key = "Down"
+                    } else {
+                        this.trial.key = "Up"
+                    }
+                }
             }
             this.trial.givenResponse = response;
+
             this.trial.inputMethod = inputMethod;
             dbUtils.saveTrial(this.trial).then(executableUtils.stop);
         };
