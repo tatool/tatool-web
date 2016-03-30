@@ -10,7 +10,7 @@ function (executableUtils, timerUtils, stimulusServiceFactory, inputServiceFacto
 
         // Stimulus counter. One for each module name (3 in total: practice, A & B)
         this.counter = 0;
-        ncorrect = 0; // Used only for feedback at the end of practice
+        this.ncorrect = 0; // Used only for feedback at the end of practice
 
         // Randomise which condition starts first (but do it only once)
         var firsttime = false;
@@ -192,7 +192,7 @@ function (executableUtils, timerUtils, stimulusServiceFactory, inputServiceFacto
             this.trial.givenResponse = response;
             if (this.trial.correctResponse == this.trial.givenResponse) {
                 this.trial.score = 1;
-                ncorrect++; //Use only for practice trial
+                dbUtils.setModuleProperty(this, 'ncorrect', ++this.ncorrect); //Used only for practice trial
             } else {
                 this.trial.score = 0;
             }

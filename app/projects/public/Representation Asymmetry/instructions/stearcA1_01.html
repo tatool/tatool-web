@@ -2,7 +2,7 @@
 	<h1><i>Days of the week</i> task</h1>
 	<h2>Run 1/4</h2>
 
-	<p>You responded <span id="count"></span>% correctly.</p>
+	<p>You responded {{moduleProperties.stearcpractice.ncorrect / 5 * 100}} % correctly.</p>
 
 	<p>Now comes the real task. It will be identical, except that the time to answer
 		will be shorter. It might seem very short, but it is usually enough to answer correctly.
@@ -22,5 +22,3 @@
 			arrow key</span> to start the task.
 	</p>
 </div>
-
-<script>document.getElementById("count").innerHTML = ncorrect / 5 * 100;</script>
