@@ -1,0 +1,25 @@
+keyCount,stimulusType,stimulusValue,stimulusValueType,cueValue,cueValueType,correctResponse,shiftingType,keyCode1,response1,keyIndex1,keyCode2,response2,keyIndex2,keyCode3,response3,keyIndex3,keyCode4,response4,keyIndex4
+4,up-left,response_02_tl.png,image,cue_up-left.png,image,top up-left,start,Numpad9,top up-right,0,Numpad1,bottom up-right,1,Numpad7,top up-left,2,Numpad3,bottom up-left,3
+4,up-left,response_02_tr.png,image,cue_up-left.png,image,top up-left,repetition,Numpad9,top up-right,0,Numpad1,bottom up-right,1,Numpad7,top up-left,2,Numpad3,bottom up-left,3
+4,up-right,response_02_bl.png,image,cue_up-right.png,image,bottom up-right,switch,Numpad9,top up-right,0,Numpad1,bottom up-right,1,Numpad7,top up-left,2,Numpad3,bottom up-left,3
+4,up-right,response_02_br.png,image,cue_up-right.png,image,bottom up-right,repetition,Numpad9,top up-right,0,Numpad1,bottom up-right,1,Numpad7,top up-left,2,Numpad3,bottom up-left,3
+4,up-right,response_02_tr.png,image,cue_up-right.png,image,top up-right,repetition,Numpad9,top up-right,0,Numpad1,bottom up-right,1,Numpad7,top up-left,2,Numpad3,bottom up-left,3
+4,up-left,response_02_bl.png,image,cue_up-left.png,image,bottom up-left,switch,Numpad9,top up-right,0,Numpad1,bottom up-right,1,Numpad7,top up-left,2,Numpad3,bottom up-left,3
+4,up-left,response_02_tr.png,image,cue_up-left.png,image,top up-left,repetition,Numpad9,top up-right,0,Numpad1,bottom up-right,1,Numpad7,top up-left,2,Numpad3,bottom up-left,3
+4,up-left,response_02_bl.png,image,cue_up-left.png,image,bottom up-left,repetition,Numpad9,top up-right,0,Numpad1,bottom up-right,1,Numpad7,top up-left,2,Numpad3,bottom up-left,3
+4,up-right,response_02_bl.png,image,cue_up-right.png,image,bottom up-right,switch,Numpad9,top up-right,0,Numpad1,bottom up-right,1,Numpad7,top up-left,2,Numpad3,bottom up-left,3
+4,up-left,response_02_tl.png,image,cue_up-left.png,image,top up-left,switch,Numpad9,top up-right,0,Numpad1,bottom up-right,1,Numpad7,top up-left,2,Numpad3,bottom up-left,3
+4,up-left,response_02_tr.png,image,cue_up-left.png,image,top up-left,repetition,Numpad9,top up-right,0,Numpad1,bottom up-right,1,Numpad7,top up-left,2,Numpad3,bottom up-left,3
+4,up-right,response_02_br.png,image,cue_up-right.png,image,bottom up-right,repetition,Numpad9,top up-right,0,Numpad1,bottom up-right,1,Numpad7,top up-left,2,Numpad3,bottom up-left,3
+4,up-right,response_02_bl.png,image,cue_up-right.png,image,bottom up-right,repetition,Numpad9,top up-right,0,Numpad1,bottom up-right,1,Numpad7,top up-left,2,Numpad3,bottom up-left,3
+4,up-right,response_02_tl.png,image,cue_up-right.png,image,top up-right,switch,Numpad9,top up-right,0,Numpad1,bottom up-right,1,Numpad7,top up-left,2,Numpad3,bottom up-left,3
+4,up-left,response_02_bl.png,image,cue_up-left.png,image,bottom up-left,repetition,Numpad9,top up-right,0,Numpad1,bottom up-right,1,Numpad7,top up-left,2,Numpad3,bottom up-left,3
+4,up-right,response_02_tl.png,image,cue_up-right.png,image,top up-right,repetition,Numpad9,top up-right,0,Numpad1,bottom up-right,1,Numpad7,top up-left,2,Numpad3,bottom up-left,3
+4,up-right,response_02_tr.png,image,cue_up-right.png,image,top up-right,switch,Numpad9,top up-right,0,Numpad1,bottom up-right,1,Numpad7,top up-left,2,Numpad3,bottom up-left,3
+4,up-right,response_02_br.png,image,cue_up-right.png,image,bottom up-right,repetition,Numpad9,top up-right,0,Numpad1,bottom up-right,1,Numpad7,top up-left,2,Numpad3,bottom up-left,3
+4,up-left,response_02_br.png,image,cue_up-left.png,image,bottom up-left,repetition,Numpad9,top up-right,0,Numpad1,bottom up-right,1,Numpad7,top up-left,2,Numpad3,bottom up-left,3
+4,up-right,response_02_tl.png,image,cue_up-right.png,image,top up-right,switch,Numpad9,top up-right,0,Numpad1,bottom up-right,1,Numpad7,top up-left,2,Numpad3,bottom up-left,3
+4,up-left,response_02_br.png,image,cue_up-left.png,image,bottom up-left,switch,Numpad9,top up-right,0,Numpad1,bottom up-right,1,Numpad7,top up-left,2,Numpad3,bottom up-left,3
+4,up-left,response_02_tl.png,image,cue_up-left.png,image,top up-left,switch,Numpad9,top up-right,0,Numpad1,bottom up-right,1,Numpad7,top up-left,2,Numpad3,bottom up-left,3
+4,up-left,response_02_br.png,image,cue_up-left.png,image,bottom up-left,switch,Numpad9,top up-right,0,Numpad1,bottom up-right,1,Numpad7,top up-left,2,Numpad3,bottom up-left,3
+4,up-right,response_02_tr.png,image,cue_up-right.png,image,top up-right,repetition,Numpad9,top up-right,0,Numpad1,bottom up-right,1,Numpad7,top up-left,2,Numpad3,bottom up-left,3

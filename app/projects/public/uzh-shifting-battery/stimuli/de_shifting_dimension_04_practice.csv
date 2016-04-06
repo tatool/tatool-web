@@ -1,0 +1,25 @@
+keyCount,stimulusType,stimulusValue,stimulusValueType,cueValue,cueValueType,correctResponse,shiftingType,keyCode1,response1,keyIndex1,keyCode2,response2,keyIndex2,keyCode3,response3,keyIndex3,keyCode4,response4,keyIndex4
+4,orientation,dimension_04_otl_str.png,image,cue_orientation.png,image,top left,start,Numpad1,bottom left,0,Numpad3,bottom right,1,Numpad7,top left,2,Numpad9,top right,3
+4,orientation,dimension_04_obr_str.png,image,cue_orientation.png,image,bottom right,repetition,Numpad1,bottom left,0,Numpad3,bottom right,1,Numpad7,top left,2,Numpad9,top right,3
+4,size,dimension_04_obl_stl.png,image,cue_size.png,image,top left,switch,Numpad1,bottom left,0,Numpad3,bottom right,1,Numpad7,top left,2,Numpad9,top right,3
+4,orientation,dimension_04_otl_sbl.png,image,cue_orientation.png,image,top left,switch,Numpad1,bottom left,0,Numpad3,bottom right,1,Numpad7,top left,2,Numpad9,top right,3
+4,size,dimension_04_obr_sbl.png,image,cue_size.png,image,bottom left,switch,Numpad1,bottom left,0,Numpad3,bottom right,1,Numpad7,top left,2,Numpad9,top right,3
+4,orientation,dimension_04_otr_stl.png,image,cue_orientation.png,image,top right,switch,Numpad1,bottom left,0,Numpad3,bottom right,1,Numpad7,top left,2,Numpad9,top right,3
+4,orientation,dimension_04_obl_str.png,image,cue_orientation.png,image,bottom left,repetition,Numpad1,bottom left,0,Numpad3,bottom right,1,Numpad7,top left,2,Numpad9,top right,3
+4,orientation,dimension_04_obl_sbr.png,image,cue_orientation.png,image,bottom left,repetition,Numpad1,bottom left,0,Numpad3,bottom right,1,Numpad7,top left,2,Numpad9,top right,3
+4,size,dimension_04_otl_sbr.png,image,cue_size.png,image,bottom right,switch,Numpad1,bottom left,0,Numpad3,bottom right,1,Numpad7,top left,2,Numpad9,top right,3
+4,orientation,dimension_04_otr_sbr.png,image,cue_orientation.png,image,top right,switch,Numpad1,bottom left,0,Numpad3,bottom right,1,Numpad7,top left,2,Numpad9,top right,3
+4,orientation,dimension_04_obl_stl.png,image,cue_orientation.png,image,bottom left,repetition,Numpad1,bottom left,0,Numpad3,bottom right,1,Numpad7,top left,2,Numpad9,top right,3
+4,size,dimension_04_otr_sbl.png,image,cue_size.png,image,bottom left,switch,Numpad1,bottom left,0,Numpad3,bottom right,1,Numpad7,top left,2,Numpad9,top right,3
+4,size,dimension_04_obr_str.png,image,cue_size.png,image,top right,repetition,Numpad1,bottom left,0,Numpad3,bottom right,1,Numpad7,top left,2,Numpad9,top right,3
+4,size,dimension_04_otr_stl.png,image,cue_size.png,image,top left,repetition,Numpad1,bottom left,0,Numpad3,bottom right,1,Numpad7,top left,2,Numpad9,top right,3
+4,size,dimension_04_otr_sbr.png,image,cue_size.png,image,bottom right,repetition,Numpad1,bottom left,0,Numpad3,bottom right,1,Numpad7,top left,2,Numpad9,top right,3
+4,orientation,dimension_04_otl_sbr.png,image,cue_orientation.png,image,top left,switch,Numpad1,bottom left,0,Numpad3,bottom right,1,Numpad7,top left,2,Numpad9,top right,3
+4,orientation,dimension_04_otr_sbl.png,image,cue_orientation.png,image,top right,repetition,Numpad1,bottom left,0,Numpad3,bottom right,1,Numpad7,top left,2,Numpad9,top right,3
+4,size,dimension_04_obl_str.png,image,cue_size.png,image,top right,switch,Numpad1,bottom left,0,Numpad3,bottom right,1,Numpad7,top left,2,Numpad9,top right,3
+4,size,dimension_04_obl_sbr.png,image,cue_size.png,image,bottom right,repetition,Numpad1,bottom left,0,Numpad3,bottom right,1,Numpad7,top left,2,Numpad9,top right,3
+4,size,dimension_04_obr_stl.png,image,cue_size.png,image,top left,repetition,Numpad1,bottom left,0,Numpad3,bottom right,1,Numpad7,top left,2,Numpad9,top right,3
+4,orientation,dimension_04_obr_sbl.png,image,cue_orientation.png,image,bottom right,switch,Numpad1,bottom left,0,Numpad3,bottom right,1,Numpad7,top left,2,Numpad9,top right,3
+4,size,dimension_04_otl_sbl.png,image,cue_size.png,image,bottom left,switch,Numpad1,bottom left,0,Numpad3,bottom right,1,Numpad7,top left,2,Numpad9,top right,3
+4,size,dimension_04_otl_str.png,image,cue_size.png,image,top right,repetition,Numpad1,bottom left,0,Numpad3,bottom right,1,Numpad7,top left,2,Numpad9,top right,3
+4,orientation,dimension_04_obr_stl.png,image,cue_orientation.png,image,bottom right,switch,Numpad1,bottom left,0,Numpad3,bottom right,1,Numpad7,top left,2,Numpad9,top right,3

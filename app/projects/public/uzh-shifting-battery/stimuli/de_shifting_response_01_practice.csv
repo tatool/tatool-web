@@ -1,0 +1,25 @@
+keyCount,stimulusType,stimulusValue,stimulusValueType,cueValue,cueValueType,correctResponse,shiftingType,keyCode1,response1,keyIndex1,keyCode2,response2,keyIndex2,keyCode3,response3,keyIndex3,keyCode4,response4,keyIndex4
+4,vertically,E,text,cue_vertically.png,image,vowel vertically,switch,V,vowel horizontally,0,B,consonant horizontally,1,Numpad1,vowel vertically,2,Numpad4,consonant vertically,3
+4,horizontally,O,text,cue_horizontally.png,image,vowel horizontally,repetition,V,vowel horizontally,0,B,consonant horizontally,1,Numpad1,vowel vertically,2,Numpad4,consonant vertically,3
+4,horizontally,E,text,cue_horizontally.png,image,vowel horizontally,repetition,V,vowel horizontally,0,B,consonant horizontally,1,Numpad1,vowel vertically,2,Numpad4,consonant vertically,3
+4,horizontally,U,text,cue_horizontally.png,image,vowel horizontally,repetition,V,vowel horizontally,0,B,consonant horizontally,1,Numpad1,vowel vertically,2,Numpad4,consonant vertically,3
+4,vertically,G,text,cue_vertically.png,image,consonant vertically,repetition,V,vowel horizontally,0,B,consonant horizontally,1,Numpad1,vowel vertically,2,Numpad4,consonant vertically,3
+4,horizontally,U,text,cue_horizontally.png,image,vowel horizontally,repetition,V,vowel horizontally,0,B,consonant horizontally,1,Numpad1,vowel vertically,2,Numpad4,consonant vertically,3
+4,horizontally,S,text,cue_horizontally.png,image,consonant horizontally,repetition,V,vowel horizontally,0,B,consonant horizontally,1,Numpad1,vowel vertically,2,Numpad4,consonant vertically,3
+4,horizontally,G,text,cue_horizontally.png,image,consonant horizontally,repetition,V,vowel horizontally,0,B,consonant horizontally,1,Numpad1,vowel vertically,2,Numpad4,consonant vertically,3
+4,vertically,R,text,cue_vertically.png,image,consonant vertically,switch,V,vowel horizontally,0,B,consonant horizontally,1,Numpad1,vowel vertically,2,Numpad4,consonant vertically,3
+4,horizontally,B,text,cue_horizontally.png,image,consonant horizontally,switch,V,vowel horizontally,0,B,consonant horizontally,1,Numpad1,vowel vertically,2,Numpad4,consonant vertically,3
+4,vertically,B,text,cue_vertically.png,image,consonant vertically,switch,V,vowel horizontally,0,B,consonant horizontally,1,Numpad1,vowel vertically,2,Numpad4,consonant vertically,3
+4,vertically,E,text,cue_vertically.png,image,vowel vertically,repetition,V,vowel horizontally,0,B,consonant horizontally,1,Numpad1,vowel vertically,2,Numpad4,consonant vertically,3
+4,vertically,A,text,cue_vertically.png,image,vowel vertically,start,V,vowel horizontally,0,B,consonant horizontally,1,Numpad1,vowel vertically,2,Numpad4,consonant vertically,3
+4,vertically,S,text,cue_vertically.png,image,consonant vertically,repetition,V,vowel horizontally,0,B,consonant horizontally,1,Numpad1,vowel vertically,2,Numpad4,consonant vertically,3
+4,horizontally,A,text,cue_horizontally.png,image,vowel horizontally,switch,V,vowel horizontally,0,B,consonant horizontally,1,Numpad1,vowel vertically,2,Numpad4,consonant vertically,3
+4,vertically,O,text,cue_vertically.png,image,vowel vertically,switch,V,vowel horizontally,0,B,consonant horizontally,1,Numpad1,vowel vertically,2,Numpad4,consonant vertically,3
+4,horizontally,S,text,cue_horizontally.png,image,consonant horizontally,switch,V,vowel horizontally,0,B,consonant horizontally,1,Numpad1,vowel vertically,2,Numpad4,consonant vertically,3
+4,horizontally,R,text,cue_horizontally.png,image,consonant horizontally,repetition,V,vowel horizontally,0,B,consonant horizontally,1,Numpad1,vowel vertically,2,Numpad4,consonant vertically,3
+4,vertically,A,text,cue_vertically.png,image,vowel vertically,switch,V,vowel horizontally,0,B,consonant horizontally,1,Numpad1,vowel vertically,2,Numpad4,consonant vertically,3
+4,horizontally,O,text,cue_horizontally.png,image,vowel horizontally,switch,V,vowel horizontally,0,B,consonant horizontally,1,Numpad1,vowel vertically,2,Numpad4,consonant vertically,3
+4,vertically,U,text,cue_vertically.png,image,vowel vertically,switch,V,vowel horizontally,0,B,consonant horizontally,1,Numpad1,vowel vertically,2,Numpad4,consonant vertically,3
+4,horizontally,R,text,cue_horizontally.png,image,consonant horizontally,switch,V,vowel horizontally,0,B,consonant horizontally,1,Numpad1,vowel vertically,2,Numpad4,consonant vertically,3
+4,vertically,G,text,cue_vertically.png,image,consonant vertically,switch,V,vowel horizontally,0,B,consonant horizontally,1,Numpad1,vowel vertically,2,Numpad4,consonant vertically,3
+4,vertically,B,text,cue_vertically.png,image,consonant vertically,repetition,V,vowel horizontally,0,B,consonant horizontally,1,Numpad1,vowel vertically,2,Numpad4,consonant vertically,3
