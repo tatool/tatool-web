@@ -70,6 +70,7 @@ function (executableUtils, timerUtils, stimulusServiceFactory, inputServiceFacto
 
             //Full date
             this.d = new Date();
+            this.timezone = this.d.getTimezoneOffset();
 
             //Day of the week (in number) of today
             this.today = this.d.getDay();
@@ -170,6 +171,8 @@ function (executableUtils, timerUtils, stimulusServiceFactory, inputServiceFacto
 
             //Keep a record
             this.trial = {};
+            this.trial.timezone = this.timezone;
+            this.trial.timestamp = Date.now();
             this.trial.today = this.today;
             this.trial.stimulusType = stimulus.stimulusType;
             this.trial.dayofweek = daynum;
