@@ -10,7 +10,7 @@ function (executableUtils, timerUtils, stimulusServiceFactory, inputServiceFacto
 
         // Stimulus counter. One for each module name (3 in total: practice, A & B)
         this.counter = 0;
-        this.ncorrect = 0; // Used only for feedback at the end of practice
+        this.continuepractice = true;
 
         // Randomise which condition starts first (but do it only once)
         var firsttime = false;
@@ -156,6 +156,20 @@ function (executableUtils, timerUtils, stimulusServiceFactory, inputServiceFacto
         };
 
         STEARCweek.prototype.createStimulus = function() {
+            //If the participant seems to have understood the task
+            if(this.name == "stearcpractice") {
+                var levelHandler = dbUtils.getHandler('levelHandler');
+                var currentLevel = dbUtils.getModuleProperty(levelHandler, 'currentLevel');
+                if (currentLevel > 4) {
+                    this.fixationInterval = 0;
+                    this.blankInterval = 0;
+                    this.continuepractice = false;
+                }
+                if (!this.continuepractice) {
+                    executableUtils.stop();
+                }
+            }
+
 
 
             //Get the stimulus
@@ -195,15 +209,10 @@ function (executableUtils, timerUtils, stimulusServiceFactory, inputServiceFacto
             this.trial.givenResponse = response;
             if (this.trial.correctResponse == this.trial.givenResponse) {
                 this.trial.score = 1;
-                dbUtils.setModuleProperty(this, 'ncorrect', ++this.ncorrect); //Used only for practice trial
             } else {
                 this.trial.score = 0;
             }
             dbUtils.saveTrial(this.trial).then(executableUtils.stop);
-        };
-
-        STEARCweek.prototype.stopExecution = function() {
-            executableUtils.stop();
         };
 
         return STEARCweek;
