@@ -164,6 +164,7 @@ function (executableUtils, timerUtils, stimulusServiceFactory, inputServiceFacto
                     this.fixationInterval = 0;
                     this.blankInterval = 0;
                     this.continuepractice = false;
+                    this.timer = 'NULL';
                 }
                 if (!this.continuepractice) {
                     executableUtils.stop();
