@@ -27,9 +27,9 @@ function ($scope, service) {
     }
 
     $scope.inputAction = function(input, timing, event) {
+        service.endTime = service.timer.stop();
         service.inputService.disable();
         service.stimulusService.hide();
-        service.endTime = timing;
         service.processResponse(input.givenResponse);
     };
 
