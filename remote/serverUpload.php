@@ -1,6 +1,8 @@
 <?php
 require("config.php");
 
+use LZCompressor\LZString as LZString;
+
 // respond to preflights
 if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
   // return only the headers and not the content
