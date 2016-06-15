@@ -9,6 +9,12 @@ tatool.controller('tatoolTowerOfFameCtrl', ['$scope', 'service', 'executableUtil
     $scope.radioFlat = '';
     $scope.radioNextEnabled = true;
 
+    // UI strings
+    $scope.floorLabel = service.floorLabel;
+    $scope.apartmentLabel = service.apartmentLabel;
+    $scope.choiceUnknownLabel = service.choiceUnknownLabel;
+    $scope.buttonLabel = service.buttonLabel;
+
     $scope.start = function() {
       service.createStimulus();
 
@@ -61,7 +67,6 @@ tatool.controller('tatoolTowerOfFameCtrl', ['$scope', 'service', 'executableUtil
       service.endTime = executableUtils.getTiming();
       service.stimulusService.hide();
       $scope.radioInputShow = false;
-      console.log('You selected: ' + floor + flat);
 
       processResponse(floor + flat);
     };

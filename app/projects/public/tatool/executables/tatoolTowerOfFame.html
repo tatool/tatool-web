@@ -6,7 +6,7 @@
     <div id="radioInput" ng-show="radioInputShow">
 
     <div>
-      <div class="inputTitle">Stockwerk:</div>
+      <div class="inputTitle">{{floorLabel}}</div>
       <div class="btn-group">
         <label class="btn btn-default btn-lg" ng-model="radioFloor" btn-radio="'1'">1</label>
         <label class="btn btn-default btn-lg" ng-model="radioFloor" btn-radio="'2'">2</label>
@@ -14,27 +14,27 @@
         <label class="btn btn-default btn-lg" ng-model="radioFloor" btn-radio="'4'">4</label>
         <label class="btn btn-default btn-lg" ng-model="radioFloor" btn-radio="'5'">5</label>
         <label class="btn btn-default btn-lg" ng-model="radioFloor" btn-radio="'6'">6</label>
-        <label class="btn btn-default btn-lg" ng-model="radioFloor" btn-radio="'0'">Weiss nicht</label>
+        <label class="btn btn-default btn-lg" ng-model="radioFloor" btn-radio="'0'">{{choiceUnknownLabel}}</label>
       </div>
     </div>
 
     <br>
 
     <div>
-      <div class="inputTitle">Wohnung:</div>
+      <div class="inputTitle">{{apartmentLabel}}</div>
       <div class="btn-group">
         <label class="btn btn-default btn-lg" ng-model="radioFlat" btn-radio="'A'">A</label>
         <label class="btn btn-default btn-lg" ng-model="radioFlat" btn-radio="'B'">B</label>
         <label class="btn btn-default btn-lg" ng-model="radioFlat" btn-radio="'C'">C</label>
         <label class="btn btn-default btn-lg" ng-model="radioFlat" btn-radio="'D'">D</label>
-        <label class="btn btn-default btn-lg" ng-model="radioFlat" btn-radio="'X'">Weiss nicht</label>
+        <label class="btn btn-default btn-lg" ng-model="radioFlat" btn-radio="'X'">{{choiceUnknownLabel}}</label>
       </div>
     </div>
 
     <br>
 
     <div>
-      <button type="button" class="btn btn-primary btn-lg" ng-click="inputAction(radioFloor, radioFlat)" ng-disabled="radioNextEnabled">Weiter</button>
+      <button type="button" class="btn btn-primary btn-lg" ng-click="inputAction(radioFloor, radioFlat)" ng-disabled="radioNextEnabled">{{buttonLabel}}</button>
     </div>
 
     <br>
