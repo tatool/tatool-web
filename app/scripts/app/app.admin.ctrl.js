@@ -353,10 +353,10 @@ angular.module('tatool.app')
                 project.executables = $('#executables').val().replace(/\r?\n/g, '');
 
                 if (!hasValidProjectExecutables(project)) {
-                  alert("The executables are not in proper JSON format. Please correct and try again.");
+                  alert('The executables are not in proper JSON format. Please correct and try again.');
                   return false;
                 } else if (!project.name || project.name === '' || !project.access || project.access === '' || !project.email || project.email === '') {
-                  alert("Invalid project name or access type.");
+                  alert('Invalid project name or access type.');
                   return false;
                 } else {
                   insertProject(project);
@@ -487,7 +487,7 @@ angular.module('tatool.app')
                 if (hasValidProjectExecutables(cloneOfProject)) {
                   updateProject(cloneOfProject);
                 } else {
-                  alert("The executables are not in proper JSON format. Please correct and try again.");
+                  alert('The executables are not in proper JSON format. Please correct and try again.');
                   return false;
                 }
               }
