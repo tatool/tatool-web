@@ -272,13 +272,8 @@ angular.module('tatool.app')
 
         project.description = (project.description) ? project.description : '';
         project.email = (project.email) ? project.email : '';
-        try {
-          project.executables = (project.executables) ? JSON.parse(project.executables) : [];
-        } catch (e) {
-          jsonParse = false;
-        }
 
-        if (uniqueProject && jsonParse) {
+        if (uniqueProject) {
           moduleDataService.addProject(project).then(function() {
             setAlert('success', 'Project ' + project.name + ' has been added.');
             getProjects();
@@ -287,9 +282,6 @@ angular.module('tatool.app')
           });
         } else if (!uniqueProject) {
           setAlert('danger', 'There already exists a project with this name and access type.');
-          $scope.$apply();
-        } else if (!jsonParse) {
-          setAlert('danger', 'The executables are not in proper JSON format.');
           $scope.$apply();
         } else {
           setAlert('danger', 'Unknown error');
@@ -326,7 +318,7 @@ angular.module('tatool.app')
             '</div> ' +
 
           '<div class="form-group"> ' +
-            '<label class="col-md-4 control-label" for="name">Owner</label> ' +
+            '<label class="col-md-4 control-label" for="name">Owner (email)</label> ' +
             '<div class="col-md-6"> ' +
             '<input id="owner" name="owner" type="text" class="form-control input-md" ng-required> ' +
             '</div> ' +
@@ -359,9 +351,13 @@ angular.module('tatool.app')
                 project.email = $('#owner').val();
                 project.description = $('#description').val();
                 project.executables = $('#executables').val().replace(/\r?\n/g, '');
-                if (!project.name || project.name === '' || !project.access || project.access === '' || !project.email || project.email === '') {
-                  setAlert('danger', 'Invalid project name or access type.');
-                  $scope.$apply();
+
+                if (!hasValidProjectExecutables(project)) {
+                  alert("The executables are not in proper JSON format. Please correct and try again.");
+                  return false;
+                } else if (!project.name || project.name === '' || !project.access || project.access === '' || !project.email || project.email === '') {
+                  alert("Invalid project name or access type.");
+                  return false;
                 } else {
                   insertProject(project);
                 }
@@ -416,70 +412,66 @@ angular.module('tatool.app')
       };
 
       function updateProject(project) {
-        var jsonParse = true;
-
-        project.description = (project.description) ? project.description : '';
-        try {
-          project.executables = (project.executables) ? JSON.parse(project.executables) : [];
-        } catch (e) {
-          jsonParse = false;
-        }
-
-        if (jsonParse) {
-          moduleDataService.addProject(project).then(function() {
+        moduleDataService.addProject(project).then(function() {
             setAlert('success', 'Project ' + project.name + ' has been saved.');
             getProjects();
           }, function(err) {
             $log.error(err);
           });
-        } else if (!jsonParse) {
-          setAlert('danger', 'The executables are not in proper JSON format.');
-          $scope.$apply();
-        } else {
-          setAlert('danger', 'Unknown error');
-          $scope.$apply();
+      }
+
+      function hasValidProjectExecutables(project) {
+        var jsonParse = true;
+        try {
+          project.executables = (project.executables) ? JSON.parse(project.executables) : project.executables;
+        } catch (e) {
+          jsonParse = false;
         }
+        return jsonParse;
       }
 
       $scope.editProject = function(project) {
+
+        var cloneOfProject = JSON.parse(JSON.stringify(project));
         $scope.hideAlert();
         var box = bootbox.dialog({
           title: '<b>Edit Project</b>',
-          message: '<div class="row">  ' +
+          message: 
+          '<div class="row">  ' +
             '<div class="col-md-12"> ' +
             '<form class="form-horizontal"> ' +
             '<div class="form-group"> ' +
             '<label class="col-md-4 control-label" for="name">Name</label> ' +
             '<div class="col-md-6"> ' +
-            '<p class="form-control-static"><b>' + project.name + '</b></p>' +
+            '<p class="form-control-static"><b>' + cloneOfProject.name + '</b></p>' +
             '</div> ' +
             '</div> ' +
 
           '<div class="form-group"> ' +
             '<label class="col-md-4 control-label" for="name">Access</label> ' +
             '<div class="col-md-6"> ' +
-            '<p class="form-control-static"><b>' + project.access + '</b></p>' +
+            '<p class="form-control-static"><b>' + cloneOfProject.access + '</b></p>' +
             '</div> ' +
             '</div> ' +
 
           '<div class="form-group"> ' +
-            '<label class="col-md-4 control-label" for="name">Owner</label> ' +
+            '<label class="col-md-4 control-label" for="name">Owner (email)</label> ' +
             '<div class="col-md-6"> ' +
-            '<p class="form-control-static"><b>' + project.email + '</b></p>' +
+            '<p class="form-control-static"><b>' + cloneOfProject.email + '</b></p>' +
             '</div> ' +
             '</div> ' +
 
           '<div class="form-group"> ' +
             '<label class="col-md-4 control-label" for="name">Description</label> ' +
             '<div class="col-md-6"> ' +
-            '<input id="description" name="description" type="text" class="form-control input-md" value="' + project.description + '"> ' +
+            '<input id="description" name="description" type="text" class="form-control input-md" value="' + cloneOfProject.description + '"> ' +
             '</div> ' +
             '</div> ' +
 
           '<div class="form-group"> ' +
             '<label class="col-md-4 control-label" for="name">Executables (JSON)</label> ' +
             '<div class="col-md-8"> ' +
-            '<textarea id="executables" name="executables" class="form-control input-sm" rows="10">' + JSON.stringify(project.executables) + '</textarea>' +
+            '<textarea id="executables" name="executables" class="form-control input-sm" rows="10">' + JSON.stringify(cloneOfProject.executables) + '</textarea>' +
             '<small><b>Format:</b> [ { "customType" : "executable1", "description": "Small executable description", "customProperties": [ { "propertyName": "booleanProperty", "propertyType": "Boolean" } ] }, <br>{ "customType" : "executable2" } ]</small>' +
             '</div> ' +
             '</div> ' +
@@ -490,9 +482,14 @@ angular.module('tatool.app')
               label: 'Ok',
               className: 'btn-default',
               callback: function() {
-                project.description = $('#description').val();
-                project.executables = $('#executables').val().replace(/\r?\n/g, '');
-                updateProject(project);
+                cloneOfProject.description = $('#description').val();
+                cloneOfProject.executables = $('#executables').val().replace(/\r?\n/g, '');
+                if (hasValidProjectExecutables(cloneOfProject)) {
+                  updateProject(cloneOfProject);
+                } else {
+                  alert("The executables are not in proper JSON format. Please correct and try again.");
+                  return false;
+                }
               }
             },
             cancel: {
