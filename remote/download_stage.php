@@ -13,7 +13,7 @@ $moduleId = $_GET['moduleId'];
 $userCode = $_GET['userCode'];
 $niceFileName = $_GET['fileName'] . '.zip';
 
-if ((!isset($moduleId) || is_null($moduleId)) || (!isset($userCode) || is_null($userCode)) || (!isset($niceFileName) || is_null($niceFileName)) ) {
+if ((!isset($moduleId) || is_null($moduleId)) || (!isset($niceFileName) || is_null($niceFileName)) ) {
   echo "error";
   header('HTTP/1.1 500 Internal Server Error');
   echo json_decode("{'message': 'Missing data!'}");

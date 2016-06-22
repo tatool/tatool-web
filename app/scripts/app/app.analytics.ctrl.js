@@ -124,7 +124,6 @@ angular.module('tatool.app')
 
     $scope.downloadAllData = function(moduleId) {
       moduleDataService.getModuleAnalyticsAllUserData(moduleId).then( function(data) {
-        console.log(data);
         window.open('/data/user/all/' + data);
       }, function(error) {
         $log.error(error);
