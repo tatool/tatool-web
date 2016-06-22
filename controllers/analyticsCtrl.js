@@ -6,6 +6,7 @@ var uuid = require('node-uuid');
 var fs = require('fs');
 var request = require('request');
 var rmdir = require('rimraf');
+var archiver = require('archiver');
 
 exports.initAnalytics = function(module) {
   var deferred = Q.defer();
@@ -246,6 +247,62 @@ var deleteAnalyticsData = function(req, res) {
   }
 };
 
+exports.getAllUserDataDownloadToken = function(req, res) {
+  Analytics.findOne({ email: { $in: [req.user.email] }, moduleId: req.params.moduleId }, function(err, module) {
+    if (err) {
+      res.status(500).send(err);
+    } else {
+      if (module) {
+        var filename = module.moduleId + '.zip'; 
+        var niceFileName = ((module.moduleLabel) ? module.moduleLabel : module.moduleId);
+        var token = uuid.v4();
+        var file = '';
+
+        if (req.app.get('remote_url')) {
+          file = req.app.get('remote_url') + req.app.get('remote_download') + '?moduleId=' + req.params.moduleId + '&fileName=' + niceFileName;
+        } else {
+          file = 'uploads/user/' + req.params.moduleId + '/' + filename;
+        }
+
+        var fileToken = new DownloadToken();
+        fileToken.token = token;
+        fileToken.file = file;
+        fileToken.fileName = niceFileName + '.zip';
+        fileToken.moduleId = req.params.moduleId;
+        fileToken.created_at = Date.now();
+        fileToken.created_by = req.user.email;
+
+        if (req.app.get('remote_url')) {
+          fileToken.save(function(err, data) {
+            if (err) {
+              res.status(500).json({message: 'Download Token not saved.'});
+            } else {
+              res.json(token);
+            }
+          });
+        } else {
+          fs.exists('uploads/user/' + req.params.moduleId + '/', function(exists) {
+            if (exists) {
+              fileToken.save(function(err, data) {
+                if (err) {
+                  res.status(500).json({message: 'Download Token not saved.'});
+                } else {
+                  res.json(token);
+                }
+              });
+            } else {
+              res.status(500).json({ message: 'No data available' });
+            }
+          });
+        }
+
+      } else {
+        res.status(500).json({message: 'Module not found.'});
+      }
+    }
+  });
+};
+
 exports.getUserDataDownloadToken = function(req, res) {
   Analytics.findOne({ email: { $in: [req.user.email] }, moduleId: req.params.moduleId }, function(err, module) {
     if (err) {
@@ -267,6 +324,7 @@ exports.getUserDataDownloadToken = function(req, res) {
         fileToken.token = token;
         fileToken.file = file;
         fileToken.fileName = niceFileName + '.zip';
+        fileToken.moduleId = req.params.moduleId;
         fileToken.created_at = Date.now();
         fileToken.created_by = req.user.email;
 
@@ -299,6 +357,50 @@ exports.getUserDataDownloadToken = function(req, res) {
       }
     }
   });
+};
+
+exports.getAllUserData = function(req, res) {
+
+  if (req.app.get('remote_url')) {
+    DownloadToken.findOneAndRemove({ token: req.params.token }, function(err, data) {
+      if (err) {
+        res.status(500).json({ message: 'Download failed' });
+      } else {
+        if (data) {
+          var options = {
+            uri: data.file,
+            method: 'GET'
+          };
+
+          request(options)
+            .auth(req.app.get('resource_user'), req.app.get('resource_pw'), true)
+              .pipe(res);
+        } else {
+          res.status(500).json({ message: 'Download failed' });
+        }
+      }
+    });
+  } else {
+    DownloadToken.findOneAndRemove({ token: req.params.token }, function(err, data) {
+      if (err) {
+        res.status(500).json({ message: 'Download failed' });
+      } else {
+        if (data) {
+          var output = fs.createWriteStream(data.file, {'flags': 'w'});
+          var zip = archiver('zip');
+          zip.pipe(output);
+          zip.bulk([{src: ['uploads/user/' + data.moduleId + '/' + data.moduleId + '_*.zip'], dest: '', expand: true, flatten: true}]).finalize();
+
+          output.on('close', function() {
+            res.download(data.file, data.fileName);
+          });
+
+        } else {
+          res.status(500).json({ message: 'Download failed' });
+        }
+      }
+    });
+  }
 };
 
 exports.getUserData = function(req, res) {

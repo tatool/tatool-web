@@ -377,6 +377,22 @@ angular.module('tatool')
       return deferred.promise;
     };
 
+    // get all module analytics data
+    data.getModuleAnalyticsAllUserData = function(moduleId) {
+      var deferred = $q.defer();
+
+      $http.get('/api/analytics/data/modules/' + moduleId)
+        .success(function (data) {
+          deferred.resolve(data);
+        })
+        .error(function (error) {
+          $log.error(error);
+          deferred.reject(error.message);
+        });
+
+      return deferred.promise;
+    };
+
     return data;
 
   }]);

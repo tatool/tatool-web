@@ -110,6 +110,7 @@ app.get('/developer/resources/:projectAccess/:projectName/:resourceType/:resourc
 router.get('/analytics/modules', analyticsCtrl.getAll);
 router.get('/analytics/modules/:moduleId', analyticsCtrl.get);
 router.delete('/analytics/modules/:moduleId', analyticsCtrl.remove);
+router.get('/analytics/data/modules/:moduleId', analyticsCtrl.getAllUserDataDownloadToken);
 router.get('/analytics/data/modules/:moduleId/:userCode', analyticsCtrl.getUserDataDownloadToken);
 
 // Admin
@@ -149,6 +150,7 @@ app.get('/user/resetverify/:token', userController.verifyResetToken);
 app.post('/user/reset/:token', userController.updatePassword);
 app.post('/user/captcha', userController.verifyCaptcha);
 app.post('/user/devaccount', userController.signupDev);
+app.get('/data/user/all/:token', analyticsCtrl.getAllUserData);
 app.get('/data/user/:token', analyticsCtrl.getUserData);
 
 // open API for public module
