@@ -133,5 +133,17 @@ angular.module('tatool.module')
       return session.getMaxTrialId();
     };
 
+    moduleService.getSession = function(sessionId) {
+      return module.getSession(sessionId);
+    };
+
+    moduleService.setSessionToken = function(token) {
+      session.setSessionToken(token);
+    };
+
+     moduleService.getSessionToken = function() {
+      return session.getSessionToken();
+    };
+
     return moduleService;
   }]);

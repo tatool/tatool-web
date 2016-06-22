@@ -83,6 +83,10 @@ angular.module('tatool.module')
       Resource Loading Helper functions
     -------------------------------- */
 
+    utils.getSessionToken = function() {
+      return token;
+    };
+
     utils.getResourcePath = function(res) {
       return getResourcePath(res);
     };

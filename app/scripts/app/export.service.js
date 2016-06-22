@@ -4,7 +4,8 @@
 /* global LZString */
 
 angular.module('tatool.app')
-  .factory('exportService', ['$log', '$q', '$http', 'moduleDataService', 'trialDataService', 'cfgApp', 'userService', function ($log, $q, $http, moduleDataService, trialDataService, cfgApp, userService) {
+  .factory('exportService', ['$log', '$q', '$http', 'moduleDataService', 'trialDataService', 'cfgApp', 'userService', 'publicService', 
+    function ($log, $q, $http, moduleDataService, trialDataService, cfgApp, userService, publicService) {
     $log.debug('ExportService: initialized');
 
     var exporter = {};
@@ -87,7 +88,7 @@ angular.module('tatool.app')
     function convertToCsv(allTrials, moduleProperties, sessionProperties, moduleLabel) {
       var output = '';
       var trials = allTrials;
-      var header = ['userCode', 'moduleId', 'sessionId', 'trialId', 'executableId'];
+      var header = ['userCode', 'extId', 'moduleId', 'sessionId', 'sessionToken', 'trialId', 'executableId'];
       var prefix = '';
 
       // add module properties header
@@ -116,9 +117,10 @@ angular.module('tatool.app')
         var currentTrial = trials[i];
         prefix = currentTrial.executableId;
 
-        // create new line and add userCode as static first element
+        // create new line and add userCode and extId as static first elements
         var line = [];
         line.push(userService.getUserCode());
+        line.push(publicService.getExtId());
 
         // add module properties
         for (var mpi = 0; mpi < moduleProperties.length; mpi++){

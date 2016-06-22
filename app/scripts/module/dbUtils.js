@@ -43,6 +43,7 @@ angular.module('tatool.module')
     utils.saveTrial = function(trial, showStatusFeedback) {
       trial.moduleId = moduleService.getModuleId();
       trial.sessionId = moduleService.getMaxSessionId();
+      trial.sessionToken = moduleService.getSessionToken();
       trial.trialId = moduleService.getNextTrialId();
       var currentExecutable = contextService.getProperty('currentExecutable');
       trial.executableId = (currentExecutable.name) ? currentExecutable.name : currentExecutable.customType;

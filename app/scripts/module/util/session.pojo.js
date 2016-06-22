@@ -5,6 +5,7 @@ var Session = function(sessionId, sessionStartTime) {
   this.sessionId = sessionId;
   this.startTime = sessionStartTime;
   this.endTime = null;
+  this.sessionToken = null;
   this.sessionComplete = false;
   this.maxTrialId = 0;
   this.sessionProperties = {};
@@ -13,6 +14,16 @@ var Session = function(sessionId, sessionStartTime) {
 // set the session end time
 Session.prototype.setSessionEndTime = function(sessionEndTime) {
   this.endTime = sessionEndTime;
+};
+
+// set the session token
+Session.prototype.setSessionToken = function(token) {
+  this.sessionToken = token;
+};
+
+// get the sessionToken
+Session.prototype.getSessionToken = function() {
+  return this.sessionToken;
 };
 
 // mark the session as complete

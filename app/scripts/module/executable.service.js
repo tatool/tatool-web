@@ -42,6 +42,7 @@ angular.module('tatool.module')
           moduleProject.token = data.token;
           moduleProject.path = '/' + mode + '/resources/' +  moduleProject.access + '/' + moduleProject.name + '/';
           executableUtils.init(runningExecutor, data.token, mode);
+          moduleService.setSessionToken(data.token);
 
           initializeTatoolResources().then(function() {
             deferred.resolve();
