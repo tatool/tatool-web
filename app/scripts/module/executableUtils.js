@@ -226,7 +226,6 @@ angular.module('tatool.module')
               images.push(stimulus[key.replace('Type', '')]);
             }
           } else if (key.indexOf('stimulusValue') >= 0 && imagefile.test(value)) {
-            console.log('test');
             if (images.indexOf(stimulus[key]) === -1) {
               images.push(stimulus[key]);
             }
