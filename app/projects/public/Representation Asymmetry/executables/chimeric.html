@@ -1,0 +1,14 @@
+<tatool>
+    <tatool-grid service="gridService"
+        id="centeredExecutable"
+        gridSpacing="15"
+        cellHeight = "250"
+        cellWidth = "180"
+        cellClass="chimericCell"
+        gridClick="userClick(cell, timing, $event)"
+        allowDrag="no"
+        allowDrop="no">
+    </tatool-grid>
+
+  <tatool-input id="bottomExecutable" service="inputService" userInput="inputAction(input, timing, event)"></tatool-input>
+</tatool>
