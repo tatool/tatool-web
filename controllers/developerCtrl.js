@@ -72,6 +72,7 @@ var update = function(req, res, module) {
       module.moduleIcon = req.body.moduleIcon;
       module.moduleDescription = req.body.moduleDescription;
       module.moduleMaxSessions = req.body.moduleMaxSessions;
+      module.exportDelimiter = req.body.exportDelimiter;
       module.markModified('moduleDefinition');
 
       // update runtime information

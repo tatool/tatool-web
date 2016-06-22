@@ -53,6 +53,7 @@ var update = function(entry, module, res) {
   entry.moduleIcon = module.moduleIcon;
   entry.moduleDescription = module.moduleDescription;
   entry.moduleMaxSessions = module.moduleMaxSessions;
+  entry.exportDelimiter = module.exportDelimiter;
   entry.markModified('moduleDefinition');
 
   entry.save(function(err, data) {

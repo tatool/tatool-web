@@ -66,7 +66,7 @@
   </div>
   <div class="form-group">
     <label for="label" class="col-sm-3 control-label">Exporter
-      <a class="info" tooltip="Module trial data export options." tooltip-placement="right"><i class="fa fa-info-circle"></i></a>
+      <a class="info" tooltip="Choose all data exporters you want to enable." tooltip-placement="right"><i class="fa fa-info-circle"></i></a>
     </label>
     <div class="col-sm-9">
       <div class="form-group col-sm-12" ng-repeat="exporter in module.moduleDefinition.export | filter: filterValidExporter ">
@@ -87,6 +87,24 @@
       </div>
     </div>
   </div>
+
+  <div class="form-group">
+    <label for="label" class="col-sm-3 control-label">Delimiter
+      <a class="info" tooltip="Choose the CSV delimiter to use for all future data exports." tooltip-placement="right"><i class="fa fa-info-circle"></i></a>
+    </label>
+    <div class="col-sm-9">
+      <label class="radio-inline radio-inline-up">
+        <input type="radio" ng-model="module.exportDelimiter" name="exportDelimiter" value=";"> Semicolon
+      </label>
+      <label class="radio-inline radio-inline-up">
+        <input type="radio" ng-model="module.exportDelimiter" name="exportDelimiter" value=","> Comma
+      </label>
+      <label class="radio-inline radio-inline-up">
+        <input type="radio" ng-model="module.exportDelimiter" name="exportDelimiter" value="|"> Pipe
+      </label>
+    </div>
+  </div>
+
 </form>
 
 </div>

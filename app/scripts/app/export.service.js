@@ -85,7 +85,7 @@ angular.module('tatool.app')
       return sessionProperties;
     };
 
-    function convertToCsv(allTrials, moduleProperties, sessionProperties, moduleLabel) {
+    function convertToCsv(allTrials, moduleProperties, sessionProperties, moduleLabel, delimiter) {
       var output = '';
       var trials = allTrials;
       var header = ['userCode', 'extId', 'moduleId', 'sessionId', 'sessionToken', 'trialId', 'executableId'];
@@ -163,8 +163,10 @@ angular.module('tatool.app')
         // transform array to csv
         for (var j = 0; j < line.length; j++) {
           if (text !== '') {
-            text += cfgApp.CSV_DELIMITER;
+            text += delimiter;
           }
+
+          line[j] = (line[j] !== undefined && line[j].toString().indexOf(delimiter) > -1) ? '"' + line[j] + '"' : line[j];
           text += (line[j] !== undefined) ? line[j] : '';
         }
 
@@ -180,7 +182,7 @@ angular.module('tatool.app')
       // add header line
       for (var k = 0; k < header.length; k++) {
         if (headerLine !== '') {
-          headerLine += cfgApp.CSV_DELIMITER;
+          headerLine += delimiter;
         }
         headerLine += header[k];
       }
@@ -207,8 +209,9 @@ angular.module('tatool.app')
           // prepare module properties
           var moduleProperties = getModuleProperties(response);
           var sessionProperties = getSessionProperties(response);
+          var delimiter = (response.exportDelimiter) ? response.exportDelimiter : cfgApp.CSV_DELIMITER;
 
-          var csv = convertToCsv(trials, moduleProperties, sessionProperties, response.moduleLabel);
+          var csv = convertToCsv(trials, moduleProperties, sessionProperties, response.moduleLabel, delimiter);
           deferred.resolve(csv);
         }, function(error) {
           deferred.reject(error);

@@ -110,6 +110,7 @@ var update = function(req, res, userModule) {
         userModule.moduleIcon = module.moduleIcon;
         userModule.moduleDescription = module.moduleDescription;
         userModule.moduleMaxSessions = module.moduleMaxSessions;
+        userModule.exportDelimiter = module.exportDelimiter;
         userModule.markModified('moduleDefinition');
 
         userModule.save(function(err, data) {

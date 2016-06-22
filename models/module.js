@@ -42,6 +42,10 @@ var Module = new Schema({
       type: Number,
       required: false
     },
+    exportDelimiter: { // export delimiter for module
+      type: String,
+      required: false
+    },
     invites: {          // defines details for private repository module (invite, users)
       type: Schema.Types.Mixed,
       required: false    
