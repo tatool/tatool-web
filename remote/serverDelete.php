@@ -10,6 +10,7 @@ header("Content-Type: application/json");
 
 // Process Delete
 $moduleId = filter_var($_GET['moduleId'], FILTER_SANITIZE_STRING);
+$userCode = $_GET['userCode'];
 
 if ((!isset($moduleId) || is_null($moduleId))) {
   header('HTTP/1.1 500 Internal Server Error');
@@ -18,17 +19,30 @@ if ((!isset($moduleId) || is_null($moduleId))) {
 }
 
 $path = $tatoolwebpath . $moduleId;
-
-// check if path exists
-if (file_exists($path)) {
-  deleteDir($path);
-  exit;
+  
+if (!isset($userCode) || is_null($userCode)) {
+  // check if path exists
+  if (file_exists($path)) {
+    deleteDir($path);
+    exit;
+  } else {
+    echo json_decode("{'message': 'No data to remove'}");
+    exit;
+  }
 } else {
-  echo json_decode("{'message': 'No data to remove'}");
+  $filesCSV = glob($path .  "/*_" . $userCode . '_*.csv');
+  foreach ($filesCSV as $file) {
+    @unlink($file);
+  }
+  $filesZIP = glob($path .  "/" . $moduleId . "_" . $userCode . '.zip');
+  foreach ($filesZIP as $file) {
+    @unlink($file);
+  }
   exit;
 }
 
 function deleteDir($path) {
+
   if (empty($path)) { 
     return false;
   }
