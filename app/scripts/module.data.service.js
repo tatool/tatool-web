@@ -361,6 +361,22 @@ angular.module('tatool')
       return deferred.promise;
     };
 
+    // delete user analytics data
+    data.deleteModuleUserAnalytics = function(user, module) {
+      var deferred = $q.defer();
+
+      $http.delete('/api/analytics/modules/' + module.moduleId + '/' + user.code)
+        .success(function (data) {
+          deferred.resolve(data);
+        })
+        .error(function (error) {
+          $log.error(error);
+          deferred.reject(error.message);
+        });
+
+      return deferred.promise;
+    };
+
     // get user analytics data
     data.getModuleAnalyticsUserData = function(user, module) {
       var deferred = $q.defer();

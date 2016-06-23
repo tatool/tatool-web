@@ -3,7 +3,7 @@
 /* global Date */
 
 angular.module('tatool.app')
-  .controller('AnalyticsCtrl', [ '$scope', '$sce', '$modal', '$log', 'moduleDataService', 'spinnerService', function ($scope, $sce, $modal, $log, moduleDataService, spinnerService) {
+  .controller('AnalyticsCtrl', [ '$scope', '$sce', '$modal', '$log', '$timeout', 'moduleDataService', 'spinnerService', function ($scope, $sce, $modal, $log, $timeout, moduleDataService, spinnerService) {
 
     $scope.currentModule = null;
 
@@ -81,6 +81,43 @@ angular.module('tatool.app')
       bootbox.dialog({
           message: 'Are you sure you want to delete all analytics data for <b>\'' + $scope.currentModule.moduleName + '\'</b>?',
           title: '<b>Delete Analytics Data</b>',
+          buttons: {
+            ok: {
+              label: 'OK',
+              className: 'btn-default',
+              callback: runDelete
+            },
+            cancel: {
+              label: 'Cancel',
+              className: 'btn-default'
+            }
+          }
+        });
+    };
+
+    $scope.deleteUserData = function(user, module) {
+      function runDelete() {
+        startSpinner('Deleting data...');
+        moduleDataService.deleteModuleUserAnalytics(user, module).then( function() {
+          setAlert('info', 'Analytics data for user ' + user.code + ' has been deleted.');
+
+          moduleDataService.getModuleAnalytics(module.moduleId).then( function(data) {
+            $scope.currentModule = data;
+          }, function(error) {
+            $log.error(error);
+            setAlert('danger', error);
+          });
+
+          stopSpinner();
+        }, function(error) {
+          $log.error(error);
+          stopSpinner();
+        });
+      }
+      
+      bootbox.dialog({
+          message: 'Are you sure you want to delete all analytics data for user <b>\'' + user.code + '\'</b>?',
+          title: '<b>Delete User Analytics Data</b>',
           buttons: {
             ok: {
               label: 'OK',

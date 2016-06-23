@@ -89,6 +89,7 @@
           <td align="center"> 
             <a ng-click="showDetails(user)" class="btn btn-tatool-off" tooltip="Show user details" tooltip-placement="top" tooltip-animation="false"><i class="fa fa-search-plus"></i></a>
             <a ng-click="downloadData(user, currentModule)" class="btn btn-tatool-off" tooltip="Download user data for this Module. Download will open a Pop-up window." tooltip-placement="top" tooltip-animation="false"><i class="fa fa-download"></i></a>
+            <a ng-click="deleteUserData(user, currentModule)" class="btn btn-tatool-off" tooltip="Delete all uploaded user data." tooltip-placement="top" tooltip-animation="false"><i class="fa fa-trash-o"></i></a>
           </td>
         </tr>
         <tr ng-if="currentModule.userData.length === 0">

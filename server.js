@@ -110,6 +110,7 @@ app.get('/developer/resources/:projectAccess/:projectName/:resourceType/:resourc
 router.get('/analytics/modules', analyticsCtrl.getAll);
 router.get('/analytics/modules/:moduleId', analyticsCtrl.get);
 router.delete('/analytics/modules/:moduleId', analyticsCtrl.remove);
+router.delete('/analytics/modules/:moduleId/:userCode', analyticsCtrl.removeUser);
 router.get('/analytics/data/modules/:moduleId', analyticsCtrl.getAllUserDataDownloadToken);
 router.get('/analytics/data/modules/:moduleId/:userCode', analyticsCtrl.getUserDataDownloadToken);
 

@@ -7,6 +7,7 @@ var fs = require('fs');
 var request = require('request');
 var rmdir = require('rimraf');
 var archiver = require('archiver');
+var glob = require('glob');
 
 exports.initAnalytics = function(module) {
   var deferred = Q.defer();
@@ -222,8 +223,50 @@ exports.remove = function(req, res) {
   });
 };
 
-var deleteAnalyticsData = function(req, res) {
+exports.removeUser = function(req, res) {
+  Analytics.findOne({ email: { $in: [req.user.email] }, moduleId: req.params.moduleId }, function(err, module) {
+    if (err) {
+      res.status(500).send(err);
+    } else {
+      if (module) {
+        
+        var exists = false;
+        for (var i = 0; i < module.userData.length; i++) {
+          if (req.params.userCode === module.userData[i].code.toString()) {
+            exists = true;
+            break;
+          }
+        }
 
+        if (exists) {
+          module.userData.splice(i, 1);
+          module.save(function(err, data) {
+            if (err) {
+              res.status(500).json({message: 'Error saving analytics data.'});
+            } else {
+              deleteAnalyticsData(req, res);
+            }
+          });
+        } else {
+          res.json();
+        }
+
+      } else {
+        res.status(500).json({message: 'Module not found.'});
+      }
+    }
+  });
+};
+
+var deleteAnalyticsData = function(req, res) {
+  if (req.params.userCode) {
+    deleteUserAnalyticsData(req, res);
+  } else {
+    deleteAllAnalyticsData(req, res);
+  }
+};
+
+var deleteAllAnalyticsData = function(req, res) {
   var moduleId = req.params.moduleId.replace(/\//g, '');
 
   if (req.app.get('remote_url')) {
@@ -246,6 +289,50 @@ var deleteAnalyticsData = function(req, res) {
     });
   }
 };
+
+var deleteUserAnalyticsData = function(req, res) {
+  var moduleId = req.params.moduleId.replace(/\//g, '');
+  var userCode = req.params.userCode.replace(/\//g, '');
+
+  if (req.app.get('remote_url')) {
+    var options = {
+      uri: req.app.get('remote_url') + req.app.get('remote_delete') + '?moduleId=' + moduleId + '&userCode=' + userCode,
+      method: 'GET'
+    };
+    request(options)
+      .auth(req.app.get('resource_user'), req.app.get('resource_pw'), true)
+        .pipe(res);
+
+  } else {
+    var analyticsPath = 'uploads/user/' + moduleId + '/';
+
+    glob(analyticsPath + '*_' + userCode + "_*.csv", function (err, files) { 
+      deleteFiles(files, function (data) {
+        glob(analyticsPath + '*_' + userCode + ".zip", function (err, files) { 
+          deleteFiles(files, function (data) {
+            res.json();
+          });
+        });
+      });
+    });
+  }
+};
+
+function deleteFiles(files, callback){
+  var i = files.length;
+  files.forEach(function(file){
+    fs.unlink(file, function(err) {
+      i--;
+      if (err) {
+        callback(err);
+        return;
+      } else if (i <= 0) {
+        callback(null);
+      }
+    });
+  });
+  callback(null);
+}
 
 exports.getAllUserDataDownloadToken = function(req, res) {
   Analytics.findOne({ email: { $in: [req.user.email] }, moduleId: req.params.moduleId }, function(err, module) {
