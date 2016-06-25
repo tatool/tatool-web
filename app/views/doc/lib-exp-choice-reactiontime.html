@@ -1,6 +1,7 @@
-<h2>Stroop</h2>
+<p><a ui-sref="doc({page: 'lib-exp.html'})">Experimental Tasks</a></p>
+<h2>Choice Reaction Time</h2>
 
-<p>In the Stroop paradigm, participants have to suppress a dominant response. For example, in the Colour-Stroop (see available stimuli files below which is modeled after the classic <a href="http://en.wikipedia.org/wiki/Stroop_effect" target="_blank">Stroop-Test</a>) participants have to resist the dominant tendency to read a word instead of naming its print colour. Stimuli can be congruent (i.e., the colour matches the meaning of the word, for example the word 'red' is printed in red), incongruent (i.e.,the colour doesn't match the meaning of the word, for example the word 'blue' is printed in red), or neutral (i.e., the printed word is not a colour word at all, for example a string of '#' is printed in red).</p>
+<p>In the Choice Reaction Time paradigm, participants have to respond to a stimulus as quickly and as accurately as possible. Typically, stimuli have to be classified into two categories (e.g., decide whether a digit is odd or even, see Parity Task in the available stimuli files below). Tatool's implementation allows you to use 1 to <i>n</i> response options.</p>
 
 <ul id="docPageNav">
   <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('executable')">Executable</a></li>
@@ -13,7 +14,7 @@
 
 <h3 id="executable">Executable<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
 
-<p>Use the following settings in the Module Editor for this type of task:</p>
+<p>Use the following settings in the Module Editor for this type of task: </p>
 
 <table class="table table-condensed table-bordered">
   <tbody>
@@ -113,11 +114,18 @@
   </thead>
   <tbody>
     <tr>
-	  <td class="cellB">Colour-Stroop</td>
+	  <td class="cellB">Parity</td>
       <td>tatool-stimuli</td>
       <td>stimuli</td>
-      <td><a href="https://raw.githubusercontent.com/tatool/tatool-web/master/app/projects/public/tatool-stimuli/stimuli/choice-stroop-colors.csv" target="_blank">choice-stroop-colors.csv</a></td>
-      <td>Use red, green, blue text stimuli to display congruent, incongruent, and neutral stimuli.</td>
+      <td><a href="https://raw.githubusercontent.com/tatool/tatool-web/master/app/projects/public/tatool-stimuli/stimuli/choice-parity.csv" target="_blank">choice-parity.csv</a></td>
+      <td>Uses digits 1,2,3,4,6,7,8,9 as stimuli and asks for parity (odd/even).</td>
+    </tr>
+    <tr>
+	  <td class="cellB">Magnitude</td>
+      <td>tatool-stimuli</td>
+      <td>stimuli</td>
+      <td><a href="https://raw.githubusercontent.com/tatool/tatool-web/master/app/projects/public/tatool-stimuli/stimuli/choice-magnitude.csv" target="_blank">choice-magnitude.csv</a></td>
+      <td>Uses digits 1,2,3,4,6,7,8,9 as stimuli and asks whether they're less than or greater than 5.</td>
     </tr>
   </tbody>
 </table>

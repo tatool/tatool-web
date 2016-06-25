@@ -1,6 +1,8 @@
-<h2>Complex Span</h2>
+<p><a ui-sref="doc({page: 'lib-exp.html'})">Experimental Tasks</a></p>
+<h2>Brown-Peterson</h2>
 
-<p>In the Complex Span paradigm, participants have to switch between memorising stimuli, and responding to a choice-reaction time task. After a series of such switches, they're asked to recall the stimuli memorised. In Tatool, this is implemented as Dual Element composed of the <a ui-sref="doc({page: 'lib-memory-span.html'})">Memory Span</a> and the <a ui-sref="doc({page: 'lib-choice-reactiontime.html'})">Choice Reaction Time</a> paradigms.</p>
+
+<p>In the Brown-Peterson paradigm, participants have to memorise lists of stimuli. During a delay period, participants typically have to respond to several trials of a choice-reaction time task, before they're asked to recall the stimuli previously memorised. In Tatool, this is implemented as Dual Element composed of the <a ui-sref="doc({page: 'lib-exp-memory-span.html'})">Memory Span</a> and the <a ui-sref="doc({page: 'lib-exp-choice-reactiontime.html'})">Choice Reaction Time</a> paradigms.</p>
 
 <ul id="docPageNav">
   <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('element')">Element</a></li>
@@ -14,7 +16,7 @@
 
 <h3 id="element">Element<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
 
-<p>Use a <a ui-sref="doc({page: 'ref-elements.html'})">Dual Element</a> as the parent element in order to create the Complex Span paradigm.</p>
+<p>Use a <a ui-sref="doc({page: 'ref-elements.html'})">Dual Element</a> as the parent element in order to create the Brown-Peterson paradigm.</p>
 
 <hr class="hr-red">
 
@@ -63,18 +65,18 @@
 
 <p>The following Properties can be provided in the Module Editor to change the behaviour of the task:</p>
 
-<p><a ui-sref="doc({page: 'lib-memory-span.html'})">Memory Span Task</a><br>
-Note that you have to set the Property <code>suspendAfterEachItem</code> to <code>true</code>.</p>
+<p><a ui-sref="doc({page: 'lib-exp-memory-span.html'})">Memory Span Task</a><br>
+Note that you have to set the Property <code>suspendAfterEachItem</code> to <code>false</code>.</p>
 
-<p><a ui-sref="doc({page: 'lib-choice-reactiontime.html'})">Choice Reaction Time Task</a></p>
+<p><a ui-sref="doc({page: 'lib-exp-choice-reactiontime.html'})">Choice Reaction Time Task</a></p>
 
 <hr class="hr-red">
 
 <h3 id="stimuli">Stimuli File<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
 
-<p><a ui-sref="doc({page: 'lib-memory-span.html'})">Memory Span Task</a></p>
+<p><a ui-sref="doc({page: 'lib-exp-memory-span.html'})">Memory Span Task</a></p>
 
-<p><a ui-sref="doc({page: 'lib-choice-reactiontime.html'})">Choice Reaction Time Task</a></p>
+<p><a ui-sref="doc({page: 'lib-exp-choice-reactiontime.html'})">Choice Reaction Time Task</a></p>
 
 <hr class="hr-red">
 

@@ -1,6 +1,7 @@
-<h2>Object-Location Memory</h2>
+<p><a ui-sref="doc({page: 'lib-exp.html'})">Experimental Tasks</a></p>
+<h2>Corsi Block</h2>
 
-<p>In the Object-Location Memory paradigm, participants are asked to memorise stimuli that are presented sequentially at different locations on the screen. Immediately afterward, participants are asked to drag and drop the stimuli to the positions they were previously presented at.</p>
+<p>In the Corsi Block paradigm, participants have to memorise sequentially highlighted positions in a 3x3 grid and then recall them in correct serial order by selecting them by mouse click.</p>
 
 <ul id="docPageNav">
   <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('executable')">Executable</a></li>
@@ -13,7 +14,7 @@
 
 <h3 id="executable">Executable<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
 
-<p>Use the following settings in the Module Editor for this type of task: </p>
+<p>Use the following settings in the Module Editor for this type of task:</p>
 
 <table class="table table-condensed table-bordered">
   <tbody>
@@ -23,10 +24,11 @@
     </tr>
     <tr>
       <td class="cellB">Executable Type</td>
-      <td>tatoolObjectLocation</td>
+      <td>tatoolCorsiBlock</td>
     </tr>
   </tbody>
 </table>
+
 
 <hr class="hr-red">
 
@@ -57,28 +59,21 @@
       <td>Path</td>
       <td>-</td>
       <td class="cellB">Yes</td>
-      <td>A stimuli path where to load any resources from (stimuli images, input key images.)</td>
+      <td>A stimuli path where to load any resources from (stimuli images, input key images).</td>
     </tr>
     <tr>
       <td class="cellB">displayDuration</td>
       <td>String</td>
-      <td>2000</td>
+      <td>1000</td>
       <td>No</td>
-      <td>Display duration for each memorandum.</td>
+      <td>Timer duration in ms to display a single block.</td>
     </tr>
     <tr>
       <td class="cellB">intervalDuration</td>
       <td>String</td>
       <td>400</td>
       <td>No</td>
-      <td>Interval duration between memoranda.</td>
-    </tr>
-    <tr>
-      <td class="cellB">feedbackDuration</td>
-      <td>String</td>
-      <td>3000</td>
-      <td>No</td>
-      <td>Duration of feedback presentation at the end of a trial.</td>
+      <td>Timer duration in ms to wait between displaying the next block.</td>
     </tr>
     <tr>
       <td class="cellB">randomisation</td>
@@ -86,7 +81,7 @@
       <td>(none)</td>
       <td>No</td>
       <td>Defines the randomisation criteria. If no value is set no randomisation is applied. The following values are allowed:<br>
-        <b>full:</b> fully randomises stimuli (no duplicates until all stimuli are shown once)</td>
+        <b>full:</b> fully randomises stimuli (no duplicates until all stimuli are shown once)<br>
     </tr>
   </tbody>
 </table>
@@ -95,14 +90,14 @@
 
 <h3 id="stimuli">Stimuli File<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
 
-<p>This task requires a stimuli file to run. To allow set sizes / list lengths of <i>n</i> memoranda per trial, you can use the usual stimulus properties and add an index at the end (e.g., stimulusValue1). The stimuli file has to contain the columns specified in the Stimuli File Structure below.</p>
+<p>This task requires a stimuli file to run. If you're using Tatool's randomisation feature, you only need to provide every possible combination once. By setting the number of iterations you can control the number of trials. The stimuli file has to contain the columns specified in the Stimuli File Structure below.</p>
 
 <h4>Available Stimuli Files</h4>
 
 <table class="table table-striped table-condensed table-bordered">
   <thead>
     <tr>
-	  <th>Task</th>
+    <th>Task</th>
       <th>Project</th>
       <th>Type</th>
       <th>File Name</th>
@@ -111,11 +106,11 @@
   </thead>
   <tbody>
     <tr>
-	  <td class="cellB">Animal-Position</td>
+    <td class="cellB">Corsi Block Colors</td>
       <td>tatool-stimuli</td>
       <td>stimuli</td>
-      <td><a href="https://raw.githubusercontent.com/tatool/tatool-web/master/app/projects/public/tatool-stimuli/stimuli/objectLocation-animals.csv" target="_blank">objectLocation-animals.csv</a></td>
-      <td>Displays animal images to memorise and recall.</td>
+      <td><a href="https://raw.githubusercontent.com/tatool/tatool-web/master/app/projects/public/tatool-stimuli/stimuli/corsiBlock-colors.csv" target="_blank">corsiBlock-colors.csv</a></td>
+      <td>Display colored blocks in a matrix.</td>
     </tr>
   </tbody>
 </table>
@@ -151,19 +146,21 @@
       <td>The stimulus value type for Tatool to know how to display it.</td>
     </tr>
     <tr>
-      <td class="cellB">correctResponse[n]</td>
-      <td>(String)</td>
-      <td class="cellB">Yes</td>
-      <td>The correct response for this memorandum.</td>
-    </tr>
-    <tr>
       <td class="cellB">gridPosition[n]</td>
       <td>(String)</td>
       <td class="cellB">Yes</td>
       <td>The grid position for this memorandum.</td>
     </tr>
+    <tr>
+      <td class="cellB">gridCellClass[n]</td>
+      <td>(String)</td>
+      <td class="cellB">Yes</td>
+      <td>The CSS class used to style the memorandum.</td>
+    </tr>
   </tbody>
 </table>
+
+
 
 <hr class="hr-red">
 

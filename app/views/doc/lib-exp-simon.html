@@ -1,6 +1,7 @@
-<h2>Flanker</h2>
+<p><a ui-sref="doc({page: 'lib-exp.html'})">Experimental Tasks</a></p>
+<h2>Simon</h2>
 
-<p>In the Flanker paradigm (modeled after the <a href="http://en.wikipedia.org/wiki/Eriksen_flanker_task" target="_blank">Eriksen flanker task</a>), participants are asked to classify a central target stimulus while ignoring irrelevant flanker stimuli surrounding the target. The flankers can be congruent (i.e., elicit the same response as the target), incongruent (i.e., elicit the opposite response as the target), or neutral (i.e., completely unrelated to the target). For example, in the Arrow-Flanker (see available stimuli files below) the target stimulus is an arrow, and participants have to indicate whether it points to the left or to the right. In the congruent condition, the flankers point in the same direction as the target, while they point in the opposite direction in the incongruent condition. In neutral trials, the target arrow is surrounded by squares. </p>
+<p>In the <a href="http://en.wikipedia.org/wiki/Simon_effect" target="_blank">Simon paradigm</a>, participants are asked to respond as quickly and as accurately as possible whether a stimulus is green or red using a left and a right key. The difficulty is that the stimulus can be displayed in the left or in the right half of the screen, thereby being congruent (e.g., green stimulus in the left half) or incongruent (e.g., green stimulus in the right half) with the location of the response keys.</p>
 
 <ul id="docPageNav">
   <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('executable')">Executable</a></li>
@@ -23,7 +24,7 @@
     </tr>
     <tr>
       <td class="cellB">Executable Type</td>
-      <td>tatoolChoiceReaction</td>
+      <td>tatoolSimon</td>
     </tr>
   </tbody>
 </table>
@@ -82,6 +83,13 @@
       <td>Timer duration in ms to wait for user feedback before stopping.</td>
     </tr>
     <tr>
+      <td class="cellB">displayCrossDuration</td>
+      <td>String</td>
+      <td>250</td>
+      <td>No</td>
+      <td>Timer duration in ms to display fixation cross upfront.</td>
+    </tr>
+    <tr>
       <td class="cellB">randomisation</td>
       <td>String</td>
       <td>(none)</td>
@@ -113,11 +121,11 @@
   </thead>
   <tbody>
     <tr>
-	  <td class="cellB">Arrow-Flanker</td>
+    <td class="cellB">Simon</td>
       <td>tatool-stimuli</td>
       <td>stimuli</td>
-      <td><a href="https://raw.githubusercontent.com/tatool/tatool-web/master/app/projects/public/tatool-stimuli/stimuli/choice-flanker-arrows.csv" target="_blank">choice-flanker-arrows.csv</a></td>
-      <td>Arrow (&lt; >) images to display congruent, incongruent and neutral stimuli.</td>
+      <td><a href="https://raw.githubusercontent.com/tatool/tatool-web/master/app/projects/public/tatool-stimuli/stimuli/simon-colors.csv" target="_blank">simon-colors.csv</a></td>
+      <td>Display a green/red circle on the left/right side of the screen. The user has to answer with the left/right arrow keys depending on the color of the circle.</td>
     </tr>
   </tbody>
 </table>
@@ -151,6 +159,12 @@
       <td>(String)</td>
       <td class="cellB">Yes</td>
       <td>Categorize stimulus according to custom group or condition (e.g., congruent, incongruent, neutral).</td>
+    </tr>
+    <tr>
+      <td class="cellB">stimulusPosition</td>
+      <td>left/right</td>
+      <td class="cellB">Yes</td>
+      <td>Indicate whether stimulus should be displayed on the left or right hand side of the screen.</td>
     </tr>
     <tr>
       <td class="cellB">correctResponse</td>

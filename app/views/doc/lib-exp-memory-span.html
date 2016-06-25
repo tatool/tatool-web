@@ -1,0 +1,181 @@
+<p><a ui-sref="doc({page: 'lib-exp.html'})">Experimental Tasks</a></p>
+<h2>Memory Span</h2>
+
+<p>In the Memory Span paradigm, participants have to memorise a list of stimuli (e.g., digits in the case of a <a href="http://en.wikipedia.org/wiki/Memory_span#Digit-span" target="_blank">Digit Span</a>, see available stimuli files below) and then recall them in correct serial order. In Tatool, the Memory Span has to be set as the primary Executable of a Dual Element. It can (but doesn't have to) be combined with the <a ui-sref="doc({page: 'lib-exp-choice-reactiontime.html'})">Choice Reaction Time</a> task to create a <a ui-sref="doc({page: 'lib-exp-brown-peterson.html'})">Brown-Peterson</a> or a <a ui-sref="doc({page: 'lib-exp-complex-span.html'})">Complex Span</a> task.</p>
+
+<ul id="docPageNav">
+  <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('executable')">Executable</a></li>
+  <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('properties')">Properties</a></li>
+  <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('stimuli')">Stimuli File</a></li>
+  <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('download')">Download</a></li>
+</ul>
+
+<hr class="hr-red">
+
+<h3 id="executable">Executable<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
+
+<p>Use the following settings in the Module Editor for this type of task: </p>
+
+<table class="table table-condensed table-bordered">
+  <tbody>
+    <tr>
+      <td class="cellB">Project</td>
+      <td>tatool</td>
+    </tr>
+    <tr>
+      <td class="cellB">Executable Type</td>
+      <td>tatoolMemorySpan</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="hint">
+  <div class="icon red"><i class="fa fa-lightbulb-o fa-2x"></i></div> 
+  <div class="text">
+    <p>The Memory Span Executable has to be used as the <b>primary Executable of a Dual Element</b> in order for it to work properly. Omit the secondary element to use the Memory Span Executable as a simple span task.</p>
+  </div>
+</div>
+
+<hr class="hr-red">
+
+<h3 id="properties">Properties<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
+
+<p>The following Properties can be provided in the Module Editor to change the behaviour of the task:</p>
+
+<table class="table table-striped table-condensed table-bordered">
+  <thead>
+    <tr>
+      <th>Property Name</th>
+      <th>Property Type</th>
+      <th>Default</th>
+      <th>Mandatory</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="cellB">stimuliFile</td>
+      <td>Resource</td>
+      <td>-</td>
+      <td class="cellB">Yes</td>
+      <td>A stimuli file expecting stimuli according to the Tatool Stimulus definition.</td>
+    </tr>
+    <tr>
+      <td class="cellB">stimuliPath</td>
+      <td>Path</td>
+      <td>-</td>
+      <td class="cellB">Yes</td>
+      <td>A stimuli path where to load any resources from (stimuli images, input key images).</td>
+    </tr>
+    <tr>
+      <td class="cellB">suspendAfterEachItem</td>
+      <td>Boolean</td>
+      <td>true</td>
+      <td>No</td>
+      <td>Configures the Executable to suspend after each memorandum (true) as in the Complex Span paradigm, or after all memoranda (false) as in the Brown-Peterson paradigm.</td>
+    </tr>
+    <tr>
+      <td class="cellB">displayDuration</td>
+      <td>String</td>
+      <td>800</td>
+      <td>No</td>
+      <td>Display duration for each memorandum.</td>
+    </tr>
+    <tr>
+      <td class="cellB">intervalDuration</td>
+      <td>String</td>
+      <td>400</td>
+      <td>No</td>
+      <td>Interval duration between memoranda.</td>
+    </tr>
+    <tr>
+      <td class="cellB">randomisation</td>
+      <td>String</td>
+      <td>(none)</td>
+      <td>No</td>
+      <td>Defines the randomisation criteria. If no value is set no randomisation is applied. The following values are allowed:<br>
+        <b>full:</b> fully randomises stimuli (no duplicates until all stimuli are shown once)</td>
+    </tr>
+    <tr>
+      <td class="cellB">recallText</td>
+      <td>String</td>
+      <td>Stimulus</td>
+      <td>No</td>
+      <td>Text to display in the recall phase. Text will always receive the number of the current recall stimulus as a suffix (e.g., 'Stimulus 1').</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr class="hr-red">
+
+<h3 id="stimuli">Stimuli File<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
+
+<p>This task requires a stimuli file to run. To allow set sizes / list lengths of <i>n</i> memoranda per trial, you can use the usual stimulus properties and add an index at the end (e.g., stimulusValue1). The stimuli file has to contain the columns specified in the Stimuli File Structure below.</p>
+
+<h4>Available Stimuli Files</h4>
+
+<table class="table table-striped table-condensed table-bordered">
+  <thead>
+    <tr>
+	  <th>Task</th>
+      <th>Project</th>
+      <th>Type</th>
+      <th>File Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr> 
+	  <td class="cellB">Digit Span</td>
+      <td>tatool-stimuli</td>
+      <td>stimuli</td>
+      <td><a href="https://raw.githubusercontent.com/tatool/tatool-web/master/app/projects/public/tatool-stimuli/stimuli/memorySpan-digits.csv" target="_blank">memorySpan-digits.csv</a></td>
+      <td>Uses two-digit numbers as memoranda with different spans (3-5).</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4>Stimuli File Structure</h4>
+
+<table class="table table-striped table-condensed table-bordered">
+  <thead>
+    <tr>
+      <th>Column Name</th>
+      <th>Column Values</th>
+      <th>Mandatory</th>
+      <th>Column Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="cellB">stimulusCount</td>
+      <td>(String)</td>
+      <td class="cellB">Yes</td>
+      <td>Set size / list length (i.e., number of memoranda) in this trial.</td>
+    </tr>
+    <tr>
+      <td class="cellB">stimulusValue[n]</td>
+      <td>(String)/(Image Filename)</td>
+      <td class="cellB">Yes</td>
+      <td>Value to display on screen. Can either be a text or an image.</td>
+    </tr>
+    <tr>
+      <td class="cellB">stimulusValueType[n]</td>
+      <td>text/image/circle/square</td>
+      <td class="cellB">Yes</td>
+      <td>The stimulus value type for Tatool to know how to display it.</td>
+    </tr>
+    <tr>
+      <td class="cellB">correctResponse[n]</td>
+      <td>(String)</td>
+      <td class="cellB">Yes</td>
+      <td>The correct response for this memorandum.</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr class="hr-red">
+
+<h3 id="download">Download<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
+
+<p>You can access the source code (Service, Controller, Template, CSS) for this Executable in our <a href="https://github.com/tatool/tatool-web/tree/master/app/projects/public/tatool/executables" target="_blank">Github Repository</a>.</p>

@@ -1,6 +1,7 @@
-<h2>Code</h2>
+<p><a ui-sref="doc({page: 'lib-acc.html'})">Accessory Executables</a></p>
+<h2>Countdown</h2>
 
-<p>The Code Executable provides the functionality for a user to enter his/her unique experiment participant code. This comes in handy, when you want to run an experiment in your lab without creating a separate user for every participant. The code entered by the participant will be available as the session property <code>sessionCode</code> in your data export.</p>
+<p>The Countdown Executable displays a numerical countdown that you can use to make sure the user is ready at the beginning of your Executables.</p>
 
 <ul id="docPageNav">
   <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('executable')">Executable</a></li>
@@ -23,11 +24,10 @@
     </tr>
     <tr>
       <td class="cellB">Executable Type</td>
-      <td>tatoolCode</td>
+      <td>tatoolCountdown</td>
     </tr>
   </tbody>
 </table>
-
 
 <hr class="hr-red">
 
@@ -47,25 +47,25 @@
   </thead>
   <tbody>
     <tr>
-      <td class="cellB">inputText</td>
+      <td class="cellB">countdown</td>
       <td>String</td>
-      <td>'Please enter your Code below:'</td>
+      <td>5</td>
       <td>No</td>
-      <td>The text that will be displayed on screen to instruct the user to enter their code.</td>
+      <td>The number to start to count down from.</td>
     </tr>
     <tr>
-      <td class="cellB">exactCodeLength</td>
+      <td class="cellB">interval</td>
       <td>String</td>
-      <td>-</td>
+      <td>600</td>
       <td>No</td>
-      <td>The exact number of required characters/digits for the code. If the code entered doesn't fulfill this rule, a warning icon is displayed and the user can try again.</td>
+      <td>Interval used to refresh countdown numbers.</td>
     </tr>
     <tr>
-      <td class="cellB">minCodeLength</td>
+      <td class="cellB">goText</td>
       <td>String</td>
-      <td>-</td>
+      <td>'Go!'</td>
       <td>No</td>
-      <td>The minimum number of required characters/digits for the code. If the code entered doesn't fulfill this rule, a warning icon is displayed and the user can try again.</td>
+      <td>Text that's displayed once the countdown has finished.</td>
     </tr>
   </tbody>
 </table>
@@ -74,9 +74,7 @@
 
 <h3 id="stimuli">Stimuli File<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
 
-<p>This task does not support the use of a stimuli file.</p>
-
-
+<p>This task does not support the use of a Stimuli File.</p>
 
 <hr class="hr-red">
 
