@@ -1,0 +1,153 @@
+<p><a ui-sref="doc({page: 'lib-bat-uzh-multi.html'})">Multifacet Working Memory Testing and Training Package</a></p>
+<h2>Testing</h2>
+
+<p>This set of tasks can be used to measure working memory capacity before and after training. Relational integration (cf. <a href="http://www.sciencedirect.com/science/article/pii/S0160289608000214" target="_blank">Oberauer et al., 2008</a>) is measured by the <b>Tower of Fame</b> task. In this task, sequentially presented sentences contain information about which famous person resides in which of four apartments across four floors in relation to the aforementioned person. After a variable number of such sentences, the task is to recall who lived where.<br><br>
+Storage and Processing, and Supervision are measured by a complex span and an switching task, respectively. Both tasks will soon be added to the module.
+</p>
+
+<ul id="docPageNav">
+  <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('module')">Module</a></li>
+  <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('tower')">Tower of Fame Task</a></li>
+  <li><i class="fa fa-angle-right"></i> Complex Span Task: coming soon!</li>
+  <li><i class="fa fa-angle-right"></i> Switching Task: coming soon!</li>
+  <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('download')">Download</a></li>
+</ul>
+
+<hr class="hr-red">
+
+<h3 id="module">Module<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
+<p>The following modules can be used: 
+<a href="https://raw.githubusercontent.com/tatool/tatool-web/master/app/projects/public/uzh-multi-battery/modules/de_multi_testing.json" target="_blank">de_multi_testing.json</a> (German version)</p>
+
+<hr class="hr-red">
+
+<h3 id="tower">Tower of Fame Task<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
+
+<h4>Executable</h4>
+
+<p>Use the following settings in the Module Editor for these tasks: </p>
+
+<table class="table table-condensed table-bordered">
+  <tbody>
+    <tr>
+      <td class="cellB">Project</td>
+      <td>uzh-multi</td>
+    </tr>
+    <tr>
+      <td class="cellB">Executable Type</td>
+      <td>towerOfFame</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr>
+
+<h4>Properties</h4>
+
+<p>The following Properties can be provided in the Module Editor to change the behaviour of the task (note that, except for displayLanguage, the default value is the one used in the publication):</p>
+
+<table class="table table-striped table-condensed table-bordered">
+  <thead>
+    <tr>
+      <th>Property Name</th>
+      <th>Property Type</th>
+      <th>Default</th>
+      <th>Mandatory</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="cellB">stimuliFile</td>
+      <td>Resource</td>
+      <td>None, see <i>Stimuli Files</i> below for options</td>
+      <td class="cellB">Yes</td>
+      <td>A stimuli file expecting stimuli according to the Tatool Stimulus definition.</td>
+    </tr>
+    <tr>
+      <td class="cellB">stimuliPath</td>
+      <td>Path</td>
+      <td>None, use the following:<br>Project: uzh-multi-battery<br>Type: stimuli</td>
+      <td class="cellB">Yes</td>
+      <td>A stimuli path where to load any resources from (stimuli images, input key images).</td>
+    </tr>
+    <tr>
+      <td class="cellB">displayDuration</td>
+      <td>String</td>
+      <td>4750</td>
+      <td>No</td>
+      <td>Timer duration in ms to wait for user feedback before stopping.</td>
+    </tr>
+     <tr>
+      <td class="cellB">intervalDuration</td>
+      <td>String</td>
+      <td>250</td>
+      <td>No</td>
+      <td>Timer duration in ms to wait and present a blank screen before the next sentence.</td>
+    </tr>
+     <tr>
+      <td class="cellB">displayLanguage</td>
+      <td>String</td>
+      <td>EN</td>
+      <td>No</td>
+      <td>Language in which stimuli are presented (EN for English, DE for German)</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr>
+
+<h4>Stimuli Files</h4>
+
+The following stimuli files were used in the publication:</p>
+
+<table class="table table-striped table-condensed table-bordered">
+  <thead>
+    <tr>
+	  <th>Task</th>
+      <th>Project</th>
+      <th>Type</th>
+      <th>File Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+	  <td class="cellB">Practice Trials</td>
+      <td>uzh-multi-battery</td>
+      <td>stimuli</td>
+      <td><a href="https://raw.githubusercontent.com/tatool/tatool-web/master/app/projects/public/uzh-multi-battery/stimuli/tower-of-fame-practice.csv" target="_blank">tower-of-fame-practice.csv</a></td>
+      <td>3 practice trials.</td>
+    </tr>
+    <tr>
+	  <td class="cellB">Test Trials</td>
+      <td>uzh-multi-battery</td>
+      <td>stimuli</td>
+      <td><a href="https://raw.githubusercontent.com/tatool/tatool-web/master/app/projects/public/uzh-multi-battery/stimuli/tower-of-fame.csv" target="_blank">tower-of-fame.csv</a></td>
+      <td>18 test trials.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4>Instructions</h4>
+<p>The following (German) instruction pages can be used with the Executable (English translation coming soon):</p>
+<ul class="docContentList">
+	<li>de_tower_01.htm</li>
+	<li>de_tower_02.htm</li>
+	<li>de_tower_03.htm</li>
+	<li>de_tower_04.htm</li>
+  <li>de_tower_05.htm</li>
+  <li>de_tower_06.htm</li>
+  <li>de_tower_07.htm</li>
+  <li>de_tower_08.htm</li>
+  <li>de_tower_09.htm</li>
+  <li>de_tower_10.htm</li>
+  <li>de_tower_11.htm</li>
+  <li>de_tower_12.htm</li>
+</ul>
+
+<hr class="hr-red">
+
+<h3 id="download">Download<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
+
+<p>You can access the source code (Service, Controller, Template, CSS) for these Executables in our <a href="https://github.com/tatool/tatool-web/tree/master/app/projects/public/uzh-multi-battery/executables" target="_blank">GitHub repository</a>.</p>

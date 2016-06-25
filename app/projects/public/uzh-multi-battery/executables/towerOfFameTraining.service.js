@@ -1,7 +1,7 @@
-tatool.factory('tatoolTowerOfFame', ['executableUtils', 'stimulusServiceFactory', 'inputServiceFactory', 'dbUtils', 'timerUtils',
+tatool.factory('towerOfFameTraining', ['executableUtils', 'stimulusServiceFactory', 'inputServiceFactory', 'dbUtils', 'timerUtils',
   function(executableUtils, stimulusServiceFactory, inputServiceFactory, dbUtils, timerUtils) {
 
-    var TowerOfFame = executableUtils.createExecutable();
+    var TowerOfFameTraining = executableUtils.createExecutable();
 
     var DISPLAY_DURATION_DEFAULT = 4750;
     var INTERVAL_DURATION_DEFAULT = 250;
@@ -74,10 +74,10 @@ tatool.factory('tatoolTowerOfFame', ['executableUtils', 'stimulusServiceFactory'
       },
     };
 
-    TowerOfFame.prototype.init = function() {
+    TowerOfFameTraining.prototype.init = function() {
       var promise = executableUtils.createPromise();
 
-      this.displayLanguage = (this.displaylanguage ) ? this.displaylanguage : DEFAULT_LANG;
+      this.displayLanguage = (this.displayLanguage ) ? this.displayLanguage : DEFAULT_LANG;
 
       // timing properties
       this.displayDuration = (this.displayDuration) ? this.displayDuration : DISPLAY_DURATION_DEFAULT;
@@ -85,7 +85,6 @@ tatool.factory('tatoolTowerOfFame', ['executableUtils', 'stimulusServiceFactory'
       this.timerDisplayMemoranda = timerUtils.createTimer(this.displayDuration, false, this);
       this.timerIntervalMemoranda = timerUtils.createTimer(this.intervalDuration, false, this);
 
-      this.counter = 0;
       this.stimulusService = stimulusServiceFactory.createService(this.stimuliPath);
       this.inputService = inputServiceFactory.createService(this.stimuliPath);
 
@@ -98,7 +97,7 @@ tatool.factory('tatoolTowerOfFame', ['executableUtils', 'stimulusServiceFactory'
       var self = this;
       executableUtils.getCSVResource(this.stimuliFile, true, this.stimuliPath).then(
         function(list) {
-          self.stimuliList = list;
+          self.celebrities = list;
           promise.resolve();
         }, function(error) {
           promise.reject(error);
@@ -107,19 +106,97 @@ tatool.factory('tatoolTowerOfFame', ['executableUtils', 'stimulusServiceFactory'
       return promise;
     };
 
-    TowerOfFame.prototype.createStimulus = function() {
+    TowerOfFameTraining.prototype.createStimulus = function() {
       // reset executable properties
       this.startTime = 0;
       this.endTime = 0;
       this.memCounter = 0;
       this.respCounter = 0;
 
-      this.stimulus = executableUtils.getNext(this.stimuliList, this.counter);
+      var levelHandler = dbUtils.getHandler('towerOfFameLevel');
+      var currentLevel = (levelHandler) ? dbUtils.getModuleProperty(levelHandler, 'currentLevel') : null;
 
-      this.counter++;
+      if (currentLevel == null) {
+        currentLevel = 1;
+      }
+
+      var currentCelebrities = angular.copy(this.celebrities);
+
+      // fill appartments array with appartments ranging from 1A to 6D
+      var appartments = [];
+      for (var i = 0; i < 6; i++) {
+        for (var j = 0; j < 4; j++) {
+          var n = appartments.length
+          switch (j) {
+            case 0:
+              appartments[n] = i + 1 + "A";
+              break;
+            case 1:
+              appartments[n] = i + 1 + "B";
+              break;
+            case 2:
+              appartments[n] = i + 1 + "C";
+              break;
+            case 3:
+              appartments[n] = i + 1 + "D";
+              break;
+          }
+        }
+      }
+
+      var nStimuli = 2;
+
+      if (currentLevel <= 2) {
+        nStimuli = 2;
+      } else if (currentLevel <= 4) {
+        nStimuli = 3;
+      } else if (currentLevel <= 6) {
+        nStimuli = 4;
+      } else if (currentLevel <= 8) {
+        nStimuli = 5;
+      } else if (currentLevel <= 10) {
+        nStimuli = 6;
+      } else if (currentLevel <= 12) {
+        nStimuli = 7;
+      } else if (currentLevel <= 14) {
+        nStimuli = 8;
+      } else if (currentLevel <= 16) {
+        nStimuli = 9;
+      } else if (currentLevel <= 18) {
+        nStimuli = 10;
+      } else {
+        nStimuli = 10;
+      }
+
+      // create prompts array
+      var prompts = [];
+      for (i = 0; i < nStimuli; i++) {
+        prompts[i] = i + 1;
+      }
+
+      this.promptsRand = 0;
+
+      // shuffle recall prompt order for even levels
+      if (currentLevel % 2 == 0) {
+        prompts = executableUtils.shuffle(prompts);
+        this.promptsRand = 1;
+      }
+
+      // create stimulus
+      this.stimulus = new Array();
+
+      // create stimulus properties
+      this.stimulus['stimulusCount'] = nStimuli;
+
+      for (var j = 1; j < nStimuli + 1; j++) {
+        this.stimulus['stimulusValueType' + j] = 'text';
+        this.stimulus['stimulusValue' + j] = executableUtils.getRandom(currentCelebrities).name;
+        this.stimulus['promptValue' + j] = executableUtils.getNext(prompts, j - 1);
+        this.stimulus['correctResponse' + j] = executableUtils.getRandom(appartments);
+      }
     };
 
-    TowerOfFame.prototype.setStimulus = function() {
+    TowerOfFameTraining.prototype.setStimulus = function() {
       var stimulusText = this.concatStimulus();
 
       this.stimulusService.set({
@@ -128,7 +205,7 @@ tatool.factory('tatoolTowerOfFame', ['executableUtils', 'stimulusServiceFactory'
       });
     };
 
-    TowerOfFame.prototype.concatStimulus = function() {
+    TowerOfFameTraining.prototype.concatStimulus = function() {
       var name = this.stimulus['stimulusValue' + this.memCounter];
       var apartment = this.stimulus['correctResponse' + this.memCounter];
       var lastItem = this.memCounter - 1
@@ -177,7 +254,7 @@ tatool.factory('tatoolTowerOfFame', ['executableUtils', 'stimulusServiceFactory'
       return text;
     }
 
-    TowerOfFame.prototype.setRecallPrompt = function() {
+    TowerOfFameTraining.prototype.setRecallPrompt = function() {
       for (var i = 1; i < this.stimulus.stimulusCount + 1; i++) {
         var prompt = this.stimulus['promptValue' + i];
 
@@ -194,13 +271,13 @@ tatool.factory('tatoolTowerOfFame', ['executableUtils', 'stimulusServiceFactory'
     };
 
     // Process given response
-    TowerOfFame.prototype.addTrial = function(givenResponse) {
+    TowerOfFameTraining.prototype.addTrial = function(givenResponse) {
       this.trial = {};
-      this.trial.trialNo = this.counter;
       this.trial.setSize = this.stimulus.stimulusCount;
       this.trial.reactionTime = this.endTime - this.startTime;
       this.trial.givenResponse = givenResponse;
       this.trial.correctResponse = this.correctResponse;
+      this.trial.randomized = this.promptsRand;
 
       if (this.trial.correctResponse == this.trial.givenResponse) {
         this.trial.score = 1;
@@ -212,10 +289,10 @@ tatool.factory('tatoolTowerOfFame', ['executableUtils', 'stimulusServiceFactory'
     };
 
     // Stop executable
-    TowerOfFame.prototype.stopExecution = function() {
+    TowerOfFameTraining.prototype.stopExecution = function() {
       executableUtils.stop();
     };
 
-    return TowerOfFame;
+    return TowerOfFameTraining;
   }
 ]);
