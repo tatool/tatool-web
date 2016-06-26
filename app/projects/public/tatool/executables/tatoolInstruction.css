@@ -172,7 +172,7 @@ text-align:center;
 }
 
 #tatoolFormat ol {
-  list-style-type: numeric;
+  list-style-type: decimal;
 }
 #tatoolFormat ul, ol {
   list-style-position: inside;
