@@ -13,6 +13,7 @@ var Module = function(moduleId) {
   this.modulePackagePath = '';
   this.sessions = {};
   this.moduleType = '';
+  this.exportDelimiter = '';
 };
 
 // get the module name
@@ -95,6 +96,10 @@ Module.prototype.setModulePackagePath = function(packagePath) {
 
 Module.prototype.setModuleType = function(moduleType) {
   this.moduleType = moduleType;
+};
+
+Module.prototype.setExportDelimiter = function(exportDelimiter) {
+  this.exportDelimiter = exportDelimiter;
 };
 
 // add a session to this module

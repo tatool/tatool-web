@@ -4,8 +4,8 @@
 /* global uuid */
 
 angular.module('tatool.app')
-  .controller('DeveloperCtrl', ['$scope', '$q', '$timeout', '$window', '$rootScope', '$location',  '$state', '$http', '$log', '$modal', '$sce', 'moduleDataService', 'cfg', 'authService', 'userService', 'moduleCreatorService', 'exportService', 'spinnerService', 'trialDataService',
-    function ($scope, $q, $timeout, $window, $rootScope, $location, $state, $http, $log, $modal, $sce, moduleDataService, cfg, authService, userService, moduleCreatorService, exportService, spinnerService, trialDataService) {
+  .controller('DeveloperCtrl', ['$scope', '$q', '$timeout', '$window', '$rootScope', '$location',  '$state', '$http', '$log', '$modal', '$sce', 'moduleDataService', 'cfg', 'authService', 'userService', 'moduleCreatorService', 'exportService', 'spinnerService', 'trialDataService', 'cfgApp',
+    function ($scope, $q, $timeout, $window, $rootScope, $location, $state, $http, $log, $modal, $sce, moduleDataService, cfg, authService, userService, moduleCreatorService, exportService, spinnerService, trialDataService, cfgApp) {
 
     $scope.modules = [];
     $scope.alert = {};
@@ -423,6 +423,7 @@ angular.module('tatool.app')
       newModule.setModuleAuthor(moduleDefinition.author);
       newModule.setModuleDefinition(moduleDefinition);
       newModule.setModuleLabel(moduleDefinition.label);
+      newModule.setExportDelimiter(cfgApp.CSV_DELIMITER);
 
       $scope.editModule(newModule);
     };
