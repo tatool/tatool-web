@@ -1,7 +1,34 @@
 <h2>Analytics</h2>
 
-<p>The tab <i>Analytics</i> allows researchers to monitor their modules and to download the data collected. Researchers can select modules they previously added to their <i>Repository</i> via drop-down menu (<b>1</b>). While public modules are always anonymised by using internal user codes, researchers can choose whether they want to run their private module in blind mode (using codes as well) or whether they want to list users by the email adress which was used to invite them (<b>2</b>). For each individual, Session data can be inspected and downloaded in form of zipped CSV files (<b>3</b>). Once an experiment is over and all data is downloaded, the module can be deleted from Analytics (<b>4</b>). Note that this irreversible step deletes all data from the web server.</p>
+<p>The <i>Analytics</i> tab lists the data for each module, allowing researchers to monitor their modules and to download the data collected. Here, the following actions can be taken:</p>
+
 <p>
   <img src="../../images/doc/screen-analytics-main.png" class="internal"><br>
   <i>Screenshot of the Analytics tab</i>
+</p>
+
+<p>
+<ol class="docContentList">
+	<li>Select any of the modules previously added to your <i>Repository</i> via a drop-down menu.</li>
+	<li>Monitor your module and inspect the data:</li>
+		<ul>
+		<li>Choose to run your private module in blind mode by listing anonymised codes or to display your subjects' <b>email addresses</b> with which you invited them (see <a ui-sref="doc({page: 'use-editor.html'})">Publishing your Module</a>). Note that public modules are always automatically anonymised by using internal user codes.</li>
+		<li> <b>Download</b> the zipped data from all subjects.</li>
+		<li> <b>Delete</b> the module from Analytics once your study is completed and all data had been downloaded. Note that this <b>irreversible</b> step deletes all data from the web server.</li>
+	</ul>
+	<li>The table comprises the following columns:</li>
+	<ul>
+		<li> <b>Subject</b> lists all users that executed your module.</li>
+		<li> <b>ExternalID</b> is the external identifier is a string of characters you can provide with your module URL (for instructions on how to set an external ID, click on <i>Show URL</i> when <a ui-sref="doc({page: 'use-editor.html'})">Publishing your Module</a>). An external ID allows for checking the source of module executions. For example, you can use it to monitor which way of distributing your experiment was most effective (e.g., through Twitter or Facebook), or to determine the Worker ID when using <a ui-sref="doc({page: 'use-mturk.html'})">Amazon MTurk</a>.</li>
+		<li> The <b>SessionToken</b> is the completion code provided at the end of Modules executed from a URL and can be used in combination with <a ui-sref="doc({page: 'use-mturk.html'})">Amazon MTurk</a>.</li>
+		<li> <b>Sessions</b> is the number of executions by each subject.</li>
+		<li> <b>Last Update</b> provides date and time of the last data upload for each subject.</li>
+	</ul>
+	<li>Inspect single sessions and subjects:</li>
+	<ul>
+		<li> Show <b>user details</b> for each session such as its start and end time and the number of trials completed.</li>
+		<li> <b>Download</b> the zipped data of a single user (will open in a pop-up window).</li>
+		<li> <b>Delete</b> data from a single user. Note that this <b>irreversible</b> step deletes the data from the web server.</li>
+	</ul>
+</ol>
 </p>
