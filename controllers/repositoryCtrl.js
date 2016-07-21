@@ -73,7 +73,7 @@ exports.getAll = function(req, res) {
     } else {
       res.json(entries);
     }
-  });
+  }).lean();
 };
 
 exports.get = function(req, res) {

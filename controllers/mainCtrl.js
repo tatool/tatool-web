@@ -306,7 +306,7 @@ exports.getAll = function(req, res) {
     } else {
       res.json(modules);
     }
-  });
+  }).lean();
 };
 
 exports.get = function(req, res) {

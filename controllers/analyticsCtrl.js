@@ -191,7 +191,7 @@ exports.getAll = function(req, res) {
     } else {
       res.json(modules);
     }
-  });
+  }).lean();
 };
 
 exports.get = function(req, res) {
@@ -210,7 +210,7 @@ exports.get = function(req, res) {
         res.status(500).json({message: 'Module not found.'});
       }
     }
-  });
+  }).lean();
 };
 
 exports.remove = function(req, res) {
