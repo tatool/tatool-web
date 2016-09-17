@@ -41,6 +41,15 @@
 
 <hr>
 
+<p><b class="red">stopIteration()</b> - (no return value)</p>
+<p>Stops the execution of the current Executable. This also signals the iterator of the parent List/Dual Element to stop iterating immediately irrelevant of how many iterations are left. The Executor will kick in and decide what will be executed next.</p>
+
+<p><b>Example</b></p>
+<pre><code class="language-javascript">executableUtils.stopIteration();
+</code></pre>
+
+<hr>
+
 <p><b class="red">suspend()</b> - (no return value)</p>
 <p>Used in combination with a Dual Element to inform the Executor that the primary Executable has finished and the secondary Element/Executable can be executed. Afterward, the Executor will execute the primary Executable again.</p>
 
@@ -85,6 +94,29 @@
 
   return promise;
 };
+</code></pre>
+
+<hr>
+
+<p><b class="red">setNumIterations(numIterations)</b> - (no return value)</p>
+<p>Set the number of iterations of the parent Element from within an Executable. This only sets the total 
+number of iterations but doesn't reset the number of already executed iterations. Allows to dynamically set the number of iterations
+depending on events happening within the Executable (e.g. user can choose how many iterations they want.</p>
+
+<p><b>Parameters</b><br>
+<code>numIterations</code>: an Integer value representing the new number of iterations</p>
+
+<p><b>Example</b></p>
+<pre><code class="language-javascript">executableUtils.setNumIterations(5);
+</code></pre>
+
+<hr>
+
+<p><b class="red">resetNumIterations()</b> - (no return value)</p>
+<p>Reset the number of already executed iterations of the parent Element to 0. Allows to create an infinite number of iterations.</p>
+
+<p><b>Example</b></p>
+<pre><code class="language-javascript">executableUtils.resetNumIterations();
 </code></pre>
 
 <hr>

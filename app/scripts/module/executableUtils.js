@@ -4,7 +4,7 @@
 /* global async */
 
 angular.module('tatool.module')
-  .service('executableUtils', [ '$q', '$http', '$log', function ($q, $http, $log) {
+  .service('executableUtils', [ '$q', '$http', '$log', 'contextService', function ($q, $http, $log, contextService) {
 
     var utils = {};
 
@@ -31,6 +31,15 @@ angular.module('tatool.module')
 
     // stops the execution of the current executable
     utils.stop = function() {
+      console.log();
+      executor.stopExecutable();
+    };
+
+    // stops the execution of the current executable and the iteration of the parent element
+    utils.stopIteration = function() {
+      var currentStack = contextService.getProperty("elementStack");
+      var parentElement = currentStack[1];
+      parentElement.iterator.executedIterations = parentElement.iterator.numIterations;
       executor.stopExecutable();
     };
 
@@ -42,6 +51,20 @@ angular.module('tatool.module')
     // fail the current executable and stop module
     utils.fail = function(error) {
       executor.failExecutable(error);
+    };
+
+    // set the number of iterations of the parent element
+    utils.setNumIterations = function(numIterations) {
+      var currentStack = contextService.getProperty("elementStack");
+      var parentElement = currentStack[1];
+      parentElement.iterator.numIterations = numIterations;
+    };
+
+    // reset the iterations to 0 for the parent element
+    utils.resetNumIterations = function() {
+      var currentStack = contextService.getProperty("elementStack");
+      var parentElement = currentStack[1];
+      parentElement.iterator.executedIterations = 0;
     };
 
     // stop the execution of the current module
