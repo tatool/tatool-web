@@ -38,6 +38,11 @@ angular.module('tatool.module')
       var currentSessionId = moduleService.getMaxSessionId();
       return moduleService.getSessionProperty(element, currentSessionId, propertyKey);
     };
+
+    // get session number
+    utils.getSessionNr = function() {
+      return moduleService.getMaxSessionId();
+    };
     
     // add new trial after extending it with base properties
     utils.saveTrial = function(trial, showStatusFeedback) {

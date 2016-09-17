@@ -78,6 +78,16 @@ var currentLevel = dbUtils.getSessionProperty(this, 'currentLevel');
 
 <hr>
 
+<p><b class="red">getSessionNr()</b> - returns the current session number</p>
+<p>Get the current session number.</p>
+
+<p><b>Example</b></p>
+<pre><code class="language-javascript">
+var sessionNr = dbUtils.getSessionNr();
+</code></pre>
+
+<hr>
+
 <p><b class="red">getHandler(handlerName)</b> - returns the Handler object</p>
 <p>In order to access the Properties created by a handler (e.g. levelHandler), you'll need to get the handler element object. The handler object can be used as the first parameter for the get/set Property methods.</p>
 
