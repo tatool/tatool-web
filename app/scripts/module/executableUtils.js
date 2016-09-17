@@ -37,7 +37,7 @@ angular.module('tatool.module')
 
     // stops the execution of the current executable and the iteration of the parent element
     utils.stopIteration = function() {
-      var currentStack = contextService.getProperty("elementStack");
+      var currentStack = contextService.getProperty('elementStack');
       var parentElement = currentStack[1];
       parentElement.iterator.executedIterations = parentElement.iterator.numIterations;
       executor.stopExecutable();
@@ -55,14 +55,14 @@ angular.module('tatool.module')
 
     // set the number of iterations of the parent element
     utils.setNumIterations = function(numIterations) {
-      var currentStack = contextService.getProperty("elementStack");
+      var currentStack = contextService.getProperty('elementStack');
       var parentElement = currentStack[1];
       parentElement.iterator.numIterations = numIterations;
     };
 
     // reset the iterations to 0 for the parent element
     utils.resetNumIterations = function() {
-      var currentStack = contextService.getProperty("elementStack");
+      var currentStack = contextService.getProperty('elementStack');
       var parentElement = currentStack[1];
       parentElement.iterator.executedIterations = 0;
     };
