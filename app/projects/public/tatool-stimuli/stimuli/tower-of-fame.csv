@@ -1,0 +1,19 @@
+stimulusCount;stimulusValue1;stimulusValueType1;promptValue1;correctResponse1;stimulusValue2;stimulusValueType2;promptValue2;correctResponse2;stimulusValue3;stimulusValueType3;promptValue3;correctResponse3;stimulusValue4;stimulusValueType4;promptValue4;correctResponse4
+2;Walt Disney;text;1;6B;Angelina Jolie;text;2;3B
+4;Marlon Brando;text;2;6C;Stefan Raab;text;1;5C;Abraham Lincoln;text;4;5A;Michael Jordan;text;3;5B
+3;Boris Becker;text;1;2D;Bill Clinton;text;2;6A;Albert Einstein;text;3;1A
+4;John Lennon;text;3;3D;Charlie Chaplin;text;2;2C;Louis Armstrong;text;1;6C;Barack Obama;text;4;1A
+2;David Beckham;text;2;4D;Paris Hilton;text;1;4A
+2;Harrison Ford;text;1;5C;Phil Collins;text;2;6B
+4;Ray Charles;text;2;1C;Whitney Houston;text;3;1B;Frank Sinatra;text;4;5C;Stevie Wonder ;text;1;4C
+3;John Travolta;text;1;5D;Kate Winslet;text;3;4C;Elvis Presley;text;2;6B
+3;Woody Allen;text;2;6C;Britney Spears;text;1;5C;Nelson Mandela;text;3;5A
+4;Boris Becker;text;2;5C;Walt Disney;text;1;6D;Albert Einstein;text;3;2B;Angelina Jolie;text;4;2A
+4;David Beckham;text;1;3A;Kate Winslet;text;4;3C;Elvis Presley;text;3;3B;Woody Allen;text;2;6C
+2;Bill Clinton;text;1;6C;John Travolta;text;2;5A
+3;John Lennon;text;1;3C;Marlon Brando;text;2;5A;Stefan Raab;text;3;5C
+2;Charlie Chaplin;text;1;1D;Ray Charles;text;2;1C
+3;Abraham Lincoln;text;2;4B;Phil Collins;text;3;4C;Louis Armstrong;text;1;6C
+3;Albert Einstein;text;3;5C;Harrison Ford;text;2;5D;Ray Charles;text;1;2C
+2;Barack Obama;text;2;1C;Michael Jordan;text;1;3C
+4;Paris Hilton;text;1;1D;Britney Spears;text;2;3D;Harrison Ford;text;3;2C;Nelson Mandela;text;4;6A
