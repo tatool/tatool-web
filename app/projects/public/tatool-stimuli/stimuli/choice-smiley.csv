@@ -1,0 +1,4 @@
+stimulusType;stimulusValue;stimulusValueType;correctResponse
+sad;smiley_sad.png;image;right
+happy;smiley_happy.png;image;right
+neutral;smiley_neutral.png;image;right
