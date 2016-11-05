@@ -72,7 +72,10 @@ angular.module('tatool.app')
         sessionProperties[value.sessionId] = [];
         // add base properties
         var sessionComplete = (value.sessionComplete) ? 1 : 0;
-        sessionProperties[value.sessionId].push({key: 'session.complete', value: sessionComplete, position: -1 });
+        var sessionCondition = (value.sessionCondition) ? value.sessionCondition : '';
+        console.log(sessionCondition);
+        sessionProperties[value.sessionId].push({key: 'session.complete', value: sessionComplete, position: -2 });
+        sessionProperties[value.sessionId].push({key: 'session.condition', value: sessionCondition, position: -1 });
         // loop through user defined properties
         var properties = value.sessionProperties;
         angular.forEach(properties, function(values, element) {

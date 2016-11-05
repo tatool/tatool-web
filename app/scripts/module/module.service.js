@@ -145,5 +145,13 @@ angular.module('tatool.module')
       return session.getSessionToken();
     };
 
+    moduleService.setSessionCondition = function(condition) {
+      session.setSessionCondition(condition);
+    };
+
+     moduleService.getSessionCondition = function() {
+      return session.getSessionCondition();
+    };
+
     return moduleService;
   }]);

@@ -6,6 +6,7 @@ var Session = function(sessionId, sessionStartTime) {
   this.startTime = sessionStartTime;
   this.endTime = null;
   this.sessionToken = null;
+  this.sessionCondition = '';
   this.sessionComplete = false;
   this.maxTrialId = 0;
   this.sessionProperties = {};
@@ -24,6 +25,16 @@ Session.prototype.setSessionToken = function(token) {
 // get the sessionToken
 Session.prototype.getSessionToken = function() {
   return this.sessionToken;
+};
+
+// set the session condition
+Session.prototype.setSessionCondition = function(condition) {
+  this.sessionCondition = condition;
+};
+
+// get the session condition
+Session.prototype.getSessionCondition = function() {
+  return this.sessionCondition;
 };
 
 // mark the session as complete

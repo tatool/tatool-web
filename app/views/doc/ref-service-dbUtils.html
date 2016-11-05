@@ -88,6 +88,27 @@ var sessionNr = dbUtils.getSessionNr();
 
 <hr>
 
+<p><b class="red">getSessionCondition()</b> - returns the current session condition</p>
+<p>Get the current session condition.</p>
+
+<p><b>Example</b></p>
+<pre><code class="language-javascript">
+var condition = dbUtils.getSessionCondition();
+</code></pre>
+
+<hr>
+
+<p><b class="red">setSessionCondition()</b> - sets the session condition</p>
+<p>Sets the current session condition that is being used for every List/Dual Iterator to decide whether it should be run or skipped.</p>
+
+<p><b>Example</b></p>
+<pre><code class="language-javascript">
+var condition = 'group1';
+dbUtils.setSessionCondition(condition);
+</code></pre>
+
+<hr>
+
 <p><b class="red">getHandler(handlerName)</b> - returns the Handler object</p>
 <p>In order to access the Properties created by a handler (e.g. levelHandler), you'll need to get the handler element object. The handler object can be used as the first parameter for the get/set Property methods.</p>
 

@@ -77,7 +77,7 @@ angular.module('tatool.app', ['tatool', 'tatool.auth', 'tatool.common', 'ngAnima
           }]
         }
       }).state('public', {
-        url: '/public/:moduleId?extid',
+        url: '/public/:moduleId?extid&c',
         templateUrl: 'views/app/public_start.html',
         controller: 'PublicStartCtrl',
         resolve: {
@@ -86,6 +86,13 @@ angular.module('tatool.app', ['tatool', 'tatool.auth', 'tatool.common', 'ngAnima
               return '';
             } else {
               return $stateParams.extid;
+            }
+          }],
+          condition: ['$state', '$stateParams', function($state, $stateParams) {
+            if (!$stateParams.c) {
+              return '';
+            } else {
+              return $stateParams.c;
             }
           }],
           moduleId: ['$state', '$stateParams', function($state, $stateParams) {

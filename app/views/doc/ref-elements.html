@@ -12,7 +12,7 @@
 
 <h3 id="list">List Element<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
 
-<p>A List Element can contain any number of Elements or Executables that will be executed sequentially (one after another in the order as they are listed) for a specified number of times. For example, the Module in the Figure below consists of a ListElement 1 which contains Executable A, Executable B and another ListElement 2 which in turn contains n more Executables. Note that ListElement 1 is set to 3 iterations. Therefore, Tatool would execute the Module in sequential order for three times.</p>
+<p>A List Element can contain any number of Elements or Executables that will either be executed sequentially (one after another in the order as they are listed) or in random order for a specified number of times. For example, the Module in the Figure below consists of a ListElement 1 which contains Executable A, Executable B and another ListElement 2 which in turn contains n more Executables. Note that ListElement 1 is set to 3 iterations. Therefore, Tatool would execute the Module in sequential order for three times.</p>
 
 <p>
   <img src="../../images/doc/figure-elements-list.png" class="internal"><br>
@@ -24,6 +24,9 @@
 <br>[ListElement 1: <b>Iteration 2</b>] > Executable A > Executable B > [ListElement 2] > ...
 <br>[ListElement 1: <b>Iteration 3</b>] > Executable A > Executable B > [ListElement 2] > ...</p>
 
+<p><b>Order:</b> You can configure the order of execution of a List Element. You can either let the List Element execute its child elements in <b>sequential</b> or in <b>random</b> order. In case of random order, the order will be randomised at the beginning of every iteration.</p>
+
+<p><b>Condition:</b> Use the condition value in case you want to enable/disable the execution of specific Elements depending on an input value. You can provide a custom input condition for every Module execution by adding the parameter <code>c</code> and a value to your module URL (e.g. http://host/#/public/moduleId?c=group1) or by using the <code>setSessionCondition</code> method of the <a ui-sref="doc({page: 'ref-service-dbUtils.html'})">dbUtils</a> Utility Service from within your Executables. The condition has to be a string value without special characters or underscores.<br><b>Example:</b> you could provide two groups of participants with the same Module URL but a different <code>c</code> parameter (<i>group1</i>, <i>group2</i>). You want participants in group1 to see a different Instruction than participants in group2. By creating two List Elements and setting the condition to <i>group1</i> for one List Element and <i>group2</i> for the other List Element you can run the same Module but show different content depending on a condition.</p>
 
 <hr class="hr-red">
 
@@ -57,4 +60,6 @@
 </p>
 
 <p><b>Note:</b> It is possible to use a Dual Element with only a primary and without any secondary element. For example, if you want to use the <a ui-sref="doc({page: 'lib-exp-memory-span.html'})">Memory Span task</a> as a simple instead of a complex span task, select a Dual child element in the Editor, and then add only one Executable (the tatoolMemorySpan) as a child and omit the secondary element. In such a case, Tatool will first execute the selected Executable as primary element, then look for a secondary element which does not exist, and hence, immediately fall back to the primary element execution.</p>
+
+<p><b>Condition:</b> Same usage as described above for List Element.</p>
 

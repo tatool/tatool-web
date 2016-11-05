@@ -15,6 +15,9 @@ angular.module('tatool.module')
     obj.startModule = function(){
       // create new session
       obj.currentSessionId = moduleService.createSession();
+      var extCondition = $window.sessionStorage.getItem('extCondition');
+      moduleService.setSessionCondition(extCondition);
+      $window.sessionStorage.removeItem('extCondition');
 
       // saving the module back to make sure the new session is registered in case of an error
       moduleService.saveModule().then(function() {
@@ -110,7 +113,7 @@ angular.module('tatool.module')
     var runSelector = function() {
       var iteratorObj = elementStack.stack.peek().iterator;
       if (iteratorObj) {
-        return iteratorObj.selectNextElement(elementStack.stack);
+        return iteratorObj.selectNextElement(elementStack.stack, moduleService.getSessionCondition());
       } else {
         return false;
       }

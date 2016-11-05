@@ -3,11 +3,12 @@
 /* global screenfull */
 
 angular.module('tatool.app')
-  .controller('PublicStartCtrl', ['$scope', '$window', '$state', 'publicService', 'moduleId', 'extid', 'moduleDataService',
-    function ($scope, $window, $state, publicService, moduleId, extid, moduleDataService) {
+  .controller('PublicStartCtrl', ['$scope', '$window', '$state', 'publicService', 'moduleId', 'extid', 'condition', 'moduleDataService',
+    function ($scope, $window, $state, publicService, moduleId, extid, condition, moduleDataService) {
 
     $scope.validModule = false;
     publicService.setExtId(extid);
+    publicService.setExtCondition(condition);
 
     if (moduleId !== '') {
       moduleDataService.getPublicModule(moduleId).then(function(module) {

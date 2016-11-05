@@ -6,9 +6,9 @@ var ListIterator = function() {
 };
 
 // logic to select the next element
-ListIterator.prototype.selectNextElement = function(currentStack) {
+ListIterator.prototype.selectNextElement = function(currentStack, sessionCondition) {
   if (this.iter === null || !this.iter.hasNext()) {
-    if (this.canCreateIterator()) {
+    if (this.canCreateIterator(sessionCondition)) {
       this.createIterator(currentStack);
       this.executedIterations++;
     } else {
@@ -35,8 +35,19 @@ ListIterator.prototype.selectNextElement = function(currentStack) {
 };
 
 // checks whether we can continue iterating
-ListIterator.prototype.canCreateIterator = function() {
-  return ((this.executedIterations < this.numIterations) || (this.numIterations < 0));
+ListIterator.prototype.canCreateIterator = function(sessionCondition) {
+  var isIterator = false;
+  if (!this.condition || this.condition === '') {
+    isIterator = true;
+  } else if(this.condition === sessionCondition){
+    isIterator = true;
+  }
+
+  if (isIterator) {
+    isIterator = (this.executedIterations < this.numIterations) || (this.numIterations < 0);
+  }
+  
+  return isIterator;
 };
 
 // creates a simple iterator over child elements

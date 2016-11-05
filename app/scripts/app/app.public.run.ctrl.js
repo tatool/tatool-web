@@ -9,6 +9,7 @@ angular.module('tatool.app')
 
     var moduleId = publicService.getModuleId();
     var extid = publicService.getExtId();
+    var extCondition = publicService.getExtCondition();
 
     // module listener
     var moduleListener = function(e) {
@@ -83,7 +84,8 @@ angular.module('tatool.app')
       // set the moduleId as a session property
       $window.sessionStorage.setItem('moduleId', moduleId);
       $window.sessionStorage.setItem('mode', cfg.APP_MODE_PUBLIC);
-      
+      $window.sessionStorage.setItem('extCondition', extCondition);
+
       // open moduleUrl in Iframe
       if (moduleId) {
         startSpinner('Loading module...');

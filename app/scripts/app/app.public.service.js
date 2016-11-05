@@ -17,6 +17,10 @@ angular.module('tatool.app')
       return this.extId;
     };
 
+    publicStart.getExtCondition = function() {
+      return this.extCondition;
+    };
+
     publicStart.getSessionToken = function() {
       return this.module.lastSessionToken;
     };
@@ -27,6 +31,10 @@ angular.module('tatool.app')
 
     publicStart.setExtId = function(extId) {
       this.extId = extId;
+    };
+
+    publicStart.setExtCondition = function(extCondition) {
+      this.extCondition = extCondition;
     };
 
     return publicStart;
