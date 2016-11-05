@@ -413,7 +413,7 @@ angular.module('tatool.app')
         moduleHierarchy: {
           tatoolType: 'List',
           label: 'Task List',
-          iterator: { customType: 'ListIterator', numIterations: 1 },
+          iterator: { customType: 'ListIterator', numIterations: 1, order: 'sequential' },
           children: []
         }
       };

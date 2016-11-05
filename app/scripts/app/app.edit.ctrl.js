@@ -123,7 +123,7 @@ angular.module('tatool.app')
         var list = {
           'tatoolType': 'List',
           'name': (Math.random().toString(36)+'00000000000000000').slice(2,16+2),
-          'iterator': { 'customType' : 'ListIterator', 'numIterations' : 1 },
+          'iterator': { 'customType' : 'ListIterator', 'numIterations' : 1, 'order' : 'sequential' },
           'handlers': [  ],
           'children': [  ]
         };
@@ -145,7 +145,7 @@ angular.module('tatool.app')
         var list = {
           'tatoolType': 'Dual',
           'name': (Math.random().toString(36)+'00000000000000000').slice(2,16+2),
-          'iterator': { 'customType' : 'ListIterator', 'numIterations' : 1 },
+          'iterator': { 'customType' : 'ListIterator', 'numIterations' : 1, 'order' : 'sequential'  },
           'handlers': [  ],
           'children': { }
         };
@@ -742,6 +742,11 @@ angular.module('tatool.app')
           // add default numIterations of 1
           if(!element.iterator.numIterations || element.iterator.numIterations === '') {
             element.iterator.numIterations = 1;
+          } 
+
+          // add default order to sequential
+          if(element.tatoolType === 'List' && (!element.iterator.order || element.iterator.order === '')) {
+            element.iterator.order = 'sequential';
           } 
 
           // add default handler names if not provided
