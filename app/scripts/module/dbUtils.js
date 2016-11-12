@@ -44,6 +44,11 @@ angular.module('tatool.module')
       return moduleService.getMaxSessionId();
     };
 
+    // get trial number
+    utils.getTrialNr = function() {
+      return moduleService.getMaxTrialId();
+    };
+
     // set session condition
     utils.setSessionCondition = function(condition) {
       return moduleService.setSessionCondition(condition);
