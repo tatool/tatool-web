@@ -4,10 +4,12 @@ angular.module('tatool.auth').factory('authInterceptor', [ '$log', '$rootScope',
   function ($log, $rootScope, $q, $window, $injector, cfg, messageService, spinnerService) {
   return {
     request: function (config) {
-      config.headers = config.headers || {};
-      var token = $window.sessionStorage.getItem('token');
-      if (token) {
-        config.headers.Authorization = 'Bearer ' + token;
+      if (!config.skipauth) {
+        config.headers = config.headers || {};
+        var token = $window.sessionStorage.getItem('token');
+        if (token) {
+          config.headers.Authorization = 'Bearer ' + token;
+        }
       }
       return config;
     },

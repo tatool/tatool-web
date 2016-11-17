@@ -164,7 +164,7 @@ angular.module('tatool.module')
     var getExternalResource = function(resUrl) {
       var deferred = $q.defer();
 
-      $http.get(resUrl)
+      $http.get(resUrl, {skipauth: true})
         .success(function (data) {
           deferred.resolve(data);
         })
@@ -218,7 +218,7 @@ angular.module('tatool.module')
         header = false;
       }
 
-      $http.get(resUrl)
+      $http.get(resUrl, {skipauth: true})
         .success(function (data) {
           var csv = Papa.parse(data, {header: header, dynamicTyping: true, skipEmptyLines: true});
           if (header && stimuliPath) {
