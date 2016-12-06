@@ -74,9 +74,9 @@ tatool
     }
 
     function changeInstruction(index) {
-      if (service.pages) {
+      if (service.pages && service.pages.propertyValue.length > 0) {
         $scope.currentPage = $scope.urls[index].resourceName;
-      } else if (service.images) {
+      } else if (service.images && service.images.propertyValue.length > 0) {
         $scope.currentImage = $scope.urls[index];
       } else {
         console.error('Error: missing pages or images Property.');
