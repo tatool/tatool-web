@@ -14,7 +14,7 @@
 
 <h3 id="nodejs">Install nodeJS<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
 
-<p><img src="../../images/doc/nodejs-logo.png"><br><br>Get the latest download for your operating system from <a href="http://nodejs.org/" target="_blank">http://nodejs.org/</a> and follow the instructions on their page to install it.</p>
+<p><img src="../../images/doc/nodejs-logo.png"><br><br>Get the latest <b>node.js LTS</b> download for your operating system from <a href="http://nodejs.org/" target="_blank">http://nodejs.org/</a> and follow the instructions on their page to install it.</p>
 
 <div class="hint">
   <div class="icon red"><i class="fa fa-lightbulb-o fa-2x"></i></div> 
@@ -25,7 +25,7 @@
 
 <p>Type the following command in your terminal window and make sure you get a response indicating your version of nodeJS. If you don't see the version of your nodeJS, something went wrong with your installation and you'll need to fix it first.</p>
 <pre><code class="language-javascript">$> node --version
-v4.2.6
+v6.9.1
 </code></pre>
 
 <hr class="hr-red">
@@ -45,11 +45,11 @@ git version 2.7.0.windows.1
 
 <p><img src="../../images/doc/mongodb-logo.png"><br><br>Get the latest download for your operating system from <a href="http://www.mongodb.org/downloads" target="_blank">http://www.mongodb.org/downloads</a> and follow the <a href="http://docs.mongodb.org/manual/installation/" target="_blank">instructions</a> on their page to install it. Follow the steps under 'Install MongoDB', and also complete Step 1 under 'Run MongoDB' which will create the necessary data directory for mongoDB.</p>
 
-<p>Type the following command in your terminal window and make sure you get a response indicating your version of mongoDB. If you don't see the version of your mongoDB, something went wrong with your installation and you'll need to fix it first.</p>
+<p>Type the following command in your terminal window and make sure you get a response indicating your version of mongoDB. If you don't see the version of your mongoDB, something went wrong with your installation and you'll need to fix it first. The cd command changes your directory to the directory where you installed your mongodb.</p>
 <pre><code class="language-javascript">$> cd mongodb
 $mongodb> cd bin
 $mongodb\bin> mongo -version
-MongoDB shell version: 3.0.4
+MongoDB shell version: 3.2.8
 </code></pre>
 
 <hr class="hr-red">
@@ -60,7 +60,7 @@ MongoDB shell version: 3.0.4
 
 <p>After having downloaded/extracted the tatool-web code to where you want to run Tatool from, you'll have to run a few commands to properly install all dependencies.</p>
 
-<p><b>1.</b> Open the folder where you downloaded and extracted tatool-web to in your terminal window.</p>
+<p><b>1.</b> Open the folder where you downloaded and extracted tatool-web to in your terminal window. The cd command changes your directory to the directory where you extracted/downloaded the tatool-web data to.</p>
 <pre><code class="language-javascript">$> cd tatool-web
 </code></pre>
 
@@ -69,7 +69,7 @@ The second command checks whether your installation of bower was successful. If 
 <pre><code class="language-javascript">$tatool-web> npm install -g bower
 ...
 $tatool-web> bower -version
-1.7.2
+1.8.0
 </code></pre>
 
 <p><b>3.</b> Enter the first command to install the <b>gulp plugin</b> for nodejs. Gulp is used to build tatool-web.<br>
@@ -77,8 +77,8 @@ The second command checks whether your installation of gulp was successful. If y
 <pre><code class="language-javascript">$tatool-web> npm install -g gulp
 ...
 $tatool-web> gulp -version
-[20:38:17] CLI version 3.8.8
-[20:38:17] Local version undefined
+[20:38:17] CLI version 3.9.1
+[20:38:17] Local version 3.9.0
 </code></pre>
 
 <p><b>4.</b> Run <b>npm install</b> to install Tatool. The command will run bower to download all dependencies and gulp to build the code. On Mac OSX you might need to run this with the <b>sudo</b> command. The installation might take a while the first time. You might also need to run it twice for the first time to make sure everything gets downloaded and built.</p>
