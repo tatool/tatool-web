@@ -14,7 +14,6 @@ angular.module('tatool')
       trialsDBready = false;
     };
 
-    // initialize trials db
     data.openTrialsDB = function(userName, mode, callback) {
       if (trialsDBready && mode === dbMode) {
         if (callback !== null) {
