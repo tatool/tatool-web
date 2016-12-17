@@ -1,0 +1,49 @@
+<h2>Hosting your own Stimuli</h2>
+
+<p>You can use your own stimuli (CSV, images, video) with the Executables on tatool-web.com by making them accessible on a public URL (website). This tutorial shows you how to setup a free account with Cloudinaty to host your stimuli files.</p>
+
+<ul id="docPageNav">
+  <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('create')">Create Free Account</a></li>
+  <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('configure')">Configure Account</a></li>
+  <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('upload')">Upload Stimuli</a></li>
+  <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('use')">Use Stimuli in Tatool Web</a></li>
+</ul>
+
+<hr class="hr-red">
+
+<h3 id="create">Create Free Account<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
+<p>Sign up for a new FREE account at <a href="https://cloudinary.com/users/register/free" target = "_blank">Cloudinary</a>. Make sure you change the assigned "cloud name" in the form to something that makes sense for you as it will be part of your URL to your stimuli later on.</p>
+
+<hr class="hr-red">
+
+<h3 id="configure">Configure Account<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
+
+  <p>After you've signed up and logged into your new Cloudinary account, you have to update the settings slightly. Go to <b>Settings</b> in the left hand menu. Click on the <b>Upload</b> tab at the top. Make sure the dropdown for <b>Use file name in Media Library</b> says <b>Yes</b> as this allows you to refer to your stimuli files by their filename.</p>
+
+<hr class="hr-red">
+
+<h3 id="upload">Upload Stimuli<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
+
+<p>Your account is now ready and you can start uploading your stimuli. Go to <b>Media Library</b> in the left hand menu and start uploading all of your stimuli files (csv, video, images). If you can't see your csv files after the upload you will have to switch to the <b>Files</b> view in the upper right hand corner. As they are kept seperate to images or videos.</p>
+
+<hr class="hr-red">
+
+<h3 id="use">Use Stimuli in Tatool Web<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
+
+<p>In the Tatool Editor change your settings for the Executable Properties <i>stimuliPath</i> and <i>stimuliFile</i> to point to your stimuli in your Cloudinary account. Check the details of your uploaded files to get an idea of what URL to use to link the stimuli from Tatool Web. The URL should consists of your cloud name, the type of file and the file name itself. See the following example templates:</p>
+
+<p>
+<b>stimuliPath:</b> http://res.cloudinary.com/<b>[your cloud name]</b>/image/upload/v1/<br>
+(replace image with video in case of video stimuli)
+</p>
+
+<p>
+<b>stimuliFile:</b> http://res.cloudinary.com/<b>[your cloud name]</b>/raw/upload/v1/<b>[your csv file name]</b>
+</p>
+
+<div class="hint">
+  <div class="icon red"><i class="fa fa-lightbulb-o fa-2x"></i></div> 
+  <div class="text">
+    <p>The <b>stimuliPath</b> allows you to refer to your files just by filename in your stimuli csv file. When Tatool Web loads your stimuli file it will use the stimuliPath as a prefix for your filenames.</p>
+  </div>
+</div>
