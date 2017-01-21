@@ -68,3 +68,7 @@ Session.prototype.getNextTrialId = function() {
 Session.prototype.getMaxTrialId = function() {
   return this.maxTrialId;
 };
+
+Session.prototype.getProperties = function() {
+  return this.sessionProperties;
+};

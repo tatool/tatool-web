@@ -12,29 +12,10 @@ tatool
 
       var self = this;
       if (this.pages && this.pages.propertyValue && this.pages.propertyValue.length > 0) {
-        async.each(this.pages.propertyValue, function(page, callback) {
-          if (page.project.access !== 'external') {
-            executableUtils.getResource(page).then(function(template) {
-                // parse HTML for images and replace with proper resource path
-                var parsedTemplate = $('<div/>').append(template);
-                parsedTemplate.find('img').prop('src',function() {
-                  var res = { project: page.project, resourceType: 'instructions', resourceName: this.getAttribute('src')};
-                  return executableUtils.getResourcePath(res);
-                });
-                $templateCache.put(page.resourceName, parsedTemplate);
-                callback();
-              }, function(error) {
-                callback('Could not find page "' + page.resourceName + '" in instruction "' + self.name + '".');
-              });
-          } else {
-            callback('The Instruction Executable currently doesn\'t support External HTML resources<br><br><li>' + page.resourceName);
-          }
+        this.refreshCache().then(function() {
+          deferred.resolve();
         }, function(err) {
-          if( err ) {
-            deferred.reject(err);
-          } else {
-            deferred.resolve();
-          }
+          deferred.reject(err);
         });
       } else if (this.images && this.images.propertyValue && this.images.propertyValue.length > 0) {
         this.imageUrls = [];
@@ -58,6 +39,35 @@ tatool
       this.inputService = inputServiceFactory.createService();
 
       return deferred;
+    };
+
+    TatoolInstruction.prototype.refreshCache = function() {
+      var deferred = executableUtils.createPromise();
+      async.each(this.pages.propertyValue, function(page, callback) {
+          if (page.project.access !== 'external') {
+            executableUtils.getResource(page).then(function(template) {
+                // parse HTML for images and replace with proper resource path
+                var parsedTemplate = $('<div/>').append(template);
+                parsedTemplate.find('img').prop('src',function() {
+                  var res = { project: page.project, resourceType: 'instructions', resourceName: this.getAttribute('src')};
+                  return executableUtils.getResourcePath(res);
+                });
+                $templateCache.put(page.resourceName, parsedTemplate);
+                callback();
+              }, function(error) {
+                callback('Could not find page "' + page.resourceName + '" in instruction "' + self.name + '".');
+              });
+          } else {
+            callback('The Instruction Executable currently doesn\'t support External HTML resources<br><br><li>' + page.resourceName);
+          }
+        }, function(err) {
+          if( err ) {
+            deferred.reject(err);
+          } else {
+            deferred.resolve();
+          }
+        });
+      return deferred.promise;
     };
 
     TatoolInstruction.prototype.stopExecutable = function() {

@@ -86,6 +86,10 @@ angular.module('tatool.module')
       return module.getProperties();
     };
 
+    moduleService.getSessionProperties = function(sessionId) {
+      return module.getSession(sessionId).getProperties();
+    };
+
     // set a module property (key and value)
     moduleService.setModuleProperty = function(element, propertyKey, propertyValue) {
       var name = (element.name !== undefined) ? element.name : 'undefined';

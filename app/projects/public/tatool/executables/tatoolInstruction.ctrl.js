@@ -7,11 +7,13 @@ tatool
     var PROJECTS_PATH = '../../projects/';
 
     // initialize template variables
+    var sessionNr = moduleService.getMaxSessionId();
     $scope.moduleName = moduleService.getModuleName() ? moduleService.getModuleName() : '';
     $scope.moduleAuthor = moduleService.getModuleAuthor() ? moduleService.getModuleAuthor() : '';
     $scope.moduleVersion = moduleService.getModuleVersion() ? moduleService.getModuleVersion() : '';
-    $scope.sessionNr = moduleService.getMaxSessionId() ? moduleService.getMaxSessionId() : '';
+    $scope.sessionNr = sessionNr ? sessionNr : '';
     $scope.moduleProperties = moduleService.getModuleProperties() ? moduleService.getModuleProperties() : {};
+    $scope.sessionProperties = moduleService.getSessionProperties(sessionNr) ? moduleService.getSessionProperties(sessionNr) : {};
 
     $scope.inputService = service.inputService;
 
@@ -21,20 +23,18 @@ tatool
 
     // start instruction
     $scope.start = function() {
+      $scope.currentIndex = 0;
+      service.inputService.hide();
+      service.inputService.enable();
+
       if (service.pages && service.pages.propertyValue.length > 0) {
-        $scope.currentIndex = 0;
         $scope.urls = service.pages.propertyValue;
-        $scope.currentPage = $scope.urls[$scope.currentIndex].resourceName;
-        service.inputService.hide();
-        service.inputService.enable();
-        $scope.showPagination = true;
+        service.refreshCache().then(changeInstruction(0));
+        showPagination();
       } else if (service.images && service.images.propertyValue.length > 0) {
-        $scope.currentIndex = 0;
         $scope.urls = service.imageUrls;
         $scope.currentImage = $scope.urls[$scope.currentIndex];
-        service.inputService.hide();
-        service.inputService.enable();
-        $scope.showPagination = true;
+        showPagination();
       } else {
         service.stopExecutable();
       }
@@ -68,6 +68,10 @@ tatool
       $scope.currentIndex = index;
       changeInstruction($scope.currentIndex);
     };
+
+    function showPagination() {
+      $scope.showPagination = true;
+    }
 
     function getImagePath(project) {
       return PROJECTS_PATH + project.access + '/' + project.name + '/instructions';
