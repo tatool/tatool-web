@@ -1,5 +1,5 @@
 // Load required packages
-var uuid = require('node-uuid');
+var uuid = require('uuid');
 var User = require('../models/user');
 var Counter = require('../models/counter');
 var UserModule = require('../models/module').userModule;

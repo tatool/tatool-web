@@ -2,7 +2,7 @@
 var User = require('../models/user');
 var Counter = require('../models/counter');
 var simple_recaptcha = require('simple-recaptcha');
-var uuid = require('node-uuid');
+var uuid = require('uuid');
 var postmark = require("postmark")(process.env.POSTMARK_API_KEY);
 
 var nodemailer = require('nodemailer');

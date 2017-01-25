@@ -45,7 +45,7 @@
     "passport-http": "0.3.0",
     "postmark": "0.2.6",
     "q": "1.4.1",
-    "request": "2.69.0",
+    "request": "2.79.0",
     "rimraf": "2.5.1",
     "serve-favicon": "2.3.0",
     "simple-recaptcha": "0.0.3"
