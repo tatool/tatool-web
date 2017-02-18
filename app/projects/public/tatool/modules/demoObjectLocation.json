@@ -1,31 +1,28 @@
 {
-   "name":"Flanker Experiment",
+   "name":"Object Location Memory Experiment",
    "author":"Tatool",
-   "label":"demoFlanker",
+   "label":"demoObjectLocation",
    "export":[
       {
          "mode":"upload",
          "auto":true,
          "enabled":true,
-         "$$hashKey":"object:8845"
+         "$$hashKey":"object:6801"
       },
       {
          "mode":"download",
          "enabled":true,
-         "$$hashKey":"object:8458"
+         "$$hashKey":"object:6474"
       }
    ],
    "allowEscapeKey":true,
-   "fullscreen":true,
+   "fullscreen":false,
    "moduleHierarchy":{
       "tatoolType":"List",
       "iterator":{
          "customType":"ListIterator",
          "numIterations":1
       },
-      "handlers":[
-
-      ],
       "children":[
          {
             "tatoolType":"Executable",
@@ -45,8 +42,16 @@
                         "name":"tatool",
                         "access":"public"
                      },
-                     "resourceName":"tatoolFlanker.html",
+                     "resourceName":"tatoolObjectLocation_01.html",
                      "resourceType":"instructions"
+                  },
+                  {
+                     "project":{
+                        "name":"tatool",
+                        "access":"public"
+                     },
+                     "resourceType":"instructions",
+                     "resourceName":"tatoolObjectLocation_02.html"
                   }
                ]
             }
@@ -64,29 +69,21 @@
          },
          {
             "tatoolType":"List",
-            "name":"squq4uboijh8h0k9",
+            "name":"31cl0hkj2zjdzpvi",
             "iterator":{
                "customType":"ListIterator",
-               "numIterations":20
+               "numIterations":5
             },
             "handlers":[
-               {
-                  "name":"trialCounter",
-                  "customType":"trialCountHandler",
-                  "trialCounterStart":"1",
-                  "reverse":{
-                     "propertyType":"Boolean",
-                     "propertyValue":false
-                  }
-               }
+
             ],
             "children":[
                {
                   "tatoolType":"Executable",
-                  "customType":"tatoolChoiceReaction",
-                  "name":"flanker",
+                  "customType":"tatoolObjectLocation",
+                  "name":"objectLocation",
                   "blankInterval":"350",
-                  "fixationInterval":"150",
+                  "fixationInterval":0,
                   "project":{
                      "name":"tatool",
                      "access":"public"
@@ -97,7 +94,7 @@
                         "name":"tatool-stimuli",
                         "access":"public"
                      },
-                     "resourceName":"choice-flanker-arrows.csv",
+                     "resourceName":"objectLocation-animals.csv",
                      "resourceType":"stimuli"
                   },
                   "stimuliPath":{
@@ -109,21 +106,10 @@
                      "resourceName":"",
                      "resourceType":"stimuli"
                   },
-                  "status":{
-                     "feedbackPanel":true,
-                     "timerPanel":true,
-                     "trialCountPanel":true,
-                     "levelPanel":false
-                  },
                   "randomisation":"full",
-                  "timerEnabled":{
-                     "propertyType":"Boolean",
-                     "propertyValue":true
-                  },
-                  "displayDuration":"2000",
-                  "showKeys":{
-                     "propertyType":"Boolean",
-                     "propertyValue":true
+                  "status":{
+                     "feedbackPanel":false,
+                     "trialCountPanel":false
                   }
                }
             ]
