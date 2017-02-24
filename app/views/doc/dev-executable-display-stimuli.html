@@ -48,7 +48,7 @@
       return promise;
     };
 
-    // custom method to get the next stimulus out of our stimuliList
+    // our custom methods go here
     MyExecutable.prototype.createStimulus = function() {
       var stimulus = executableUtils.getNext(this.stimuliList, this.counter);
       this.stimulusService.set(stimulus);

@@ -126,7 +126,7 @@
 
 <p>As part of our <code>start()</code> method, we add a call to display our input buttons on the screen with the <code>show()</code> method and activate the user input by calling the <code>enable()</code> method on <b>lines 10 and 11</b>. If you want the user to respond via key press only and choose not to display any buttons, you can simply drop the optional <code>show()</code> method. Finally, on <b>line 16</b>, we add the function <code>inputAction()</code> to the <code>$scope</code> object. Within this function, we have to make sure that the user input is deactivated by calling the method <code>disable()</code>, and then hide our stimulus by calling the method <code>hide()</code>. On <b>line 19</b>, we call our <code>stopExecution()</code> method which will stop the current execution once a key is pressed.</p>
 
-<p>Let's edit our Module now so that it executes our Executable several times (e.g., 3 times) instead of only once. When we now execute our Module, we should be able to press the left or right arrow key to finish the current trial and proceed to the next one.</p>
+<p>Let's edit our Module now so that it executes our Executable several times (e.g., 3 times) instead of only once. This can be done in the Module Editor by setting the Iterations on your Task List Element. When we now execute our Module, we should be able to press the left or right arrow key to finish the current trial and proceed to the next one for a total of three trials.</p>
 
 <hr class="hr-red">
 

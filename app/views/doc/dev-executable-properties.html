@@ -39,7 +39,7 @@
 
 <h3 id="service">Adding Properties to the Executable Service<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
 
-<p>Now we can make use of these Properties in our Executable Service code, where we previously manually defined the resource and path location. We can remove the two variable definitions of stimuliFile and stimuliPath and use the Properties instead. Properties are always available on your current object (accessible through <i>this</i>). As you can see on <b>line 6</b> below, we can now access the Properties with this.stimuliFile and this.stimuliPath. From now on you can easily use different stimuli files or allow other users to use their own stimuli files with the Module Editor.</p>
+<p>Now we can make use of these Properties in our Executable Service code, where we previously manually defined the resource and path location. We now need to delete the two variable definitions of stimuliFile and stimuliPath and use the Properties instead. Properties are always available on your current object (accessible through <i>this</i>). As you can see on <b>line 5</b> below, we can now access the Properties with this.stimuliFile and this.stimuliPath. From now on you can easily use different stimuli files or allow other users to use their own stimuli files within the Module Editor. Your new init() method is a lot shorter now as you can see below.</p>
 
 <h4>myExecutable.service.js</h4>
 <pre class="line-numbers"><code class="language-javascript">MyExecutable.prototype.init = function() {

@@ -17,7 +17,7 @@
 
 <p>What does that mean for our task of reading a stimuli file? If we would read our stimuli file synchronously, all other processes would be blocked until the whole file was read and made available in a variable. Instead, calling the read operation asynchronously will return a Promise immediately, but without blocking any other processes. The Promise tells us that the file is being read in the background and we can go on doing other things and check the Promise at a later time for the actual data. At the end of our init() method, we'll return our own Promise in order to notify Tatool that all asynchronous processing is completed once it's actually done.</p> 
 
-<p>Let's take a look at the necessary code to create a Promise, return it and tell Tatool when the Promise has been satisfied (i.e., resolved or rejected). Add the following code to your init() method:</p>
+<p>Let's take a look at the necessary code to create a Promise, return it and tell Tatool when the Promise has been satisfied (i.e., resolved or rejected). You can now replace your existing init() method on line 6-8 with the following code:</p>
 
 <h4>myExecutable.service.js</h4>
 <pre class="line-numbers"><code class="language-javascript">MyExecutable.prototype.init = function() {
