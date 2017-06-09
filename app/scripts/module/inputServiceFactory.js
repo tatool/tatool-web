@@ -63,7 +63,7 @@ angular.module('tatool.module')
 
         // extract key information from stimuli list
         for (var i = 0; i < list.length; i++) {
-          if (list[i].keyCode != undefined && !(list[i].keyCode in keyCodes)) {
+          if (list[i].keyCode !== undefined && !(list[i].keyCode in keyCodes)) {
             keyCodes[list[i].keyCode] = { keyCode: list[i].keyCode, keyLabel: list[i].keyLabel, keyLabelType: list[i].keyLabelType, keyIndex: list[i].keyIndex, response: list[i].response };
           }
         }
