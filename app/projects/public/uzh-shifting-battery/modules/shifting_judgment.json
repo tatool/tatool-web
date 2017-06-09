@@ -1,7 +1,7 @@
 {  
-   "name":"Rule Shifting",
+   "name":"Judgment Shifting",
    "author":"University of Zurich (von Bastian & Druey)",
-   "label":"rule",
+   "label":"judgment",
    "export":[  
       {  
          "mode":"upload",
@@ -28,7 +28,7 @@
          {  
             "tatoolType":"Executable",
             "customType":"tatoolInstruction",
-            "name":"instruction_rule_01_practice",
+            "name":"instruction_judgment_01_practice",
             "blankInterval":0,
             "fixationInterval":0,
             "project":{  
@@ -43,7 +43,7 @@
                         "name":"uzh-shifting-battery",
                         "access":"public"
                      },
-                     "resourceName":"de_rule_01_01.htm",
+                     "resourceName":"de_judgment_01_01.htm",
                      "resourceType":"instructions"
                   },
                   {  
@@ -52,7 +52,7 @@
                         "access":"public"
                      },
                      "resourceType":"instructions",
-                     "resourceName":"de_rule_01_02.htm"
+                     "resourceName":"de_judgment_01_02.htm"
                   },
                   {  
                      "project":{  
@@ -60,7 +60,7 @@
                         "access":"public"
                      },
                      "resourceType":"instructions",
-                     "resourceName":"de_rule_01_03.htm"
+                     "resourceName":"de_judgment_01_03.htm"
                   },
                   {  
                      "project":{  
@@ -68,7 +68,7 @@
                         "access":"public"
                      },
                      "resourceType":"instructions",
-                     "resourceName":"de_rule_01_04.htm"
+                     "resourceName":"de_judgment_01_04.htm"
                   }
                ]
             }
@@ -87,7 +87,7 @@
                {  
                   "tatoolType":"Executable",
                   "customType":"uzhShifting",
-                  "name":"rule_01_practice",
+                  "name":"judgment_01_practice",
                   "blankInterval":"500",
                   "fixationInterval":0,
                   "project":{  
@@ -112,7 +112,7 @@
                         "name":"uzh-shifting-battery",
                         "access":"public"
                      },
-                     "resourceName":"de_shifting_rule_01_practice.csv",
+                     "resourceName":"de_shifting_judgment_01_practice.csv",
                      "resourceType":"stimuli"
                   },
                   "displayCueDuration":"150"
@@ -147,7 +147,7 @@
          {  
             "tatoolType":"Executable",
             "customType":"tatoolInstruction",
-            "name":"instruction_rule_01_test",
+            "name":"instruction_judgment_01_test",
             "blankInterval":0,
             "fixationInterval":0,
             "project":{  
@@ -162,7 +162,7 @@
                         "name":"uzh-shifting-battery",
                         "access":"public"
                      },
-                     "resourceName":"de_rule_01_05.htm",
+                     "resourceName":"de_judgment_01_05.htm",
                      "resourceType":"instructions"
                   }
                ]
@@ -182,7 +182,7 @@
                {  
                   "tatoolType":"Executable",
                   "customType":"uzhShifting",
-                  "name":"rule_01",
+                  "name":"judgment_01",
                   "blankInterval":"500",
                   "fixationInterval":0,
                   "project":{  
@@ -204,7 +204,7 @@
                         "name":"uzh-shifting-battery",
                         "access":"public"
                      },
-                     "resourceName":"de_shifting_rule_01.csv",
+                     "resourceName":"de_shifting_judgment_01.csv",
                      "resourceType":"stimuli"
                   },
                   "displayCueDuration":"150"
@@ -226,7 +226,7 @@
          {  
             "tatoolType":"Executable",
             "customType":"tatoolInstruction",
-            "name":"instruction_rule_02_practice",
+            "name":"instruction_judgment_02_practice",
             "blankInterval":0,
             "fixationInterval":0,
             "project":{  
@@ -241,7 +241,7 @@
                         "name":"uzh-shifting-battery",
                         "access":"public"
                      },
-                     "resourceName":"de_rule_02_01.htm",
+                     "resourceName":"de_judgment_02_01.htm",
                      "resourceType":"instructions"
                   },
                   {  
@@ -250,7 +250,7 @@
                         "access":"public"
                      },
                      "resourceType":"instructions",
-                     "resourceName":"de_rule_02_02.htm"
+                     "resourceName":"de_judgment_02_02.htm"
                   },
                   {  
                      "project":{  
@@ -258,7 +258,7 @@
                         "access":"public"
                      },
                      "resourceType":"instructions",
-                     "resourceName":"de_rule_02_03.htm"
+                     "resourceName":"de_judgment_02_03.htm"
                   },
                   {  
                      "project":{  
@@ -266,7 +266,7 @@
                         "access":"public"
                      },
                      "resourceType":"instructions",
-                     "resourceName":"de_rule_02_04.htm"
+                     "resourceName":"de_judgment_02_04.htm"
                   }
                ]
             }
@@ -285,7 +285,7 @@
                {  
                   "tatoolType":"Executable",
                   "customType":"uzhShifting",
-                  "name":"rule_02_practice",
+                  "name":"judgment_02_practice",
                   "blankInterval":0,
                   "fixationInterval":0,
                   "project":{  
@@ -307,7 +307,7 @@
                         "name":"uzh-shifting-battery",
                         "access":"public"
                      },
-                     "resourceName":"de_shifting_rule_02_practice.csv",
+                     "resourceName":"de_shifting_judgment_02_practice.csv",
                      "resourceType":"stimuli"
                   },
                   "displayCueDuration":"150"
@@ -329,7 +329,7 @@
          {  
             "tatoolType":"Executable",
             "customType":"tatoolInstruction",
-            "name":"instruction_rule_02_test",
+            "name":"instruction_judgment_02_test",
             "blankInterval":0,
             "fixationInterval":0,
             "project":{  
@@ -344,7 +344,7 @@
                         "name":"uzh-shifting-battery",
                         "access":"public"
                      },
-                     "resourceName":"de_rule_02_05.htm",
+                     "resourceName":"de_judgment_02_05.htm",
                      "resourceType":"instructions"
                   }
                ]
@@ -364,7 +364,7 @@
                {  
                   "tatoolType":"Executable",
                   "customType":"uzhShifting",
-                  "name":"rule_02",
+                  "name":"judgment_02",
                   "blankInterval":"500",
                   "fixationInterval":0,
                   "project":{  
@@ -386,7 +386,7 @@
                         "name":"uzh-shifting-battery",
                         "access":"public"
                      },
-                     "resourceName":"de_shifting_rule_02.csv",
+                     "resourceName":"de_shifting_judgment_02.csv",
                      "resourceType":"stimuli"
                   },
                   "displayCueDuration":"150"
@@ -408,7 +408,7 @@
          {  
             "tatoolType":"Executable",
             "customType":"tatoolInstruction",
-            "name":"instruction_rule_03_practice",
+            "name":"instruction_judgment_03_practice",
             "blankInterval":0,
             "fixationInterval":0,
             "project":{  
@@ -423,7 +423,7 @@
                         "name":"uzh-shifting-battery",
                         "access":"public"
                      },
-                     "resourceName":"de_rule_03_01.htm",
+                     "resourceName":"de_judgment_03_01.htm",
                      "resourceType":"instructions"
                   },
                   {  
@@ -432,7 +432,7 @@
                         "access":"public"
                      },
                      "resourceType":"instructions",
-                     "resourceName":"de_rule_03_02.htm"
+                     "resourceName":"de_judgment_03_02.htm"
                   },
                   {  
                      "project":{  
@@ -440,7 +440,7 @@
                         "access":"public"
                      },
                      "resourceType":"instructions",
-                     "resourceName":"de_rule_03_03.htm"
+                     "resourceName":"de_judgment_03_03.htm"
                   },
                   {  
                      "project":{  
@@ -448,7 +448,7 @@
                         "access":"public"
                      },
                      "resourceType":"instructions",
-                     "resourceName":"de_rule_03_04.htm"
+                     "resourceName":"de_judgment_03_04.htm"
                   }
                ]
             }
@@ -467,7 +467,7 @@
                {  
                   "tatoolType":"Executable",
                   "customType":"uzhShifting",
-                  "name":"rule_03_practice",
+                  "name":"judgment_03_practice",
                   "blankInterval":0,
                   "fixationInterval":0,
                   "project":{  
@@ -489,7 +489,7 @@
                         "name":"uzh-shifting-battery",
                         "access":"public"
                      },
-                     "resourceName":"de_shifting_rule_03_practice.csv",
+                     "resourceName":"de_shifting_judgment_03_practice.csv",
                      "resourceType":"stimuli"
                   },
                   "displayCueDuration":"150"
@@ -511,7 +511,7 @@
          {  
             "tatoolType":"Executable",
             "customType":"tatoolInstruction",
-            "name":"instruction_rule_03_test",
+            "name":"instruction_judgment_03_test",
             "blankInterval":0,
             "fixationInterval":0,
             "project":{  
@@ -526,7 +526,7 @@
                         "name":"uzh-shifting-battery",
                         "access":"public"
                      },
-                     "resourceName":"de_rule_03_05.htm",
+                     "resourceName":"de_judgment_03_05.htm",
                      "resourceType":"instructions"
                   }
                ]
@@ -546,7 +546,7 @@
                {  
                   "tatoolType":"Executable",
                   "customType":"uzhShifting",
-                  "name":"rule_03",
+                  "name":"judgment_03",
                   "blankInterval":"500",
                   "fixationInterval":0,
                   "project":{  
@@ -568,7 +568,7 @@
                         "name":"uzh-shifting-battery",
                         "access":"public"
                      },
-                     "resourceName":"de_shifting_rule_03.csv",
+                     "resourceName":"de_shifting_judgment_03.csv",
                      "resourceType":"stimuli"
                   },
                   "displayCueDuration":"150"
@@ -590,7 +590,7 @@
          {  
             "tatoolType":"Executable",
             "customType":"tatoolInstruction",
-            "name":"instruction_rule_04_practice",
+            "name":"instruction_judgment_04_practice",
             "blankInterval":0,
             "fixationInterval":0,
             "project":{  
@@ -605,7 +605,7 @@
                         "name":"uzh-shifting-battery",
                         "access":"public"
                      },
-                     "resourceName":"de_rule_04_01.htm",
+                     "resourceName":"de_judgment_04_01.htm",
                      "resourceType":"instructions"
                   },
                   {  
@@ -614,7 +614,7 @@
                         "access":"public"
                      },
                      "resourceType":"instructions",
-                     "resourceName":"de_rule_04_02.htm"
+                     "resourceName":"de_judgment_04_02.htm"
                   },
                   {  
                      "project":{  
@@ -622,7 +622,7 @@
                         "access":"public"
                      },
                      "resourceType":"instructions",
-                     "resourceName":"de_rule_04_03.htm"
+                     "resourceName":"de_judgment_04_03.htm"
                   },
                   {  
                      "project":{  
@@ -630,7 +630,7 @@
                         "access":"public"
                      },
                      "resourceType":"instructions",
-                     "resourceName":"de_rule_04_04.htm"
+                     "resourceName":"de_judgment_04_04.htm"
                   }
                ]
             }
@@ -649,7 +649,7 @@
                {  
                   "tatoolType":"Executable",
                   "customType":"uzhShifting",
-                  "name":"rule_04_practice",
+                  "name":"judgment_04_practice",
                   "blankInterval":"500",
                   "fixationInterval":0,
                   "project":{  
@@ -671,7 +671,7 @@
                         "name":"uzh-shifting-battery",
                         "access":"public"
                      },
-                     "resourceName":"de_shifting_rule_04_practice.csv",
+                     "resourceName":"de_shifting_judgment_04_practice.csv",
                      "resourceType":"stimuli"
                   },
                   "displayCueDuration":"150"
@@ -693,7 +693,7 @@
          {  
             "tatoolType":"Executable",
             "customType":"tatoolInstruction",
-            "name":"instruction_rule_04_test",
+            "name":"instruction_judgment_04_test",
             "blankInterval":0,
             "fixationInterval":0,
             "project":{  
@@ -708,7 +708,7 @@
                         "name":"uzh-shifting-battery",
                         "access":"public"
                      },
-                     "resourceName":"de_rule_04_05.htm",
+                     "resourceName":"de_judgment_04_05.htm",
                      "resourceType":"instructions"
                   }
                ]
@@ -734,7 +734,7 @@
                {  
                   "tatoolType":"Executable",
                   "customType":"uzhShifting",
-                  "name":"rule_04",
+                  "name":"judgment_04",
                   "blankInterval":"500",
                   "fixationInterval":0,
                   "project":{  
@@ -756,7 +756,7 @@
                         "name":"uzh-shifting-battery",
                         "access":"public"
                      },
-                     "resourceName":"de_shifting_rule_04.csv",
+                     "resourceName":"de_shifting_judgment_04.csv",
                      "resourceType":"stimuli"
                   },
                   "displayCueDuration":"150"
@@ -790,5 +790,5 @@
          }
       ]
    },
-   "description":"Rule Shifting tasks from von Bastian, C. C. & Druey, M. D. (submitted). Shifting between Mental Sets: An Individual Differences Approach to Commonalities and Differences of Task Switching Components."
+   "description":"Judgment Shifting tasks from von Bastian, C. C. & Druey, M. D. (in press). Shifting between mental sets: An individual differences approach to commonalities and differences of task switching components. Journal of Experimental Psychology: General. doi: 10.1037/xge0000333"
 }

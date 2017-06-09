@@ -1,0 +1,146 @@
+keyCount,stimulusType,stimulusValue,stimulusValueType,cueValue,cueValueType,correctResponse,shiftingType,keyCode1,response1,keyIndex1,keyCode2,response2,keyIndex2
+2,animacy,judgment_02_camel.png,image,cue_animacy.png,image,living,start,ArrowLeft,living,0,ArrowRight,non-living,1
+2,airyness,judgment_02_bird.png,image,cue_airyness.png,image,flying,switch,ArrowLeft,flying,0,ArrowRight,not flying,1
+2,animacy,judgment_02_wood.png,image,cue_animacy.png,image,non-living,switch,ArrowLeft,living,0,ArrowRight,non-living,1
+2,airyness,judgment_02_arrow.png,image,cue_airyness.png,image,flying,switch,ArrowLeft,flying,0,ArrowRight,not flying,1
+2,airyness,judgment_02_bird.png,image,cue_airyness.png,image,flying,repetition,ArrowLeft,flying,0,ArrowRight,not flying,1
+2,animacy,judgment_02_crab.png,image,cue_animacy.png,image,living,switch,ArrowLeft,living,0,ArrowRight,non-living,1
+2,animacy,judgment_02_butterfly.png,image,cue_animacy.png,image,living,repetition,ArrowLeft,living,0,ArrowRight,non-living,1
+2,airyness,judgment_02_crab.png,image,cue_airyness.png,image,not flying,switch,ArrowLeft,flying,0,ArrowRight,not flying,1
+2,airyness,judgment_02_arrow.png,image,cue_airyness.png,image,flying,repetition,ArrowLeft,flying,0,ArrowRight,not flying,1
+2,animacy,judgment_02_bird.png,image,cue_animacy.png,image,living,switch,ArrowLeft,living,0,ArrowRight,non-living,1
+2,airyness,judgment_02_fish.png,image,cue_airyness.png,image,not flying,switch,ArrowLeft,flying,0,ArrowRight,not flying,1
+2,airyness,judgment_02_camel.png,image,cue_airyness.png,image,not flying,repetition,ArrowLeft,flying,0,ArrowRight,not flying,1
+2,animacy,judgment_02_wood.png,image,cue_animacy.png,image,non-living,switch,ArrowLeft,living,0,ArrowRight,non-living,1
+2,animacy,judgment_02_bat.png,image,cue_animacy.png,image,living,repetition,ArrowLeft,living,0,ArrowRight,non-living,1
+2,airyness,judgment_02_balloon.png,image,cue_airyness.png,image,flying,switch,ArrowLeft,flying,0,ArrowRight,not flying,1
+2,airyness,judgment_02_banjo.png,image,cue_airyness.png,image,not flying,repetition,ArrowLeft,flying,0,ArrowRight,not flying,1
+2,animacy,judgment_02_bat.png,image,cue_animacy.png,image,living,switch,ArrowLeft,living,0,ArrowRight,non-living,1
+2,airyness,judgment_02_crab.png,image,cue_airyness.png,image,not flying,switch,ArrowLeft,flying,0,ArrowRight,not flying,1
+2,airyness,judgment_02_bat.png,image,cue_airyness.png,image,flying,repetition,ArrowLeft,flying,0,ArrowRight,not flying,1
+2,airyness,judgment_02_bench.png,image,cue_airyness.png,image,not flying,repetition,ArrowLeft,flying,0,ArrowRight,not flying,1
+2,animacy,judgment_02_arrow.png,image,cue_animacy.png,image,non-living,switch,ArrowLeft,living,0,ArrowRight,non-living,1
+2,animacy,judgment_02_fish.png,image,cue_animacy.png,image,living,repetition,ArrowLeft,living,0,ArrowRight,non-living,1
+2,airyness,judgment_02_bench.png,image,cue_airyness.png,image,not flying,switch,ArrowLeft,flying,0,ArrowRight,not flying,1
+2,animacy,judgment_02_crab.png,image,cue_animacy.png,image,living,switch,ArrowLeft,living,0,ArrowRight,non-living,1
+2,airyness,judgment_02_wood.png,image,cue_airyness.png,image,not flying,switch,ArrowLeft,flying,0,ArrowRight,not flying,1
+2,animacy,judgment_02_kite.png,image,cue_animacy.png,image,non-living,switch,ArrowLeft,living,0,ArrowRight,non-living,1
+2,animacy,judgment_02_bat.png,image,cue_animacy.png,image,living,repetition,ArrowLeft,living,0,ArrowRight,non-living,1
+2,animacy,judgment_02_camel.png,image,cue_animacy.png,image,living,repetition,ArrowLeft,living,0,ArrowRight,non-living,1
+2,airyness,judgment_02_wood.png,image,cue_airyness.png,image,not flying,switch,ArrowLeft,flying,0,ArrowRight,not flying,1
+2,animacy,judgment_02_kite.png,image,cue_animacy.png,image,non-living,switch,ArrowLeft,living,0,ArrowRight,non-living,1
+2,animacy,judgment_02_banjo.png,image,cue_animacy.png,image,non-living,repetition,ArrowLeft,living,0,ArrowRight,non-living,1
+2,airyness,judgment_02_bird.png,image,cue_airyness.png,image,flying,switch,ArrowLeft,flying,0,ArrowRight,not flying,1
+2,airyness,judgment_02_butterfly.png,image,cue_airyness.png,image,flying,repetition,ArrowLeft,flying,0,ArrowRight,not flying,1
+2,animacy,judgment_02_kite.png,image,cue_animacy.png,image,non-living,switch,ArrowLeft,living,0,ArrowRight,non-living,1
+2,animacy,judgment_02_butterfly.png,image,cue_animacy.png,image,living,repetition,ArrowLeft,living,0,ArrowRight,non-living,1
+2,animacy,judgment_02_arrow.png,image,cue_animacy.png,image,non-living,repetition,ArrowLeft,living,0,ArrowRight,non-living,1
+2,airyness,judgment_02_banjo.png,image,cue_airyness.png,image,not flying,switch,ArrowLeft,flying,0,ArrowRight,not flying,1
+2,airyness,judgment_02_butterfly.png,image,cue_airyness.png,image,flying,repetition,ArrowLeft,flying,0,ArrowRight,not flying,1
+2,airyness,judgment_02_bird.png,image,cue_airyness.png,image,flying,repetition,ArrowLeft,flying,0,ArrowRight,not flying,1
+2,animacy,judgment_02_camel.png,image,cue_animacy.png,image,living,switch,ArrowLeft,living,0,ArrowRight,non-living,1
+2,airyness,judgment_02_bench.png,image,cue_airyness.png,image,not flying,switch,ArrowLeft,flying,0,ArrowRight,not flying,1
+2,airyness,judgment_02_banjo.png,image,cue_airyness.png,image,not flying,repetition,ArrowLeft,flying,0,ArrowRight,not flying,1
+2,airyness,judgment_02_fish.png,image,cue_airyness.png,image,not flying,repetition,ArrowLeft,flying,0,ArrowRight,not flying,1
+2,airyness,judgment_02_bench.png,image,cue_airyness.png,image,not flying,repetition,ArrowLeft,flying,0,ArrowRight,not flying,1
+2,animacy,judgment_02_fish.png,image,cue_animacy.png,image,living,switch,ArrowLeft,living,0,ArrowRight,non-living,1
+2,animacy,judgment_02_balloon.png,image,cue_animacy.png,image,non-living,repetition,ArrowLeft,living,0,ArrowRight,non-living,1
+2,airyness,judgment_02_crab.png,image,cue_airyness.png,image,not flying,switch,ArrowLeft,flying,0,ArrowRight,not flying,1
+2,animacy,judgment_02_wood.png,image,cue_animacy.png,image,non-living,switch,ArrowLeft,living,0,ArrowRight,non-living,1
+2,animacy,judgment_02_camel.png,image,cue_animacy.png,image,living,repetition,ArrowLeft,living,0,ArrowRight,non-living,1
+2,airyness,judgment_02_bat.png,image,cue_airyness.png,image,flying,switch,ArrowLeft,flying,0,ArrowRight,not flying,1
+2,airyness,judgment_02_camel.png,image,cue_airyness.png,image,not flying,repetition,ArrowLeft,flying,0,ArrowRight,not flying,1
+2,airyness,judgment_02_kite.png,image,cue_airyness.png,image,flying,repetition,ArrowLeft,flying,0,ArrowRight,not flying,1
+2,airyness,judgment_02_wood.png,image,cue_airyness.png,image,not flying,repetition,ArrowLeft,flying,0,ArrowRight,not flying,1
+2,animacy,judgment_02_arrow.png,image,cue_animacy.png,image,non-living,switch,ArrowLeft,living,0,ArrowRight,non-living,1
+2,airyness,judgment_02_balloon.png,image,cue_airyness.png,image,flying,switch,ArrowLeft,flying,0,ArrowRight,not flying,1
+2,airyness,judgment_02_kite.png,image,cue_airyness.png,image,flying,repetition,ArrowLeft,flying,0,ArrowRight,not flying,1
+2,airyness,judgment_02_fish.png,image,cue_airyness.png,image,not flying,repetition,ArrowLeft,flying,0,ArrowRight,not flying,1
+2,animacy,judgment_02_banjo.png,image,cue_animacy.png,image,non-living,switch,ArrowLeft,living,0,ArrowRight,non-living,1
+2,airyness,judgment_02_butterfly.png,image,cue_airyness.png,image,flying,switch,ArrowLeft,flying,0,ArrowRight,not flying,1
+2,animacy,judgment_02_crab.png,image,cue_animacy.png,image,living,switch,ArrowLeft,living,0,ArrowRight,non-living,1
+2,animacy,judgment_02_balloon.png,image,cue_animacy.png,image,non-living,repetition,ArrowLeft,living,0,ArrowRight,non-living,1
+2,airyness,judgment_02_butterfly.png,image,cue_airyness.png,image,flying,switch,ArrowLeft,flying,0,ArrowRight,not flying,1
+2,animacy,judgment_02_bird.png,image,cue_animacy.png,image,living,switch,ArrowLeft,living,0,ArrowRight,non-living,1
+2,animacy,judgment_02_arrow.png,image,cue_animacy.png,image,non-living,repetition,ArrowLeft,living,0,ArrowRight,non-living,1
+2,airyness,judgment_02_bat.png,image,cue_airyness.png,image,flying,switch,ArrowLeft,flying,0,ArrowRight,not flying,1
+2,airyness,judgment_02_wood.png,image,cue_airyness.png,image,not flying,repetition,ArrowLeft,flying,0,ArrowRight,not flying,1
+2,animacy,judgment_02_crab.png,image,cue_animacy.png,image,living,switch,ArrowLeft,living,0,ArrowRight,non-living,1
+2,animacy,judgment_02_bird.png,image,cue_animacy.png,image,living,repetition,ArrowLeft,living,0,ArrowRight,non-living,1
+2,animacy,judgment_02_kite.png,image,cue_animacy.png,image,non-living,repetition,ArrowLeft,living,0,ArrowRight,non-living,1
+2,airyness,judgment_02_balloon.png,image,cue_airyness.png,image,flying,switch,ArrowLeft,flying,0,ArrowRight,not flying,1
+2,animacy,judgment_02_bat.png,image,cue_animacy.png,image,living,switch,ArrowLeft,living,0,ArrowRight,non-living,1
+2,airyness,judgment_02_bench.png,image,cue_airyness.png,image,not flying,switch,ArrowLeft,flying,0,ArrowRight,not flying,1
+2,airyness,judgment_02_crab.png,image,cue_airyness.png,image,not flying,repetition,ArrowLeft,flying,0,ArrowRight,not flying,1
+2,airyness,judgment_02_arrow.png,image,cue_airyness.png,image,flying,repetition,ArrowLeft,flying,0,ArrowRight,not flying,1
+2,animacy,judgment_02_fish.png,image,cue_animacy.png,image,living,switch,ArrowLeft,living,0,ArrowRight,non-living,1
+2,animacy,judgment_02_bench.png,image,cue_animacy.png,image,non-living,repetition,ArrowLeft,living,0,ArrowRight,non-living,1
+2,animacy,judgment_02_bat.png,image,cue_animacy.png,image,living,repetition,ArrowLeft,living,0,ArrowRight,non-living,1
+2,animacy,judgment_02_bench.png,image,cue_animacy.png,image,non-living,repetition,ArrowLeft,living,0,ArrowRight,non-living,1
+2,airyness,judgment_02_kite.png,image,cue_airyness.png,image,flying,switch,ArrowLeft,flying,0,ArrowRight,not flying,1
+2,animacy,judgment_02_bird.png,image,cue_animacy.png,image,living,switch,ArrowLeft,living,0,ArrowRight,non-living,1
+2,animacy,judgment_02_butterfly.png,image,cue_animacy.png,image,living,repetition,ArrowLeft,living,0,ArrowRight,non-living,1
+2,animacy,judgment_02_bird.png,image,cue_animacy.png,image,living,repetition,ArrowLeft,living,0,ArrowRight,non-living,1
+2,airyness,judgment_02_fish.png,image,cue_airyness.png,image,not flying,switch,ArrowLeft,flying,0,ArrowRight,not flying,1
+2,airyness,judgment_02_banjo.png,image,cue_airyness.png,image,not flying,repetition,ArrowLeft,flying,0,ArrowRight,not flying,1
+2,animacy,judgment_02_balloon.png,image,cue_animacy.png,image,non-living,switch,ArrowLeft,living,0,ArrowRight,non-living,1
+2,airyness,judgment_02_balloon.png,image,cue_airyness.png,image,flying,switch,ArrowLeft,flying,0,ArrowRight,not flying,1
+2,animacy,judgment_02_bench.png,image,cue_animacy.png,image,non-living,switch,ArrowLeft,living,0,ArrowRight,non-living,1
+2,animacy,judgment_02_banjo.png,image,cue_animacy.png,image,non-living,repetition,ArrowLeft,living,0,ArrowRight,non-living,1
+2,airyness,judgment_02_bat.png,image,cue_airyness.png,image,flying,switch,ArrowLeft,flying,0,ArrowRight,not flying,1
+2,animacy,judgment_02_bird.png,image,cue_animacy.png,image,living,switch,ArrowLeft,living,0,ArrowRight,non-living,1
+2,animacy,judgment_02_butterfly.png,image,cue_animacy.png,image,living,repetition,ArrowLeft,living,0,ArrowRight,non-living,1
+2,animacy,judgment_02_kite.png,image,cue_animacy.png,image,non-living,repetition,ArrowLeft,living,0,ArrowRight,non-living,1
+2,airyness,judgment_02_wood.png,image,cue_airyness.png,image,not flying,switch,ArrowLeft,flying,0,ArrowRight,not flying,1
+2,animacy,judgment_02_banjo.png,image,cue_animacy.png,image,non-living,switch,ArrowLeft,living,0,ArrowRight,non-living,1
+2,airyness,judgment_02_arrow.png,image,cue_airyness.png,image,flying,switch,ArrowLeft,flying,0,ArrowRight,not flying,1
+2,airyness,judgment_02_kite.png,image,cue_airyness.png,image,flying,repetition,ArrowLeft,flying,0,ArrowRight,not flying,1
+2,airyness,judgment_02_wood.png,image,cue_airyness.png,image,not flying,repetition,ArrowLeft,flying,0,ArrowRight,not flying,1
+2,airyness,judgment_02_camel.png,image,cue_airyness.png,image,not flying,repetition,ArrowLeft,flying,0,ArrowRight,not flying,1
+2,animacy,judgment_02_crab.png,image,cue_animacy.png,image,living,switch,ArrowLeft,living,0,ArrowRight,non-living,1
+2,airyness,judgment_02_balloon.png,image,cue_airyness.png,image,flying,switch,ArrowLeft,flying,0,ArrowRight,not flying,1
+2,airyness,judgment_02_fish.png,image,cue_airyness.png,image,not flying,repetition,ArrowLeft,flying,0,ArrowRight,not flying,1
+2,airyness,judgment_02_bird.png,image,cue_airyness.png,image,flying,repetition,ArrowLeft,flying,0,ArrowRight,not flying,1
+2,airyness,judgment_02_arrow.png,image,cue_airyness.png,image,flying,repetition,ArrowLeft,flying,0,ArrowRight,not flying,1
+2,animacy,judgment_02_butterfly.png,image,cue_animacy.png,image,living,switch,ArrowLeft,living,0,ArrowRight,non-living,1
+2,animacy,judgment_02_arrow.png,image,cue_animacy.png,image,non-living,repetition,ArrowLeft,living,0,ArrowRight,non-living,1
+2,animacy,judgment_02_kite.png,image,cue_animacy.png,image,non-living,repetition,ArrowLeft,living,0,ArrowRight,non-living,1
+2,airyness,judgment_02_camel.png,image,cue_airyness.png,image,not flying,switch,ArrowLeft,flying,0,ArrowRight,not flying,1
+2,airyness,judgment_02_bat.png,image,cue_airyness.png,image,flying,repetition,ArrowLeft,flying,0,ArrowRight,not flying,1
+2,airyness,judgment_02_kite.png,image,cue_airyness.png,image,flying,repetition,ArrowLeft,flying,0,ArrowRight,not flying,1
+2,animacy,judgment_02_fish.png,image,cue_animacy.png,image,living,switch,ArrowLeft,living,0,ArrowRight,non-living,1
+2,animacy,judgment_02_balloon.png,image,cue_animacy.png,image,non-living,repetition,ArrowLeft,living,0,ArrowRight,non-living,1
+2,animacy,judgment_02_banjo.png,image,cue_animacy.png,image,non-living,repetition,ArrowLeft,living,0,ArrowRight,non-living,1
+2,airyness,judgment_02_fish.png,image,cue_airyness.png,image,not flying,switch,ArrowLeft,flying,0,ArrowRight,not flying,1
+2,airyness,judgment_02_bird.png,image,cue_airyness.png,image,flying,repetition,ArrowLeft,flying,0,ArrowRight,not flying,1
+2,airyness,judgment_02_balloon.png,image,cue_airyness.png,image,flying,repetition,ArrowLeft,flying,0,ArrowRight,not flying,1
+2,animacy,judgment_02_crab.png,image,cue_animacy.png,image,living,switch,ArrowLeft,living,0,ArrowRight,non-living,1
+2,animacy,judgment_02_wood.png,image,cue_animacy.png,image,non-living,repetition,ArrowLeft,living,0,ArrowRight,non-living,1
+2,animacy,judgment_02_bench.png,image,cue_animacy.png,image,non-living,repetition,ArrowLeft,living,0,ArrowRight,non-living,1
+2,airyness,judgment_02_camel.png,image,cue_airyness.png,image,not flying,switch,ArrowLeft,flying,0,ArrowRight,not flying,1
+2,animacy,judgment_02_balloon.png,image,cue_animacy.png,image,non-living,switch,ArrowLeft,living,0,ArrowRight,non-living,1
+2,animacy,judgment_02_fish.png,image,cue_animacy.png,image,living,repetition,ArrowLeft,living,0,ArrowRight,non-living,1
+2,airyness,judgment_02_bat.png,image,cue_airyness.png,image,flying,switch,ArrowLeft,flying,0,ArrowRight,not flying,1
+2,airyness,judgment_02_butterfly.png,image,cue_airyness.png,image,flying,repetition,ArrowLeft,flying,0,ArrowRight,not flying,1
+2,animacy,judgment_02_bench.png,image,cue_animacy.png,image,non-living,switch,ArrowLeft,living,0,ArrowRight,non-living,1
+2,animacy,judgment_02_balloon.png,image,cue_animacy.png,image,non-living,repetition,ArrowLeft,living,0,ArrowRight,non-living,1
+2,animacy,judgment_02_bench.png,image,cue_animacy.png,image,non-living,repetition,ArrowLeft,living,0,ArrowRight,non-living,1
+2,airyness,judgment_02_butterfly.png,image,cue_airyness.png,image,flying,switch,ArrowLeft,flying,0,ArrowRight,not flying,1
+2,airyness,judgment_02_kite.png,image,cue_airyness.png,image,flying,repetition,ArrowLeft,flying,0,ArrowRight,not flying,1
+2,airyness,judgment_02_camel.png,image,cue_airyness.png,image,not flying,repetition,ArrowLeft,flying,0,ArrowRight,not flying,1
+2,animacy,judgment_02_arrow.png,image,cue_animacy.png,image,non-living,switch,ArrowLeft,living,0,ArrowRight,non-living,1
+2,animacy,judgment_02_wood.png,image,cue_animacy.png,image,non-living,repetition,ArrowLeft,living,0,ArrowRight,non-living,1
+2,animacy,judgment_02_camel.png,image,cue_animacy.png,image,living,repetition,ArrowLeft,living,0,ArrowRight,non-living,1
+2,animacy,judgment_02_bat.png,image,cue_animacy.png,image,living,repetition,ArrowLeft,living,0,ArrowRight,non-living,1
+2,airyness,judgment_02_crab.png,image,cue_airyness.png,image,not flying,switch,ArrowLeft,flying,0,ArrowRight,not flying,1
+2,animacy,judgment_02_wood.png,image,cue_animacy.png,image,non-living,switch,ArrowLeft,living,0,ArrowRight,non-living,1
+2,airyness,judgment_02_banjo.png,image,cue_airyness.png,image,not flying,switch,ArrowLeft,flying,0,ArrowRight,not flying,1
+2,airyness,judgment_02_arrow.png,image,cue_airyness.png,image,flying,repetition,ArrowLeft,flying,0,ArrowRight,not flying,1
+2,animacy,judgment_02_banjo.png,image,cue_animacy.png,image,non-living,switch,ArrowLeft,living,0,ArrowRight,non-living,1
+2,airyness,judgment_02_crab.png,image,cue_airyness.png,image,not flying,switch,ArrowLeft,flying,0,ArrowRight,not flying,1
+2,animacy,judgment_02_camel.png,image,cue_animacy.png,image,living,switch,ArrowLeft,living,0,ArrowRight,non-living,1
+2,animacy,judgment_02_fish.png,image,cue_animacy.png,image,living,repetition,ArrowLeft,living,0,ArrowRight,non-living,1
+2,animacy,judgment_02_butterfly.png,image,cue_animacy.png,image,living,repetition,ArrowLeft,living,0,ArrowRight,non-living,1
+2,airyness,judgment_02_bench.png,image,cue_airyness.png,image,not flying,switch,ArrowLeft,flying,0,ArrowRight,not flying,1
+2,airyness,judgment_02_banjo.png,image,cue_airyness.png,image,not flying,repetition,ArrowLeft,flying,0,ArrowRight,not flying,1
+2,animacy,judgment_02_camel.png,image,cue_animacy.png,image,living,switch,ArrowLeft,living,0,ArrowRight,non-living,1
