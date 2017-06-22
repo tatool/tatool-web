@@ -25,6 +25,9 @@ exports.register = function(req, res) {
       user.email = req.body.userName;
       user.password = req.body.userPassword;
       user.roles.push('user');
+      if (req.body.devAccess) {
+        user.roles.push('developer');
+      }
       user.verified = false;
       user.fullName = req.body.fullname;
       user.affiliation = req.body.affiliation;
