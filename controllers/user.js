@@ -27,6 +27,7 @@ exports.register = function(req, res) {
       user.roles.push('user');
       if (req.body.devAccess) {
         user.roles.push('developer');
+        user.roles.push('analytics');
       }
       user.verified = false;
       user.fullName = req.body.fullname;
