@@ -8,7 +8,7 @@
     "url": "http://github.com/tatool/tatool-web.git"
   },
   "engines": {
-    "node": "4.2.x"
+    "node": "4.8.x"
   },
   "dependencies": {
     "archiver": "0.21.0",
