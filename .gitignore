@@ -8,4 +8,5 @@ uploads
 .env
 .envprod
 app/projects/private/*
+app/projects/public/myExperiment/*
 newrelic_agent.log
