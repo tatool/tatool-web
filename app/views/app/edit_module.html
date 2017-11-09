@@ -106,6 +106,26 @@
     </div>
   </div>
 
+  <div class="form-group">
+    <label for="label" class="col-sm-3 control-label">Format
+      <a class="info" tooltip="Choose the CSV export format." tooltip-placement="right"><i class="fa fa-info-circle"></i></a>
+    </label>
+    <div class="col-sm-9">
+      <label class="radio-inline radio-inline-up">
+        <input type="radio" ng-model="module.exportFormat" name="exportFormat" value="long"> Long Format 
+        <span>
+          <a class="info" tooltip="Values with the same property name appear in the same column irrespective of executable. This is the default format." tooltip-placement="right"><i class="fa fa-info-circle"></i></a>
+        </span>
+      </label>
+      <label class="radio-inline radio-inline-up">
+        <input type="radio" ng-model="module.exportFormat" name="exportFormat" value="legacy"> Legacy Format
+        <span>
+          <a class="info" tooltip="Every executable property gets its own column." tooltip-placement="right"><i class="fa fa-info-circle"></i></a>
+        </span>
+      </label>
+    </div>
+  </div>
+
 </form>
 
 </div>

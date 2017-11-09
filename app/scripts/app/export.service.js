@@ -88,7 +88,7 @@ angular.module('tatool.app')
       return sessionProperties;
     };
 
-    function convertToCsv(allTrials, moduleProperties, sessionProperties, moduleLabel, delimiter) {
+    function convertToCsv(allTrials, moduleProperties, sessionProperties, moduleLabel, delimiter, format) {
       var output = '';
       var trials = allTrials;
       var header = ['userCode', 'extId', 'moduleId', 'sessionId', 'sessionToken', 'trialId', 'executableId'];
@@ -141,7 +141,7 @@ angular.module('tatool.app')
         // add trial properties
         var tIndex = 0;
         for (var key in currentTrial) {
-          var prefixedKey = prefix + '.' + key;
+          var prefixedKey = (format === 'long') ? key : prefix + '.' + key;
  
           // exclude technical keys
           if (key.substring(0,1) !== '_' ) {
@@ -214,8 +214,9 @@ angular.module('tatool.app')
           var moduleProperties = getModuleProperties(response);
           var sessionProperties = getSessionProperties(response);
           var delimiter = (response.exportDelimiter) ? response.exportDelimiter : cfgApp.CSV_DELIMITER;
+          var format = (response.exportFormat) ? response.exportFormat : 'legacy';
 
-          var csv = convertToCsv(trials, moduleProperties, sessionProperties, response.moduleLabel, delimiter);
+          var csv = convertToCsv(trials, moduleProperties, sessionProperties, response.moduleLabel, delimiter, format);
           deferred.resolve(csv);
         }, function(error) {
           deferred.reject(error);
