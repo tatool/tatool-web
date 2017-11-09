@@ -5,7 +5,8 @@ angular.module('tatool.app', ['tatool', 'tatool.auth', 'tatool.common', 'ngAnima
     IMG_PATH: 'images/app/',
     MODULE_IMG_PATH: 'images/module/',
     VIEW_PATH:'views/app/',
-    CSV_DELIMITER: ';'
+    CSV_DELIMITER: ';',
+    EXPORT_FORMAT: 'long'
   })
   .config(['$stateProvider', function ($stateProvider) {
 
