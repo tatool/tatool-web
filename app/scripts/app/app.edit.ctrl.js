@@ -385,8 +385,6 @@ angular.module('tatool.app')
       };
 
 
-
-
       /*******************/
       // GENERIC PROPERTY METHODS
       /*******************/

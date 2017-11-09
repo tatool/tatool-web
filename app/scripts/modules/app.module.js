@@ -119,3 +119,4 @@ angular.module('tatool.app', ['tatool', 'tatool.auth', 'tatool.common', 'ngAnima
         return input.slice(start);
       };
   });
+  

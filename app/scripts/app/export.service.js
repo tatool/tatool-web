@@ -204,6 +204,7 @@ angular.module('tatool.app')
       return -1;
     }
 
+
     function exportData(moduleId, trials) {
       var deferred = $q.defer();
 
