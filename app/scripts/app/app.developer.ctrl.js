@@ -424,7 +424,6 @@ angular.module('tatool.app')
       newModule.setModuleDefinition(moduleDefinition);
       newModule.setModuleLabel(moduleDefinition.label);
       newModule.setExportDelimiter(cfgApp.CSV_DELIMITER);
-      newModule.setExportFormat(cfgApp.EXPORT_FORMAT);
 
       $scope.editModule(newModule);
     };

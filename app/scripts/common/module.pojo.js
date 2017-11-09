@@ -59,10 +59,6 @@ Module.prototype.getModuleType = function() {
   return this.moduleType;
 };
 
-Module.prototype.getExportFormat = function() {
-  return this.exportFormat;
-};
-
 // sets the module name
 Module.prototype.setModuleName = function(moduleName) {
   this.moduleName = moduleName;
@@ -104,10 +100,6 @@ Module.prototype.setModuleType = function(moduleType) {
 
 Module.prototype.setExportDelimiter = function(exportDelimiter) {
   this.exportDelimiter = exportDelimiter;
-};
-
-Module.prototype.setExportFormat = function(exportFormat) {
-  this.exportFormat = exportFormat;
 };
 
 // add a session to this module
