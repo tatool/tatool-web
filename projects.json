@@ -28,6 +28,14 @@
 					{ "propertyName": "randomisation" },
 					{ "propertyName": "recallText" }
 				] },
+				{ "customType" : "tatoolMemorySpanTraining", "description" : "Memory Span Training Task", "customProperties": [
+					{ "propertyName": "suspendAfterEachItem", "propertyType": "Boolean" },
+					{ "propertyName": "displayDuration" },
+					{ "propertyName": "intervalDuration" },
+					{ "propertyName": "recallText" },
+					{ "propertyName": "levelHandler" },
+					{ "propertyName": "numMemoranda" }
+				] },
 				{ "customType" : "tatoolInstruction", "description" : "Instruction Task", "customProperties": [
 					{ "propertyName": "pages", "propertyType": "ArrayResource" },
 					{ "propertyName": "images", "propertyType": "ArrayResource" }
