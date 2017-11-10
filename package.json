@@ -8,7 +8,7 @@
     "url": "http://github.com/tatool/tatool-web.git"
   },
   "engines": {
-    "node": "8.9.x"
+    "node": "6.12.x"
   },
   "dependencies": {
     "archiver": "0.21.0",
@@ -21,7 +21,7 @@
     "express": "4.13.4",
     "express-jwt": "3.3.0",
     "glob": "7.0.5",
-    "gulp": "3.9.0",
+    "gulp": "^3.9.1",
     "gulp-concat": "2.6.0",
     "gulp-cssnano": "2.1.0",
     "gulp-jshint": "2.0.0",
