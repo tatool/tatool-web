@@ -1,6 +1,6 @@
 'use strict';
 
-tatool.controller('memorySpanTrainingCtrl', [ '$scope', 'service', 
+tatool.controller('tatoolMemorySpanTrainingCtrl', [ '$scope', 'service', 
     function ($scope, service) {
 
     $scope.stimulusService = service.stimulusService;

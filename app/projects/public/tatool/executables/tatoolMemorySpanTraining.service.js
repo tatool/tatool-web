@@ -1,6 +1,6 @@
 'use strict';
 
-tatool.factory('memorySpanTraining', ['executableUtils', 'dbUtils', 'timerUtils', 'stimulusServiceFactory', 'inputServiceFactory',
+tatool.factory('tatoolMemorySpanTraining', ['executableUtils', 'dbUtils', 'timerUtils', 'stimulusServiceFactory', 'inputServiceFactory',
   function(executableUtils, dbUtils, timerUtils, stimulusServiceFactory, inputServiceFactory) {
 
     var MemorySpanTraining = executableUtils.createExecutable();
@@ -36,9 +36,12 @@ tatool.factory('memorySpanTraining', ['executableUtils', 'dbUtils', 'timerUtils'
       this.intervalDuration = (this.intervalDuration) ? this.intervalDuration : INTERVAL_DURATION_DEFAULT;
       this.timerDisplayMemoranda = timerUtils.createTimer(this.displayDuration, true, this);
       this.timerIntervalMemoranda = timerUtils.createTimer(this.intervalDuration, false, this);
-      
-      var self = this;
 
+      // levelhandler for adaptivity
+      this.levelHandler = (this.levelHandler) ? this.levelHandler : '';
+
+      // static value for number of memoranda per trial
+      this.numMemoranda = (this.numMemoranda) ? parseInt(this.numMemoranda) : 0;
     };
 
     // Create stimulus and set properties
@@ -57,29 +60,26 @@ tatool.factory('memorySpanTraining', ['executableUtils', 'dbUtils', 'timerUtils'
         numbers[i - 11] = i;
       }
 
-      var levelHandler = dbUtils.getHandler('complexSpanLevel');
-      var currentLevel = dbUtils.getModuleProperty(levelHandler, 'currentLevel');
-
-      if (currentLevel == null) {
-        currentLevel = 1;
+      // get current level from designated level handler to allow for adaptivity
+      var currentLevel = 1;
+      var levelHandler = dbUtils.getHandler(this.levelHandler);
+      if (levelHandler) {
+        currentLevel = dbUtils.getModuleProperty(levelHandler, 'currentLevel');
       }
 
       this.stimulus = new Array();
 
-      // draw as many numbers as level+1
-      var nStimuli = currentLevel + 1;
+      // draw as many numbers as level+1 OR value of numMemoranda property if set
+      var nStimuli = (this.numMemoranda > 0) ? this.numMemoranda : currentLevel + 1;
 
       // create stimulus properties
-      this.stimulus["stimulusCount"] = nStimuli;
+      this.stimulus['stimulusCount'] = nStimuli;
 
       for (var j = 1; j < nStimuli + 1; j++) {
+      
         this.stimulus['stimulusValueType' + j] = 'text';
         this.stimulus['stimulusValue' + j] = executableUtils.getRandom(numbers);
         this.stimulus['correctResponse' + j] = this.stimulus['stimulusValue' + j];
-      }
-
-      for (var index in this.stimulus) {
-        console.log(index + " : " + this.stimulus[index]);
       }
     };
 
