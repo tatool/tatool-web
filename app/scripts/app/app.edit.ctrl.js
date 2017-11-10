@@ -668,6 +668,9 @@ angular.module('tatool.app')
         module.moduleDefinition.author = module.moduleAuthor;
         module.moduleDefinition.label = module.moduleLabel;
         module.moduleDefinition.description = module.moduleDescription;
+        module.moduleDefinition.exportDelimiter = module.exportDelimiter;
+        module.moduleDefinition.exportFormat = module.exportFormat;
+        module.moduleDefinition.moduleMaxSessions = module.moduleMaxSessions;
 
         // prepare export
         var exportModule = JSON.stringify(module.moduleDefinition);
@@ -702,6 +705,10 @@ angular.module('tatool.app')
           module.moduleDefinition.name = module.moduleName;
           module.moduleDefinition.author = module.moduleAuthor;
           module.moduleDefinition.label = module.moduleLabel;
+          module.moduleDefinition.description = module.moduleDescription;
+          module.moduleDefinition.exportDelimiter = module.exportDelimiter;
+          module.moduleDefinition.exportFormat = module.exportFormat;
+          module.moduleDefinition.moduleMaxSessions = module.moduleMaxSessions;
           $modalInstance.close();
         }
       };
