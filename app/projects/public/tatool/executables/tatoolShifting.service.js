@@ -89,8 +89,10 @@ tatool
     // Adding keyInputs and show by default
     Shifting.prototype.setupInputKeys = function(stimulus) {
       this.inputService.removeAllInputKeys();
-      this.inputService.addInputKey(stimulus.keyCode1, stimulus.response1, stimulus.keyLabel1, stimulus.keyLabelType1, !this.showKeys.propertyValue);
-      this.inputService.addInputKey(stimulus.keyCode2, stimulus.response2, stimulus.keyLabel2, stimulus.keyLabelType2, !this.showKeys.propertyValue);
+      stimulus.keyCount = (stimulus.keyCount) ? stimulus.keyCount : 2;
+      for (var i = 1; i <= stimulus.keyCount; i++) {
+        this.inputService.addInputKey(stimulus['keyCode' + i], stimulus['response' + i], stimulus['keyLabel' + i], stimulus['keyLabelType' + i], !this.showKeys.propertyValue);
+      }
     };
 
     // Create stimulus and set properties
