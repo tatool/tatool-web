@@ -10,7 +10,7 @@ var path = require('path');
 var bodyParser = require('body-parser');
 var logger = require('morgan');
 var mongoose = require('mongoose');
-mongoose.Promise = require('bluebird');
+mongoose.Promise = global.Promise;
 var passport = require('passport');
 var expressJwt = require('express-jwt');
 var jwt = require('jsonwebtoken');
@@ -47,7 +47,7 @@ var commonCtrl = require('./controllers/commonCtrl');
 var logCtrl = require('./controllers/logCtrl');
 
 // db
-mongoose.connect( process.env.MONGOLAB_URI || 'mongodb://localhost/tatool-web' );
+mongoose.connect( process.env.MONGOLAB_URI || 'mongodb://localhost/tatool-web', { useMongoClient: true } );
 
 //logging setup
 if (app.get('env') === 'dev') {
