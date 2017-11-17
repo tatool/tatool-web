@@ -3,8 +3,12 @@
 /* global Papa */
 /* global async */
 
-angular.module('tatool.module')
-  .service('executableUtils', [ '$q', '$http', '$log', 'contextService', function ($q, $http, $log, contextService) {
+import async from 'async'
+import Papa from 'papaparse'
+
+ExecutableUtilsService.$inject = ['$q', '$http', '$log', 'contextService'];
+
+function ExecutableUtilsService($q, $http, $log, contextService) {
 
     var utils = {};
 
@@ -373,4 +377,6 @@ angular.module('tatool.module')
     };
 
     return utils;
-  }]);
+}
+
+export default ExecutableUtilsService;

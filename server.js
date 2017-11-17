@@ -10,6 +10,7 @@ var path = require('path');
 var bodyParser = require('body-parser');
 var logger = require('morgan');
 var mongoose = require('mongoose');
+mongoose.Promise = require('bluebird');
 var passport = require('passport');
 var expressJwt = require('express-jwt');
 var jwt = require('jsonwebtoken');
@@ -159,7 +160,7 @@ app.get('/public/:moduleId', mainCtrl.getPublic);
 app.get('/public/login/:moduleId', mainCtrl.installPublic);
 
 // Tatool Web Client
-app.use(express.static(path.join(__dirname, (app.get('env') === 'dev') ? 'app' : 'dist')));
+app.use(express.static(path.join(__dirname, 'dist')));
 
 // send 404 if no match found
 app.use(function(req, res, next){

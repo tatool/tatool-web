@@ -1,7 +1,8 @@
 'use strict';
 
-angular.module('tatool.module')
-  .service('executionPhaseService', ['$log', '$rootScope', function ($log, $rootScope) {
+ExecutionPhaseService.$inject = ['$log', '$rootScope'];
+
+function ExecutionPhaseService($log, $rootScope) {
     $log.debug('ExecutionPhaseListener: initialized');
 
     this.broadcastPhase = function(executionPhase, stack) {
@@ -9,4 +10,7 @@ angular.module('tatool.module')
       $rootScope.$broadcast(executionPhase, stack);
     };
 
-  }]);
+    return this;
+}
+
+export default ExecutionPhaseService;

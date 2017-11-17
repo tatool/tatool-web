@@ -3,9 +3,12 @@
 /* global async */
 /* global head */
 
-angular.module('tatool.module')
-  .service('executableService', ['$log', '$rootScope', '$injector', '$q', '$http', '$templateCache', '$window', 'contextService', 'tatoolPhase', 'executableUtils', 'moduleService', 'cfgModule',
-    function ($log, $rootScope, $injector, $q, $http, $templateCache, $window, contextService, tatoolPhase, executableUtils, moduleService, cfgModule) {
+import async from 'async';
+import 'headjs/dist/1.0.0/head.load.min.js'
+
+ExecutableService.$inject = ['$log', '$rootScope', '$injector', '$q', '$http', '$templateCache', '$window', 'contextService', 'tatoolPhase', 'executableUtils', 'moduleService', 'cfgModule'];
+
+function ExecutableService($log, $rootScope, $injector, $q, $http, $templateCache, $window, contextService, tatoolPhase, executableUtils, moduleService, cfgModule) {
 
     var executableService = {};
 
@@ -120,30 +123,21 @@ angular.module('tatool.module')
         return files;
       };
 
-      // $script loader
-      /*return [
-          path + executableSrv,
-          path + executableCtrl
-        ];*/
-      
       // try first in project folder and use default project as fallback to allow override of executables
       var templatePath = '';
 
       $http.get( projectPath + executableSrv + token)
         .success(function () {
-          //$script(dependencies(projectPath), executableName);
           head.load( dependencies(projectPath) );
           templatePath = projectPath + executableTpl + token;
         })
         .error(function () {
-          //$script(dependencies(libraryPath), executableName);
           head.load( dependencies(defaultProjectPath) );
           templatePath = defaultProjectPath + executableTpl + token;
         });
    
       // Create executable once scripts are loaded
       head.ready(executableCtrl, function() {
-      //$script.ready(executableName, function() {
         try {
           var ExecutableService = $injector.get(executableName);
           var executable = new ExecutableService();
@@ -158,6 +152,7 @@ angular.module('tatool.module')
             deferred.reject(error);
           });
         } catch (e) {
+          $log.error(e);
           deferred.reject('Unable to find executable: ' + executableName + ' (' + executableSrv + ')');
         }
       });
@@ -253,4 +248,6 @@ angular.module('tatool.module')
     });
 
     return executableService;
-  }]);
+}
+
+export default ExecutableService;

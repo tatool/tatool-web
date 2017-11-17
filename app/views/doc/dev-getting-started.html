@@ -5,7 +5,7 @@
 <ul id="docPageNav">
   <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('nodejs')">Install nodeJS</a></li>
   <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('git')">Install Git</a></li>
-  <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('mongodb')">Install mongoDB</a></li>
+  <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('mongodb')">Install MongoDB Community Edition</a></li>
   <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('tatool')">Install Tatool</a></li>
   <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('runTatool')">Run Tatool</a></li>
 </ul>
@@ -25,7 +25,7 @@
 
 <p>Type the following command in your terminal window and make sure you get a response indicating your version of nodeJS. If you don't see the version of your nodeJS, something went wrong with your installation and you'll need to fix it first.</p>
 <pre><code class="language-javascript">$> node --version
-v6.9.1
+v8.9.1
 </code></pre>
 
 <hr class="hr-red">
@@ -41,11 +41,11 @@ git version 2.7.0.windows.1
 
 <hr class="hr-red">
 
-<h3 id="mongodb">Install mongoDB<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
+<h3 id="mongodb">Install MongoDB Community Edition<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
 
-<p><img src="../../images/doc/mongodb-logo.png"><br><br>Get the latest download for your operating system from <a href="http://www.mongodb.org/downloads" target="_blank">http://www.mongodb.org/downloads</a> and follow the <a href="http://docs.mongodb.org/manual/installation/" target="_blank">instructions</a> on their page to install it. Follow the steps under 'Install MongoDB', and also complete Step 1 under 'Run MongoDB' which will create the necessary data directory for mongoDB.</p>
+<p><img src="../../images/doc/mongodb-logo.png"><br><br>Get the latest download for your operating system from <a href="http://www.mongodb.org/downloads" target="_blank">http://www.mongodb.org/downloads</a> and follow the <a href="http://docs.mongodb.org/manual/installation/" target="_blank">instructions</a> on their page to install it. Follow the steps under 'Install MongoDB Community Edition', and also complete Step 1 under 'Run MongoDB Community Edition' which will create the necessary data directory for MongoDB.</p>
 
-<p>Type the following command in your terminal window and make sure you get a response indicating your version of mongoDB. If you don't see the version of your mongoDB, something went wrong with your installation and you'll need to fix it first. The cd command changes your directory to the directory where you installed your mongodb.</p>
+<p>Type the following command in your terminal window and make sure you get a response indicating your version of MongoDB. If you don't see the version of your MongoDB, something went wrong with your installation and you'll need to fix it first. The cd command changes your directory to the directory where you installed MongoDb.</p>
 <pre><code class="language-javascript">$> cd mongodb
 $mongodb> cd bin
 $mongodb\bin> mongo -version
@@ -64,25 +64,8 @@ MongoDB shell version: 3.2.8
 <pre><code class="language-javascript">$> cd tatool-web
 </code></pre>
 
-<p><b>2.</b> Enter the first command to install the <b>bower plugin</b> for nodejs. Bower is used to automatically download all dependencies.<br>
-The second command checks whether your installation of bower was successful. If you don't see the version of bower, something went wrong with your installation and you'll have to fix it first.</p>
-<pre><code class="language-javascript">$tatool-web> npm install -g bower
-...
-$tatool-web> bower -version
-1.8.0
-</code></pre>
-
-<p><b>3.</b> Enter the first command to install the <b>gulp plugin</b> for nodejs. Gulp is used to build tatool-web.<br>
-The second command checks whether your installation of gulp was successful. If you don't see the version of gulp, something went wrong with your installation and you'll have to fix it first.</p>
-<pre><code class="language-javascript">$tatool-web> npm install -g gulp
-...
-$tatool-web> gulp -version
-[20:38:17] CLI version 3.9.1
-[20:38:17] Local version 3.9.0
-</code></pre>
-
-<p><b>4.</b> Run <b>npm install</b> to install Tatool. The command will run bower to download all dependencies and gulp to build the code. On Mac OSX you might need to run this with the <b>sudo</b> command. The installation might take a while the first time. You might also need to run it twice for the first time to make sure everything gets downloaded and built.</p>
-<pre><code class="language-javascript">$tatool-web> npm install
+<p><b>2.</b> Run <b>npm run setup</b> to install Tatool and all its dependencies. On Mac OSX you might need to run this with the <b>sudo</b> command. The installation might take a while the first time. You might also need to run it twice for the first time to make sure everything gets downloaded and built.</p>
+<pre><code class="language-javascript">$tatool-web> npm run setup
 ...
 </code></pre>
 

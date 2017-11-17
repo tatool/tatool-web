@@ -1,10 +1,12 @@
 'use strict';
 
-angular.module('tatool.app')
-  .controller('EditCtrl', ['$scope', '$q', '$modalInstance', '$sce', '$compile', '$modal', '$log', 'module', 'moduleDataService',
-    function ($scope, $q, $modalInstance, $sce, $compile, $modal, $log, module, moduleDataService) {
+import bootbox from 'bootbox';
 
-      var VIEW_PATH = '../../views/app/';
+import download from '../common/util/download.js';
+
+EditCtrl.$inject = ['$scope', '$q', '$uibModalInstance', '$sce', '$compile', '$uibModal', '$log', 'module', 'moduleDataService'];
+
+function EditCtrl($scope, $q, $uibModalInstance, $sce, $compile, $uibModal, $log, module, moduleDataService) {
 
       var PROTECTED_PROPERTIES = ['tatoolType', 'customType', 'name', 'blankInterval', 'fixationInterval', 'status', 'project', 'hideMouseCursor'];
 
@@ -18,7 +20,7 @@ angular.module('tatool.app')
       $scope.highlightId = {key: 'module'};
 
       $scope.alert = {};
-      $scope.elementType = VIEW_PATH + 'edit_module.html';
+      $scope.elementType = 'edit_module.html';
       $scope.projects = [];
       $scope.executables = [];
 
@@ -29,7 +31,7 @@ angular.module('tatool.app')
       $scope.openModule = function() {
         hideAlert();
         $scope.highlightId.key = 'module';
-        $scope.elementType = VIEW_PATH + 'edit_module.html';
+        $scope.elementType = 'edit_module.html';
       };
 
       $scope.openElement = function(element, index, parent) {
@@ -40,11 +42,11 @@ angular.module('tatool.app')
         $scope.customProperties = [];
 
         if (element.tatoolType === 'List' || element.tatoolType === 'Dual') {
-          $scope.elementType = VIEW_PATH + 'edit_list.html';
+          $scope.elementType = 'edit_list.html';
         } else if (element.tatoolType === 'Executable') {
           // prepare custom properties
           loadCustomProperties(element, 'executable');
-          $scope.elementType = VIEW_PATH + 'edit_executable.html';
+          $scope.elementType = 'edit_executable.html';
         }
       };
 
@@ -213,11 +215,11 @@ angular.module('tatool.app')
           if (parent) {
             if (parent.tatoolType === 'Dual') {
               delete parent.children[index];
-              $scope.elementType = VIEW_PATH + 'edit_module.html';
+              $scope.elementType = 'edit_module.html';
               $scope.highlightId.key = 'module';
             } else {
               parent.children.splice(index, 1);
-              $scope.elementType = VIEW_PATH + 'edit_module.html';
+              $scope.elementType = 'edit_module.html';
               $scope.highlightId.key = 'module';
             }
             $scope.$apply();
@@ -276,7 +278,7 @@ angular.module('tatool.app')
           }
         }
 
-        $scope.elementType = VIEW_PATH + 'edit_executable_select.html';
+        $scope.elementType = 'edit_executable_select.html';
       };
 
       $scope.groupByProjectAccess = function (item) {
@@ -311,13 +313,13 @@ angular.module('tatool.app')
 
       $scope.returnTo = function(string) {
         if (string === 'executable') {
-          $scope.elementType = VIEW_PATH + 'edit_executable.html';
+          $scope.elementType = 'edit_executable.html';
         } else if (string === 'element') {
-          $scope.elementType = VIEW_PATH + 'edit_list.html';
+          $scope.elementType = 'edit_list.html';
         } else if (string === 'handler') {
-          $scope.elementType = VIEW_PATH + 'edit_handler.html';
+          $scope.elementType = 'edit_handler.html';
         } else if (string === 'module') {
-          $scope.elementType = VIEW_PATH + 'edit_module.html';
+          $scope.elementType = 'edit_module.html';
         }
       };
 
@@ -347,7 +349,7 @@ angular.module('tatool.app')
           $scope.currentProject = {};
         }
 
-        $scope.elementType = VIEW_PATH + 'edit_executable_property.html';
+        $scope.elementType = 'edit_executable_property.html';
         $scope.currentProperty = property;
       };
 
@@ -370,7 +372,7 @@ angular.module('tatool.app')
           $scope.currentProject = {};
         }
 
-        $scope.elementType = VIEW_PATH + 'edit_executable_property_path.html';
+        $scope.elementType = 'edit_executable_property_path.html';
         $scope.currentProperty = property;
       };
 
@@ -607,7 +609,7 @@ angular.module('tatool.app')
       $scope.editHandler = function(handler) {
         $scope.handler = handler;
         loadCustomProperties(handler, 'handler');
-        $scope.elementType = VIEW_PATH + 'edit_handler.html';
+        $scope.elementType = 'edit_handler.html';
       };
 
       $scope.editHandlerProperty = function(handler, property, $index) {
@@ -630,7 +632,7 @@ angular.module('tatool.app')
           $scope.currentProject = {};
         }
 
-        $scope.elementType = VIEW_PATH + 'edit_handler_property.html';
+        $scope.elementType = 'edit_handler_property.html';
         $scope.currentProperty = property;
       };
 
@@ -653,7 +655,7 @@ angular.module('tatool.app')
           $scope.currentProject = {};
         }
 
-        $scope.elementType = VIEW_PATH + 'edit_handler_property_path.html';
+        $scope.elementType = 'edit_handler_property_path.html';
         $scope.currentProperty = property;
       };
 
@@ -680,19 +682,19 @@ angular.module('tatool.app')
       };
 
       $scope.saveAndBack = function () {
-        if ($scope.elementType === VIEW_PATH + 'edit_executable_select.html') {
+        if ($scope.elementType === 'edit_executable_select.html') {
           addCustomPropertiesFromProject($scope.element);
           loadCustomProperties($scope.element);
           $scope.returnTo('executable');
-        } else if ($scope.elementType === VIEW_PATH + 'edit_executable_property.html') {
+        } else if ($scope.elementType === 'edit_executable_property.html') {
           $scope.returnTo('executable');
-        } else if ($scope.elementType === VIEW_PATH + 'edit_executable_property_path.html') {
+        } else if ($scope.elementType === 'edit_executable_property_path.html') {
           $scope.returnTo('executable');
-        } else if ($scope.elementType === VIEW_PATH + 'edit_handler.html') {
+        } else if ($scope.elementType === 'edit_handler.html') {
           $scope.returnTo('element');
-        } else if ($scope.elementType === VIEW_PATH + 'edit_handler_property.html') {
+        } else if ($scope.elementType === 'edit_handler_property.html') {
           $scope.returnTo('handler');
-        } else if ($scope.elementType === VIEW_PATH + 'edit_handler_property_path.html') {
+        } else if ($scope.elementType === 'edit_handler_property_path.html') {
           $scope.returnTo('handler');
         } 
       };
@@ -709,7 +711,7 @@ angular.module('tatool.app')
           module.moduleDefinition.exportDelimiter = module.exportDelimiter;
           module.moduleDefinition.exportFormat = module.exportFormat;
           module.moduleDefinition.moduleMaxSessions = module.moduleMaxSessions;
-          $modalInstance.close();
+          $uibModalInstance.close();
         }
       };
 
@@ -777,7 +779,7 @@ angular.module('tatool.app')
 
       $scope.cancel = function () {
         function dismiss() {
-          $modalInstance.dismiss('cancel');
+          $uibModalInstance.dismiss('cancel');
         }
 
         bootbox.dialog({
@@ -813,4 +815,6 @@ angular.module('tatool.app')
 
       $scope.hideAlert = hideAlert;
 
-    }]);
+}
+
+export default EditCtrl;

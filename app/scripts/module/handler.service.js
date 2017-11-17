@@ -1,8 +1,8 @@
 'use strict';
 
-angular.module('tatool.module')
-  .service('handlerService', ['$log', '$rootScope', '$injector', 'contextService', 'tatoolPhase',
-    function ($log, $rootScope, $injector, contextService, tatoolPhase) {
+HandlerService.$inject = ['$log', '$rootScope', '$injector', 'contextService', 'tatoolPhase'];
+
+function HandlerService($log, $rootScope, $injector, contextService, tatoolPhase) {
 
     var handlerService = {};
 
@@ -119,4 +119,6 @@ angular.module('tatool.module')
     });
 
     return handlerService;
-  }]);
+}
+
+export default HandlerService;

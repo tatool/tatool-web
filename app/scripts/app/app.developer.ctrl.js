@@ -1,11 +1,16 @@
 'use strict';
 
 /* global screenfull */
-/* global uuid */
 
-angular.module('tatool.app')
-  .controller('DeveloperCtrl', ['$scope', '$q', '$timeout', '$window', '$rootScope', '$location',  '$state', '$http', '$log', '$modal', '$sce', 'moduleDataService', 'cfg', 'authService', 'userService', 'moduleCreatorService', 'exportService', 'spinnerService', 'trialDataService', 'cfgApp',
-    function ($scope, $q, $timeout, $window, $rootScope, $location, $state, $http, $log, $modal, $sce, moduleDataService, cfg, authService, userService, moduleCreatorService, exportService, spinnerService, trialDataService, cfgApp) {
+import bootbox from 'bootbox';
+import screenfull from 'screenfull';
+import uuidv4  from 'uuid/v4';
+
+import Module from '../common/module.pojo.js';
+
+DeveloperCtrl.$inject = ['$scope', '$q', '$timeout', '$window', '$rootScope', '$location',  '$state', '$http', '$log', '$uibModal', '$sce', 'moduleDataService', 'cfg', 'authService', 'userService', 'moduleCreatorService', 'exportService', 'spinnerService', 'trialDataService', 'cfgApp'];
+
+function DeveloperCtrl($scope, $q, $timeout, $window, $rootScope, $location, $state, $http, $log, $uibModal, $sce, moduleDataService, cfg, authService, userService, moduleCreatorService, exportService, spinnerService, trialDataService, cfgApp) {
 
     $scope.modules = [];
     $scope.alert = {};
@@ -106,8 +111,8 @@ angular.module('tatool.app')
     $scope.editModule = function(module) {
       hideAlert();
 
-      var modalInstance = $modal.open({
-        templateUrl: 'views/app/edit.html',
+      var modalInstance = $uibModal.open({
+        template: require('../../views/app/edit.html'),
         controller: 'EditCtrl',
         size: 'lg',
         keyboard: false,
@@ -188,8 +193,8 @@ angular.module('tatool.app')
       hideAlert();
       moduleDataService.getRepositoryModule(moduleId).then(function(module) {
         if (module && module.moduleType === 'private') {
-          $modal.open({
-            templateUrl: 'views/app/invite.html',
+          $uibModal.open({
+            template: require('../../views/app/invite.html'),
             controller: 'InviteCtrl',
             size: 'lg',
             resolve: {
@@ -418,7 +423,7 @@ angular.module('tatool.app')
         }
       };
 
-      var newModule = new Module(uuid());
+      var newModule = new Module(uuidv4());
       newModule.setModuleName(moduleDefinition.name);
       newModule.setModuleAuthor(moduleDefinition.author);
       newModule.setModuleDefinition(moduleDefinition);
@@ -430,7 +435,6 @@ angular.module('tatool.app')
     };
 
     $scope.hideAlert = hideAlert;
+}
 
-
-
-  }]);
+export default DeveloperCtrl;

@@ -1,8 +1,8 @@
 'use strict';
 
-angular.module('tatool.app')
-  .controller('MainCtrl', ['$scope', '$rootScope', '$state', '$window', '$http', 'authService',
-    function ($scope, $rootScope, $state, $window, $http, authService) {
+MainCtrl.$inject = ['$scope', '$rootScope', '$state', '$window', '$http', 'authService'];
+
+function MainCtrl($scope, $rootScope, $state, $window, $http, authService) {
 
     $scope.authorized = authService.isAuthenticated();
 
@@ -66,4 +66,6 @@ angular.module('tatool.app')
       $scope.authorized = authService.isAuthenticated();
     });
 
-  }]);
+}
+
+export default MainCtrl;

@@ -1,8 +1,8 @@
 'use strict';
 
-angular.module('tatool.module')
-  .factory('trialCountHandler', ['$log', 'statusPanelService', 'handlerService', 'tatoolPhase',
-    function ($log, statusPanelService, handlerService, tatoolPhase) {
+TrialCountHandlerService.$inject = ['$log', 'statusPanelService', 'handlerService', 'tatoolPhase'];
+
+function TrialCountHandlerService($log, statusPanelService, handlerService, tatoolPhase) {
 
     // create a new handler object and set all handler properties
     var TrialCountHandler = function() {
@@ -39,4 +39,6 @@ angular.module('tatool.module')
     };
 
     return TrialCountHandler;    
-  }]);
+}
+
+export default TrialCountHandlerService;

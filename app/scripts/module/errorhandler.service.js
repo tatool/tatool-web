@@ -1,8 +1,8 @@
 'use strict';
 
-angular.module('tatool.module')
-  .factory('errorHandlerService', ['$log',
-    function ($log) {
+ErrorHandlerService.$inject = ['$log'];
+
+function ErrorHandlerService($log) {
     $log.debug('ErrorHandlerService: initialized');
 
     var errorHandler = {};
@@ -28,4 +28,6 @@ angular.module('tatool.module')
 
     return errorHandler;
 
-  }]);
+}
+
+export default ErrorHandlerService;

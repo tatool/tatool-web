@@ -1,8 +1,8 @@
 'use strict';
 
-angular.module('tatool.module')
-  .factory('statusPanelService', [ '$log', '$rootScope', '$timeout', 'tatoolPhase',
-    function ($log, $rootScope, $timeout, tatoolPhase) {
+StatusPanelService.$inject = ['$log', '$rootScope', '$timeout', 'tatoolPhase'];
+
+function StatusPanelService($log, $rootScope, $timeout, tatoolPhase) {
 
 	var service = {};
 
@@ -49,4 +49,6 @@ angular.module('tatool.module')
   // Return our service object
   return service;
 
-}]);
+}
+
+export default StatusPanelService;

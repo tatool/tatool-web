@@ -76,8 +76,8 @@ tatool.factory('towerOfFame', ['executableUtils', 'stimulusServiceFactory', 'inp
 
     TowerOfFame.prototype.init = function() {
       var promise = executableUtils.createPromise();
-
-      this.displayLanguage = (this.displayLanguage ) ? this.displayLanguage : DEFAULT_LANG;
+      
+      this.displayLanguage = (this.displayLanguage ) ? this.displayLanguage.toUpperCase() : DEFAULT_LANG;
 
       // timing properties
       this.displayDuration = (this.displayDuration) ? this.displayDuration : DISPLAY_DURATION_DEFAULT;

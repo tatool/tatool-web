@@ -7,7 +7,7 @@
   <form class="form-horizontal">
   <div class="form-group">
     <label for="name" class="col-sm-3 control-label">Type *
-      <a class="info" tooltip="The executable type defines which code to execute. Built-in executables start with the prefix 'tatool'." tooltip-placement="right"><i class="fa fa-info-circle"></i></a>
+      <a class="info" uib-tooltip="The executable type defines which code to execute. Built-in executables start with the prefix 'tatool'." uib-tooltip-placement="right"><i class="fa fa-info-circle"></i></a>
     </label>
     <div class="col-sm-9">
       <div class="input-group">
@@ -20,7 +20,7 @@
   </div>
   <div class="form-group">
     <label for="name" class="col-sm-3 control-label">Name *
-      <a class="info" tooltip="Provide an internal name for your executable. This name will be visible in the export data later on." tooltip-placement="right"><i class="fa fa-info-circle"></i></a>
+      <a class="info" uib-tooltip="Provide an internal name for your executable. This name will be visible in the export data later on." uib-tooltip-placement="right"><i class="fa fa-info-circle"></i></a>
     </label>
     <div class="col-sm-9">
       <input type="text" class="form-control" id="name" ng-model="element.name" ng-required="true">
@@ -28,7 +28,7 @@
   </div>
   <div class="form-group">
     <label for="name" class="col-sm-3 control-label">Fixation <i class="fa fa-clock-o"></i> 
-      <a class="info" tooltip="Set the duration in milliseconds for how long a fixation cross should be displayed before every execution. Leave empty if you don't want to display a fixation cross." tooltip-placement="right"><i class="fa fa-info-circle"></i></a>
+      <a class="info" uib-tooltip="Set the duration in milliseconds for how long a fixation cross should be displayed before every execution. Leave empty if you don't want to display a fixation cross." uib-tooltip-placement="right"><i class="fa fa-info-circle"></i></a>
     </label>
     <div class="col-sm-9">
       <input type="text" class="form-control" id="fixationInterval" ng-model="element.fixationInterval">
@@ -36,7 +36,7 @@
   </div>
   <div class="form-group">
     <label for="name" class="col-sm-3 control-label">Blank <i class="fa fa-clock-o"></i>
-      <a class="info" tooltip="Set the duration in milliseconds for how long a blank screen should be displayed before every execution. Leave empty if you don't want to display a blank screen." tooltip-placement="right"><i class="fa fa-info-circle"></i></a>
+      <a class="info" uib-tooltip="Set the duration in milliseconds for how long a blank screen should be displayed before every execution. Leave empty if you don't want to display a blank screen." uib-tooltip-placement="right"><i class="fa fa-info-circle"></i></a>
     </label>
     <div class="col-sm-9">
       <input type="text" class="form-control" id="blankInterval" ng-model="element.blankInterval">
@@ -44,31 +44,31 @@
   </div>
   <div class="form-group">
     <label for="name" class="col-sm-3 control-label">Status Panel
-      <a class="info" tooltip="Enable status panels for this executable. Make sure to add the required handlers in your parent list/dual elements for the status panels to be updated." tooltip-placement="right"><i class="fa fa-info-circle"></i></a>
+      <a class="info" uib-tooltip="Enable status panels for this executable. Make sure to add the required handlers in your parent list/dual elements for the status panels to be updated." uib-tooltip-placement="right"><i class="fa fa-info-circle"></i></a>
     </label>
     <div class="col-sm-9">
       <label class="checkbox-inline">
         <input type="checkbox" id="feedback" ng-model="element.status.feedbackPanel"> Feedback 
-        <a class="info" tooltip="Displays a visual feedback whether the answer was correct or not. No handler is required as the display is updated whenever a trial is saved." tooltip-placement="top"><i class="fa fa-info-circle"></i></a>
+        <a class="info" uib-tooltip="Displays a visual feedback whether the answer was correct or not. No handler is required as the display is updated whenever a trial is saved." uib-tooltip-placement="top"><i class="fa fa-info-circle"></i></a>
       </label>
       <label class="checkbox-inline">
         <input type="checkbox" id="trial" ng-model="element.status.trialCountPanel"> Counter 
-        <a class="info" tooltip="Displays a visual trial counter. Depends on the 'trialCountHandler' to update the counter." tooltip-placement="top"><i class="fa fa-info-circle"></i></a>
+        <a class="info" uib-tooltip="Displays a visual trial counter. Depends on the 'trialCountHandler' to update the counter." uib-tooltip-placement="top"><i class="fa fa-info-circle"></i></a>
       </label>
       <label class="checkbox-inline">
         <input type="checkbox" id="timer" ng-model="element.status.timerPanel"> Timer 
-        <a class="info" tooltip="Displays a visual timer. No handler is required as the timer is configured as part of the executable code." tooltip-placement="top"><i class="fa fa-info-circle"></i></a>
+        <a class="info" uib-tooltip="Displays a visual timer. No handler is required as the timer is configured as part of the executable code." uib-tooltip-placement="top"><i class="fa fa-info-circle"></i></a>
       </label>
       <label class="checkbox-inline">
         <input type="checkbox" id="level" ng-model="element.status.levelPanel"> Level 
-        <a class="info" tooltip="Displays the current level. Depends on the 'levelHandler' to update the level." tooltip-placement="top"><i class="fa fa-info-circle"></i></a>
+        <a class="info" uib-tooltip="Displays the current level. Depends on the 'levelHandler' to update the level." uib-tooltip-placement="top"><i class="fa fa-info-circle"></i></a>
       </label>
     </div>
   </div>
 
   <div class="form-group">
     <label for="name" class="col-sm-3 control-label">Hide Cursor
-      <a class="info" tooltip="Hides the mouse cursor for this Executable." tooltip-placement="right"><i class="fa fa-info-circle"></i></a>
+      <a class="info" uib-tooltip="Hides the mouse cursor for this Executable." uib-tooltip-placement="right"><i class="fa fa-info-circle"></i></a>
     </label>
     <div class="col-sm-9">
       <label class="checkbox-inline">
@@ -79,7 +79,7 @@
   
   <!-- Display custom properties -->
   <hr>
-  <b>Custom Properties</b> <a class="info" tooltip="Set custom properties depending on the Executable type. Take a look at the Tatool Reference in order to know what Properties are supported by this Executable" tooltip-placement="right"><i class="fa fa-info-circle"></i></a>
+  <b>Custom Properties</b> <a class="info" uib-tooltip="Set custom properties depending on the Executable type. Take a look at the Tatool Reference in order to know what Properties are supported by this Executable" uib-tooltip-placement="right"><i class="fa fa-info-circle"></i></a>
   <br><br>
 
   <div class="form-group" ng-repeat="property in customProperties">

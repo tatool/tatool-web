@@ -2,9 +2,9 @@
 
 /* global Date */
 
-angular.module('tatool.app')
-  .controller('InviteCtrl', ['$scope', '$q', '$modalInstance', '$sce', 'module', 'moduleDataService',
-    function ($scope, $q, $modalInstance, $sce, module, moduleDataService) {
+InviteCtrl.$inject = ['$scope', '$q', '$uibModalInstance', '$sce', 'module', 'moduleDataService'];
+
+function InviteCtrl($scope, $q, $uibModalInstance, $sce, module, moduleDataService) {
 
       $scope.user = {};
       $scope.module = module;
@@ -12,11 +12,11 @@ angular.module('tatool.app')
       $scope.alert = {};
 
       $scope.ok = function () {
-        $modalInstance.close();
+        $uibModalInstance.close();
       };
 
       $scope.cancel = function () {
-        $modalInstance.dismiss('cancel');
+        $uibModalInstance.dismiss('cancel');
       };
 
       $scope.formatDate = function(date) {
@@ -82,4 +82,6 @@ angular.module('tatool.app')
 
       $scope.hideAlert = hideAlert;
 
-    }]);
+}
+
+export default InviteCtrl;

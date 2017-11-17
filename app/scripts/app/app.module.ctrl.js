@@ -3,9 +3,12 @@
 /* global screenfull */
 /* global async */
 
-angular.module('tatool.app')
-  .controller('ModuleCtrl', ['$scope', '$q', '$timeout', '$window', '$rootScope', '$location',  '$state', '$http', '$log', '$sce', 'moduleDataService', 'cfgApp', 'authService', 'userService', 'moduleCreatorService', 'exportService', 'spinnerService', 'cfg',
-    function ($scope, $q, $timeout, $window, $rootScope, $location, $state, $http, $log, $sce, moduleDataService, cfgApp, authService, userService, moduleCreatorService, exportService, spinnerService, cfg) {
+import async from 'async';
+import bootbox from 'bootbox';
+
+ModuleCtrl.$inject = ['$scope', '$q', '$timeout', '$window', '$rootScope', '$location',  '$state', '$http', '$log', '$sce', 'moduleDataService', 'cfgApp', 'authService', 'userService', 'moduleCreatorService', 'exportService', 'spinnerService', 'cfg'];
+
+function ModuleCtrl($scope, $q, $timeout, $window, $rootScope, $location, $state, $http, $log, $sce, moduleDataService, cfgApp, authService, userService, moduleCreatorService, exportService, spinnerService, cfg) {
 
     // setting contants
     $scope.imgPath = cfgApp.IMG_PATH;
@@ -141,8 +144,11 @@ angular.module('tatool.app')
 
     function preloadData() {
       for (var i = 0; i < tatoolModuleAssets.length; i++) {
+        //var img = new Image();
+        //img.src = cfgApp.MODULE_IMG_PATH + tatoolModuleAssets[i];
+        require('../../images/module/' + tatoolModuleAssets[i]);
         var img = new Image();
-        img.src = cfgApp.MODULE_IMG_PATH + tatoolModuleAssets[i];
+        img.src = '../images/' + tatoolModuleAssets[i];
       }
     }
 
@@ -360,6 +366,6 @@ angular.module('tatool.app')
     };
 
     $scope.hideAlert = hideAlert;
+}
 
-
-  }]);
+export default ModuleCtrl;

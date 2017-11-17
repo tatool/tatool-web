@@ -1,7 +1,8 @@
 'use strict';
 
-angular.module('tatool.common')
-  .factory('messageService', ['$rootScope', function ($rootScope) {
+MessageService.$inject = ['$rootScope'];
+
+function MessageService($rootScope) {
 
   var queue = [];
   var currentMessage = { type: '', msg: ''};
@@ -18,4 +19,6 @@ angular.module('tatool.common')
       return currentMessage;
     }
   };
-}]);
+}
+
+export default MessageService;

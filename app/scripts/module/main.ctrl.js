@@ -1,8 +1,8 @@
 'use strict';
 
-angular.module('tatool.module')
-  .controller('MainCtrl', ['$rootScope','$scope', '$log', '$timeout', '$state', '$window', 'moduleService', 'userService', 'moduleDataService', 'trialDataService', 'executor', 'cfgModule', 'executableUtils', 'tatoolPhase',
-    function ($rootScope, $scope, $log, $timeout, $state, $window, moduleService, userService, moduleDataService, trialDataService, executor, cfgModule, executableUtils, tatoolPhase) {
+MainCtrl.$inject = ['$rootScope','$scope', '$log', '$timeout', '$state', '$window', 'moduleService', 'userService', 'moduleDataService', 'trialDataService', 'executorService', 'cfgModule', 'executableUtils', 'tatoolPhase'];
+
+function MainCtrl($rootScope, $scope, $log, $timeout, $state, $window, moduleService, userService, moduleDataService, trialDataService, executorService, cfgModule, executableUtils, tatoolPhase) {
 
     $scope.alert = { type: 'danger', msg: '', visible: false };
 
@@ -22,10 +22,10 @@ angular.module('tatool.module')
     $scope.keyPress = function($event){
       if($event.which === 27) { // Escape Key
         if (allowEscapeKey) {
-          if (executor.exec) {
-            executor.finishExecutable();
+          if (executorService.exec) {
+            executorService.finishExecutable();
           }
-          executor.stopModule(true);
+          executorService.stopModule(true);
         }
       } else {
         var timing = executableUtils.getTiming();
@@ -43,10 +43,10 @@ angular.module('tatool.module')
       var message = e.data;
       if (message.type === 'fullscreenExit') {
         if (allowEscapeKey) {
-          if (executor.exec) {
-            executor.finishExecutable();
+          if (executorService.exec) {
+            executorService.finishExecutable();
           }
-          executor.stopModule(true);
+          executorService.stopModule(true);
         }
       }
     };
@@ -66,7 +66,7 @@ angular.module('tatool.module')
     // Handle wrong state changes by stopping the current module
     $scope.$on('$stateChangeError', function (event, fromState, toState) {
       $log.error('Error in stateChange', toState);
-      executor.stopModule(false);
+      executorService.stopModule(false);
       event.preventDefault();
     });
 
@@ -90,14 +90,14 @@ angular.module('tatool.module')
         $log.debug('Main: Start module...');
         allowEscapeKey = data.moduleDefinition.allowEscapeKey ? data.moduleDefinition.allowEscapeKey : false;
 
-        executor.startModule();
+        executorService.startModule();
       }
 
       function onModuleError(data) {
         $scope.alert.msg = data;
         $scope.alert.visible = true;
 
-        executor.exitModule('Unknown error');
+        executorService.exitModule('Unknown error');
       }
       
       moduleService.openModule(userService.getUserName(), moduleId).then(onModuleSuccess, onModuleError);
@@ -116,7 +116,9 @@ angular.module('tatool.module')
           trialDataService.openTrialsDB(userService.getUserName(), mode, loadModule);
         });
     } else {
-      executor.stopModule(false);
+      executorService.stopModule(false);
     }
 
-  }]);
+}
+
+export default MainCtrl;

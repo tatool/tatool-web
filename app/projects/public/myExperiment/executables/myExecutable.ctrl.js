@@ -13,6 +13,10 @@ tatool.controller('myExecutableCtrl', [ '$scope', 'service',
       service.startTime = service.stimulusService.show();
     };
 
+    $scope.clickMe = function(stimulus, timing, $event) {
+      console.log('hallo');
+    };
+
     $scope.inputAction = function(input, timing, event) {
       service.inputService.disable();
       service.stimulusService.hide();

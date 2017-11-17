@@ -1,7 +1,6 @@
 'use strict';
 
-angular.module('tatool.module')
-  .factory('util', [ function () {
+function UtilService() {
 
     var util = {};
 
@@ -26,4 +25,6 @@ angular.module('tatool.module')
 
     return util;
 
-  }]);
+}
+
+export default UtilService;

@@ -1,7 +1,7 @@
 <div class="wrapper">
 
 <!-- HEADER --> 
-<div ng-include src="'../../views/header.html'"></div>
+<div ng-include src="'header.html'"></div>
 
 
 <!-- DEVELOPMENT -->
@@ -23,13 +23,13 @@
       </div>
     </div>
 
-    <accordion>
-      <accordion-group is-open="accordionStatus.develop">
-        <accordion-heading>
+    <uib-accordion>
+      <uib-accordion-group is-open="accordionStatus.develop">
+        <uib-accordion-heading>
           EDITOR
           <i class="fa fa-chevron-right" ng-class="{'fa fa-chevron-down red': accordionStatus.develop, 'fa fa-chevron-right': !accordionStatus.develop}"></i>
           
-        </accordion-heading>
+        </uib-accordion-heading>
         <div id="modules">
 
           <div class="tile tileDev" ng-class="{'tileHighlight': module.moduleId == highlightModuleId}" ng-repeat="module in modules | orderBy:'moduleName'" ng-if="!!modules.length">
@@ -45,8 +45,8 @@
               <div class="buttonbar">
                 <div class="btn btn-tatool-off" ng-click="editModule(module)">Edit</div>
                 <div class="btn btn-tatool-off" ng-click="startModule(module)">Test</div>
-                <div id="dropdownExport" class="btn-group" dropdown is-open="status.isopen" ng-if="exporterEnabled(module)">
-                  <div id="dropdownExportButton" class="btn btn-tatool-off dropdown-toggle" dropdown-toggle>Export <span class="caret"></span></div>
+                <div id="dropdownExport" class="btn-group" uib-dropdown is-open="status.isopen" ng-if="exporterEnabled(module)">
+                  <div id="dropdownExportButton" class="btn btn-tatool-off dropdown-toggle" uib-dropdown-toggle>Export <span class="caret"></span></div>
                   <ul class="dropdown-menu" role="menu">
                     <li class="exporterName" ng-click="doExport($event, module, exporter.mode, exporter.target)" ng-repeat="exporter in module.moduleDefinition.export | filter:filterExporterValues | orderBy:'mode'">
                       <a ui-sref="developer">{{exporter.mode}}</a>
@@ -111,8 +111,8 @@
             No modules found.
           </div>
         </div>
-      </accordion-group>
-    </accordion>
+      </uib-accordion-group>
+    </uib-accordion>
   </div>
 
 
@@ -122,4 +122,4 @@
     </div>
 
 <!-- FOOTER --> 
-  <div ng-include src="'../../views/footer.html'"></div>
+  <div ng-include src="'footer.html'"></div>

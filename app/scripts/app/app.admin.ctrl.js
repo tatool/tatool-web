@@ -1,8 +1,10 @@
 'use strict';
 
-angular.module('tatool.app')
-  .controller('AdminCtrl', ['$scope', '$q', '$http', '$log', '$timeout', '$sce', 'userDataService', 'moduleDataService', 'spinnerService',
-    function($scope, $q, $http, $log, $timeout, $sce, userDataService, moduleDataService, spinnerService) {
+import bootbox from 'bootbox';
+
+AdminCtrl.$inject = ['$scope', '$q', '$http', '$log', '$timeout', '$sce', 'userDataService', 'moduleDataService', 'spinnerService'];
+
+function AdminCtrl($scope, $q, $http, $log, $timeout, $sce, userDataService, moduleDataService, spinnerService) {
 
       $scope.users = [];
 
@@ -547,5 +549,6 @@ angular.module('tatool.app')
         $scope.filterProject = '';
       };
 
-    }
-  ]);
+}
+
+export default AdminCtrl;

@@ -1,8 +1,8 @@
 'use strict';
 
-angular.module('tatool.module')
-  .factory('levelHandler', ['$log', '$rootScope', 'statusPanelService', 'handlerService', 'tatoolPhase', 'moduleService', 'trialService',
-    function ($log, $rootScope, statusPanelService, handlerService, tatoolPhase, moduleService, trialService) {
+LevelHandlerService.$inject = ['$log', '$rootScope', 'statusPanelService', 'handlerService', 'tatoolPhase', 'moduleService', 'trialService'];
+
+function LevelHandlerService($log, $rootScope, statusPanelService, handlerService, tatoolPhase, moduleService, trialService) {
 
     // create a new handler object and set all handler properties
     var LevelHandler = function() {
@@ -82,4 +82,6 @@ angular.module('tatool.module')
     };
 
     return LevelHandler;    
-  }]);
+}
+
+export default LevelHandlerService;

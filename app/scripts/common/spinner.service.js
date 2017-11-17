@@ -1,5 +1,10 @@
 'use strict';
 
+import { Spinner } from 'spin.js';
+
+SpinnerService.$inject = ['$log', '$rootScope'];
+TatoolSpinner.$inject = ['$window'];
+
 /**
  * Tatool Spinner adaptation from original angular-spinner 
  *
@@ -11,8 +16,7 @@
 
  /* global Spinner */
 
-angular.module('tatool.common')
-  .factory('spinnerService', ['$log', '$rootScope', function ($log, $rootScope) {
+function SpinnerService($log, $rootScope) {
     var config = {};
 
     config.spin = function (key, text) {
@@ -27,10 +31,9 @@ angular.module('tatool.common')
     };
 
     return config;
-  }]);
+}
 
-angular.module('tatool.common')
-  .directive('tatoolSpinner', ['$window', function ($window) {
+function TatoolSpinner($window) {
     return {
       scope: true,
       link: function (scope, element, attr) {
@@ -100,6 +103,12 @@ angular.module('tatool.common')
           scope.spinner = null;
         });
       },
-      templateUrl: '../../views/app/spinner.html'
+      //templateUrl: '../../views/app/spinner.html'
+      template: require('../../views/app/spinner.html')
     };
-  }]);
+}
+
+export {
+  SpinnerService,
+  TatoolSpinner,
+}

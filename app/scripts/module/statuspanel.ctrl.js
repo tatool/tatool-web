@@ -1,8 +1,8 @@
 'use strict';
 
-angular.module('tatool.module')
-  .controller('StatusPanelCtrl', ['$scope', '$rootScope', '$log', '$timeout', '$interval', 'statusPanelService', 'status', 'tatoolPhase', 'cfgModule', 'statusUpdate',
-    function ($scope, $rootScope, $log, $timeout, $interval, statusPanelService, status, tatoolPhase, cfgModule, statusUpdate) {
+StatusPanelCtrl.$inject = ['$scope', '$rootScope', '$log', '$timeout', '$interval', 'statusPanelService', 'status', 'tatoolPhase', 'cfgModule', 'statusUpdate'];
+
+function StatusPanelCtrl($scope, $rootScope, $log, $timeout, $interval, statusPanelService, status, tatoolPhase, cfgModule, statusUpdate) {
 
     $scope.imgPath = cfgModule.MODULE_IMG_PATH;
     
@@ -50,4 +50,6 @@ angular.module('tatool.module')
       }
     );
     
-  }]);
+}
+
+export default StatusPanelCtrl;

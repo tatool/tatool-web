@@ -103,3 +103,5 @@ var KeyCodes = {
     SingleQuote         : 222 
 };
 /*jshint +W079 */
+
+export default KeyCodes;

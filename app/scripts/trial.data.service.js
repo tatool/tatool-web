@@ -1,8 +1,12 @@
 'use strict';
 /* global IDBStore */
 
-angular.module('tatool')
-  .factory('trialDataService', ['$log', '$q', 'cfg', function ($log, $q, cfg) {
+import Sha1 from 'sha1';
+import IDBStore from 'idb-wrapper'
+
+TrialDataService.$inject = ['$log', '$q', 'cfg'];
+
+function TrialDataService($log, $q, cfg) {
     $log.debug('TrialDataService: initialized');
 
     var data = {};
@@ -21,7 +25,7 @@ angular.module('tatool')
         }
       } else {
         dbMode = mode;
-        var prefix = Sha1.hash(userName);
+        var prefix = Sha1(userName);
         var suffix = (dbMode === cfg.APP_MODE_DEVELOPER) ? 'd' : 'u';
 
         data.trialsDB = new IDBStore({
@@ -146,4 +150,6 @@ angular.module('tatool')
 
     return data;
 
-  }]);
+}
+
+export default TrialDataService;

@@ -1,6 +1,9 @@
 'use strict';
 
-angular.module('tatool.app').directive('customOnChange', function() {
+Tree.$inject = ['recursionHelper'];
+ChecklistModel.$inject = ['$parse', '$compile'];
+
+function CustomOnChange() {
   return {
     restrict: 'A',
     link: function (scope, element, attrs) {
@@ -9,10 +12,9 @@ angular.module('tatool.app').directive('customOnChange', function() {
       element.bind('change', function() { document.getElementById('openModuleForm').reset(); });
     }
   };
-});
+}
 
-
-angular.module('tatool.app').directive('tree', ['RecursionHelper', function(RecursionHelper) {
+function Tree(recursionHelper) {
   return {
     restrict: 'E',
     scope: {
@@ -54,7 +56,7 @@ angular.module('tatool.app').directive('tree', ['RecursionHelper', function(Recu
           '</div>' +
         '</div>',
     compile: function(element) {
-      return RecursionHelper.compile(element, function(scope) {
+      return recursionHelper.compile(element, function(scope) {
 
         scope.highlightElement = function() {
           scope.highlight.key = scope.element.name;
@@ -62,7 +64,7 @@ angular.module('tatool.app').directive('tree', ['RecursionHelper', function(Recu
       });
     }
   };
-}]);
+}
 
 
 /**
@@ -70,7 +72,7 @@ angular.module('tatool.app').directive('tree', ['RecursionHelper', function(Recu
  * AngularJS directive for list of checkboxes
  */
 
-angular.module('tatool.app').directive('checklistModel', ['$parse', '$compile', function($parse, $compile) {
+function ChecklistModel($parse, $compile) {
   // contains
   function contains(arr, item) {
     if (angular.isArray(arr)) {
@@ -162,4 +164,10 @@ angular.module('tatool.app').directive('checklistModel', ['$parse', '$compile', 
       return postLinkFn;
     }
   };
-}]);
+}
+
+export {
+  CustomOnChange,
+  Tree,
+  ChecklistModel
+}

@@ -1,15 +1,15 @@
 'use strict';
 
-angular.module('tatool.auth')
-  .factory('authService', ['$http', '$q', '$base64', '$log', 'userService', 'messageService',
-    function($http, $q, $base64, $log, userService, messageService) {
+AuthService.$inject = ['$http', '$q', '$log', 'userService', 'messageService'];
+
+function AuthService($http, $q, $log, userService, messageService) {
 
   var authService = {};
  
   // login
   authService.login = function (credentials) {
     var deferred = $q.defer();
-    $http.defaults.headers.common.Authorization = 'Basic ' + $base64.encode(credentials.userName + ':' + credentials.userPassword);
+    $http.defaults.headers.common.Authorization = 'Basic ' + btoa(credentials.userName + ':' + credentials.userPassword);
     $http.defaults.headers.common['Content-Type'] = 'application/json;charset=utf-8';
     $http.get('/api/login')
       .success(function (data) {
@@ -157,4 +157,6 @@ angular.module('tatool.auth')
   
   return authService;
 
-}]);
+}
+
+export default AuthService;

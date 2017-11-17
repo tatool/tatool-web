@@ -1,7 +1,7 @@
 <div class="wrapper">
 
 <!-- HEADER --> 
-<div ng-include src="'../../views/header.html'"></div>
+<div ng-include src="'header.html'"></div>
 
   <!-- MAIN -->
 <div id="startDocument" class="container">
@@ -21,7 +21,7 @@
     </ul>
     <li ui-sref-active="active"><a ui-sref="doc({page: 'main-community.html'})"><b>Community</b></a></li>
     <ul class="subNav" ng-show="parentPage==='community'">
-      <li><i class="fa fa-angle-right"></i> <a href="http://www.tatool.ch/forum" target="_blank">Forum</a></li>
+      <li><i class="fa fa-angle-right"></i> <a href="https://github.com/tatool/tatool-web" target="_blank">Github</a></li>
       <li ui-sref-active="active"><i class="fa fa-angle-right"></i> <a ui-sref="doc({page: 'community-contribute.html'})">Contribute</a></li>
       <br>
     </ul>
@@ -106,4 +106,4 @@
 </div>
 
 <!-- FOOTER --> 
-<div ng-include src="'../../views/footer.html'"></div>
+<div ng-include src="'footer.html'"></div>

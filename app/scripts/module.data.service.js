@@ -1,7 +1,8 @@
 'use strict';
 
-angular.module('tatool')
-  .factory('moduleDataService', ['$log', '$q', '$http', 'trialDataService', function ($log, $q, $http, trialDataService) {
+ModuleDataService.$inject = ['$log', '$q', '$http', 'trialDataService'];
+
+function ModuleDataService($log, $q, $http, trialDataService) {
     $log.debug('ModuleDataService: initialized');
 
     var data = {};
@@ -411,4 +412,6 @@ angular.module('tatool')
 
     return data;
 
-  }]);
+}
+
+export default ModuleDataService;

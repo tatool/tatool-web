@@ -1,7 +1,7 @@
 <div class="wrapper">
 
 <!-- HEADER --> 
-<div ng-include src="'../../views/header.html'"></div>
+<div ng-include src="'header.html'"></div>
 
   <div class="container">
 
@@ -10,11 +10,11 @@
           <div ng-bind-html="alert.msg"></div>
         </div>
 
-        <tabset>
-          <tab select="hideAlert()">
-            <tab-heading>
+        <uib-tabset>
+          <uib-tab select="hideAlert()">
+            <uib-tab-heading>
               <b>Users</b>
-            </tab-heading>
+            </uib-tab-heading>
             <br>
 
             <div class="actionHeader">
@@ -54,9 +54,9 @@
                 <td> {{user.fullName}}<br><span ng-if="user.affiliation">({{user.affiliation}})</span></td>
                 <td align="center" ng-repeat="role in roles"> <input type="checkbox" checklist-model="user.roles" checklist-value="role"> </td>
                 <td align="center"> 
-                  <div class="btn btn-tatool-off" ng-click="updateUser(user)" tooltip="Save changes to user roles." tooltip-placement="top" tooltip-animation="false"><i class="fa fa-floppy-o"></i></div>
-                  <a ng-click="changePassword(user)" class="btn btn-tatool-off" tooltip="Change user password." tooltip-placement="top" tooltip-animation="false"><i class="fa fa-lock"></i></a>
-                  <a ng-click="deleteUser(user)" class="btn btn-tatool-off" tooltip="Delete user." tooltip-placement="top" tooltip-animation="false"><i class="fa fa-trash-o"></i></a>
+                  <div class="btn btn-tatool-off" ng-click="updateUser(user)" uib-tooltip="Save changes to user roles." uib-tooltip-placement="top" uib-tooltip-animation="false"><i class="fa fa-floppy-o"></i></div>
+                  <a ng-click="changePassword(user)" class="btn btn-tatool-off" uib-tooltip="Change user password." uib-tooltip-placement="top" uib-tooltip-animation="false"><i class="fa fa-lock"></i></a>
+                  <a ng-click="deleteUser(user)" class="btn btn-tatool-off" uib-tooltip="Delete user." uib-tooltip-placement="top" uib-tooltip-animation="false"><i class="fa fa-trash-o"></i></a>
                 </td>
                 </tr>
               </tbody>
@@ -71,11 +71,11 @@
               </button>
             </div>
 
-          </tab>
-          <tab select="hideAlert()">
-            <tab-heading>
+          </uib-tab>
+          <uib-tab select="hideAlert()">
+            <uib-tab-heading>
               <b>Projects</b>
-            </tab-heading>
+            </uib-tab-heading>
             <br>
 
             <div class="actionHeader">
@@ -102,22 +102,22 @@
               <tbody>
                 <tr ng-repeat="project in projects | filter:{ $: filterProject } | orderBy:'name'">
                   <td> 
-                    <span ng-if="project.access === 'public'"><i class="fa fa-globe fa-lg fa-fw" tooltip="Public project" tooltip-placement="top"></i> </span>
-                    <span ng-if="project.access === 'private'"><i class="fa fa-lock fa-lg fa-fw" tooltip="Private project" tooltip-placement="top"></i> </span>
+                    <span ng-if="project.access === 'public'"><i class="fa fa-globe fa-lg fa-fw" uib-tooltip="Public project" uib-tooltip-placement="top"></i> </span>
+                    <span ng-if="project.access === 'private'"><i class="fa fa-lock fa-lg fa-fw" uib-tooltip="Private project" uib-tooltip-placement="top"></i> </span>
                     {{project.name}} 
                   </td>
                   <td> {{project.email}}</td>
                   <td> {{project.description}}</td>
                   <td align="center"> 
-                    <div class="btn btn-tatool-off" ng-click="editProject(project)" tooltip="Edit project." tooltip-placement="top" tooltip-animation="false"><i class="fa fa-pencil-square-o"></i></div>
-                    <a ng-click="deleteProject(project)" class="btn btn-tatool-off" tooltip="Delete project." tooltip-placement="top" tooltip-animation="false"><i class="fa fa-trash-o"></i></a>
+                    <div class="btn btn-tatool-off" ng-click="editProject(project)" uib-tooltip="Edit project." uib-tooltip-placement="top" uib-tooltip-animation="false"><i class="fa fa-pencil-square-o"></i></div>
+                    <a ng-click="deleteProject(project)" class="btn btn-tatool-off" uib-tooltip="Delete project." uib-tooltip-placement="top" uib-tooltip-animation="false"><i class="fa fa-trash-o"></i></a>
                 </td>
                 </tr>
               </tbody>
             </table>
 
-          </tab>
-        </tabset>
+          </uib-tab>
+        </uib-tabset>
 
         
 
@@ -128,4 +128,4 @@
 </div>
 
 <!-- FOOTER --> 
-<div ng-include src="'../../views/footer.html'"></div>
+<div ng-include src="'footer.html'"></div>

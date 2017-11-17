@@ -1,9 +1,12 @@
 'use strict';
 
-angular.module('tatool.app')
-  .controller('PublicEndCtrl', ['$scope', 'publicService',
-    function ($scope, publicService) {
+PublicEndCtrl.$inject = ['$scope', 'publicService'];
 
-    $scope.sessionToken = publicService.getSessionToken();
-    
-  }]);
+function PublicEndCtrl($scope, publicService) {
+	if (publicService.getModule() != undefined) {
+		$scope.message = 'This code confirms the completion of your session:';
+		$scope.sessionToken = publicService.getSessionToken();
+	}
+}
+
+export default PublicEndCtrl;

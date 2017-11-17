@@ -2,9 +2,11 @@
 
 /* global screenfull */
 
-angular.module('tatool.app')
-  .controller('PublicStartCtrl', ['$scope', '$window', '$state', 'publicService', 'moduleId', 'extid', 'condition', 'moduleDataService',
-    function ($scope, $window, $state, publicService, moduleId, extid, condition, moduleDataService) {
+import screenfull from 'screenfull';
+
+PublicStartCtrl.$inject = ['$scope', '$window', '$state', 'publicService', 'moduleId', 'extid', 'condition', 'moduleDataService'];
+
+function PublicStartCtrl($scope, $window, $state, publicService, moduleId, extid, condition, moduleDataService) {
 
     $scope.validModule = false;
     publicService.setExtId(extid);
@@ -30,6 +32,6 @@ angular.module('tatool.app')
       }
       $state.go('publicRun');
     };
+}
 
-    
-  }]);
+export default PublicStartCtrl;
