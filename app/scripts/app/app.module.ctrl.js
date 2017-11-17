@@ -5,6 +5,7 @@
 
 import async from 'async';
 import bootbox from 'bootbox';
+import screenfull from 'screenfull';
 
 ModuleCtrl.$inject = ['$scope', '$q', '$timeout', '$window', '$rootScope', '$location',  '$state', '$http', '$log', '$sce', 'moduleDataService', 'cfgApp', 'authService', 'userService', 'moduleCreatorService', 'exportService', 'spinnerService', 'cfg'];
 
