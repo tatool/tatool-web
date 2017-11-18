@@ -1,0 +1,36 @@
+.delayAversion_emptyCell, .delayAversion_emptyCellStatic {
+  font-size: 300%;
+  background-color: transparent;
+  border: 0;
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+  margin: 0;
+  padding: 8px;
+}
+
+.delayAversion_fillCell, .delayAversion_fillCellStatic {
+  font-size: 150%;
+  background-color: transparent;
+  border: 0;
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+  margin: 0;
+  padding: 8px;
+}
+
+.delayAversion_countCell, .delayAversion_countCellStatic {
+  font-size: 300%;
+  border: 5px solid #aaa;
+  background: #f8f8f8;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+}
+
+.delayAversion_fillCell:hover {
+  cursor: pointer;
+}

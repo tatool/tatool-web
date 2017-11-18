@@ -1,0 +1,22 @@
+.memoryClassify_emptyCell, .memoryClassify_emptyCellStatic {
+  font-size: 300%;
+  background-color: transparent;
+  border: 0;
+  display: table-cell;
+  vertical-align: middle;
+  margin: 0;
+  padding: 8px;
+}
+
+.memoryClassify_fillCell, .memoryClassify_fillCellStatic {
+  font-size: 300%;
+  background-color: transparent;
+  border: 0;
+  display: table-cell;
+  vertical-align: middle;
+  margin: 0;
+  padding: 8px;
+}
+.memoryClassify_fillCell:hover {
+  cursor: pointer;
+}
