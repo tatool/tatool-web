@@ -9,6 +9,5 @@ uploads
 .envprod
 app/projects/private/*
 app/projects/public/myExperiment/*
-app/projects/public/tatool-share/*
 newrelic_agent.log
 package-lock.json
