@@ -10,3 +10,4 @@ uploads
 app/projects/private/*
 app/projects/public/myExperiment/*
 newrelic_agent.log
+package-lock.json
