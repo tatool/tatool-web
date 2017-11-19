@@ -270,6 +270,7 @@ tatoolApp.run(['$templateCache', function($templateCache) {
     $templateCache.put('lib-exp.html', require('../../views/doc/lib-exp.html'));
     $templateCache.put('lib-gen.html', require('../../views/doc/lib-gen.html'));
     $templateCache.put('lib-train.html', require('../../views/doc/lib-train.html'));
+    $templateCache.put('lib-train-digit-memory-span.html', require('../../views/doc/lib-train-digit-memory-span.html'));
     $templateCache.put('main-about.html', require('../../views/doc/main-about.html'));
     $templateCache.put('main-community.html', require('../../views/doc/main-community.html'));
     $templateCache.put('main-dev.html', require('../../views/doc/main-dev.html'));

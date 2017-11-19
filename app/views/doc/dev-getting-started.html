@@ -4,7 +4,6 @@
 
 <ul id="docPageNav">
   <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('nodejs')">Install nodeJS</a></li>
-  <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('git')">Install Git</a></li>
   <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('mongodb')">Install MongoDB Community Edition</a></li>
   <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('tatool')">Install Tatool</a></li>
   <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('runTatool')">Run Tatool</a></li>
@@ -19,53 +18,45 @@
 <div class="hint">
   <div class="icon red"><i class="fa fa-lightbulb-o fa-2x"></i></div> 
   <div class="text">
-    <p>In the following, you'll need to enter several computer prompts. To do so in Windows, open a Command Prompt window by clicking the Start button and then typing <i>cmd</i> in the search box. On Mac, navigate to <i>Applications</i> and then to <i>Utilities</i>. Open the Terminal by double-clicking it.</p>
+    <p>In the following, you'll need to enter a few commands. To do so in Windows, open a Command Prompt window by clicking the Start button and then typing <i>cmd</i> in the search box. On Mac, navigate to <i>Applications</i> and then to <i>Utilities</i>. Open the Terminal by double-clicking it.</p>
   </div>
 </div>
 
 <p>Type the following command in your terminal window and make sure you get a response indicating your version of nodeJS. If you don't see the version of your nodeJS, something went wrong with your installation and you'll need to fix it first.</p>
-<pre><code class="language-javascript">$> node --version
+<pre><code class="language-javascript">&gt; node --version
+
 v8.9.1
-</code></pre>
-
-<hr class="hr-red">
-
-<h3 id="git">Install Git<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
-
-<p><img src="../../images/doc/git-logo.png" width="200"><br><br>Get the latest download for your operating system from <a href="http://git-scm.com/downloads" target="_blank">http://git-scm.com/downloads</a> and follow the instructions on their page to install it. Even if you choose not to use git to download the latest version of tatool-web, you'll still need to install it as it's required during the installation. Make sure to select <i>Use Git from the Windows Command Prompt</i> during the installation.</p>
-
-<p>Type the following command in your terminal window and make sure you get a response indicating your version of Git. If you don't see the version, something went wrong with your installation and you'll need to fix it first.</p>
-<pre><code class="language-javascript">$> git version
-git version 2.7.0.windows.1
 </code></pre>
 
 <hr class="hr-red">
 
 <h3 id="mongodb">Install MongoDB Community Edition<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
 
-<p><img src="../../images/doc/mongodb-logo.png"><br><br>Get the latest download for your operating system from <a href="http://www.mongodb.org/downloads" target="_blank">http://www.mongodb.org/downloads</a> and follow the <a href="http://docs.mongodb.org/manual/installation/" target="_blank">instructions</a> on their page to install it. Follow the steps under 'Install MongoDB Community Edition', and also complete Step 1 under 'Run MongoDB Community Edition' which will create the necessary data directory for MongoDB.</p>
+<p><img src="../../images/doc/mongodb-logo.png"><br><br>Get the latest download of MongoDB Community Server for your operating system from <a href="https://www.mongodb.com/download-center#community" target="_blank">http://www.mongodb.org</a> and follow the <a href="https://docs.mongodb.com/manual/installation/#tutorials" target="_blank">instructions</a> on their page to install it. Follow the steps under 'Install MongoDB Community Edition', and also complete Step 1 under 'Run MongoDB Community Edition' which will create the necessary data directory for MongoDB.</p>
 
-<p>Type the following command in your terminal window and make sure you get a response indicating your version of MongoDB. If you don't see the version of your MongoDB, something went wrong with your installation and you'll need to fix it first. The cd command changes your directory to the directory where you installed MongoDb.</p>
-<pre><code class="language-javascript">$> cd mongodb
-$mongodb> cd bin
-$mongodb\bin> mongo -version
+<p>Type the following commands in your terminal window and make sure you get a response indicating your version of MongoDB. If you don't see the version of your MongoDB, something went wrong with your installation and you'll need to fix it first. The <i>cd</i> command changes your directory to the directory where you installed MongoDB. On Windows by default it will be in "C:\Program Files\MongoDB\Server\3.4\bin" if you install version 3.4.</p>
+<pre><code class="language-javascript">&gt; cd &lt;path to mongodb binary&gt;
+&gt; mongo -version
+
 MongoDB shell version: 3.2.8
+...
 </code></pre>
 
 <hr class="hr-red">
 
 <h3 id="tatool">Install Tatool<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
 
-<p><img src="../../images/app/tatool_logo.png" width="200"><br><br>Get the latest download of Tatool from our <a href="http://github.com/tatool/tatool-web" target="_blank">GitHub repository</a>. If you're familiar with Git, we recommend you clone the tatool-web repository, otherwise you can simply download a ZIP file by clicking on the "Download ZIP" button in the top menu on GitHub.</p>
+<p><img src="../../images/app/tatool_logo.png" width="200"><br><br>Get the latest download of Tatool from our <a href="http://github.com/tatool/tatool-web" target="_blank">GitHub repository</a>. If you're familiar with Git, we recommend you clone the tatool-web repository, otherwise you can simply download a ZIP file by clicking <a href="https://github.com/tatool/tatool-web/archive/master.zip">here</a>.</p>
 
-<p>After having downloaded/extracted the tatool-web code to where you want to run Tatool from, you'll have to run a few commands to properly install all dependencies.</p>
+<p>After having downloaded/extracted the tatool-web code to where you want to run Tatool from, you are ready to install tatool-web.</p>
 
-<p><b>1.</b> Open the folder where you downloaded and extracted tatool-web to in your terminal window. The cd command changes your directory to the directory where you extracted/downloaded the tatool-web data to.</p>
-<pre><code class="language-javascript">$> cd tatool-web
+<p><b>1.</b> Open the folder where you downloaded and extracted tatool-web to in your terminal window. The cd command changes your directory to the directory where you extracted/cloned tatool-web to.</p>
+<pre><code class="language-javascript">&gt; cd &lt;path to tatool-web-master&gt;
 </code></pre>
 
-<p><b>2.</b> Run <b>npm run setup</b> to install Tatool and all its dependencies. On Mac OSX you might need to run this with the <b>sudo</b> command. The installation might take a while the first time. You might also need to run it twice for the first time to make sure everything gets downloaded and built.</p>
-<pre><code class="language-javascript">$tatool-web> npm run setup
+<p><b>2.</b> Run <b>npm run setup</b> to install Tatool and all its dependencies. On Mac OSX you might need to run this with the <b>sudo</b> command. The installation might take a while the first time.</p>
+<pre><code class="language-javascript">&gt; npm run setup
+
 ...
 </code></pre>
 
@@ -86,15 +77,16 @@ MongoDB shell version: 3.2.8
 <p>The following steps are needed to execute your local Tatool environment. You'll need to follow these steps every time you want to start your local instance of Tatool.</p>
 
 <p><b>1.</b> Start <b>mongoDB</b> (if you haven't already done so in an earlier step) by first changing into the mongoDB directory using the <i>cd</i> command followed by the full path where you installed the mongoDB into. Don't close the terminal afterwards, as this will kill the process running your database. If you chose a different data directory during the installation, you'll need to provide the dbpath argument (without the brackets [ ]).</p>
-<pre><code class="language-javascript">$> cd mongodb
-$mongodb> cd bin
-$mongodb\bin> mongod --dbpath [your data directory path]
+<pre><code class="language-javascript">&gt; cd &lt;path to mongodb binary&gt;
+&gt; mongod --dbpath [your data directory path]
+
 ...waiting for connections on port 27017
 </code></pre>
 
-<p><b>2.</b> Start <b>nodejs</b> in a new terminal by executing the commands below. First you'll have to change into the directory where you extracted tatool-web to. The second command will start a local web server hosting Tatool. Don't close the terminal, as this will kill the process running your server.</p>
-<pre><code class="language-javascript">$> cd tatool-web
-$tatool-web> npm start
+<p><b>2.</b> Start <b>nodejs</b> in a new terminal by executing the commands below. First you'll have to change into the directory where you extracted/cloned tatool-web to. The second command will start a local web server hosting Tatool. Don't close the terminal, as this will kill the process running your server.</p>
+<pre><code class="language-javascript">&gt; cd &lt;path to tatool-web-master&gt;
+&gt; npm start
+
 ...
 
 You can access tatool on hostname:3000

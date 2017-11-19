@@ -1,6 +1,6 @@
 'use strict';
 
-tatool.factory('tatoolMemorySpanTraining', ['executableUtils', 'dbUtils', 'timerUtils', 'stimulusServiceFactory', 'inputServiceFactory',
+tatool.factory('tatoolDigitMemorySpanTraining', ['executableUtils', 'dbUtils', 'timerUtils', 'stimulusServiceFactory', 'inputServiceFactory',
   function(executableUtils, dbUtils, timerUtils, stimulusServiceFactory, inputServiceFactory) {
 
     var MemorySpanTraining = executableUtils.createExecutable();

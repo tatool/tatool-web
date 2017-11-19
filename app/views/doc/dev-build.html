@@ -6,19 +6,22 @@
 <hr>
 <p>Run Tatool with <b>webpack-dev-server</b>, if you want to extend the functionality of tatool while using automatic reloading. You'll have to run the server in a separate process.</p>
 <pre><code class="language-bash"># run server
-$> npm start
+&gt; npm start
 
 # run webpack-dev-server
-$> npm run dev
+&gt; npm run dev
 </code></pre>
 
 <hr>
 <p>Build tatool with <b>webpack</b>.</p>
 <pre><code class="language-bash"># install dependencies
-$> npm run install
+&gt; npm run install
 
 # build tatool
-$> npm run build
+&gt; npm run build
+
+# or in one command (install and build)
+&gt; npm run setup
 </code></pre>
 
 <hr>
@@ -26,12 +29,12 @@ $> npm run build
 <pre><code class="language-bash">$> npm start
 
 # alternatively you can call node directly
-$> node server.js lab prod
+&gt; node server.js lab prod
 </code></pre>
 
 <hr>
 <p>If you want to run Tatool Web in <b>server mode</b>, you'll have to provide the following two configuration parameters. The environment parameter will direct Tatool Web to enable or disable server logging.</p>
 <pre><code class="language-bash"># [mode] : lab / server
 # [environment] : dev / prod
-$> node server.js [mode] [environment]
+&gt; node server.js [mode] [environment]
 </code></pre>
