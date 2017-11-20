@@ -369,6 +369,8 @@ box-shadow: 3px 3px 13px 0px rgba(64,64,64,0.54);
   display: inline-block;
   float:left;
   width: 18%;
+  position: sticky;
+  top: 0;
 }
 
 #docNavigation ul {
