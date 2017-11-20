@@ -8,10 +8,10 @@
 
         <div ng-switch on="col.data.stimulusValueType">
           <div ng-switch-when="image">
-            <img class="imageCellValue" draggable="false" ng-src="{{col.stimulusImage}}">
+            <img class="imageCellValue" draggable="false" ng-src="{{col.stimulusImage}}" style="{{col.data.stimulusValueStyle}}">
           </div>
           <div ng-switch-when="text" style="overflow: hidden;">
-            <div class="textCellValue"><span>{{col.data.stimulusValue}}</span></div>
+            <div class="textCellValue" style="{{col.data.stimulusValueStyle}}"><span>{{col.data.stimulusValue}}</span></div>
           </div>
           <div ng-switch-when="circle">
             <div class="circleCellValue"><div ng-style="col.gridCellValueOverrideStyle"></div></div>
