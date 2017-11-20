@@ -43,7 +43,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'font-awesome/css/font-awesome.css';
 
 // custom css
-import '../../styles/prism.css';
 import '../../styles/fonts/module/leaguegothic-regular-webfont.css';
 import '../../styles/fonts/module/tatool-icons.css';
 import '../../styles/reset.css';

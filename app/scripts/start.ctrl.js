@@ -3,6 +3,10 @@
 /* global Prism */
 
 import Prism from 'prismjs';
+import 'prismjs/plugins/line-numbers/prism-line-numbers';
+
+import 'prismjs/themes/prism.css';
+import 'prismjs/plugins/line-numbers/prism-line-numbers.css';
 
 StartCtrl.$inject = ['$scope', '$http', '$location', '$anchorScroll', '$state', '$timeout', 'page'];
 
