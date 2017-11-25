@@ -248,7 +248,7 @@ tatoolApp.run(['$templateCache', function($templateCache) {
     $templateCache.put('lib-bat-uzh-multi.html', require('../../views/doc/lib-bat-uzh-multi.html'));
     $templateCache.put('lib-bat-uzh-multi-testing.html', require('../../views/doc/lib-bat-uzh-multi-testing.html'));
     $templateCache.put('lib-bat-uzh-multi-training.html', require('../../views/doc/lib-bat-uzh-multi-training.html'));
-    $templateCache.put('lib-bat-uzh-shifting.html', require('../../views/doc/lib-bat-uzh-multi.html'));
+    $templateCache.put('lib-bat-uzh-shifting.html', require('../../views/doc/lib-bat-uzh-shifting.html'));
     $templateCache.put('lib-bat-uzh-shifting-dimension.html', require('../../views/doc/lib-bat-uzh-shifting-dimension.html'));
     $templateCache.put('lib-bat-uzh-shifting-judgment.html', require('../../views/doc/lib-bat-uzh-shifting-judgment.html'));
     $templateCache.put('lib-bat-uzh-shifting-mapping.html', require('../../views/doc/lib-bat-uzh-shifting-mapping.html'));
