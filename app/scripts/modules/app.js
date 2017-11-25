@@ -1,13 +1,29 @@
 'use strict';
 
-var tatool = angular.module('tatool', ['ui.bootstrap', 'ui.router'])
+import angular from 'angular';
+import uibootstrap from 'angular-ui-bootstrap';
+import uirouter from 'angular-ui-router';
+
+import UserDataService from '../user.data.service.js';
+import TrialDataService from '../trial.data.service.js';
+import ModuleDataService from '../module.data.service.js';
+
+var tatool = angular.module('tatool', [uibootstrap, uirouter])
   .constant('cfg', {
     MODE: 'REMOTE', // LOCAL or REMOTE
     APP_MODE_USER: 'user',
     APP_MODE_DEVELOPER: 'developer',
     APP_MODE_PUBLIC: 'public'
-  })
-  .config(['$stateProvider', '$urlRouterProvider', '$provide', '$controllerProvider', '$logProvider',
+  });
+
+// make the variable tatool globally available to provide legacy support for tasks
+window.tatool = tatool;
+
+tatool.factory('userDataService', UserDataService);
+tatool.factory('trialDataService', TrialDataService);
+tatool.factory('moduleDataService', ModuleDataService);
+
+tatool.config(['$stateProvider', '$urlRouterProvider', '$provide', '$controllerProvider', '$logProvider',
     function ($stateProvider, $urlRouterProvider, $provide, $controllerProvider, $logProvider) {
 
     //userDataServiceProvider.setProvider(cfg.MODE);
@@ -24,16 +40,7 @@ var tatool = angular.module('tatool', ['ui.bootstrap', 'ui.router'])
     $stateProvider
       .state('start', {
         url: '/',
-        templateUrl: 'views/start.html',
-        controller: 'StartCtrl',
-        resolve: {
-          page: [function() {
-            return '';
-          }]
-        }
-      }).state('about', {
-        url: '/about',
-        templateUrl: 'views/about.html',
+        template: require('../../views/start.html'),
         controller: 'StartCtrl',
         resolve: {
           page: [function() {
@@ -42,7 +49,7 @@ var tatool = angular.module('tatool', ['ui.bootstrap', 'ui.router'])
         }
       }).state('doc', {
         url: '/doc/:page',
-        templateUrl: 'views/documentation.html',
+        template: require('../../views/documentation.html'),
         controller: 'StartCtrl',
         resolve: {
           page: ['$state', '$stateParams', function($state, $stateParams) {
@@ -80,23 +87,4 @@ var tatool = angular.module('tatool', ['ui.bootstrap', 'ui.router'])
     };
   }]);
 
-/*
-angular.module('tatool').provider('userDataService', function() {
-  this.setProvider = function(provider) {
-    this.authProvider = provider;
-  };
-    
-  this.$get = ['userDataLocalService', 'userDataRemoteService', function(userDataLocalService, userDataRemoteService) {
-
-    if(this.authProvider === 'LOCAL') {
-      return userDataLocalService;
-    }
-        
-    if(this.authProvider === 'REMOTE') {
-      return userDataRemoteService;
-    }
-        
-    throw 'No userDataService available';
-  }];
-});
-*/
+export default tatool.name;

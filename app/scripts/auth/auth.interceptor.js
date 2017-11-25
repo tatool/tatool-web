@@ -1,7 +1,8 @@
 'use strict';
 
-angular.module('tatool.auth').factory('authInterceptor', [ '$log', '$rootScope', '$q', '$window', '$injector', 'cfg', 'messageService', 'spinnerService',
-  function ($log, $rootScope, $q, $window, $injector, cfg, messageService, spinnerService) {
+AuthInterceptor.$inject = ['$log', '$rootScope', '$q', '$window', '$injector', 'cfg', 'messageService', 'spinnerService'];
+
+function AuthInterceptor($log, $rootScope, $q, $window, $injector, cfg, messageService, spinnerService) {
   return {
     request: function (config) {
       if (!config.skipauth) {
@@ -36,4 +37,6 @@ angular.module('tatool.auth').factory('authInterceptor', [ '$log', '$rootScope',
       }
     }
   };
-}]);
+}
+
+export default AuthInterceptor;

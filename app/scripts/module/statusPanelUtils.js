@@ -5,9 +5,9 @@
   Updating of status panels.
 **/
 
-angular.module('tatool.module')
-  .factory('statusPanelUtils', ['$rootScope', 'statusUpdate',
-    function ($rootScope, statusUpdate) {
+StatusPanelUtilsService.$inject = ['$rootScope', 'statusUpdate'];
+
+function StatusPanelUtilsService($rootScope, statusUpdate) {
 
     var utils = {};
 
@@ -18,4 +18,6 @@ angular.module('tatool.module')
 
     return utils;
 
-  }]);
+}
+
+export default StatusPanelUtilsService;

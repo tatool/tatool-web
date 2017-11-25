@@ -3,9 +3,11 @@
 /* global $script */
 /* global Recaptcha */
 
-angular.module('tatool.auth')
-  .controller('LoginCtrl', ['$scope', '$log', '$state', '$sce', '$anchorScroll', '$location', 'authService', 'messageService', 'spinnerService', 'cfg', 'token',
-    function ($scope, $log, $state, $sce, $anchorScroll, $location, authService, messageService, spinnerService, cfg, token) {
+import $script from 'scriptjs';
+
+LoginCtrl.$inject = ['$scope', '$log', '$state', '$sce', '$anchorScroll', '$location', 'authService', 'messageService', 'spinnerService', 'cfg', 'token'];
+
+function LoginCtrl($scope, $log, $state, $sce, $anchorScroll, $location, authService, messageService, spinnerService, cfg, token) {
 
     $scope.alert = { type: 'danger', msg: '', visible: false };
 
@@ -172,4 +174,6 @@ angular.module('tatool.auth')
       hideAlert();
     }
 
-  }]);
+}
+
+export default LoginCtrl;

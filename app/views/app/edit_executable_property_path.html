@@ -8,7 +8,7 @@
 
   <div class="form-group">
     <label for="name" class="col-sm-3 control-label">Project
-      <a class="info" tooltip="The resource project or external resource." tooltip-placement="right"><i class="fa fa-info-circle"></i></a>
+      <a class="info" uib-tooltip="The resource project or external resource." uib-tooltip-placement="right"><i class="fa fa-info-circle"></i></a>
     </label>
     <div class="col-sm-9">
       <ui-select ng-model="currentProject" theme="bootstrap" ng-disabled="disabled" on-select="chooseResourceProject($item, $model)">
@@ -23,7 +23,7 @@
 
   <div class="form-group" ng-if="currentProject.access !== 'external'">
     <label for="name" class="col-sm-3 control-label">Type
-      <a class="info" tooltip="The resource type." tooltip-placement="right"><i class="fa fa-info-circle"></i></a>
+      <a class="info" uib-tooltip="The resource type." uib-tooltip-placement="right"><i class="fa fa-info-circle"></i></a>
     </label>
     <div class="col-sm-9">
       <ui-select ng-model="customProperty.resourceType" theme="bootstrap" ng-disabled="disabled">
@@ -37,7 +37,7 @@
 
   <div class="form-group" ng-if="currentProject.access === 'external'">
     <label for="name" class="col-sm-3 control-label">Path
-      <a class="info" tooltip="The resource file name." tooltip-placement="right"><i class="fa fa-info-circle"></i></a>
+      <a class="info" uib-tooltip="The resource file name." uib-tooltip-placement="right"><i class="fa fa-info-circle"></i></a>
     </label>
     <div class="col-sm-9">
       <input type="text" class="form-control" ng-model="customProperty.resourcePath">

@@ -3,11 +3,20 @@
 /* global KeyCodes */
 /* global videojs */
 
+import KeyCodes from './util/keycodes.js';
+import videojs from 'video.js';
+
+Tatool.$inject = ['$timeout', 'executableUtils', 'contextService'];
+TatoolInput.$inject = ['$log', '$templateCache', '$compile', '$timeout', 'executableUtils'];
+TatoolKey.$inject = ['$log', '$sce', 'executableUtils'];
+TatoolStimulus.$inject = ['$log', '$templateCache', '$timeout', '$q', 'cfgModule', 'executableUtils'];
+TatoolGrid.$inject = ['$log', '$templateCache', 'cfgModule', 'executableUtils'];
+
 /**
   <tatool> 
   Main directive used to initiate start of executable after all directives have loaded.
 **/
-angular.module('tatool.module').directive('tatool', ['$timeout', 'executableUtils', 'contextService', function($timeout, executableUtils, contextService) {
+function Tatool($timeout, executableUtils, contextService) {
   return {
     restrict: 'E',
     priority: Number.MIN_SAFE_INTEGER, // execute as last directive
@@ -21,14 +30,14 @@ angular.module('tatool.module').directive('tatool', ['$timeout', 'executableUtil
       }
     }
   };
-}]);
+}
 
 
 /**
   <tatool-input> 
   Directive to configure user input.
 **/
-angular.module('tatool.module').directive('tatoolInput', ['$log', '$templateCache', '$compile', '$timeout', 'executableUtils', function($log, $templateCache, $compile, $timeout, executableUtils) {
+function TatoolInput($log, $templateCache, $compile, $timeout, executableUtils) {
   return {
     restrict: 'E',
     transclude: true,
@@ -146,14 +155,14 @@ angular.module('tatool.module').directive('tatoolInput', ['$log', '$templateCach
     },
     template: '<div id="tatoolInput" ng-transclude ng-show="show"></div>'
   };
-}]);
+}
 
 
 /**
   <tatool-key> 
   Directive to configure key input.
 **/
-angular.module('tatool.module').directive('tatoolKey', ['$log', '$sce', 'executableUtils', function($log, $sce, executableUtils) {
+function TatoolKey($log, $sce, executableUtils) {
   return {
     restrict: 'E',
     scope: {},
@@ -211,14 +220,14 @@ angular.module('tatool.module').directive('tatoolKey', ['$log', '$sce', 'executa
     },
     template: '<div class="tatoolKey" ng-click="clickInput($event)" ng-bind-html="key"></div>'
   };
-}]);
+}
 
 
 /**
   <tatool-text> 
   Directive to configure text input.
 **/
-angular.module('tatool.module').directive('tatoolText', [ function() {
+function TatoolText() {
   return {
     restrict: 'E',
     scope: {},
@@ -234,7 +243,7 @@ angular.module('tatool.module').directive('tatoolText', [ function() {
     },
     template: '<input type="text" class="textInput" id="tatoolInputText">'
   };
-}]);
+}
 
 
 
@@ -242,7 +251,7 @@ angular.module('tatool.module').directive('tatoolText', [ function() {
   <tatool-stimulus> 
   Directive to display a stimulus.
 **/
-angular.module('tatool.module').directive('tatoolStimulus', ['$log', '$templateCache', '$timeout', '$q', 'cfgModule', 'executableUtils', function($log, $templateCache, $timeout, $q, cfgModule, executableUtils) {
+function TatoolStimulus($log, $templateCache, $timeout, $q, cfgModule, executableUtils) {
   return {
     restrict: 'E',
     scope: {
@@ -310,14 +319,14 @@ angular.module('tatool.module').directive('tatoolStimulus', ['$log', '$templateC
     },
     template: $templateCache.get('tatoolStimulus.html')
   };
-}]);
+}
 
 
 /**
   <tatool-grid> 
   Directive creating a grid used to display stimuli.
 **/
-angular.module('tatool.module').directive('tatoolGrid', ['$log', '$templateCache', 'cfgModule', 'executableUtils', function($log, $templateCache, cfgModule, executableUtils) {
+function TatoolGrid($log, $templateCache, cfgModule, executableUtils) {
   return {
     restrict: 'E',
     scope: {
@@ -555,11 +564,10 @@ angular.module('tatool.module').directive('tatoolGrid', ['$log', '$templateCache
     },
     template: $templateCache.get('tatoolGrid.html')
   };
-}]);
+}
 
 
-
-angular.module('tatool.module').directive('tatoolDrag', function() {
+function TatoolDrag() {
   return {
     restrict: 'A',
     link: function(scope, element, attrs) {
@@ -600,9 +608,9 @@ angular.module('tatool.module').directive('tatoolDrag', function() {
       }
     }
   };
-});
+}
 
-angular.module('tatool.module').directive('tatoolDrop', function() {
+function TatoolDrop() {
   return {
     restrict: 'A',
     scope: {
@@ -671,4 +679,15 @@ angular.module('tatool.module').directive('tatoolDrop', function() {
       });
     }
   };
-});
+}
+
+export {
+  Tatool,
+  TatoolInput,
+  TatoolKey,
+  TatoolText,
+  TatoolStimulus,
+  TatoolGrid,
+  TatoolDrag,
+  TatoolDrop
+}

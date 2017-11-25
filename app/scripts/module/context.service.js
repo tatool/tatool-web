@@ -1,7 +1,8 @@
 'use strict';
 
-angular.module('tatool.module')
-  .factory('contextService', ['$log', function ($log) {
+ContextService.$inject = ['$log'];
+
+function ContextService($log) {
     $log.debug('context: initialized');
 
     // following keys are available:
@@ -27,4 +28,6 @@ angular.module('tatool.module')
     };
 
     return contextService;
-  }]);
+}
+
+export default ContextService;

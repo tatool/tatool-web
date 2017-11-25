@@ -1,7 +1,8 @@
 'use strict';
 
-angular.module('tatool.app')
-.factory('RecursionHelper', ['$compile', function($compile){
+RecursionHelper.$inject = ['$compile'];
+
+function RecursionHelper($compile){
   return {
     /**
      * Manually compiles the element, fixing the recursion loop.
@@ -41,4 +42,6 @@ angular.module('tatool.app')
       };
     }
   };
-}]);
+}
+
+export default RecursionHelper;

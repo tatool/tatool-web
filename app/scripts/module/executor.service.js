@@ -1,8 +1,8 @@
 'use strict';
 
-angular.module('tatool.module')
-  .factory('executor', ['$log', '$location', '$q', '$state', '$timeout', '$injector', '$window', 'moduleService', 'elementStack', 'util', 'executionPhaseService', 'trialService', 'contextService', 'timerUtils', 'tatoolPhase', 'cfgModule', 'executableService',
-    function ($log, $location, $q, $state, $timeout, $injector, $window, moduleService, elementStack, util, executionPhaseService, trialService, contextService, timerUtils, tatoolPhase, cfgModule, executableService) {
+ExecutorService.$inject = ['$log', '$location', '$q', '$state', '$timeout', '$injector', '$window', 'moduleService', 'elementStackService', 'utilService', 'executionPhaseService', 'trialService', 'contextService', 'timerUtils', 'tatoolPhase', 'cfgModule', 'executableService'];
+
+function ExecutorService($log, $location, $q, $state, $timeout, $injector, $window, moduleService, elementStackService, utilService, executionPhaseService, trialService, contextService, timerUtils, tatoolPhase, cfgModule, executableService) {
     $log.debug('Executor: initialized');
 
     var obj = {currentSessionId: 0, blankInterval: 0, blankIntervalScreen: '', fixationInterval: 0, fixationIntervalScreen: ''};
@@ -29,7 +29,7 @@ angular.module('tatool.module')
       obj.continueModule = true;
 
       // initialize the stack
-      elementStack.initialize(obj, moduleService.getModuleDefinition()).then(function() {
+      elementStackService.initialize(obj, moduleService.getModuleDefinition()).then(function() {
         // run init method on all executables
         executableService.initAllExecutables().then(function() {
           moduleLoaded(); // inform tatool app that loading has finished
@@ -46,7 +46,7 @@ angular.module('tatool.module')
 
     var runModule = function() {
       // trigger phase change
-      broadcastPhaseChange(tatoolPhase.SESSION_START, elementStack.stack);
+      broadcastPhaseChange(tatoolPhase.SESSION_START, elementStackService.stack);
 
       // start running root element
       runElement();
@@ -65,7 +65,7 @@ angular.module('tatool.module')
 
       // closing the open session
       if (obj.currentSessionId !== 0) {
-        moduleService.setSessionEndTime(util.getCurrentDate());
+        moduleService.setSessionEndTime(utilService.getCurrentDate());
         if (sessionComplete) {
           moduleService.setSessionComplete();
         }
@@ -96,13 +96,13 @@ angular.module('tatool.module')
       var x = 0;
 
       while (x < 100) {
-        if (elementStack.stack.peek().tatoolType === 'Executable') {
+        if (elementStackService.stack.peek().tatoolType === 'Executable') {
           return true;
         } else if (runSelector()) {
           continue;
         } else {
-          elementStack.stack.pop();
-          if (elementStack.stack.getCount() === 0) {
+          elementStackService.stack.pop();
+          if (elementStackService.stack.getCount() === 0) {
             return false;
           }
         }
@@ -111,9 +111,9 @@ angular.module('tatool.module')
 
     // Run selector of current element
     var runSelector = function() {
-      var iteratorObj = elementStack.stack.peek().iterator;
+      var iteratorObj = elementStackService.stack.peek().iterator;
       if (iteratorObj) {
-        return iteratorObj.selectNextElement(elementStack.stack, moduleService.getSessionCondition());
+        return iteratorObj.selectNextElement(elementStackService.stack, moduleService.getSessionCondition());
       } else {
         return false;
       }
@@ -123,12 +123,12 @@ angular.module('tatool.module')
     var runElement = function() {
       obj.continueModule = updateElementStack();
 
-      contextService.setProperty('elementStack', elementStack.stack.displayAll());
-      contextService.setProperty('currentExecutable', elementStack.stack.peek());
+      contextService.setProperty('elementStack', elementStackService.stack.displayAll());
+      contextService.setProperty('currentExecutable', elementStackService.stack.peek());
 
       if (obj.continueModule) {
         // create execution deferred to continue running the runElement method as soon as its promise is resolved by an Executable
-        var currentExecutable = elementStack.stack.peek();
+        var currentExecutable = elementStackService.stack.peek();
 
         obj.exec = $q.defer();
         obj.exec.promise.then(
@@ -204,7 +204,7 @@ angular.module('tatool.module')
     // Run executable by accessing the specific Controller/View
     // In order to initialize the Controller if the state has not changed, we force a reload
     var runExecutable = function(currentExecutable) {
-      broadcastPhaseChange(tatoolPhase.EXECUTABLE_START, elementStack.stack);
+      broadcastPhaseChange(tatoolPhase.EXECUTABLE_START, elementStackService.stack);
 
       var url = 'executables/' + currentExecutable.customType + '.html';
 
@@ -223,7 +223,7 @@ angular.module('tatool.module')
 
       // focus window to make sure we're receiving user input
       $window.focus();
-
+      
       if ($state.is('module', params)) {
         $state.forceReload();
       } else {
@@ -277,13 +277,13 @@ angular.module('tatool.module')
     // Used to signal the executor that the current executable should be finished
     obj.finishExecutable = function() {
       // broadcast the phase EXECUTABLE_END
-      broadcastPhaseChange(tatoolPhase.EXECUTABLE_END, elementStack.stack);
+      broadcastPhaseChange(tatoolPhase.EXECUTABLE_END, elementStackService.stack);
 
       // cancel executable timers
-      timerUtils.cancelExecutableTimers(elementStack.stack.peek().name);
+      timerUtils.cancelExecutableTimers(elementStackService.stack.peek().name);
         
       // remove current executable from elementStack
-      elementStack.stack.pop();
+      elementStackService.stack.pop();
 
       // remove all trials from temporary trialService object
       trialService.clearCurrentTrials();
@@ -295,4 +295,6 @@ angular.module('tatool.module')
     };
 
     return obj;
-  }]);
+}
+
+export default ExecutorService;

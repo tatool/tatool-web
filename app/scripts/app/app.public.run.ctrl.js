@@ -2,10 +2,12 @@
 
 /* global screenfull */
 /* global async */
+import screenfull from 'screenfull';
+import async from 'async';
 
-angular.module('tatool.app')
-  .controller('PublicRunCtrl', ['$scope', '$window', '$state', '$sce', '$log', 'spinnerService', 'authService', 'cfg', 'moduleDataService', 'userService', 'exportService', 'publicService',
-    function ($scope, $window, $state, $sce, $log, spinnerService, authService, cfg, moduleDataService, userService, exportService, publicService) {
+PublicRunCtrl.$inject = ['$scope', '$window', '$state', '$sce', '$log', 'spinnerService', 'authService', 'cfg', 'moduleDataService', 'userService', 'exportService', 'publicService'];
+
+function PublicRunCtrl($scope, $window, $state, $sce, $log, spinnerService, authService, cfg, moduleDataService, userService, exportService, publicService) {
 
     var moduleId = publicService.getModuleId();
     var extid = publicService.getExtId();
@@ -89,7 +91,7 @@ angular.module('tatool.app')
       // open moduleUrl in Iframe
       if (moduleId) {
         startSpinner('Loading module...');
-        $scope.moduleUrl = $sce.trustAsResourceUrl('../../views/module/index.html#module');
+        $scope.moduleUrl = $sce.trustAsResourceUrl('../../moduleIndex.html#module');
       } else {
         authService.logout();
         $state.go('publicEnd');
@@ -139,4 +141,6 @@ angular.module('tatool.app')
       $state.go('start');
     });
     
-  }]);
+}
+
+export default PublicRunCtrl;

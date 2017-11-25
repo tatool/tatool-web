@@ -1,9 +1,12 @@
 'use strict';
 
-/* global uuid */
+import uuidv4  from 'uuid/v4';
 
-angular.module('tatool.app')
-  .factory('moduleCreatorService', ['$log', '$q', 'moduleDataService', function ($log, $q, moduleDataService) {
+import Module from '../common/module.pojo.js';
+
+ModuleCreatorService.$inject = ['$log', '$q', 'moduleDataService'];
+
+function ModuleCreatorService($log, $q, moduleDataService) {
     $log.debug('ModuleCreatorService: initialized');
 
     var creator = {};
@@ -68,7 +71,7 @@ angular.module('tatool.app')
             deferred.reject('Validation of module file failed. <br><br><b>' + validationResult + '</b>');
           } else {
             // create module object
-            var newModule = new Module(uuid());
+            var newModule = new Module(uuidv4());
             newModule.setModuleName(moduleDefinition.name);
             newModule.setModuleAuthor(moduleDefinition.author);
             newModule.setModuleDefinition(moduleDefinition);
@@ -175,4 +178,6 @@ angular.module('tatool.app')
 
     return creator;
 
-  }]);
+}
+
+export default ModuleCreatorService;

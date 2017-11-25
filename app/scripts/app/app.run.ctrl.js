@@ -2,9 +2,12 @@
 
 /* global screenfull */
 
-angular.module('tatool.app')
-  .controller('RunCtrl', ['$scope', '$window', '$state', '$sce', '$timeout', 'spinnerService', 'cfg',
-    function ($scope, $window, $state, $sce, $timeout, spinnerService, cfg) {
+import screenfull from 'screenfull';
+import bootbox from 'bootbox';
+
+RunCtrl.$inject = ['$scope', '$window', '$state', '$sce', '$timeout', 'spinnerService', 'cfg'];
+
+function RunCtrl($scope, $window, $state, $sce, $timeout, spinnerService, cfg) {
 
     // module listener
     var moduleListener = function(e) {
@@ -80,7 +83,7 @@ angular.module('tatool.app')
     // open moduleUrl in Iframe
     if (moduleId) {
       startSpinner();
-      $scope.moduleUrl = $sce.trustAsResourceUrl('../../views/module/index.html#module');
+      $scope.moduleUrl = $sce.trustAsResourceUrl('../../moduleIndex.html#module'); //../../views/module/index.html#module
     } else {
       if (mode === cfg.APP_MODE_DEVELOPER) {
         $state.go('developer');
@@ -89,4 +92,6 @@ angular.module('tatool.app')
       }
     }
     
-  }]);
+}
+
+export default RunCtrl;

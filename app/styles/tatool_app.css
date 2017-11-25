@@ -369,6 +369,8 @@ box-shadow: 3px 3px 13px 0px rgba(64,64,64,0.54);
   display: inline-block;
   float:left;
   width: 18%;
+  position: sticky;
+  top: 0;
 }
 
 #docNavigation ul {
@@ -886,7 +888,7 @@ ul.tree ul li {
     margin-top: 0.3em;
     padding: 0.1em 0.6em;
     line-height: 20px;
-    background: url(../../images/app/lastnode.png) no-repeat;
+    background: url(../images/app/lastnode.png) no-repeat;
     color: #333;
     cursor: pointer;
 }
@@ -898,7 +900,7 @@ ul.tree ul:last-child {
 }
 
 ul.tree li .last {
-    background: #000 url(../../images/app/lastnode.png) no-repeat;
+    background: #000 url(../images/app/lastnode.png) no-repeat;
 }
 
 

@@ -1,0 +1,108 @@
+<p><a ui-sref="doc({page: 'lib-train.html'})">Adaptive Training Tasks</a></p>
+<h2>Digit Memory Span</h2>
+
+<p>In the Digit Memory Span paradigm, participants have to memorise a list of digits and then recall them in correct serial order. In Tatool, the Digit Memory Span has to be set as the primary Executable of a Dual Element. It can (but doesn't have to) be combined with the <a ui-sref="doc({page: 'lib-exp-choice-reactiontime.html'})">Choice Reaction Time</a> task to create a <a ui-sref="doc({page: 'lib-exp-brown-peterson.html'})">Brown-Peterson</a> or a <a ui-sref="doc({page: 'lib-exp-complex-span.html'})">Complex Span</a> task.</p>
+
+<p>The task will randomly create two-digit numbers from 11 to 99. The number of memoranda can either be set statically or be adaptive with the use of a Level Handler.</p>
+
+
+
+<ul id="docPageNav">
+  <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('executable')">Executable</a></li>
+  <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('properties')">Properties</a></li>
+  <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('download')">Download</a></li>
+</ul>
+
+<hr class="hr-red">
+
+<h3 id="executable">Executable<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
+
+<p>Use the following settings in the Module Editor for this type of task: </p>
+
+<table class="table table-condensed table-bordered">
+  <tbody>
+    <tr>
+      <td class="cellB">Project</td>
+      <td>tatool</td>
+    </tr>
+    <tr>
+      <td class="cellB">Executable Type</td>
+      <td>tatoolDigitMemorySpanTraining</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="hint">
+  <div class="icon red"><i class="fa fa-lightbulb-o fa-2x"></i></div> 
+  <div class="text">
+    <p>The Digit Memory Span Executable has to be used as the <b>primary Executable of a Dual Element</b> in order for it to work properly. Omit the secondary element to use the Digit Memory Span Executable as a simple span task.</p>
+  </div>
+</div>
+
+<hr class="hr-red">
+
+<h3 id="properties">Properties<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
+
+<p>The following Properties can be provided in the Module Editor to change the behaviour of the task:</p>
+
+<table class="table table-striped table-condensed table-bordered">
+  <thead>
+    <tr>
+      <th>Property Name</th>
+      <th>Property Type</th>
+      <th>Default</th>
+      <th>Mandatory</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="cellB">suspendAfterEachItem</td>
+      <td>Boolean</td>
+      <td>true</td>
+      <td>No</td>
+      <td>Configures the Executable to suspend after each memorandum (true) as in the Complex Span paradigm, or after all memoranda (false) as in the Brown-Peterson paradigm.</td>
+    </tr>
+    <tr>
+      <td class="cellB">displayDuration</td>
+      <td>String</td>
+      <td>800</td>
+      <td>No</td>
+      <td>Display duration for each memorandum.</td>
+    </tr>
+    <tr>
+      <td class="cellB">intervalDuration</td>
+      <td>String</td>
+      <td>400</td>
+      <td>No</td>
+      <td>Interval duration between memoranda.</td>
+    </tr>
+    <tr>
+      <td class="cellB">recallText</td>
+      <td>String</td>
+      <td>Stimulus</td>
+      <td>No</td>
+      <td>Text to display in the recall phase. Text will always receive the number of the current recall stimulus as a suffix (e.g., 'Stimulus 1').</td>
+    </tr>
+    <tr>
+      <td class="cellB">levelHandler</td>
+      <td>String</td>
+      <td>Stimulus</td>
+      <td>No</td>
+      <td>The name of Level Handler used to decide on how many memoranda to show. If the level handler is used, the number of memoranda will be currentLevel + 1 (e.g. in level 2 there will be 3 memoranda).</td>
+    </tr>
+    <tr>
+      <td class="cellB">numMemoranda</td>
+      <td>String</td>
+      <td>Stimulus</td>
+      <td>No</td>
+      <td>Can be used to set the number of memoranda to a static value. This will override the Level Handler if provided.</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr class="hr-red">
+
+<h3 id="download">Download<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
+
+<p>You can access the source code (Service, Controller, Template, CSS) for this Executable in our <a href="https://github.com/tatool/tatool-web/tree/master/app/projects/public/tatool/executables" target="_blank">Github Repository</a>.</p>

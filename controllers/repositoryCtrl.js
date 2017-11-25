@@ -31,6 +31,7 @@ var insert = function(module, res) {
     if (err) {
       res.status(500).send(err);
     } else {
+      console.log(result);
       res.json();
     }
   });

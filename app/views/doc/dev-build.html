@@ -1,8 +1,27 @@
 <h2>Building Tatool Web</h2>
 
 <hr>
-<p>Tatool Web uses <b>gulp</b> for its <b>build process automation</b>. Details about the tasks (concat, minify, copy) in the build process can be found in gulpfile.js.</p>
-<pre><code class="language-bash">$> gulp build
+<p>Tatool Web uses <b>webpack</b> for its <b>build process automation</b>. Details about the loaders and plugins can be found in the webpack config files.</p>
+
+<hr>
+<p>Run Tatool with <b>webpack-dev-server</b>, if you want to extend the functionality of tatool while using automatic reloading. You'll have to run the server in a separate process.</p>
+<pre><code class="language-bash"># run server
+&gt; npm start
+
+# run webpack-dev-server
+&gt; npm run dev
+</code></pre>
+
+<hr>
+<p>Build tatool with <b>webpack</b>.</p>
+<pre><code class="language-bash"># install dependencies
+&gt; npm run install
+
+# build tatool
+&gt; npm run build
+
+# or in one command (install and build)
+&gt; npm run setup
 </code></pre>
 
 <hr>
@@ -10,12 +29,12 @@
 <pre><code class="language-bash">$> npm start
 
 # alternatively you can call node directly
-$> node server.js lab dev
+&gt; node server.js lab prod
 </code></pre>
 
 <hr>
-<p>If you want to run Tatool Web on a webserver or in production mode, you'll have to provide the following two configuration parameters. The environment parameter will direct Tatool Web to either access your development version (app directory) or the built version (dist directory). In order to use the built version you must run <code>npm install</code> first.</p>
+<p>If you want to run Tatool Web in <b>server mode</b>, you'll have to provide the following two configuration parameters. The environment parameter will direct Tatool Web to enable or disable server logging.</p>
 <pre><code class="language-bash"># [mode] : lab / server
 # [environment] : dev / prod
-$> node server.js [mode] [environment]
+&gt; node server.js [mode] [environment]
 </code></pre>

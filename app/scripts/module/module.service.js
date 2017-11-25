@@ -1,7 +1,11 @@
 'use strict';
 
-angular.module('tatool.module')
-  .factory('moduleService', ['$http', '$log', '$q', 'util', 'moduleDataService', function ($http, $log, $q, util, moduleDataService) {
+import Module from '../common/module.pojo.js';
+import Session from './util/session.pojo.js';
+
+ModuleService.$inject = ['$http', '$log', '$q', 'utilService', 'moduleDataService'];
+
+function ModuleService($http, $log, $q, utilService, moduleDataService) {
     $log.debug('ModuleService: initialized');
 
     var moduleService = {};
@@ -116,7 +120,7 @@ angular.module('tatool.module')
 
     moduleService.createSession = function() {
       var sessionId = this.getNextSessionId();
-      session = new Session(sessionId, util.getCurrentDate());
+      session = new Session(sessionId, utilService.getCurrentDate());
       module.addSession(session);
       return sessionId;
     };
@@ -158,4 +162,6 @@ angular.module('tatool.module')
     };
 
     return moduleService;
-  }]);
+}
+
+export default ModuleService;

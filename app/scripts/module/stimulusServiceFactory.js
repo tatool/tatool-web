@@ -1,7 +1,8 @@
 'use strict';
 
-angular.module('tatool.module')
-  .factory('stimulusServiceFactory', [ '$log', '$sce', 'executableUtils', function ($log, $sce, executableUtils) {
+StimulusServiceFactory.$inject = ['$log', '$sce', 'executableUtils'];
+
+function StimulusServiceFactory($log, $sce, executableUtils) {
 
     var stimulusServiceFactory = {};
 
@@ -75,4 +76,6 @@ angular.module('tatool.module')
 
     return stimulusServiceFactory;
 
-  }]);
+}
+
+export default StimulusServiceFactory;

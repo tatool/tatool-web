@@ -2,8 +2,11 @@
 
 /* global KeyCodes */
 
-angular.module('tatool.module')
-  .factory('inputServiceFactory', [ 'executableUtils', function (executableUtils) {
+import KeyCodes from './util/keycodes.js';
+
+InputServiceFactory.$inject = ['executableUtils'];
+
+function InputServiceFactory(executableUtils) {
 
     var inputServiceFactory = {};
 
@@ -132,4 +135,6 @@ angular.module('tatool.module')
 
     return inputServiceFactory;
 
-  }]);
+}
+
+export default InputServiceFactory;

@@ -2,8 +2,11 @@
 
 /* global Date */
 
-angular.module('tatool.app')
-  .controller('AnalyticsCtrl', [ '$scope', '$sce', '$modal', '$log', '$timeout', 'moduleDataService', 'spinnerService', function ($scope, $sce, $modal, $log, $timeout, moduleDataService, spinnerService) {
+import bootbox from 'bootbox';
+
+AnalyticsCtrl.$inject = ['$scope', '$sce', '$uibModal', '$log', '$timeout', 'moduleDataService', 'spinnerService'];
+
+function AnalyticsCtrl($scope, $sce, $uibModal, $log, $timeout, moduleDataService, spinnerService) {
 
     $scope.currentModule = null;
 
@@ -137,8 +140,8 @@ angular.module('tatool.app')
       if (!user.maxSessionId) {
         setAlert('info', 'There is no session data available yet for this subject.');
       } else {
-        $modal.open({
-          templateUrl: 'views/app/analytics_user.html',
+        $uibModal.open({
+          template: require('../../views/app/analytics_user.html'),
           controller: 'AnalyticsUserCtrl',
           size: 'lg',
           resolve: {
@@ -178,4 +181,6 @@ angular.module('tatool.app')
       return new Date(Date.parse(date)).toLocaleString();
     };
 
-  }]);
+}
+
+export default AnalyticsCtrl;

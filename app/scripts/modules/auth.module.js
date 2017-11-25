@@ -1,11 +1,27 @@
 'use strict';
 
-angular.module('tatool.auth', ['tatool', 'base64', 'tatool.common'])
+import angular from 'angular';
+
+import tatool from './app.js';
+import tatoolCommon from './common.module.js';
+
+import UserService from '../auth/user.service.js';
+import AuthService from '../auth/auth.service.js';
+import AuthInterceptor from '../auth/auth.interceptor.js';
+import LoginCtrl from '../auth/auth.login.ctrl.js';
+
+var tatoolAuth = angular.module('tatool.auth', [tatool, tatoolCommon])
   .constant('cfgAuth', {
     IMG_PATH: 'images/auth/',
     VIEW_PATH:'views/auth/'
-  })
-  .config(['$httpProvider', '$stateProvider', function ($httpProvider, $stateProvider) {
+  });
+
+tatoolAuth.factory('userService', UserService);
+tatoolAuth.factory('authService', AuthService);
+tatoolAuth.factory('authInterceptor', AuthInterceptor);
+tatoolAuth.controller('LoginCtrl', LoginCtrl);
+
+tatoolAuth.config(['$httpProvider', '$stateProvider', function ($httpProvider, $stateProvider) {
 
     // auth interceptor
     $httpProvider.interceptors.push('authInterceptor');
@@ -14,7 +30,7 @@ angular.module('tatool.auth', ['tatool', 'base64', 'tatool.common'])
     $stateProvider
       .state('login', {
         url: '/login?verify',
-        templateUrl: 'views/auth/login.html',
+        template: require('../../views/auth/login.html'),
         controller: 'LoginCtrl',
         resolve: {
           token: [ function() {
@@ -31,7 +47,7 @@ angular.module('tatool.auth', ['tatool', 'base64', 'tatool.common'])
       })
       .state('verify', {
         url: '/verify',
-        templateUrl: 'views/auth/verificationResend.html',
+        template: require('../../views/auth/verificationResend.html'),
         controller: 'LoginCtrl',
         resolve: {
           token: ['messageService', function(messageService) {
@@ -42,7 +58,7 @@ angular.module('tatool.auth', ['tatool', 'base64', 'tatool.common'])
       })
       .state('reset', {
         url: '/reset?token',
-        templateUrl: 'views/auth/passwordReset.html',
+        template: require('../../views/auth/passwordReset.html'),
         controller: 'LoginCtrl',
         resolve: {
           token: ['$stateParams', '$state', '$q', 'messageService', 'authService', function($stateParams, $state, $q, messageService, authService) {
@@ -66,7 +82,7 @@ angular.module('tatool.auth', ['tatool', 'base64', 'tatool.common'])
       })
       .state('register', {
         url: '/register',
-        templateUrl: 'views/auth/register.html',
+        template: require('../../views/auth/register.html'),
         controller: 'LoginCtrl',
         resolve: {
           token: [ function() {
@@ -75,3 +91,5 @@ angular.module('tatool.auth', ['tatool', 'base64', 'tatool.common'])
         }
       });
   }]);
+
+  export default tatoolAuth.name;

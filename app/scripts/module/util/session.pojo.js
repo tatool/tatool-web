@@ -72,3 +72,5 @@ Session.prototype.getMaxTrialId = function() {
 Session.prototype.getProperties = function() {
   return this.sessionProperties;
 };
+
+export default Session;

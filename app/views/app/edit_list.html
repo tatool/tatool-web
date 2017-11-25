@@ -6,7 +6,7 @@
   <form class="form-horizontal" role="form">
   <div class="form-group">
     <label for="name" class="col-sm-3 control-label">Iterations *
-      <a class="info" tooltip="Sets the number of iterations. For example 1 iteration will execute all child elements once." tooltip-placement="right"><i class="fa fa-info-circle"></i></a>
+      <a class="info" uib-tooltip="Sets the number of iterations. For example 1 iteration will execute all child elements once." uib-tooltip-placement="right"><i class="fa fa-info-circle"></i></a>
     </label>
     <div class="col-sm-9">
       <input type="number" class="form-control" id="numIterations" ng-model="element.iterator.numIterations" ng-required="true" auto-focus>
@@ -14,7 +14,7 @@
   </div>
   <div class="form-group">
     <label for="name" class="col-sm-3 control-label">Label
-      <a class="info" tooltip="Assign a label to the element." tooltip-placement="right"><i class="fa fa-info-circle"></i></a>
+      <a class="info" uib-tooltip="Assign a label to the element." uib-tooltip-placement="right"><i class="fa fa-info-circle"></i></a>
     </label>
     <div class="col-sm-9">
       <input type="text" class="form-control" id="label" ng-model="element.label" ng-required="true">
@@ -22,22 +22,22 @@
   </div>
   <div class="form-group" ng-if='element.tatoolType === "List"'>
     <label for="name" class="col-sm-3 control-label">Order
-      <a class="info" tooltip="Define the order in which the direct child elements are executed." tooltip-placement="right"><i class="fa fa-info-circle"></i></a>
+      <a class="info" uib-tooltip="Define the order in which the direct child elements are executed." uib-tooltip-placement="right"><i class="fa fa-info-circle"></i></a>
     </label>
     <div class="col-sm-9">
       <label class="radio-inline radio-inline-up">
         <input type="radio" ng-model="element.iterator.order" name="order" value="sequential"> Sequential 
-        <a class="info" tooltip="Child elements are executed in the order you add them in your Task List on the left." tooltip-placement="right"><i class="fa fa-info-circle"></i></a>
+        <a class="info" uib-tooltip="Child elements are executed in the order you add them in your Task List on the left." uib-tooltip-placement="right"><i class="fa fa-info-circle"></i></a>
       </label>
       <label class="radio-inline radio-inline-up">
         <input type="radio" ng-model="element.iterator.order" name="order" value="random"> Random
-        <a class="info" tooltip="Every iteration the child elements are executed in a new random order." tooltip-placement="right"><i class="fa fa-info-circle"></i></a>
+        <a class="info" uib-tooltip="Every iteration the child elements are executed in a new random order." uib-tooltip-placement="right"><i class="fa fa-info-circle"></i></a>
       </label>
     </div>
   </div>
   <div class="form-group">
     <label for="name" class="col-sm-3 control-label">Condition
-      <a class="info" tooltip="Set a condition for this Element." tooltip-placement="right"><i class="fa fa-info-circle"></i></a>
+      <a class="info" uib-tooltip="Set a condition for this Element." uib-tooltip-placement="right"><i class="fa fa-info-circle"></i></a>
     </label>
     <div class="col-sm-9">
       <input type="text" class="form-control" id="condition" ng-model="element.iterator.condition" ng-required="true">
@@ -47,7 +47,7 @@
   
   <!-- Display handlers -->
   <hr>
-  <b>Handlers</b> <a class="info" tooltip="Set handlers available to all child elements." tooltip-placement="right"><i class="fa fa-info-circle"></i></a>
+  <b>Handlers</b> <a class="info" uib-tooltip="Set handlers available to all child elements." uib-tooltip-placement="right"><i class="fa fa-info-circle"></i></a>
   <br><br>
 
   <div class="form-group" ng-repeat="handler in element.handlers">
@@ -78,8 +78,8 @@
   <div class="form-group">
     <div class="col-sm-offset-3 col-sm-9">
 
-      <div id="dropdownExport" class="btn-group" dropdown>
-        <div id="dropdownExportButton" class="btn btn-default dropdown-toggle" dropdown-toggle><i class="fa fa-plus-square-o"></i> Add Child</div>
+      <div id="dropdownExport" class="btn-group" uib-dropdown>
+        <div id="dropdownExportButton" class="btn btn-default dropdown-toggle" uib-dropdown-toggle><i class="fa fa-plus-square-o"></i> Add Child</div>
         <ul class="dropdown-menu" role="menu">
           <li ng-click="addNewList(element, elementIndex, elementParent)">
             <a ui-sref="developer"><i class="fa fa-list"></i> List</a>

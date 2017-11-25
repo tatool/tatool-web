@@ -3,9 +3,14 @@
 /* global async */
 /* global LZString */
 
-angular.module('tatool.app')
-  .factory('exportService', ['$log', '$q', '$http', 'moduleDataService', 'trialDataService', 'cfgApp', 'userService', 'publicService', 
-    function ($log, $q, $http, moduleDataService, trialDataService, cfgApp, userService, publicService) {
+import async from 'async';
+import LZString from 'lz-string'
+
+import download from '../common/util/download.js';
+
+ExportService.$inject = ['$log', '$q', '$http', 'moduleDataService', 'trialDataService', 'cfgApp', 'userService', 'publicService'];
+
+function ExportService($log, $q, $http, moduleDataService, trialDataService, cfgApp, userService, publicService) {
     $log.debug('ExportService: initialized');
 
     var exporter = {};
@@ -395,4 +400,6 @@ angular.module('tatool.app')
 
     return exporter;
 
-  }]);
+}
+
+export default ExportService;

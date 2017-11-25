@@ -1,7 +1,8 @@
 'use strict';
 
-angular.module('tatool.app')
-  .factory('publicService', [ function () {
+PublicService.$inject = [];
+
+function PublicService() {
 
     var publicStart = {};
 
@@ -39,4 +40,6 @@ angular.module('tatool.app')
 
     return publicStart;
 
-  }]);
+}
+
+export default PublicService;

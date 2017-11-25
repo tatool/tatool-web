@@ -5,9 +5,9 @@
   Handling saving and retrieving of data for current module/session only.
 **/
 
-angular.module('tatool.module')
-  .factory('dbUtils', ['$log', 'moduleService', 'contextService', 'trialService', 'handlerService',
-    function ($log, moduleService, contextService, trialService, handlerService) {
+DbUtils.$inject = ['$log', 'moduleService', 'contextService', 'trialService', 'handlerService'];
+
+function DbUtils($log, moduleService, contextService, trialService, handlerService) {
     $log.debug('DB: initialized');
 
     var utils = {};
@@ -72,4 +72,6 @@ angular.module('tatool.module')
 
     return utils;
 
-  }]);
+}
+
+export default DbUtils;

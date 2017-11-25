@@ -2,14 +2,20 @@
 
 /* global Prism */
 
-angular.module('tatool.app')
-  .controller('StartCtrl', ['$scope', '$http', '$location', '$anchorScroll', '$state', '$timeout', 'page',
-    function ($scope, $http, $location, $anchorScroll, $state, $timeout, page) {
+import Prism from 'prismjs';
+import 'prismjs/plugins/line-numbers/prism-line-numbers';
+
+import 'prismjs/themes/prism.css';
+import 'prismjs/plugins/line-numbers/prism-line-numbers.css';
+
+StartCtrl.$inject = ['$scope', '$http', '$location', '$anchorScroll', '$state', '$timeout', 'page'];
+
+function StartCtrl($scope, $http, $location, $anchorScroll, $state, $timeout, page) {
 
       $scope.stopDevSignup = false;
       $scope.slides = ['slide-develop.html', 'slide-publish.html', 'slide-collect.html', 'slide-analyse.html'];
       var currentSlide = 0;
-      $scope.slide = 'views/' + $scope.slides[currentSlide];
+      $scope.slide = $scope.slides[currentSlide];
 
       $scope.go = function(state) {
         $state.go(state);
@@ -18,14 +24,14 @@ angular.module('tatool.app')
       $scope.nextSlide = function() {
         if (currentSlide < $scope.slides.length - 1) {
           currentSlide++;
-          $scope.slide = 'views/' + $scope.slides[currentSlide];
+          $scope.slide = $scope.slides[currentSlide];
         }
       };
 
       $scope.prevSlide = function() {
         if (currentSlide > 0) {
           currentSlide--;
-          $scope.slide = 'views/' + $scope.slides[currentSlide];
+          $scope.slide = $scope.slides[currentSlide];
         }
       };
 
@@ -51,7 +57,7 @@ angular.module('tatool.app')
       };
 
       $scope.goPage = function(page) {
-        $scope.docPage = 'views/doc/' + page;
+        $scope.docPage = page;
         $scope.scrollTo('top');
       };
 
@@ -77,8 +83,10 @@ angular.module('tatool.app')
         } else {
           $scope.parentPage = strArr[0];
         }
-        $scope.docPage = 'views/doc/' + page;
+        $scope.docPage = page;
         $timeout(function() {$scope.scrollTo('top'); }, 0);
       }
 
-    }]);
+}
+
+export default StartCtrl;

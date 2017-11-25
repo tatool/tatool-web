@@ -2,8 +2,9 @@
 
 /* global Date */
 
-angular.module('tatool.app')
-  .controller('AnalyticsUserCtrl', [ '$scope', '$sce', '$modalInstance', 'user', function ($scope, $sce, $modalInstance, user) {
+AnalyticsUserCtrl.$inject = ['$scope', '$sce', '$uibModalInstance', 'user'];
+
+function AnalyticsUserCtrl($scope, $sce, $uibModalInstance, user) {
 
     $scope.user = user;
     $scope.sessions = Object.keys(user.sessions).map(function(k) { return user.sessions[k]; });
@@ -18,11 +19,13 @@ angular.module('tatool.app')
     };
 
     $scope.ok = function () {
-      $modalInstance.close();
+      $uibModalInstance.close();
     };
 
     $scope.cancel = function () {
-      $modalInstance.dismiss('cancel');
+      $uibModalInstance.dismiss('cancel');
     };
 
-  }]);
+}
+
+export default AnalyticsUserCtrl;

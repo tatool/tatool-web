@@ -1,0 +1,18 @@
+<!doctype html>
+<html class="no-js">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+  </head>
+  <body ng-app="tatool.module" ng-controller="MainCtrl" ng-keydown="keyPress($event);" ng-mousedown="mousePress($event);" ng-class="executableName" ng-strict-di>
+
+    <!-- Module content -->
+    <div id="moduleContainer" ng-class="{true:'hideCursor'}[hideMouseCursor]">
+      <div ui-view></div>
+    </div>
+
+</body>
+</html>

@@ -1,8 +1,8 @@
 'use strict';
 
-angular.module('tatool.module')
-  .factory('elementStack', ['$log', '$injector', '$q', '$window', 'handlerService', 'executableService',
-    function ($log, $injector, $q, $window, handlerService, executableService) {
+ElementStackService.$inject = ['$log', '$injector', '$q', '$window', 'handlerService', 'executableService'];
+
+function ElementStackService($log, $injector, $q, $window, handlerService, executableService) {
     $log.debug('ElementStack: initialized');
 
     var obj = {content:null};
@@ -131,7 +131,8 @@ angular.module('tatool.module')
       
       if ('iterator' in element) {
         var iteratorType = element.iterator.customType;
-        var iterator = new $window[iteratorType]();
+        var IteratorService = $injector.get(iteratorType);
+        var iterator = new IteratorService();
         
         angular.extend(iterator, element.iterator);
         element.iterator = iterator;
@@ -161,4 +162,6 @@ angular.module('tatool.module')
     };
 
     return obj;
-  }]);
+}
+
+export default ElementStackService;

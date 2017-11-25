@@ -1,7 +1,8 @@
 'use strict';
 
-angular.module('tatool.auth')
-  .service('userService', [ '$window', '$rootScope', 'moduleDataService', 'trialDataService', function ($window, $rootScope, moduleDataService, trialDataService) {
+UserService.$inject = ['$window', '$rootScope', 'moduleDataService', 'trialDataService'];
+
+function UserService($window, $rootScope, moduleDataService, trialDataService) {
 
   // creates a new user sessions
   this.createSession = function (userName, token, roles, code) {
@@ -58,4 +59,6 @@ angular.module('tatool.auth')
   };
 
   return this;
-}]);
+}
+
+export default UserService;

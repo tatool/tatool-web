@@ -1,8 +1,8 @@
 'use strict';
 
-angular.module('tatool.module')
-  .factory('timerUtils', ['$log', '$timeout', '$interval', 'statusPanelService', 'executableUtils',
-    function ($log, $timeout, $interval, statusPanelService, executableUtils) {
+TimerUtilsService.$inject = ['$log', '$timeout', '$interval', 'statusPanelService', 'executableUtils'];
+
+function TimerUtilsService($log, $timeout, $interval, statusPanelService, executableUtils) {
 
     var timerUtils = {};
 
@@ -139,5 +139,6 @@ angular.module('tatool.module')
     };
 
     return timerUtils;
+}
 
-  }]);
+export default TimerUtilsService;

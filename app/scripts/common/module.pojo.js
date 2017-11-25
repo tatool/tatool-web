@@ -142,3 +142,5 @@ Module.prototype.getProperty = function(name, propertyKey) {
 Module.prototype.getProperties = function() {
   return this.moduleProperties;
 };
+
+export default Module;

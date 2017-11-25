@@ -7,7 +7,7 @@
   <form class="form-horizontal" role="form" ng-submit="saveModule()">
   <div class="form-group">
     <label for="moduleName" class="col-sm-3 control-label">Name * 
-      <a class="info" tooltip="The name of your module will be visible for everyone once published." tooltip-placement="right"><i class="fa fa-info-circle"></i></a>
+      <a class="info" uib-tooltip="The name of your module will be visible for everyone once published." uib-tooltip-placement="right"><i class="fa fa-info-circle"></i></a>
     </label>
     <div class="col-sm-9">
       <input type="text" class="form-control" id="moduleName" ng-model="module.moduleName" ng-required="true" auto-focus>
@@ -15,7 +15,7 @@
   </div>
   <div class="form-group">
     <label for="moduleAuthor" class="col-sm-3 control-label">Author *
-      <a class="info" tooltip="Author name will be visible for everyone once published." tooltip-placement="right"><i class="fa fa-info-circle"></i></a>
+      <a class="info" uib-tooltip="Author name will be visible for everyone once published." uib-tooltip-placement="right"><i class="fa fa-info-circle"></i></a>
     </label>
     <div class="col-sm-9">
       <input type="text" class="form-control" id="moduleAuthor" ng-model="module.moduleAuthor">
@@ -23,7 +23,7 @@
   </div>
   <div class="form-group">
     <label for="moduleLabel" class="col-sm-3 control-label">Label *
-      <a class="info" tooltip="Internal shorthand name for your module, which will be used to name any export files." tooltip-placement="right"><i class="fa fa-info-circle"></i></a>
+      <a class="info" uib-tooltip="Internal shorthand name for your module, which will be used to name any export files." uib-tooltip-placement="right"><i class="fa fa-info-circle"></i></a>
     </label>
     <div class="col-sm-9">
       <input type="text" class="form-control" id="moduleLabel" ng-model="module.moduleLabel" ng-trim="false" ng-pattern="/^[a-zA-Z0-9]*$/">
@@ -31,7 +31,7 @@
   </div>
   <div class="form-group">
     <label for="label" class="col-sm-3 control-label">Description
-      <a class="info" tooltip="A brief description about your Module, which will be visible once published." tooltip-placement="right"><i class="fa fa-info-circle"></i></a>
+      <a class="info" uib-tooltip="A brief description about your Module, which will be visible once published." uib-tooltip-placement="right"><i class="fa fa-info-circle"></i></a>
     </label>
     <div class="col-sm-9">
       <textarea class="form-control" id="description" rows="4" ng-model="module.moduleDescription"></textarea>
@@ -39,7 +39,7 @@
   </div>
   <div class="form-group">
     <label for="moduleLabel" class="col-sm-3 control-label">No Sessions
-      <a class="info" tooltip="Define the number of Sessions allowed for this Module. Leave empty if you don't want to limit the number of Sessions." tooltip-placement="right"><i class="fa fa-info-circle"></i></a>
+      <a class="info" uib-tooltip="Define the number of Sessions allowed for this Module. Leave empty if you don't want to limit the number of Sessions." uib-tooltip-placement="right"><i class="fa fa-info-circle"></i></a>
     </label>
     <div class="col-sm-9">
       <input type="number" class="form-control" min="0" id="moduleLabel" ng-model="module.moduleMaxSessions">
@@ -47,7 +47,7 @@
   </div>
   <div class="form-group">
     <label for="label" class="col-sm-3 control-label">Escape
-      <a class="info" tooltip="Allow the user to exit the module by pressing the Esc key." tooltip-placement="right"><i class="fa fa-info-circle"></i></a>
+      <a class="info" uib-tooltip="Allow the user to exit the module by pressing the Esc key." uib-tooltip-placement="right"><i class="fa fa-info-circle"></i></a>
     </label>
     <div class="col-sm-9">
       <label>
@@ -57,7 +57,7 @@
   </div>
   <div class="form-group">
     <label for="label" class="col-sm-3 control-label">Fullscreen
-      <a class="info" tooltip="Module will run in fullscreen mode where available." tooltip-placement="right"><i class="fa fa-info-circle"></i></a>
+      <a class="info" uib-tooltip="Module will run in fullscreen mode where available." uib-tooltip-placement="right"><i class="fa fa-info-circle"></i></a>
     </label>
     <div class="col-sm-9">
       <label>
@@ -67,7 +67,7 @@
   </div>
   <div class="form-group">
     <label for="label" class="col-sm-3 control-label">Exporter
-      <a class="info" tooltip="Choose all data exporters you want to enable." tooltip-placement="right"><i class="fa fa-info-circle"></i></a>
+      <a class="info" uib-tooltip="Choose all data exporters you want to enable." uib-tooltip-placement="right"><i class="fa fa-info-circle"></i></a>
     </label>
     <div class="col-sm-9">
       <div class="form-group col-sm-12" ng-repeat="exporter in module.moduleDefinition.export | filter: filterValidExporter ">
@@ -91,7 +91,7 @@
 
   <div class="form-group">
     <label for="label" class="col-sm-3 control-label">Delimiter
-      <a class="info" tooltip="Choose the CSV delimiter to use for all future data exports." tooltip-placement="right"><i class="fa fa-info-circle"></i></a>
+      <a class="info" uib-tooltip="Choose the CSV delimiter to use for all future data exports." uib-tooltip-placement="right"><i class="fa fa-info-circle"></i></a>
     </label>
     <div class="col-sm-9">
       <label class="radio-inline radio-inline-up">
@@ -108,19 +108,19 @@
 
   <div class="form-group">
     <label for="label" class="col-sm-3 control-label">Format
-      <a class="info" tooltip="Choose the CSV export format." tooltip-placement="right"><i class="fa fa-info-circle"></i></a>
+      <a class="info" uib-tooltip="Choose the CSV export format to use for all future data exports." uib-tooltip-placement="right"><i class="fa fa-info-circle"></i></a>
     </label>
     <div class="col-sm-9">
       <label class="radio-inline radio-inline-up">
         <input type="radio" ng-model="module.exportFormat" name="exportFormat" value="long"> Long
         <span>
-          <a class="info" tooltip="Values with the same property name appear in the same column irrespective of executable. This is the default format." tooltip-placement="right"><i class="fa fa-info-circle"></i></a>
+          <a class="info" uib-tooltip="Values with the same property name appear in the same column irrespective of executable. This is the default format." uib-tooltip-placement="right"><i class="fa fa-info-circle"></i></a>
         </span>
       </label>
       <label class="radio-inline radio-inline-up">
         <input type="radio" ng-model="module.exportFormat" name="exportFormat" value="legacy"> Legacy
         <span>
-          <a class="info" tooltip="Every executable property gets its own column." tooltip-placement="right"><i class="fa fa-info-circle"></i></a>
+          <a class="info" uib-tooltip="Every executable property gets its own column." uib-tooltip-placement="right"><i class="fa fa-info-circle"></i></a>
         </span>
       </label>
     </div>

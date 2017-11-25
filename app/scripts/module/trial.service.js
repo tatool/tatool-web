@@ -1,8 +1,8 @@
 'use strict';
 
-angular.module('tatool.module')
-  .factory('trialService', ['$log', '$q', '$rootScope', 'util', 'trialDataService', 'tatoolPhase',
-    function ($log, $q, $rootScope, util, trialDataService, tatoolPhase) {
+TrialService.$inject = ['$log', '$q', '$rootScope', 'trialDataService', 'tatoolPhase'];
+
+function TrialService($log, $q, $rootScope, trialDataService, tatoolPhase) {
     $log.debug('TrialService: initialized');
 
     var trialService = {};
@@ -41,7 +41,7 @@ angular.module('tatool.module')
       return deferred.promise;
     };
 
-
-
     return trialService;
-  }]);
+  }
+
+  export default TrialService;
