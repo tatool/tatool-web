@@ -1,0 +1,3 @@
+stimulusCount,gridRows,gridCols,stimulusValue1,stimulusValue2,stimulusValueType1,stimulusValueType2,stimulusGridPosition1,stimulusGridPosition2,probeValue1,probeValue2,probeValueType1,probeValueType2,probeGridPosition1,probeGridPosition2,probeType1,probeType2
+2,5,5,grid_01.png,grid_06.png,image,image,15,1,grid_06.png,grid_01.png,image,image,1,15,match,match
+2,5,5,grid_03.png,grid_05.png,image,image,9,4,grid_05.png,grid_10.png,image,image,6,4,intrusion,distractor

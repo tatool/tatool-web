@@ -1,0 +1,30 @@
+.emptyCell, .emptyCellStatic {
+  font-size: 300%;
+  background-color: transparent;
+  border: 1px solid #999;
+  display: table-cell;
+  vertical-align: middle;
+  margin: 0;
+  padding: 5px;
+  outline: 0px solid #999;
+}
+
+.memCell, .memCellStatic {
+  font-size: 300%;
+  background-color: transparent;
+  border: 1px solid #999;
+  display: table-cell;
+  vertical-align: middle;
+  margin: 0;
+  padding: 5px;
+}
+
+.probeCell, .probeCellStatic {
+  font-size: 300%;
+  background-color: transparent;
+  border: 1px solid #999;
+  display: table-cell;
+  vertical-align: middle;
+  margin: 0;
+  padding: 5px;
+}
