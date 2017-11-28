@@ -69,7 +69,7 @@ tatool
 
       this.gridService.clear().refresh();
       this.stimulus = executableUtils.getNext(this.stimuliList, this.counter);
-
+      this.setupInputKeys(this.stimulus);
       this.counter++;
     };
 

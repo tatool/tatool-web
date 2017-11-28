@@ -89,7 +89,27 @@
 					{ "propertyName": "stimuliFile", "propertyType": "Resource" },
 					{ "propertyName": "displayDuration" },
 					{ "propertyName": "intervalDuration" }
-				] }
+				] },
+				{
+      			"customProperties":[
+         {
+            "propertyName":"stimuliPath",
+            "propertyType":"Path"
+         },
+         {
+            "propertyName":"stimuliFile",
+            "propertyType":"Resource"
+         },
+         {
+            "propertyName":"displayDuration"
+         },
+         {
+            "propertyName":"intervalDuration"
+         }
+      ],
+      "description":"Local recognition / binding task from Guye & von Bastian, 2017",
+      "customType":"tatoolLocalRecognition"
+   }
 			]
 		},
 		{ 
