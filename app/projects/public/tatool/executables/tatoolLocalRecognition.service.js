@@ -1,7 +1,7 @@
 'use strict';
 
 tatool
-  .factory('localRecognition', [ 'executableUtils', 'dbUtils', 'timerUtils', 'gridServiceFactory', 'inputServiceFactory', 'statusPanelUtils',
+  .factory('tatoolLocalRecognition', [ 'executableUtils', 'dbUtils', 'timerUtils', 'gridServiceFactory', 'inputServiceFactory', 'statusPanelUtils',
     function (executableUtils, dbUtils, timerUtils, gridServiceFactory, inputServiceFactory, statusPanelUtils) {
 
     var LocalRecognition = executableUtils.createExecutable();
@@ -13,15 +13,21 @@ tatool
     LocalRecognition.prototype.init = function() {
       var deferred = executableUtils.createPromise();
 
+      if (!this.showKeys) {
+        this.showKeys = { propertyValue: true };
+      } else {
+        this.showKeys.propertyValue = (this.showKeys.propertyValue === true) ? true : false;
+      }
+      
       if (!this.stimuliPath) {
-        deferred.reject('Invalid property settings for Executable localRecognition. Expected property <b>stimuliPath</b> of type Path.');
+        deferred.reject('Invalid property settings for Executable tatoolLocalRecognition. Expected property <b>stimuliPath</b> of type Path.');
       }
 
       // set grid size at task start 
-      this.nRows = 1;
-      this.nCols = 1;
+      this.gridRows = 1;
+      this.gridCols = 1;
 
-      this.gridService = gridServiceFactory.createService(this.nRows, this.nCols, 'stimuliGrid', this.stimuliPath);
+      this.gridService = gridServiceFactory.createService(this.gridRows, this.gridCols, 'stimuliGrid', this.stimuliPath);
       this.inputService = inputServiceFactory.createService(this.stimuliPath);
 
       // timing properties
@@ -45,7 +51,7 @@ tatool
             deferred.reject('Resource not found: ' + self.stimuliFile.resourceName);
           });
       } else {
-        deferred.reject('Invalid property settings for Executable localRecognition. Expected property <b>stimuliFile</b> of type Resource.');
+        deferred.reject('Invalid property settings for Executable tatoolLocalRecognition. Expected property <b>stimuliFile</b> of type Resource.');
       }
 
       return deferred;
@@ -67,8 +73,19 @@ tatool
       this.counter++;
     };
 
+    // Adding keyInputs and show by default
+    LocalRecognition.prototype.setupInputKeys = function(stimulus) {
+      this.inputService.removeAllInputKeys();
+      stimulus.keyCount = (stimulus.keyCount) ? stimulus.keyCount : 2;
+      for (var i = 1; i <= stimulus.keyCount; i++) {
+        this.inputService.addInputKey(stimulus['keyCode' + i], stimulus['response' + i], stimulus['keyLabel' + i], stimulus['keyLabelType' + i], !this.showKeys.propertyValue);
+      }
+    };
+
     LocalRecognition.prototype.setStimulus = function() {
       if (this.gridRows != this.stimulus['gridRows'] || this.gridCols != this.stimulus['gridCols']) {
+        this.gridRows = this.stimulus['gridRows'];
+        this.gridCols = this.stimulus['gridCols'];
         this.gridService.resize(this.stimulus['gridRows'], this.stimulus['gridCols']).redraw();
       };
 

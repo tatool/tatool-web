@@ -1,3 +1,3 @@
-stimulusCount,gridRows,gridCols,stimulusValue1,stimulusValue2,stimulusValueType1,stimulusValueType2,stimulusGridPosition1,stimulusGridPosition2,probeValue1,probeValue2,probeValueType1,probeValueType2,probeGridPosition1,probeGridPosition2,probeType1,probeType2
-2,1,2,rows_01.png,rows_02.png,image,image,1,2,rows_02.png,rows_01.png,image,image,2,1,match,match
-2,1,2,rows_08.png,rows_07.png,image,image,1,2,rows_07.png,rows_05.png,image,image,1,2,intrusion,distractor
+stimulusCount,gridRows,gridCols,stimulusValue1,stimulusValue2,stimulusValueType1,stimulusValueType2,stimulusGridPosition1,stimulusGridPosition2,probeValue1,probeValue2,probeValueType1,probeValueType2,probeGridPosition1,probeGridPosition2,probeType1,probeType2,keyCount,keyCode1,keyLabel1,keyLabelType1,response1,keyCode2,keyLabel2,keyLabelType2,response2
+2,1,2,rows_01.png,rows_02.png,image,image,1,2,rows_02.png,rows_01.png,image,image,2,1,match,match,2,ArrowLeft,key-button-yes.png,image,1,ArrowRight,key-button-no.png,image,0
+2,1,2,rows_08.png,rows_07.png,image,image,1,2,rows_07.png,rows_05.png,image,image,1,2,intrusion,distractor,2,ArrowLeft,key-button-yes.png,image,1,ArrowRight,key-button-no.png,image,0

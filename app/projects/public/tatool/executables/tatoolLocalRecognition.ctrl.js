@@ -1,7 +1,7 @@
 'use strict';
 
 tatool
-  .controller('localRecognitionCtrl', [ '$scope', 'service',
+  .controller('tatoolLocalRecognitionCtrl', [ '$scope', 'service',
     function ($scope, service) {
 
     $scope.gridService = service.gridService;
@@ -42,7 +42,6 @@ tatool
       if (service.getPhase() == 'MEMORISATION') {
         service.timerIntervalMemoranda.start(memorisationPhase);
       } else if (service.getPhase() == 'RECOGNITION'){
-        service.gridService.clear().refresh();
         service.timerIntervalProbe.start(recognitionPhase);
       }
     }

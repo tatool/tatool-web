@@ -1,0 +1,237 @@
+<p><a ui-sref="doc({page: 'lib-exp.html'})">Experimental Tasks</a></p>
+<h2>Local Recognition</h2>
+
+<p>Local Recognition Task.</p>
+
+<ul id="docPageNav">
+  <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('executable')">Executable</a></li>
+  <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('properties')">Properties</a></li>
+  <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('stimuli')">Stimuli File</a></li>
+  <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('download')">Download</a></li>
+</ul>
+
+<hr class="hr-red">
+
+<h3 id="executable">Executable<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
+
+<p>Use the following settings in the Module Editor for this type of task:</p>
+
+<table class="table table-condensed table-bordered">
+  <tbody>
+    <tr>
+      <td class="cellB">Project</td>
+      <td>tatool</td>
+    </tr>
+    <tr>
+      <td class="cellB">Executable Type</td>
+      <td>tatoolLocalRecognition</td>
+    </tr>
+  </tbody>
+</table>
+
+
+<hr class="hr-red">
+
+<h3 id="properties">Properties<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
+
+<p>The following Properties can be provided in the Module Editor to change the behaviour of the task:</p>
+
+<table class="table table-striped table-condensed table-bordered">
+  <thead>
+    <tr>
+      <th>Property Name</th>
+      <th>Property Type</th>
+      <th>Default</th>
+      <th>Mandatory</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="cellB">stimuliFile</td>
+      <td>Resource</td>
+      <td>-</td>
+      <td class="cellB">Yes</td>
+      <td>A stimuli file expecting stimuli according to the Tatool Stimulus definition.</td>
+    </tr>
+    <tr>
+      <td class="cellB">stimuliPath</td>
+      <td>Path</td>
+      <td>-</td>
+      <td class="cellB">Yes</td>
+      <td>A stimuli path where to load any resources from (stimuli images, input key images).</td>
+    </tr>
+    <tr>
+      <td class="cellB">showKeys</td>
+      <td>Boolean</td>
+      <td>true</td>
+      <td>No</td>
+      <td>Shows or hides specified input keys.</td>
+    </tr>
+    <tr>
+      <td class="cellB">displayDuration</td>
+      <td>String</td>
+      <td>2000</td>
+      <td>No</td>
+      <td>Timer duration in ms for display of a single memorandum.</td>
+    </tr>
+    <tr>
+      <td class="cellB">intervalDuration</td>
+      <td>String</td>
+      <td>2000</td>
+      <td>No</td>
+      <td>Timer duration in ms for interval between memorandum.</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr class="hr-red">
+
+<h3 id="stimuli">Stimuli File<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
+
+<p>This task requires a stimuli file to run. The stimuli file has to contain the columns specified in the Stimuli File Structure below.</p>
+
+<h4>Available Stimuli Files</h4>
+
+<table class="table table-striped table-condensed table-bordered">
+  <thead>
+    <tr>
+	  <th>Task</th>
+      <th>Project</th>
+      <th>Type</th>
+      <th>File Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+	  <td class="cellB">Local Recognition Grid</td>
+      <td>tatool-stimuli</td>
+      <td>stimuli</td>
+      <td><a href="https://raw.githubusercontent.com/tatool/tatool-web/master/app/projects/public/tatool-stimuli/stimuli/localRecognition_grid.csv" target="_blank">localRecognition_grid.csv</a><br>
+        <a href="https://raw.githubusercontent.com/tatool/tatool-web/master/app/projects/public/tatool-stimuli/stimuli/localRecognition_grid_practice.csv" target="_blank">localRecognition_grid_practice.csv</a></td>
+      <td>Display of 2-5 coloured triangles shown in a 5x5 grid.</td>
+    </tr>
+    <tr>
+    <td class="cellB">Local Recognition Row</td>
+      <td>tatool-stimuli</td>
+      <td>stimuli</td>
+      <td><a href="https://raw.githubusercontent.com/tatool/tatool-web/master/app/projects/public/tatool-stimuli/stimuli/localRecognition_rows.csv" target="_blank">localRecognition_rows.csv</a><br>
+        <a href="https://raw.githubusercontent.com/tatool/tatool-web/master/app/projects/public/tatool-stimuli/stimuli/localRecognition_rows_practice.csv" target="_blank">localRecognition_rows_practice.csv</a></td>
+      <td>Display of 2-4 fractal images in a row of 2-4 columns.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4>Stimuli File Structure</h4>
+
+<table class="table table-striped table-condensed table-bordered">
+  <thead>
+    <tr>
+      <th>Column Name</th>
+      <th>Column Values</th>
+      <th>Mandatory</th>
+      <th>Column Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="cellB">stimulusCount</td>
+      <td>(String)</td>
+      <td class="cellB">Yes</td>
+      <td>Number of memoranda/probes for this trial.</td>
+    </tr>
+    <tr>
+      <td class="cellB">gridRows</td>
+      <td>(String)</td>
+      <td class="cellB">Yes</td>
+      <td>Number of rows to show in grid.</td>
+    </tr>
+    <tr>
+      <td class="cellB">gridCols</td>
+      <td>(String)</td>
+      <td class="cellB">Yes</td>
+      <td>Number of columns to show in grid.</td>
+    </tr>
+    <tr>
+      <td class="cellB">stimulusValue[n]</td>
+      <td>(String)/(Image Filename)</td>
+      <td class="cellB">Yes</td>
+      <td>Value to display on screen. Can either be text or an image filename.</td>
+    </tr>
+    <tr>
+      <td class="cellB">stimulusValueType[n]</td>
+      <td>text/image/circle/square</td>
+      <td class="cellB">Yes</td>
+      <td>The internal Tatool stimulus value type for Tatool to know how to display it.</td>
+    </tr>
+    <tr>
+      <td class="cellB">stimulusGridPosition[n]</td>
+      <td>(String)</td>
+      <td class="cellB">Yes</td>
+      <td>The grid position for this memorandum.</td>
+    </tr>
+    <tr>
+      <td class="cellB">probeValue[n]</td>
+      <td>(String)/(Image Filename)</td>
+      <td class="cellB">Yes</td>
+      <td>Value to display on screen. Can either be text or an image filename.</td>
+    </tr>
+    <tr>
+      <td class="cellB">probeValueType[n]</td>
+      <td>text/image/circle/square</td>
+      <td class="cellB">Yes</td>
+      <td>The internal Tatool stimulus value type for Tatool to know how to display it.</td>
+    </tr>
+    <tr>
+      <td class="cellB">probeGridPosition[n]</td>
+      <td>(String)</td>
+      <td class="cellB">Yes</td>
+      <td>The grid position for this probe.</td>
+    </tr>
+    <tr>
+      <td class="cellB">probeType[n]</td>
+      <td>(String)</td>
+      <td class="cellB">match/intrusion/distractor</td>
+      <td>The type of this probe.</td>
+    </tr>
+    <tr>
+      <td class="cellB">keyCount</td>
+      <td>(String)</td>
+      <td>No</td>
+      <td>Number of keys to be added for this stimuli.</td>
+    </tr>
+    <tr>
+      <td class="cellB">keyCode[n]</td>
+      <td>(KeyCode)</td>
+      <td class="cellB">Yes</td>
+      <td>The correct <code>keyCode</code> to press from the list of available <code>KeyCodes</code> (see <a ui-sref="doc({page: 'ref-directive-tatoolInput.html'})">Tatool Input Service</a>).</td>
+    </tr>
+    <tr>
+      <td class="cellB">keyLabel[n]</td>
+      <td>(String)/(Image Filename)</td>
+      <td>No</td>
+      <td>An alternative label to display on the input key. Can either be text or an image filename.</td>
+    </tr>
+    <tr>
+      <td class="cellB">keyLabelType[n]</td>
+      <td>text/image</td>
+      <td>No</td>
+      <td>The internal Tatool key label type for Tatool to know how to display it.</td>
+    </tr>
+    <tr>
+      <td class="cellB">response[n]</td>
+      <td>(String)</td>
+      <td>Yes</td>
+      <td>Response value assigned to this key.</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+<hr class="hr-red">
+
+<h3 id="download">Download<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
+
+<p>You can access the source code (Service, Controller, Template, CSS) for this Executable in our <a href="https://github.com/tatool/tatool-web/tree/master/app/projects/public/tatool/executables" target="_blank">GitHub repository</a>.</p>

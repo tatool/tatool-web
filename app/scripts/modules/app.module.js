@@ -261,6 +261,7 @@ tatoolApp.run(['$templateCache', function($templateCache) {
     $templateCache.put('lib-exp-complex-span.html', require('../../views/doc/lib-exp-complex-span.html'));
     $templateCache.put('lib-exp-corsi-block.html', require('../../views/doc/lib-exp-corsi-block.html'));
     $templateCache.put('lib-exp-flanker.html', require('../../views/doc/lib-exp-flanker.html'));
+    $templateCache.put('lib-exp-local-recognition.html', require('../../views/doc/lib-exp-local-recognition.html'));
     $templateCache.put('lib-exp-memory-span.html', require('../../views/doc/lib-exp-memory-span.html'));
     $templateCache.put('lib-exp-object-location.html', require('../../views/doc/lib-exp-object-location.html'));
     $templateCache.put('lib-exp-shifting.html', require('../../views/doc/lib-exp-shifting.html'));
