@@ -1,22 +1,22 @@
-.stimulusText {
+.towerOfFameTraining_stimulusText {
   font-size: 200%;
   font: Helvetica, Arial, Sans-Serif; 
   line-height: 150%;
 }
 
 /* Executable */
-#radioInput {
+#towerOfFameTraining_radioInput {
   text-align: left;
   width:500px; 
   margin:0px auto; 
 }
 
-.inputTitle {
+.towerOfFameTraining_inputTitle {
   margin-bottom: 5px;
   font-weight: bold;
 }
 
-.inputButton {
+.towerOfFameTraining_inputButton {
   text-align: center;
   width:500px; 
   margin:0px auto; 
