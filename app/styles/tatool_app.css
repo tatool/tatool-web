@@ -229,12 +229,13 @@ a.github-icon {
 
 #publicModule {
   position: absolute;
-  left: 50%;
   top: 50%;
+  transform: translateY(-50%);
   margin: 0 auto;
+  /*left: 50%;
   -webkit-transform: translate(-50%, -50%);
   -ms-transform: translate(-50%,-50%);
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);*/
   text-align: center;
   vertical-align: middle;
 }
@@ -922,14 +923,16 @@ ul.tree li .last {
 #spinner {
   visibility: hidden;
   position: absolute;
-  left: 50%;
   top: 50%;
+  transform: translateY(-50%);
   height: 180px;
   width: 300px;
   margin: 0 auto;
+  /*left: 50%;
   -webkit-transform: translate(-50%, -50%);
   -ms-transform: translate(-50%,-50%);
   transform: translate(-50%, -50%);
+  */
   text-align: center;
   vertical-align: middle;
   z-index: 10000;
