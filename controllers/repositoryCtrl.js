@@ -19,6 +19,10 @@ exports.add = function(module, res) {
 var insert = function(module, res) {
   var today = new Date();
 
+  // make sure this copy of an existing module is treated as an insert by mongoose
+  module.set('_id', undefined)
+  module.isNew = true; 
+
   // set all required technical fields (overriding anything set by the user)
   module.updated_at = today;
 
@@ -31,7 +35,6 @@ var insert = function(module, res) {
     if (err) {
       res.status(500).send(err);
     } else {
-      console.log(result);
       res.json();
     }
   });

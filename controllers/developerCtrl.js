@@ -145,8 +145,6 @@ exports.publish = function(req, res) {
       res.status(500).send(err);
     } else {
       if (module) {
-
-
         module.publishedModuleVersion = module.moduleVersion;
         module.moduleType = req.params.moduleType;
         if (module.moduleType !== 'private') {

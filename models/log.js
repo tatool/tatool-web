@@ -11,7 +11,7 @@ var Log = new Schema({
       type: Schema.Types.Mixed,
       required: false
     },
-});
+}, { usePushEach: true });
  
 
 // define different collections using the same Module model

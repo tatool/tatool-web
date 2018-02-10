@@ -9,7 +9,7 @@ var os = require('os');
 var path = require('path');
 var bodyParser = require('body-parser');
 var logger = require('morgan');
-var mongoose = require('mongoose');
+var mongoose = require('mongoose'); 
 mongoose.Promise = global.Promise;
 var passport = require('passport');
 var expressJwt = require('express-jwt');
@@ -47,11 +47,12 @@ var commonCtrl = require('./controllers/commonCtrl');
 var logCtrl = require('./controllers/logCtrl');
 
 // db
-mongoose.connect( process.env.MONGOLAB_URI || 'mongodb://127.0.0.1/tatool-web', { useMongoClient: true } );
+mongoose.connect( process.env.MONGOLAB_URI || 'mongodb://127.0.0.1/tatool-web', {  } );
 
 //logging setup
 if (app.get('env') === 'dev') {
   app.use(logger('dev'));
+  mongoose.set('debug', true);
 }
 
 //compression

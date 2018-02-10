@@ -30,6 +30,6 @@ var Analytics = new mongoose.Schema({
       type: [],
       required: false
     }
-});
+}, { usePushEach: true });
 
 module.exports = mongoose.model( 'Analytics', Analytics );

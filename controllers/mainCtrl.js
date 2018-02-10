@@ -34,10 +34,12 @@ var insert = function(req, res) {
       res.status(500).send(err);
     } else {
       if (module) {
+        
+        // make sure this copy of an existing module is treated as an insert by mongoose
+        module.set('_id', undefined)
+        module.isNew = true; 
 
         // update technical fields
-        module = module.toObject(); // required in order to delete module
-        delete module['_id'];
         module.email = req.user.email;
         module.updated_at = today;
         module.invites = undefined;
