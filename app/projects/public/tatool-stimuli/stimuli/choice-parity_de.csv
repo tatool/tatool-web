@@ -1,0 +1,9 @@
+stimulusValue;stimulusValueType;stimulusValueColor;stimulusType;correctResponse;keyCode;response;keyIndex;keyLabel;keyLabelType
+1;text;blue;odd;odd;ArrowLeft;odd;0;parity-odd-left_de.png;image
+2;text;blue;even;even;ArrowRight;even;1;parity-even-right_de.png;image
+3;text;blue;odd;odd;ArrowLeft;odd;0;parity-odd-left_de.png;image
+4;text;blue;even;even;ArrowRight;even;1;parity-even-right_de.png;image
+6;text;blue;even;even;ArrowRight;even;1;parity-even-right_de.png;image
+7;text;blue;odd;odd;ArrowLeft;odd;0;parity-odd-left_de.png;image
+8;text;blue;even;even;ArrowRight;even;1;parity-even-right_de.png;image
+9;text;blue;odd;odd;ArrowLeft;odd;0;parity-odd-left_de.png;image
