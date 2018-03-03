@@ -1,0 +1,23 @@
+<tatool>
+  <div id="centeredExecutable" class="verbalReasoning_stimulus">
+    <p class="verbalReasoning_question">
+      {{stimulusQuestion}}
+    </p>
+    <div class="verbalReasoning_answer">
+      <ul>
+        <li ng-repeat="answer in stimulusAnswers">{{answer}}</li>
+      </ul>
+    </div>
+  </div>
+
+  <tatool-input id="bottomExecutable" service="inputService" userInput="inputAction(input, timing, event)">
+    <tatool-key code="A" response="1"></tatool-key>
+    <tatool-key code="B" response="2"></tatool-key>
+    <tatool-key code="C" response="3"></tatool-key>
+    <tatool-key code="D" response="4"></tatool-key>
+    <tatool-key code="E" response="5"></tatool-key>
+    <tatool-key code="F" response="6"></tatool-key>
+    <tatool-key code="G" response="7"></tatool-key>
+    <tatool-key code="H" response="8"></tatool-key>
+  </tatool-input>
+</tatool>

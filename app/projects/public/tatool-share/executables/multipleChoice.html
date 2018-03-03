@@ -1,0 +1,7 @@
+<tatool>
+  <tatool-stimulus id="centeredExecutable" service="stimulusService" class="multipleChoice_stimulusImage"></tatool-stimulus>
+
+  <tatool-input id="bottomExecutable" service="inputService" userInput="inputAction(input, timing, event)">
+    <tatool-key ng-repeat="x in answerLabels track by $index" code="{{x}}" response="{{$index + 1}}"></tatool-key>
+  </tatool-input>
+</tatool>

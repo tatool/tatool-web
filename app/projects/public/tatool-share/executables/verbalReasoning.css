@@ -1,0 +1,25 @@
+.verbalReasoning_stimulus {
+  border: 1px solid #a5a5a5;
+}
+
+.verbalReasoning_question {
+  font-size: xx-large;
+  margin-bottom: 40px;
+}
+
+.verbalReasoning_answer {
+  font-size: x-large;
+}
+
+.verbalReasoning_answer ul{
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 5px;
+  flex-wrap: wrap;
+}
+
+.verbalReasoning_answer li {
+  border: 1px dotted grey;
+  align-self: center;
+  margin: 1px;
+}
