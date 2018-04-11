@@ -10,6 +10,7 @@ var smtpTransport = require('nodemailer-smtp-transport');
 var ejs = require("ejs");
 var Q = require('q');
 
+
 // register new user and send verification email
 exports.register = function(req, res) {
 
