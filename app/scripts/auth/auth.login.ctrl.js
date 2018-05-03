@@ -69,26 +69,29 @@ function LoginCtrl($scope, $log, $state, $sce, $anchorScroll, $location, authSer
         alertText += (!credentials.affiliation) ? '<li> Affiliation' : '';
         alertText += '</ul>';
         setAlert('danger', alertText);
-      } else if (!captcha.recaptcha_response_field && cfg.MODE === 'REMOTE') {
+      /*} else if (!captcha.recaptcha_response_field && cfg.MODE === 'REMOTE') {
         alertText += (!captcha.recaptcha_response_field) ? '<li> Captcha' : '';
-        setAlert('danger', alertText);
+        setAlert('danger', alertText);*/
       } else {
         hideAlert();
 
         spinnerService.spin('loadingSpinner');
 
-        authService.verifyCaptcha(captcha).then(function() {
-          authService.register(credentials).then(function() {
+        authService.register(credentials).then(function() {
             spinnerService.stop('loadingSpinner');
             $state.go('login');
           }, function(error) {
             spinnerService.stop('loadingSpinner');
             setAlert('danger', error);
           });
+
+/*
+        authService.verifyCaptcha(captcha).then(function() {
+          
         }, function(error) {
           spinnerService.stop('loadingSpinner');
           setAlert('danger', error);
-        });
+        });*/
       }
     };
 
@@ -160,11 +163,13 @@ function LoginCtrl($scope, $log, $state, $sce, $anchorScroll, $location, authSer
     }
 
     // captcha loading
+    /*
     if ($state.current.name === 'register' && cfg.MODE === 'REMOTE') {
       $script('http://www.google.com/recaptcha/api/js/recaptcha_ajax.js', function() {
         showRecaptcha('captcha');
       });
     }
+    */
 
     // on load message handler
     var message = messageService.getMessage();
