@@ -1,7 +1,7 @@
 // Load dependencies
 var User = require('../models/user');
 var Counter = require('../models/counter');
-var simple_recaptcha = require('simple-recaptcha');
+//var simple_recaptcha = require('simple-recaptcha');
 var uuid = require('uuid');
 var postmark = require("postmark")(process.env.POSTMARK_API_KEY);
 
@@ -118,7 +118,7 @@ exports.verifyCaptcha = function(req, res) {
     var ip = req.ip;
     var challenge = req.body.recaptcha_challenge_field;
     var response = req.body.recaptcha_response_field;
-
+    /*
     simple_recaptcha(privateKey, ip, challenge, response, function(err) {
       if (err) {
         res.status(500).json({ message: 'Captcha verification failed. Refresh  the captcha by clicking on the button right next to the Captcha to try again.', data: err });
@@ -126,6 +126,7 @@ exports.verifyCaptcha = function(req, res) {
         res.json();
       }
     });
+    */
   } else {
     res.json();
   }
