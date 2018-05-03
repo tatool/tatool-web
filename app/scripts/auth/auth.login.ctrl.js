@@ -1,7 +1,6 @@
 'use strict';
 
 /* global $script */
-/* global Recaptcha */
 
 import $script from 'scriptjs';
 
@@ -47,8 +46,8 @@ function LoginCtrl($scope, $log, $state, $sce, $anchorScroll, $location, authSer
       // add captcha information
       var captcha = {};
       if (cfg.MODE === 'REMOTE') {
-        captcha.recaptcha_response_field = Recaptcha.get_response();
-        captcha.recaptcha_challenge_field = Recaptcha.get_challenge();
+        //captcha.recaptcha_response_field = Recaptcha.get_response();
+        //captcha.recaptcha_challenge_field = Recaptcha.get_challenge();
       }
       
       var alertText = '';
@@ -156,6 +155,7 @@ function LoginCtrl($scope, $log, $state, $sce, $anchorScroll, $location, authSer
       $scope.alert.msg = '';
     }
 
+    /*
     function showRecaptcha(element) {
       Recaptcha.create('6LfSvfwSAAAAAOD0SuK_6f3vswGHswyH3kiHj-q3', element, {
         theme: 'clean'
@@ -163,7 +163,6 @@ function LoginCtrl($scope, $log, $state, $sce, $anchorScroll, $location, authSer
     }
 
     // captcha loading
-    /*
     if ($state.current.name === 'register' && cfg.MODE === 'REMOTE') {
       $script('http://www.google.com/recaptcha/api/js/recaptcha_ajax.js', function() {
         showRecaptcha('captcha');
