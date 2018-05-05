@@ -122,12 +122,13 @@ exports.verifyCaptcha = function(req, res) {
     };
 
     request(options, function (error, response, body) {
-      console.log(body);
+      console.log(body.success);
 
-      if (!body.success) {
-        res.status(500).json({ message: 'Captcha verification failed.'});
-      } else {
+      if (body.success) {
+        console.log('success');
         res.json();
+      } else {
+        res.status(500).json({ message: 'Captcha verification failed.'});
       }
     });
 
