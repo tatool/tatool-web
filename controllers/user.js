@@ -121,7 +121,7 @@ exports.verifyCaptcha = function(req, res) {
       method: 'POST',
       json: {
               'secret': privateKey,
-              'response': req.body,
+              'response': req.body.response,
               'remoteip': req.ip
             }
     };

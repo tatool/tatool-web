@@ -129,7 +129,7 @@ function AuthService($http, $q, $log, userService, messageService) {
   authService.verifyCaptcha = function(captcha) {
     var deferred = $q.defer();
 
-    $http.post('/user/captcha', captcha)
+    $http.post('/user/captcha', {'response' : captcha})
       .success(function () {
         deferred.resolve('success');
       })
