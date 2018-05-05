@@ -122,10 +122,10 @@ exports.verifyCaptcha = function(req, res) {
     };
 
     request(options, function (error, response, body) {
-      console.log(body.success);
+      var captcha = JSON.parse(body);
+      console.log(captcha.success);
 
-      if (body.success) {
-        console.log('success');
+      if (captcha.success) {
         res.json();
       } else {
         res.status(500).json({ message: 'Captcha verification failed.'});
