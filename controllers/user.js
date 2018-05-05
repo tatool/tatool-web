@@ -132,6 +132,7 @@ exports.verifyCaptcha = function(req, res) {
       console.log(body);
       console.log(response);
       console.log(error);
+      
       if (!body.success) {
         res.status(500).json({ message: 'Captcha verification failed.'});
       } else {
