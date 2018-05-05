@@ -115,9 +115,6 @@ exports.verifyCaptcha = function(req, res) {
   var privateKey = req.app.get('captcha_private_key');
 
   if (privateKey) {
-    var ip = req.ip;
-    var challenge = req.body.recaptcha_challenge_field;
-    var response = req.body.recaptcha_response_field;
 
     var options = {
       uri: 'https://www.google.com/recaptcha/api/siteverify',
@@ -127,16 +124,20 @@ exports.verifyCaptcha = function(req, res) {
               'response': req.body,
               'remoteip': req.ip
             }
-      }
+    };
+
+    console.log(options);
 
     request(options, function (error, response, body) {
       if (!body.success) {
         res.status(500).json({ message: 'Captcha verification failed.'});
       } else {
+        console.log(error);
+        console.log(body);
         res.json();
       }
     });
-    
+
   } else {
     res.json();
   }
