@@ -123,8 +123,6 @@ exports.verifyCaptcha = function(req, res) {
 
     request(options, function (error, response, body) {
       var captcha = JSON.parse(body);
-      console.log(captcha.success);
-
       if (captcha.success) {
         res.json();
       } else {

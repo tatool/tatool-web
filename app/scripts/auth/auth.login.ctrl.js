@@ -61,9 +61,9 @@ function LoginCtrl($scope, $log, $state, $sce, $anchorScroll, $location, authSer
         alertText += (!credentials.affiliation) ? '<li> Affiliation' : '';
         alertText += '</ul>';
         setAlert('danger', alertText);
-      /*} else if (!credentials.captcha && cfg.MODE === 'REMOTE') {
+      } else if (!credentials.captcha && cfg.MODE === 'REMOTE') {
         alertText = 'You have not solved the Captcha.';
-        setAlert('danger', alertText);*/
+        setAlert('danger', alertText);
       } else {
         hideAlert();
 
