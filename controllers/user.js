@@ -117,27 +117,16 @@ exports.verifyCaptcha = function(req, res) {
   if (privateKey) {
 
     var options = {
-      uri: 'https://www.google.com/recaptcha/api/siteverify',
-      method: 'POST',
-      json: {
-              'secret': privateKey,
-              'response': req.body.response,
-              'remoteip': req.ip
-            }
+      uri: 'https://www.google.com/recaptcha/api/siteverify?secret=' + privateKey + '&response=' + req.body.response,
+      method: 'POST'
     };
-
-    console.log(options);
 
     request(options, function (error, response, body) {
       console.log(body);
-      console.log(response);
-      console.log(error);
-      
+
       if (!body.success) {
         res.status(500).json({ message: 'Captcha verification failed.'});
       } else {
-        console.log(error);
-        console.log(body);
         res.json();
       }
     });
