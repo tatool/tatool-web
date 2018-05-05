@@ -12,6 +12,7 @@ module.exports = {
             'angular-sanitize',
             'angular-ui-bootstrap',
             'angular-ui-router',
+            'angular-recaptcha',
             'jquery',
             'async',
             'bootstrap'

@@ -43,13 +43,6 @@ function LoginCtrl($scope, $log, $state, $sce, $anchorScroll, $location, authSer
     // register new user with authService
     $scope.register = function(credentials) {
 
-      // add captcha information
-      var captcha = {};
-      if (cfg.MODE === 'REMOTE') {
-        //captcha.recaptcha_response_field = Recaptcha.get_response();
-        //captcha.recaptcha_challenge_field = Recaptcha.get_challenge();
-      }
-      
       var alertText = '';
       if (!credentials) {
         setAlert('danger', 'Please enter all required fields:<br><ul> <li> Email<li> Password</ul>');
@@ -68,29 +61,26 @@ function LoginCtrl($scope, $log, $state, $sce, $anchorScroll, $location, authSer
         alertText += (!credentials.affiliation) ? '<li> Affiliation' : '';
         alertText += '</ul>';
         setAlert('danger', alertText);
-      /*} else if (!captcha.recaptcha_response_field && cfg.MODE === 'REMOTE') {
-        alertText += (!captcha.recaptcha_response_field) ? '<li> Captcha' : '';
-        setAlert('danger', alertText);*/
+      } else if (!credentials.captcha && cfg.MODE === 'REMOTE') {
+        alertText = 'You have not solved the Captcha.';
+        setAlert('danger', alertText);
       } else {
         hideAlert();
 
         spinnerService.spin('loadingSpinner');
 
-        authService.register(credentials).then(function() {
+        authService.verifyCaptcha(credentials.captcha).then(function() {
+          authService.register(credentials).then(function() {
             spinnerService.stop('loadingSpinner');
             $state.go('login');
           }, function(error) {
             spinnerService.stop('loadingSpinner');
             setAlert('danger', error);
           });
-
-/*
-        authService.verifyCaptcha(captcha).then(function() {
-          
         }, function(error) {
           spinnerService.stop('loadingSpinner');
           setAlert('danger', error);
-        });*/
+        });
       }
     };
 

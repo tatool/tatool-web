@@ -1,6 +1,7 @@
 'use strict';
 
 import angular from 'angular';
+import angularrecaptcha from 'angular-recaptcha';
 
 import tatool from './app.js';
 import tatoolCommon from './common.module.js';
@@ -10,7 +11,9 @@ import AuthService from '../auth/auth.service.js';
 import AuthInterceptor from '../auth/auth.interceptor.js';
 import LoginCtrl from '../auth/auth.login.ctrl.js';
 
-var tatoolAuth = angular.module('tatool.auth', [tatool, tatoolCommon])
+
+
+var tatoolAuth = angular.module('tatool.auth', [tatool, tatoolCommon, angularrecaptcha])
   .constant('cfgAuth', {
     IMG_PATH: 'images/auth/',
     VIEW_PATH:'views/auth/'

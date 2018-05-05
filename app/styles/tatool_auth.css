@@ -10,9 +10,9 @@
 }
 
 #captcha {
-  margin: auto;
-  width: 450px;
-  height: 130px;
+  width:300px;
+  margin-right:auto;
+  margin-left:auto;
 }
 
 #messagebox {
