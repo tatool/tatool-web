@@ -47,6 +47,36 @@ function StimulusServiceFactory($log, $sce, executableUtils) {
         if (this.data.stimulusClass !== undefined) {
           this.stimulusClass = this.data.stimulusClass;
         }
+
+        if (this.data.stimulusValueType === 'audio') 
+        {
+          var audioResource = this.stimuliPath;
+          audioResource.resourceName = this.data.stimulusValue;
+          var audSrc = executableUtils.getResourcePath(audioResource);
+
+          var sound = new Howl({src: audSrc});
+          sound.play();
+
+          this.stimulusAudio = audSrc;
+        }
+
+        if (this.data.stimulusValueType === 'dual') 
+        {
+          var imgResource = this.stimuliPath;
+          imgResource.resourceName = this.data.stimulusImage;
+          var imgSrc = executableUtils.getResourcePath(imgResource);
+          this.stimulusImage = imgSrc;
+
+          var audioResource = this.stimuliPath;
+          audioResource.resourceName = this.data.stimulusValue;
+          var audSrc = executableUtils.getResourcePath(audioResource);
+
+          var sound = new Howl({src: audSrc});
+          sound.play();
+
+          this.stimulusAudio = audSrc;
+        }
+
       };
 
       this.set = function(content) {

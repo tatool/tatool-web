@@ -1,5 +1,7 @@
 'use strict';
 
+import {Howl, Howler} from 'howler';
+
 import angular from 'angular';
 import angularprogressarc from 'angular-progress-arc'
 
