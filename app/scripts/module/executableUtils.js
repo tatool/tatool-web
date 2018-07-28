@@ -5,6 +5,7 @@
 
 import async from 'async'
 import Papa from 'papaparse'
+import {Howl, Howler} from 'howler';
 
 ExecutableUtilsService.$inject = ['$q', '$http', '$log', 'contextService'];
 
@@ -203,7 +204,7 @@ function ExecutableUtilsService($q, $http, $log, contextService) {
         .success(function (data) {
           var csv = Papa.parse(data, {header: header, dynamicTyping: true, skipEmptyLines: true});
           if (header && stimuliPath) {
-            getImages(csv.data, deferred, stimuliPath);
+            getStimuliFiles(csv.data, deferred, stimuliPath);
           } else {
             deferred.resolve(csv.data);
           }
@@ -225,7 +226,7 @@ function ExecutableUtilsService($q, $http, $log, contextService) {
         .success(function (data) {
           var csv = Papa.parse(data, {header: header, dynamicTyping: true, skipEmptyLines: true});
           if (header && stimuliPath) {
-            getImages(csv.data, deferred, stimuliPath);
+            getStimuliFiles(csv.data, deferred, stimuliPath);
           } else {
             deferred.resolve(csv.data);
           }
@@ -238,9 +239,11 @@ function ExecutableUtilsService($q, $http, $log, contextService) {
     };
 
     // loops through a stimuli file and collects all image file names
-    var getImages = function(list, deferred, stimuliPath) {
+    var getStimuliFiles = function(list, deferred, stimuliPath) {
       var images = [];
+      var sounds = [];
       var imagefile = /png$|jpg$|jpeg$|svg$|gif$/i;
+      var soundfile = /wav$|mp3$|ogg$|aac$|m4a$/i;
       async.each(list, function(stimulus, callback) {
         angular.forEach(stimulus, function(value, key) {
           if (key.indexOf('stimulusValueType') >= 0 && value === 'image') {
@@ -259,6 +262,22 @@ function ExecutableUtilsService($q, $http, $log, contextService) {
             if (images.indexOf(stimulus[key]) === -1) {
               images.push(stimulus[key]);
             }
+          } else if (key.indexOf('stimulusValueType') >= 0 && value === 'audio') {
+            if (sounds.indexOf(stimulus[key.replace('Type', '')]) === -1) {
+              sounds.push(stimulus[key.replace('Type', '')]);
+            }
+          } else if (key.indexOf('stimulusValueType') >= 0 && value === 'audio-image') {
+            if (sounds.indexOf(stimulus.stimulusAudioValue) === -1) {
+              sounds.push(stimulus.stimulusAudioValue);
+            }
+          } else if (key.indexOf('stimulusValueType') >= 0 && value === 'audio-text') {
+            if (sounds.indexOf(stimulus.stimulusAudioValue) === -1) {
+              sounds.push(stimulus.stimulusAudioValue);
+            }
+          } else if (key.indexOf('stimulusValue') >= 0 && soundfile.test(value)) {
+            if (sounds.indexOf(stimulus[key]) === -1) {
+              sounds.push(stimulus[key]);
+            }
           }
         });
         callback();
@@ -266,17 +285,19 @@ function ExecutableUtilsService($q, $http, $log, contextService) {
         if( err ) {
           deferred.reject(err);
         } else {
-          if (images.length > 0) {
-            preloadImages(list, images, deferred, stimuliPath);
-          } else {
+          preloadFiles(list, images, sounds, deferred, stimuliPath).then(function(list) {
             deferred.resolve(list);
-          }
+          }, function(error) {
+            deferred.reject('Error preloading files');
+          });
         }
       });
     };
 
-    // preloads images
-    var preloadImages = function(list, images, deferred, stimuliPath) {
+    // preloads Files
+    var preloadFiles = function(list, images, sounds, deferred, stimuliPath) {
+      var deferred = $q.defer();
+
       async.each(images, function(image, callback) {
         var img = new Image();
         var resource = stimuliPath;
@@ -287,9 +308,22 @@ function ExecutableUtilsService($q, $http, $log, contextService) {
         if( err ) {
           deferred.reject(err);
         } else {
-          deferred.resolve(list);
+          async.each(sounds, function(sound, callback) {
+            var resource = stimuliPath;
+            resource.resourceName = sound;
+            new Howl({src: getResourcePath(resource)});
+            callback();
+          }, function(err) {
+            if( err ) {
+              deferred.reject(err);
+            } else {
+              deferred.resolve(list);
+            }
+          });
         }
       });
+
+      return deferred.promise;
     };
 
 
