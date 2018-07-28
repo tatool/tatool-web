@@ -13,11 +13,11 @@ function StimulusServiceFactory($log, $sce, executableUtils) {
     };
 
     function Stimulus() {
-      this.data = {};
+      this.data = {}; 
 
       this.init = function() {
         if (this.data.stimulusValueColor !== undefined) {
-          if (this.data.stimulusValueType === 'text') {
+          if (this.data.stimulusValueType === 'text' || this.data.stimulusValueType === 'audio-text') {
             this.stimulusStyle = {
               'color': this.data.stimulusValueColor
             };
@@ -48,33 +48,34 @@ function StimulusServiceFactory($log, $sce, executableUtils) {
           this.stimulusClass = this.data.stimulusClass;
         }
 
+        // prepare audio source
         if (this.data.stimulusValueType === 'audio') 
         {
           var audioResource = this.stimuliPath;
           audioResource.resourceName = this.data.stimulusValue;
-          var audSrc = executableUtils.getResourcePath(audioResource);
-
-          var sound = new Howl({src: audSrc});
-          sound.play();
-
-          this.stimulusAudio = audSrc;
+          var audioSrc = executableUtils.getResourcePath(audioResource);
+          this.stimulusAudio = audioSrc;
         }
 
-        if (this.data.stimulusValueType === 'dual') 
+        if (this.data.stimulusValueType === 'audio-image') 
         {
           var imgResource = this.stimuliPath;
-          imgResource.resourceName = this.data.stimulusImage;
+          imgResource.resourceName = this.data.stimulusValue;
           var imgSrc = executableUtils.getResourcePath(imgResource);
           this.stimulusImage = imgSrc;
 
           var audioResource = this.stimuliPath;
-          audioResource.resourceName = this.data.stimulusValue;
-          var audSrc = executableUtils.getResourcePath(audioResource);
+          audioResource.resourceName = this.data.stimulusAudioValue;
+          var audioSrc = executableUtils.getResourcePath(audioResource);
+          this.stimulusAudio = audioSrc;
+        }
 
-          var sound = new Howl({src: audSrc});
-          sound.play();
-
-          this.stimulusAudio = audSrc;
+        if (this.data.stimulusValueType === 'audio-text') 
+        {
+          var audioResource = this.stimuliPath;
+          audioResource.resourceName = this.data.stimulusAudioValue;
+          var audioSrc = executableUtils.getResourcePath(audioResource);
+          this.stimulusAudio = audioSrc;
         }
 
       };

@@ -5,6 +5,7 @@
 
 import KeyCodes from './util/keycodes.js';
 import videojs from 'video.js';
+import {Howl, Howler} from 'howler';
 
 Tatool.$inject = ['$timeout', 'executableUtils', 'contextService'];
 TatoolInput.$inject = ['$log', '$templateCache', '$compile', '$timeout', 'executableUtils'];
@@ -264,14 +265,32 @@ function TatoolStimulus($log, $templateCache, $timeout, $q, cfgModule, executabl
       scope.show = false;
       scope.stimulus = scope.service;
       var videoPlayer = null;
+      var audioPlayer = null;
 
       scope.service.show = function() {
         scope.show = true;
+        scope.service.playAudio();
         return executableUtils.getTiming();
       };
 
       scope.service.hide = function() {
         scope.show = false;
+        scope.service.stopAudio();
+        return executableUtils.getTiming();
+      };
+
+      scope.service.playAudio = function() {
+        if (scope.stimulus.data.stimulusValueType.startsWith('audio')) {
+          audioPlayer = new Howl({src: scope.stimulus.stimulusAudio});
+          audioPlayer.play();
+        }
+        return executableUtils.getTiming();
+      };
+
+      scope.service.stopAudio = function() {
+        if (scope.stimulus.data.stimulusValueType.startsWith('audio') && audioPlayer !== null) {
+          audioPlayer.stop();
+        }
         return executableUtils.getTiming();
       };
 

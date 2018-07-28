@@ -1,8 +1,4 @@
 // server
-// conditional load of newrelic module
-if (process.argv[2] === 'server') {
-  require('newrelic');
-}
 var express = require('express');
 var compress = require('compression');
 var os = require('os');

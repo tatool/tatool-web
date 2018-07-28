@@ -6,10 +6,13 @@
           <div ng-switch-when="image">
             <img class="imageStimulusValue" draggable="false" ng-src="{{stimulus.stimulusImage}}" ng-class="stimulus.stimulusClass" style="{{col.data.stimulusValueStyle}}">
           </div>
-          <div ng-switch-when="dual">
+          <div ng-switch-when="audio">
+            
+          </div>
+          <div ng-switch-when="audio-image">
             <img class="imageStimulusValue" draggable="false" ng-src="{{stimulus.stimulusImage}}" ng-class="stimulus.stimulusClass" style="{{col.data.stimulusValueStyle}}">
           </div>
-          <div ng-switch-when="audio" ng-style="stimulus.stimulusStyle" ng-class="stimulus.stimulusClass" style="{{col.data.stimulusValueStyle}}">
+          <div ng-switch-when="audio-text" ng-style="stimulus.stimulusStyle" ng-class="stimulus.stimulusClass" style="{{col.data.stimulusValueStyle}}">
             <div class="textStimulusValue"><span>{{stimulus.data.stimulusValue}}</span></div>
           </div>
           <div ng-switch-when="text" ng-style="stimulus.stimulusStyle" ng-class="stimulus.stimulusClass" style="{{col.data.stimulusValueStyle}}">
