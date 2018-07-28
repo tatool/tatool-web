@@ -35,7 +35,6 @@ function ExecutableUtilsService($q, $http, $log, contextService) {
 
     // stops the execution of the current executable
     utils.stop = function() {
-      console.log();
       executor.stopExecutable();
     };
 

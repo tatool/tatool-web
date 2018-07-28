@@ -1,7 +1,6 @@
 // Load dependencies
 var User = require('../models/user');
 var Counter = require('../models/counter');
-//var simple_recaptcha = require('simple-recaptcha');
 var uuid = require('uuid');
 var postmark = require('postmark')(process.env.POSTMARK_API_KEY);
 var request = require('request');
@@ -77,36 +76,54 @@ exports.register = function(req, res) {
 };
 
 // creates a temp user for public modules
-exports.createTempUser = function(req, res) {
+exports.getTempUser = function(req, res) {
   var deferred = Q.defer();
 
-  // Create a new temp user
-  var user = new User();
+  var extid = '';
 
-  user.roles.push('user');
-  user.verified = true;
-  user.tempUser = true;
   if (req.query.extid && req.query.extid !== '') {
-    user.extid = req.query.extid;
+    extid = req.query.extid;
   }
-  user.updated_at = new Date();
 
-  Counter.getUserCode(function (err, userCode) {
-    if (err) {
-      deferred.reject({ message: 'User registration failed.', data: err });
-    } else {
-      user.code = userCode.next;
-      user.email = userCode.next.toString();
-      user.password = userCode.next;
-      user.save(function(err) {
-        if (err) {
-          deferred.reject({ message: 'User registration failed.', data: err });
-        } else {
-          deferred.resolve(user);
+  User.findOne({ extid: extid, tempUser: true, moduleid: req.params.moduleId }, function (err, user) {
+
+      if (err) { deferred.reject({ message: 'User registration failed.', data: err }); }
+
+      // Existing user
+      if (user) {  
+        deferred.resolve(user);
+      } else {
+      // Create new temp user
+        var user = new User();
+
+        user.roles.push('user');
+        user.verified = true;
+        user.tempUser = true;
+        user.moduleid = req.params.moduleId;
+        if (req.query.extid && req.query.extid !== '') {
+          user.extid = req.query.extid;
         }
-      });
-    }
-  }); 
+        user.updated_at = new Date();
+
+        Counter.getUserCode(function (err, userCode) {
+          if (err) {
+            deferred.reject({ message: 'User registration failed.', data: err });
+          } else {
+            user.code = userCode.next;
+            user.email = userCode.next.toString();
+            user.password = userCode.next;
+            user.save(function(err) {
+              if (err) {
+                deferred.reject({ message: 'User registration failed.', data: err });
+              } else {
+                deferred.resolve(user);
+              }
+            });
+          }
+        }); 
+      }
+
+  });
 
   return deferred.promise;
 };

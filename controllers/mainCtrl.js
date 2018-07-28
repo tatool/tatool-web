@@ -156,7 +156,7 @@ exports.installPublic = function(req, res) {
       res.status(500).send(err);
     } else {
       if (module) {
-        userCtrl.createTempUser(req, res).then(function(user) {
+        userCtrl.getTempUser(req, res).then(function(user) {
           var token = user.createToken(req.app.get('jwt_secret'));
           res.json({ token: token, roles: user.roles, code: user.code });
         }, function(error) {

@@ -37,6 +37,10 @@ var User = new Schema({
       type: String,
       required: false
     },
+    moduleid: {
+      type: String,
+      required: false
+    },
     fullName: {
       type: String,
       required: false
