@@ -32,6 +32,7 @@
     "font-awesome": "4.7.0",
     "glob": "7.1.2",
     "headjs": "1.0.3",
+    "howler": "^2.0.14",
     "idb-wrapper": "1.6.1",
     "jquery": "3.0.0",
     "jquery-ui": "1.12.x",
