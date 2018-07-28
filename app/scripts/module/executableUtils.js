@@ -285,7 +285,7 @@ function ExecutableUtilsService($q, $http, $log, contextService) {
         if( err ) {
           deferred.reject(err);
         } else {
-          preloadFiles(list, images, sounds, deferred, stimuliPath).then(function(list) {
+          preloadFiles(list, images, sounds, stimuliPath).then(function(list) {
             deferred.resolve(list);
           }, function(error) {
             deferred.reject('Error preloading files');
@@ -295,7 +295,7 @@ function ExecutableUtilsService($q, $http, $log, contextService) {
     };
 
     // preloads Files
-    var preloadFiles = function(list, images, sounds, deferred, stimuliPath) {
+    var preloadFiles = function(list, images, sounds, stimuliPath) {
       var deferred = $q.defer();
 
       async.each(images, function(image, callback) {
