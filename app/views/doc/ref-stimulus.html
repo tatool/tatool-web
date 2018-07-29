@@ -17,14 +17,27 @@
   </thead>
   <tbody>
     <tr>
-      <td class="cellB">stimulusValue</td>
-      <td>[String]</td>
-      <td>The value to be displayed on screen. Can be a text or an image filename. </td>
+      <td class="cellB" valign="top">stimulusValueType</td>
+      <td>text<br>image<br>video<br>audio<br>audio-text<br>audio-image<br>circle/square</td>
+      <td>
+        Expects a text value in stimulusValue.<br>
+        Expects an image filename in stimulusValue.<br>
+        Expects a video filename in stimulusValue.<br>
+        Expects an audio filename in stimulusValue.<br>
+        Expects a text value in stimulusValue.<br>
+        Expects an image filename in stimulusValue.<br>
+        Will not use stimulusValue not display anything.<br>
+      </td>
     </tr>
     <tr>
-      <td class="cellB">stimulusValueType</td>
-      <td>text/image/video/circle/square</td>
-      <td>Defines the type of the value in order for Tatool to know how to display it.</td>
+      <td class="cellB">stimulusValue</td>
+      <td>[String]</td>
+      <td>The value to be displayed depending on stimulusValueType.</td>
+    </tr>
+    <tr>
+      <td class="cellB">stimulusAudioValue</td>
+      <td>[String]</td>
+      <td>Should contain audio filename in combination with stimulusValueType of audio-text/audio-image.</td>
     </tr>
     <tr>
       <td class="cellB">stimulusType</td>
