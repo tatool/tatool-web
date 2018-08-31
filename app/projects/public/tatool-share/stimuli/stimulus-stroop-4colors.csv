@@ -1,0 +1,17 @@
+stimulusValue,stimulusValueType,stimulusValueColor,stimulusType,correctResponse,keyCode,keyLabel,keyLabelType,keyIndex,response
+red,text,red,congruent,red,ArrowLeft,stroop-color-left.png,image,0,red
+green,text,green,congruent,green,ArrowDown,stroop-color-down.png,image,2,green
+blue,text,blue,congruent,blue,ArrowRight,stroop-color-right.png,image,3,blue
+red,text,green,incongruent,green,ArrowDown,stroop-color-down.png,image,2,green
+blue,text,green,incongruent,green,ArrowDown,stroop-color-down.png,image,2,green
+green,text,red,incongruent,red,ArrowLeft,stroop-color-left.png,image,0,red
+blue,text,red,incongruent,red,ArrowLeft,stroop-color-left.png,image,0,red
+green,text,blue,incongruent,blue,ArrowRight,stroop-color-right.png,image,3,blue
+red,text,blue,incongruent,blue,ArrowRight,stroop-color-right.png,image,3,blue
+red,text,black,incongruent,black,ArrowUp,stroop-color-up.png,image,1,black
+blue,text,black,incongruent,black,ArrowUp,stroop-color-up.png,image,1,black
+green,text,black,incongruent,black,ArrowUp,stroop-color-up.png,image,1,black
+black,text,black,congruent,black,ArrowUp,stroop-color-up.png,image,1,black
+black,text,red,incongruent,red,ArrowLeft,stroop-color-left.png,image,0,red
+black,text,green,incongruent,green,ArrowDown,stroop-color-down.png,image,2,green
+black,text,blue,incongruent,blue,ArrowRight,stroop-color-right.png,image,3,blue
