@@ -23,8 +23,8 @@ module.exports = merge(baseConfig, {
               loader: 'file-loader',
               options: {
                 name: '[name].[ext]',
-                outputPath: './styles/fonts/',
-                publicPath: '../'
+                outputPath: './styles/fonts/'
+                //publicPath: '../'
               }
             }
           ]
