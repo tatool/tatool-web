@@ -1,0 +1,37 @@
+    {
+      "customType": "DualNBack",
+      "description": "Dual N-Back Task",
+      "customProperties": [
+        {
+          "propertyName": "stimuliPath",
+          "propertyType": "Path"
+        },
+        {
+          "propertyName": "stimuliFile",
+          "propertyType": "Resource"
+        },
+        {
+          "propertyName": "showKeys",
+          "propertyType": "Boolean"
+        },
+        {
+          "propertyName": "timerEnabled",
+          "propertyType": "Boolean"
+        },
+        {
+          "propertyName": "displayDuration"
+        },
+        {
+          "propertyName": "randomisation"
+        },
+        {
+          "propertyName": "nValue"
+        },
+        {
+          "propertyName": "iterations"
+        },
+        {
+          "propertyName": "targets"
+        }
+      ]
+    }
