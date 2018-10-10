@@ -1,0 +1,77 @@
+<p><a ui-sref="doc({page: 'lib-exp.html'})">Experimental Tasks</a></p>
+<h2>Dual N Back</h2>
+
+<p>In the Dual N-Back paradigm, participants need to respond whenever the current stimulus was the same as the one presented N positions back in the sequence. Dependent measure is the proportion of hits minus false alarms averaged over both modalities and all n-back levels</p>
+
+<ul id="docPageNav">
+  <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('element')">Element</a></li>
+  <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('executable')">Executables</a></li>
+  <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('properties')">Properties</a></li>
+  <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('stimuli')">Stimuli File</a></li>
+  <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('download')">Download</a></li>
+</ul>
+
+<hr class="hr-red">
+
+<h3 id="element">Element<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
+
+<p>Use a <a ui-sref="doc({page: 'ref-elements.html'})">List Element</a> as the parent element in order to create the Dual N-Back paradigm. The number of iterations should be set to the number of stimuli to be shown.</p>
+
+<hr class="hr-red">
+
+<h3 id="executable">Executables<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
+
+<p>Use the following settings in the Module Editor for this type of task: </p>
+
+<h4>DualNBack</h3>
+<table class="table table-condensed table-bordered">
+  <tbody>
+    <tr>
+      <td class="cellB">Project</td>
+      <td>hsrc</td>
+    </tr>
+    <tr>
+      <td class="cellB">Executable Type</td>
+      <td>DualNBack</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr class="hr-red">
+
+<h3 id="properties">Properties<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
+
+<p>The following Properties can be provided in the Module Editor to change the behaviour of the task:</p>
+
+<table class="table table-condensed table-bordered">
+  <tbody>
+    <tr>
+      <td class="cellB">displayDuration</td>
+      <td>The time in milliseconds to display the stimulus</td>
+    </tr>
+    <tr>
+      <td class="cellB">nValue</td>
+      <td>The value of N refered to in the initial description</td>
+    </tr>
+    <tr>
+      <td class="cellB">iterations</td>
+      <td>This should match the iterations in the list element. Used to assist in generating the correct number of targets</td>
+    </tr>
+    <tr>
+      <td class="cellB">targets</td>
+      <td>How many target stimuli should be generated (default is 12)</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr class="hr-red">
+
+<h3 id="stimuli">Stimuli File<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
+
+<p><a ui-sref="doc({page: 'lib-exp-dual-n-back.html'})">dual-nback-permutations.csv contains a list of the available stimuli. This lists all the visual and audio stimuli also in the same folder.</a></p>
+
+<hr class="hr-red">
+
+<h3 id="download">Download<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
+
+<p>You can access the source code (Service, Controller, Template, CSS) for both Executables in our <a href="https://github.com/tatool/tatool-web/tree/master/app/projects/public/tatool/executables" target="_blank">GitHub repository</a>.</p>
