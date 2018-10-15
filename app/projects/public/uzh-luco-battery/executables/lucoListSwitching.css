@@ -1,0 +1,39 @@
+.emptyCell, .emptyCellStatic {
+  font-size: 500%;
+  background-color: transparent;
+  border: 0px;
+  display: table-cell;
+  vertical-align: middle;
+  margin: 0;
+  padding: 24px;
+}
+
+.warningCell, .warningCellStatic {
+  font-size: 500%;
+  background-color: transparent;
+  border: 0px;
+  display: table-cell;
+  vertical-align: middle;
+  margin: 0;
+  padding: 24px;
+}
+
+.greenCell, .greenCellStatic {
+  font-size: 500%;
+  background-color: transparent;
+  border: 3px solid #008000;
+  display: table-cell;
+  vertical-align: middle;
+  margin: 0;
+  padding: 24px;
+}
+
+.magentaCell, .magentaCellStatic {
+  font-size: 500%;
+  background-color: transparent;
+  border: 3px solid #FF00FF;
+  display: table-cell;
+  vertical-align: middle;
+  margin: 0;
+  padding: 24px;
+}
