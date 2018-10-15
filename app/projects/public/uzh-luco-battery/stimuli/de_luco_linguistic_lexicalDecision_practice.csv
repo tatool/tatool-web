@@ -1,0 +1,6 @@
+stimulusValue,stimulusValueType,stimulusType,correctResponse,keyCode,keyIndex,response
+BRECK,text,nonword,nonword,ArrowRight,1,nonword
+LAMPE,text,word,word,ArrowLeft,0,word
+KOLZ,text,nonword,nonword,ArrowRight,1,nonword
+HUND,text,word,word,ArrowLeft,0,word
+SCHUH,text,word,word,ArrowLeft,0,word

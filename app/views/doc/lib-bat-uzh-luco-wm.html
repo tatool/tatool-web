@@ -1,0 +1,298 @@
+<p><a ui-sref="doc({page: 'lib-bat-uzh-luco.html'})">Language Use and Cognition (UZH-LuCo)</a></p>
+<h2>Working Memory</h2>
+
+<p>This set of tasks measures working memory with the list-switching paradigm modelled after <a href="https://doi.org/10.1016/j.cogpsych.2012.11.001" target="_blank">Oberauer, Souza, Druey, &amp; Gade (2013)</a> (see also <a href="http://dx.doi.org/10.3758/s13421-016-0645-4" target="_blank">Gade, Souza, Druey, &amp; Oberauer, 2017</a>; <a href="http://dx.doi.org/10.1037/0278-7393.31.4.714" target="_blank">Oberauer, 2005</a>). Two lists of items are presented that have to be retained in working memory. After memorisation of the lists, a series of probes is presented. The task is to indicate for each probe whether it was presented at that particular position in that particular list. In the <b>Figural List-Switching Task</b>, stimuli are filled or transparent simple shapes. In the <b>Numerical List-Switching Task</b>, stimuli are numbers which additionally have to be continuously updated according to simple arithmetic operations.
+</p>
+
+<ul id="docPageNav">
+  <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('module')">Module</a></li>
+  <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('fig')">Figural List-Switching Task</a></li>
+  <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('num')">Numerical List-Switching Task</a></li>
+  <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('download')">Download</a></li>
+</ul>
+
+<hr class="hr-red">
+
+<h3 id="module">Module<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
+<p>The following modules comprise the tasks alongside their instructions:
+  <ul class="docContentList">
+    <li>Figural List-Switching Task: <a href="https://raw.githubusercontent.com/tatool/tatool-web/master/app/projects/public/uzh-luco-battery/modules/de_luco_wm_fig.json" target="_blank">de_luco_wm_fig.json</a></li>
+    <li>Numerical List-Switching Task: <a href="https://raw.githubusercontent.com/tatool/tatool-web/master/app/projects/public/uzh-luco-battery/modules/de_luco_wm_num.json" target="_blank">de_luco_wm_num.json</a></li>
+  </ul>
+</p>
+
+<hr class="hr-red">
+
+<h3 id="fig">Figural List-Switching Task<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
+
+<h4>Executable</h4>
+
+<p>Use the following settings in the Module Editor for these tasks: </p>
+
+<table class="table table-condensed table-bordered">
+  <tbody>
+    <tr>
+      <td class="cellB">Project</td>
+      <td>uzh-luco-battery</td>
+    </tr>
+    <tr>
+      <td class="cellB">Executable Type</td>
+      <td>lucoListSwitching</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr>
+
+<h4>Properties</h4>
+
+<p>The following Properties can be provided in the Module Editor to change the behaviour of the task (note that the default value is the one used in the publication):</p>
+
+<table class="table table-striped table-condensed table-bordered">
+  <thead>
+    <tr>
+      <th>Property Name</th>
+      <th>Property Type</th>
+      <th>Default</th>
+      <th>Mandatory</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="cellB">stimuliFile</td>
+      <td>Resource</td>
+      <td>None, see <i>Stimuli Files</i> below for options</td>
+      <td class="cellB">Yes</td>
+      <td>A stimuli file expecting stimuli according to the Tatool Stimulus definition.</td>
+    </tr>
+    <tr>
+      <td class="cellB">stimuliPath</td>
+      <td>Path</td>
+      <td>None, use the following:<br>Project: uzh-ef-battery<br>Type: stimuli</td>
+      <td class="cellB">Yes</td>
+      <td>A stimuli path where to load any resources from (stimuli images, input key images).</td>
+    </tr>
+    <tr>
+      <td class="cellB">displayEncodingDuration</td>
+      <td>String</td>
+      <td>6500</td>
+      <td>No</td>
+      <td>Timer duration in ms to display memoranda in the encoding phase.</td>
+    </tr>
+     <tr>
+      <td class="cellB">intervalEncodingDuration</td>
+      <td>String</td>
+      <td>250</td>
+      <td>No</td>
+      <td>Timer duration in ms to wait and present a blank screen before the updating phase starts.</td>
+    </tr>
+     <tr>
+      <td class="cellB">displayUpdatingDuration</td>
+      <td>String</td>
+      <td>1500</td>
+      <td>No</td>
+      <td>Timer duration in ms to wait for user feedback before stopping.</td>
+    </tr>
+     <tr>
+      <td class="cellB">intervalUpdatingDuration</td>
+      <td>String</td>
+      <td>250</td>
+      <td>No</td>
+      <td>Timer duration in ms to wait and present a blank screen before the next updating step.</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr>
+
+<h4>Stimuli Files</h4>
+
+<p>The following stimuli files were used in the publication:</p>
+
+<table class="table table-striped table-condensed table-bordered">
+  <thead>
+    <tr>
+	  <th>Task</th>
+      <th>Project</th>
+      <th>Type</th>
+      <th>File Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+	  <td class="cellB">Practice Trials</td>
+      <td>uzh-luco-battery</td>
+      <td>stimuli</td>
+      <td><a href="https://raw.githubusercontent.com/tatool/tatool-web/master/app/projects/public/uzh-luco-battery/stimuli/luco_wm_fig_practice.csv" target="_blank">luco_wm_fig_practice.csv</a></td>
+      <td>5 practice trials.</td>
+    </tr>
+    <tr>
+	  <td class="cellB">Test Trials</td>
+      <td>uzh-luco-battery</td>
+      <td>stimuli</td>
+      <td><a href="https://raw.githubusercontent.com/tatool/tatool-web/master/app/projects/public/uzh-luco-battery/stimuli/luco_wm_fig.csv" target="_blank">luco_wm_fig.csv</a></td>
+      <td>128 test trials.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4>Instructions</h4>
+<p>The following instruction pages can be used with the Executable:</p>
+<ul class="docContentList">
+  <li>de_listSwitching_fig_general.htm</li>
+  <li>de_listSwitching_fig_single_1_01.htm</li>
+  <li>de_listSwitching_fig_single_1_02.htm</li>
+  <li>de_listSwitching_fig_single_1_03.htm</li>
+  <li>de_listSwitching_fig_single_1_04.htm</li>
+  <li>de_listSwitching_fig_mixed_01.htm</li>
+  <li>de_listSwitching_fig_mixed_02.htm</li>
+  <li>de_listSwitching_fig_mixed_03.htm</li>
+  <li>de_listSwitching_fig_mixed_04.htm</li>
+  <li>de_listSwitching_fig_mixed_05.htm</li>
+  <li>de_listSwitching_fig_single_2_01.htm</li>
+  <li>de_listSwitching_fig_single_2_02.htm</li>
+  <li>de_listSwitching_fig_single_2_03.htm</li>
+</ul>
+
+<hr class="hr-red">
+
+<h3 id="num">Numerical List-Switching Task<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
+
+<h4>Executable</h4>
+
+<p>Use the following settings in the Module Editor for these tasks: </p>
+
+<table class="table table-condensed table-bordered">
+  <tbody>
+    <tr>
+      <td class="cellB">Project</td>
+      <td>uzh-luco-battery</td>
+    </tr>
+    <tr>
+      <td class="cellB">Executable Type</td>
+      <td>lucoListSwitching</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr>
+
+<h4>Properties</h4>
+
+<p>The following Properties can be provided in the Module Editor to change the behaviour of the task (note that the default value is the one used in the publication):</p>
+
+<table class="table table-striped table-condensed table-bordered">
+  <thead>
+    <tr>
+      <th>Property Name</th>
+      <th>Property Type</th>
+      <th>Default</th>
+      <th>Mandatory</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="cellB">stimuliFile</td>
+      <td>Resource</td>
+      <td>None, see <i>Stimuli Files</i> below for options</td>
+      <td class="cellB">Yes</td>
+      <td>A stimuli file expecting stimuli according to the Tatool Stimulus definition.</td>
+    </tr>
+    <tr>
+      <td class="cellB">stimuliPath</td>
+      <td>Path</td>
+      <td>None, use the following:<br>Project: uzh-ef-battery<br>Type: stimuli</td>
+      <td class="cellB">Yes</td>
+      <td>A stimuli path where to load any resources from (stimuli images, input key images).</td>
+    </tr>
+    <tr>
+      <td class="cellB">displayEncodingDuration</td>
+      <td>String</td>
+      <td>6500</td>
+      <td>No</td>
+      <td>Timer duration in ms to display memoranda in the encoding phase.</td>
+    </tr>
+     <tr>
+      <td class="cellB">intervalEncodingDuration</td>
+      <td>String</td>
+      <td>250</td>
+      <td>No</td>
+      <td>Timer duration in ms to wait and present a blank screen before the updating phase starts.</td>
+    </tr>
+     <tr>
+      <td class="cellB">displayUpdatingDuration</td>
+      <td>String</td>
+      <td>1500</td>
+      <td>No</td>
+      <td>Timer duration in ms to wait for user feedback before stopping.</td>
+    </tr>
+     <tr>
+      <td class="cellB">intervalUpdatingDuration</td>
+      <td>String</td>
+      <td>250</td>
+      <td>No</td>
+      <td>Timer duration in ms to wait and present a blank screen before the next updating step.</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr>
+
+<h4>Stimuli Files</h4>
+
+<p>The following stimuli files were used in the publication:</p>
+
+<table class="table table-striped table-condensed table-bordered">
+  <thead>
+    <tr>
+    <th>Task</th>
+      <th>Project</th>
+      <th>Type</th>
+      <th>File Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+    <td class="cellB">Practice Trials</td>
+      <td>uzh-luco-battery</td>
+      <td>stimuli</td>
+      <td><a href="https://raw.githubusercontent.com/tatool/tatool-web/master/app/projects/public/uzh-luco-battery/stimuli/luco_wm_num_practice.csv" target="_blank">luco_wm_num_practice.csv</a></td>
+      <td>5 practice trials.</td>
+    </tr>
+    <tr>
+    <td class="cellB">Test Trials</td>
+      <td>uzh-luco-battery</td>
+      <td>stimuli</td>
+      <td><a href="https://raw.githubusercontent.com/tatool/tatool-web/master/app/projects/public/uzh-luco-battery/stimuli/luco_wm_num.csv" target="_blank">luco_wm_num.csv</a></td>
+      <td>128 test trials.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4>Instructions</h4>
+<p>The following instruction pages can be used with the Executable:</p>
+<ul class="docContentList">
+  <li>de_listSwitching_num_general.htm</li>
+  <li>de_listSwitching_num_single_1_01.htm</li>
+  <li>de_listSwitching_num_single_1_02.htm</li>
+  <li>de_listSwitching_num_single_1_03.htm</li>
+  <li>de_listSwitching_num_single_1_04.htm</li>
+  <li>de_listSwitching_num_mixed_01.htm</li>
+  <li>de_listSwitching_num_mixed_02.htm</li>
+  <li>de_listSwitching_num_mixed_03.htm</li>
+  <li>de_listSwitching_num_mixed_04.htm</li>
+  <li>de_listSwitching_num_mixed_05.htm</li>
+  <li>de_listSwitching_num_single_2_01.htm</li>
+  <li>de_listSwitching_num_single_2_02.htm</li>
+  <li>de_listSwitching_num_single_2_03.htm</li>
+</ul>
+
+<hr class="hr-red">
+
+<h3 id="download">Download<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
+
+<p>You can access the source code (Service, Controller, Template, CSS) for these Executables in our <a href="https://github.com/tatool/tatool-web/tree/master/app/projects/public/tatool/executables" target="_blank">GitHub repository</a>.</p>

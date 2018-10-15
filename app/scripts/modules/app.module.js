@@ -245,6 +245,10 @@ tatoolApp.run(['$templateCache', function($templateCache) {
     $templateCache.put('lib-bat-uzh-ef-shifting.html', require('../../views/doc/lib-bat-uzh-ef-shifting.html'));
     $templateCache.put('lib-bat-uzh-ef-updating.html', require('../../views/doc/lib-bat-uzh-ef-updating.html'));
     $templateCache.put('lib-bat-uzh-ef.html', require('../../views/doc/lib-bat-uzh-ef.html'));
+    $templateCache.put('lib-bat-uzh-luco-linguistic.html', require('../../views/doc/lib-bat-uzh-luco-linguistic.html'));
+    $templateCache.put('lib-bat-uzh-luco-monitoring.html', require('../../views/doc/lib-bat-uzh-luco-monitoring.html'));
+    $templateCache.put('lib-bat-uzh-luco-wm.html', require('../../views/doc/lib-bat-uzh-luco-wm.html'));
+    $templateCache.put('lib-bat-uzh-luco.html', require('../../views/doc/lib-bat-uzh-luco.html'));
     $templateCache.put('lib-bat-uzh-multi.html', require('../../views/doc/lib-bat-uzh-multi.html'));
     $templateCache.put('lib-bat-uzh-multi-testing.html', require('../../views/doc/lib-bat-uzh-multi-testing.html'));
     $templateCache.put('lib-bat-uzh-multi-training.html', require('../../views/doc/lib-bat-uzh-multi-training.html'));

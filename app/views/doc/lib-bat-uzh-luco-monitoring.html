@@ -1,0 +1,280 @@
+<p><a ui-sref="doc({page: 'lib-bat-uzh-luco.html'})">Language Use and Cognition (UZH-LuCo)</a></p>
+<h2>Monitoring</h2>
+
+<p>This set of tasks measures monitoring of elements in working memory with the monitoring paradigm modelled after <a href="https://doi.org/10.1016/S0160-2896(02)00115-0" target="_blank">Oberauer, S&uuml;&szlig; Wilhelm, &amp; Wittman (2003)</a> (see also <a href="http://dx.doi.org/10.1016/j.jml.2013.02.002" target="_blank">von Bastian &amp; Oberauer, 2013</a>; <a href="http://dx.doi.org/10.1037/xge0000120" target="_blank">von Bastian, Souza, &amp; Gade, 2016</a>). The task is to monitor independently changing objects and react whenever a predefined relateion between the objects occurred. In the <b>Squares Monitoring Task</b>, dots are changing their position in a 10x10 grid every 2s. The task is to press the spacebar whenever four dots formed a square. In the <b>Digits Monitoring Task</b>, three-digit numbers are presented in a 3x3 grid, one of which changes every 2s. The task is to press the spacebar whenever the last digit of three numbers in a row, column or on a diagonal was identical.
+</p>
+
+<ul id="docPageNav">
+  <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('module')">Module</a></li>
+  <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('fig')">Squares Monitoring Task</a></li>
+  <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('num')">Digits Monitoring Task</a></li>
+  <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('download')">Download</a></li>
+</ul>
+
+<hr class="hr-red">
+
+<h3 id="module">Module<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
+<p>The following modules comprise the tasks alongside their instructions:
+  <ul class="docContentList">
+    <li>Squares Monitoring Task: <a href="https://raw.githubusercontent.com/tatool/tatool-web/master/app/projects/public/uzh-luco-battery/modules/de_luco_monitoring_fig.json" target="_blank">de_luco_monitoring_fig.json</a></li>
+    <li>Digits Monitoring Task: <a href="https://raw.githubusercontent.com/tatool/tatool-web/master/app/projects/public/uzh-luco-battery/modules/de_luco_monitoring_num.json" target="_blank">de_luco_monitoring_num.json</a></li>
+  </ul>
+</p>
+
+<hr class="hr-red">
+
+<h3 id="fig">Squares Monitoring Task<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
+
+<h4>Executable</h4>
+
+<p>Use the following settings in the Module Editor for these tasks: </p>
+
+<table class="table table-condensed table-bordered">
+  <tbody>
+    <tr>
+      <td class="cellB">Project</td>
+      <td>uzh-luco-battery</td>
+    </tr>
+    <tr>
+      <td class="cellB">Executable Type</td>
+      <td>lucoMonitoringFigural</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr>
+
+<h4>Properties</h4>
+
+<p>The following Properties can be provided in the Module Editor to change the behaviour of the task (note that the default value is the one used in the publication):</p>
+
+<table class="table table-striped table-condensed table-bordered">
+  <thead>
+    <tr>
+      <th>Property Name</th>
+      <th>Property Type</th>
+      <th>Default</th>
+      <th>Mandatory</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="cellB">stimuliFile</td>
+      <td>Resource</td>
+      <td>None, see <i>Stimuli Files</i> below for options</td>
+      <td class="cellB">Yes</td>
+      <td>A stimuli file expecting stimuli according to the Tatool Stimulus definition.</td>
+    </tr>
+    <tr>
+      <td class="cellB">stimuliPath</td>
+      <td>Path</td>
+      <td>None, use the following:<br>Project: uzh-ef-battery<br>Type: stimuli</td>
+      <td class="cellB">Yes</td>
+      <td>A stimuli path where to load any resources from (stimuli images, input key images).</td>
+    </tr>
+    <tr>
+      <td class="cellB">displayEncodingDuration</td>
+      <td>String</td>
+      <td>6500</td>
+      <td>No</td>
+      <td>Timer duration in ms to display memoranda in the encoding phase.</td>
+    </tr>
+     <tr>
+      <td class="cellB">intervalEncodingDuration</td>
+      <td>String</td>
+      <td>250</td>
+      <td>No</td>
+      <td>Timer duration in ms to wait and present a blank screen before the updating phase starts.</td>
+    </tr>
+     <tr>
+      <td class="cellB">displayUpdatingDuration</td>
+      <td>String</td>
+      <td>1500</td>
+      <td>No</td>
+      <td>Timer duration in ms to wait for user feedback before stopping.</td>
+    </tr>
+     <tr>
+      <td class="cellB">intervalUpdatingDuration</td>
+      <td>String</td>
+      <td>250</td>
+      <td>No</td>
+      <td>Timer duration in ms to wait and present a blank screen before the next updating step.</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr>
+
+<h4>Stimuli Files</h4>
+
+<p>The following stimuli files were used in the publication:</p>
+
+<table class="table table-striped table-condensed table-bordered">
+  <thead>
+    <tr>
+    <th>Task</th>
+      <th>Project</th>
+      <th>Type</th>
+      <th>File Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+    <td class="cellB">Practice Trials</td>
+      <td>uzh-luco-battery</td>
+      <td>stimuli</td>
+      <td><a href="https://raw.githubusercontent.com/tatool/tatool-web/master/app/projects/public/uzh-luco-battery/stimuli/luco_monitoring_fig_practice.csv" target="_blank">luco_monitoring_fig_practice.csv</a></td>
+      <td>5 practice trials.</td>
+    </tr>
+    <tr>
+    <td class="cellB">Test Trials</td>
+      <td>uzh-luco-battery</td>
+      <td>stimuli</td>
+      <td><a href="https://raw.githubusercontent.com/tatool/tatool-web/master/app/projects/public/uzh-luco-battery/stimuli/luco_monitoring_fig.csv" target="_blank">luco_monitoring_fig.csv</a></td>
+      <td>128 test trials.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4>Instructions</h4>
+<p>The following instruction pages can be used with the Executable:</p>
+<ul class="docContentList">
+  <li>de_monitoring_fig_01.htm</li>
+  <li>de_monitoring_fig_02.htm</li>
+  <li>de_monitoring_fig_03.htm</li>
+  <li>de_monitoring_fig_04.htm</li>
+</ul>
+
+<hr class="hr-red">
+
+<h3 id="num">Digits Monitoring Task<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
+
+<h4>Executable</h4>
+
+<p>Use the following settings in the Module Editor for these tasks: </p>
+
+<table class="table table-condensed table-bordered">
+  <tbody>
+    <tr>
+      <td class="cellB">Project</td>
+      <td>uzh-luco-battery</td>
+    </tr>
+    <tr>
+      <td class="cellB">Executable Type</td>
+      <td>lucoMonitoringNumerical</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr>
+
+<h4>Properties</h4>
+
+<p>The following Properties can be provided in the Module Editor to change the behaviour of the task (note that the default value is the one used in the publication):</p>
+
+<table class="table table-striped table-condensed table-bordered">
+  <thead>
+    <tr>
+      <th>Property Name</th>
+      <th>Property Type</th>
+      <th>Default</th>
+      <th>Mandatory</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="cellB">stimuliFile</td>
+      <td>Resource</td>
+      <td>None, see <i>Stimuli Files</i> below for options</td>
+      <td class="cellB">Yes</td>
+      <td>A stimuli file expecting stimuli according to the Tatool Stimulus definition.</td>
+    </tr>
+    <tr>
+      <td class="cellB">stimuliPath</td>
+      <td>Path</td>
+      <td>None, use the following:<br>Project: uzh-ef-battery<br>Type: stimuli</td>
+      <td class="cellB">Yes</td>
+      <td>A stimuli path where to load any resources from (stimuli images, input key images).</td>
+    </tr>
+    <tr>
+      <td class="cellB">displayEncodingDuration</td>
+      <td>String</td>
+      <td>6500</td>
+      <td>No</td>
+      <td>Timer duration in ms to display memoranda in the encoding phase.</td>
+    </tr>
+     <tr>
+      <td class="cellB">intervalEncodingDuration</td>
+      <td>String</td>
+      <td>250</td>
+      <td>No</td>
+      <td>Timer duration in ms to wait and present a blank screen before the updating phase starts.</td>
+    </tr>
+     <tr>
+      <td class="cellB">displayUpdatingDuration</td>
+      <td>String</td>
+      <td>1500</td>
+      <td>No</td>
+      <td>Timer duration in ms to wait for user feedback before stopping.</td>
+    </tr>
+     <tr>
+      <td class="cellB">intervalUpdatingDuration</td>
+      <td>String</td>
+      <td>250</td>
+      <td>No</td>
+      <td>Timer duration in ms to wait and present a blank screen before the next updating step.</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr>
+
+<h4>Stimuli Files</h4>
+
+<p>The following stimuli files were used in the publication:</p>
+
+<table class="table table-striped table-condensed table-bordered">
+  <thead>
+    <tr>
+    <th>Task</th>
+      <th>Project</th>
+      <th>Type</th>
+      <th>File Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+    <td class="cellB">Practice Trials</td>
+      <td>uzh-luco-battery</td>
+      <td>stimuli</td>
+      <td><a href="https://raw.githubusercontent.com/tatool/tatool-web/master/app/projects/public/uzh-luco-battery/stimuli/luco_wm_num_practice.csv" target="_blank">luco_monitoring_num_practice.csv</a></td>
+      <td>5 practice trials.</td>
+    </tr>
+    <tr>
+    <td class="cellB">Test Trials</td>
+      <td>uzh-luco-battery</td>
+      <td>stimuli</td>
+      <td><a href="https://raw.githubusercontent.com/tatool/tatool-web/master/app/projects/public/uzh-luco-battery/stimuli/luco_wm_num.csv" target="_blank">luco_monitoring_num.csv</a></td>
+      <td>128 test trials.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4>Instructions</h4>
+<p>The following instruction pages can be used with the Executable:</p>
+<ul class="docContentList">
+  <li>de_monitoring_num_01.htm</li>
+  <li>de_monitoring_num_02.htm</li>
+  <li>de_monitoring_num_03.htm</li>
+  <li>de_monitoring_num_04.htm</li>
+</ul>
+
+<hr class="hr-red">
+
+<h3 id="download">Download<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
+
+<p>You can access the source code (Service, Controller, Template, CSS) for these Executables in our <a href="https://github.com/tatool/tatool-web/tree/master/app/projects/public/tatool/executables" target="_blank">GitHub repository</a>.</p>

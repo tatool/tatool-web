@@ -436,7 +436,7 @@ gridService.addCellAtPosition(3, data).refresh();
 
 <p><b class="red">redraw()</b> - (no return value)</p>
 
-<p>Redraws the whole grid to show all changes made to it since it was redrawn the last time. This method will redraw all cells regardless of changes and should only be used in the case where <code>refresh()</code> can't be used (e.g., resize). AAs most methods that manipulate the grid return the grid service object itself, you can chain the <code>redraw()</code> call to your previous call as in the last line in the following example:</p>
+<p>Redraws the whole grid to show all changes made to it since it was redrawn the last time. This method will redraw all cells regardless of changes and should only be used in the case where <code>refresh()</code> can't be used (e.g., resize). As most methods that manipulate the grid return the grid service object itself, you can chain the <code>redraw()</code> call to your previous call as in the last line in the following example:</p>
 
 <p><b>Example</b></p>
 <pre><code class="language-javascript">// redraw the grid

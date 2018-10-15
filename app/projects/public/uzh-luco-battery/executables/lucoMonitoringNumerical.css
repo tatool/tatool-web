@@ -1,0 +1,28 @@
+.lucoMonitoringNumerical_emptyCell, .lucoMonitoringNumerical_emptyCellStatic {
+  font-size: 300%;
+  background-color: transparent;
+  border: 1px solid #000;
+  display: table-cell;
+  vertical-align: middle;
+  margin: 0;
+  padding: 5px;
+  outline: 0px solid #000;
+}
+.lucoMonitoringNumerical_fillCell, .lucoMonitoringNumerical_fillCellStatic {
+  font-size: 300%;
+  background-color: #000;
+  border: 1px solid #000;
+  display: table-cell;
+  vertical-align: middle;
+  margin: 0;
+  padding: 5px;
+}
+.lucoMonitoringNumerical_contentCell {
+  font-size: 300%;
+  background-color: #fff;
+  border: 1px solid #000;
+  display: table-cell;
+  vertical-align: middle;
+  margin: 0;
+  padding: 5px;
+}
