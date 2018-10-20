@@ -94,11 +94,12 @@
 
 <hr>
 
-<p><b class="red">createService(stimuliPath)</b> - returns a new stimulus service object.</p>
+<p><b class="red">createService(stimuliPath, defaultVisible = false)</b> - returns a new stimulus service object.</p>
 <p>Creates a new stimulus service object that can be used to manipulate one stimulus. The parameter <code>stimuliPath</code> can be used to let the service know where to access resources (e.g., images).</p>
 
 <p><b>Parameters</b><br>
-<code>stimuliPath</code>: A Path Property object (see <a ui-sref="doc({page: 'ref-properties.html'})">Properties</a> for more details).
+<code>stimuliPath</code>: A Path Property object (see <a ui-sref="doc({page: 'ref-properties.html'})">Properties</a> for more details).<br>
+<code>defaultVisible</code>: Set <code>true</code> to change the default visibility of the stimulus to not be hidden at the start of the execution, thereby avoiding flickering of the display.
 </p>
 
 <p><b>Example</b></p>
