@@ -1,12 +1,18 @@
 'use strict';
 
 tatool
-  .factory('lucoMonitoringNumerical', [ 'executableUtils', 'dbUtils', 'timerUtils', 'gridServiceFactory', 'inputServiceFactory',
+  .factory('tatoolMonitoring', [ 'executableUtils', 'dbUtils', 'timerUtils', 'gridServiceFactory', 'inputServiceFactory',
     function (executableUtils, dbUtils, timerUtils, gridServiceFactory, inputServiceFactory) {
 
     var lucoMonitoring = executableUtils.createExecutable();
 
     var DISPLAY_DURATION_DEFAULT = 2000;
+
+    var GRID_ROWS_DEFAULT = 3;
+    var GRID_COLS_DEFAULT = 3;
+
+    var CELL_HEIGHT_DEFAULT = 150;
+    var CELL_WIDTH_DEFAULT = 150;
 
     //  Initialze variables at the start of every session
     lucoMonitoring.prototype.init = function() {
@@ -25,17 +31,22 @@ tatool
       }
       
       if (!this.stimuliPath) {
-        deferred.reject('Invalid property settings for Executable lucoMonitoringNumerical. Expected property <b>stimuliPath</b> of type Path.');
+        deferred.reject('Invalid property settings for Executable tatoolMonitoring. Expected property <b>stimuliPath</b> of type Path.');
       }
 
+      // grid properties
+      this.gridRows = (this.gridRows ) ? this.gridRows : GRID_ROWS_DEFAULT;
+      this.gridCols = (this.gridCols ) ? this.gridCols : GRID_COLS_DEFAULT;
+      this.cellHeight = (this.cellHeight ) ? this.cellHeight : CELL_HEIGHT_DEFAULT;
+      this.cellWidth = (this.cellWidth ) ? this.cellWidth : CELL_WIDTH_DEFAULT;
+
       // template properties
-      this.mainGridService = gridServiceFactory.createService(3, 3, 'mainGrid', this.stimuliPath);
+      this.mainGridService = gridServiceFactory.createService(this.gridRows, this.gridCols, 'mainGrid', this.stimuliPath, true);
       this.inputService = inputServiceFactory.createService(this.stimuliPath);
 
       // timing properties
       this.displayDuration = (this.displayDuration ) ? this.displayDuration : DISPLAY_DURATION_DEFAULT;
       this.timer = timerUtils.createTimer(this.displayDuration, true, this);
-
       // trial counter property
       this.counter = 0;
 
@@ -48,7 +59,7 @@ tatool
             deferred.reject('Resource not found: ' + self.stimuliFile.resourceName);
           });
       } else {
-        deferred.reject('Invalid property settings for Executable lucoMonitoringNumerical. Expected property <b>stimuliFile</b> of type Resource.');
+        deferred.reject('Invalid property settings for Executable tatoolMonitoring. Expected property <b>stimuliFile</b> of type Resource.');
       }
 
       return deferred;
@@ -56,31 +67,10 @@ tatool
 
     // process stimuli file according to randomisation property
     lucoMonitoring.prototype.processStimuliFile = function(list, deferred) {
-      if (this.randomisation === 'full-condition') {
-        this.stimuliList = this.splitStimuliList(list);
-      } else if (this.randomisation === 'full') {
-        this.stimuliList = executableUtils.shuffle(list);
-      } else {
-        this.stimuliList = list;
-      }
-
+      this.stimuliList = list;
       this.totalStimuli = list.length;
       this.setupInputKeys(list);
       deferred.resolve();
-    };
-
-    // Splitting the stimuliList according to stimulusType for full-condition and randomise
-    lucoMonitoring.prototype.splitStimuliList = function(list) {
-      var newList = {};
-      for (var i = 0; i < list.length; i++) {
-        var stimulusType = list[i].stimulusType; 
-        if(!newList[stimulusType]) {
-          newList[stimulusType] = [];
-        }
-        newList[stimulusType].push(list[i]);
-      }
-
-      return newList;
     };
 
     // Adding keyInputs and show by default
@@ -88,7 +78,7 @@ tatool
       var keys = this.inputService.addInputKeys(list, !this.showKeys.propertyValue);
 
       if (keys.length === 0) {
-        executableUtils.fail('Error creating input template for Executable lucoMonitoringNumerical. No keyCode provided in stimuliFile.');
+        executableUtils.fail('Error creating input template for Executable tatoolMonitoring. No keyCode provided in stimuliFile.');
       }
     };
 
@@ -113,18 +103,11 @@ tatool
       this.trial.reactionTime = 0;
       this.trial.score = null;
 
-      // pick stimulus to display
-      this.stimulus = null;
-      if (this.randomisation === 'full-condition') {
-        this.stimulus = this.createRandomConditionStimulus();
-      } else if (this.randomisation === 'full') {
-        this.stimulus = this.createRandomStimulus();
-      } else {
-        this.stimulus = this.createNonRandomStimulus();
-      }
+      // pick next stimulus to display
+      this.stimulus = executableUtils.getNext(this.stimuliList, this.counter);
 
       if (this.stimulus === null) {
-        executableUtils.fail('Error creating stimulus in Executable lucoMonitoringNumerical. No more stimuli available in current stimuliList.');
+        executableUtils.fail('Error creating stimulus in Executable tatoolMonitoring. No more stimuli available in current stimuliList.');
       } else {
         this.trial.stimulusValue = this.stimulus.stimulusValue;
         this.trial.stimulusType = this.stimulus.stimulusType;
@@ -142,27 +125,6 @@ tatool
           gridCellClass: this.stimulus['gridCellClass' + i]
         });
       }
-    };
-
-    lucoMonitoring.prototype.createRandomConditionStimulus = function() {
-      // get random stimuliType with replacement
-      var stimuliType = executableUtils.getRandomReplace(this.stimuliList);
-
-      // get random stimulus out of selected stimuliType
-      var  randomStimulus = executableUtils.getRandomReplace(stimuliType);
-      return randomStimulus;
-    };
-
-    lucoMonitoring.prototype.createRandomStimulus = function() {
-      // get random stimulus out of selected stimuliType
-      var  randomStimulus = executableUtils.getNext(this.stimuliList, this.counter);
-      return randomStimulus;
-    };
-
-    lucoMonitoring.prototype.createNonRandomStimulus = function() {
-      // get stimulus next replacement
-      var nonRandomStimulus = executableUtils.getNext(this.stimuliList, this.counter);
-      return nonRandomStimulus;
     };
 
     // Process given response and stop executable

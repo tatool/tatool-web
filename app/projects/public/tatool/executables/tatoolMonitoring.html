@@ -2,12 +2,11 @@
   <tatool-grid   id="centeredExecutable"
     service="mainGridService"
     gridSpacing="0"
-    cellWidth="150"
-    cellHeight="150"
-    cellClass="lucoMonitoringNumerical_emptyCell"
+    cellClass="tatoolMonitoring_emptyCell"
+    cellHeight="{{cellHeight}}"
+    cellWidth="{{cellWidth}}"
     allowDrag="no"
-    allowDrop="no"
-    gridClick="userClick(cell, timing, $event)">
+    allowDrop="no">
   </tatool-grid>
 
   <tatool-input id="bottomExecutable" service="inputService" userInput="inputAction(input, timing, event)"></tatool-input>

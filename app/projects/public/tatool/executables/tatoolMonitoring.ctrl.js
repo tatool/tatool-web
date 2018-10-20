@@ -1,11 +1,14 @@
 'use strict';
 
 tatool
-  .controller('lucoMonitoringNumericalCtrl', [ '$scope', 'service',
+  .controller('tatoolMonitoringCtrl', [ '$scope', 'service',
     function ($scope, service) {
 
     // Make the stimulus service available for the <tatool-stimulus> directive
     $scope.mainGridService = service.mainGridService;
+    $scope.cellHeight = service.cellHeight;
+    $scope.cellWidth = service.cellWidth;
+
     // Make the input service available for the <tatool-input> directive
     $scope.inputService = service.inputService;
 
