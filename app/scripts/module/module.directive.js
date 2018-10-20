@@ -366,7 +366,7 @@ function TatoolGrid($log, $templateCache, cfgModule, executableUtils) {
     link: function (scope, element, attr) {
 
       // hide by default
-      scope.show = false;
+      scope.show = scope.service.gridVisible;
 
       // set table styling
       scope.tableStyle = {};

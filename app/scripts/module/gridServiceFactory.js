@@ -7,10 +7,11 @@ function GridServiceFactory($log, $rootScope, executableUtils) {
     // Define our executable service constructor which will be called once for every instance
     var gridServiceFactory = {};
 
-    gridServiceFactory.createService = function(rows, cols, gridId, stimuliPath) {
+    gridServiceFactory.createService = function(rows, cols, gridId, stimuliPath, defaultVisible = false) {
       var grid = new Grid(gridId);
       grid.resize(rows, cols);
       grid.stimuliPath = stimuliPath ? stimuliPath : '';
+      grid.gridVisible = defaultVisible;
       return grid;
     };
 

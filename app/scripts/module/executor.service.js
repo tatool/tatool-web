@@ -225,7 +225,7 @@ function ExecutorService($log, $location, $q, $state, $timeout, $injector, $wind
       $window.focus();
       
       if ($state.is('module', params)) {
-        $state.forceReload();
+        $state.reload();
       } else {
         $state.go('module', params, {location: false});
       }
