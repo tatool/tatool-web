@@ -11,7 +11,7 @@ function GridServiceFactory($log, $rootScope, executableUtils) {
       var grid = new Grid(gridId);
       grid.resize(rows, cols);
       grid.stimuliPath = stimuliPath ? stimuliPath : '';
-      grid.gridVisible = defaultVisible;
+      grid.displayVisible = defaultVisible;
       return grid;
     };
 

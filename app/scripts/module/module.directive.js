@@ -79,7 +79,7 @@ function TatoolInput($log, $templateCache, $compile, $timeout, executableUtils) 
 
       // hide and disable by default
       scope.inputEnabled = false;
-      scope.show = false;
+      scope.show = scope.service.displayVisible;
       $('#tatoolInputText').attr('disabled', true);
 
       // add key directives for dynamically added keys in correct order
@@ -262,7 +262,7 @@ function TatoolStimulus($log, $templateCache, $timeout, $q, cfgModule, executabl
     link: function (scope, element) {
 
       // hide by default
-      scope.show = false;
+      scope.show = scope.service.displayVisible;
       scope.stimulus = scope.service;
       var videoPlayer = null;
       var audioPlayer = null;
@@ -366,7 +366,7 @@ function TatoolGrid($log, $templateCache, cfgModule, executableUtils) {
     link: function (scope, element, attr) {
 
       // hide by default
-      scope.show = scope.service.gridVisible;
+      scope.show = scope.service.displayVisible;
 
       // set table styling
       scope.tableStyle = {};

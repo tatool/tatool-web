@@ -10,9 +10,10 @@ function InputServiceFactory(executableUtils) {
 
     var inputServiceFactory = {};
 
-    inputServiceFactory.createService = function(stimuliPath) {
+    inputServiceFactory.createService = function(stimuliPath, defaultVisible = false) {
       var input = new Input();
       input.stimuliPath = stimuliPath ? stimuliPath : '';
+      input.displayVisible = defaultVisible;
       return input;
     };
 

@@ -6,9 +6,10 @@ function StimulusServiceFactory($log, $sce, executableUtils) {
 
     var stimulusServiceFactory = {};
 
-    stimulusServiceFactory.createService = function(stimuliPath) {
+    stimulusServiceFactory.createService = function(stimuliPath, defaultVisible = false) {
       var stimulus = new Stimulus();
       stimulus.stimuliPath = stimuliPath ? stimuliPath : '';
+      stimulus.displayVisible = defaultVisible;
       return stimulus;
     };
 
