@@ -48,7 +48,7 @@ tatool
             deferred.reject('Resource not found: ' + self.stimuliFile.resourceName);
           });
       } else {
-        deferred.reject('Invalid property settings for Executable tatoollucoMonitoring. Expected property <b>stimuliFile</b> of type Resource.');
+        deferred.reject('Invalid property settings for Executable lucoMonitoringFigural. Expected property <b>stimuliFile</b> of type Resource.');
       }
 
       return deferred;
@@ -88,7 +88,7 @@ tatool
       var keys = this.inputService.addInputKeys(list, !this.showKeys.propertyValue);
 
       if (keys.length === 0) {
-        executableUtils.fail('Error creating input template for Executable tatoollucoMonitoring. No keyCode provided in stimuliFile.');
+        executableUtils.fail('Error creating input template for Executable lucoMonitoringFigural. No keyCode provided in stimuliFile.');
       }
     };
 
@@ -124,7 +124,7 @@ tatool
       }
 
       if (stimulus === null) {
-        executableUtils.fail('Error creating stimulus in Executable tatoollucoMonitoring. No more stimuli available in current stimuliList.');
+        executableUtils.fail('Error creating stimulus in Executable lucoMonitoringFigural. No more stimuli available in current stimuliList.');
       } else {
         this.trial.stimulusValue = stimulus.stimulusValue;
         this.trial.stimulusType = stimulus.stimulusType;

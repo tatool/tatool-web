@@ -25,7 +25,7 @@ tatool
       }
       
       if (!this.stimuliPath) {
-        deferred.reject('Invalid property settings for Executable lucoMonitoringFigural. Expected property <b>stimuliPath</b> of type Path.');
+        deferred.reject('Invalid property settings for Executable lucoMonitoringNumerical. Expected property <b>stimuliPath</b> of type Path.');
       }
 
       // template properties
@@ -48,7 +48,7 @@ tatool
             deferred.reject('Resource not found: ' + self.stimuliFile.resourceName);
           });
       } else {
-        deferred.reject('Invalid property settings for Executable lucoMonitoring. Expected property <b>stimuliFile</b> of type Resource.');
+        deferred.reject('Invalid property settings for Executable lucoMonitoringNumerical. Expected property <b>stimuliFile</b> of type Resource.');
       }
 
       return deferred;
@@ -88,14 +88,12 @@ tatool
       var keys = this.inputService.addInputKeys(list, !this.showKeys.propertyValue);
 
       if (keys.length === 0) {
-        executableUtils.fail('Error creating input template for Executable lucoMonitoring. No keyCode provided in stimuliFile.');
+        executableUtils.fail('Error creating input template for Executable lucoMonitoringNumerical. No keyCode provided in stimuliFile.');
       }
     };
 
     // Create stimulus and set properties
     lucoMonitoring.prototype.createStimulus = function() {
-      this.mainGridService.clear().refresh();
-
       // reset executable properties
       this.startTime = 0;
       this.endTime = 0;
@@ -126,7 +124,7 @@ tatool
       }
 
       if (this.stimulus === null) {
-        executableUtils.fail('Error creating stimulus in Executable lucoMonitoring. No more stimuli available in current stimuliList.');
+        executableUtils.fail('Error creating stimulus in Executable lucoMonitoringNumerical. No more stimuli available in current stimuliList.');
       } else {
         this.trial.stimulusValue = this.stimulus.stimulusValue;
         this.trial.stimulusType = this.stimulus.stimulusType;
@@ -144,8 +142,6 @@ tatool
           gridCellClass: this.stimulus['gridCellClass' + i]
         });
       }
-
-      this.mainGridService.refresh();
     };
 
     lucoMonitoring.prototype.createRandomConditionStimulus = function() {
@@ -189,7 +185,6 @@ tatool
       }
       dbUtils.saveTrial(this.trial).then(executableUtils.stop);
       console.log("endTask");
-      //service.mainGridService.clear().refresh();
     };
 
     return lucoMonitoring;

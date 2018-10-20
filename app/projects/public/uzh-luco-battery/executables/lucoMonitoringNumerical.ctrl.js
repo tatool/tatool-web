@@ -16,6 +16,8 @@ tatool
       service.createStimulus();
       service.setStimulus();
 
+      service.mainGridService.refresh();
+
       service.inputService.enable();
 
       if (service.showKeys.propertyValue === true) {
