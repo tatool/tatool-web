@@ -23,12 +23,6 @@ tatool
       } else {
         this.showKeys.propertyValue = (this.showKeys.propertyValue === true) ? true : false;
       }
-
-      if (!this.timerEnabled) {
-        this.timerEnabled = { propertyValue: false };
-      } else {
-        this.timerEnabled.propertyValue = (this.timerEnabled.propertyValue === true) ? true : false;
-      }
       
       if (!this.stimuliPath) {
         deferred.reject('Invalid property settings for Executable tatoolMonitoring. Expected property <b>stimuliPath</b> of type Path.');
@@ -92,9 +86,6 @@ tatool
       // reset counter to 0 if > no. of total stimuli
       if (this.counter >= this.totalStimuli) {
         this.counter = 0;
-        if (this.randomisation === 'full') {
-          this.stimuliList = executableUtils.shuffle(this.stimuliList);
-        }
       }
 
       // create new trial
