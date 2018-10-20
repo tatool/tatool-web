@@ -20,12 +20,6 @@ tatool
         this.showKeys.propertyValue = (this.showKeys.propertyValue === true) ? true : false;
       }
 
-      if (!this.timerEnabled) {
-        this.timerEnabled = { propertyValue: false };
-      } else {
-        this.timerEnabled.propertyValue = (this.timerEnabled.propertyValue === true) ? true : false;
-      }
-      
       if (!this.stimuliPath) {
         deferred.reject('Invalid property settings for Executable tatoolListSwitching. Expected property <b>stimuliPath</b> of type Path.');
       }
