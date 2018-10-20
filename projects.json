@@ -90,26 +90,22 @@
 					{ "propertyName": "displayDuration" },
 					{ "propertyName": "intervalDuration" }
 				] },
-				{
-      			"customProperties":[
-         {
-            "propertyName":"stimuliPath",
-            "propertyType":"Path"
-         },
-         {
-            "propertyName":"stimuliFile",
-            "propertyType":"Resource"
-         },
-         {
-            "propertyName":"displayDuration"
-         },
-         {
-            "propertyName":"intervalDuration"
-         }
-      ],
-      "description":"Local recognition / binding task from Guye & von Bastian, 2017",
-      "customType":"tatoolLocalRecognition"
-   }
+				{ "customType":"tatoolLocalRecognition", "description":"Local recognition / binding task from Guye & von Bastian, 2017", "customProperties":[
+        			{ "propertyName": "stimuliPath", "propertyType":"Path" },
+         			{ "propertyName": "stimuliFile", "propertyType":"Resource" },
+         			{ "propertyName": "displayDuration" },
+         			{ "propertyName": "intervalDuration" }
+      			] },
+				{ "customType":"tatoolMonitoring", "description":"Monitoring Task", "customProperties":[
+        			{ "propertyName": "stimuliPath", "propertyType":"Path" },
+         			{ "propertyName": "stimuliFile", "propertyType":"Resource" },
+         			{ "propertyName": "showKeys", "propertyType": "Boolean" },
+         			{ "propertyName": "displayDuration" },
+         			{ "propertyName": "gridRows" },
+         			{ "propertyName": "gridCols" },
+         			{ "propertyName": "cellHeight" },
+         			{ "propertyName": "cellWidth" }
+      			] }
 			]
 		},
 		{ 
