@@ -121,6 +121,8 @@ tatool
     // Process given response and stop executable
     lucoMonitoring.prototype.processResponse = function(givenResponse) {
       this.trial.reactionTime = this.endTime - this.startTime;
+      console.log(this.endTime);
+      console.log(this.startTime);
       this.trial.givenResponse = givenResponse;
       
       if (this.trial.correctResponse == this.trial.givenResponse) {

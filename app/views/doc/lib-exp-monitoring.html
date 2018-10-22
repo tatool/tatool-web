@@ -1,7 +1,7 @@
 <p><a ui-sref="doc({page: 'lib-exp.html'})">Experimental Tasks</a></p>
-<h2>Local Recognition</h2>
+<h2>Monitoring</h2>
 
-<p>In this paradigm (modelled after <a href="http://psycnet.apa.org/record/2005-09704-005" target="_blank">Oberauer, 2005</a>), participants have to memorise items and their current context (e.g., object at specific locations in a grid). After memorisation, participants are probed with matches (i.e., items that have been presented in that context), distractors (i.e., items that haven't been presented in the current trial at all), or lures (i.e., items that have been presented in a different context). This setup allows for disentangling recognition of items from recognition of item-to-context binding. Local recognition tasks are, therefore, sometimes also referred to as <i>binding</i> tasks (e.g., <a href="http://dx.doi.org/10.1037/xge0000453" target="_blank">De Simoni &amp; von Bastian, 2018</a>; <a href="http://dx.doi.org/10.1016/j.jml.2013.02.002" target="_blank">von Bastian &amp; Oberauer, 2013</a>).</p>
+<p>In this paradigm (modelled after <a href="https://doi.org/10.1016/S0160-2896(02)00115-0" target="_blank">Oberauer, S&uuml;&szlig; Wilhelm, &amp; Wittman, 2003</a>), participants have to monitor constantly changing elements and react whenever a critical relation between those elements occurs (e.g., three rhyming words appear in a row, column, or diagonal of a matrix).</p>
 
 <ul id="docPageNav">
   <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('executable')">Executable</a></li>
@@ -24,7 +24,7 @@
     </tr>
     <tr>
       <td class="cellB">Executable Type</td>
-      <td>tatoolLocalRecognition</td>
+      <td>tatoolMonitoring</td>
     </tr>
   </tbody>
 </table>
@@ -73,14 +73,35 @@
       <td>String</td>
       <td>2000</td>
       <td>No</td>
-      <td>Timer duration in ms for display of a single memorandum.</td>
+      <td>Timer duration in ms for display of a single trial.</td>
     </tr>
     <tr>
-      <td class="cellB">intervalDuration</td>
+      <td class="cellB">gridRows</td>
       <td>String</td>
-      <td>2000</td>
+      <td>3</td>
       <td>No</td>
-      <td>Timer duration in ms for interval between memorandum.</td>
+      <td>Number of rows to show in grid.</td>
+    </tr>
+    <tr>
+      <td class="cellB">gridCols</td>
+      <td>String</td>
+      <td>3</td>
+      <td>No</td>
+      <td>Number of columns to show in grid.</td>
+    </tr>
+    <tr>
+      <td class="cellB">cellHeight</td>
+      <td>String</td>
+      <td>150</td>
+      <td>No</td>
+      <td>Height of each cell.</td>
+    </tr>
+    <tr>
+      <td class="cellB">cellWidth</td>
+      <td>String</td>
+      <td>150</td>
+      <td>No</td>
+      <td>Width of each cell.</td>
     </tr>
   </tbody>
 </table>
@@ -105,20 +126,20 @@
   </thead>
   <tbody>
     <tr>
-	  <td class="cellB">Local Recognition Grid</td>
+	  <td class="cellB">Squares Monitoring</td>
       <td>tatool-stimuli</td>
       <td>stimuli</td>
-      <td><a href="https://raw.githubusercontent.com/tatool/tatool-web/master/app/projects/public/tatool-stimuli/stimuli/localRecognition_grid.csv" target="_blank">localRecognition_grid.csv</a><br>
-        <a href="https://raw.githubusercontent.com/tatool/tatool-web/master/app/projects/public/tatool-stimuli/stimuli/localRecognition_grid_practice.csv" target="_blank">localRecognition_grid_practice.csv</a></td>
-      <td>Display of 2-5 coloured triangles shown in a 5x5 grid.</td>
+      <td><a href="https://raw.githubusercontent.com/tatool/tatool-web/master/app/projects/public/uzh-luco-battery/stimuli/luco_monitoring_fig.csv" target="_blank">luco_monitoring_fig.csv</a><br>
+        <a href="https://raw.githubusercontent.com/tatool/tatool-web/master/app/projects/public/uzh-luco-battery/stimuli/luco_monitoring_fig_practice.csv" target="_blank">luco_monitoring_fig_practice.csv</a></td>
+      <td>Monitor changing dot patterns in a 10x10 grid to detect a square.</td>
     </tr>
     <tr>
-    <td class="cellB">Local Recognition Row</td>
+    <td class="cellB">Digits Monitoring</td>
       <td>tatool-stimuli</td>
       <td>stimuli</td>
-      <td><a href="https://raw.githubusercontent.com/tatool/tatool-web/master/app/projects/public/tatool-stimuli/stimuli/localRecognition_rows.csv" target="_blank">localRecognition_rows.csv</a><br>
-        <a href="https://raw.githubusercontent.com/tatool/tatool-web/master/app/projects/public/tatool-stimuli/stimuli/localRecognition_rows_practice.csv" target="_blank">localRecognition_rows_practice.csv</a></td>
-      <td>Display of 2-4 fractal images in a row of 2-4 columns.</td>
+      <td><a href="https://raw.githubusercontent.com/tatool/tatool-web/master/app/projects/public/uzh-luco-battery/stimuli/luco_wm_num.csv" target="_blank">luco_wm_num.csv</a><br>
+        <a href="https://raw.githubusercontent.com/tatool/tatool-web/master/app/projects/public/uzh-luco-battery/stimuli/luco_wm_num_practice.csv" target="_blank">luco_wm_num_practice.csv</a></td>
+      <td>Monitor changing numbers in a 3x3 grid to detect when the last digits of 3 numbers in a row, column or on the diagonal are identical.</td>
     </tr>
   </tbody>
 </table>
@@ -139,25 +160,13 @@
       <td class="cellB">stimulusCount</td>
       <td>(String)</td>
       <td class="cellB">Yes</td>
-      <td>Number of memoranda/probes for this trial.</td>
-    </tr>
-    <tr>
-      <td class="cellB">gridRows</td>
-      <td>(String)</td>
-      <td class="cellB">Yes</td>
-      <td>Number of rows to show in grid.</td>
-    </tr>
-    <tr>
-      <td class="cellB">gridCols</td>
-      <td>(String)</td>
-      <td class="cellB">Yes</td>
-      <td>Number of columns to show in grid.</td>
+      <td>Number of filled cells in this trial.</td>
     </tr>
     <tr>
       <td class="cellB">stimulusValue[n]</td>
       <td>(String)/(Image Filename)</td>
       <td class="cellB">Yes</td>
-      <td>Value to display on screen. Can either be text or an image filename.</td>
+      <td>Value to display on screen. Can be either text or an image filename.</td>
     </tr>
     <tr>
       <td class="cellB">stimulusValueType[n]</td>
@@ -166,61 +175,49 @@
       <td>The internal Tatool stimulus value type for Tatool to know how to display it.</td>
     </tr>
     <tr>
-      <td class="cellB">stimulusGridPosition[n]</td>
+      <td class="cellB">gridPosition[n]</td>
       <td>(String)</td>
       <td class="cellB">Yes</td>
-      <td>The grid position for this memorandum.</td>
+      <td>The grid position for this item.</td>
     </tr>
     <tr>
-      <td class="cellB">probeValue[n]</td>
+      <td class="cellB">gridCellClass[n]</td>
       <td>(String)/(Image Filename)</td>
       <td class="cellB">Yes</td>
-      <td>Value to display on screen. Can either be text or an image filename.</td>
+      <td>Styling of this cell. Can be either <code>tatoolMonitoring_bgBlackCell</code> for a black background (e.g., to highlight specific cells), or <code>tatoolMonitoring_bgWhiteCell</code> for a white background (e.g., when displaying text).</td>
     </tr>
     <tr>
-      <td class="cellB">probeValueType[n]</td>
-      <td>text/image/circle/square</td>
-      <td class="cellB">Yes</td>
-      <td>The internal Tatool stimulus value type for Tatool to know how to display it.</td>
-    </tr>
-    <tr>
-      <td class="cellB">probeGridPosition[n]</td>
+      <td class="cellB">stimulusType</td>
       <td>(String)</td>
       <td class="cellB">Yes</td>
-      <td>The grid position for this probe.</td>
+      <td>Condition of this trial, can be used to keep track of trials and runs.</td>
     </tr>
     <tr>
-      <td class="cellB">probeType[n]</td>
-      <td>(String)</td>
-      <td class="cellB">match/intrusion/distractor</td>
-      <td>The type of this probe.</td>
-    </tr>
-    <tr>
-      <td class="cellB">keyCount</td>
+      <td class="cellB">correctResponse</td>
       <td>(String)</td>
       <td class="cellB">Yes</td>
-      <td>Number of keys to be added for this stimuli.</td>
+      <td>Correct response of this trial.</td>
     </tr>
     <tr>
-      <td class="cellB">keyCode[n]</td>
+      <td class="cellB">keyCode</td>
       <td>(KeyCode)</td>
       <td class="cellB">Yes</td>
-      <td>The correct <code>keyCode</code> to press from the list of available <code>KeyCodes</code> (see <a ui-sref="doc({page: 'ref-directive-tatoolInput.html'})">Tatool Input Service</a>).</td>
+      <td>The <code>keyCode</code> to press from the list of available <code>KeyCodes</code> (see <a ui-sref="doc({page: 'ref-directive-tatoolInput.html'})">Tatool Input Service</a>) whenever the critical relation occurs.</td>
     </tr>
     <tr>
-      <td class="cellB">keyLabel[n]</td>
+      <td class="cellB">keyLabel</td>
       <td>(String)/(Image Filename)</td>
       <td>No</td>
       <td>An alternative label to display on the input key. Can either be text or an image filename.</td>
     </tr>
     <tr>
-      <td class="cellB">keyLabelType[n]</td>
+      <td class="cellB">keyLabelType</td>
       <td>text/image</td>
       <td>No</td>
       <td>The internal Tatool key label type for Tatool to know how to display it.</td>
     </tr>
     <tr>
-      <td class="cellB">response[n]</td>
+      <td class="cellB">response</td>
       <td>(String)</td>
       <td class="cellB">Yes</td>
       <td>Response value assigned to this key.</td>

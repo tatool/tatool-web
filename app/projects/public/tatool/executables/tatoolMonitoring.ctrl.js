@@ -15,10 +15,11 @@ tatool
     // Start execution
     $scope.start = function() {
       service.mainGridService.clear();
-      service.startTime = service.mainGridService.show();
+      
       service.createStimulus();
       service.setStimulus();
 
+      service.startTime = service.mainGridService.show();
       service.mainGridService.refresh();
 
       service.inputService.enable();
