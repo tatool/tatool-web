@@ -1,0 +1,17 @@
+type,run,trial,phase,listType,gridRows,gridCols,stimulusCount,stimulusValue1,stimulusValueType1,stimulusGridPosition1,gridCellClass1,stimulusValue2,stimulusValueType2,stimulusGridPosition2,gridCellClass2,probeType,correctResponse,listSwitch,objectSwitch,keyCode1,keyLabel1,keyLabelType1,response1,keyCode2,keyLabel2,keyLabelType2,response2
+2,1,0,0,0,1,1,1,!!!,text,1,warningCell,,,,,,,,,,,,,,,,
+2,1,0,1,1,1,2,2,diamondfilled.png,image,1,greenCell,hexagonempty.png,image,2,greenCell,,,,,,,,,,,,
+2,1,0,1,2,1,2,2,tearempty.png,image,1,magentaCell,moonfilled.png,image,2,magentaCell,,,,,,,,,,,,
+2,1,1,2,1,1,2,2,,text,1,greenCell,hexagonempty.png,image,2,greenCell,1,1,2,2,ArrowLeft,de_key_yes.png,image,1,ArrowRight,de_key_no.png,image,0
+2,1,2,2,2,1,2,2,,text,1,magentaCell,tearempty.png,image,2,magentaCell,2,0,1,0,ArrowLeft,de_key_yes.png,image,1,ArrowRight,de_key_no.png,image,0
+2,1,3,2,2,1,2,2,,text,1,magentaCell,moonfilled.png,image,2,magentaCell,1,1,0,0,ArrowLeft,de_key_yes.png,image,1,ArrowRight,de_key_no.png,image,0
+2,1,4,2,1,1,2,2,diamondfilled.png,image,1,greenCell,,text,2,greenCell,1,1,1,1,ArrowLeft,de_key_yes.png,image,1,ArrowRight,de_key_no.png,image,0
+2,1,5,2,2,1,2,2,,text,1,magentaCell,moonfilled.png,image,2,magentaCell,1,1,1,1,ArrowLeft,de_key_yes.png,image,1,ArrowRight,de_key_no.png,image,0
+2,1,6,2,2,1,2,2,,text,1,magentaCell,tearempty.png,image,2,magentaCell,2,0,0,0,ArrowLeft,de_key_yes.png,image,1,ArrowRight,de_key_no.png,image,0
+2,1,7,2,2,1,2,2,tearempty.png,image,1,magentaCell,,text,2,magentaCell,1,1,0,1,ArrowLeft,de_key_yes.png,image,1,ArrowRight,de_key_no.png,image,0
+2,1,8,2,1,1,2,2,diamondfilled.png,image,1,greenCell,,text,2,greenCell,1,1,1,0,ArrowLeft,de_key_yes.png,image,1,ArrowRight,de_key_no.png,image,0
+2,1,9,2,2,1,2,2,,text,1,magentaCell,diamondempty.png,image,2,magentaCell,3,0,1,1,ArrowLeft,de_key_yes.png,image,1,ArrowRight,de_key_no.png,image,0
+2,1,10,2,2,1,2,2,,text,1,magentaCell,tearfilled.png,image,2,magentaCell,3,0,0,0,ArrowLeft,de_key_yes.png,image,1,ArrowRight,de_key_no.png,image,0
+2,1,11,2,1,1,2,2,,text,1,greenCell,hexagonempty.png,image,2,greenCell,1,1,1,0,ArrowLeft,de_key_yes.png,image,1,ArrowRight,de_key_no.png,image,0
+2,1,12,2,1,1,2,2,hexagonempty.png,image,1,greenCell,,text,2,greenCell,2,0,0,1,ArrowLeft,de_key_yes.png,image,1,ArrowRight,de_key_no.png,image,0
+2,1,13,2,1,1,2,2,,text,1,greenCell,starempty.png,image,2,greenCell,3,0,0,1,ArrowLeft,de_key_yes.png,image,1,ArrowRight,de_key_no.png,image,0

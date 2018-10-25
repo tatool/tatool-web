@@ -3,6 +3,8 @@
 
 <p>This set of tasks measures working memory with the list-switching paradigm modelled after <a href="https://doi.org/10.1016/j.cogpsych.2012.11.001" target="_blank">Oberauer, Souza, Druey, &amp; Gade (2013)</a> (see also <a href="http://dx.doi.org/10.3758/s13421-016-0645-4" target="_blank">Gade, Souza, Druey, &amp; Oberauer, 2017</a>; <a href="http://dx.doi.org/10.1037/0278-7393.31.4.714" target="_blank">Oberauer, 2005</a>). Two lists of items are presented that have to be retained in working memory. After memorisation of the lists, a series of probes is presented. The task is to indicate for each probe whether it was presented at that particular position in that particular list. In the <b>Figural List-Switching Task</b>, stimuli are filled or transparent simple shapes. In the <b>Numerical List-Switching Task</b>, stimuli are numbers which additionally have to be continuously updated according to simple arithmetic operations.
 </p>
+<p>
+In the published version of the test battery, the tasks follow a sandwich design with 3 blocks each. In the first single-list block, each of the lists is presented separately, followed by a mixed-lists block in which the two lists switch unpredictably. After the mixed-lists block, another single-list block is completed.</p>
 
 <ul id="docPageNav">
   <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('module')">Module</a></li>
@@ -69,37 +71,41 @@
     <tr>
       <td class="cellB">stimuliPath</td>
       <td>Path</td>
-      <td>None, use the following:<br>Project: uzh-ef-battery<br>Type: stimuli</td>
+      <td>None, use the following:<br>Project: uzh-luco-battery<br>Type: stimuli</td>
       <td class="cellB">Yes</td>
       <td>A stimuli path where to load any resources from (stimuli images, input key images).</td>
     </tr>
     <tr>
-      <td class="cellB">displayEncodingDuration</td>
+      <td class="cellB">showKeys</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td class="cellB">warningDuration</td>
       <td>String</td>
-      <td>6500</td>
+      <td>1000</td>
       <td>No</td>
-      <td>Timer duration in ms to display memoranda in the encoding phase.</td>
+      <td>Timer duration in ms to display a cue indicating the encoding phase.</td>
     </tr>
      <tr>
-      <td class="cellB">intervalEncodingDuration</td>
+      <td class="cellB">encodingDuration</td>
+      <td>String</td>
+      <td>2400</td>
+      <td>No</td>
+      <td>Timer duration in ms to display the memoranda.</td>
+    </tr>
+    <tr>
+      <td class="cellB">cueDuration</td>
+      <td>String</td>
+      <td>150</td>
+      <td>No</td>
+    <td>Timer duration in ms to display a cue indicating the next probe's position.</td>
+    </tr>
+     <tr>
+      <td class="cellB">blankDuration</td>
       <td>String</td>
       <td>250</td>
       <td>No</td>
-      <td>Timer duration in ms to wait and present a blank screen before the updating phase starts.</td>
-    </tr>
-     <tr>
-      <td class="cellB">displayUpdatingDuration</td>
-      <td>String</td>
-      <td>1500</td>
-      <td>No</td>
-      <td>Timer duration in ms to wait for user feedback before stopping.</td>
-    </tr>
-     <tr>
-      <td class="cellB">intervalUpdatingDuration</td>
-      <td>String</td>
-      <td>250</td>
-      <td>No</td>
-      <td>Timer duration in ms to wait and present a blank screen before the next updating step.</td>
+      <td>Timer duration in ms to wait and present a blank screen before the next probe appears.</td>
     </tr>
   </tbody>
 </table>
@@ -122,18 +128,39 @@
   </thead>
   <tbody>
     <tr>
-	  <td class="cellB">Practice Trials</td>
+	  <td class="cellB">Single Block Practice Trials</td>
       <td>uzh-luco-battery</td>
       <td>stimuli</td>
-      <td><a href="https://raw.githubusercontent.com/tatool/tatool-web/master/app/projects/public/uzh-luco-battery/stimuli/luco_wm_fig_practice.csv" target="_blank">luco_wm_fig_practice.csv</a></td>
-      <td>5 practice trials.</td>
+      <td><a href="https://raw.githubusercontent.com/tatool/tatool-web/master/app/projects/public/uzh-luco-battery/stimuli/luco_listSwitching_fig_single_practice.csv" target="_blank">luco_listSwitching_fig_single_practice.csv</a></td>
+      <td>18 single block practice trials (2 runs).</td>
     </tr>
     <tr>
-	  <td class="cellB">Test Trials</td>
+    <td class="cellB">Single Block Test Trials</td>
       <td>uzh-luco-battery</td>
       <td>stimuli</td>
-      <td><a href="https://raw.githubusercontent.com/tatool/tatool-web/master/app/projects/public/uzh-luco-battery/stimuli/luco_wm_fig.csv" target="_blank">luco_wm_fig.csv</a></td>
-      <td>128 test trials.</td>
+      <td><a href="https://raw.githubusercontent.com/tatool/tatool-web/master/app/projects/public/uzh-luco-battery/stimuli/luco_listSwitching_fig_single_1.csv" target="_blank">luco_listSwitching_fig_single_1.csv</a></td>
+      <td>90 single block trials (6 runs).</td>
+    </tr>
+    <tr>
+    <td class="cellB">Mixed Block Practice Trials</td>
+      <td>uzh-luco-battery</td>
+      <td>stimuli</td>
+      <td><a href="https://raw.githubusercontent.com/tatool/tatool-web/master/app/projects/public/uzh-luco-battery/stimuli/luco_listSwitching_fig_mixed_practice.csv" target="_blank">luco_listSwitching_fig_mixed_practice.csv</a></td>
+      <td>16 mixed block practice trials (1 run).</td>
+    </tr>
+    <tr>
+    <td class="cellB">Mixed Block Test Trials</td>
+      <td>uzh-luco-battery</td>
+      <td>stimuli</td>
+      <td><a href="https://raw.githubusercontent.com/tatool/tatool-web/master/app/projects/public/uzh-luco-battery/stimuli/luco_listSwitching_fig_mixed.csv" target="_blank">luco_listSwitching_fig_mixed.csv</a></td>
+      <td>192 mixed block trials (12 runs).</td>
+    </tr>
+    <tr>
+    <td class="cellB">Single Block Test Trials</td>
+      <td>uzh-luco-battery</td>
+      <td>stimuli</td>
+      <td><a href="https://raw.githubusercontent.com/tatool/tatool-web/master/app/projects/public/uzh-luco-battery/stimuli/luco_listSwitching_fig_single_2.csv" target="_blank">luco_listSwitching_fig_single_2.csv</a></td>
+      <td>90 single block trials (6 runs).</td>
     </tr>
   </tbody>
 </table>
@@ -204,37 +231,37 @@
     <tr>
       <td class="cellB">stimuliPath</td>
       <td>Path</td>
-      <td>None, use the following:<br>Project: uzh-ef-battery<br>Type: stimuli</td>
+      <td>None, use the following:<br>Project: uzh-luco-battery<br>Type: stimuli</td>
       <td class="cellB">Yes</td>
       <td>A stimuli path where to load any resources from (stimuli images, input key images).</td>
     </tr>
     <tr>
-      <td class="cellB">displayEncodingDuration</td>
+      <td class="cellB">warningDuration</td>
       <td>String</td>
-      <td>6500</td>
+      <td>1000</td>
       <td>No</td>
-      <td>Timer duration in ms to display memoranda in the encoding phase.</td>
+      <td>Timer duration in ms to display a cue indicating the encoding phase.</td>
     </tr>
      <tr>
-      <td class="cellB">intervalEncodingDuration</td>
+      <td class="cellB">encodingDuration</td>
+      <td>String</td>
+      <td>2400</td>
+      <td>No</td>
+      <td>Timer duration in ms to display the memoranda.</td>
+    </tr>
+    <tr>
+      <td class="cellB">cueDuration</td>
+      <td>String</td>
+      <td>150</td>
+      <td>No</td>
+    <td>Timer duration in ms to display a cue indicating the next probe's position.</td>
+    </tr>
+     <tr>
+      <td class="cellB">blankDuration</td>
       <td>String</td>
       <td>250</td>
       <td>No</td>
-      <td>Timer duration in ms to wait and present a blank screen before the updating phase starts.</td>
-    </tr>
-     <tr>
-      <td class="cellB">displayUpdatingDuration</td>
-      <td>String</td>
-      <td>1500</td>
-      <td>No</td>
-      <td>Timer duration in ms to wait for user feedback before stopping.</td>
-    </tr>
-     <tr>
-      <td class="cellB">intervalUpdatingDuration</td>
-      <td>String</td>
-      <td>250</td>
-      <td>No</td>
-      <td>Timer duration in ms to wait and present a blank screen before the next updating step.</td>
+      <td>Timer duration in ms to wait and present a blank screen before the next probe appears.</td>
     </tr>
   </tbody>
 </table>
@@ -257,18 +284,39 @@
   </thead>
   <tbody>
     <tr>
-    <td class="cellB">Practice Trials</td>
+    <td class="cellB">Single Block Practice Trials</td>
       <td>uzh-luco-battery</td>
       <td>stimuli</td>
-      <td><a href="https://raw.githubusercontent.com/tatool/tatool-web/master/app/projects/public/uzh-luco-battery/stimuli/luco_wm_num_practice.csv" target="_blank">luco_wm_num_practice.csv</a></td>
-      <td>5 practice trials.</td>
+      <td><a href="https://raw.githubusercontent.com/tatool/tatool-web/master/app/projects/public/uzh-luco-battery/stimuli/luco_listSwitching_num_single_practice.csv" target="_blank">luco_listSwitching_num_single_practice.csv</a></td>
+      <td>18 single block practice trials (2 runs).</td>
     </tr>
     <tr>
-    <td class="cellB">Test Trials</td>
+    <td class="cellB">Single Block Test Trials</td>
       <td>uzh-luco-battery</td>
       <td>stimuli</td>
-      <td><a href="https://raw.githubusercontent.com/tatool/tatool-web/master/app/projects/public/uzh-luco-battery/stimuli/luco_wm_num.csv" target="_blank">luco_wm_num.csv</a></td>
-      <td>128 test trials.</td>
+      <td><a href="https://raw.githubusercontent.com/tatool/tatool-web/master/app/projects/public/uzh-luco-battery/stimuli/luco_listSwitching_num_single_1.csv" target="_blank">luco_listSwitching_num_single_1.csv</a></td>
+      <td>90 single block trials (6 runs).</td>
+    </tr>
+    <tr>
+    <td class="cellB">Mixed Block Practice Trials</td>
+      <td>uzh-luco-battery</td>
+      <td>stimuli</td>
+      <td><a href="https://raw.githubusercontent.com/tatool/tatool-web/master/app/projects/public/uzh-luco-battery/stimuli/luco_listSwitching_num_mixed_practice.csv" target="_blank">luco_listSwitching_num_mixed_practice.csv</a></td>
+      <td>16 mixed block practice trials (1 run).</td>
+    </tr>
+    <tr>
+    <td class="cellB">Mixed Block Test Trials</td>
+      <td>uzh-luco-battery</td>
+      <td>stimuli</td>
+      <td><a href="https://raw.githubusercontent.com/tatool/tatool-web/master/app/projects/public/uzh-luco-battery/stimuli/luco_listSwitching_num_mixed.csv" target="_blank">luco_listSwitching_num_mixed.csv</a></td>
+      <td>192 mixed block trials (12 runs).</td>
+    </tr>
+    <tr>
+    <td class="cellB">Single Block Test Trials</td>
+      <td>uzh-luco-battery</td>
+      <td>stimuli</td>
+      <td><a href="https://raw.githubusercontent.com/tatool/tatool-web/master/app/projects/public/uzh-luco-battery/stimuli/luco_listSwitching_num_single_2.csv" target="_blank">luco_listSwitching_num_single_2.csv</a></td>
+      <td>90 single block trials (6 runs).</td>
     </tr>
   </tbody>
 </table>
