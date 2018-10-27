@@ -90,7 +90,7 @@
 					{ "propertyName": "displayDuration" },
 					{ "propertyName": "intervalDuration" }
 				] },
-				{ "customType":"tatoolLocalRecognition", "description":"Local recognition / binding task from Guye & von Bastian, 2017", "customProperties":[
+				{ "customType":"tatoolLocalRecognition", "description":"Local recognition / binding task", "customProperties":[
         			{ "propertyName": "stimuliPath", "propertyType":"Path" },
          			{ "propertyName": "stimuliFile", "propertyType":"Resource" },
          			{ "propertyName": "displayDuration" },
@@ -105,6 +105,14 @@
          			{ "propertyName": "gridCols" },
          			{ "propertyName": "cellHeight" },
          			{ "propertyName": "cellWidth" }
+      			] },
+      			{ "customType":"tatoolItemRecognition", "description":"Item Recognition Task", "customProperties":[
+        			{ "propertyName": "stimuliPath", "propertyType":"Path" },
+         			{ "propertyName": "stimuliFile", "propertyType":"Resource" },
+         			{ "propertyName": "showKeys", "propertyType": "Boolean" },
+         			{ "propertyName": "encodingDuration" },
+         			{ "propertyName": "blankDuration" },
+         			{ "propertyName": "instructionDuration" }
       			] }
 			]
 		},
