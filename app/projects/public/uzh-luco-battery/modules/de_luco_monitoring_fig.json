@@ -1,7 +1,7 @@
 {
-   "name":"Squares Monitoring",
+   "name":"LuCo: Squares Monitoring",
    "author":"University of Zurich (Oschwald et al.)",
-   "label":"squares",
+   "label":"squaresMonitoring",
    "export":[
       {
          "mode":"upload",

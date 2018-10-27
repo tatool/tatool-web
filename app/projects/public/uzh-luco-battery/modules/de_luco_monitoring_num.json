@@ -1,7 +1,7 @@
 {
-   "name":"Digits Monitoring",
+   "name":"LuCo: Digits Monitoring",
    "author":"University of Zurich (Oschwald et al.)",
-   "label":"digits",
+   "label":"digitsMonitoring",
    "export":[
       {
          "mode":"upload",

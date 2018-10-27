@@ -1,7 +1,7 @@
 {  
-   "name":"Numerical Working Memory",
+   "name":"LuCo: Numerical Working Memory",
    "author":"University of Zurich (Oschwald et al.)",
-   "label":"numerical",
+   "label":"numericalWM",
    "export":[  
       {  
          "mode":"upload",
@@ -142,7 +142,7 @@
                   "blankDuration":"250",
                   "showKeys":{  
                      "propertyType":"Boolean",
-                     "propertyValue":true
+                     "propertyValue":false
                   },
                   "status":{  
                      "feedbackPanel":true
@@ -243,7 +243,7 @@
                   "blankDuration":"250",
                   "showKeys":{  
                      "propertyType":"Boolean",
-                     "propertyValue":true
+                     "propertyValue":false
                   }
                }
             ],
@@ -365,7 +365,7 @@
                   "blankDuration":"250",
                   "showKeys":{  
                      "propertyType":"Boolean",
-                     "propertyValue":true
+                     "propertyValue":false
                   },
                   "status":{  
                      "feedbackPanel":true
@@ -466,7 +466,7 @@
                   "blankDuration":"250",
                   "showKeys":{  
                      "propertyType":"Boolean",
-                     "propertyValue":true
+                     "propertyValue":false
                   }
                }
             ],
@@ -580,7 +580,7 @@
                   "blankDuration":"250",
                   "showKeys":{  
                      "propertyType":"Boolean",
-                     "propertyValue":true
+                     "propertyValue":false
                   }
                }
             ],

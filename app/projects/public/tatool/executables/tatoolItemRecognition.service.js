@@ -1,7 +1,7 @@
 'use strict';
 
 tatool
-  .factory('tatoolItemItemRecognition', [ 'executableUtils', 'dbUtils', 'timerUtils', 'stimulusServiceFactory', 'inputServiceFactory',
+  .factory('tatoolItemRecognition', [ 'executableUtils', 'dbUtils', 'timerUtils', 'stimulusServiceFactory', 'inputServiceFactory',
     function (executableUtils, dbUtils, timerUtils, stimulusServiceFactory, inputServiceFactory) {
 
     var ItemRecognition = executableUtils.createExecutable();

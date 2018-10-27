@@ -1,7 +1,7 @@
 {  
-   "name":"Word Recognition",
+   "name":"LuCo: Word Recognition",
    "author":"University of Zurich (Oschwald et al.)",
-   "label":"wordRec",
+   "label":"wordRecognition",
    "export":[  
       {  
          "mode":"upload",
@@ -115,7 +115,7 @@
                         "name":"uzh-luco-battery",
                         "access":"public"
                      },
-                     "resourceName":"de_luco_linguistic_wordrec_practice.csv",
+                     "resourceName":"de_luco_linguistic_wordRecognition_practice.csv",
                      "resourceType":"stimuli"
                   },
                   "stimuliPath":{  
@@ -212,10 +212,10 @@
 				  "stimuliFile":{  
                      "propertyType":"Resource",
                      "project":{  
-                        "name":"tatool",
+                        "name":"uzh-luco-battery",
                         "access":"public"
                      },
-                     "resourceName":"de_luco_linguistic_wordrec.csv",
+                     "resourceName":"de_luco_linguistic_wordRecognition.csv",
                      "resourceType":"stimuli"
                   },
                   "stimuliPath":{  

@@ -1,7 +1,7 @@
 {  
-   "name":"Figural Working Memory",
+   "name":"LuCo: Figural Working Memory",
    "author":"University of Zurich (Oschwald et al.)",
-   "label":"figural",
+   "label":"figuralWM",
    "export":[  
       {  
          "mode":"upload",
