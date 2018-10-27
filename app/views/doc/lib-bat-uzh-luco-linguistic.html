@@ -17,8 +17,8 @@ In the <b>Word Recognition Task</b>, sequentially presented nouns have to be mem
 <h3 id="module">Module<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
 <p>The following modules comprise the tasks alongside their instructions:
   <ul class="docContentList">
-    <li>Lexical Decision Making Task: <a href="https://raw.githubusercontent.com/tatool/tatool-web/master/app/projects/public/uzh-luco-battery/modules/de_luco_linguistic_ldm.json" target="_blank">de_luco_linguistic_ldm.json</a></li>
-    <li>Word Recognition Task: <a href="https://raw.githubusercontent.com/tatool/tatool-web/master/app/projects/public/uzh-luco-battery/modules/de_luco_linguistic_wordrec.json" target="_blank">de_luco_linguistic_wordrec.json</a></li>
+    <li>Lexical Decision Making Task: <a href="https://raw.githubusercontent.com/tatool/tatool-web/master/app/projects/public/uzh-luco-battery/modules/de_luco_linguistic_lexicalDecision.json" target="_blank">de_luco_linguistic_lexicalDecision.json</a></li>
+    <li>Word Recognition Task: <a href="https://raw.githubusercontent.com/tatool/tatool-web/master/app/projects/public/uzh-luco-battery/modules/de_luco_linguistic_wordRecognition.json" target="_blank">de_luco_linguistic_wordRecognition.json</a></li>
   </ul>
 </p>
 
@@ -149,7 +149,7 @@ The following values for the Properties were used in the publication:</p>
     </tr>
     <tr>
       <td class="cellB">Executable Type</td>
-      <td>tatoolWordRecognition</td>
+      <td>tatoolItemRecognition</td>
     </tr>
   </tbody>
 </table>
@@ -158,7 +158,7 @@ The following values for the Properties were used in the publication:</p>
 
 <h4>Properties</h4>
 
-<p>See <a ui-sref="doc({page: 'lib-exp-wordrec.html'})">Word Recognition Task</a> in the Task Library for a description of the Properties that can be provided in the Module Editor to change the behaviour of the task.<br><br>
+<p>See <a ui-sref="doc({page: 'lib-exp-item-recognition.html'})">Item Recognition Task</a> in the Task Library for a description of the Properties that can be provided in the Module Editor to change the behaviour of the task.<br><br>
 
 The following values for the Properties were used in the publication:</p>
 
@@ -183,12 +183,16 @@ The following values for the Properties were used in the publication:</p>
       <td>Yes</td>
     </tr>
     <tr>
-      <td class="cellB">displayDuration</td>
+      <td class="cellB">encodingDuration</td>
       <td>3000</td>
     </tr>
     <tr>
-      <td class="cellB">randomisation</td>
-      <td>N/A (not set)</td>
+      <td class="cellB">blankDuration</td>
+      <td>250</td>
+    </tr>
+    <tr>
+      <td class="cellB">instructionDuration</td>
+      <td>4000</td>
     </tr>
   </tbody>
 </table>
@@ -197,9 +201,7 @@ The following values for the Properties were used in the publication:</p>
 
 <h4>Stimuli Files</h4>
 
-<p>See <a ui-sref="doc({page: 'lib-exp-wordrec.html'})">Word Recognition Task</a> in the Task Library  for possible alternative stimuli files.<br><br>
-
-The following stimuli files were used in the publication:</p>
+<p>The following stimuli files were used in the publication:</p>
 
 <table class="table table-striped table-condensed table-bordered">
   <thead>
@@ -217,14 +219,14 @@ The following stimuli files were used in the publication:</p>
       <td>uzh-luco-battery</td>
       <td>stimuli</td>
       <td><a href="https://raw.githubusercontent.com/tatool/tatool-web/master/app/projects/public/uzh-luco-battery/stimuli/de_luco_linguistic_wordRecognition_practice.csv" target="_blank">de_luco_linguistic_wordRecognition_practice.csv</a></td>
-      <td>3 (memorisation) + 6 (recognition) practice trials.</td>
+      <td>6 practice trials (3 old probes + 3 new probes) and 1 instruction.</td>
     </tr>
     <tr>
 	  <td class="cellB">Test Trials</td>
       <td>uzh-luco-battery</td>
       <td>stimuli</td>
       <td><a href="https://raw.githubusercontent.com/tatool/tatool-web/master/app/projects/public/uzh-luco-battery/stimuli/de_luco_linguistic_wordRecognition.csv" target="_blank">de_luco_linguistic_wordRecognition.csv</a></td>
-      <td>30 (memorisation) + 60 (recognition) test trials.</td>
+      <td>60 test trials (30 old probes + 30 new probes) and 1 instruction.</td>
     </tr>
   </tbody>
 </table>
@@ -236,7 +238,6 @@ The following stimuli files were used in the publication:</p>
 	<li>de_word_recognition_02.htm</li>
 	<li>de_word_recognition_03.htm</li>
 	<li>de_word_recognition_04.htm</li>
-  <li>de_word_recognition_block_pause.htm</li>
 </ul>
 
 <hr class="hr-red">

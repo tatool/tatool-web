@@ -1,0 +1,11 @@
+phase,stimulusValue,stimulusValueType,stimulusValueColor,stimulusType,probeType,correctResponse,keyCode1,keyLabel1,keyLabelType1,response1,keyCode2,keyLabel2,keyLabelType2,response2
+1,HAUS,text,#000,,,,,,,,,,,
+1,LIEBE,text,#000,,,,,,,,,,,
+1,BUCH,text,#000,,,,,,,,,,,
+0,de_wordrec_recall.png,image,,,,,,,,,,,,
+2,AUTO,text,#2ca3dc,concrete,new,new,ArrowLeft,de_key_old.png,image,old,ArrowRight,de_key_new.png,image,new
+2,HAUS,text,#2ca3dc,concrete,old,old,ArrowLeft,de_key_old.png,image,old,ArrowRight,de_key_new.png,image,new
+2,BUCH,text,#2ca3dc,concrete,old,old,ArrowLeft,de_key_old.png,image,old,ArrowRight,de_key_new.png,image,new
+2,GEDANKE,text,#2ca3dc,abstract,new,new,ArrowLeft,de_key_old.png,image,old,ArrowRight,de_key_new.png,image,new
+2,LIEBE,text,#2ca3dc,abstract,old,old,ArrowLeft,de_key_old.png,image,old,ArrowRight,de_key_new.png,image,new
+2,SORGE,text,#2ca3dc,abstract,new,new,ArrowLeft,de_key_old.png,image,old,ArrowRight,de_key_new.png,image,new

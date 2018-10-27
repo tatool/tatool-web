@@ -4,7 +4,7 @@ tatool
   .factory('tatoolMonitoring', [ 'executableUtils', 'dbUtils', 'timerUtils', 'gridServiceFactory', 'inputServiceFactory',
     function (executableUtils, dbUtils, timerUtils, gridServiceFactory, inputServiceFactory) {
 
-    var lucoMonitoring = executableUtils.createExecutable();
+    var Monitoring = executableUtils.createExecutable();
 
     var DISPLAY_DURATION_DEFAULT = 2000;
 
@@ -15,7 +15,7 @@ tatool
     var CELL_WIDTH_DEFAULT = 150;
 
     //  Initialze variables at the start of every session
-    lucoMonitoring.prototype.init = function() {
+    Monitoring.prototype.init = function() {
       var deferred = executableUtils.createPromise();
 
       if (!this.showKeys) {
@@ -60,7 +60,7 @@ tatool
     };
 
     // process stimuli file according to randomisation property
-    lucoMonitoring.prototype.processStimuliFile = function(list, deferred) {
+    Monitoring.prototype.processStimuliFile = function(list, deferred) {
       this.stimuliList = list;
       this.totalStimuli = list.length;
       this.setupInputKeys(list);
@@ -68,7 +68,7 @@ tatool
     };
 
     // Adding keyInputs and show by default
-    lucoMonitoring.prototype.setupInputKeys = function(list) {
+    Monitoring.prototype.setupInputKeys = function(list) {
       var keys = this.inputService.addInputKeys(list, !this.showKeys.propertyValue);
 
       if (keys.length === 0) {
@@ -77,7 +77,7 @@ tatool
     };
 
     // Create stimulus and set properties
-    lucoMonitoring.prototype.createStimulus = function() {
+    Monitoring.prototype.createStimulus = function() {
       // reset executable properties
       this.startTime = 0;
       this.endTime = 0;
@@ -108,7 +108,7 @@ tatool
       this.counter++;
     };
 
-    lucoMonitoring.prototype.setStimulus = function() {
+    Monitoring.prototype.setStimulus = function() {
       for (var i=1; i <= this.stimulus.stimulusCount; i++) {
         this.mainGridService.addCellAtPosition(this.stimulus['gridPosition' + i], {
           stimulusValue: this.stimulus['stimulusValue' + i], 
@@ -119,7 +119,7 @@ tatool
     };
 
     // Process given response and stop executable
-    lucoMonitoring.prototype.processResponse = function(givenResponse) {
+    Monitoring.prototype.processResponse = function(givenResponse) {
       this.trial.reactionTime = this.endTime - this.startTime;
       console.log(this.endTime);
       console.log(this.startTime);
@@ -130,18 +130,16 @@ tatool
       } else {
         this.trial.score = 0;
       }
-      console.log("processResponse");
     };
 
     // stop executable
-    lucoMonitoring.prototype.endTask = function() {
+    Monitoring.prototype.endTask = function() {
       if (!this.responseGiven) {
         this.processResponse('absent');
       }
       dbUtils.saveTrial(this.trial).then(executableUtils.stop);
-      console.log("endTask");
     };
 
-    return lucoMonitoring;
+    return Monitoring;
 
   }]);

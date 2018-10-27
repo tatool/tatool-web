@@ -1,7 +1,7 @@
 <p><a ui-sref="doc({page: 'lib-exp.html'})">Experimental Tasks</a></p>
-<h2>Local Recognition</h2>
+<h2>Item Recognition</h2>
 
-<p>In this paradigm (modelled after <a href="http://psycnet.apa.org/record/2005-09704-005" target="_blank">Oberauer, 2005</a>), participants have to memorise items and their current context (e.g., object at specific locations in a grid). After memorisation, participants are probed with matches (i.e., items that have been presented in that context), distractors (i.e., items that haven't been presented in the current trial at all), or lures (i.e., items that have been presented in a different context). This setup allows for disentangling recognition of items from recognition of item-to-context binding. Local recognition tasks are, therefore, sometimes also referred to as <i>binding</i> tasks (e.g., <a href="http://dx.doi.org/10.1037/xge0000453" target="_blank">De Simoni &amp; von Bastian, 2018</a>; <a href="http://dx.doi.org/10.1016/j.jml.2013.02.002" target="_blank">von Bastian &amp; Oberauer, 2013</a>).</p>
+<p>In the Item Recognition paradigm, participants have to memorise a list of stimuli (e.g., words or faces). In the subsequent recognition phase, the previously presented items are intermixed with new items. The task is to indicate which items were presented previously and which were not. The executable allows for presenting a text or image to signal the transition from the memorisation to the recognition phase of the task. </p>
 
 <ul id="docPageNav">
   <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('executable')">Executable</a></li>
@@ -14,7 +14,7 @@
 
 <h3 id="executable">Executable<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
 
-<p>Use the following settings in the Module Editor for this type of task:</p>
+<p>Use the following settings in the Module Editor for this type of task: </p>
 
 <table class="table table-condensed table-bordered">
   <tbody>
@@ -24,11 +24,10 @@
     </tr>
     <tr>
       <td class="cellB">Executable Type</td>
-      <td>tatoolLocalRecognition</td>
+      <td>tatoolItemRecognition</td>
     </tr>
   </tbody>
 </table>
-
 
 <hr class="hr-red">
 
@@ -69,18 +68,25 @@
       <td>Shows or hides specified input keys.</td>
     </tr>
     <tr>
-      <td class="cellB">displayDuration</td>
+      <td class="cellB">encodingDuration</td>
       <td>String</td>
-      <td>2000</td>
+      <td>3000</td>
       <td>No</td>
-      <td>Timer duration in ms for display of a single memorandum.</td>
+      <td>Display duration for each memorandum.</td>
     </tr>
     <tr>
-      <td class="cellB">intervalDuration</td>
+      <td class="cellB">blankDuration</td>
       <td>String</td>
-      <td>2000</td>
+      <td>250</td>
       <td>No</td>
-      <td>Timer duration in ms for interval between memorandum.</td>
+      <td>Interval duration between memoranda.</td>
+    </tr>
+    <tr>
+      <td class="cellB">instructionDuration</td>
+      <td>String</td>
+      <td>4000</td>
+      <td>No</td>
+      <td>Display duration of the instruction between the memorisation and the recognition phase. </td>
     </tr>
   </tbody>
 </table>
@@ -104,21 +110,12 @@
     </tr>
   </thead>
   <tbody>
-    <tr>
-	  <td class="cellB">Local Recognition Grid</td>
-      <td>tatool-stimuli</td>
+    <tr> 
+	  <td class="cellB">German Word Recognition<td>
+      <td>uzh-luco-battery</td>
       <td>stimuli</td>
-      <td><a href="https://raw.githubusercontent.com/tatool/tatool-web/master/app/projects/public/tatool-stimuli/stimuli/localRecognition_grid.csv" target="_blank">localRecognition_grid.csv</a><br>
-        <a href="https://raw.githubusercontent.com/tatool/tatool-web/master/app/projects/public/tatool-stimuli/stimuli/localRecognition_grid_practice.csv" target="_blank">localRecognition_grid_practice.csv</a></td>
-      <td>Display of 2-5 coloured triangles shown in a 5x5 grid.</td>
-    </tr>
-    <tr>
-    <td class="cellB">Local Recognition Row</td>
-      <td>tatool-stimuli</td>
-      <td>stimuli</td>
-      <td><a href="https://raw.githubusercontent.com/tatool/tatool-web/master/app/projects/public/tatool-stimuli/stimuli/localRecognition_rows.csv" target="_blank">localRecognition_rows.csv</a><br>
-        <a href="https://raw.githubusercontent.com/tatool/tatool-web/master/app/projects/public/tatool-stimuli/stimuli/localRecognition_rows_practice.csv" target="_blank">localRecognition_rows_practice.csv</a></td>
-      <td>Display of 2-4 fractal images in a row of 2-4 columns.</td>
+      <td><a href="https://raw.githubusercontent.com/tatool/tatool-web/master/app/projects/public/uzh-luco-battery/stimuli/de_luco_linguistic_wordrec.csv" target="_blank">de_luco_linguistic_wordrec.csv</a></td>
+      <td>Memoranda are 30 German nouns that are either concrete or abstract and intermixed with 30 new words during the recognition phase.</td>
     </tr>
   </tbody>
 </table>
@@ -136,67 +133,31 @@
   </thead>
   <tbody>
     <tr>
-      <td class="cellB">stimulusCount</td>
+      <td class="cellB">phase</td>
       <td>(String)</td>
       <td class="cellB">Yes</td>
-      <td>Number of memoranda/probes for this trial.</td>
-    </tr>
-    <tr>
-      <td class="cellB">gridRows</td>
-      <td>(String)</td>
-      <td class="cellB">Yes</td>
-      <td>Number of rows to show in grid.</td>
-    </tr>
-    <tr>
-      <td class="cellB">gridCols</td>
-      <td>(String)</td>
-      <td class="cellB">Yes</td>
-      <td>Number of columns to show in grid.</td>
+      <td>Determines the phase of the task. <br>
+        <strong>0:</strong> Instruction, can be used to present a text or image during the transition from the memorisation to the recognition phase.<br>
+        <strong>1:</strong> Memorisation.<br>
+        <strong>2:</strong> Recognition.</td>
     </tr>
     <tr>
       <td class="cellB">stimulusValue[n]</td>
       <td>(String)/(Image Filename)</td>
       <td class="cellB">Yes</td>
-      <td>Value to display on screen. Can either be text or an image filename.</td>
+      <td>Value to display on screen. Can either be a text or an image.</td>
     </tr>
     <tr>
-      <td class="cellB">stimulusValueType[n]</td>
+      <td class="cellB">stimulusValueType</td>
       <td>text/image/circle/square</td>
       <td class="cellB">Yes</td>
-      <td>The internal Tatool stimulus value type for Tatool to know how to display it.</td>
+      <td>The stimulus value type for Tatool to know how to display it.</td>
     </tr>
     <tr>
-      <td class="cellB">stimulusGridPosition[n]</td>
+      <td class="cellB">correctResponse</td>
       <td>(String)</td>
       <td class="cellB">Yes</td>
-      <td>The grid position for this memorandum.</td>
-    </tr>
-    <tr>
-      <td class="cellB">probeValue[n]</td>
-      <td>(String)/(Image Filename)</td>
-      <td class="cellB">Yes</td>
-      <td>Value to display on screen. Can either be text or an image filename.</td>
-    </tr>
-    <tr>
-      <td class="cellB">probeValueType[n]</td>
-      <td>text/image/circle/square</td>
-      <td class="cellB">Yes</td>
-      <td>The internal Tatool stimulus value type for Tatool to know how to display it.</td>
-    </tr>
-    <tr>
-      <td class="cellB">probeGridPosition[n]</td>
-      <td>(String)</td>
-      <td class="cellB">Yes</td>
-      <td>The grid position for this probe.</td>
-    </tr>
-    <tr>
-      <td class="cellB">probeType[n]</td>
-      <td>match/intrusion/distractor</td>
-      <td class="cellB">Yes</td>
-      <td>The type of this probe.<br>
-        <b>match:</b> probe matches item and position.<br>
-        <b>intrusion:</b> probe matches item but not position.<br>
-        <b>distractor:</b> probe matches neither item nor position.</td>
+      <td>The correct response for this probe.</td>
     </tr>
     <tr>
       <td class="cellB">keyCount</td>
@@ -228,13 +189,29 @@
       <td class="cellB">Yes</td>
       <td>Response value assigned to this key.</td>
     </tr>
+    <tr>
+      <td class="cellB">stimulusValueColor</td>
+      <td></td>
+      <td>No</td>
+      <td>Defines the colour of a text/circle/square stimulus. Can be set via color name (e.g., <code>red</code>) or via hexadecimal color codes (e.g., <code>#CD0000</code>).</td>
+    </tr>
+    <tr>
+      <td class="cellB">stimulusType</td>
+      <td></td>
+      <td>No</td>
+      <td>Condition of this stimulus.</td>
+    </tr>
+    <tr>
+      <td class="cellB">probeType</td>
+      <td></td>
+      <td>No</td>
+      <td>Type of this probe.</td>
+    </tr>
   </tbody>
 </table>
-
-
 
 <hr class="hr-red">
 
 <h3 id="download">Download<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
 
-<p>You can access the source code (Service, Controller, Template, CSS) for this Executable in our <a href="https://github.com/tatool/tatool-web/tree/master/app/projects/public/tatool/executables" target="_blank">GitHub repository</a>.</p>
+<p>You can access the source code (Service, Controller, Template, CSS) for this Executable in our <a href="https://github.com/tatool/tatool-web/tree/master/app/projects/public/tatool/executables" target="_blank">Github Repository</a>.</p>

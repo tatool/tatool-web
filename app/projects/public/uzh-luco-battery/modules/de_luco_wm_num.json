@@ -1,7 +1,7 @@
 {  
    "name":"Numerical Working Memory",
    "author":"University of Zurich (Oschwald et al.)",
-   "label":"numericl",
+   "label":"numerical",
    "export":[  
       {  
          "mode":"upload",
@@ -111,7 +111,7 @@
                   "tatoolType":"Executable",
                   "customType":"lucoListSwitching",
                   "name":"single_practice",
-                  "blankInterval":0,
+                  "blankInterval":250,
                   "fixationInterval":0,
                   "project":{  
                      "name":"uzh-luco-battery",
@@ -253,7 +253,7 @@
             "tatoolType":"Executable",
             "customType":"tatoolInstruction",
             "name":"instruction_mixed_practice",
-            "blankInterval":0,
+            "blankInterval":250,
             "fixationInterval":0,
             "project":{  
                "name":"tatool",
