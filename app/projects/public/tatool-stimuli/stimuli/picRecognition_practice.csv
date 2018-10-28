@@ -1,0 +1,12 @@
+phase,stimulusValue,stimulusValueType,probeType,correctResponse,keyCode1,keyLabel1,keyLabelType1,response1,keyCode2,keyLabel2,keyLabelType2,response2
+0,STUDY,text,,,,,,,,,,
+1,picRecognition_61.png,image,,,,,,,,,,
+1,picRecognition_62.png,image,,,,,,,,,,
+1,picRecognition_63.png,image,,,,,,,,,,
+0,RECOGNITION,text,,,,,,,,,,
+2,picRecognition_64.png,image,new,new,ArrowLeft,en_key_old.png,image,old,ArrowRight,en_key_new.png,image,new
+2,picRecognition_63.png,image,old,old,ArrowLeft,en_key_old.png,image,old,ArrowRight,en_key_new.png,image,new
+2,picRecognition_61.png,image,old,old,ArrowLeft,en_key_old.png,image,old,ArrowRight,en_key_new.png,image,new
+2,picRecognition_65.png,image,new,new,ArrowLeft,en_key_old.png,image,old,ArrowRight,en_key_new.png,image,new
+2,picRecognition_66.png,image,new,new,ArrowLeft,en_key_old.png,image,old,ArrowRight,en_key_new.png,image,new
+2,picRecognition_67.png,image,new,new,ArrowLeft,en_key_old.png,image,old,ArrowRight,en_key_new.png,image,new
