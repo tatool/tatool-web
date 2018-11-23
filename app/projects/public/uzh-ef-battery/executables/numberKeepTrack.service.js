@@ -10,6 +10,7 @@ tatool
     var INTERVAL_ENCODING_DURATION_DEFAULT = 250;
     var DISPLAY_UPDATING_DURATION_DEFAULT = 1250;
     var INTERVAL_UPDATING_DURATION_DEFAULT = 250;
+    var RECALL_PROMPT_DEFAULT = 'Digit?';
 
     var COLORS = [ 'red', 'blue', 'green', 'orange' ];
 
@@ -29,6 +30,7 @@ tatool
       this.intervalEncodingDuration = (this.intervalEncodingDuration ) ? this.intervalEncodingDuration : INTERVAL_ENCODING_DURATION_DEFAULT;
       this.displayUpdatingDuration = (this.displayUpdatingDuration ) ? this.displayUpdatingDuration : DISPLAY_UPDATING_DURATION_DEFAULT;
       this.intervalUpdatingDuration = (this.intervalUpdatingDuration ) ? this.intervalUpdatingDuration : INTERVAL_UPDATING_DURATION_DEFAULT;
+      this.recallPrompt = (this.recallPrompt ) ? this.recallPrompt : RECALL_PROMPT_DEFAULT;
       this.timerDisplayEncoding = timerUtils.createTimer(this.displayEncodingDuration, true, this);
       this.timerIntervalEncoding = timerUtils.createTimer(this.intervalEncodingDuration, false, this);
       this.timerDisplayUpdating = timerUtils.createTimer(this.displayUpdatingDuration, true, this);
@@ -126,7 +128,7 @@ tatool
 
       // set cue stimulus
       this.gridService.addCellAtPosition(1, {
-        stimulusValue: 'Digit?', 
+        stimulusValue: this.recallPrompt, 
         stimulusValueType: 'text',
         gridCellClass: 'numberKeepTrack_emptyCell ' + 'numberKeepTrack_' + COLORS[this.stimulus['color']]
       });
