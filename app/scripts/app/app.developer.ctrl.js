@@ -410,7 +410,7 @@ function DeveloperCtrl($scope, $q, $timeout, $window, $rootScope, $location, $st
         author: userService.getUserName(),
         label: 'newModule',
         export : [
-          { mode: 'upload', auto: true, enabled: false},
+          { mode: 'upload', auto: true, enabled: true},
           { mode: 'download', enabled: true }
         ],
         allowEscapeKey : true,

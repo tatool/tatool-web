@@ -76,10 +76,10 @@
             <input type="checkbox" ng-model="exporter.enabled" ng-true-value="true" ng-false-value="false"> <span class="exporterName">{{exporter.mode}}</span> 
             <span ng-switch on="exporter.mode">
               <span ng-switch-when="upload">
-                <a class="info" tooltip="Automatic upload of trial data to server. Data can be accessed in Analytics tab. Upload is not possible in the Editor tab." tooltip-placement="right"><i class="fa fa-info-circle"></i></a>
+                <a class="info" uib-tooltip="Automatic upload of trial data to server. Data can be accessed in Analytics tab. Upload is not possible in the Editor tab." uib-tooltip-placement="right"><i class="fa fa-info-circle"></i></a>
               </span>
               <span ng-switch-when="download">
-                <a class="info" tooltip="Allows manual download of trial data as a CSV. Currently not supported by Safari browsers." tooltip-placement="right"><i class="fa fa-info-circle"></i></a>
+                <a class="info" uib-tooltip="Allows manual download of trial data as a CSV. Currently not supported by Safari browsers." uib-tooltip-placement="right"><i class="fa fa-info-circle"></i></a>
               </span>
             </span>
             
