@@ -101,7 +101,7 @@ tatool
 
     DualNBack.prototype.makeTargets = function(list)
     {
-      var newList = (executableUtils.shuffle(list)).slice(0,20);
+      var newList = (executableUtils.shuffle(list)).slice(0,this.iterations);
 
       while(this.countTargets(newList) < this.targets)
       {
