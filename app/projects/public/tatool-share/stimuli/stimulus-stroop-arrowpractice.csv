@@ -1,0 +1,5 @@
+stimulusValue,stimulusValueType,stimulusValueColor,stimulusType,correctResponse,keyCode,keyLabel,keyLabelType,keyIndex,response
+stroop-color-left.png,image,red,neutral,red,ArrowLeft,stroop-color-left.png,image,0,red
+stroop-color-down.png,image,green,neutral,green,ArrowDown,stroop-color-down.png,image,2,green
+stroop-color-up.png,image,yellow,neutral,yellow,ArrowUp,stroop-color-up.png,image,1,yellow
+stroop-color-right.png,image,blue,neutral,blue,ArrowRight,stroop-color-right.png,image,3,blue

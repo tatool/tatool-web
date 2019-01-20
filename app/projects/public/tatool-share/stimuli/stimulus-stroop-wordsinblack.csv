@@ -1,0 +1,5 @@
+stimulusValue,stimulusValueType,stimulusValueColor,stimulusType,correctResponse,keyCode,keyLabel,keyLabelType,keyIndex,response
+red,text,black,incongruent,red,ArrowLeft,stroop-color-left.png,image,0,red
+blue,text,black,incongruent,blue,ArrowRight,stroop-color-right.png,image,3,blue
+green,text,black,incongruent,green,ArrowDown,stroop-color-down.png,image,2,green
+yellow,text,black,incongruent,yellow,ArrowUp,stroop-color-up.png,image,1,yellow
