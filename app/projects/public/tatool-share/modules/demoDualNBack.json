@@ -1,0 +1,109 @@
+{
+    "name": "Dual N-Back",
+    "author": "HSRC",
+    "label": "demoDualNBack",
+    "export": [
+      {
+        "mode": "upload",
+        "auto": true,
+        "enabled": true
+      },
+      {
+        "mode": "download",
+        "enabled": true
+      }
+    ],
+    "allowEscapeKey": true,
+    "fullscreen": false,
+    "moduleHierarchy": {
+      "tatoolType": "List",
+      "iterator": {
+        "customType": "ListIterator",
+        "numIterations": 1,
+        "order": "sequential"
+      },
+      "children": [
+        {
+          "tatoolType": "Executable",
+          "name": "hbmxqna2k4f00000",
+          "customType": "tatoolInstruction",
+          "blankInterval": 0,
+          "fixationInterval": 0,
+          "project": {
+            "name": "tatool-share",
+            "access": "public"
+          },
+          "pages": {
+            "propertyType": "ArrayResource",
+            "propertyValue": [
+              {
+                "project": {
+                  "name": "tatool-share",
+                  "access": "public"
+                },
+                "resourceName": "dual2Back.html",
+                "resourceType": "instructions"
+              }
+            ]
+          },
+          "images": {
+            "propertyType": "ArrayResource",
+            "propertyValue": []
+          }
+        },
+        {
+          "tatoolType": "List",
+          "name": "51iijn8v79sbgldi",
+          "iterator": {
+            "customType": "ListIterator",
+            "numIterations": 20,
+            "order": "sequential"
+          },
+          "handlers": [],
+          "children": [
+            {
+              "tatoolType": "Executable",
+              "customType": "DualNBack",
+              "name": "2back",
+              "blankInterval": 0,
+              "fixationInterval": 0,
+              "project": {
+                "name": "tatool-share",
+                "access": "public"
+              },
+              "stimuliPath": {
+                "propertyType": "Path",
+                "project": {
+                  "name": "tatool-share",
+                  "access": "public"
+                },
+                "resourceName": "",
+                "resourceType": "stimuli"
+              },
+              "stimuliFile": {
+                "propertyType": "Resource",
+                "project": {
+                  "name": "tatool-share",
+                  "access": "public"
+                },
+                "resourceName": "dual-nback-permutations.csv",
+                "resourceType": "stimuli"
+              },
+              "showKeys": {
+                "propertyType": "Boolean",
+                "propertyValue": true
+              },
+              "timerEnabled": {
+                "propertyType": "Boolean",
+                "propertyValue": true
+              },
+              "displayDuration": "1000",
+              "nValue": "2",
+              "iterations": "20",
+              "targets": "12"
+          }
+        ]
+      }
+    ]
+  }
+}
