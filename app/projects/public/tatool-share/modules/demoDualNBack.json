@@ -30,7 +30,7 @@
           "blankInterval": 0,
           "fixationInterval": 0,
           "project": {
-            "name": "hsrc",
+            "name": "tatool-share",
             "access": "public"
           },
           "pages": {
@@ -38,7 +38,7 @@
             "propertyValue": [
               {
                 "project": {
-                  "name": "hsrc",
+                  "name": "tatool-share",
                   "access": "public"
                 },
                 "resourceName": "dual2Back.html",
@@ -68,13 +68,13 @@
               "blankInterval": 0,
               "fixationInterval": 0,
               "project": {
-                "name": "hsrc",
+                "name": "tatool-share",
                 "access": "public"
               },
               "stimuliPath": {
                 "propertyType": "Path",
                 "project": {
-                  "name": "hsrc",
+                  "name": "tatool-share",
                   "access": "public"
                 },
                 "resourceName": "",
@@ -83,7 +83,7 @@
               "stimuliFile": {
                 "propertyType": "Resource",
                 "project": {
-                  "name": "hsrc",
+                  "name": "tatool-share",
                   "access": "public"
                 },
                 "resourceName": "dual-nback-permutations.csv",
