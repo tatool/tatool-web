@@ -1,0 +1,16 @@
+stimulusCount;stimulusValue1;stimulusValueType1;correctResponse1;stimulusValue2;stimulusValueType2;correctResponse2;stimulusValue3;stimulusValueType3;correctResponse3;stimulusValue4;stimulusValueType4;correctResponse4;stimulusValue5;stimulusValueType5;correctResponse5;stimulusValue6;stimulusValueType6;correctResponse6
+2;ring;text;ring;music;text;music
+2;bag;text;bag;carrot;text;carrot
+2;sleeve;text;sleeve;light;text;light
+3;system;text;system;dress;text;dress;tunnel;text;tunnel
+3;kitchen;text;kitchen;grass;text;grass;devil;text;devil
+3;arm;text;arm;fault;text;fault;project;text;project
+4;tea;text;tea;pants;text;pants;dream;text;dream;problem;text;problem
+4;bliss;text;bliss;comfort;text;comfort;rose;text;rose;speed;text;speed
+4;bed;text;bed;winter;text;winter;ghost;text;ghost;ice;text;ice
+5;fork;text;fork;quarter;text;quarter;forest;text;forest;nest;text;nest;talent;text;talent
+5;soldier;text;soldier;price;text;price;culture;text;culture;rat;text;rat;butter;text;butter
+5;nature;text;nature;window;text;window;summer;text;summer;title;text;title;madness;text;madness
+6;wolf;text;wolf;brain;text;brain;concept;text;concept;heat;text;heat;sheep;text;sheep;hammer;text;hammer
+6;jewel;text;jewel;apple;text;apple;land;text;land;table;text;table;weight;text;weight;closet;text;closet
+6;test;text;test;garden;text;garden;stone;text;stone;helmet;text;helmet;pond;text;pond;pig;text;pig

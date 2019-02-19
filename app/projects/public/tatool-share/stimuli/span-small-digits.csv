@@ -1,0 +1,17 @@
+stimulusCount;stimulusValue1;stimulusValueType1;correctResponse1;stimulusValue2;stimulusValueType2;correctResponse2;stimulusValue3;stimulusValueType3;correctResponse3;stimulusValue4;stimulusValueType4;correctResponse4;stimulusValue5;stimulusValueType5;correctResponse5;stimulusValue6;stimulusValueType6;correctResponse6;stimulusValue7;stimulusValueType7;correctResponse7;stimulusValue8;stimulusValueType8;correctResponse8
+2;1;text;1;7;text;7;;;;;;;;;;;;;;;;;;
+2;6;text;6;3;text;3;;;;;;;;;;;;;;;;;;
+3;5;text;5;8;text;8;2;text;2;;;;;;;;;;;;;;;
+3;6;text;6;9;text;9;4;text;4;;;;;;;;;;;;;;;
+4;6;text;6;4;text;4;3;text;3;9;text;9;;;;;;;;;;;;
+4;7;text;7;2;text;2;8;text;8;6;text;6;;;;;;;;;;;;
+5;4;text;4;2;text;2;7;text;7;3;text;3;1;text;1;;;;;;;;;
+5;7;text;7;5;text;5;8;text;8;3;text;3;6;text;6;;;;;;;;;
+6;6;text;6;1;text;1;9;text;9;4;text;4;7;text;7;3;text;3;;;;;;
+6;3;text;3;9;text;9;2;text;2;4;text;4;8;text;8;7;text;7;;;;;;
+7;5;text;5;9;text;9;1;text;1;7;text;7;4;text;4;2;text;2;8;text;8;;;
+7;4;text;4;1;text;1;7;text;7;9;text;9;3;text;3;8;text;8;6;text;6;;;
+8;5;text;5;8;text;8;1;text;1;9;text;9;2;text;2;6;text;6;4;text;4;7;text;7
+8;3;text;3;8;text;8;2;text;2;9;text;9;5;text;5;1;text;1;7;text;7;4;text;4
+8;2;text;2;7;text;7;5;text;5;6;text;6;2;text;2;5;text;5;8;text;8;4;text;4
+8;7;text;7;1;text;1;3;text;3;4;text;4;2;text;2;5;text;5;6;text;6;8;text;8
