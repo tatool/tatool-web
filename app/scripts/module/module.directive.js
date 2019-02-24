@@ -279,9 +279,9 @@ function TatoolStimulus($log, $templateCache, $timeout, $q, cfgModule, executabl
         return executableUtils.getTiming();
       };
 
-      scope.service.playAudio = function() {
+      scope.service.playAudio = function(onEnd) {
         if (scope.stimulus.data.stimulusValueType.startsWith('audio')) {
-          audioPlayer = new Howl({src: scope.stimulus.stimulusAudio});
+          audioPlayer = new Howl({src: scope.stimulus.stimulusAudio, onend: onEnd});
           audioPlayer.play();
         }
         return executableUtils.getTiming();

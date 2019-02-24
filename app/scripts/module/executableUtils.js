@@ -311,8 +311,7 @@ function ExecutableUtilsService($q, $http, $log, contextService) {
           async.each(sounds, function(sound, callback) {
             var resource = stimuliPath;
             resource.resourceName = sound;
-            new Howl({src: getResourcePath(resource)});
-            callback();
+            new Howl({src: getResourcePath(resource), onload: callback, onloaderror: callback});
           }, function(err) {
             if( err ) {
               deferred.reject(err);
