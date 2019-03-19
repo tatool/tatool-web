@@ -17,6 +17,8 @@ tatool
 
     $scope.inputService = service.inputService;
 
+    $scope.showDigitPagination = service.showDigitPagination;
+
     $scope.currentPage = '';
     $scope.currentImage = '';
     $scope.showPagination = false;

@@ -10,6 +10,12 @@ tatool
     TatoolInstruction.prototype.init = function() {
       var deferred = executableUtils.createPromise();
 
+      if (!this.showDigitPagination) {
+        this.showDigitPagination = true;
+      } else {
+        this.showDigitPagination = (this.showDigitPagination.propertyValue === true) ? true : false;
+      }
+
       var self = this;
       if (this.pages && this.pages.propertyValue && this.pages.propertyValue.length > 0) {
         this.refreshCache().then(function() {

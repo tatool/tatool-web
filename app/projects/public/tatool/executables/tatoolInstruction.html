@@ -12,7 +12,7 @@
 					<div class='tatoolInstruction_paginationArrowLeft'><i class='icon-left-open'></i></div>
 				</a>
 			</li>
-    		<li ng-repeat="url in urls track by $index">
+    		<li ng-repeat="url in urls track by $index" ng-show="showDigitPagination">
         		<a class="tatoolInstruction_page" ng-class="{tatoolInstruction_pageActive: $index==currentIndex}" ng-click="jump($index)">
         			<div class='tatoolInstruction_paginationDigit'>{{$index+1}}</div>
         		</a>
