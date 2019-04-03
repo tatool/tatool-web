@@ -57,7 +57,7 @@ var update = function(req, res, module) {
   Module.find({ email: req.user.email, moduleType: { $exists: true, $nin: [''] } }, function (err, result) {
     if (err) {
       res.status(500).send({ message: 'Unknown error occurred during saving of module.'});
-    } else if (result.length >= req.app.get('module_limit') && !module.moduleType && req.body.moduleType !== '' && req.user.email !== req.app.get('editor_user')) {
+    } else if (result.length >= req.app.get('module_limit') && !module.moduleType && req.body.moduleType !== '' && !req.app.get('editor_user').includes(req.user.email)) {
       res.status(500).send({ message: 'The number of simultaneously published modules per researcher is currently restricted to ' + req.app.get('module_limit') + '.'});
     } else {
       // update technical information
