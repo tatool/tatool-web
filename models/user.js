@@ -41,14 +41,6 @@ var User = new Schema({
       type: String,
       required: false
     },
-    fullName: {
-      type: String,
-      required: false
-    },
-    affiliation: {
-      type: String,
-      required: false
-    },
     updated_at: {
       type: Date,
       required: true

@@ -55,12 +55,6 @@ function LoginCtrl($scope, $log, $state, $sce, $anchorScroll, $location, authSer
       } else if (credentials.userPassword !== credentials.userPassword2) {
         alertText = 'The passwords you entered don\'t match.';
         setAlert('danger', alertText);
-      } else if (credentials.devAccess && (!credentials.fullname || !credentials.affiliation)) {
-        alertText = 'Please enter all required fields for your Developer Access:<br><ul>';
-        alertText += (!credentials.fullname) ? '<li> Full Name' : '';
-        alertText += (!credentials.affiliation) ? '<li> Affiliation' : '';
-        alertText += '</ul>';
-        setAlert('danger', alertText);
       } else if (!credentials.captcha && cfg.MODE === 'REMOTE') {
         alertText = 'You have not solved the Captcha.';
         setAlert('danger', alertText);

@@ -34,13 +34,11 @@
                 <tr>
                 <th>
                 <b>Total # of Users: {{users.length}}</b></th>
-                <th></th>
                 <th colspan="4"><b>Roles</b></th>
                 <th></th>
                 </tr>
                 <tr>
                 <th><b>Username</b></th>
-                <th><b>Name/Affiliation</b></th>
                 <th width="100px"><i class="fa fa-cube fa-lg"></i><br>Modules</th>
                 <th width="100px"><i class="fa fa-cogs fa-lg"></i><br>Editor</th>
                 <th width="100px"><i class="fa fa-bar-chart fa-lg"></i><br>Analytics</th>
@@ -51,7 +49,6 @@
               <tbody>
                 <tr ng-repeat="user in users | filter:{ $: filterUser } | orderBy:'email' | startFrom:userPaging.currentPage*userPaging.pageSize | limitTo:userPaging.pageSize" ng-class="{'success': user.email === highlightUserEmail}" >
                 <td> {{user.email}}</td>
-                <td> {{user.fullName}}<br><span ng-if="user.affiliation">({{user.affiliation}})</span></td>
                 <td align="center" ng-repeat="role in roles"> <input type="checkbox" checklist-model="user.roles" checklist-value="role"> </td>
                 <td align="center"> 
                   <div class="btn btn-tatool-off" ng-click="updateUser(user)" uib-tooltip="Save changes to user roles." uib-tooltip-placement="top" uib-tooltip-animation="false"><i class="fa fa-floppy-o"></i></div>

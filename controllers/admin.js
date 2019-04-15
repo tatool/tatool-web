@@ -75,8 +75,6 @@ exports.updateUser = function(req, res) {
       user.password = req.body.password;
       user.roles.push('user');
       user.verified = true;
-      user.fullName = '';
-      user.affiliation = '';
       user.token = '';
       user.updated_at = new Date();
 

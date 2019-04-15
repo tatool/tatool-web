@@ -30,8 +30,6 @@ exports.register = function(req, res) {
         user.roles.push('analytics');
       }
       user.verified = false;
-      user.fullName = req.body.fullname;
-      user.affiliation = req.body.affiliation;
       user.token = uuid.v4();
       user.updated_at = new Date();
 
@@ -305,9 +303,7 @@ exports.signupDev = function(req, res) {
       name: process.env.SENDER_EMAIL,
       subject: 'Developer Signup',
       template: 'developer-signup-email',
-      user: req.body.userName,
-      fullName: req.body.fullname,
-      affiliation: req.body.affiliation
+      user: req.body.userName
   };
 
   sendVerificationEmail(message, function (error, success) {
@@ -339,8 +335,6 @@ exports.registerAdmin = function() {
           user.roles.push('user');
           user.roles.push('admin');
           user.verified = true;
-          user.fullName = '';
-          user.affiliation = '';
           user.token = '';
           user.updated_at = new Date();
 
