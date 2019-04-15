@@ -221,6 +221,7 @@ tatoolApp.run(['$templateCache', function($templateCache) {
     $templateCache.put('about-cite.html', require('../../views/doc/about-cite.html'));
     $templateCache.put('about-license.html', require('../../views/doc/about-license.html'));
     $templateCache.put('about-publications.html', require('../../views/doc/about-publications.html'));
+    $templateCache.put('about-privacy-policy.html', require('../../views/doc/about-privacy-policy.html'));
     $templateCache.put('community-contribute.html', require('../../views/doc/community-contribute.html'));
     $templateCache.put('dev-admin.html', require('../../views/doc/dev-admin.html'));
     $templateCache.put('dev-basics.html', require('../../views/doc/dev-basics.html'));
