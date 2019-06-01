@@ -8,6 +8,8 @@ import async from 'async';
 window.async = async;
 import jquery from 'jquery';
 window.$ = window.JQuery = jquery;
+import * as Survey from 'survey-jquery';
+window.Survey = window.Survey = Survey;
 import draggable from 'jquery-ui/ui/widgets/draggable';
 import droppable from 'jquery-ui/ui/widgets/droppable';
 import mouse from 'jquery-ui/ui/widgets/mouse';

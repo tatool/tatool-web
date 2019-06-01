@@ -61,6 +61,7 @@
     "serve-favicon": "2.3.0",
     "sha1": "1.1.1",
     "spin.js": "3.0.0",
+    "survey-jquery": "^1.0.89",
     "ui-select": "0.19.8",
     "uuid": "3.0.1",
     "video.js": "6.2.8"
