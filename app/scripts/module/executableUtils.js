@@ -302,8 +302,8 @@ function ExecutableUtilsService($q, $http, $log, contextService) {
         var img = new Image();
         var resource = stimuliPath;
         resource.resourceName = image;
+        img.onload = function() { callback(); }
         img.src = getResourcePath(resource);
-        callback();
       }, function(err) {
         if( err ) {
           deferred.reject(err);
