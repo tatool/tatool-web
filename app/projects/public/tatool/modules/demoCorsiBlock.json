@@ -17,6 +17,8 @@
    ],
    "allowEscapeKey":true,
    "fullscreen":false,
+   "exportDelimiter":";",
+   "exportFormat":"long",
    "moduleHierarchy":{
       "tatoolType":"List",
       "label":"Task List",

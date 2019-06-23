@@ -17,6 +17,8 @@
    ],
    "allowEscapeKey":true,
    "fullscreen":true,
+   "exportDelimiter":";",
+   "exportFormat":"long",
    "moduleHierarchy":{
       "tatoolType":"List",
       "iterator":{
