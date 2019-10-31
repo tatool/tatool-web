@@ -42,7 +42,7 @@
     "jsonwebtoken": "5.5.4",
     "lz-string": "1.4.4",
     "mkdirp": "0.5.1",
-    "mongoose": "5.0.4",
+    "mongoose": "5.7.7",
     "morgan": "1.6.1",
     "newrelic": "1.25.1",
     "nodemailer": "4.4.0",
