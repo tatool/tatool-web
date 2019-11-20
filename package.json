@@ -11,7 +11,7 @@
     "node": "8.9.1"
   },
   "dependencies": {
-    "angular": "1.5.11",
+    "angular": "1.7.9",
     "angular-progress-arc": "1.0.0",
     "angular-recaptcha": "^4.1.4",
     "angular-sanitize": "1.5.11",
