@@ -14,6 +14,7 @@ import draggable from 'jquery-ui/ui/widgets/draggable';
 import droppable from 'jquery-ui/ui/widgets/droppable';
 import mouse from 'jquery-ui/ui/widgets/mouse';
 import jqueryuitouchpunch from 'jquery-ui-touch-punch';
+import fabric from 'fabric';
 
 // import modules
 import tatool from './app.js';
