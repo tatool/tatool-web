@@ -1,0 +1,7 @@
+stimulusValue;stimulusValueType;stimulusValueColor;stimulusType;correctResponse;keyCode;response;keyIndex;keyLabel;keyLabelType
+1-11=-10;text;;correct;correct;ArrowLeft;correct;0;key_arrow_L_marked.png;image
+5+11=18;text;;wrong;wrong;ArrowRight;wrong;1;key_arrow_R_marked.png;image
+2+6=10;text;;wrong;wrong;ArrowRight;wrong;1;key_arrow_R_marked.png;image
+9+6=15;text;;correct;correct;ArrowLeft;correct;0;key_arrow_L_marked.png;image
+6-6=0;text;;correct;correct;ArrowLeft;correct;0;key_arrow_L_marked.png;image
+4+6=12;text;;wrong;wrong;ArrowRight;wrong;1;key_arrow_R_marked.png;image

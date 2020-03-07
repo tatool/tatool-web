@@ -1,0 +1,19 @@
+<tatool>
+
+  <tatool-grid   id="centeredExecutable"
+    service="mainGridService"
+    gridSpacing="15"
+    cellWidth="90"
+    cellHeight="90"
+    cellClass="tatoolCorsiBlock_emptyCell"
+    allowDrag="no"
+    allowDrop="no"
+    gridClick="userClick(cell, timing, $event)">
+  </tatool-grid>
+
+
+  <tatool-input id="bottomExecutable" service="inputService" userInput="okClick(input, timing, event)">
+    <tatool-key code="Enter" label="OK" response="1"></tatool-key>
+  </tatool-input>
+
+</tatool>
