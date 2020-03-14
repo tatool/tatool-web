@@ -1,154 +1,153 @@
 {
-   "name":"Shifting Experiment",
-   "author":"Tatool",
-   "label":"demoShifting",
-   "export":[
+  "moduleHierarchy": {
+    "children": [
       {
-         "mode":"upload",
-         "auto":true,
-         "enabled":true,
-         "$$hashKey":"object:5810"
+        "pages": {
+          "propertyValue": [
+            {
+              "resourceType": "instructions",
+              "resourceName": "tatoolShifting_01.html",
+              "project": {
+                "access": "public",
+                "name": "tatool"
+              }
+            },
+            {
+              "resourceType": "instructions",
+              "resourceName": "tatoolShifting_02.html",
+              "project": {
+                "access": "public",
+                "name": "tatool"
+              }
+            }
+          ],
+          "propertyType": "ArrayResource"
+        },
+        "project": {
+          "access": "public",
+          "name": "tatool"
+        },
+        "fixationInterval": 0,
+        "blankInterval": "250",
+        "name": "instruction",
+        "customType": "tatoolInstruction",
+        "tatoolType": "Executable"
       },
       {
-         "mode":"download",
-         "enabled":true,
-         "$$hashKey":"object:5599"
+        "project": {
+          "access": "public",
+          "name": "tatool"
+        },
+        "fixationInterval": 0,
+        "blankInterval": "250",
+        "name": "countdown",
+        "customType": "tatoolCountdown",
+        "tatoolType": "Executable"
+      },
+      {
+        "children": [
+          {
+            "showKeys": {
+              "propertyValue": true,
+              "propertyType": "Boolean"
+            },
+            "displayCueDuration": "250",
+            "displayDuration": "2000",
+            "timerEnabled": {
+              "propertyValue": true,
+              "propertyType": "Boolean"
+            },
+            "randomisation": "full",
+            "status": {
+              "levelPanel": true,
+              "trialCountPanel": true,
+              "timerPanel": true,
+              "feedbackPanel": true
+            },
+            "stimuliPath": {
+              "resourceType": "stimuli",
+              "resourceName": "",
+              "project": {
+                "access": "public",
+                "name": "tatool-stimuli"
+              },
+              "propertyType": "Path"
+            },
+            "stimuliFile": {
+              "resourceType": "stimuli",
+              "resourceName": "shifting-parity-magnitude.csv",
+              "project": {
+                "access": "public",
+                "name": "tatool-stimuli"
+              },
+              "propertyType": "Resource"
+            },
+            "project": {
+              "access": "public",
+              "name": "tatool"
+            },
+            "fixationInterval": 0,
+            "blankInterval": "350",
+            "name": "shifting",
+            "customType": "tatoolShifting",
+            "tatoolType": "Executable"
+          }
+        ],
+        "handlers": [
+          {
+            "reverse": {
+              "propertyValue": false,
+              "propertyType": "Boolean"
+            },
+            "trialCounterStart": "1",
+            "customType": "trialCountHandler",
+            "name": "trialCounter"
+          },
+          {
+            "allowLevelDown": {
+              "propertyValue": true,
+              "propertyType": "Boolean"
+            },
+            "benchmark": "0.8",
+            "benchmarkSampleSize": "3",
+            "customType": "levelHandler",
+            "name": "level"
+          }
+        ],
+        "iterator": {
+          "numIterations": 20,
+          "customType": "ListIterator"
+        },
+        "name": "squq4uboijh8h0k9",
+        "tatoolType": "List"
       }
-   ],
-   "allowEscapeKey":true,
-   "fullscreen":true,
-   "exportDelimiter":";",
-   "exportFormat":"long",
-   "moduleHierarchy":{
-      "tatoolType":"List",
-      "iterator":{
-         "customType":"ListIterator",
-         "numIterations":1
-      },
-      "handlers":[
-
-      ],
-      "children":[
-         {
-            "tatoolType":"Executable",
-            "customType":"tatoolInstruction",
-            "name":"instruction",
-            "blankInterval":"250",
-            "fixationInterval":0,
-            "project":{
-               "name":"tatool",
-               "access":"public"
-            },
-            "pages":{
-               "propertyType":"ArrayResource",
-               "propertyValue":[
-                  {
-                     "project":{
-                        "name":"tatool",
-                        "access":"public"
-                     },
-                     "resourceName":"tatoolShifting_01.html",
-                     "resourceType":"instructions"
-                  },
-                  {
-                     "project":{
-                        "name":"tatool",
-                        "access":"public"
-                     },
-                     "resourceName":"tatoolShifting_02.html",
-                     "resourceType":"instructions"
-                  }
-               ]
-            }
-         },
-         {
-            "tatoolType":"Executable",
-            "customType":"tatoolCountdown",
-            "name":"countdown",
-            "blankInterval":"250",
-            "fixationInterval":0,
-            "project":{
-               "name":"tatool",
-               "access":"public"
-            }
-         },
-         {
-            "tatoolType":"List",
-            "name":"squq4uboijh8h0k9",
-            "iterator":{
-               "customType":"ListIterator",
-               "numIterations":20
-            },
-            "handlers":[
-               {
-                  "name":"trialCounter",
-                  "customType":"trialCountHandler",
-                  "trialCounterStart":"1",
-                  "reverse":{
-                     "propertyType":"Boolean",
-                     "propertyValue":false
-                  }
-               },
-               {
-                  "name":"level",
-                  "customType":"levelHandler",
-                  "benchmarkSampleSize":"3",
-                  "benchmark":"0.8",
-                  "allowLevelDown":{
-                     "propertyType":"Boolean",
-                     "propertyValue":true
-                  }
-               }
-            ],
-            "children":[
-               {
-                  "tatoolType":"Executable",
-                  "customType":"tatoolShifting",
-                  "name":"shifting",
-                  "blankInterval":"350",
-                  "fixationInterval":0,
-                  "project":{
-                     "name":"tatool",
-                     "access":"public"
-                  },
-                  "stimuliFile":{
-                     "propertyType":"Resource",
-                     "project":{
-                        "name":"tatool-stimuli",
-                        "access":"public"
-                     },
-                     "resourceName":"shifting-parity-magnitude.csv",
-                     "resourceType":"stimuli"
-                  },
-                  "stimuliPath":{
-                     "propertyType":"Path",
-                     "project":{
-                        "name":"tatool-stimuli",
-                        "access":"public"
-                     },
-                     "resourceName":"",
-                     "resourceType":"stimuli"
-                  },
-                  "status":{
-                     "feedbackPanel":true,
-                     "timerPanel":true,
-                     "trialCountPanel":true,
-                     "levelPanel":true
-                  },
-                  "randomisation":"full",
-                  "timerEnabled":{
-                     "propertyType":"Boolean",
-                     "propertyValue":true
-                  },
-                  "displayDuration":"2000",
-                  "displayCueDuration":"250",
-                  "showKeys":{
-                     "propertyType":"Boolean",
-                     "propertyValue":true
-                  }
-               }
-            ]
-         }
-      ]
-   }
+    ],
+    "handlers": [],
+    "iterator": {
+      "numIterations": 1,
+      "customType": "ListIterator"
+    },
+    "tatoolType": "List"
+  },
+  "fullscreen": true,
+  "allowEscapeKey": true,
+  "export": [
+    {
+      "enabled": true,
+      "auto": true,
+      "mode": "upload",
+      "$$hashKey": "object:77950"
+    },
+    {
+      "enabled": true,
+      "mode": "download",
+      "$$hashKey": "object:77841"
+    }
+  ],
+  "label": "demoShifting",
+  "author": "Tatool",
+  "name": "Shifting Experiment",
+  "exportDelimiter": ",",
+  "exportFormat": "long",
+  "moduleMaxSessions": null
 }

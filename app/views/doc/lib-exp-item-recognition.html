@@ -4,11 +4,22 @@
 <p>In the Item Recognition paradigm, participants have to memorise a list of stimuli (e.g., words or faces). In the subsequent recognition phase, the previously presented items are intermixed with new items. The task is to indicate which items were presented previously and which were not. The executable allows for presenting a text or image to signal the transition from the memorisation to the recognition phase of the task. </p>
 
 <ul id="docPageNav">
-  <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('executable')">Executable</a></li>
+  <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('demo')">Demo</a></li>
+  <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('element')">Element</a></li>
+  <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('executable')">Executables</a></li>
   <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('properties')">Properties</a></li>
   <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('stimuli')">Stimuli File</a></li>
+  <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('module')">Example Module</a></li>
   <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('download')">Download</a></li>
 </ul>
+
+<hr class="hr-red">
+
+<h3 id="demo">Demo<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
+<p>Try out the task: 
+<a href="hhttp://www.tatool-web.com/#/public/eb61fcf0-beae-4580-b54d-4dcb3e639f62?extid=demo" target="_blank">Item (Picture) Recognition Demo</a></p>
+<p>The <a href ng-click="scrollTo('module')">Example Module</a> contains all elements of the above demo and can be used to customize the task. 
+</p>
 
 <hr class="hr-red">
 
@@ -102,7 +113,7 @@
 <table class="table table-striped table-condensed table-bordered">
   <thead>
     <tr>
-	  <th>Task</th>
+	    <th>Task</th>
       <th>Project</th>
       <th>Type</th>
       <th>File Name</th>
@@ -111,28 +122,28 @@
   </thead>
   <tbody>
     <tr> 
-    <td class="cellB">Picture Recognition<td>
-      <td>uzh-luco-battery</td>
+      <td class="cellB">Picture Recognition</td>
+      <td>tatool-stimuli</td>
       <td>stimuli</td>
       <td><a href="https://raw.githubusercontent.com/tatool/tatool-web/master/app/projects/public/tatool-stimuli/stimuli/picRecognition.csv" target="_blank">picRecognition.csv</a></td>
       <td>Memoranda are 15 difficult to verbalise pictures that are intermixed with 15 new pictures during the recognition phase.</td>
     </tr>
     <tr> 
-    <td class="cellB">Picture Recognition Practice<td>
-      <td>uzh-luco-battery</td>
+    <td class="cellB">Picture Recognition Practice</td>
+      <td>tatool-stimuli</td>
       <td>stimuli</td>
       <td><a href="https://raw.githubusercontent.com/tatool/tatool-web/master/app/projects/public/tatool-stimuli/stimuli/picRecognition_practice.csv" target="_blank">picRecognition_practice.csv</a></td>
       <td>3 practice pictures that are intermixed with 3 new pictures during the recognition phase.</td>
     </tr>
     <tr> 
-	  <td class="cellB">German Word Recognition<td>
+	  <td class="cellB">German Word Recognition</td>
       <td>uzh-luco-battery</td>
       <td>stimuli</td>
       <td><a href="https://raw.githubusercontent.com/tatool/tatool-web/master/app/projects/public/uzh-luco-battery/stimuli/de_luco_linguistic_wordRecognition.csv" target="_blank">de_luco_linguistic_wordRecognition.csv</a></td>
       <td>Memoranda are 30 German nouns that are either concrete or abstract and intermixed with 30 new words during the recognition phase.</td>
     </tr>
     <tr> 
-    <td class="cellB">German Word Recognition Practice<td>
+    <td class="cellB">German Word Recognition Practice</td>
       <td>uzh-luco-battery</td>
       <td>stimuli</td>
       <td><a href="https://raw.githubusercontent.com/tatool/tatool-web/master/app/projects/public/uzh-luco-battery/stimuli/de_luco_linguistic_wordRecognition_practice.csv" target="_blank">de_luco_linguistic_wordRecognition_practice.csv</a></td>
@@ -230,6 +241,13 @@
     </tr>
   </tbody>
 </table>
+
+<hr class="hr-red">
+
+<h3 id="module">Example Module<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
+<p>Download from GitHub: <a href="https://raw.githubusercontent.com/tatool/tatool-web/master/app/projects/public/tatool/modules/demoPictureRecognition.json" target="_blank">demoPictureRecognition.json</a> </p>
+<p>The Example Module contains all elements of the <a href ng-click="scrollTo('demo')">demo</a> and can be used to customize the task (for more details, see <a ui-sref="doc({page: 'use-host.html'})">instructions for using your own stimuli</a> and description of the <a ui-sref="doc({page: 'lib-acc-instruction.html'})">Instruction Accessory Executable</a>). Note that the Instruction Executable currently doesn't allow HTML pages from external resources. This means that you can use custom HTML pages if you <a ui-sref="doc({page: 'dev-getting-started.html'})">host your own instance</a> of Tatool Web, but you cannot use externally hosted HTML pages on tatool-web.com. For running experiments on tatool-web.com with customized instructions, you must use images (see the <a ui-sref="doc({page: 'main-faq.html'})">FAQ</a> for currently available options to host your custom stimuli and instructions on tatool-web.com).
+</p>
 
 <hr class="hr-red">
 

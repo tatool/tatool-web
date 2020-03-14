@@ -1,0 +1,299 @@
+{
+  "name": "Local Recognition: Patterns",
+  "author": "info@tatool.ch",
+  "label": "demoLocalRecRows",
+  "export": [
+    {
+      "mode": "upload",
+      "auto": true,
+      "enabled": true,
+      "$$hashKey": "object:55428"
+    },
+    {
+      "mode": "download",
+      "enabled": true,
+      "$$hashKey": "object:55155"
+    }
+  ],
+  "allowEscapeKey": true,
+  "fullscreen": true,
+  "moduleHierarchy": {
+    "tatoolType": "List",
+    "label": "Task List",
+    "iterator": {
+      "customType": "ListIterator",
+      "numIterations": 1,
+      "order": "sequential"
+    },
+    "children": [
+      {
+        "tatoolType": "Executable",
+        "customType": "tatoolInstruction",
+        "name": "instruction1",
+        "blankInterval": 0,
+        "fixationInterval": 0,
+        "project": {
+          "name": "tatool",
+          "access": "public"
+        },
+        "pages": {
+          "propertyType": "ArrayResource",
+          "propertyValue": [
+            {
+              "project": {
+                "name": "tatool-stimuli",
+                "access": "public"
+              },
+              "resourceName": "localRecognitionPatterns_01.html",
+              "resourceType": "instructions"
+            },
+            {
+              "project": {
+                "name": "tatool-stimuli",
+                "access": "public"
+              },
+              "resourceType": "instructions",
+              "resourceName": "localRecognitionPatterns_02.html"
+            }
+          ]
+        },
+        "images": {
+          "propertyType": "ArrayResource",
+          "propertyValue": []
+        }
+      },
+      {
+        "tatoolType": "Executable",
+        "customType": "tatoolCountdown",
+        "name": "countdown",
+        "blankInterval": 0,
+        "fixationInterval": 0,
+        "project": {
+          "name": "tatool",
+          "access": "public"
+        },
+        "countdown": "5",
+        "interval": "500",
+        "goText": "Go!",
+        "hideMouseCursor": true
+      },
+      {
+        "tatoolType": "List",
+        "name": "4ufuiql1kh500000",
+        "iterator": {
+          "customType": "ListIterator",
+          "numIterations": 2,
+          "order": "sequential"
+        },
+        "handlers": [],
+        "children": [
+          {
+            "tatoolType": "Executable",
+            "customType": "tatoolLocalRecognition",
+            "name": "locRecGrid_practice",
+            "blankInterval": "1000",
+            "fixationInterval": "",
+            "project": {
+              "name": "tatool",
+              "access": "public"
+            },
+            "stimuliPath": {
+              "propertyType": "Path",
+              "project": {
+                "name": "tatool-stimuli",
+                "access": "public"
+              },
+              "resourceName": "",
+              "resourceType": "stimuli"
+            },
+            "stimuliFile": {
+              "propertyType": "Resource",
+              "project": {
+                "name": "tatool-stimuli",
+                "access": "public"
+              },
+              "resourceName": "localRecognition_rows_practice.csv",
+              "resourceType": "stimuli"
+            },
+            "displayDuration": "900",
+            "intervalDuration": "100",
+            "hideMouseCursor": true,
+            "status": {
+              "feedbackPanel": true
+            }
+          }
+        ],
+        "label": "Practice"
+      },
+      {
+        "tatoolType": "Executable",
+        "customType": "tatoolInstruction",
+        "name": "instruction2",
+        "blankInterval": 0,
+        "fixationInterval": 0,
+        "project": {
+          "name": "tatool",
+          "access": "public"
+        },
+        "pages": {
+          "propertyType": "ArrayResource",
+          "propertyValue": [
+            {
+              "project": {
+                "name": "tatool-stimuli",
+                "access": "public"
+              },
+              "resourceName": "localRecognitionPatterns_03.html",
+              "resourceType": "instructions"
+            }
+          ]
+        },
+        "images": {
+          "propertyType": "ArrayResource",
+          "propertyValue": []
+        }
+      },
+      {
+        "tatoolType": "Executable",
+        "customType": "tatoolCountdown",
+        "name": "countdown",
+        "blankInterval": 0,
+        "fixationInterval": 0,
+        "project": {
+          "name": "tatool",
+          "access": "public"
+        },
+        "hideMouseCursor": true
+      },
+      {
+        "tatoolType": "List",
+        "name": "8f039kcbcal00000",
+        "iterator": {
+          "customType": "ListIterator",
+          "numIterations": 3,
+          "order": "sequential"
+        },
+        "handlers": [],
+        "children": [
+          {
+            "tatoolType": "Executable",
+            "customType": "tatoolLocalRecognition",
+            "name": "locRecGrid_test",
+            "blankInterval": 0,
+            "fixationInterval": 0,
+            "project": {
+              "name": "tatool",
+              "access": "public"
+            },
+            "stimuliPath": {
+              "propertyType": "Path",
+              "project": {
+                "name": "tatool-stimuli",
+                "access": "public"
+              },
+              "resourceName": "",
+              "resourceType": "stimuli"
+            },
+            "stimuliFile": {
+              "propertyType": "Resource",
+              "project": {
+                "name": "tatool-stimuli",
+                "access": "public"
+              },
+              "resourceName": "localRecognition_rows.csv",
+              "resourceType": "stimuli"
+            },
+            "displayDuration": "900",
+            "intervalDuration": "100",
+            "hideMouseCursor": true
+          }
+        ],
+        "label": "Block 1"
+      },
+      {
+        "tatoolType": "Executable",
+        "customType": "tatoolInstruction",
+        "name": "break",
+        "blankInterval": 0,
+        "fixationInterval": 0,
+        "project": {
+          "name": "tatool",
+          "access": "public"
+        },
+        "pages": {
+          "propertyType": "ArrayResource",
+          "propertyValue": [
+            {
+              "project": {
+                "name": "tatool-stimuli",
+                "access": "public"
+              },
+              "resourceName": "break.html",
+              "resourceType": "instructions"
+            }
+          ]
+        },
+        "images": {
+          "propertyType": "ArrayResource",
+          "propertyValue": []
+        }
+      },
+      {
+        "tatoolType": "List",
+        "name": "33wrxbnmh9e00000",
+        "iterator": {
+          "customType": "ListIterator",
+          "numIterations": 3,
+          "order": "sequential"
+        },
+        "handlers": [],
+        "children": [
+          {
+            "tatoolType": "Executable",
+            "customType": "tatoolLocalRecognition",
+            "name": "locRecGrid_test",
+            "blankInterval": 0,
+            "fixationInterval": 0,
+            "project": {
+              "name": "tatool",
+              "access": "public"
+            }
+          }
+        ],
+        "label": "Block 2"
+      },
+      {
+        "tatoolType": "Executable",
+        "customType": "tatoolInstruction",
+        "name": "end",
+        "blankInterval": 0,
+        "fixationInterval": 0,
+        "project": {
+          "name": "tatool",
+          "access": "public"
+        },
+        "pages": {
+          "propertyType": "ArrayResource",
+          "propertyValue": [
+            {
+              "project": {
+                "name": "tatool-stimuli",
+                "access": "public"
+              },
+              "resourceName": "end.html",
+              "resourceType": "instructions"
+            }
+          ]
+        },
+        "images": {
+          "propertyType": "ArrayResource",
+          "propertyValue": []
+        }
+      }
+    ]
+  },
+  "description": "An example local recognition task using rows.",
+  "exportDelimiter": ",",
+  "exportFormat": "long",
+  "moduleMaxSessions": null
+}

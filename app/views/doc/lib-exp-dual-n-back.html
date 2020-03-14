@@ -43,23 +43,58 @@
 
 <p>The following Properties can be provided in the Module Editor to change the behaviour of the task:</p>
 
-<table class="table table-condensed table-bordered">
+<table class="table table-striped table-condensed table-bordered">
+  <thead>
+    <tr>
+      <th>Property Name</th>
+      <th>Property Type</th>
+      <th>Default</th>
+      <th>Mandatory</th>
+      <th>Description</th>
+    </tr>
+  </thead>
   <tbody>
     <tr>
+      <td class="cellB">stimuliFile</td>
+      <td>Resource</td>
+      <td>-</td>
+      <td class="cellB">Yes</td>
+      <td>A stimuli file expecting stimuli according to the Tatool Stimulus definition.</td>
+    </tr>
+    <tr>
+      <td class="cellB">stimuliPath</td>
+      <td>Path</td>
+      <td>-</td>
+      <td class="cellB">Yes</td>
+      <td>A stimuli path where to load any resources from (stimuli images, input key images).</td>
+    </tr>
+    <tr>
       <td class="cellB">displayDuration</td>
-      <td>The time in milliseconds to display the stimulus</td>
+      <td>String</td>
+      <td>2000</td>
+      <td>No</td>
+      <td>The time in milliseconds to display each stimulus.</td>
     </tr>
     <tr>
       <td class="cellB">nValue</td>
-      <td>The value of N refered to in the initial description</td>
+      <td>String</td>
+      <td>1</td>
+      <td>No</td>
+      <td>The critical number of positions back in the sequence.</td>
     </tr>
     <tr>
       <td class="cellB">iterations</td>
-      <td>This should match the iterations in the list element. Used to assist in generating the correct number of targets</td>
+      <td>String</td>
+      <td>20</td>
+      <td>No</td>
+      <td>The number of iterations as provided in the List Element. Used to assist in generating the correct number of targets.</td>
     </tr>
     <tr>
       <td class="cellB">targets</td>
-      <td>How many target stimuli should be generated (default is 12)</td>
+      <td>String</td>
+      <td>12</td>
+      <td>No</td>
+      <td>The number of targets to be generated.</td>
     </tr>
   </tbody>
 </table>
@@ -67,8 +102,7 @@
 <hr class="hr-red">
 
 <h3 id="stimuli">Stimuli File<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
-
-<p><a ui-sref="doc({page: 'lib-exp-dual-n-back.html'})">dual-nback-permutations.csv contains a list of the available stimuli. This lists all the visual and audio stimuli also in the same folder.</a></p>
+<p><a href="https://raw.githubusercontent.com/tatool/tatool-web/master/app/projects/public/tatool-share/stimuli/dual-nback-permutations.csv" target="_blank">ldual-nback-permutations.csv</a> contains a list of the available visual and audio stimuli.</p>
 
 <hr class="hr-red">
 

@@ -4,11 +4,22 @@
 <p>In the Shifting paradigm (also referred to as <a href="http://en.wikipedia.org/wiki/Task_switching_%28psychology%29" target="_blank">task switching</a>), participants are asked to classify stimuli according to changing rules. For example, in a classic Shifting paradigm, participants have to switch between the task to classify a digit as being odd or even, and the task to judge its magnitude being less or greater than 5.</p>
 
 <ul id="docPageNav">
-  <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('executable')">Executable</a></li>
+  <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('demo')">Demo</a></li>
+  <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('element')">Element</a></li>
+  <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('executable')">Executables</a></li>
   <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('properties')">Properties</a></li>
   <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('stimuli')">Stimuli File</a></li>
+  <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('module')">Example Module</a></li>
   <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('download')">Download</a></li>
 </ul>
+
+<hr class="hr-red">
+
+<h3 id="demo">Demo<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
+<p>Try out the task: 
+<a href="http://www.tatool-web.com/#/public/97095beb-854e-424c-97aa-eed72cfff055?extid=demo" target="_blank">Shifting Demo</a></p>
+<p>The <a href ng-click="scrollTo('module')">Example Module</a> contains all elements of the above demo and can be used to customize the task. 
+</p>
 
 <hr class="hr-red">
 
@@ -223,7 +234,12 @@
   </tbody>
 </table>
 
+<hr class="hr-red">
 
+<h3 id="module">Example Module<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
+<p>Download from GitHub: <a href="https://raw.githubusercontent.com/tatool/tatool-web/master/app/projects/public/tatool/modules/demoShifting.json" target="_blank">demoShifting.json</a> </p>
+<p>The Example Module contains all elements of the <a href ng-click="scrollTo('demo')">demo</a> and can be used to customize the task (for more details, see <a ui-sref="doc({page: 'use-host.html'})">instructions for using your own stimuli</a> and description of the <a ui-sref="doc({page: 'lib-acc-instruction.html'})">Instruction Accessory Executable</a>). Note that the Instruction Executable currently doesn't allow HTML pages from external resources. This means that you can use custom HTML pages if you <a ui-sref="doc({page: 'dev-getting-started.html'})">host your own instance</a> of Tatool Web, but you cannot use externally hosted HTML pages on tatool-web.com. For running experiments on tatool-web.com with customized instructions, you must use images (see the <a ui-sref="doc({page: 'main-faq.html'})">FAQ</a> for currently available options to host your custom stimuli and instructions on tatool-web.com).
+</p>
 
 <hr class="hr-red">
 

@@ -1,0 +1,258 @@
+{
+  "moduleHierarchy": {
+    "children": [
+      {
+        "hideMouseCursor": false,
+        "images": {
+          "propertyValue": [],
+          "propertyType": "ArrayResource"
+        },
+        "pages": {
+          "propertyValue": [
+            {
+              "resourceType": "instructions",
+              "resourceName": "digitSpan_01.htm",
+              "project": {
+                "name": "tatool-stimuli",
+                "access": "public"
+              }
+            }
+          ],
+          "propertyType": "ArrayResource"
+        },
+        "project": {
+          "access": "public",
+          "name": "tatool"
+        },
+        "fixationInterval": 0,
+        "blankInterval": 0,
+        "name": "instruction_practise",
+        "customType": "tatoolInstruction",
+        "tatoolType": "Executable"
+      },
+      {
+        "hideMouseCursor": true,
+        "interval": "1000",
+        "countdown": "3",
+        "project": {
+          "access": "public",
+          "name": "tatool"
+        },
+        "fixationInterval": 0,
+        "blankInterval": 0,
+        "name": "countdown",
+        "customType": "tatoolCountdown",
+        "tatoolType": "Executable"
+      },
+      {
+        "label": "practice",
+        "children": {
+          "primary": {
+            "status": {
+              "feedbackPanel": true
+            },
+            "hideMouseCursor": true,
+            "recallText": "Number",
+            "randomisation": "full",
+            "intervalDuration": "0",
+            "displayDuration": "1000",
+            "suspendAfterEachItem": {
+              "propertyValue": true,
+              "propertyType": "Boolean"
+            },
+            "stimuliFile": {
+              "resourceType": "stimuli",
+              "resourceName": "digitSpan_practice.csv",
+              "project": {
+                "name": "tatool-stimuli",
+                "access": "public"
+              },
+              "propertyType": "Resource"
+            },
+            "stimuliPath": {
+              "resourceType": "stimuli",
+              "resourceName": "",
+              "project": {
+                "name": "tatool-stimuli",
+                "access": "public"
+              },
+              "propertyType": "Path"
+            },
+            "project": {
+              "access": "public",
+              "name": "tatool"
+            },
+            "fixationInterval": 0,
+            "blankInterval": "500",
+            "name": "practice",
+            "customType": "tatoolMemorySpan",
+            "tatoolType": "Executable"
+          }
+        },
+        "handlers": [],
+        "iterator": {
+          "order": "sequential",
+          "numIterations": 2,
+          "customType": "ListIterator"
+        },
+        "name": "7yzkbrhjcfykjem1",
+        "tatoolType": "Dual"
+      },
+      {
+        "images": {
+          "propertyValue": [],
+          "propertyType": "ArrayResource"
+        },
+        "pages": {
+          "propertyValue": [
+            {
+              "resourceType": "instructions",
+              "resourceName": "digitSpan_02.htm",
+              "project": {
+                "name": "tatool-stimuli",
+                "access": "public"
+              }
+            },
+            {
+              "project": {
+                "name": "tatool-stimuli",
+                "access": "public"
+              },
+              "resourceType": "instructions",
+              "resourceName": "digitSpan_02.htm"
+            }
+          ],
+          "propertyType": "ArrayResource"
+        },
+        "project": {
+          "access": "public",
+          "name": "tatool"
+        },
+        "fixationInterval": 0,
+        "blankInterval": 0,
+        "name": "instruction_test",
+        "customType": "tatoolInstruction",
+        "tatoolType": "Executable"
+      },
+      {
+        "project": {
+          "access": "public",
+          "name": "tatool"
+        },
+        "fixationInterval": 0,
+        "blankInterval": 0,
+        "name": "countdown",
+        "customType": "tatoolCountdown",
+        "tatoolType": "Executable"
+      },
+      {
+        "label": "test",
+        "children": {
+          "primary": {
+            "hideMouseCursor": true,
+            "recallText": "Number",
+            "randomisation": "full",
+            "intervalDuration": "0",
+            "displayDuration": "1000",
+            "suspendAfterEachItem": {
+              "propertyValue": true,
+              "propertyType": "Boolean"
+            },
+            "stimuliFile": {
+              "resourceType": "stimuli",
+              "resourceName": "digitSpan_test.csv",
+              "project": {
+                "name": "tatool-stimuli",
+                "access": "public"
+              },
+              "propertyType": "Resource"
+            },
+            "stimuliPath": {
+              "resourceType": "stimuli",
+              "resourceName": "",
+              "project": {
+                "name": "tatool-stimuli",
+                "access": "public"
+              },
+              "propertyType": "Path"
+            },
+            "project": {
+              "access": "public",
+              "name": "tatool"
+            },
+            "fixationInterval": 0,
+            "blankInterval": 0,
+            "name": "test",
+            "customType": "tatoolMemorySpan",
+            "tatoolType": "Executable"
+          }
+        },
+        "handlers": [],
+        "iterator": {
+          "order": "sequential",
+          "numIterations": 12,
+          "customType": "ListIterator"
+        },
+        "name": "on5vzqxnkzcfr5jy",
+        "tatoolType": "Dual"
+      },
+      {
+        "images": {
+          "propertyValue": [],
+          "propertyType": "ArrayResource"
+        },
+        "pages": {
+          "propertyValue": [
+            {
+              "resourceType": "instructions",
+              "resourceName": "digitSpan_03.htm",
+              "project": {
+                "name": "tatool-stimuli",
+                "access": "public"
+              }
+            }
+          ],
+          "propertyType": "ArrayResource"
+        },
+        "project": {
+          "access": "public",
+          "name": "tatool"
+        },
+        "fixationInterval": 0,
+        "blankInterval": 0,
+        "name": "instruction_end",
+        "customType": "tatoolInstruction",
+        "tatoolType": "Executable"
+      }
+    ],
+    "iterator": {
+      "order": "sequential",
+      "numIterations": 1,
+      "customType": "ListIterator"
+    },
+    "label": "Task List",
+    "tatoolType": "List"
+  },
+  "fullscreen": true,
+  "allowEscapeKey": true,
+  "export": [
+    {
+      "enabled": true,
+      "auto": true,
+      "mode": "upload",
+      "$$hashKey": "object:62934"
+    },
+    {
+      "enabled": true,
+      "mode": "download",
+      "$$hashKey": "object:62554"
+    }
+  ],
+  "label": "demoDigitSpan",
+  "author": "info@tatool.ch",
+  "name": "Digit Memory Span",
+  "description": "Example for a digit span task.",
+  "exportDelimiter": ",",
+  "moduleMaxSessions": 1,
+  "exportFormat": "long"
+}

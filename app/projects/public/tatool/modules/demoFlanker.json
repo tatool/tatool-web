@@ -1,135 +1,136 @@
 {
-   "name":"Flanker Experiment",
-   "author":"Tatool",
-   "label":"demoFlanker",
-   "export":[
+  "moduleHierarchy": {
+    "children": [
       {
-         "mode":"upload",
-         "auto":true,
-         "enabled":true,
-         "$$hashKey":"object:8845"
+        "pages": {
+          "propertyValue": [
+            {
+              "resourceType": "instructions",
+              "resourceName": "tatoolFlanker.html",
+              "project": {
+                "access": "public",
+                "name": "tatool"
+              }
+            }
+          ],
+          "propertyType": "ArrayResource"
+        },
+        "project": {
+          "access": "public",
+          "name": "tatool"
+        },
+        "fixationInterval": 0,
+        "blankInterval": "250",
+        "name": "instruction",
+        "customType": "tatoolInstruction",
+        "tatoolType": "Executable"
       },
       {
-         "mode":"download",
-         "enabled":true,
-         "$$hashKey":"object:8458"
+        "project": {
+          "access": "public",
+          "name": "tatool"
+        },
+        "fixationInterval": 0,
+        "blankInterval": "250",
+        "name": "countdown",
+        "customType": "tatoolCountdown",
+        "tatoolType": "Executable"
+      },
+      {
+        "children": [
+          {
+            "showKeys": {
+              "propertyValue": true,
+              "propertyType": "Boolean"
+            },
+            "displayDuration": "2000",
+            "timerEnabled": {
+              "propertyValue": false,
+              "propertyType": "Boolean"
+            },
+            "randomisation": "full",
+            "status": {
+              "levelPanel": false,
+              "trialCountPanel": true,
+              "timerPanel": true,
+              "feedbackPanel": true
+            },
+            "stimuliPath": {
+              "resourceType": "stimuli",
+              "resourceName": "",
+              "project": {
+                "access": "public",
+                "name": "tatool-stimuli"
+              },
+              "propertyType": "Path"
+            },
+            "stimuliFile": {
+              "resourceType": "stimuli",
+              "resourceName": "choice-flanker-arrows.csv",
+              "project": {
+                "access": "public",
+                "name": "tatool-stimuli"
+              },
+              "propertyType": "Resource"
+            },
+            "project": {
+              "access": "public",
+              "name": "tatool"
+            },
+            "fixationInterval": "150",
+            "blankInterval": "350",
+            "name": "flanker",
+            "customType": "tatoolChoiceReaction",
+            "tatoolType": "Executable"
+          }
+        ],
+        "handlers": [
+          {
+            "reverse": {
+              "propertyValue": false,
+              "propertyType": "Boolean"
+            },
+            "trialCounterStart": "1",
+            "customType": "trialCountHandler",
+            "name": "trialCounter"
+          }
+        ],
+        "iterator": {
+          "numIterations": 20,
+          "customType": "ListIterator",
+          "order": "sequential"
+        },
+        "name": "squq4uboijh8h0k9",
+        "tatoolType": "List"
       }
-   ],
-   "allowEscapeKey":true,
-   "fullscreen":true,
-   "exportDelimiter":";",
-   "exportFormat":"long",
-   "moduleHierarchy":{
-      "tatoolType":"List",
-      "iterator":{
-         "customType":"ListIterator",
-         "numIterations":1
-      },
-      "handlers":[
-
-      ],
-      "children":[
-         {
-            "tatoolType":"Executable",
-            "customType":"tatoolInstruction",
-            "name":"instruction",
-            "blankInterval":"250",
-            "fixationInterval":0,
-            "project":{
-               "name":"tatool",
-               "access":"public"
-            },
-            "pages":{
-               "propertyType":"ArrayResource",
-               "propertyValue":[
-                  {
-                     "project":{
-                        "name":"tatool",
-                        "access":"public"
-                     },
-                     "resourceName":"tatoolFlanker.html",
-                     "resourceType":"instructions"
-                  }
-               ]
-            }
-         },
-         {
-            "tatoolType":"Executable",
-            "customType":"tatoolCountdown",
-            "name":"countdown",
-            "blankInterval":"250",
-            "fixationInterval":0,
-            "project":{
-               "name":"tatool",
-               "access":"public"
-            }
-         },
-         {
-            "tatoolType":"List",
-            "name":"squq4uboijh8h0k9",
-            "iterator":{
-               "customType":"ListIterator",
-               "numIterations":20
-            },
-            "handlers":[
-               {
-                  "name":"trialCounter",
-                  "customType":"trialCountHandler",
-                  "trialCounterStart":"1",
-                  "reverse":{
-                     "propertyType":"Boolean",
-                     "propertyValue":false
-                  }
-               }
-            ],
-            "children":[
-               {
-                  "tatoolType":"Executable",
-                  "customType":"tatoolChoiceReaction",
-                  "name":"flanker",
-                  "blankInterval":"350",
-                  "fixationInterval":"150",
-                  "project":{
-                     "name":"tatool",
-                     "access":"public"
-                  },
-                  "stimuliFile":{
-                     "propertyType":"Resource",
-                     "project":{
-                        "name":"tatool-stimuli",
-                        "access":"public"
-                     },
-                     "resourceName":"choice-flanker-arrows.csv",
-                     "resourceType":"stimuli"
-                  },
-                  "stimuliPath":{
-                     "propertyType":"Path",
-                     "project":{
-                        "name":"tatool-stimuli",
-                        "access":"public"
-                     },
-                     "resourceName":"",
-                     "resourceType":"stimuli"
-                  },
-                  "status":{
-                     "feedbackPanel":true,
-                     "timerPanel":true,
-                     "trialCountPanel":true,
-                     "levelPanel":false
-                  },
-                  "randomisation":"full",
-                  "timerEnabled":{
-                     "propertyType":"Boolean",
-                     "propertyValue":true
-                  },
-                  "displayDuration":"2000",
-                  "showKeys":{
-                     "propertyType":"Boolean",
-                     "propertyValue":true
-                  }
-               }
-            ]
-         }
-      ]
-   }
+    ],
+    "handlers": [],
+    "iterator": {
+      "numIterations": 1,
+      "customType": "ListIterator",
+      "order": "sequential"
+    },
+    "tatoolType": "List"
+  },
+  "fullscreen": true,
+  "allowEscapeKey": true,
+  "export": [
+    {
+      "enabled": true,
+      "auto": true,
+      "mode": "upload",
+      "$$hashKey": "object:10583"
+    },
+    {
+      "enabled": true,
+      "mode": "download",
+      "$$hashKey": "object:10332"
+    }
+  ],
+  "label": "demoFlanker",
+  "author": "Tatool",
+  "name": "Flanker Experiment",
+  "exportDelimiter": ",",
+  "exportFormat": "long",
+  "moduleMaxSessions": null
 }

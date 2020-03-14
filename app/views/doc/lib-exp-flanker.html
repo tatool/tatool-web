@@ -4,11 +4,22 @@
 <p>In the Flanker paradigm (modeled after the <a href="http://en.wikipedia.org/wiki/Eriksen_flanker_task" target="_blank">Eriksen flanker task</a>), participants are asked to classify a central target stimulus while ignoring irrelevant flanker stimuli surrounding the target. The flankers can be congruent (i.e., elicit the same response as the target), incongruent (i.e., elicit the opposite response as the target), or neutral (i.e., completely unrelated to the target). For example, in the Arrow-Flanker (see available stimuli files below) the target stimulus is an arrow, and participants have to indicate whether it points to the left or to the right. In the congruent condition, the flankers point in the same direction as the target, while they point in the opposite direction in the incongruent condition. In neutral trials, the target arrow is surrounded by squares. </p>
 
 <ul id="docPageNav">
-  <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('executable')">Executable</a></li>
+  <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('demo')">Demo</a></li>
+  <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('element')">Element</a></li>
+  <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('executable')">Executables</a></li>
   <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('properties')">Properties</a></li>
   <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('stimuli')">Stimuli File</a></li>
+  <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('module')">Example Module</a></li>
   <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('download')">Download</a></li>
 </ul>
+
+<hr class="hr-red">
+
+<h3 id="demo">Demo<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
+<p>Try out the task: 
+<a href="http://www.tatool-web.com/#/public/05762b93-5dbb-4058-b72b-0cba973a3acc?extid=demo" target="_blank">Flanker Demo</a></p>
+<p>The <a href ng-click="scrollTo('module')">Example Module</a> contains all elements of the above demo and can be used to customize the task. 
+</p>
 
 <hr class="hr-red">
 
@@ -198,7 +209,12 @@
   </tbody>
 </table>
 
+<hr class="hr-red">
 
+<h3 id="module">Example Module<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
+<p>Download from GitHub: <a href="https://raw.githubusercontent.com/tatool/tatool-web/master/app/projects/public/tatool/modules/demoFlanker.json" target="_blank">demoFlanker.json</a> </p>
+<p>The Example Module contains all elements of the <a href ng-click="scrollTo('demo')">demo</a> and can be used to customize the task (for more details, see <a ui-sref="doc({page: 'use-host.html'})">instructions for using your own stimuli</a> and description of the <a ui-sref="doc({page: 'lib-acc-instruction.html'})">Instruction Accessory Executable</a>). Note that the Instruction Executable currently doesn't allow HTML pages from external resources. This means that you can use custom HTML pages if you <a ui-sref="doc({page: 'dev-getting-started.html'})">host your own instance</a> of Tatool Web, but you cannot use externally hosted HTML pages on tatool-web.com. For running experiments on tatool-web.com with customized instructions, you must use images (see the <a ui-sref="doc({page: 'main-faq.html'})">FAQ</a> for currently available options to host your custom stimuli and instructions on tatool-web.com).
+</p>
 
 <hr class="hr-red">
 

@@ -4,12 +4,22 @@
 <p>In the Complex Span paradigm, participants have to switch between memorising stimuli, and responding to a choice-reaction time task. After a series of such switches, they're asked to recall the stimuli memorised. In Tatool, this is implemented as Dual Element composed of the <a ui-sref="doc({page: 'lib-exp-memory-span.html'})">Memory Span</a> and the <a ui-sref="doc({page: 'lib-exp-choice-reactiontime.html'})">Choice Reaction Time</a> paradigms.</p>
 
 <ul id="docPageNav">
+  <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('demo')">Demo</a></li>
   <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('element')">Element</a></li>
   <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('executable')">Executables</a></li>
   <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('properties')">Properties</a></li>
   <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('stimuli')">Stimuli File</a></li>
+  <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('module')">Example Module</a></li>
   <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('download')">Download</a></li>
 </ul>
+
+<hr class="hr-red">
+
+<h3 id="demo">Demo<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
+<p>Try out the task: 
+<a href="http://www.tatool-web.com/#/public/174f0462-c468-4dfa-a054-bba8ec4c97fb?extid=demo" target="_blank">Complex Span Demo</a></p>
+<p>The <a href ng-click="scrollTo('module')">Example Module</a> contains all elements of the above demo and can be used to customize the task. 
+</p>
 
 <hr class="hr-red">
 
@@ -76,6 +86,13 @@ Note that you have to set the Property <code>suspendAfterEachItem</code> to <cod
 <p><a ui-sref="doc({page: 'lib-exp-memory-span.html'})">Memory Span Task</a></p>
 
 <p><a ui-sref="doc({page: 'lib-exp-choice-reactiontime.html'})">Choice Reaction Time Task</a></p>
+
+<hr class="hr-red">
+
+<h3 id="module">Example Module<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
+<p>Download from GitHub: <a href="https://raw.githubusercontent.com/tatool/tatool-web/master/app/projects/public/tatool/modules/demoComplexSpan.json" target="_blank">demoComplexSpan.json</a> </p>
+<p>The Example Module contains all elements of the <a href ng-click="scrollTo('demo')">demo</a> and can be used to customize the task (for more details, see <a ui-sref="doc({page: 'use-host.html'})">instructions for using your own stimuli</a> and description of the <a ui-sref="doc({page: 'lib-acc-instruction.html'})">Instruction Accessory Executable</a>). Note that the Instruction Executable currently doesn't allow HTML pages from external resources. This means that you can use custom HTML pages if you <a ui-sref="doc({page: 'dev-getting-started.html'})">host your own instance</a> of Tatool Web, but you cannot use externally hosted HTML pages on tatool-web.com. For running experiments on tatool-web.com with customized instructions, you must use images (see the <a ui-sref="doc({page: 'main-faq.html'})">FAQ</a> for currently available options to host your custom stimuli and instructions on tatool-web.com).
+</p>
 
 <hr class="hr-red">
 

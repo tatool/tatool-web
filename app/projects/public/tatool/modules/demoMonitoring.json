@@ -1,0 +1,237 @@
+{
+  "name": "Monitoring",
+  "author": "info@tatool.ch",
+  "label": "demoMonitoring",
+  "export": [
+    {
+      "mode": "upload",
+      "auto": true,
+      "enabled": true,
+      "$$hashKey": "object:74607"
+    },
+    {
+      "mode": "download",
+      "enabled": true,
+      "$$hashKey": "object:74441"
+    }
+  ],
+  "allowEscapeKey": true,
+  "fullscreen": true,
+  "moduleHierarchy": {
+    "tatoolType": "List",
+    "label": "Digit Monitoring",
+    "iterator": {
+      "customType": "ListIterator",
+      "numIterations": 1,
+      "order": "sequential"
+    },
+    "children": [
+      {
+        "tatoolType": "Executable",
+        "customType": "tatoolInstruction",
+        "name": "instruction_practice",
+        "blankInterval": 0,
+        "fixationInterval": 0,
+        "project": {
+          "name": "tatool",
+          "access": "public"
+        },
+        "pages": {
+          "propertyType": "ArrayResource",
+          "propertyValue": [
+            {
+              "project": {
+                "name": "tatool-stimuli",
+                "access": "public"
+              },
+              "resourceName": "monitoring_num_01.htm",
+              "resourceType": "instructions"
+            },
+            {
+              "project": {
+                "name": "tatool-stimuli",
+                "access": "public"
+              },
+              "resourceType": "instructions",
+              "resourceName": "monitoring_num_02.htm"
+            }
+          ]
+        },
+        "images": {
+          "propertyType": "ArrayResource",
+          "propertyValue": []
+        }
+      },
+      {
+        "tatoolType": "Executable",
+        "customType": "tatoolCountdown",
+        "name": "countdown",
+        "blankInterval": 0,
+        "fixationInterval": 0,
+        "project": {
+          "name": "tatool",
+          "access": "public"
+        },
+        "countdown": "3",
+        "interval": "1000",
+        "goText": "Go!",
+        "hideMouseCursor": true
+      },
+      {
+        "tatoolType": "List",
+        "name": "4giiwhrdl0x00000",
+        "iterator": {
+          "customType": "ListIterator",
+          "numIterations": 15,
+          "order": "sequential"
+        },
+        "handlers": [],
+        "children": [
+          {
+            "tatoolType": "Executable",
+            "customType": "tatoolMonitoring",
+            "name": "digits_practice",
+            "blankInterval": "0",
+            "fixationInterval": 0,
+            "project": {
+              "name": "tatool",
+              "access": "public"
+            },
+            "stimuliPath": {
+              "propertyType": "Path",
+              "project": {
+                "name": "uzh-luco-battery",
+                "access": "public"
+              },
+              "resourceName": "",
+              "resourceType": "stimuli"
+            },
+            "stimuliFile": {
+              "propertyType": "Resource",
+              "project": {
+                "name": "uzh-luco-battery",
+                "access": "public"
+              },
+              "resourceName": "luco_monitoring_num_practice.csv",
+              "resourceType": "stimuli"
+            },
+            "showKeys": {
+              "propertyType": "Boolean",
+              "propertyValue": false
+            },
+            "displayDuration": "2000",
+            "gridRows": "3",
+            "gridCols": "3",
+            "cellHeight": "150",
+            "cellWidth": "150",
+            "hideMouseCursor": true,
+            "status": {
+              "feedbackPanel": false
+            }
+          }
+        ],
+        "label": "Practice Block"
+      },
+      {
+        "tatoolType": "Executable",
+        "customType": "tatoolInstruction",
+        "name": "instruction_test",
+        "blankInterval": 0,
+        "fixationInterval": 0,
+        "project": {
+          "name": "tatool",
+          "access": "public"
+        },
+        "pages": {
+          "propertyType": "ArrayResource",
+          "propertyValue": [
+            {
+              "project": {
+                "name": "tatool-stimuli",
+                "access": "public"
+              },
+              "resourceName": "monitoring_num_03.htm",
+              "resourceType": "instructions"
+            }
+          ]
+        },
+        "images": {
+          "propertyType": "ArrayResource",
+          "propertyValue": []
+        },
+        "hideMouseCursor": false
+      },
+      {
+        "tatoolType": "Executable",
+        "customType": "tatoolCountdown",
+        "name": "countdown",
+        "blankInterval": 0,
+        "fixationInterval": 0,
+        "project": {
+          "name": "tatool",
+          "access": "public"
+        },
+        "countdown": "3",
+        "interval": "1000",
+        "goText": "Los!",
+        "hideMouseCursor": true
+      },
+      {
+        "tatoolType": "List",
+        "name": "5nl15wqkd1w00000",
+        "iterator": {
+          "customType": "ListIterator",
+          "numIterations": 44,
+          "order": "sequential"
+        },
+        "handlers": [],
+        "children": [
+          {
+            "tatoolType": "Executable",
+            "customType": "tatoolMonitoring",
+            "name": "digits",
+            "blankInterval": 0,
+            "fixationInterval": 0,
+            "project": {
+              "name": "tatool",
+              "access": "public"
+            },
+            "stimuliPath": {
+              "propertyType": "Path",
+              "project": {
+                "name": "uzh-luco-battery",
+                "access": "public"
+              },
+              "resourceName": "",
+              "resourceType": "stimuli"
+            },
+            "stimuliFile": {
+              "propertyType": "Resource",
+              "project": {
+                "name": "uzh-luco-battery",
+                "access": "public"
+              },
+              "resourceName": "luco_monitoring_num_practice.csv",
+              "resourceType": "stimuli"
+            },
+            "showKeys": {
+              "propertyType": "Boolean",
+              "propertyValue": false
+            },
+            "displayDuration": "2000",
+            "gridRows": "3",
+            "gridCols": "3",
+            "cellHeight": "150",
+            "cellWidth": "150",
+            "hideMouseCursor": true
+          }
+        ],
+        "label": "Test Block"
+      }
+    ]
+  },
+  "exportDelimiter": ",",
+  "exportFormat": "long",
+  "description": "A brief demo of the monitoring task.",
+  "moduleMaxSessions": null
+}

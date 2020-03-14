@@ -4,11 +4,23 @@
 <p>In this paradigm (modelled after <a href="http://psycnet.apa.org/record/2005-09704-005" target="_blank">Oberauer, 2005</a>), participants have to memorise items and their current context (e.g., object at specific locations in a grid). After memorisation, participants are probed with matches (i.e., items that have been presented in that context), distractors (i.e., items that haven't been presented in the current trial at all), or lures (i.e., items that have been presented in a different context). This setup allows for disentangling recognition of items from recognition of item-to-context binding. Local recognition tasks are, therefore, sometimes also referred to as <i>binding</i> tasks (e.g., <a href="http://dx.doi.org/10.1037/xge0000453" target="_blank">De Simoni &amp; von Bastian, 2018</a>; <a href="http://dx.doi.org/10.1016/j.jml.2013.02.002" target="_blank">von Bastian &amp; Oberauer, 2013</a>).</p>
 
 <ul id="docPageNav">
-  <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('executable')">Executable</a></li>
+  <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('demo')">Demo</a></li>
+  <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('element')">Element</a></li>
+  <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('executable')">Executables</a></li>
   <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('properties')">Properties</a></li>
   <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('stimuli')">Stimuli File</a></li>
+  <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('module')">Example Module</a></li>
   <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('download')">Download</a></li>
 </ul>
+
+<hr class="hr-red">
+
+<h3 id="demo">Demo<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
+<p>Try out two different versions of the task: <br><br>
+<a href="http://www.tatool-web.com/#/public/1e08b85e-26e2-41f4-95ea-c8d290375111?extid=demo" target="_blank">Local Recognition (Grid) Demo</a><br>
+<a href="http://www.tatool-web.com/#/public/950331d2-8b46-4b55-9fd2-5800c31ba7a4?extid=demo" target="_blank">Local Recognition (Rows) Demo</a></p>
+<p>The <a href ng-click="scrollTo('module')">Example Module</a> contains all elements of the above demo and can be used to customize the task. 
+</p>
 
 <hr class="hr-red">
 
@@ -231,6 +243,14 @@
   </tbody>
 </table>
 
+<hr class="hr-red">
+
+<h3 id="module">Example Module<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
+<p>Download from GitHub: <br>
+  <a href="https://raw.githubusercontent.com/tatool/tatool-web/master/app/projects/public/tatool/modules/demoLocalRecGrid.json" target="_blank">demoLocalRecGrid.json</a> <br>
+  <a href="https://raw.githubusercontent.com/tatool/tatool-web/master/app/projects/public/tatool/modules/demoLocalRecRows.json" target="_blank">demoLocalRecRows.json</a> </p>
+<p>The Example Modules contain all elements of the <a href ng-click="scrollTo('demo')">demos</a> and can be used to customize the tasks (for more details, see <a ui-sref="doc({page: 'use-host.html'})">instructions for using your own stimuli</a> and description of the <a ui-sref="doc({page: 'lib-acc-instruction.html'})">Instruction Accessory Executable</a>). Note that the Instruction Executable currently doesn't allow HTML pages from external resources. This means that you can use custom HTML pages if you <a ui-sref="doc({page: 'dev-getting-started.html'})">host your own instance</a> of Tatool Web, but you cannot use externally hosted HTML pages on tatool-web.com. For running experiments on tatool-web.com with customized instructions, you must use images (see the <a ui-sref="doc({page: 'main-faq.html'})">FAQ</a> for currently available options to host your custom stimuli and instructions on tatool-web.com).
+</p>
 
 
 <hr class="hr-red">

@@ -1,112 +1,109 @@
 {
-   "name":"Corsi Block",
-   "author":"info@tatool.ch",
-   "label":"demoCorsiBlock",
-   "export":[
+  "description": "Corsi Block task in which sequentially marked positions in a grid have to be memorized and later recalled.",
+  "moduleHierarchy": {
+    "children": [
       {
-         "mode":"upload",
-         "auto":true,
-         "enabled":true,
-         "$$hashKey":"object:9834"
-      },
-      {
-         "mode":"download",
-         "enabled":true,
-         "$$hashKey":"object:9319"
-      }
-   ],
-   "allowEscapeKey":true,
-   "fullscreen":false,
-   "exportDelimiter":";",
-   "exportFormat":"long",
-   "moduleHierarchy":{
-      "tatoolType":"List",
-      "label":"Task List",
-      "iterator":{
-         "customType":"ListIterator",
-         "numIterations":1
-      },
-      "children":[
-         {
-            "tatoolType":"Executable",
-            "customType":"tatoolInstruction",
-            "name":"corsiInstruction",
-            "blankInterval":0,
-            "fixationInterval":0,
-            "project":{
-               "name":"tatool",
-               "access":"public"
-            },
-            "pages":{
-               "propertyType":"ArrayResource",
-               "propertyValue":[
-                  {
-                     "project":{
-                        "name":"tatool",
-                        "access":"public"
-                     },
-                     "resourceName":"tatoolCorsiBlock.html",
-                     "resourceType":"instructions"
-                  }
-               ]
-            },
-            "images":{
-               "propertyType":"ArrayResource",
-               "propertyValue":[
-
-               ]
+        "images": {
+          "propertyValue": [],
+          "propertyType": "ArrayResource"
+        },
+        "pages": {
+          "propertyValue": [
+            {
+              "resourceType": "instructions",
+              "resourceName": "tatoolCorsiBlock.html",
+              "project": {
+                "access": "public",
+                "name": "tatool"
+              }
             }
-         },
-         {
-            "tatoolType":"List",
-            "name":"47csdnkojqq6w290",
-            "iterator":{
-               "customType":"ListIterator",
-               "numIterations":5
+          ],
+          "propertyType": "ArrayResource"
+        },
+        "project": {
+          "access": "public",
+          "name": "tatool"
+        },
+        "fixationInterval": 0,
+        "blankInterval": 0,
+        "name": "corsiInstruction",
+        "customType": "tatoolInstruction",
+        "tatoolType": "Executable"
+      },
+      {
+        "label": "corsiBlock",
+        "children": [
+          {
+            "status": {
+              "feedbackPanel": false
             },
-            "handlers":[
-
-            ],
-            "children":[
-               {
-                  "tatoolType":"Executable",
-                  "customType":"tatoolCorsiBlock",
-                  "name":"corsiBlock",
-                  "blankInterval":"0",
-                  "fixationInterval":0,
-                  "project":{
-                     "name":"tatool",
-                     "access":"public"
-                  },
-                  "stimuliPath":{
-                     "propertyType":"Path",
-                     "project":{
-                        "name":"tatool-stimuli",
-                        "access":"public"
-                     },
-                     "resourceName":"",
-                     "resourceType":"stimuli"
-                  },
-                  "stimuliFile":{
-                     "propertyType":"Resource",
-                     "project":{
-                        "name":"tatool-stimuli",
-                        "access":"public"
-                     },
-                     "resourceName":"corsiBlock-colors.csv",
-                     "resourceType":"stimuli"
-                  },
-                  "displayDuration":"1000",
-                  "intervalDuration":"250",
-                  "randomisation":"full",
-                  "status":{
-                     "feedbackPanel":false
-                  }
-               }
-            ],
-            "label":"corsiBlock"
-         }
-      ]
-   },
-   "description":"Corsi Block task in which sequentially marked positions in a grid have to be memorized and later recalled."
+            "randomisation": "full",
+            "intervalDuration": "250",
+            "displayDuration": "1000",
+            "stimuliFile": {
+              "resourceType": "stimuli",
+              "resourceName": "corsiBlock-colors.csv",
+              "project": {
+                "access": "public",
+                "name": "tatool-stimuli"
+              },
+              "propertyType": "Resource"
+            },
+            "stimuliPath": {
+              "resourceType": "stimuli",
+              "resourceName": "",
+              "project": {
+                "access": "public",
+                "name": "tatool-stimuli"
+              },
+              "propertyType": "Path"
+            },
+            "project": {
+              "access": "public",
+              "name": "tatool"
+            },
+            "fixationInterval": 0,
+            "blankInterval": "0",
+            "name": "corsiBlock",
+            "customType": "tatoolCorsiBlock",
+            "tatoolType": "Executable"
+          }
+        ],
+        "handlers": [],
+        "iterator": {
+          "numIterations": 5,
+          "customType": "ListIterator"
+        },
+        "name": "47csdnkojqq6w290",
+        "tatoolType": "List"
+      }
+    ],
+    "iterator": {
+      "numIterations": 1,
+      "customType": "ListIterator"
+    },
+    "label": "Task List",
+    "tatoolType": "List"
+  },
+  "fullscreen": false,
+  "allowEscapeKey": true,
+  "export": [
+    {
+      "enabled": true,
+      "auto": true,
+      "mode": "upload",
+      "$$hashKey": "object:19114"
+    },
+    {
+      "enabled": true,
+      "mode": "download",
+      "$$hashKey": "object:18775"
+    }
+  ],
+  "label": "demoCorsiBlock",
+  "author": "info@tatool.ch",
+  "name": "Corsi Block",
+  "exportDelimiter": ",",
+  "exportFormat": "long",
+  "moduleMaxSessions": null
 }

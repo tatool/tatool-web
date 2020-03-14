@@ -1,179 +1,174 @@
 {
-   "name":"Complex Span Experiment",
-   "author":"Tatool",
-   "label":"demoComplexSpan",
-   "export":[
+  "moduleHierarchy": {
+    "children": [
       {
-         "mode":"upload",
-         "auto":true,
-         "enabled":true,
-         "$$hashKey":"object:10844"
-      },
-      {
-         "mode":"download",
-         "enabled":true,
-         "$$hashKey":"object:10242"
-      }
-   ],
-   "allowEscapeKey":true,
-   "fullscreen":false,
-   "exportDelimiter":";",
-   "exportFormat":"long",
-   "moduleHierarchy":{
-      "tatoolType":"List",
-      "iterator":{
-         "customType":"ListIterator",
-         "numIterations":1
-      },
-      "children":[
-         {
-            "tatoolType":"Executable",
-            "customType":"tatoolInstruction",
-            "name":"instruction",
-            "blankInterval":"250",
-            "fixationInterval":0,
-            "project":{
-               "name":"tatool",
-               "access":"public"
-            },
-            "pages":{
-               "propertyType":"ArrayResource",
-               "propertyValue":[
-                  {
-                     "project":{
-                        "name":"tatool",
-                        "access":"public"
-                     },
-                     "resourceName":"tatoolComplexSpan.html",
-                     "resourceType":"instructions"
-                  }
-               ]
+        "pages": {
+          "propertyValue": [
+            {
+              "resourceType": "instructions",
+              "resourceName": "tatoolComplexSpan.html",
+              "project": {
+                "access": "public",
+                "name": "tatool"
+              }
             }
-         },
-         {
-            "tatoolType":"Executable",
-            "customType":"tatoolCountdown",
-            "name":"countdown",
-            "blankInterval":"250",
-            "fixationInterval":0,
-            "project":{
-               "name":"tatool",
-               "access":"public"
-            },
-            "countdown":"3"
-         },
-         {
-            "tatoolType":"List",
-            "name":"51iijn8v79sbgldi",
-            "iterator":{
-               "customType":"ListIterator",
-               "numIterations":"1"
-            },
-            "handlers":[
-
-            ],
-            "children":[
-               {
-                  "tatoolType":"Dual",
-                  "name":"512itjha4a62yb90",
-                  "iterator":{
-                     "customType":"ListIterator",
-                     "numIterations":6
-                  },
-                  "handlers":[
-
-                  ],
-                  "children":{
-                     "primary":{
-                        "tatoolType":"Executable",
-                        "customType":"tatoolMemorySpan",
-                        "name":"digitSpan",
-                        "blankInterval":"250",
-                        "fixationInterval":0,
-                        "project":{
-                           "name":"tatool",
-                           "access":"public"
-                        },
-                        "stimuliFile":{
-                           "propertyType":"Resource",
-                           "project":{
-                              "name":"tatool-stimuli",
-                              "access":"public"
-                           },
-                           "resourceName":"memorySpan-digits.csv",
-                           "resourceType":"stimuli"
-                        },
-                        "stimuliPath":{
-                           "propertyType":"Path",
-                           "project":{
-                              "name":"tatool-stimuli",
-                              "access":"public"
-                           },
-                           "resourceName":"",
-                           "resourceType":"stimuli"
-                        },
-                        "suspendAfterEachItem":{
-                           "propertyType":"Boolean",
-                           "propertyValue":true
-                        },
-                        "randomisation":"full",
-                        "recallText":"Digit",
-                        "status":{
-                           "trialCountPanel":false
-                        }
-                     },
-                     "secondary":{
-                        "tatoolType":"List",
-                        "name":"m6ft4dxkydkakyb9",
-                        "iterator":{
-                           "customType":"ListIterator",
-                           "numIterations":1
-                        },
-                        "handlers":[
-
-                        ],
-                        "children":[
-                           {
-                              "tatoolType":"Executable",
-                              "customType":"tatoolChoiceReaction",
-                              "name":"magnitude",
-                              "blankInterval":"250",
-                              "fixationInterval":0,
-                              "project":{
-                                 "name":"tatool",
-                                 "access":"public"
-                              },
-                              "stimuliFile":{
-                                 "propertyType":"Resource",
-                                 "project":{
-                                    "name":"tatool-stimuli",
-                                    "access":"public"
-                                 },
-                                 "resourceName":"choice-magnitude.csv",
-                                 "resourceType":"stimuli"
-                              },
-                              "stimuliPath":{
-                                 "propertyType":"Path",
-                                 "project":{
-                                    "name":"tatool-stimuli",
-                                    "access":"public"
-                                 },
-                                 "resourceName":"",
-                                 "resourceType":"stimuli"
-                              },
-                              "timerEnabled":{
-                                 "propertyType":"Boolean",
-                                 "propertyValue":true
-                              },
-                              "displayDuration":"2500",
-                              "randomisation":"full"
-                           }
-                        ]
-                     }
+          ],
+          "propertyType": "ArrayResource"
+        },
+        "project": {
+          "access": "public",
+          "name": "tatool"
+        },
+        "fixationInterval": 0,
+        "blankInterval": "250",
+        "name": "instruction",
+        "customType": "tatoolInstruction",
+        "tatoolType": "Executable"
+      },
+      {
+        "countdown": "3",
+        "project": {
+          "access": "public",
+          "name": "tatool"
+        },
+        "fixationInterval": 0,
+        "blankInterval": "250",
+        "name": "countdown",
+        "customType": "tatoolCountdown",
+        "tatoolType": "Executable"
+      },
+      {
+        "children": [
+          {
+            "children": {
+              "secondary": {
+                "children": [
+                  {
+                    "randomisation": "full",
+                    "displayDuration": "2500",
+                    "timerEnabled": {
+                      "propertyValue": true,
+                      "propertyType": "Boolean"
+                    },
+                    "stimuliPath": {
+                      "resourceType": "stimuli",
+                      "resourceName": "",
+                      "project": {
+                        "access": "public",
+                        "name": "tatool-stimuli"
+                      },
+                      "propertyType": "Path"
+                    },
+                    "stimuliFile": {
+                      "resourceType": "stimuli",
+                      "resourceName": "choice-magnitude.csv",
+                      "project": {
+                        "access": "public",
+                        "name": "tatool-stimuli"
+                      },
+                      "propertyType": "Resource"
+                    },
+                    "project": {
+                      "access": "public",
+                      "name": "tatool"
+                    },
+                    "fixationInterval": 0,
+                    "blankInterval": "250",
+                    "name": "magnitude",
+                    "customType": "tatoolChoiceReaction",
+                    "tatoolType": "Executable"
                   }
-               }
-            ]
-         }
-      ]
-   }
+                ],
+                "handlers": [],
+                "iterator": {
+                  "numIterations": 1,
+                  "customType": "ListIterator"
+                },
+                "name": "m6ft4dxkydkakyb9",
+                "tatoolType": "List"
+              },
+              "primary": {
+                "status": {
+                  "trialCountPanel": false
+                },
+                "recallText": "Digit",
+                "randomisation": "full",
+                "suspendAfterEachItem": {
+                  "propertyValue": true,
+                  "propertyType": "Boolean"
+                },
+                "stimuliPath": {
+                  "resourceType": "stimuli",
+                  "resourceName": "",
+                  "project": {
+                    "access": "public",
+                    "name": "tatool-stimuli"
+                  },
+                  "propertyType": "Path"
+                },
+                "stimuliFile": {
+                  "resourceType": "stimuli",
+                  "resourceName": "memorySpan-digits.csv",
+                  "project": {
+                    "access": "public",
+                    "name": "tatool-stimuli"
+                  },
+                  "propertyType": "Resource"
+                },
+                "project": {
+                  "access": "public",
+                  "name": "tatool"
+                },
+                "fixationInterval": 0,
+                "blankInterval": "250",
+                "name": "digitSpan",
+                "customType": "tatoolMemorySpan",
+                "tatoolType": "Executable"
+              }
+            },
+            "handlers": [],
+            "iterator": {
+              "numIterations": 6,
+              "customType": "ListIterator"
+            },
+            "name": "512itjha4a62yb90",
+            "tatoolType": "Dual"
+          }
+        ],
+        "handlers": [],
+        "iterator": {
+          "numIterations": "1",
+          "customType": "ListIterator"
+        },
+        "name": "51iijn8v79sbgldi",
+        "tatoolType": "List"
+      }
+    ],
+    "iterator": {
+      "numIterations": 1,
+      "customType": "ListIterator"
+    },
+    "tatoolType": "List"
+  },
+  "fullscreen": false,
+  "allowEscapeKey": true,
+  "export": [
+    {
+      "enabled": true,
+      "auto": true,
+      "mode": "upload",
+      "$$hashKey": "object:14462"
+    },
+    {
+      "enabled": true,
+      "mode": "download",
+      "$$hashKey": "object:14086"
+    }
+  ],
+  "label": "demoComplexSpan",
+  "author": "Tatool",
+  "name": "Complex Span Experiment",
+  "exportDelimiter": ",",
+  "exportFormat": "long",
+  "moduleMaxSessions": null
 }

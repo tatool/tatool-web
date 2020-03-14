@@ -1,0 +1,231 @@
+{
+  "name": "Picture Recognition",
+  "author": "Tatool",
+  "label": "demoPictureRecognition",
+  "export": [
+    {
+      "mode": "upload",
+      "auto": true,
+      "enabled": true,
+      "$$hashKey": "object:20491"
+    },
+    {
+      "mode": "download",
+      "enabled": true,
+      "$$hashKey": "object:20356"
+    }
+  ],
+  "allowEscapeKey": true,
+  "fullscreen": true,
+  "moduleHierarchy": {
+    "tatoolType": "List",
+    "label": "Task List",
+    "iterator": {
+      "customType": "ListIterator",
+      "numIterations": 1,
+      "order": "sequential"
+    },
+    "children": [
+      {
+        "tatoolType": "Executable",
+        "customType": "tatoolInstruction",
+        "name": "practice_instruction",
+        "blankInterval": 0,
+        "fixationInterval": 0,
+        "project": {
+          "name": "tatool",
+          "access": "public"
+        },
+        "pages": {
+          "propertyType": "ArrayResource",
+          "propertyValue": [
+            {
+              "project": {
+                "name": "tatool",
+                "access": "public"
+              },
+              "resourceName": "tatoolItemRecognition_01.html",
+              "resourceType": "instructions"
+            },
+            {
+              "project": {
+                "name": "tatool",
+                "access": "public"
+              },
+              "resourceType": "instructions",
+              "resourceName": "tatoolItemRecognition_02.html"
+            }
+          ]
+        },
+        "images": {
+          "propertyType": "ArrayResource",
+          "propertyValue": []
+        }
+      },
+      {
+        "tatoolType": "Executable",
+        "customType": "tatoolCountdown",
+        "name": "countdown",
+        "blankInterval": 0,
+        "fixationInterval": 0,
+        "project": {
+          "name": "tatool",
+          "access": "public"
+        },
+        "countdown": "3",
+        "interval": "1000",
+        "goText": "Go!",
+        "hideMouseCursor": true
+      },
+      {
+        "tatoolType": "List",
+        "name": "m9rrbeyvf1j00000",
+        "iterator": {
+          "customType": "ListIterator",
+          "numIterations": 6,
+          "order": "sequential"
+        },
+        "handlers": [],
+        "children": [
+          {
+            "tatoolType": "Executable",
+            "customType": "tatoolItemRecognition",
+            "name": "picRec_practice",
+            "blankInterval": "250",
+            "fixationInterval": 0,
+            "project": {
+              "name": "tatool",
+              "access": "public"
+            },
+            "stimuliPath": {
+              "propertyType": "Path",
+              "project": {
+                "name": "tatool-stimuli",
+                "access": "public"
+              },
+              "resourceName": "",
+              "resourceType": "stimuli"
+            },
+            "stimuliFile": {
+              "propertyType": "Resource",
+              "project": {
+                "name": "tatool-stimuli",
+                "access": "public"
+              },
+              "resourceName": "picRecognition_practice.csv",
+              "resourceType": "stimuli"
+            },
+            "showKeys": {
+              "propertyType": "Boolean",
+              "propertyValue": true
+            },
+            "encodingDuration": "3000",
+            "blankDuration": "1000",
+            "instructionDuration": "4000",
+            "hideMouseCursor": true,
+            "status": {
+              "feedbackPanel": true
+            }
+          }
+        ],
+        "label": "Practice"
+      },
+      {
+        "tatoolType": "Executable",
+        "customType": "tatoolInstruction",
+        "name": "test_instruction",
+        "blankInterval": 0,
+        "fixationInterval": 0,
+        "project": {
+          "name": "tatool",
+          "access": "public"
+        },
+        "pages": {
+          "propertyType": "ArrayResource",
+          "propertyValue": [
+            {
+              "project": {
+                "name": "tatool",
+                "access": "public"
+              },
+              "resourceName": "tatoolItemRecognition_03.html",
+              "resourceType": "instructions"
+            }
+          ]
+        },
+        "images": {
+          "propertyType": "ArrayResource",
+          "propertyValue": []
+        }
+      },
+      {
+        "tatoolType": "Executable",
+        "customType": "tatoolCountdown",
+        "name": "kxp70sijcke00000",
+        "blankInterval": 0,
+        "fixationInterval": 0,
+        "project": {
+          "name": "tatool",
+          "access": "public"
+        },
+        "countdown": "3",
+        "interval": "1000",
+        "goText": "Go!",
+        "hideMouseCursor": true
+      },
+      {
+        "tatoolType": "List",
+        "name": "0mtb564jmyce0000",
+        "iterator": {
+          "customType": "ListIterator",
+          "numIterations": 30,
+          "order": "sequential"
+        },
+        "handlers": [],
+        "children": [
+          {
+            "tatoolType": "Executable",
+            "customType": "tatoolItemRecognition",
+            "name": "picRec",
+            "blankInterval": 0,
+            "fixationInterval": 0,
+            "project": {
+              "name": "tatool",
+              "access": "public"
+            },
+            "stimuliPath": {
+              "propertyType": "Path",
+              "project": {
+                "name": "tatool-stimuli",
+                "access": "public"
+              },
+              "resourceName": "",
+              "resourceType": "stimuli"
+            },
+            "stimuliFile": {
+              "propertyType": "Resource",
+              "project": {
+                "name": "tatool-stimuli",
+                "access": "public"
+              },
+              "resourceName": "picRecognition.csv",
+              "resourceType": "stimuli"
+            },
+            "showKeys": {
+              "propertyType": "Boolean",
+              "propertyValue": true
+            },
+            "encodingDuration": "3000",
+            "blankDuration": "1000",
+            "instructionDuration": "4000",
+            "hideMouseCursor": true
+          }
+        ],
+        "label": "Test"
+      }
+    ]
+  },
+  "description": "A picture recognition task using the tatoolItemRecognition executable.",
+  "exportDelimiter": ",",
+  "exportFormat": "long"
+}
