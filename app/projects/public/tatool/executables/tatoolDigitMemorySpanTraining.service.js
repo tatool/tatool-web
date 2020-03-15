@@ -63,8 +63,9 @@ tatool.factory('tatoolDigitMemorySpanTraining', ['executableUtils', 'dbUtils', '
       // get current level from designated level handler to allow for adaptivity
       var currentLevel = 1;
       var levelHandler = dbUtils.getHandler(this.levelHandler);
+
       if (levelHandler) {
-        currentLevel = dbUtils.getModuleProperty(levelHandler, 'currentLevel');
+        currentLevel = levelHandler.currentLevel;
       }
 
       this.stimulus = new Array();
