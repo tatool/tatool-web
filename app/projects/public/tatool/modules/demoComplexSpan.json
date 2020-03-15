@@ -1,5 +1,6 @@
 {
   "moduleHierarchy": {
+	"label": "Task List",
     "children": [
       {
         "pages": {
@@ -167,7 +168,7 @@
   ],
   "label": "demoComplexSpan",
   "author": "Tatool",
-  "name": "Complex Span Experiment",
+  "name": "Demo: Complex Span",
   "exportDelimiter": ",",
   "exportFormat": "long",
   "moduleMaxSessions": null

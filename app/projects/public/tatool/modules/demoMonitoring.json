@@ -1,6 +1,6 @@
 {
-  "name": "Monitoring",
-  "author": "info@tatool.ch",
+  "name": "Demo: Monitoring",
+  "author": "Tatool",
   "label": "demoMonitoring",
   "export": [
     {
@@ -19,7 +19,7 @@
   "fullscreen": true,
   "moduleHierarchy": {
     "tatoolType": "List",
-    "label": "Digit Monitoring",
+    "label": "Task List",
     "iterator": {
       "customType": "ListIterator",
       "numIterations": 1,

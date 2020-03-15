@@ -1,0 +1,49 @@
+{
+  "name": "Demo: Code Executable",
+  "author": "Tatool",
+  "label": "demoCode",
+  "export": [
+    {
+      "mode": "upload",
+      "auto": true,
+      "enabled": false,
+      "$$hashKey": "object:2565"
+    },
+    {
+      "mode": "download",
+      "enabled": false,
+      "$$hashKey": "object:2566"
+    }
+  ],
+  "allowEscapeKey": true,
+  "fullscreen": false,
+  "moduleHierarchy": {
+    "tatoolType": "List",
+    "label": "Task List",
+    "iterator": {
+      "customType": "ListIterator",
+      "numIterations": 1,
+      "order": "sequential"
+    },
+    "children": [
+      {
+        "tatoolType": "Executable",
+        "customType": "tatoolCode",
+        "name": "code",
+        "blankInterval": 0,
+        "fixationInterval": 0,
+        "project": {
+          "name": "tatool",
+          "access": "public"
+        },
+        "inputText": "Please enter your 4-digit participant code:",
+        "exactCodeLength": "4",
+        "minCodeLength": "4"
+      }
+    ]
+  },
+  "description": "An example of the tatoolCode executable.",
+  "exportDelimiter": ",",
+  "exportFormat": "long",
+  "moduleMaxSessions": null
+}

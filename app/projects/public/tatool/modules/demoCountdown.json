@@ -1,0 +1,50 @@
+{
+  "name": "Demo: Countdown",
+  "author": "Tatool",
+  "label": "demoCountdown",
+  "export": [
+    {
+      "mode": "upload",
+      "auto": true,
+      "enabled": false,
+      "$$hashKey": "object:3107"
+    },
+    {
+      "mode": "download",
+      "enabled": false,
+      "$$hashKey": "object:3108"
+    }
+  ],
+  "allowEscapeKey": true,
+  "fullscreen": false,
+  "moduleHierarchy": {
+    "tatoolType": "List",
+    "label": "Task List",
+    "iterator": {
+      "customType": "ListIterator",
+      "numIterations": 1,
+      "order": "sequential"
+    },
+    "children": [
+      {
+        "tatoolType": "Executable",
+        "customType": "tatoolCountdown",
+        "name": "countdown",
+        "blankInterval": 0,
+        "fixationInterval": 0,
+        "project": {
+          "name": "tatool",
+          "access": "public"
+        },
+        "countdown": "5",
+        "interval": "500",
+        "goText": "GO",
+        "hideMouseCursor": true
+      }
+    ]
+  },
+  "description": "An example for the countdown.",
+  "exportDelimiter": ",",
+  "exportFormat": "long",
+  "moduleMaxSessions": ""
+}

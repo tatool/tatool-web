@@ -1,5 +1,6 @@
 {
   "moduleHierarchy": {
+    "label": "Task List",
     "children": [
       {
         "pages": {
@@ -146,7 +147,7 @@
   ],
   "label": "demoShifting",
   "author": "Tatool",
-  "name": "Shifting Experiment",
+  "name": "Demo: Shifting",
   "exportDelimiter": ",",
   "exportFormat": "long",
   "moduleMaxSessions": null

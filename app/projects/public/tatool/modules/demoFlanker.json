@@ -1,5 +1,6 @@
 {
   "moduleHierarchy": {
+	"label": "Task List",
     "children": [
       {
         "pages": {
@@ -129,7 +130,7 @@
   ],
   "label": "demoFlanker",
   "author": "Tatool",
-  "name": "Flanker Experiment",
+  "name": "Demo: Flanker",
   "exportDelimiter": ",",
   "exportFormat": "long",
   "moduleMaxSessions": null

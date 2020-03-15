@@ -1,6 +1,7 @@
 {
   "exportDelimiter": ",",
   "moduleHierarchy": {
+    "label": "Task List",
     "children": [
       {
         "pages": {
@@ -141,7 +142,7 @@
   ],
   "label": "demoSimon",
   "author": "Tatool",
-  "name": "Simon Experiment",
+  "name": "Demo: Simon",
   "exportFormat": "long",
   "moduleMaxSessions": null
 }

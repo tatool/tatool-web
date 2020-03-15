@@ -1,6 +1,6 @@
 {
-  "name": "Local Recognition: Triangles",
-  "author": "info@tatool.ch",
+  "name": "Demo: Local Recognition (Triangles)",
+  "author": "Tatool",
   "label": "demoLocalRecGrid",
   "export": [
     {

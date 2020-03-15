@@ -1,776 +1,667 @@
-{  
-   "name":"EF Battery: Updating",
-   "author":"University of Zurich (von Bastian, Souza, & Gade)",
-   "label":"ef_updating",
-   "export":[  
-      {  
-         "mode":"upload",
-         "auto":true,
-         "enabled":false,
-         "$$hashKey":"object:235"
+{
+  "name": "EF Battery: Updating",
+  "author": "University of Zurich (von Bastian, Souza, & Gade)",
+  "label": "ef_updating",
+  "export": [
+    {
+      "mode": "upload",
+      "auto": true,
+      "enabled": true,
+      "$$hashKey": "object:72128"
+    },
+    {
+      "mode": "download",
+      "enabled": true,
+      "$$hashKey": "object:71869"
+    }
+  ],
+  "allowEscapeKey": true,
+  "fullscreen": true,
+  "moduleHierarchy": {
+    "label": "Task List",
+    "tatoolType": "List",
+    "iterator": {
+      "customType": "ListIterator",
+      "numIterations": 1,
+      "order": "sequential"
+    },
+    "children": [
+      {
+        "tatoolType": "Executable",
+        "customType": "tatoolInstruction",
+        "name": "color_instruction_1",
+        "blankInterval": 0,
+        "fixationInterval": 0,
+        "project": {
+          "name": "tatool",
+          "access": "public"
+        },
+        "pages": {
+          "propertyType": "ArrayResource",
+          "propertyValue": [
+            {
+              "project": {
+                "name": "uzh-ef-battery",
+                "access": "public"
+              },
+              "resourceName": "updating_color_01.htm",
+              "resourceType": "instructions"
+            },
+            {
+              "project": {
+                "name": "uzh-ef-battery",
+                "access": "public"
+              },
+              "resourceType": "instructions",
+              "resourceName": "updating_color_02.htm"
+            },
+            {
+              "project": {
+                "name": "uzh-ef-battery",
+                "access": "public"
+              },
+              "resourceType": "instructions",
+              "resourceName": "updating_color_03.htm"
+            },
+            {
+              "project": {
+                "name": "uzh-ef-battery",
+                "access": "public"
+              },
+              "resourceType": "instructions",
+              "resourceName": "updating_color_04.htm"
+            }
+          ]
+        },
+        "images": {
+          "propertyType": "ArrayResource",
+          "propertyValue": []
+        }
       },
-      {  
-         "mode":"download",
-         "enabled":true,
-         "$$hashKey":"object:80"
+      {
+        "tatoolType": "Executable",
+        "customType": "tatoolCountdown",
+        "name": "countdown",
+        "blankInterval": 0,
+        "fixationInterval": 0,
+        "project": {
+          "name": "tatool",
+          "access": "public"
+        },
+        "countdown": "3",
+        "interval": "1000",
+        "hideMouseCursor": true
+      },
+      {
+        "tatoolType": "List",
+        "name": "dpl6erbnnftdfgvi",
+        "iterator": {
+          "customType": "ListIterator",
+          "numIterations": 3,
+          "order": "sequential"
+        },
+        "handlers": [],
+        "children": [
+          {
+            "tatoolType": "Executable",
+            "customType": "colorKeepTrack",
+            "name": "color_practice",
+            "blankInterval": 0,
+            "fixationInterval": 0,
+            "project": {
+              "name": "uzh-ef-battery",
+              "access": "public"
+            },
+            "stimuliPath": {
+              "propertyType": "Path",
+              "project": {
+                "name": "uzh-ef-battery",
+                "access": "public"
+              },
+              "resourceName": "",
+              "resourceType": "stimuli"
+            },
+            "stimuliFile": {
+              "propertyType": "Resource",
+              "project": {
+                "name": "uzh-ef-battery",
+                "access": "public"
+              },
+              "resourceName": "ef_updating_color_practice.csv",
+              "resourceType": "stimuli"
+            },
+            "status": {
+              "feedbackPanel": true
+            },
+            "hideMouseCursor": false,
+            "displayEncodingDuration": "6500",
+            "intervalEncodingDuration": "250",
+            "displayUpdatingDuration": "1500",
+            "intervalUpdatingDuration": "250"
+          }
+        ],
+        "label": "Color practice"
+      },
+      {
+        "tatoolType": "Executable",
+        "customType": "tatoolInstruction",
+        "name": "color_instruction_2",
+        "blankInterval": 0,
+        "fixationInterval": 0,
+        "project": {
+          "name": "tatool",
+          "access": "public"
+        },
+        "pages": {
+          "propertyType": "ArrayResource",
+          "propertyValue": [
+            {
+              "project": {
+                "name": "uzh-ef-battery",
+                "access": "public"
+              },
+              "resourceName": "updating_color_05.htm",
+              "resourceType": "instructions"
+            }
+          ]
+        },
+        "images": {
+          "propertyType": "ArrayResource",
+          "propertyValue": []
+        }
+      },
+      {
+        "tatoolType": "Executable",
+        "customType": "tatoolCountdown",
+        "name": "countdown",
+        "blankInterval": 0,
+        "fixationInterval": 0,
+        "project": {
+          "name": "tatool",
+          "access": "public"
+        },
+        "hideMouseCursor": true
+      },
+      {
+        "tatoolType": "List",
+        "name": "sl8vous587gphkt9",
+        "iterator": {
+          "customType": "ListIterator",
+          "numIterations": 25,
+          "order": "sequential"
+        },
+        "handlers": [],
+        "children": [
+          {
+            "tatoolType": "Executable",
+            "customType": "colorKeepTrack",
+            "name": "color_test",
+            "blankInterval": 0,
+            "fixationInterval": 0,
+            "project": {
+              "name": "uzh-ef-battery",
+              "access": "public"
+            },
+            "stimuliPath": {
+              "propertyType": "Path",
+              "project": {
+                "name": "uzh-ef-battery",
+                "access": "public"
+              },
+              "resourceName": "",
+              "resourceType": "stimuli"
+            },
+            "stimuliFile": {
+              "propertyType": "Resource",
+              "project": {
+                "name": "uzh-ef-battery",
+                "access": "public"
+              },
+              "resourceName": "ef_updating_color.csv",
+              "resourceType": "stimuli"
+            },
+            "hideMouseCursor": false,
+            "displayEncodingDuration": "6500",
+            "intervalEncodingDuration": "250",
+            "displayUpdatingDuration": "1500",
+            "intervalUpdatingDuration": "250"
+          }
+        ],
+        "label": "Color"
+      },
+      {
+        "tatoolType": "Executable",
+        "customType": "tatoolInstruction",
+        "name": "letter_instruction_1",
+        "blankInterval": 0,
+        "fixationInterval": 0,
+        "project": {
+          "name": "tatool",
+          "access": "public"
+        },
+        "pages": {
+          "propertyType": "ArrayResource",
+          "propertyValue": [
+            {
+              "project": {
+                "name": "uzh-ef-battery",
+                "access": "public"
+              },
+              "resourceName": "updating_letter_01.htm",
+              "resourceType": "instructions"
+            },
+            {
+              "project": {
+                "name": "uzh-ef-battery",
+                "access": "public"
+              },
+              "resourceType": "instructions",
+              "resourceName": "updating_letter_02.htm"
+            },
+            {
+              "project": {
+                "name": "uzh-ef-battery",
+                "access": "public"
+              },
+              "resourceType": "instructions",
+              "resourceName": "updating_letter_03.htm"
+            },
+            {
+              "project": {
+                "name": "uzh-ef-battery",
+                "access": "public"
+              },
+              "resourceType": "instructions",
+              "resourceName": "updating_letter_04.htm"
+            }
+          ]
+        },
+        "images": {
+          "propertyType": "ArrayResource",
+          "propertyValue": []
+        }
+      },
+      {
+        "tatoolType": "Executable",
+        "customType": "tatoolCountdown",
+        "name": "countdown",
+        "blankInterval": 0,
+        "fixationInterval": 0,
+        "project": {
+          "name": "tatool",
+          "access": "public"
+        },
+        "hideMouseCursor": true
+      },
+      {
+        "tatoolType": "List",
+        "name": "ky5k5i7o17hhyqfr",
+        "iterator": {
+          "customType": "ListIterator",
+          "numIterations": 3,
+          "order": "sequential"
+        },
+        "handlers": [],
+        "children": [
+          {
+            "tatoolType": "Executable",
+            "customType": "letterKeepTrack",
+            "name": "letter_practice",
+            "blankInterval": 0,
+            "fixationInterval": 0,
+            "project": {
+              "name": "uzh-ef-battery",
+              "access": "public"
+            },
+            "stimuliPath": {
+              "propertyType": "Path",
+              "project": {
+                "name": "uzh-ef-battery",
+                "access": "public"
+              },
+              "resourceName": "",
+              "resourceType": "stimuli"
+            },
+            "stimuliFile": {
+              "propertyType": "Resource",
+              "project": {
+                "name": "uzh-ef-battery",
+                "access": "public"
+              },
+              "resourceName": "ef_updating_letter_practice.csv",
+              "resourceType": "stimuli"
+            },
+            "status": {
+              "feedbackPanel": true
+            },
+            "hideMouseCursor": false,
+            "displayEncodingDuration": "5000",
+            "intervalEncodingDuration": "250",
+            "displayUpdatingDuration": "1250",
+            "intervalUpdatingDuration": "250"
+          }
+        ],
+        "label": "Letter practice"
+      },
+      {
+        "tatoolType": "Executable",
+        "customType": "tatoolInstruction",
+        "name": "letter_instruction_2",
+        "blankInterval": 0,
+        "fixationInterval": 0,
+        "project": {
+          "name": "tatool",
+          "access": "public"
+        },
+        "pages": {
+          "propertyType": "ArrayResource",
+          "propertyValue": [
+            {
+              "project": {
+                "name": "uzh-ef-battery",
+                "access": "public"
+              },
+              "resourceName": "updating_letter_05.htm",
+              "resourceType": "instructions"
+            }
+          ]
+        },
+        "images": {
+          "propertyType": "ArrayResource",
+          "propertyValue": []
+        }
+      },
+      {
+        "tatoolType": "Executable",
+        "customType": "tatoolCountdown",
+        "name": "countdown",
+        "blankInterval": 0,
+        "fixationInterval": 0,
+        "project": {
+          "name": "tatool",
+          "access": "public"
+        },
+        "hideMouseCursor": true
+      },
+      {
+        "tatoolType": "List",
+        "name": "qqxp8n93d7bke290",
+        "iterator": {
+          "customType": "ListIterator",
+          "numIterations": 25,
+          "order": "sequential"
+        },
+        "handlers": [],
+        "children": [
+          {
+            "tatoolType": "Executable",
+            "customType": "letterKeepTrack",
+            "name": "letter_test",
+            "blankInterval": 0,
+            "fixationInterval": 0,
+            "project": {
+              "name": "uzh-ef-battery",
+              "access": "public"
+            },
+            "stimuliPath": {
+              "propertyType": "Path",
+              "project": {
+                "name": "uzh-ef-battery",
+                "access": "public"
+              },
+              "resourceName": "",
+              "resourceType": "stimuli"
+            },
+            "stimuliFile": {
+              "propertyType": "Resource",
+              "project": {
+                "name": "uzh-ef-battery",
+                "access": "public"
+              },
+              "resourceName": "ef_updating_letter.csv",
+              "resourceType": "stimuli"
+            },
+            "hideMouseCursor": false,
+            "displayEncodingDuration": "5000",
+            "intervalEncodingDuration": "250",
+            "displayUpdatingDuration": "1250",
+            "intervalUpdatingDuration": "250"
+          }
+        ],
+        "label": "Letter"
+      },
+      {
+        "tatoolType": "Executable",
+        "customType": "tatoolInstruction",
+        "name": "number_instruction_1",
+        "blankInterval": 0,
+        "fixationInterval": 0,
+        "project": {
+          "name": "tatool",
+          "access": "public"
+        },
+        "pages": {
+          "propertyType": "ArrayResource",
+          "propertyValue": [
+            {
+              "project": {
+                "name": "uzh-ef-battery",
+                "access": "public"
+              },
+              "resourceName": "updating_number_01.htm",
+              "resourceType": "instructions"
+            },
+            {
+              "project": {
+                "name": "uzh-ef-battery",
+                "access": "public"
+              },
+              "resourceType": "instructions",
+              "resourceName": "updating_number_02.htm"
+            },
+            {
+              "project": {
+                "name": "uzh-ef-battery",
+                "access": "public"
+              },
+              "resourceType": "instructions",
+              "resourceName": "updating_number_03.htm"
+            },
+            {
+              "project": {
+                "name": "uzh-ef-battery",
+                "access": "public"
+              },
+              "resourceType": "instructions",
+              "resourceName": "updating_number_04.htm"
+            }
+          ]
+        },
+        "images": {
+          "propertyType": "ArrayResource",
+          "propertyValue": []
+        }
+      },
+      {
+        "tatoolType": "Executable",
+        "customType": "tatoolCountdown",
+        "name": "countdown",
+        "blankInterval": 0,
+        "fixationInterval": 0,
+        "project": {
+          "name": "tatool",
+          "access": "public"
+        },
+        "hideMouseCursor": true
+      },
+      {
+        "tatoolType": "List",
+        "name": "epv24sw7q404fgvi",
+        "iterator": {
+          "customType": "ListIterator",
+          "numIterations": 3,
+          "order": "sequential"
+        },
+        "handlers": [],
+        "children": [
+          {
+            "tatoolType": "Executable",
+            "customType": "numberKeepTrack",
+            "name": "number_practice",
+            "blankInterval": 0,
+            "fixationInterval": 0,
+            "project": {
+              "name": "uzh-ef-battery",
+              "access": "public"
+            },
+            "stimuliPath": {
+              "propertyType": "Path",
+              "project": {
+                "name": "uzh-ef-battery",
+                "access": "public"
+              },
+              "resourceName": "",
+              "resourceType": "stimuli"
+            },
+            "stimuliFile": {
+              "propertyType": "Resource",
+              "project": {
+                "name": "uzh-ef-battery",
+                "access": "public"
+              },
+              "resourceName": "ef_updating_number_practice.csv",
+              "resourceType": "stimuli"
+            },
+            "hideMouseCursor": false,
+            "status": {
+              "feedbackPanel": true
+            },
+            "displayEncodingDuration": "5000",
+            "intervalEncodingDuration": "250",
+            "displayUpdatingDuration": "1250",
+            "intervalUpdatingDuration": "250"
+          }
+        ],
+        "label": "Number practice"
+      },
+      {
+        "tatoolType": "Executable",
+        "customType": "tatoolInstruction",
+        "name": "number_instruction_2",
+        "blankInterval": 0,
+        "fixationInterval": 0,
+        "project": {
+          "name": "tatool",
+          "access": "public"
+        },
+        "pages": {
+          "propertyType": "ArrayResource",
+          "propertyValue": [
+            {
+              "project": {
+                "name": "uzh-ef-battery",
+                "access": "public"
+              },
+              "resourceName": "updating_number_05.htm",
+              "resourceType": "instructions"
+            }
+          ]
+        },
+        "images": {
+          "propertyType": "ArrayResource",
+          "propertyValue": []
+        }
+      },
+      {
+        "tatoolType": "Executable",
+        "customType": "tatoolCountdown",
+        "name": "countdown",
+        "blankInterval": 0,
+        "fixationInterval": 0,
+        "project": {
+          "name": "tatool",
+          "access": "public"
+        }
+      },
+      {
+        "tatoolType": "List",
+        "name": "g9ovea8ma0qqia4i",
+        "iterator": {
+          "customType": "ListIterator",
+          "numIterations": 25,
+          "order": "sequential"
+        },
+        "handlers": [],
+        "children": [
+          {
+            "tatoolType": "Executable",
+            "customType": "numberKeepTrack",
+            "name": "number_test",
+            "blankInterval": 0,
+            "fixationInterval": 0,
+            "project": {
+              "name": "uzh-ef-battery",
+              "access": "public"
+            },
+            "stimuliPath": {
+              "propertyType": "Path",
+              "project": {
+                "name": "uzh-ef-battery",
+                "access": "public"
+              },
+              "resourceName": "",
+              "resourceType": "stimuli"
+            },
+            "stimuliFile": {
+              "propertyType": "Resource",
+              "project": {
+                "name": "uzh-ef-battery",
+                "access": "public"
+              },
+              "resourceName": "ef_updating_number.csv",
+              "resourceType": "stimuli"
+            },
+            "hideMouseCursor": false,
+            "displayEncodingDuration": "5000",
+            "intervalEncodingDuration": "250",
+            "displayUpdatingDuration": "1250",
+            "intervalUpdatingDuration": "250"
+          }
+        ],
+        "label": "Number"
+      },
+      {
+        "tatoolType": "Executable",
+        "customType": "tatoolInstruction",
+        "name": "end",
+        "blankInterval": 0,
+        "fixationInterval": 0,
+        "project": {
+          "name": "tatool",
+          "access": "public"
+        },
+        "pages": {
+          "propertyType": "ArrayResource",
+          "propertyValue": [
+            {
+              "project": {
+                "name": "tatool-stimuli",
+                "access": "public"
+              },
+              "resourceName": "end.html",
+              "resourceType": "instructions"
+            }
+          ]
+        },
+        "images": {
+          "propertyType": "ArrayResource",
+          "propertyValue": []
+        }
       }
-   ],
-   "allowEscapeKey":true,
-   "fullscreen":true,
-   "moduleHierarchy":{  
-      "tatoolType":"List",
-      "iterator":{  
-         "customType":"ListIterator",
-         "numIterations":"1"
-      },
-      "children":[  
-         {  
-            "tatoolType":"List",
-            "name":"jewvtuge283yp66r",
-            "iterator":{  
-               "customType":"ListIterator",
-               "numIterations":"1"
-            },
-            "handlers":[  
-
-            ],
-            "children":[  
-               {  
-                  "tatoolType":"Executable",
-                  "customType":"tatoolInstruction",
-                  "name":"color_instruction_1",
-                  "blankInterval":0,
-                  "fixationInterval":0,
-                  "project":{  
-                     "name":"tatool",
-                     "access":"public"
-                  },
-                  "pages":{  
-                     "propertyType":"ArrayResource",
-                     "propertyValue":[  
-                        {  
-                           "resourceName":"updating_color_01.htm",
-                           "project":{  
-                              "name":"uzh-ef-battery",
-                              "access":"public"
-                           },
-                           "resourceType":"instructions"
-                        },
-                        {  
-                           "project":{  
-                              "name":"uzh-ef-battery",
-                              "access":"public"
-                           },
-                           "resourceType":"instructions",
-                           "resourceName":"updating_color_02.htm"
-                        },
-                        {  
-                           "project":{  
-                              "name":"uzh-ef-battery",
-                              "access":"public"
-                           },
-                           "resourceType":"instructions",
-                           "resourceName":"updating_color_03.htm"
-                        },
-                        {  
-                           "project":{  
-                              "name":"uzh-ef-battery",
-                              "access":"public"
-                           },
-                           "resourceType":"instructions",
-                           "resourceName":"updating_color_04.htm"
-                        }
-                     ]
-                  }
-               }
-            ]
-         },
-         {  
-            "tatoolType":"List",
-            "name":"3c5opgbqmbcsor00",
-            "iterator":{  
-               "customType":"ListIterator",
-               "numIterations":"1"
-            },
-            "handlers":[  
-
-            ],
-            "children":[  
-               {  
-                  "tatoolType":"Executable",
-                  "customType":"tatoolCountdown",
-                  "name":"countdown",
-                  "blankInterval":0,
-                  "fixationInterval":0,
-                  "project":{  
-                     "name":"tatool",
-                     "access":"public"
-                  },
-                  "countdown":"3",
-                  "interval":"1000",
-                  "hideMouseCursor":true
-               }
-            ]
-         },
-         {  
-            "tatoolType":"List",
-            "name":"dpl6erbnnftdfgvi",
-            "iterator":{  
-               "customType":"ListIterator",
-               "numIterations":"3"
-            },
-            "handlers":[  
-
-            ],
-            "children":[  
-               {  
-                  "tatoolType":"Executable",
-                  "customType":"colorKeepTrack",
-                  "name":"color_practice",
-                  "blankInterval":0,
-                  "fixationInterval":0,
-                  "project":{  
-                     "name":"uzh-ef-battery",
-                     "access":"public"
-                  },
-                  "stimuliPath":{  
-                     "propertyType":"Path",
-                     "project":{  
-                        "name":"uzh-ef-battery",
-                        "access":"public"
-                     },
-                     "resourceName":"",
-                     "resourceType":"stimuli"
-                  },
-                  "stimuliFile":{  
-                     "propertyType":"Resource",
-                     "project":{  
-                        "name":"uzh-ef-battery",
-                        "access":"public"
-                     },
-                     "resourceName":"ef_updating_color_practice.csv",
-                     "resourceType":"stimuli"
-                  },
-                  "status":{  
-                     "feedbackPanel":true
-                  },
-                  "hideMouseCursor":false,
-                  "displayEncodingDuration":"6500",
-                  "intervalEncodingDuration":"250",
-                  "displayUpdatingDuration":"1500",
-                  "intervalUpdatingDuration":"250"
-               }
-            ]
-         },
-         {  
-            "tatoolType":"List",
-            "name":"84qfmrkt77xecdi0",
-            "iterator":{  
-               "customType":"ListIterator",
-               "numIterations":"1"
-            },
-            "handlers":[  
-
-            ],
-            "children":[  
-               {  
-                  "tatoolType":"Executable",
-                  "customType":"tatoolInstruction",
-                  "name":"color_instruction_2",
-                  "blankInterval":0,
-                  "fixationInterval":0,
-                  "project":{  
-                     "name":"tatool",
-                     "access":"public"
-                  },
-                  "pages":{  
-                     "propertyType":"ArrayResource",
-                     "propertyValue":[  
-                        {  
-                           "project":{  
-                              "name":"uzh-ef-battery",
-                              "access":"public"
-                           },
-                           "resourceName":"updating_color_05.htm",
-                           "resourceType":"instructions"
-                        }
-                     ]
-                  }
-               }
-            ]
-         },
-         {  
-            "tatoolType":"List",
-            "name":"7q58w7yg8pp3c8fr",
-            "iterator":{  
-               "customType":"ListIterator",
-               "numIterations":"1"
-            },
-            "handlers":[  
-
-            ],
-            "children":[  
-               {  
-                  "tatoolType":"Executable",
-                  "customType":"tatoolCountdown",
-                  "name":"countdown",
-                  "blankInterval":0,
-                  "fixationInterval":0,
-                  "project":{  
-                     "name":"tatool",
-                     "access":"public"
-                  },
-                  "countdown":"3",
-                  "interval":"1000",
-                  "hideMouseCursor":true
-               }
-            ]
-         },
-         {  
-            "tatoolType":"List",
-            "name":"sl8vous587gphkt9",
-            "iterator":{  
-               "customType":"ListIterator",
-               "numIterations":"25"
-            },
-            "handlers":[  
-
-            ],
-            "children":[  
-               {  
-                  "tatoolType":"Executable",
-                  "customType":"colorKeepTrack",
-                  "name":"color_test",
-                  "blankInterval":0,
-                  "fixationInterval":0,
-                  "project":{  
-                     "name":"uzh-ef-battery",
-                     "access":"public"
-                  },
-                  "stimuliPath":{  
-                     "propertyType":"Path",
-                     "project":{  
-                        "name":"uzh-ef-battery",
-                        "access":"public"
-                     },
-                     "resourceName":"",
-                     "resourceType":"stimuli"
-                  },
-                  "stimuliFile":{  
-                     "propertyType":"Resource",
-                     "project":{  
-                        "name":"uzh-ef-battery",
-                        "access":"public"
-                     },
-                     "resourceName":"ef_updating_color.csv",
-                     "resourceType":"stimuli"
-                  },
-                  "hideMouseCursor":false,
-                  "displayEncodingDuration":"6500",
-                  "intervalEncodingDuration":"250",
-                  "displayUpdatingDuration":"1500",
-                  "intervalUpdatingDuration":"250"
-               }
-            ]
-         },
-         {  
-            "tatoolType":"List",
-            "name":"npsuuti8p3wvobt9",
-            "iterator":{  
-               "customType":"ListIterator",
-               "numIterations":"1"
-            },
-            "handlers":[  
-
-            ],
-            "children":[  
-               {  
-                  "tatoolType":"Executable",
-                  "customType":"tatoolInstruction",
-                  "name":"flanker_instruction_1",
-                  "blankInterval":0,
-                  "fixationInterval":0,
-                  "project":{  
-                     "name":"tatool",
-                     "access":"public"
-                  },
-                  "pages":{  
-                     "propertyType":"ArrayResource",
-                     "propertyValue":[  
-                        {  
-                           "project":{  
-                              "name":"uzh-ef-battery",
-                              "access":"public"
-                           },
-                           "resourceName":"updating_letter_01.htm",
-                           "resourceType":"instructions"
-                        },
-                        {  
-                           "project":{  
-                              "name":"uzh-ef-battery",
-                              "access":"public"
-                           },
-                           "resourceType":"instructions",
-                           "resourceName":"updating_letter_02.htm"
-                        },
-                        {  
-                           "project":{  
-                              "name":"uzh-ef-battery",
-                              "access":"public"
-                           },
-                           "resourceType":"instructions",
-                           "resourceName":"updating_letter_03.htm"
-                        },
-                        {  
-                           "project":{  
-                              "name":"uzh-ef-battery",
-                              "access":"public"
-                           },
-                           "resourceType":"instructions",
-                           "resourceName":"updating_letter_04.htm"
-                        }
-                     ]
-                  }
-               }
-            ]
-         },
-         {  
-            "tatoolType":"List",
-            "name":"016a7edb9dcjif6r",
-            "iterator":{  
-               "customType":"ListIterator",
-               "numIterations":"1"
-            },
-            "handlers":[  
-
-            ],
-            "children":[  
-               {  
-                  "tatoolType":"Executable",
-                  "customType":"tatoolCountdown",
-                  "name":"countdown",
-                  "blankInterval":0,
-                  "fixationInterval":0,
-                  "hideMouseCursor":true,
-                  "project":{  
-                     "name":"tatool",
-                     "access":"public"
-                  },
-                  "countdown":"3",
-                  "interval":"1000"
-               }
-            ]
-         },
-         {  
-            "tatoolType":"List",
-            "name":"ky5k5i7o17hhyqfr",
-            "iterator":{  
-               "customType":"ListIterator",
-               "numIterations":"3"
-            },
-            "handlers":[  
-
-            ],
-            "children":[  
-               {  
-                  "tatoolType":"Executable",
-                  "customType":"letterKeepTrack",
-                  "name":"letter_practice",
-                  "blankInterval":0,
-                  "fixationInterval":0,
-                  "project":{  
-                     "name":"uzh-ef-battery",
-                     "access":"public"
-                  },
-                  "stimuliPath":{  
-                     "propertyType":"Path",
-                     "project":{  
-                        "name":"uzh-ef-battery",
-                        "access":"public"
-                     },
-                     "resourceName":"",
-                     "resourceType":"stimuli"
-                  },
-                  "stimuliFile":{  
-                     "propertyType":"Resource",
-                     "project":{  
-                        "name":"uzh-ef-battery",
-                        "access":"public"
-                     },
-                     "resourceName":"ef_updating_letter_practice.csv",
-                     "resourceType":"stimuli"
-                  },
-                  "status":{  
-                     "feedbackPanel":true
-                  },
-                  "hideMouseCursor":false,
-                  "displayEncodingDuration":"5000",
-                  "intervalEncodingDuration":"250",
-                  "displayUpdatingDuration":"1250",
-                  "intervalUpdatingDuration":"250"
-               }
-            ]
-         },
-         {  
-            "tatoolType":"List",
-            "name":"fdf0xc2g9umr6bt9",
-            "iterator":{  
-               "customType":"ListIterator",
-               "numIterations":"1"
-            },
-            "handlers":[  
-
-            ],
-            "children":[  
-               {  
-                  "tatoolType":"Executable",
-                  "customType":"tatoolInstruction",
-                  "name":"flanker_instruction_2",
-                  "blankInterval":0,
-                  "fixationInterval":0,
-                  "project":{  
-                     "name":"tatool",
-                     "access":"public"
-                  },
-                  "pages":{  
-                     "propertyType":"ArrayResource",
-                     "propertyValue":[  
-                        {  
-                           "project":{  
-                              "name":"uzh-ef-battery",
-                              "access":"public"
-                           },
-                           "resourceName":"updating_letter_05.htm",
-                           "resourceType":"instructions"
-                        }
-                     ]
-                  }
-               }
-            ]
-         },
-         {  
-            "tatoolType":"List",
-            "name":"opdngjucre4b1emi",
-            "iterator":{  
-               "customType":"ListIterator",
-               "numIterations":"1"
-            },
-            "handlers":[  
-
-            ],
-            "children":[  
-               {  
-                  "tatoolType":"Executable",
-                  "customType":"tatoolCountdown",
-                  "name":"countdown",
-                  "blankInterval":0,
-                  "fixationInterval":0,
-                  "project":{  
-                     "name":"tatool",
-                     "access":"public"
-                  },
-                  "countdown":"3",
-                  "interval":"1000",
-                  "hideMouseCursor":true
-               }
-            ]
-         },
-         {  
-            "tatoolType":"List",
-            "name":"qqxp8n93d7bke290",
-            "iterator":{  
-               "customType":"ListIterator",
-               "numIterations":"25"
-            },
-            "handlers":[  
-
-            ],
-            "children":[  
-               {  
-                  "tatoolType":"Executable",
-                  "customType":"letterKeepTrack",
-                  "name":"letter_test",
-                  "blankInterval":0,
-                  "fixationInterval":0,
-                  "project":{  
-                     "name":"uzh-ef-battery",
-                     "access":"public"
-                  },
-                  "stimuliPath":{  
-                     "propertyType":"Path",
-                     "project":{  
-                        "name":"uzh-ef-battery",
-                        "access":"public"
-                     },
-                     "resourceName":"",
-                     "resourceType":"stimuli"
-                  },
-                  "stimuliFile":{  
-                     "propertyType":"Resource",
-                     "project":{  
-                        "name":"uzh-ef-battery",
-                        "access":"public"
-                     },
-                     "resourceName":"ef_updating_letter.csv",
-                     "resourceType":"stimuli"
-                  },
-                  "hideMouseCursor":false,
-                  "displayEncodingDuration":"5000",
-                  "intervalEncodingDuration":"250",
-                  "displayUpdatingDuration":"1250",
-                  "intervalUpdatingDuration":"250"
-               }
-            ]
-         },
-         {  
-            "tatoolType":"List",
-            "name":"lhhmx9ymp0q9f6r0",
-            "iterator":{  
-               "customType":"ListIterator",
-               "numIterations":"1"
-            },
-            "handlers":[  
-
-            ],
-            "children":[  
-               {  
-                  "tatoolType":"Executable",
-                  "customType":"tatoolInstruction",
-                  "name":"stroop_instruction_1",
-                  "blankInterval":0,
-                  "fixationInterval":0,
-                  "project":{  
-                     "name":"tatool",
-                     "access":"public"
-                  },
-                  "pages":{  
-                     "propertyType":"ArrayResource",
-                     "propertyValue":[  
-                        {  
-                           "project":{  
-                              "name":"uzh-ef-battery",
-                              "access":"public"
-                           },
-                           "resourceName":"updating_number_01.htm",
-                           "resourceType":"instructions"
-                        },
-                        {  
-                           "project":{  
-                              "name":"uzh-ef-battery",
-                              "access":"public"
-                           },
-                           "resourceType":"instructions",
-                           "resourceName":"updating_number_02.htm"
-                        },
-                        {  
-                           "project":{  
-                              "name":"uzh-ef-battery",
-                              "access":"public"
-                           },
-                           "resourceType":"instructions",
-                           "resourceName":"updating_number_03.htm"
-                        },
-                        {  
-                           "project":{  
-                              "name":"uzh-ef-battery",
-                              "access":"public"
-                           },
-                           "resourceType":"instructions",
-                           "resourceName":"updating_number_04.htm"
-                        }
-                     ]
-                  }
-               }
-            ]
-         },
-         {  
-            "tatoolType":"List",
-            "name":"jm4rrs1nlfwuq5mi",
-            "iterator":{  
-               "customType":"ListIterator",
-               "numIterations":"1"
-            },
-            "handlers":[  
-
-            ],
-            "children":[  
-               {  
-                  "tatoolType":"Executable",
-                  "customType":"tatoolCountdown",
-                  "name":"countdown",
-                  "blankInterval":0,
-                  "fixationInterval":0,
-                  "project":{  
-                     "name":"tatool",
-                     "access":"public"
-                  },
-                  "countdown":"3",
-                  "interval":"1000",
-                  "hideMouseCursor":true
-               }
-            ]
-         },
-         {  
-            "tatoolType":"List",
-            "name":"epv24sw7q404fgvi",
-            "iterator":{  
-               "customType":"ListIterator",
-               "numIterations":"3"
-            },
-            "handlers":[  
-
-            ],
-            "children":[  
-               {  
-                  "tatoolType":"Executable",
-                  "customType":"numberKeepTrack",
-                  "name":"number_practice",
-                  "blankInterval":0,
-                  "fixationInterval":0,
-                  "project":{  
-                     "name":"uzh-ef-battery",
-                     "access":"public"
-                  },
-                  "stimuliPath":{  
-                     "propertyType":"Path",
-                     "project":{  
-                        "name":"uzh-ef-battery",
-                        "access":"public"
-                     },
-                     "resourceName":"",
-                     "resourceType":"stimuli"
-                  },
-                  "stimuliFile":{  
-                     "propertyType":"Resource",
-                     "project":{  
-                        "name":"uzh-ef-battery",
-                        "access":"public"
-                     },
-                     "resourceName":"ef_updating_number_practice.csv",
-                     "resourceType":"stimuli"
-                  },
-                  "hideMouseCursor":false,
-                  "status":{  
-                     "feedbackPanel":true
-                  },
-                  "displayEncodingDuration":"5000",
-                  "intervalEncodingDuration":"250",
-                  "displayUpdatingDuration":"1250",
-                  "intervalUpdatingDuration":"250"
-               }
-            ]
-         },
-         {  
-            "tatoolType":"List",
-            "name":"4p17lazkmmbwqaor",
-            "iterator":{  
-               "customType":"ListIterator",
-               "numIterations":"1"
-            },
-            "handlers":[  
-
-            ],
-            "children":[  
-               {  
-                  "tatoolType":"Executable",
-                  "customType":"tatoolInstruction",
-                  "name":"stroop_instruction_2",
-                  "blankInterval":0,
-                  "fixationInterval":0,
-                  "project":{  
-                     "name":"tatool",
-                     "access":"public"
-                  },
-                  "pages":{  
-                     "propertyType":"ArrayResource",
-                     "propertyValue":[  
-                        {  
-                           "project":{  
-                              "name":"uzh-ef-battery",
-                              "access":"public"
-                           },
-                           "resourceName":"updating_number_05.htm",
-                           "resourceType":"instructions"
-                        }
-                     ]
-                  }
-               }
-            ]
-         },
-         {  
-            "tatoolType":"List",
-            "name":"a2zngpb1uicf2yb9",
-            "iterator":{  
-               "customType":"ListIterator",
-               "numIterations":"1"
-            },
-            "handlers":[  
-
-            ],
-            "children":[  
-               {  
-                  "tatoolType":"Executable",
-                  "customType":"tatoolCountdown",
-                  "name":"countdown",
-                  "blankInterval":0,
-                  "fixationInterval":0,
-                  "project":{  
-                     "name":"tatool",
-                     "access":"public"
-                  },
-                  "countdown":"3",
-                  "interval":"1000",
-                  "hideMouseCursor":true
-               }
-            ]
-         },
-         {  
-            "tatoolType":"List",
-            "name":"g9ovea8ma0qqia4i",
-            "iterator":{  
-               "customType":"ListIterator",
-               "numIterations":"25"
-            },
-            "handlers":[  
-
-            ],
-            "children":[  
-               {  
-                  "tatoolType":"Executable",
-                  "customType":"numberKeepTrack",
-                  "name":"number_test",
-                  "blankInterval":0,
-                  "fixationInterval":0,
-                  "project":{  
-                     "name":"uzh-ef-battery",
-                     "access":"public"
-                  },
-                  "stimuliPath":{  
-                     "propertyType":"Path",
-                     "project":{  
-                        "name":"uzh-ef-battery",
-                        "access":"public"
-                     },
-                     "resourceName":"",
-                     "resourceType":"stimuli"
-                  },
-                  "stimuliFile":{  
-                     "propertyType":"Resource",
-                     "project":{  
-                        "name":"uzh-ef-battery",
-                        "access":"public"
-                     },
-                     "resourceName":"ef_updating_number.csv",
-                     "resourceType":"stimuli"
-                  },
-                  "hideMouseCursor":false,
-                  "displayEncodingDuration":"5000",
-                  "intervalEncodingDuration":"250",
-                  "displayUpdatingDuration":"1250",
-                  "intervalUpdatingDuration":"250"
-               }
-            ]
-         }
-      ]
-   }
+    ]
+  },
+  "description": "Updating tasks from von Bastian, C. C. Souza, A. S., & Gade, M. (2016). No evidence for bilingual cognitive advantages: A test of four hypotheses. Journal of Experimental Psychology: General. doi: 10.1037/xge0000120",
+  "exportDelimiter": ",",
+  "exportFormat": "long",
+  "moduleMaxSessions": null
 }

@@ -1,15 +1,26 @@
 <p><a ui-sref="doc({page: 'lib-acc.html'})">Accessory Executables</a></p>
 <h2>Instruction</h2>
 
-<p>The primary purpose of this Executable is to display slides with instructions, but it can be used to present any arbitrary content using images or HTML files. It offers a pagination navigation allowing a user to either go to the next or previous slide, or to jump to a specific slide. The Instruction Executable currently doesn't allow HTML pages from external resources.</p>
+<p>The primary purpose of this Executable is to display slides with instructions, but it can be used to present any arbitrary content using images or HTML files. It offers a pagination navigation allowing a user to either go to the next or previous slide, or to jump to a specific slide. </p>
+<p>Note that the Instruction Executable currently doesn't allow HTML pages from external resources. This means that you can use custom HTML pages if you <a ui-sref="doc({page: 'dev-getting-started.html'})">host your own instance</a> of Tatool Web, but you cannot use externally hosted HTML pages on tatool-web.com. For running experiments on tatool-web.com with customized instructions, you must use images (see the <a ui-sref="doc({page: 'main-faq.html'})">FAQ</a> for currently available options to host your custom stimuli and instructions on tatool-web.com).</p>
 
 <ul id="docPageNav">
-  <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('executable')">Executable</a></li>
+  <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('demo')">Demo</a></li>
+  <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('element')">Element</a></li>
+  <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('executable')">Executables</a></li>
   <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('properties')">Properties</a></li>
   <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('stimuli')">Stimuli File</a></li>
-  <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('html')">HTML Customization</a></li>
+  <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('module')">Example Module</a></li>
   <li><i class="fa fa-angle-right"></i> <a href ng-click="scrollTo('download')">Download</a></li>
 </ul>
+
+<hr class="hr-red">
+
+<h3 id="demo">Demo<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
+<p>Try out the task: 
+<a href="http://www.tatool-web.com/#/public/fdc45b72-b89e-4936-b289-e01c753c9474?extid=demo" target="_blank">Instruction Demo</a></p>
+<p>The <a href ng-click="scrollTo('module')">Example Module</a> contains all elements of the above demo. 
+</p>
 
 <hr class="hr-red">
 
@@ -133,6 +144,14 @@
 
 &lt;/div>
 </code></pre>
+
+<hr class="hr-red">
+
+<h3 id="module">Example Module<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
+<p>Download from GitHub: <a href="https://raw.githubusercontent.com/tatool/tatool-web/master/app/projects/public/tatool/modules/demoIntroduction.json" target="_blank">demoIntroduction.json</a> </p>
+<p>The Example Module contains all elements of the <a href ng-click="scrollTo('demo')">demo</a> and can be used to customize the properties of the accessory executable.
+</p>
+
 
 <hr class="hr-red">
 

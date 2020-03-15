@@ -1,5 +1,6 @@
 {
    "moduleHierarchy":{
+      "label": "Task List",
       "children":[
          {
             "pages":{
@@ -141,7 +142,7 @@
    ],
    "label":"demoStroop",
    "author":"Tatool",
-   "name":"Stroop Experiment",
+   "name":"Demo: Stroop",
    "exportDelimiter":",",
    "exportFormat":"long",
    "moduleMaxSessions":null

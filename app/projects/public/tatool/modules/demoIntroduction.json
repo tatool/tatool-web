@@ -1,88 +1,90 @@
 {
-   "name":"Tatool Introduction",
-   "author":"Tatool",
-   "label":"demoIntroduction",
-   "export":[
+  "moduleHierarchy": {
+	"label": "Task List",
+    "children": [
       {
-         "mode":"upload",
-         "auto":true,
-         "enabled":false,
-         "$$hashKey":"object:3827"
-      },
-      {
-         "mode":"download",
-         "enabled":false,
-         "$$hashKey":"object:3828"
-      }
-   ],
-   "allowEscapeKey":true,
-   "fullscreen":true,
-   "exportDelimiter":";",
-   "exportFormat":"long",
-   "moduleHierarchy":{
-      "tatoolType":"List",
-      "iterator":{
-         "customType":"ListIterator",
-         "numIterations":1
-      },
-      "children":[
-         {
-            "tatoolType":"Executable",
-            "customType":"tatoolInstruction",
-            "name":"introduction",
-            "blankInterval":0,
-            "fixationInterval":0,
-            "project":{
-               "name":"tatool",
-               "access":"public"
+        "pages": {
+          "propertyValue": [
+            {
+              "resourceType": "instructions",
+              "resourceName": "tatool-instruction-01.html",
+              "project": {
+                "access": "public",
+                "name": "tatool-stimuli"
+              }
             },
-            "pages":{
-               "propertyType":"ArrayResource",
-               "propertyValue":[
-                  {
-                     "project":{
-                        "name":"tatool-stimuli",
-                        "access":"public"
-                     },
-                     "resourceName":"tatool-instruction-01.html",
-                     "resourceType":"instructions"
-                  },
-                  {
-                     "project":{
-                        "name":"tatool-stimuli",
-                        "access":"public"
-                     },
-                     "resourceType":"instructions",
-                     "resourceName":"tatool-instruction-02.html"
-                  },
-                  {
-                     "project":{
-                        "name":"tatool-stimuli",
-                        "access":"public"
-                     },
-                     "resourceType":"instructions",
-                     "resourceName":"tatool-instruction-03.html"
-                  },
-                  {
-                     "project":{
-                        "name":"tatool-stimuli",
-                        "access":"public"
-                     },
-                     "resourceType":"instructions",
-                     "resourceName":"tatool-instruction-04.html"
-                  },
-                  {
-                     "project":{
-                        "name":"tatool-stimuli",
-                        "access":"public"
-                     },
-                     "resourceType":"instructions",
-                     "resourceName":"tatool-instruction-05.html"
-                  }
-               ]
+            {
+              "resourceName": "tatool-instruction-02.html",
+              "resourceType": "instructions",
+              "project": {
+                "access": "public",
+                "name": "tatool-stimuli"
+              }
+            },
+            {
+              "resourceName": "tatool-instruction-03.html",
+              "resourceType": "instructions",
+              "project": {
+                "access": "public",
+                "name": "tatool-stimuli"
+              }
+            },
+            {
+              "resourceName": "tatool-instruction-04.html",
+              "resourceType": "instructions",
+              "project": {
+                "access": "public",
+                "name": "tatool-stimuli"
+              }
+            },
+            {
+              "resourceName": "tatool-instruction-05.html",
+              "resourceType": "instructions",
+              "project": {
+                "access": "public",
+                "name": "tatool-stimuli"
+              }
             }
-         }
-      ]
-   },
-   "description":"<img src=\"http://www.tatool-web.com/images/app/tatool_logo.png\" width=\"144\">\n<br><br>\nThis module gives a quick introduction on how to use Tatool as a user. We'll show you how to <b>add</b> and <b>run</b> available modules, how to <b>export</b> your data, and how to <b>remove</b> modules if you no longer need them."
+          ],
+          "propertyType": "ArrayResource"
+        },
+        "project": {
+          "access": "public",
+          "name": "tatool"
+        },
+        "fixationInterval": 0,
+        "blankInterval": 0,
+        "name": "introduction",
+        "customType": "tatoolInstruction",
+        "tatoolType": "Executable"
+      }
+    ],
+    "iterator": {
+      "numIterations": 1,
+      "customType": "ListIterator"
+    },
+    "tatoolType": "List"
+  },
+  "fullscreen": true,
+  "allowEscapeKey": true,
+  "export": [
+    {
+      "enabled": false,
+      "auto": true,
+      "mode": "upload",
+      "$$hashKey": "object:2264"
+    },
+    {
+      "enabled": false,
+      "mode": "download",
+      "$$hashKey": "object:2265"
+    }
+  ],
+  "label": "demoIntroduction",
+  "author": "Tatool",
+  "name": "Demo: Tatool Introduction",
+  "description": "This module gives a quick introduction on how to use Tatool. We'll show you how to <b>add</b> and <b>run</b> available modules, how to <b>export</b> your data, and how to <b>remove</b> modules if you no longer need them.",
+  "exportDelimiter": ",",
+  "exportFormat": "long",
+  "moduleMaxSessions": null
 }

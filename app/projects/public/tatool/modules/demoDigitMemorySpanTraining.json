@@ -1,0 +1,110 @@
+{
+  "name": "Demo: Digit Span Training",
+  "author": "Tatool",
+  "label": "demoDigitMemorySpanTraining",
+  "export": [
+    {
+      "mode": "upload",
+      "auto": true,
+      "enabled": true,
+      "$$hashKey": "object:22351"
+    },
+    {
+      "mode": "download",
+      "enabled": true,
+      "$$hashKey": "object:21969"
+    }
+  ],
+  "allowEscapeKey": true,
+  "fullscreen": true,
+  "moduleHierarchy": {
+    "tatoolType": "List",
+    "label": "Task List",
+    "iterator": {
+      "customType": "ListIterator",
+      "numIterations": 1,
+      "order": "sequential"
+    },
+    "children": [
+      {
+        "tatoolType": "Executable",
+        "customType": "tatoolInstruction",
+        "name": "instruction",
+        "blankInterval": 0,
+        "fixationInterval": 0,
+        "project": {
+          "name": "tatool",
+          "access": "public"
+        },
+        "pages": {
+          "propertyType": "ArrayResource",
+          "propertyValue": [
+            {
+              "project": {
+                "name": "tatool-stimuli",
+                "access": "public"
+              },
+              "resourceName": "digitSpanTraining_01.htm",
+              "resourceType": "instructions"
+            }
+          ]
+        },
+        "images": {
+          "propertyType": "ArrayResource",
+          "propertyValue": []
+        }
+      },
+      {
+        "tatoolType": "Dual",
+        "name": "n9xsmvu73b000000",
+        "iterator": {
+          "customType": "ListIterator",
+          "numIterations": 10,
+          "order": "sequential"
+        },
+        "handlers": [
+          {
+            "name": "adaptiveLevel",
+            "customType": "levelHandler",
+            "benchmarkSampleSize": "2",
+            "benchmark": "0.8",
+            "allowLevelDown": {
+              "propertyType": "Boolean",
+              "propertyValue": true
+            }
+          }
+        ],
+        "children": {
+          "primary": {
+            "tatoolType": "Executable",
+            "customType": "tatoolDigitMemorySpanTraining",
+            "name": "digitSpanTraining",
+            "blankInterval": "250",
+            "fixationInterval": 0,
+            "project": {
+              "name": "tatool",
+              "access": "public"
+            },
+            "suspendAfterEachItem": {
+              "propertyType": "Boolean",
+              "propertyValue": false
+            },
+            "displayDuration": "900",
+            "intervalDuration": "100",
+            "recallText": "Number",
+            "levelHandler": "adaptiveLevel",
+            "status": {
+              "feedbackPanel": true,
+              "levelPanel": true
+            }
+          }
+        }
+      }
+    ],
+    "handlers": []
+  },
+  "description": "Example for an adaptive digit span task.",
+  "exportDelimiter": ",",
+  "exportFormat": "long",
+  "moduleMaxSessions": null
+}

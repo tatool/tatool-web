@@ -1,5 +1,6 @@
 {
   "moduleHierarchy": {
+	"label": "Task List",
     "children": [
       {
         "hideMouseCursor": false,
@@ -249,8 +250,8 @@
     }
   ],
   "label": "demoDigitSpan",
-  "author": "info@tatool.ch",
-  "name": "Digit Memory Span",
+  "author": "Tatool",
+  "name": "Demo: Digit Memory Span",
   "description": "Example for a digit span task.",
   "exportDelimiter": ",",
   "moduleMaxSessions": 1,

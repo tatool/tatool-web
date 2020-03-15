@@ -1,5 +1,6 @@
 {
   "moduleHierarchy": {
+	"label": "Task List",
     "children": [
       {
         "pages": {
@@ -170,7 +171,7 @@
   ],
   "label": "demoBrownPeterson",
   "author": "Tatool",
-  "name": "Brown-Peterson Experiment",
+  "name": "Demo: Brown-Peterson",
   "exportDelimiter": ",",
   "exportFormat": "long",
   "moduleMaxSessions": null

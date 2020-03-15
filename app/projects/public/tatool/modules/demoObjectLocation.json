@@ -1,5 +1,6 @@
 {
   "moduleHierarchy": {
+    "label": "Task List",
     "children": [
       {
         "pages": {
@@ -113,7 +114,7 @@
   ],
   "label": "demoObjectLocation",
   "author": "Tatool",
-  "name": "Object Location Memory Experiment",
+  "name": "Demo: Object Location Memory",
   "exportDelimiter": ",",
   "exportFormat": "long",
   "moduleMaxSessions": null

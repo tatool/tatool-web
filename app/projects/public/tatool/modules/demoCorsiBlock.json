@@ -1,6 +1,7 @@
 {
   "description": "Corsi Block task in which sequentially marked positions in a grid have to be memorized and later recalled.",
   "moduleHierarchy": {
+	"label": "Task List",
     "children": [
       {
         "images": {
@@ -101,8 +102,8 @@
     }
   ],
   "label": "demoCorsiBlock",
-  "author": "info@tatool.ch",
-  "name": "Corsi Block",
+  "author": "Tatool",
+  "name": "Demo: Corsi Block",
   "exportDelimiter": ",",
   "exportFormat": "long",
   "moduleMaxSessions": null

@@ -1,1076 +1,881 @@
-{  
-   "name":"EF Battery: Parity-Magnitude Shifting",
-   "author":"University of Zurich (von Bastian, Souza, & Gade)",
-   "label":"ef_shifting_numerical",
-   "export":[  
-      {  
-         "mode":"upload",
-         "auto":true,
-         "enabled":true,
-         "$$hashKey":"object:8132"
+{
+  "moduleHierarchy": {
+    "label": "Task List",
+    "children": [
+      {
+        "tatoolType": "Executable",
+        "customType": "tatoolInstruction",
+        "name": "numerical_instruction_single_1_practice",
+        "blankInterval": 0,
+        "fixationInterval": 0,
+        "project": {
+          "name": "tatool",
+          "access": "public"
+        },
+        "pages": {
+          "propertyType": "ArrayResource",
+          "propertyValue": [
+            {
+              "project": {
+                "name": "uzh-ef-battery",
+                "access": "public"
+              },
+              "resourceName": "shifting_num_general_01.htm",
+              "resourceType": "instructions"
+            },
+            {
+              "project": {
+                "name": "uzh-ef-battery",
+                "access": "public"
+              },
+              "resourceType": "instructions",
+              "resourceName": "shifting_num_single_parity_01.htm"
+            },
+            {
+              "project": {
+                "name": "uzh-ef-battery",
+                "access": "public"
+              },
+              "resourceType": "instructions",
+              "resourceName": "shifting_num_single_parity_02.htm"
+            },
+            {
+              "project": {
+                "name": "uzh-ef-battery",
+                "access": "public"
+              },
+              "resourceType": "instructions",
+              "resourceName": "shifting_num_single_parity_03.htm"
+            }
+          ]
+        },
+        "images": {
+          "propertyType": "ArrayResource",
+          "propertyValue": []
+        }
       },
-      {  
-         "mode":"download",
-         "enabled":true,
-         "$$hashKey":"object:7863"
+      {
+        "tatoolType": "Executable",
+        "customType": "tatoolCountdown",
+        "name": "countdown",
+        "blankInterval": 0,
+        "fixationInterval": 0,
+        "project": {
+          "name": "tatool",
+          "access": "public"
+        },
+        "countdown": "3",
+        "interval": "1000"
+      },
+      {
+        "label": "Single parity practice",
+        "children": [
+          {
+            "hideMouseCursor": true,
+            "status": {
+              "feedbackPanel": true
+            },
+            "displayCueDuration": "250",
+            "timerEnabled": {
+              "propertyValue": false,
+              "propertyType": "Boolean"
+            },
+            "showKeys": {
+              "propertyValue": true,
+              "propertyType": "Boolean"
+            },
+            "stimuliFile": {
+              "resourceType": "stimuli",
+              "resourceName": "ef_shifting_numerical_single_parity_practice.csv",
+              "project": {
+                "access": "public",
+                "name": "uzh-ef-battery"
+              },
+              "propertyType": "Resource"
+            },
+            "stimuliPath": {
+              "resourceType": "stimuli",
+              "resourceName": "",
+              "project": {
+                "access": "public",
+                "name": "uzh-ef-battery"
+              },
+              "propertyType": "Path"
+            },
+            "project": {
+              "access": "public",
+              "name": "tatool"
+            },
+            "fixationInterval": 0,
+            "blankInterval": "250",
+            "name": "numerical_single_1_practice",
+            "customType": "tatoolShifting",
+            "tatoolType": "Executable"
+          }
+        ],
+        "handlers": [],
+        "iterator": {
+          "numIterations": 12,
+          "customType": "ListIterator",
+          "order": "sequential"
+        },
+        "name": "fwbxosx43tqhbyb9",
+        "tatoolType": "List"
+      },
+      {
+        "tatoolType": "Executable",
+        "customType": "tatoolInstruction",
+        "name": "numerical_instruction_single_1_1",
+        "blankInterval": 0,
+        "fixationInterval": 0,
+        "project": {
+          "name": "tatool",
+          "access": "public"
+        },
+        "pages": {
+          "propertyType": "ArrayResource",
+          "propertyValue": [
+            {
+              "project": {
+                "name": "uzh-ef-battery",
+                "access": "public"
+              },
+              "resourceName": "shifting_num_single_parity_04.htm",
+              "resourceType": "instructions"
+            }
+          ]
+        },
+        "images": {
+          "propertyType": "ArrayResource",
+          "propertyValue": []
+        }
+      },
+      {
+        "tatoolType": "Executable",
+        "customType": "tatoolCountdown",
+        "name": "countdown",
+        "blankInterval": 0,
+        "fixationInterval": 0,
+        "project": {
+          "name": "tatool",
+          "access": "public"
+        }
+      },
+      {
+        "label": "Single parity",
+        "children": [
+          {
+            "hideMouseCursor": true,
+            "displayCueDuration": "150",
+            "timerEnabled": {
+              "propertyValue": false,
+              "propertyType": "Boolean"
+            },
+            "showKeys": {
+              "propertyValue": true,
+              "propertyType": "Boolean"
+            },
+            "stimuliFile": {
+              "resourceType": "stimuli",
+              "resourceName": "ef_shifting_numerical_single_parity_1.csv",
+              "project": {
+                "access": "public",
+                "name": "uzh-ef-battery"
+              },
+              "propertyType": "Resource"
+            },
+            "stimuliPath": {
+              "resourceType": "stimuli",
+              "resourceName": "",
+              "project": {
+                "access": "public",
+                "name": "uzh-ef-battery"
+              },
+              "propertyType": "Path"
+            },
+            "project": {
+              "access": "public",
+              "name": "tatool"
+            },
+            "fixationInterval": 0,
+            "blankInterval": 0,
+            "name": "numerical_single_1_1",
+            "customType": "tatoolShifting",
+            "tatoolType": "Executable"
+          }
+        ],
+        "handlers": [],
+        "iterator": {
+          "numIterations": 64,
+          "customType": "ListIterator",
+          "order": "sequential"
+        },
+        "name": "60j80jyos4kuik90",
+        "tatoolType": "List"
+      },
+      {
+        "tatoolType": "Executable",
+        "customType": "tatoolInstruction",
+        "name": "numerical_instruction_single_2_practice",
+        "blankInterval": 0,
+        "fixationInterval": 0,
+        "project": {
+          "name": "tatool",
+          "access": "public"
+        },
+        "pages": {
+          "propertyType": "ArrayResource",
+          "propertyValue": [
+            {
+              "project": {
+                "name": "uzh-ef-battery",
+                "access": "public"
+              },
+              "resourceName": "shifting_num_single_magnitude_01.htm",
+              "resourceType": "instructions"
+            },
+            {
+              "project": {
+                "name": "uzh-ef-battery",
+                "access": "public"
+              },
+              "resourceType": "instructions",
+              "resourceName": "shifting_num_single_magnitude_02.htm"
+            },
+            {
+              "project": {
+                "name": "uzh-ef-battery",
+                "access": "public"
+              },
+              "resourceType": "instructions",
+              "resourceName": "shifting_num_single_magnitude_03.htm"
+            }
+          ]
+        },
+        "images": {
+          "propertyType": "ArrayResource",
+          "propertyValue": []
+        }
+      },
+      {
+        "tatoolType": "Executable",
+        "customType": "tatoolCountdown",
+        "name": "countdown",
+        "blankInterval": 0,
+        "fixationInterval": 0,
+        "project": {
+          "name": "tatool",
+          "access": "public"
+        }
+      },
+      {
+        "label": "Single magnitude practice",
+        "children": [
+          {
+            "status": {
+              "feedbackPanel": true
+            },
+            "hideMouseCursor": true,
+            "displayCueDuration": "150",
+            "timerEnabled": {
+              "propertyValue": false,
+              "propertyType": "Boolean"
+            },
+            "showKeys": {
+              "propertyValue": true,
+              "propertyType": "Boolean"
+            },
+            "stimuliFile": {
+              "resourceType": "stimuli",
+              "resourceName": "ef_shifting_numerical_single_magnitude_practice.csv",
+              "project": {
+                "access": "public",
+                "name": "uzh-ef-battery"
+              },
+              "propertyType": "Resource"
+            },
+            "stimuliPath": {
+              "resourceType": "stimuli",
+              "resourceName": "",
+              "project": {
+                "access": "public",
+                "name": "uzh-ef-battery"
+              },
+              "propertyType": "Path"
+            },
+            "project": {
+              "access": "public",
+              "name": "tatool"
+            },
+            "fixationInterval": 0,
+            "blankInterval": "250",
+            "name": "numerical_single_2_practice",
+            "customType": "tatoolShifting",
+            "tatoolType": "Executable"
+          }
+        ],
+        "handlers": [],
+        "iterator": {
+          "numIterations": 12,
+          "customType": "ListIterator",
+          "order": "sequential"
+        },
+        "name": "53ka7sf6lm6j38fr",
+        "tatoolType": "List"
+      },
+      {
+        "tatoolType": "Executable",
+        "customType": "tatoolInstruction",
+        "name": "numerical_instruction_single_2_1",
+        "blankInterval": 0,
+        "fixationInterval": 0,
+        "project": {
+          "name": "tatool",
+          "access": "public"
+        },
+        "pages": {
+          "propertyType": "ArrayResource",
+          "propertyValue": [
+            {
+              "project": {
+                "name": "uzh-ef-battery",
+                "access": "public"
+              },
+              "resourceName": "shifting_num_single_magnitude_04.htm",
+              "resourceType": "instructions"
+            }
+          ]
+        },
+        "images": {
+          "propertyType": "ArrayResource",
+          "propertyValue": []
+        }
+      },
+      {
+        "tatoolType": "Executable",
+        "customType": "tatoolCountdown",
+        "name": "countdown",
+        "blankInterval": 0,
+        "fixationInterval": 0,
+        "project": {
+          "name": "tatool",
+          "access": "public"
+        }
+      },
+      {
+        "label": "Single magnitude",
+        "children": [
+          {
+            "hideMouseCursor": true,
+            "displayCueDuration": "150",
+            "timerEnabled": {
+              "propertyValue": false,
+              "propertyType": "Boolean"
+            },
+            "showKeys": {
+              "propertyValue": true,
+              "propertyType": "Boolean"
+            },
+            "stimuliFile": {
+              "resourceType": "stimuli",
+              "resourceName": "ef_shifting_numerical_single_magnitude_1.csv",
+              "project": {
+                "access": "public",
+                "name": "uzh-ef-battery"
+              },
+              "propertyType": "Resource"
+            },
+            "stimuliPath": {
+              "resourceType": "stimuli",
+              "resourceName": "",
+              "project": {
+                "access": "public",
+                "name": "uzh-ef-battery"
+              },
+              "propertyType": "Path"
+            },
+            "project": {
+              "access": "public",
+              "name": "tatool"
+            },
+            "fixationInterval": 0,
+            "blankInterval": 0,
+            "name": "numerical_single_2_1",
+            "customType": "tatoolShifting",
+            "tatoolType": "Executable"
+          }
+        ],
+        "handlers": [],
+        "iterator": {
+          "numIterations": 64,
+          "customType": "ListIterator",
+          "order": "sequential"
+        },
+        "name": "qesqiwnnxparwwmi",
+        "tatoolType": "List"
+      },
+      {
+        "tatoolType": "Executable",
+        "customType": "tatoolInstruction",
+        "name": "numerical_instruction_mixed_practice",
+        "blankInterval": 0,
+        "fixationInterval": 0,
+        "project": {
+          "name": "tatool",
+          "access": "public"
+        },
+        "pages": {
+          "propertyType": "ArrayResource",
+          "propertyValue": [
+            {
+              "project": {
+                "name": "uzh-ef-battery",
+                "access": "public"
+              },
+              "resourceName": "shifting_num_mixed_01.htm",
+              "resourceType": "instructions"
+            },
+            {
+              "project": {
+                "name": "uzh-ef-battery",
+                "access": "public"
+              },
+              "resourceType": "instructions",
+              "resourceName": "shifting_num_mixed_02.htm"
+            },
+            {
+              "project": {
+                "name": "uzh-ef-battery",
+                "access": "public"
+              },
+              "resourceType": "instructions",
+              "resourceName": "shifting_num_mixed_03.htm"
+            },
+            {
+              "project": {
+                "name": "uzh-ef-battery",
+                "access": "public"
+              },
+              "resourceType": "instructions",
+              "resourceName": "shifting_num_mixed_04.htm"
+            }
+          ]
+        },
+        "images": {
+          "propertyType": "ArrayResource",
+          "propertyValue": []
+        }
+      },
+      {
+        "tatoolType": "Executable",
+        "customType": "tatoolCountdown",
+        "name": "countdown",
+        "blankInterval": 0,
+        "fixationInterval": 0,
+        "project": {
+          "name": "tatool",
+          "access": "public"
+        }
+      },
+      {
+        "label": "Mixed practice",
+        "children": [
+          {
+            "hideMouseCursor": true,
+            "status": {
+              "feedbackPanel": true
+            },
+            "displayCueDuration": "150",
+            "timerEnabled": {
+              "propertyValue": false,
+              "propertyType": "Boolean"
+            },
+            "showKeys": {
+              "propertyValue": true,
+              "propertyType": "Boolean"
+            },
+            "stimuliFile": {
+              "resourceName": "ef_shifting_numerical_mixed_practice.csv",
+              "project": {
+                "access": "public",
+                "name": "uzh-ef-battery"
+              },
+              "resourceType": "stimuli",
+              "propertyType": "Resource"
+            },
+            "stimuliPath": {
+              "resourceType": "stimuli",
+              "resourceName": "",
+              "project": {
+                "access": "public",
+                "name": "uzh-ef-battery"
+              },
+              "propertyType": "Path"
+            },
+            "project": {
+              "access": "public",
+              "name": "tatool"
+            },
+            "fixationInterval": 0,
+            "blankInterval": "250",
+            "name": "numerical_mixed_practice",
+            "customType": "tatoolShifting",
+            "tatoolType": "Executable"
+          }
+        ],
+        "handlers": [],
+        "iterator": {
+          "numIterations": 12,
+          "customType": "ListIterator",
+          "order": "sequential"
+        },
+        "name": "5z5drc12hfgbke29",
+        "tatoolType": "List"
+      },
+      {
+        "tatoolType": "Executable",
+        "customType": "tatoolInstruction",
+        "name": "numerical_instruction_mixed",
+        "blankInterval": 0,
+        "fixationInterval": 0,
+        "project": {
+          "name": "tatool",
+          "access": "public"
+        },
+        "pages": {
+          "propertyType": "ArrayResource",
+          "propertyValue": [
+            {
+              "project": {
+                "name": "uzh-ef-battery",
+                "access": "public"
+              },
+              "resourceName": "shifting_num_mixed_05.htm",
+              "resourceType": "instructions"
+            }
+          ]
+        },
+        "images": {
+          "propertyType": "ArrayResource",
+          "propertyValue": []
+        }
+      },
+      {
+        "tatoolType": "Executable",
+        "customType": "tatoolCountdown",
+        "name": "countdown",
+        "blankInterval": 0,
+        "fixationInterval": 0,
+        "project": {
+          "name": "tatool",
+          "access": "public"
+        }
+      },
+      {
+        "label": "Mixed",
+        "children": [
+          {
+            "hideMouseCursor": true,
+            "displayCueDuration": "150",
+            "timerEnabled": {
+              "propertyValue": false,
+              "propertyType": "Boolean"
+            },
+            "showKeys": {
+              "propertyValue": true,
+              "propertyType": "Boolean"
+            },
+            "stimuliFile": {
+              "resourceType": "stimuli",
+              "resourceName": "ef_shifting_numerical_mixed.csv",
+              "project": {
+                "access": "public",
+                "name": "uzh-ef-battery"
+              },
+              "propertyType": "Resource"
+            },
+            "stimuliPath": {
+              "resourceType": "stimuli",
+              "resourceName": "",
+              "project": {
+                "access": "public",
+                "name": "uzh-ef-battery"
+              },
+              "propertyType": "Path"
+            },
+            "project": {
+              "access": "public",
+              "name": "tatool"
+            },
+            "fixationInterval": 0,
+            "blankInterval": 0,
+            "name": "numerical_mixed",
+            "customType": "tatoolShifting",
+            "tatoolType": "Executable"
+          }
+        ],
+        "handlers": [],
+        "iterator": {
+          "numIterations": 129,
+          "customType": "ListIterator",
+          "order": "sequential"
+        },
+        "name": "3o7b0agioro7ds4i",
+        "tatoolType": "List"
+      },
+      {
+        "tatoolType": "Executable",
+        "customType": "tatoolInstruction",
+        "name": "numerical_instruction_single_2_2",
+        "blankInterval": 0,
+        "fixationInterval": 0,
+        "project": {
+          "name": "tatool",
+          "access": "public"
+        },
+        "pages": {
+          "propertyType": "ArrayResource",
+          "propertyValue": [
+            {
+              "project": {
+                "name": "uzh-ef-battery",
+                "access": "public"
+              },
+              "resourceName": "shifting_num_single_magnitude_05.htm",
+              "resourceType": "instructions"
+            },
+            {
+              "project": {
+                "name": "uzh-ef-battery",
+                "access": "public"
+              },
+              "resourceType": "instructions",
+              "resourceName": "shifting_num_single_magnitude_06.htm"
+            }
+          ]
+        },
+        "images": {
+          "propertyType": "ArrayResource",
+          "propertyValue": []
+        }
+      },
+      {
+        "tatoolType": "Executable",
+        "customType": "tatoolCountdown",
+        "name": "countdown",
+        "blankInterval": 0,
+        "fixationInterval": 0,
+        "project": {
+          "name": "tatool",
+          "access": "public"
+        }
+      },
+      {
+        "label": "Single magnitude",
+        "children": [
+          {
+            "hideMouseCursor": true,
+            "displayCueDuration": "150",
+            "timerEnabled": {
+              "propertyValue": false,
+              "propertyType": "Boolean"
+            },
+            "showKeys": {
+              "propertyValue": true,
+              "propertyType": "Boolean"
+            },
+            "stimuliFile": {
+              "project": {
+                "access": "public",
+                "name": "uzh-ef-battery"
+              },
+              "resourceName": "ef_shifting_numerical_single_magnitude_2.csv",
+              "resourceType": "stimuli",
+              "propertyType": "Resource"
+            },
+            "stimuliPath": {
+              "resourceType": "stimuli",
+              "resourceName": "",
+              "project": {
+                "access": "public",
+                "name": "uzh-ef-battery"
+              },
+              "propertyType": "Path"
+            },
+            "project": {
+              "access": "public",
+              "name": "tatool"
+            },
+            "fixationInterval": 0,
+            "blankInterval": 0,
+            "name": "numerical_single_2_2",
+            "customType": "tatoolShifting",
+            "tatoolType": "Executable"
+          }
+        ],
+        "handlers": [],
+        "iterator": {
+          "numIterations": 64,
+          "customType": "ListIterator",
+          "order": "sequential"
+        },
+        "name": "zi2u5tuvye6d2t90",
+        "tatoolType": "List"
+      },
+      {
+        "tatoolType": "Executable",
+        "customType": "tatoolInstruction",
+        "name": "numerical_instruction_single_1_2",
+        "blankInterval": 0,
+        "fixationInterval": 0,
+        "project": {
+          "name": "tatool",
+          "access": "public"
+        },
+        "pages": {
+          "propertyType": "ArrayResource",
+          "propertyValue": [
+            {
+              "project": {
+                "name": "uzh-ef-battery",
+                "access": "public"
+              },
+              "resourceName": "shifting_num_single_parity_05.htm",
+              "resourceType": "instructions"
+            },
+            {
+              "project": {
+                "name": "uzh-ef-battery",
+                "access": "public"
+              },
+              "resourceType": "instructions",
+              "resourceName": "shifting_num_single_parity_06.htm"
+            }
+          ]
+        },
+        "images": {
+          "propertyType": "ArrayResource",
+          "propertyValue": []
+        }
+      },
+      {
+        "tatoolType": "Executable",
+        "customType": "tatoolCountdown",
+        "name": "countdown",
+        "blankInterval": 0,
+        "fixationInterval": 0,
+        "project": {
+          "name": "tatool",
+          "access": "public"
+        }
+      },
+      {
+        "label": "Single parity",
+        "children": [
+          {
+            "hideMouseCursor": true,
+            "displayCueDuration": "150",
+            "timerEnabled": {
+              "propertyValue": false,
+              "propertyType": "Boolean"
+            },
+            "showKeys": {
+              "propertyValue": true,
+              "propertyType": "Boolean"
+            },
+            "stimuliFile": {
+              "resourceType": "stimuli",
+              "resourceName": "ef_shifting_numerical_single_parity_2.csv",
+              "project": {
+                "access": "public",
+                "name": "uzh-ef-battery"
+              },
+              "propertyType": "Resource"
+            },
+            "stimuliPath": {
+              "resourceType": "stimuli",
+              "resourceName": "",
+              "project": {
+                "access": "public",
+                "name": "uzh-ef-battery"
+              },
+              "propertyType": "Path"
+            },
+            "project": {
+              "access": "public",
+              "name": "tatool"
+            },
+            "fixationInterval": 0,
+            "blankInterval": 0,
+            "name": "numerical_single_1_2",
+            "customType": "tatoolShifting",
+            "tatoolType": "Executable"
+          }
+        ],
+        "handlers": [],
+        "iterator": {
+          "numIterations": "64",
+          "customType": "ListIterator",
+          "order": "sequential"
+        },
+        "name": "he9of0wrri3eg66r",
+        "tatoolType": "List"
+      },
+      {
+        "tatoolType": "Executable",
+        "customType": "tatoolInstruction",
+        "name": "end",
+        "blankInterval": 0,
+        "fixationInterval": 0,
+        "project": {
+          "name": "tatool",
+          "access": "public"
+        },
+        "pages": {
+          "propertyType": "ArrayResource",
+          "propertyValue": [
+            {
+              "project": {
+                "name": "tatool-stimuli",
+                "access": "public"
+              },
+              "resourceName": "end.html",
+              "resourceType": "instructions"
+            }
+          ]
+        },
+        "images": {
+          "propertyType": "ArrayResource",
+          "propertyValue": []
+        }
       }
-   ],
-   "allowEscapeKey":true,
-   "fullscreen":true,
-   "moduleHierarchy":{  
-      "tatoolType":"List",
-      "iterator":{  
-         "customType":"ListIterator",
-         "numIterations":1
-      },
-      "children":[  
-         {  
-            "tatoolType":"List",
-            "name":"v80fq6pxp8tfn7b9",
-            "iterator":{  
-               "customType":"ListIterator",
-               "numIterations":1
-            },
-            "handlers":[  
-
-            ],
-            "children":[  
-               {  
-                  "tatoolType":"Executable",
-                  "customType":"tatoolInstruction",
-                  "name":"numerical_instruction_single_1_practice",
-                  "blankInterval":0,
-                  "fixationInterval":0,
-                  "project":{  
-                     "name":"tatool",
-                     "access":"public"
-                  },
-                  "pages":{  
-                     "propertyType":"ArrayResource",
-                     "propertyValue":[  
-                        {  
-                           "project":{  
-                              "name":"uzh-ef-battery",
-                              "access":"public"
-                           },
-                           "resourceName":"shifting_num_general_01.htm",
-                           "resourceType":"instructions"
-                        },
-                        {  
-                           "project":{  
-                              "name":"uzh-ef-battery",
-                              "access":"public"
-                           },
-                           "resourceType":"instructions",
-                           "resourceName":"shifting_num_single_parity_01.htm"
-                        },
-                        {  
-                           "project":{  
-                              "name":"uzh-ef-battery",
-                              "access":"public"
-                           },
-                           "resourceType":"instructions",
-                           "resourceName":"shifting_num_single_parity_02.htm"
-                        },
-                        {  
-                           "project":{  
-                              "name":"uzh-ef-battery",
-                              "access":"public"
-                           },
-                           "resourceType":"instructions",
-                           "resourceName":"shifting_num_single_parity_03.htm"
-                        }
-                     ]
-                  },
-                  "hideMouseCursor":false
-               }
-            ],
-            "label":"Instruction"
-         },
-         {  
-            "tatoolType":"List",
-            "name":"y9tzj37dpge3ik90",
-            "iterator":{  
-               "customType":"ListIterator",
-               "numIterations":1
-            },
-            "handlers":[  
-
-            ],
-            "children":[  
-               {  
-                  "tatoolType":"Executable",
-                  "customType":"tatoolCountdown",
-                  "name":"countdown",
-                  "blankInterval":0,
-                  "fixationInterval":0,
-                  "project":{  
-                     "name":"tatool",
-                     "access":"public"
-                  },
-                  "countdown":"3",
-                  "interval":"1000",
-                  "hideMouseCursor":true
-               }
-            ],
-            "label":"Countdown"
-         },
-         {  
-            "tatoolType":"List",
-            "name":"fwbxosx43tqhbyb9",
-            "iterator":{  
-               "customType":"ListIterator",
-               "numIterations":12
-            },
-            "handlers":[  
-
-            ],
-            "children":[  
-               {  
-                  "tatoolType":"Executable",
-                  "customType":"tatoolShifting",
-                  "name":"numerical_single_1_practice",
-                  "blankInterval":0,
-                  "fixationInterval":0,
-                  "project":{  
-                     "name":"tatool",
-                     "access":"public"
-                  },
-                  "stimuliPath":{  
-                     "propertyType":"Path",
-                     "project":{  
-                        "name":"uzh-ef-battery",
-                        "access":"public"
-                     },
-                     "resourceName":"",
-                     "resourceType":"stimuli"
-                  },
-                  "stimuliFile":{  
-                     "propertyType":"Resource",
-                     "project":{  
-                        "name":"uzh-ef-battery",
-                        "access":"public"
-                     },
-                     "resourceName":"ef_shifting_numerical_single_parity_practice.csv",
-                     "resourceType":"stimuli"
-                  },
-                  "showKeys":{  
-                     "propertyType":"Boolean",
-                     "propertyValue":true
-                  },
-                  "timerEnabled":{  
-                     "propertyType":"Boolean",
-                     "propertyValue":false
-                  },
-                  "displayCueDuration":"250",
-                  "status":{  
-                     "feedbackPanel":true
-                  },
-                  "hideMouseCursor":true
-               }
-            ],
-            "label":"Single parity practice"
-         },
-         {  
-            "tatoolType":"List",
-            "name":"11c17gor8xyo80k9",
-            "iterator":{  
-               "customType":"ListIterator",
-               "numIterations":"1"
-            },
-            "handlers":[  
-
-            ],
-            "children":[  
-               {  
-                  "tatoolType":"Executable",
-                  "customType":"tatoolInstruction",
-                  "name":"numerical_instruction_single_1_1",
-                  "blankInterval":0,
-                  "fixationInterval":0,
-                  "project":{  
-                     "name":"tatool",
-                     "access":"public"
-                  },
-                  "pages":{  
-                     "propertyType":"ArrayResource",
-                     "propertyValue":[  
-                        {  
-                           "project":{  
-                              "name":"uzh-ef-battery",
-                              "access":"public"
-                           },
-                           "resourceName":"shifting_num_single_parity_04.htm",
-                           "resourceType":"instructions"
-                        }
-                     ]
-                  },
-                  "hideMouseCursor":false
-               }
-            ],
-            "label":"Instruction"
-         },
-         {  
-            "tatoolType":"List",
-            "name":"93ft3zf7uf7833di",
-            "iterator":{  
-               "customType":"ListIterator",
-               "numIterations":"1"
-            },
-            "handlers":[  
-
-            ],
-            "children":[  
-               {  
-                  "tatoolType":"Executable",
-                  "customType":"tatoolCountdown",
-                  "name":"countdown",
-                  "blankInterval":0,
-                  "fixationInterval":0,
-                  "hideMouseCursor":true,
-                  "project":{  
-                     "name":"tatool",
-                     "access":"public"
-                  },
-                  "countdown":"3",
-                  "interval":"1000"
-               }
-            ],
-            "label":"Countdown"
-         },
-         {  
-            "tatoolType":"List",
-            "name":"60j80jyos4kuik90",
-            "iterator":{  
-               "customType":"ListIterator",
-               "numIterations":64
-            },
-            "handlers":[  
-
-            ],
-            "children":[  
-               {  
-                  "tatoolType":"Executable",
-                  "customType":"tatoolShifting",
-                  "name":"numerical_single_1_1",
-                  "blankInterval":0,
-                  "fixationInterval":0,
-                  "project":{  
-                     "name":"tatool",
-                     "access":"public"
-                  },
-                  "stimuliPath":{  
-                     "propertyType":"Path",
-                     "project":{  
-                        "name":"uzh-ef-battery",
-                        "access":"public"
-                     },
-                     "resourceName":"",
-                     "resourceType":"stimuli"
-                  },
-                  "stimuliFile":{  
-                     "propertyType":"Resource",
-                     "project":{  
-                        "name":"uzh-ef-battery",
-                        "access":"public"
-                     },
-                     "resourceName":"ef_shifting_numerical_single_parity_1.csv",
-                     "resourceType":"stimuli"
-                  },
-                  "showKeys":{  
-                     "propertyType":"Boolean",
-                     "propertyValue":true
-                  },
-                  "timerEnabled":{  
-                     "propertyType":"Boolean",
-                     "propertyValue":false
-                  },
-                  "displayCueDuration":"150",
-                  "hideMouseCursor":true
-               }
-            ],
-            "label":"Single parity"
-         },
-         {  
-            "tatoolType":"List",
-            "name":"52ros6tadqtihpvi",
-            "iterator":{  
-               "customType":"ListIterator",
-               "numIterations":"1"
-            },
-            "handlers":[  
-
-            ],
-            "children":[  
-               {  
-                  "tatoolType":"Executable",
-                  "customType":"tatoolInstruction",
-                  "name":"numerical_instruction_single_2_practice",
-                  "blankInterval":0,
-                  "fixationInterval":0,
-                  "project":{  
-                     "name":"tatool",
-                     "access":"public"
-                  },
-                  "pages":{  
-                     "propertyType":"ArrayResource",
-                     "propertyValue":[  
-                        {  
-                           "project":{  
-                              "name":"uzh-ef-battery",
-                              "access":"public"
-                           },
-                           "resourceName":"shifting_num_single_magnitude_01.htm",
-                           "resourceType":"instructions"
-                        },
-                        {  
-                           "project":{  
-                              "name":"uzh-ef-battery",
-                              "access":"public"
-                           },
-                           "resourceType":"instructions",
-                           "resourceName":"shifting_num_single_magnitude_02.htm"
-                        },
-                        {  
-                           "project":{  
-                              "name":"uzh-ef-battery",
-                              "access":"public"
-                           },
-                           "resourceType":"instructions",
-                           "resourceName":"shifting_num_single_magnitude_03.htm"
-                        }
-                     ]
-                  },
-                  "hideMouseCursor":false
-               }
-            ],
-            "label":"Instruction"
-         },
-         {  
-            "tatoolType":"List",
-            "name":"hdinehya1vukrzfr",
-            "iterator":{  
-               "customType":"ListIterator",
-               "numIterations":"1"
-            },
-            "handlers":[  
-
-            ],
-            "children":[  
-               {  
-                  "tatoolType":"Executable",
-                  "customType":"tatoolCountdown",
-                  "name":"countdown",
-                  "blankInterval":0,
-                  "fixationInterval":0,
-                  "project":{  
-                     "name":"tatool",
-                     "access":"public"
-                  },
-                  "countdown":"3",
-                  "interval":"1000",
-                  "hideMouseCursor":true
-               }
-            ],
-            "label":"Countdown"
-         },
-         {  
-            "tatoolType":"List",
-            "name":"53ka7sf6lm6j38fr",
-            "iterator":{  
-               "customType":"ListIterator",
-               "numIterations":12
-            },
-            "handlers":[  
-
-            ],
-            "children":[  
-               {  
-                  "tatoolType":"Executable",
-                  "customType":"tatoolShifting",
-                  "name":"numerical_single_2_practice",
-                  "blankInterval":0,
-                  "fixationInterval":0,
-                  "project":{  
-                     "name":"tatool",
-                     "access":"public"
-                  },
-                  "stimuliPath":{  
-                     "propertyType":"Path",
-                     "project":{  
-                        "name":"uzh-ef-battery",
-                        "access":"public"
-                     },
-                     "resourceName":"",
-                     "resourceType":"stimuli"
-                  },
-                  "stimuliFile":{  
-                     "propertyType":"Resource",
-                     "project":{  
-                        "name":"uzh-ef-battery",
-                        "access":"public"
-                     },
-                     "resourceName":"ef_shifting_numerical_single_magnitude_practice.csv",
-                     "resourceType":"stimuli"
-                  },
-                  "showKeys":{  
-                     "propertyType":"Boolean",
-                     "propertyValue":true
-                  },
-                  "timerEnabled":{  
-                     "propertyType":"Boolean",
-                     "propertyValue":false
-                  },
-                  "displayCueDuration":"150",
-                  "hideMouseCursor":true,
-                  "status":{  
-                     "feedbackPanel":true
-                  }
-               }
-            ],
-            "label":"Single magnitude practice"
-         },
-         {  
-            "tatoolType":"List",
-            "name":"d2gx63giot9vbo6r",
-            "iterator":{  
-               "customType":"ListIterator",
-               "numIterations":"1"
-            },
-            "handlers":[  
-
-            ],
-            "children":[  
-               {  
-                  "tatoolType":"Executable",
-                  "customType":"tatoolInstruction",
-                  "name":"numerical_instruction_single_2_1",
-                  "blankInterval":0,
-                  "fixationInterval":0,
-                  "project":{  
-                     "name":"tatool",
-                     "access":"public"
-                  },
-                  "pages":{  
-                     "propertyType":"ArrayResource",
-                     "propertyValue":[  
-                        {  
-                           "resourceName":"shifting_num_single_magnitude_04.htm",
-                           "project":{  
-                              "name":"uzh-ef-battery",
-                              "access":"public"
-                           },
-                           "resourceType":"instructions"
-                        }
-                     ]
-                  }
-               }
-            ],
-            "label":"Instruction"
-         },
-         {  
-            "tatoolType":"List",
-            "name":"q5941idkl1dlhaor",
-            "iterator":{  
-               "customType":"ListIterator",
-               "numIterations":"1"
-            },
-            "handlers":[  
-
-            ],
-            "children":[  
-               {  
-                  "tatoolType":"Executable",
-                  "customType":"tatoolCountdown",
-                  "name":"countdown",
-                  "blankInterval":0,
-                  "fixationInterval":0,
-                  "hideMouseCursor":true,
-                  "project":{  
-                     "name":"tatool",
-                     "access":"public"
-                  },
-                  "countdown":"3",
-                  "interval":"1000"
-               }
-            ],
-            "label":"Countdown"
-         },
-         {  
-            "tatoolType":"List",
-            "name":"qesqiwnnxparwwmi",
-            "iterator":{  
-               "customType":"ListIterator",
-               "numIterations":64
-            },
-            "handlers":[  
-
-            ],
-            "children":[  
-               {  
-                  "tatoolType":"Executable",
-                  "customType":"tatoolShifting",
-                  "name":"numerical_single_2_1",
-                  "blankInterval":0,
-                  "fixationInterval":0,
-                  "project":{  
-                     "name":"tatool",
-                     "access":"public"
-                  },
-                  "stimuliPath":{  
-                     "propertyType":"Path",
-                     "project":{  
-                        "name":"uzh-ef-battery",
-                        "access":"public"
-                     },
-                     "resourceName":"",
-                     "resourceType":"stimuli"
-                  },
-                  "stimuliFile":{  
-                     "propertyType":"Resource",
-                     "project":{  
-                        "name":"uzh-ef-battery",
-                        "access":"public"
-                     },
-                     "resourceName":"ef_shifting_numerical_single_magnitude_1.csv",
-                     "resourceType":"stimuli"
-                  },
-                  "showKeys":{  
-                     "propertyType":"Boolean",
-                     "propertyValue":true
-                  },
-                  "timerEnabled":{  
-                     "propertyType":"Boolean",
-                     "propertyValue":false
-                  },
-                  "displayCueDuration":"150",
-                  "hideMouseCursor":true
-               }
-            ],
-            "label":"Single magnitude"
-         },
-         {  
-            "tatoolType":"List",
-            "name":"i0h9xpcw3ll680k9",
-            "iterator":{  
-               "customType":"ListIterator",
-               "numIterations":"1"
-            },
-            "handlers":[  
-
-            ],
-            "children":[  
-               {  
-                  "tatoolType":"Executable",
-                  "customType":"tatoolInstruction",
-                  "name":"numerical_instruction_mixed_practice",
-                  "blankInterval":0,
-                  "fixationInterval":0,
-                  "project":{  
-                     "name":"tatool",
-                     "access":"public"
-                  },
-                  "pages":{  
-                     "propertyType":"ArrayResource",
-                     "propertyValue":[  
-                        {  
-                           "project":{  
-                              "name":"uzh-ef-battery",
-                              "access":"public"
-                           },
-                           "resourceName":"shifting_num_mixed_01.htm",
-                           "resourceType":"instructions"
-                        },
-                        {  
-                           "project":{  
-                              "name":"uzh-ef-battery",
-                              "access":"public"
-                           },
-                           "resourceType":"instructions",
-                           "resourceName":"shifting_num_mixed_02.htm"
-                        },
-                        {  
-                           "project":{  
-                              "name":"uzh-ef-battery",
-                              "access":"public"
-                           },
-                           "resourceType":"instructions",
-                           "resourceName":"shifting_num_mixed_03.htm"
-                        },
-                        {  
-                           "project":{  
-                              "name":"uzh-ef-battery",
-                              "access":"public"
-                           },
-                           "resourceType":"instructions",
-                           "resourceName":"shifting_num_mixed_04.htm"
-                        }
-                     ]
-                  }
-               }
-            ],
-            "label":"Instruction"
-         },
-         {  
-            "tatoolType":"List",
-            "name":"dh7842tkb9c3ow29",
-            "iterator":{  
-               "customType":"ListIterator",
-               "numIterations":"1"
-            },
-            "handlers":[  
-
-            ],
-            "children":[  
-               {  
-                  "tatoolType":"Executable",
-                  "customType":"tatoolCountdown",
-                  "name":"countdown",
-                  "blankInterval":0,
-                  "fixationInterval":0,
-                  "project":{  
-                     "name":"tatool",
-                     "access":"public"
-                  },
-                  "countdown":"3",
-                  "interval":"1000",
-                  "hideMouseCursor":true
-               }
-            ],
-            "label":"Countdown"
-         },
-         {  
-            "tatoolType":"List",
-            "name":"5z5drc12hfgbke29",
-            "iterator":{  
-               "customType":"ListIterator",
-               "numIterations":12
-            },
-            "handlers":[  
-
-            ],
-            "children":[  
-               {  
-                  "tatoolType":"Executable",
-                  "customType":"tatoolShifting",
-                  "name":"numerical_mixed_practice",
-                  "blankInterval":0,
-                  "fixationInterval":0,
-                  "project":{  
-                     "name":"tatool",
-                     "access":"public"
-                  },
-                  "stimuliPath":{  
-                     "propertyType":"Path",
-                     "project":{  
-                        "name":"uzh-ef-battery",
-                        "access":"public"
-                     },
-                     "resourceName":"",
-                     "resourceType":"stimuli"
-                  },
-                  "stimuliFile":{  
-                     "propertyType":"Resource",
-                     "resourceType":"stimuli",
-                     "project":{  
-                        "name":"uzh-ef-battery",
-                        "access":"public"
-                     },
-                     "resourceName":"ef_shifting_numerical_mixed_practice.csv"
-                  },
-                  "showKeys":{  
-                     "propertyType":"Boolean",
-                     "propertyValue":true
-                  },
-                  "timerEnabled":{  
-                     "propertyType":"Boolean",
-                     "propertyValue":false
-                  },
-                  "displayCueDuration":"150",
-                  "status":{  
-                     "feedbackPanel":true
-                  },
-                  "hideMouseCursor":true
-               }
-            ],
-            "label":"Mixed practice"
-         },
-         {  
-            "tatoolType":"List",
-            "name":"384ezsdhycqe61or",
-            "iterator":{  
-               "customType":"ListIterator",
-               "numIterations":"1"
-            },
-            "handlers":[  
-
-            ],
-            "children":[  
-               {  
-                  "tatoolType":"Executable",
-                  "customType":"tatoolInstruction",
-                  "name":"numerical_instruction_mixed",
-                  "blankInterval":0,
-                  "fixationInterval":0,
-                  "project":{  
-                     "name":"tatool",
-                     "access":"public"
-                  },
-                  "pages":{  
-                     "propertyType":"ArrayResource",
-                     "propertyValue":[  
-                        {  
-                           "project":{  
-                              "name":"uzh-ef-battery",
-                              "access":"public"
-                           },
-                           "resourceName":"shifting_num_mixed_05.htm",
-                           "resourceType":"instructions"
-                        }
-                     ]
-                  }
-               }
-            ],
-            "label":"Instruction"
-         },
-         {  
-            "tatoolType":"List",
-            "name":"iyizoqftzbk2o6r0",
-            "iterator":{  
-               "customType":"ListIterator",
-               "numIterations":"1"
-            },
-            "handlers":[  
-
-            ],
-            "children":[  
-               {  
-                  "tatoolType":"Executable",
-                  "customType":"tatoolCountdown",
-                  "name":"countdown",
-                  "blankInterval":0,
-                  "fixationInterval":0,
-                  "project":{  
-                     "name":"tatool",
-                     "access":"public"
-                  },
-                  "countdown":"3",
-                  "interval":"1000",
-                  "hideMouseCursor":true
-               }
-            ],
-            "label":"Countdown"
-         },
-         {  
-            "tatoolType":"List",
-            "name":"3o7b0agioro7ds4i",
-            "iterator":{  
-               "customType":"ListIterator",
-               "numIterations":129
-            },
-            "handlers":[  
-
-            ],
-            "children":[  
-               {  
-                  "tatoolType":"Executable",
-                  "customType":"tatoolShifting",
-                  "name":"numerical_mixed",
-                  "blankInterval":0,
-                  "fixationInterval":0,
-                  "project":{  
-                     "name":"tatool",
-                     "access":"public"
-                  },
-                  "stimuliPath":{  
-                     "propertyType":"Path",
-                     "project":{  
-                        "name":"uzh-ef-battery",
-                        "access":"public"
-                     },
-                     "resourceName":"",
-                     "resourceType":"stimuli"
-                  },
-                  "stimuliFile":{  
-                     "propertyType":"Resource",
-                     "project":{  
-                        "name":"uzh-ef-battery",
-                        "access":"public"
-                     },
-                     "resourceName":"ef_shifting_numerical_mixed.csv",
-                     "resourceType":"stimuli"
-                  },
-                  "showKeys":{  
-                     "propertyType":"Boolean",
-                     "propertyValue":true
-                  },
-                  "timerEnabled":{  
-                     "propertyType":"Boolean",
-                     "propertyValue":false
-                  },
-                  "displayCueDuration":"150",
-                  "hideMouseCursor":true
-               }
-            ],
-            "label":"Mixed"
-         },
-         {  
-            "tatoolType":"List",
-            "name":"amhcurha8gqlg14i",
-            "iterator":{  
-               "customType":"ListIterator",
-               "numIterations":"1"
-            },
-            "handlers":[  
-
-            ],
-            "children":[  
-               {  
-                  "tatoolType":"Executable",
-                  "customType":"tatoolInstruction",
-                  "name":"numerical_instruction_single_2_2",
-                  "blankInterval":0,
-                  "fixationInterval":0,
-                  "project":{  
-                     "name":"tatool",
-                     "access":"public"
-                  },
-                  "pages":{  
-                     "propertyType":"ArrayResource",
-                     "propertyValue":[  
-                        {  
-                           "project":{  
-                              "name":"uzh-ef-battery",
-                              "access":"public"
-                           },
-                           "resourceName":"shifting_num_single_magnitude_05.htm",
-                           "resourceType":"instructions"
-                        },
-                        {  
-                           "project":{  
-                              "name":"uzh-ef-battery",
-                              "access":"public"
-                           },
-                           "resourceType":"instructions",
-                           "resourceName":"shifting_num_single_magnitude_06.htm"
-                        }
-                     ]
-                  },
-                  "hideMouseCursor":false
-               }
-            ],
-            "label":"Instruction"
-         },
-         {  
-            "tatoolType":"List",
-            "name":"30geh2di8zkc5wmi",
-            "iterator":{  
-               "customType":"ListIterator",
-               "numIterations":"1"
-            },
-            "handlers":[  
-
-            ],
-            "children":[  
-               {  
-                  "tatoolType":"Executable",
-                  "customType":"tatoolCountdown",
-                  "name":"countdown",
-                  "blankInterval":0,
-                  "fixationInterval":0,
-                  "project":{  
-                     "name":"tatool",
-                     "access":"public"
-                  },
-                  "countdown":"3",
-                  "interval":"1000",
-                  "hideMouseCursor":true
-               }
-            ],
-            "label":"Countdown"
-         },
-         {  
-            "tatoolType":"List",
-            "name":"zi2u5tuvye6d2t90",
-            "iterator":{  
-               "customType":"ListIterator",
-               "numIterations":64
-            },
-            "handlers":[  
-
-            ],
-            "children":[  
-               {  
-                  "tatoolType":"Executable",
-                  "customType":"tatoolShifting",
-                  "name":"numerical_single_2_2",
-                  "blankInterval":0,
-                  "fixationInterval":0,
-                  "project":{  
-                     "name":"tatool",
-                     "access":"public"
-                  },
-                  "stimuliPath":{  
-                     "propertyType":"Path",
-                     "project":{  
-                        "name":"uzh-ef-battery",
-                        "access":"public"
-                     },
-                     "resourceName":"",
-                     "resourceType":"stimuli"
-                  },
-                  "stimuliFile":{  
-                     "propertyType":"Resource",
-                     "resourceType":"stimuli",
-                     "resourceName":"ef_shifting_numerical_single_magnitude_2.csv",
-                     "project":{  
-                        "name":"uzh-ef-battery",
-                        "access":"public"
-                     }
-                  },
-                  "showKeys":{  
-                     "propertyType":"Boolean",
-                     "propertyValue":true
-                  },
-                  "timerEnabled":{  
-                     "propertyType":"Boolean",
-                     "propertyValue":false
-                  },
-                  "displayCueDuration":"150",
-                  "hideMouseCursor":true
-               }
-            ],
-            "label":"Single magnitude"
-         },
-         {  
-            "tatoolType":"List",
-            "name":"hqpvsanllioirudi",
-            "iterator":{  
-               "customType":"ListIterator",
-               "numIterations":"1"
-            },
-            "handlers":[  
-
-            ],
-            "children":[  
-               {  
-                  "tatoolType":"Executable",
-                  "customType":"tatoolInstruction",
-                  "name":"numerical_instruction_single_1_2",
-                  "blankInterval":0,
-                  "fixationInterval":0,
-                  "project":{  
-                     "name":"tatool",
-                     "access":"public"
-                  },
-                  "pages":{  
-                     "propertyType":"ArrayResource",
-                     "propertyValue":[  
-                        {  
-                           "project":{  
-                              "name":"uzh-ef-battery",
-                              "access":"public"
-                           },
-                           "resourceName":"shifting_num_single_parity_05.htm",
-                           "resourceType":"instructions"
-                        },
-                        {  
-                           "project":{  
-                              "name":"uzh-ef-battery",
-                              "access":"public"
-                           },
-                           "resourceType":"instructions",
-                           "resourceName":"shifting_num_single_parity_06.htm"
-                        }
-                     ]
-                  }
-               }
-            ],
-            "label":"Instruction"
-         },
-         {  
-            "tatoolType":"List",
-            "name":"yszkk1kyuvea5rk9",
-            "iterator":{  
-               "customType":"ListIterator",
-               "numIterations":1
-            },
-            "handlers":[  
-
-            ],
-            "children":[  
-               {  
-                  "tatoolType":"Executable",
-                  "customType":"tatoolCountdown",
-                  "name":"countdown",
-                  "blankInterval":0,
-                  "fixationInterval":0,
-                  "hideMouseCursor":true,
-                  "project":{  
-                     "name":"tatool",
-                     "access":"public"
-                  },
-                  "countdown":"3",
-                  "interval":"1000"
-               }
-            ],
-            "label":"Countdown"
-         },
-         {  
-            "tatoolType":"List",
-            "name":"he9of0wrri3eg66r",
-            "iterator":{  
-               "customType":"ListIterator",
-               "numIterations":"64"
-            },
-            "handlers":[  
-
-            ],
-            "children":[  
-               {  
-                  "tatoolType":"Executable",
-                  "customType":"tatoolShifting",
-                  "name":"numerical_single_1_2",
-                  "blankInterval":0,
-                  "fixationInterval":0,
-                  "project":{  
-                     "name":"tatool",
-                     "access":"public"
-                  },
-                  "stimuliPath":{  
-                     "propertyType":"Path",
-                     "project":{  
-                        "name":"uzh-ef-battery",
-                        "access":"public"
-                     },
-                     "resourceName":"",
-                     "resourceType":"stimuli"
-                  },
-                  "stimuliFile":{  
-                     "propertyType":"Resource",
-                     "project":{  
-                        "name":"uzh-ef-battery",
-                        "access":"public"
-                     },
-                     "resourceName":"ef_shifting_numerical_single_parity_2.csv",
-                     "resourceType":"stimuli"
-                  },
-                  "showKeys":{  
-                     "propertyType":"Boolean",
-                     "propertyValue":true
-                  },
-                  "timerEnabled":{  
-                     "propertyType":"Boolean",
-                     "propertyValue":false
-                  },
-                  "displayCueDuration":"150",
-                  "hideMouseCursor":true
-               }
-            ],
-            "label":"Single parity"
-         }
-      ],
-      "label":"Task List"
-   },
-   "description":"Parity-Magnitude Shifting task from von Bastian, C. C. Souza, A. S., & Gade, M. (in press). No evidence for bilingual cognitive advantages: A test of four hypotheses. Journal of Experimental Psychology: General. doi: 10.1037/xge0000120"
+    ],
+    "iterator": {
+      "numIterations": 1,
+      "customType": "ListIterator",
+      "order": "sequential"
+    },
+    "tatoolType": "List"
+  },
+  "fullscreen": true,
+  "allowEscapeKey": true,
+  "export": [
+    {
+      "enabled": true,
+      "auto": true,
+      "mode": "upload",
+      "$$hashKey": "object:50305"
+    },
+    {
+      "enabled": true,
+      "mode": "download",
+      "$$hashKey": "object:50007"
+    }
+  ],
+  "label": "ef_shifting_numerical",
+  "author": "University of Zurich (von Bastian, Souza, & Gade)",
+  "name": "EF Battery: Parity-Magnitude Shifting",
+  "description": "Parity-Magnitude Shifting task from von Bastian, C. C. Souza, A. S., & Gade, M. (2016). No evidence for bilingual cognitive advantages: A test of four hypotheses. Journal of Experimental Psychology: General. doi: 10.1037/xge0000120",
+  "exportDelimiter": ",",
+  "exportFormat": "long"
 }
