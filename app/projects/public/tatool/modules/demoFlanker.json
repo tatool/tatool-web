@@ -21,7 +21,7 @@
           "name": "tatool"
         },
         "fixationInterval": 0,
-        "blankInterval": "250",
+        "blankInterval": 0,
         "name": "instruction",
         "customType": "tatoolInstruction",
         "tatoolType": "Executable"
@@ -32,7 +32,7 @@
           "name": "tatool"
         },
         "fixationInterval": 0,
-        "blankInterval": "250",
+        "blankInterval": 0,
         "name": "countdown",
         "customType": "tatoolCountdown",
         "tatoolType": "Executable"
