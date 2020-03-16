@@ -46,7 +46,7 @@
             },
             "displayDuration": "2000",
             "timerEnabled": {
-              "propertyValue": false,
+              "propertyValue": true,
               "propertyType": "Boolean"
             },
             "randomisation": "full",
