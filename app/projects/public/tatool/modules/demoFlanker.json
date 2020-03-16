@@ -1,6 +1,5 @@
 {
   "moduleHierarchy": {
-	"label": "Task List",
     "children": [
       {
         "pages": {
@@ -21,7 +20,7 @@
           "name": "tatool"
         },
         "fixationInterval": 0,
-        "blankInterval": 0,
+        "blankInterval": "0",
         "name": "instruction",
         "customType": "tatoolInstruction",
         "tatoolType": "Executable"
@@ -32,10 +31,13 @@
           "name": "tatool"
         },
         "fixationInterval": 0,
-        "blankInterval": 0,
+        "blankInterval": "0",
         "name": "countdown",
         "customType": "tatoolCountdown",
-        "tatoolType": "Executable"
+        "tatoolType": "Executable",
+        "countdown": "3",
+        "interval": "1000",
+        "goText": "Go!"
       },
       {
         "children": [
@@ -111,7 +113,8 @@
       "customType": "ListIterator",
       "order": "sequential"
     },
-    "tatoolType": "List"
+    "tatoolType": "List",
+    "label": "Task List"
   },
   "fullscreen": true,
   "allowEscapeKey": true,
@@ -120,12 +123,12 @@
       "enabled": true,
       "auto": true,
       "mode": "upload",
-      "$$hashKey": "object:10583"
+      "$$hashKey": "object:4806"
     },
     {
       "enabled": true,
       "mode": "download",
-      "$$hashKey": "object:10332"
+      "$$hashKey": "object:4373"
     }
   ],
   "label": "demoFlanker",
