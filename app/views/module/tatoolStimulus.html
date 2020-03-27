@@ -4,18 +4,18 @@
 
         <div ng-switch on="stimulus.data.stimulusValueType">
           <div ng-switch-when="image">
-            <img class="imageStimulusValue" draggable="false" ng-src="{{stimulus.stimulusImage}}" ng-class="stimulus.stimulusClass" style="{{stimulus.data.stimulusValueStyle}}">
+            <img class="imageStimulusValue" draggable="false" ng-src="{{stimulus.stimulusImage}}" ng-class="stimulus.stimulusClass" ng-style="stimulus.stimulusStyle">
           </div>
           <div ng-switch-when="audio">
             
           </div>
           <div ng-switch-when="audio-image">
-            <img class="imageStimulusValue" draggable="false" ng-src="{{stimulus.stimulusImage}}" ng-class="stimulus.stimulusClass" style="{{stimulus.data.stimulusValueStyle}}">
+            <img class="imageStimulusValue" draggable="false" ng-src="{{stimulus.stimulusImage}}" ng-class="stimulus.stimulusClass" ng-style="stimulus.stimulusStyle">
           </div>
-          <div ng-switch-when="audio-text" ng-style="stimulus.stimulusStyle" ng-class="stimulus.stimulusClass" style="{{stimulus.data.stimulusValueStyle}}">
+          <div ng-switch-when="audio-text" ng-class="stimulus.stimulusClass" ng-style="stimulus.stimulusStyle">
             <div class="textStimulusValue"><span>{{stimulus.data.stimulusValue}}</span></div>
           </div>
-          <div ng-switch-when="text" ng-style="stimulus.stimulusStyle" ng-class="stimulus.stimulusClass" style="{{stimulus.data.stimulusValueStyle}}">
+          <div ng-switch-when="text" ng-class="stimulus.stimulusClass" ng-style="stimulus.stimulusStyle">
             <div class="textStimulusValue"><span>{{stimulus.data.stimulusValue}}</span></div>
           </div>
           <div ng-switch-when="video">

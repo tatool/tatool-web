@@ -45,8 +45,17 @@ function StimulusServiceFactory($log, $sce, executableUtils) {
           this.stimulusVideo = videoSrc;
         }
         
+        // apply override css class
         if (this.data.stimulusClass !== undefined) {
           this.stimulusClass = this.data.stimulusClass;
+        }
+
+        // apply override css styling
+        if (this.data.stimulusValueStyle !== undefined) {
+          this.stimulusStyle = {};
+          var regex = /([\w-]*)\s*:\s*([^;]*)/g;
+          var match;
+          while(match=regex.exec(this.data.stimulusValueStyle)) this.stimulusStyle[match[1]] = match[2].trim();
         }
 
         // prepare audio source

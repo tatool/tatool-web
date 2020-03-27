@@ -55,6 +55,12 @@ function GridServiceFactory($log, $rootScope, executableUtils) {
         if (data.gridCellWidth !== undefined) {
           cell.gridCellWidth = data.gridCellWidth;
         }
+        if (data.stimulusValueStyle !== undefined) {
+          cell.stimulusStyle = {};
+          var regex = /([\w-]*)\s*:\s*([^;]*)/g;
+          var match;
+          while(match=regex.exec(data.stimulusValueStyle)) cell.stimulusStyle[match[1]] = match[2].trim();
+        }
         // prepare image source
         if (data.stimulusValueType === 'image') {
           var resource = this.stimuliPath;
