@@ -36,7 +36,7 @@
     "heroku-ssl-redirect": "0.0.4",
     "howler": "^2.0.14",
     "idb-wrapper": "1.6.1",
-    "jquery": "3.0.0",
+    "jquery": "3.5.0",
     "jquery-ui": "1.12.x",
     "jquery-ui-touch-punch": "0.2.3",
     "jshint": "2.9.3",
