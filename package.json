@@ -28,7 +28,7 @@
     "del": "1.1.1",
     "ejs": "2.5.7",
     "express": "4.13.4",
-    "express-jwt": "3.3.0",
+    "express-jwt": "6.0.0",
     "fabric": "^4.0.0-beta.7",
     "font-awesome": "4.7.0",
     "glob": "7.1.2",
