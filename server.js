@@ -45,7 +45,7 @@ var commonCtrl = require('./controllers/commonCtrl');
 var logCtrl = require('./controllers/logCtrl');
 
 // db
-mongoose.connect( process.env.DB_URI || 'mongodb://127.0.0.1/tatool-web', {  } );
+mongoose.connect( process.env.DB_URI || 'mongodb://127.0.0.1/tatool-web', { useNewUrlParser: true } );
 
 //logging setup
 if (app.get('env') === 'dev') {
