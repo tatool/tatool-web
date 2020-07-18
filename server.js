@@ -1,5 +1,6 @@
 // server
 var express = require('express');
+var cors = require('cors');
 var compress = require('compression');
 var os = require('os');
 var path = require('path');
@@ -15,6 +16,7 @@ var projects = require('./projects');
 
 // server setup
 var app = express();
+app.use(cors());
 app.set('port', process.env.PORT || 3000);
 app.set('env', process.env.NODE_ENV || process.argv[3] || 'prod');
 app.set('jwt_secret', process.env.JWT_SECRET || 'secret');
@@ -128,7 +130,7 @@ router.post('/register', userController.register);
 router.get('/login', authController.isAuthenticated);
 
 // protect api with JWT
-app.use('/api', expressJwt({secret: app.get('jwt_secret')}).unless({path: ['/api/login','/api/register']}), noCache, authController.hasRole, router);
+app.use('/api', expressJwt({secret: app.get('jwt_secret'), algorithms: ['HS256']}).unless({path: ['/api/login','/api/register']}), noCache, authController.hasRole, router);
 
 // disable caching for API
 function noCache(req, res, next){
