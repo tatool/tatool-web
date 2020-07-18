@@ -9,7 +9,7 @@ module.exports = merge(baseConfig, {
     hot: true,
     inline: true,
     proxy: [{
-      context: ["/mode", "/api", "/user", "/developer", "/public", "/data"],
+      context: ['/mode', '/api', '/user', '/developer', '/public', '/data'],
       target: 'http://localhost:3000'
     }]
   },
