@@ -38,9 +38,8 @@ jobs:
           service_account_key: ${{ secrets.GCP_SA_KEY_STAGE }}
           project_id: ${{ secrets.GCP_PROJECT_ID_STAGE }}
           gae_variables: ${{ secrets.GAE_VARIABLES_STAGE }}
-          gae_config_path: ./server/app.yaml
       - name: Publish app to Google App Engine
-        run: | 
+        run: |
           # This client-secret.json is converted by GCP_SA_KEY.
           gcloud auth activate-service-account ${{ secrets.GCP_SA_EMAIL }} --key-file=client-secret.json
           gcloud config set project ${{ secrets.PROJECT_ID }}
