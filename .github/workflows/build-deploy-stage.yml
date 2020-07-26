@@ -17,7 +17,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
-        uses: actions/checkout@develop
+        uses: actions/checkout@v2
+        with:
+          ref: develop
       - name: Install Dependencies
         run: npm install && npm run build
   deploy:
@@ -26,7 +28,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
-        uses: actions/checkout@develop
+        uses: actions/checkout@v2
+        with:
+          ref: develop
       - name: Initialize Google Cloud SDK
         uses: zxyle/publish-gae-action@master
         with:
