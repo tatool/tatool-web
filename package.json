@@ -1,7 +1,7 @@
 {
   "name": "tatool-web",
   "version": "1.4.0",
-  "description": "Tatool - open-source experiment software for researchers",
+  "description": "Tatool - open-source experiment software for researchers.",
   "license": "GPL-3.0",
   "repository": {
     "type": "git",
