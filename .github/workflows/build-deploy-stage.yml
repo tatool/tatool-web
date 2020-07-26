@@ -9,19 +9,21 @@ on:
     branches: [ develop ]
   pull_request:
     branches: [ develop ]
+  repository_dispatch:
+    types: do-something
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  build:
-    name: Build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Repo
-        uses: actions/checkout@v2
-        with:
-          ref: develop
-      - name: Install Dependencies
-        run: npm install && npm run build
+#  build:
+#    name: Build
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: Checkout Repo
+#        uses: actions/checkout@v2
+#        with:
+#          ref: develop
+#      - name: Install Dependencies
+#        run: npm install && npm run build
   deploy:
     name: Deploy
     needs: build
