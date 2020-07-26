@@ -16,7 +16,6 @@
     "build": "webpack --config webpack.prod.config.js",
     "start": "node server.js lab prod",
     "setup": "npm install && npm run build",
-    "heroku-postbuild": "npm run build",
     "gcp-build": "npm run build"
   },
   "dependencies": {
