@@ -14,7 +14,7 @@
   "scripts": {
     "dev": "webpack-dev-server --config webpack.dev.config.js",
     "build": "webpack --config webpack.prod.config.js",
-    "start": "node server.js lab prod",
+    "start": "node server.js server prod",
     "setup": "npm install && npm run build",
     "gcp-build": "npm run build"
   },
