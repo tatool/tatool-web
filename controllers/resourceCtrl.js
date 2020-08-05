@@ -122,6 +122,9 @@ function getGCSResource(req, res, module, projectsPath) {
 				message: err
 			});
 		})
+		.on('response', (streamResponse) => {
+			res.setHeader('Content-Type', streamResponse.headers['content-type']);
+		})
 		.pipe(res);
 }
 
