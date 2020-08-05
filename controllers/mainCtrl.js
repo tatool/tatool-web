@@ -3,16 +3,23 @@ var Repository = require('../models/module').repositoryModule;
 var exportCtrl = require('../controllers/exportCtrl');
 var repositoryCtrl = require('../controllers/repositoryCtrl');
 var analyticsCtrl = require('../controllers/analyticsCtrl');
-var userCtrl = require('../controllers/user'); 
-var logCtrl = require('../controllers/logCtrl'); 
-var request = require('request');
-var crypto = require('crypto');
-var fs = require('fs');
+var userCtrl = require('../controllers/user');
+var logCtrl = require('../controllers/logCtrl');
+var resourceCtrl = require('../controllers/resourceCtrl');
+
 var Q = require('q');
+const {
+  Storage
+} = require('@google-cloud/storage');
+const storage = new Storage();
+const bucket = storage.bucket('tatool-web-stage.appspot.com');
 
 // Adding/Updating a new module from the repository
 exports.install = function(req, res) {
-  Module.findOne({ email: req.user.email, moduleId: req.params.moduleId }, function(err, module) {
+  Module.findOne({
+    email: req.user.email,
+    moduleId: req.params.moduleId
+  }, function(err, module) {
     if (err) {
       res.status(500).send(err);
     } else {
@@ -29,15 +36,17 @@ exports.install = function(req, res) {
 var insert = function(req, res) {
   var today = new Date();
 
-  Repository.findOne({ moduleId: req.params.moduleId }, function(err, module) {
+  Repository.findOne({
+    moduleId: req.params.moduleId
+  }, function(err, module) {
     if (err) {
       res.status(500).send(err);
     } else {
       if (module) {
-        
+
         // make sure this copy of an existing module is treated as an insert by mongoose
         module.set('_id', undefined)
-        module.isNew = true; 
+        module.isNew = true;
 
         // update technical fields
         module.email = req.user.email;
@@ -49,38 +58,46 @@ var insert = function(req, res) {
         // get log entry
         logCtrl.getLogMaxSessionId(req).then(function(maxSessionId) {
 
-            if (module.moduleMaxSessions) {
-              module.maxSessionId = maxSessionId;
-            }
+          if (module.moduleMaxSessions) {
+            module.maxSessionId = maxSessionId;
+          }
 
-            // add module
-            Module.create(module, function(err, result) {
-              if (err) {
-                res.status(500).send(err);
-              } else {
+          // add module
+          Module.create(module, function(err, result) {
+            if (err) {
+              res.status(500).send(err);
+            } else {
 
-                // add analytics user
-                analyticsCtrl.addAnalyticsUser(req, module).then(function(data) {
-                  // add log entry
-                  logCtrl.addLogEntry(req).then(function() {
-                    res.json(module);
-                  }, function(error) {
-                    res.status(500).json({ message: 'Error adding logs data.'});
-                  });
-
+              // add analytics user
+              analyticsCtrl.addAnalyticsUser(req, module).then(function(data) {
+                // add log entry
+                logCtrl.addLogEntry(req).then(function() {
+                  res.json(module);
                 }, function(error) {
-                  res.status(500).json({ message: 'Error adding analytics data.'});
+                  res.status(500).json({
+                    message: 'Error adding logs data.'
+                  });
                 });
 
-              }
-            });
+              }, function(error) {
+                res.status(500).json({
+                  message: 'Error adding analytics data.'
+                });
+              });
 
-          }, function(error) {
-            res.status(500).json({ message: 'Error accessing logs data.'});
+            }
+          });
+
+        }, function(error) {
+          res.status(500).json({
+            message: 'Error accessing logs data.'
+          });
         });
 
       } else {
-        res.status(500).json({ message: 'Module not found.'});
+        res.status(500).json({
+          message: 'Module not found.'
+        });
       }
     }
   });
@@ -90,7 +107,9 @@ var insert = function(req, res) {
 var update = function(req, res, userModule) {
   var today = new Date();
 
-  Repository.findOne({ moduleId: req.params.moduleId }, function(err, module) {
+  Repository.findOne({
+    moduleId: req.params.moduleId
+  }, function(err, module) {
     if (err) {
       res.status(500).send(err);
     } else {
@@ -122,13 +141,17 @@ var update = function(req, res, userModule) {
             analyticsCtrl.addAnalyticsUser(req, module).then(function(data) {
               res.json(userModule);
             }, function(error) {
-              res.status(500).json({ message: 'Error adding analytics data.'});
+              res.status(500).json({
+                message: 'Error adding analytics data.'
+              });
             });
           }
         });
 
       } else {
-        res.status(500).json({ message: 'Module not found.'});
+        res.status(500).json({
+          message: 'Module not found.'
+        });
       }
     }
   });
@@ -136,14 +159,18 @@ var update = function(req, res, userModule) {
 
 // Get a public URL module
 exports.getPublic = function(req, res) {
-  Repository.findOne({ moduleId: req.params.moduleId }, function(err, module) {
+  Repository.findOne({
+    moduleId: req.params.moduleId
+  }, function(err, module) {
     if (err) {
       res.status(500).send(err);
     } else {
       if (module) {
         res.json(module);
       } else {
-        res.status(404).json({message: 'No module found'});
+        res.status(404).json({
+          message: 'No module found'
+        });
       }
     }
   });
@@ -151,19 +178,27 @@ exports.getPublic = function(req, res) {
 
 // Adding a new module from an URL
 exports.installPublic = function(req, res) {
-  Repository.findOne({ moduleId: req.params.moduleId }, function(err, module) {
+  Repository.findOne({
+    moduleId: req.params.moduleId
+  }, function(err, module) {
     if (err) {
       res.status(500).send(err);
     } else {
       if (module) {
         userCtrl.getTempUser(req, res).then(function(user) {
           var token = user.createToken(req.app.get('jwt_secret'));
-          res.json({ token: token, roles: user.roles, code: user.code });
+          res.json({
+            token: token,
+            roles: user.roles,
+            code: user.code
+          });
         }, function(error) {
           res.status(500).json(error);
         });
       } else {
-        res.status(404).json({message: 'No module found'});
+        res.status(404).json({
+          message: 'No module found'
+        });
       }
     }
   });
@@ -174,9 +209,14 @@ exports.addInvite = function(req, repositoryModule) {
   var deferred = Q.defer();
   var today = new Date();
 
-  Module.findOne({ email: req.body.email, moduleId: req.params.moduleId }, function(err, module) {
+  Module.findOne({
+    email: req.body.email,
+    moduleId: req.params.moduleId
+  }, function(err, module) {
     if (err) {
-      deferred.reject({ message: 'Error adding invite.'});
+      deferred.reject({
+        message: 'Error adding invite.'
+      });
     } else {
       if (module) {
         deferred.resolve('accepted');
@@ -190,7 +230,9 @@ exports.addInvite = function(req, repositoryModule) {
 
         Module.create(repositoryModule, function(err, result) {
           if (err) {
-            deferred.reject({ message: 'Error adding invite.'});
+            deferred.reject({
+              message: 'Error adding invite.'
+            });
           } else {
             deferred.resolve('invited');
           }
@@ -204,7 +246,11 @@ exports.addInvite = function(req, repositoryModule) {
 
 // user accepting or declining invite
 exports.processInvite = function(req, res) {
-  Module.findOne({ moduleType: 'private', moduleId: req.params.moduleId, email: req.user.email }, function(err, module) {
+  Module.findOne({
+    moduleType: 'private',
+    moduleId: req.params.moduleId,
+    email: req.user.email
+  }, function(err, module) {
     if (err) {
       res.status(500).send(err);
     } else {
@@ -216,10 +262,12 @@ exports.processInvite = function(req, res) {
             exports.remove(req, res);
           }
         }, function(error) {
-           res.status(500).json(error);
+          res.status(500).json(error);
         });
       } else {
-        res.status(500).json({ message: 'Invite not found.'});
+        res.status(500).json({
+          message: 'Invite not found.'
+        });
       }
     }
   });
@@ -230,20 +278,32 @@ exports.removeInvite = function(req) {
   var deferred = Q.defer();
   var today = new Date();
 
-  Module.findOne({ email: req.body.email, moduleId: req.params.moduleId }, function(err, module) {
+  Module.findOne({
+    email: req.body.email,
+    moduleId: req.params.moduleId
+  }, function(err, module) {
     if (err) {
-      deferred.reject({ message: 'Error removing invite.'});
+      deferred.reject({
+        message: 'Error removing invite.'
+      });
     } else {
       if (module && module.moduleStatus === 'invite') {
-        Module.remove({ email: req.body.email, moduleId: req.params.moduleId }, function(err, module) {
+        Module.remove({
+          email: req.body.email,
+          moduleId: req.params.moduleId
+        }, function(err, module) {
           if (err) {
-            deferred.reject({ message: 'Error removing invite.'});
+            deferred.reject({
+              message: 'Error removing invite.'
+            });
           } else {
             deferred.resolve('success');
           }
         });
       } else {
-        deferred.resolve({ message: 'No module in status invite found'});
+        deferred.resolve({
+          message: 'No module in status invite found'
+        });
       }
     }
   });
@@ -254,8 +314,11 @@ exports.removeInvite = function(req) {
 // save runtime information to module
 exports.save = function(req, res) {
   var today = new Date();
-  
-  Module.findOne({ email: req.user.email, moduleId: req.params.moduleId }, function(err, module) {
+
+  Module.findOne({
+    email: req.user.email,
+    moduleId: req.params.moduleId
+  }, function(err, module) {
     if (err) {
       res.status(500).send(err);
     } else {
@@ -269,7 +332,7 @@ exports.save = function(req, res) {
 
         // update technical fields
         module.updated_at = today;
-        module.sessionToken = undefined;  // unset session token to invalidate resources
+        module.sessionToken = undefined; // unset session token to invalidate resources
 
         // update runtime information
         module.maxSessionId = req.body.maxSessionId;
@@ -286,23 +349,31 @@ exports.save = function(req, res) {
               logCtrl.updateModuleLogEntry(req).then(function() {
                 res.json(module);
               }, function(error) {
-                res.status(500).json({ message: 'Error adding logs data.'});
+                res.status(500).json({
+                  message: 'Error adding logs data.'
+                });
               });
             }, function(error) {
-              res.status(500).json({ message: 'Error adding analytics data.'});
+              res.status(500).json({
+                message: 'Error adding analytics data.'
+              });
             });
           }
         });
 
       } else {
-        res.status(500).json({ message: 'Module not found.'});
+        res.status(500).json({
+          message: 'Module not found.'
+        });
       }
     }
   });
 };
 
 exports.getAll = function(req, res) {
-  Module.find({ email: req.user.email }, function(err, modules) {
+  Module.find({
+    email: req.user.email
+  }, function(err, modules) {
     if (err) {
       res.status(500).send(err);
     } else {
@@ -312,7 +383,10 @@ exports.getAll = function(req, res) {
 };
 
 exports.get = function(req, res) {
-  Module.findOne({ email: req.user.email, moduleId: req.params.moduleId }, function(err, module) {
+  Module.findOne({
+    email: req.user.email,
+    moduleId: req.params.moduleId
+  }, function(err, module) {
     if (err) {
       res.status(500).send(err);
     } else {
@@ -322,7 +396,10 @@ exports.get = function(req, res) {
 };
 
 exports.remove = function(req, res) {
-  Module.remove({ email: req.user.email, moduleId: req.params.moduleId }, function(err, module) {
+  Module.remove({
+    email: req.user.email,
+    moduleId: req.params.moduleId
+  }, function(err, module) {
     if (err) {
       res.status(500).send(err);
     } else {
@@ -332,76 +409,20 @@ exports.remove = function(req, res) {
 };
 
 exports.addTrials = function(req, res) {
-  Module.findOne({ email: req.user.email, moduleId: req.params.moduleId }, function(err, module) {
+  Module.findOne({
+    email: req.user.email,
+    moduleId: req.params.moduleId
+  }, function(err, module) {
     if (err) {
       res.status(500).send(err);
     } else {
       if (module) {
-          exportCtrl.createFile(req, module, 'user', res);
+        exportCtrl.createFile(req, module, 'user', res);
       } else {
-        res.status(500).json({ message: 'Module not found.' });
+        res.status(500).json({
+          message: 'Module not found.'
+        });
       }
     }
   });
-};
-
-exports.getResourceToken = function(req, res) {
-  Module.findOne({ email: req.user.email, moduleId: req.params.moduleId }, function(err, module) {
-    if (err) {
-      res.status(500).send(err);
-    } else {
-
-      crypto.randomBytes(Math.ceil(8 * 3 / 4), function(ex, buf) {
-        var random = buf.toString('base64')
-        .slice(0, 8)
-        .replace(/\+/g, '0')
-        .replace(/\//g, '0');
-        random += new Date().getTime();
-
-        module.sessionToken = random;
-
-        module.save(function(err, data) {
-          if (err) {
-            res.status(500).send(err);
-          } else {
-            res.json({ token: random });
-          }
-        });
-      });
-    }
-  }); 
-};
-
-exports.getResource = function(req, res) {
-  var projectsPath = req.app.get('projects_path');
-  
-  Module.find({ sessionToken: req.query.token }, {}, { limit : 1 }, function(err, module) {
-    if (err) {
-      res.status(500).send(err);
-    } else if (module.length === 1) {
-
-      var accessType = req.params.projectAccess;
-      if (req.params.projectAccess === 'private') {
-        accessType = req.params.projectAccess + '/' + module[0].created_by; 
-      }
-
-      if (projectsPath.substring(0, 4) !== 'http') {
-        var file = projectsPath + accessType + '/' + req.params.projectName + '/' + req.params.resourceType + '/' + req.params.resourceName;
-        fs.exists(file, function(exists) {
-          if (exists) {
-            res.download(file);
-          } else {
-            res.status(404).json({ message: 'Resource not found.'} );
-          }
-        });
-      } else {
-        request(projectsPath + accessType + '/' + req.params.projectName + '/' + req.params.resourceType + '/' + req.params.resourceName)
-          .auth(req.app.get('resource_user'), req.app.get('resource_pw'), true)
-            .pipe(res);
-      }
-
-    } else {
-      res.status(404).json({ message: 'Resource not found.'} );
-    }
-  }); 
 };

@@ -6,7 +6,7 @@ var os = require('os');
 var path = require('path');
 var bodyParser = require('body-parser');
 var logger = require('morgan');
-var mongoose = require('mongoose'); 
+var mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 var passport = require('passport');
 var expressJwt = require('express-jwt');
@@ -21,7 +21,8 @@ app.set('port', process.env.PORT || 3000);
 app.set('env', process.env.NODE_ENV || process.argv[3] || 'prod');
 app.set('jwt_secret', process.env.JWT_SECRET || 'secret');
 
-app.set('projects_path', process.env.PROJECTS_PATH || __dirname + '/app/projects/');
+app.set('projects_path_type', process.env.PROJECTS_PATH_TYPE || 'local'); // local/gcs/legacy
+app.set('projects_path', process.env.PROJECTS_PATH || __dirname + '/app/projects/'); // path or gcs bucket name
 app.set('resource_user', process.env.RESOURCE_USER || 'tatool');
 app.set('resource_pw', process.env.RESOURCE_PW || 'secret');
 app.set('captcha_private_key', process.env.RECAPTCHA_PRIVATE_KEY || '');
@@ -35,6 +36,7 @@ app.set('module_limit', 3);
 
 // dependencies
 var userController = require('./controllers/user');
+var resourceCtrl = require('./controllers/resourceCtrl');
 var mainCtrl = require('./controllers/mainCtrl');
 var repositoryCtrl = require('./controllers/repositoryCtrl');
 var developerCtrl = require('./controllers/developerCtrl');
@@ -45,7 +47,10 @@ var commonCtrl = require('./controllers/commonCtrl');
 var logCtrl = require('./controllers/logCtrl');
 
 // db
-mongoose.connect( process.env.DB_URI || 'mongodb://127.0.0.1/tatool-web', { useNewUrlParser: true, useUnifiedTopology: true } );
+mongoose.connect(process.env.DB_URI || 'mongodb://127.0.0.1/tatool-web', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+});
 
 //logging setup
 if (app.get('env') === 'dev') {
@@ -58,8 +63,12 @@ app.use(compress());
 app.use(favicon(__dirname + '/app/images/app/tatool_icon.ico'));
 
 // parse json and urlencoded body
-app.use(bodyParser.json( { limit: 1048576 })); // allow upload of 1MB
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json({
+  limit: 1048576
+})); // allow upload of 1MB
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
 
 // Use passport package
 app.use(passport.initialize());
@@ -75,17 +84,17 @@ router.get('/user/modules/:moduleId', mainCtrl.get);
 router.delete('/user/modules/:moduleId', mainCtrl.remove);
 router.post('/user/modules/:moduleId/invite/:response', mainCtrl.processInvite);
 router.post('/user/modules/:moduleId/trials/:sessionId', mainCtrl.addTrials);
-router.get('/user/modules/:moduleId/resources/token', mainCtrl.getResourceToken);
+router.get('/user/modules/:moduleId/resources/token', resourceCtrl.getResourceToken);
 router.get('/user/projects', commonCtrl.getProjects);
-app.get('/user/resources/:projectAccess/:projectName/:resourceType/:resourceName', mainCtrl.getResource); // NO JWT CHECK
+app.get('/user/resources/:projectAccess/:projectName/:resourceType/:resourceName', resourceCtrl.getResource); // NO JWT CHECK
 
 // Public Modules
 router.post('/public/modules/:moduleId/install', mainCtrl.install);
 router.post('/public/modules/:moduleId', mainCtrl.save);
 router.get('/public/modules/:moduleId', mainCtrl.get);
 router.post('/public/modules/:moduleId/trials/:sessionId', mainCtrl.addTrials);
-router.get('/public/modules/:moduleId/resources/token', mainCtrl.getResourceToken);
-app.get('/public/resources/:projectAccess/:projectName/:resourceType/:resourceName', mainCtrl.getResource); // NO JWT CHECK
+router.get('/public/modules/:moduleId/resources/token', resourceCtrl.getResourceToken);
+app.get('/public/resources/:projectAccess/:projectName/:resourceType/:resourceName', resourceCtrl.getResource); // NO JWT CHECK
 
 // Repository Modules
 router.get('/user/repository', repositoryCtrl.getAll);
@@ -102,9 +111,9 @@ router.delete('/developer/modules/:moduleId', developerCtrl.remove);
 router.post('/developer/modules/:moduleId/publish/:moduleType', developerCtrl.publish);
 router.get('/developer/modules/:moduleId/unpublish', developerCtrl.unpublish);
 router.post('/developer/modules/:moduleId/trials/:sessionId', developerCtrl.addTrials);
-router.get('/developer/modules/:moduleId/resources/token', developerCtrl.getResourceToken);
+router.get('/developer/modules/:moduleId/resources/token', resourceCtrl.getResourceToken);
 router.get('/developer/projects', commonCtrl.getProjects);
-app.get('/developer/resources/:projectAccess/:projectName/:resourceType/:resourceName', developerCtrl.getResource); // NO JWT CHECK
+app.get('/developer/resources/:projectAccess/:projectName/:resourceType/:resourceName', resourceCtrl.getResource); // NO JWT CHECK
 
 // Analytics Modules
 router.get('/analytics/modules', analyticsCtrl.getAll);
@@ -130,10 +139,15 @@ router.post('/register', userController.register);
 router.get('/login', authController.isAuthenticated);
 
 // protect api with JWT
-app.use('/api', expressJwt({secret: app.get('jwt_secret'), algorithms: ['HS256']}).unless({path: ['/api/login','/api/register']}), noCache, authController.hasRole, router);
+app.use('/api', expressJwt({
+  secret: app.get('jwt_secret'),
+  algorithms: ['HS256']
+}).unless({
+  path: ['/api/login', '/api/register']
+}), noCache, authController.hasRole, router);
 
 // disable caching for API
-function noCache(req, res, next){
+function noCache(req, res, next) {
   res.header("Cache-Control", "no-cache, no-store, must-revalidate");
   res.header("Pragma", "no-cache");
   res.header("Expires", 0);
@@ -142,7 +156,9 @@ function noCache(req, res, next){
 
 // open API
 app.get('/mode', function(req, res) {
-  res.json({mode: req.app.get('mode')});
+  res.json({
+    mode: req.app.get('mode')
+  });
 });
 app.post('/user/verify/resend', userController.verifyResend);
 app.get('/user/verify/:token', userController.verifyUser);
@@ -162,14 +178,16 @@ app.get('/public/login/:moduleId', mainCtrl.installPublic);
 app.use(express.static(path.join(__dirname, 'dist')));
 
 // send 404 if no match found
-app.use(function(req, res, next){
+app.use(function(req, res, next) {
   res.status(404).send('Page not found');
 });
 
 // handle error case
-app.use(function (err, req, res, next) {
+app.use(function(err, req, res, next) {
   if (err.name === 'UnauthorizedError') {
-    res.status(401).json({ message: 'Unauthorized access!' });
+    res.status(401).json({
+      message: 'Unauthorized access!'
+    });
   }
 });
 
