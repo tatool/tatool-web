@@ -124,6 +124,7 @@ function getGCSResource(req, res, module, projectsPath) {
 		})
 		.on('response', (streamResponse) => {
 			res.setHeader('Content-Type', streamResponse.headers['content-type']);
+			res.setHeader('Cache-Control', 'public, max-age=3600')
 		})
 		.pipe(res);
 }
