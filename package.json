@@ -54,7 +54,7 @@
     "passport": "0.4.0",
     "passport-http": "0.3.0",
     "postmark": "0.2.6",
-    "prismjs": "1.8.4",
+    "prismjs": "1.21.0",
     "q": "1.4.1",
     "request": "2.79.0",
     "rimraf": "2.5.1",
