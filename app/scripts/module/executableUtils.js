@@ -298,7 +298,7 @@ function ExecutableUtilsService($q, $http, $log, contextService) {
     var preloadFiles = function(list, images, sounds, stimuliPath) {
       var deferred = $q.defer();
 
-      async.eachLimit(images, 20, function(image, callback) {
+      async.eachLimit(images, 5, function(image, callback) {
         var img = new Image();
         var resource = stimuliPath;
         resource.resourceName = image;
@@ -308,7 +308,7 @@ function ExecutableUtilsService($q, $http, $log, contextService) {
         if( err ) {
           deferred.reject(err);
         } else {
-          async.eachLimit(sounds, 20, function(sound, callback) {
+          async.eachLimit(sounds, 5, function(sound, callback) {
             var resource = stimuliPath;
             resource.resourceName = sound;
             new Howl({src: getResourcePath(resource), onload: callback, onloaderror: callback});
