@@ -122,10 +122,17 @@ function getGCSResource(req, res, module, projectsPath) {
 				message: err
 			});
 		})
-		.on('response', (streamResponse) => {
+		//.on('open', () => res.setHeader('Content-Type', streamResponse.headers['content-type']));
+		.on('open', (streamResponse) => {
+			res.set({
+     			'content-type': streamResponse.headers['content-type'],
+     			'cache-control': 'public, max-age=3600'
+  			});
+		})
+		/*.on('response', (streamResponse) => {
 			res.setHeader('Content-Type', streamResponse.headers['content-type']);
 			res.setHeader('Cache-Control', 'public, max-age=3600')
-		})
+		})*/
 		.pipe(res);
 }
 
