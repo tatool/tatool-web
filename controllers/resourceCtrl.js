@@ -116,24 +116,24 @@ function getGCSResource(req, res, module, projectsPath) {
 	const file = 'projects/' + accessType + '/' + req.params.projectName + '/' + req.params.resourceType + '/' + req.params.resourceName;
 	const remoteFile = bucket.file(file);
 
-	remoteFile.createReadStream()
+
+
+	//https://storage.googleapis.com/tatool-web-stage.appspot.com/projects/public/tatool-stimuli/stimuli/animal-bear_96x96.png
+
+	request('https://storage.googleapis.com/tatool-web-stage.appspot.com/projects/' + accessType + '/' + req.params.projectName + '/' + req.params.resourceType + '/' + req.params.resourceName)
+		.pipe(res);
+/*
+	remoteFile.createReadStream({validation: false})
 		.on('error', function(err) {
 			res.status(404).json({
 				message: err
 			});
 		})
-		//.on('open', () => res.setHeader('Content-Type', streamResponse.headers['content-type']));
-		.on('open', (streamResponse) => {
-			res.set({
-     			'content-type': streamResponse.headers['content-type'],
-     			'cache-control': 'public, max-age=3600'
-  			});
-		})
-		/*.on('response', (streamResponse) => {
+		.on('response', (streamResponse) => {
 			res.setHeader('Content-Type', streamResponse.headers['content-type']);
 			res.setHeader('Cache-Control', 'public, max-age=3600')
-		})*/
-		.pipe(res);
+		})
+		.pipe(res);*/
 }
 
 
