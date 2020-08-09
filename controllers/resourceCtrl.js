@@ -185,8 +185,8 @@ function setGCSResource(req, res, module, projectsPath, mode) {
 	var sessionId = '_' + ('000000' + req.params.sessionId).slice(-6);
 	var filename = moduleLabel + '_' + req.user.code + sessionId + '_' + new Date().getTime() + '.csv';
 
-	var file = 'uploads/' + accessType + '/' + req.params.projectName + '/' + req.params.resourceType + '/' + req.params.resourceName;
-	var remoteFile = bucket.file(file);
+	var filePath = 'uploads/' + module.moduleId + '/' + filename;
+	var remoteFile = bucket.file(filePath);
 	var data = LZString.decompressFromBase64(req.body.trialData);
 
 	const metadata = {
