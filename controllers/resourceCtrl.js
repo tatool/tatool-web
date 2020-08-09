@@ -8,6 +8,7 @@ const {
 	Storage
 } = require('@google-cloud/storage');
 const storage = new Storage();
+const gcsUrl = 'https://storage.googleapis.com/';
 
 
 exports.getResource = function(req, res) {
@@ -108,19 +109,34 @@ function getLocalResource(req, res, module, projectsPath) {
 function getGCSResource(req, res, module, projectsPath) {
 	const bucket = storage.bucket(projectsPath);
 
-	var accessType = req.params.projectAccess;
+	var accessType = (req.params.projectAccess === 'private') ? req.params.projectAccess + '/' + module[0].created_by : req.params.projectAccess;
+
 	if (req.params.projectAccess === 'private') {
-		accessType = req.params.projectAccess + '/' + module[0].created_by;
+		var file = 'projects/' + accessType + '/' + req.params.projectName + '/' + req.params.resourceType + '/' + req.params.resourceName;
+		var remoteFile = bucket.file(file);
+
+		remoteFile.createReadStream({
+				validation: false
+			})
+			.on('error', function(err) {
+				res.status(404).json({
+					message: err
+				});
+			})
+			.on('response', (streamResponse) => {
+				res.setHeader('Content-Type', streamResponse.headers['content-type']);
+				res.setHeader('Cache-Control', 'public, max-age=3600')
+			})
+			.pipe(res);
+
+	} else {
+		var file = '/projects/' + accessType + '/' + req.params.projectName + '/' + req.params.resourceType + '/' + req.params.resourceName;
+		var remoteFile = bucket.file(file);
+		request(gcsUrl + bucket.name + file)
+			.pipe(res);
 	}
 
-	const file = 'projects/' + accessType + '/' + req.params.projectName + '/' + req.params.resourceType + '/' + req.params.resourceName;
-	const remoteFile = bucket.file(file);
-
-	//https://storage.googleapis.com/tatool-web-stage.appspot.com/projects/public/tatool-stimuli/stimuli/animal-bear_96x96.png
-
-	//request('https://storage.googleapis.com/tatool-web-stage.appspot.com/projects/' + accessType + '/' + req.params.projectName + '/' + req.params.resourceType + '/' + req.params.resourceName)
-	//	.pipe(res);
-
+	/* signed url 
 	const config = {
   		action: 'read',
   		expires: '03-17-2025'
@@ -133,19 +149,8 @@ function getGCSResource(req, res, module, projectsPath) {
 		}
 		request(url).pipe(res);
 	});
+	*/
 
-/*
-	remoteFile.createReadStream({validation: false})
-		.on('error', function(err) {
-			res.status(404).json({
-				message: err
-			});
-		})
-		.on('response', (streamResponse) => {
-			res.setHeader('Content-Type', streamResponse.headers['content-type']);
-			res.setHeader('Cache-Control', 'public, max-age=3600')
-		})
-		.pipe(res);*/
 }
 
 
