@@ -4,6 +4,9 @@ var request = require('request');
 var crypto = require('crypto');
 var fs = require('fs');
 var Q = require('q');
+var archiver = require('archiver');
+var mkdirp = require("mkdirp");
+var LZString = require("lz-string");
 const {
 	Storage
 } = require('@google-cloud/storage');
@@ -87,6 +90,120 @@ exports.getResourceToken = function(req, res) {
 };
 
 
+exports.setResource = function(req, module, mode, res) {
+	const projectsPathType = req.app.get('projects_path_type');
+	const projectsPath = req.app.get('projects_path');
+
+	switch (projectsPathType) {
+		case 'local':
+			setLocalResource(req, res, module, projectsPath, mode);
+			break;
+		case 'gcs':
+			setGCSResource(req, res, module, projectsPath, mode);
+			break;
+		case 'legacy':
+			//setLegacyResource(req, res, module, projectsPath, mode);
+			break;
+		default:
+			res.status(404).json({
+				message: 'PROJECTS_PATH_TYPE not set. Resource not found.'
+			});
+	}
+};
+
+
+function setLocalResource(req, res, module, projectsPath, mode) {
+	var moduleLabel = (module.moduleLabel) ? module.moduleLabel : module.moduleId;
+	var filename = moduleLabel + '_' + req.user.code;
+	var zipFilename = module.moduleId + '_' + req.user.code;
+	var sessionId = '_' + ('000000' + req.params.sessionId).slice(-6);
+	var extension = '.csv';
+	var zipExtension = '.zip';
+
+	if (!req.body.target || !req.app.get('override_upload_dir')) {
+		uploadPath = 'uploads/' + mode + '/' + module.moduleId + '/';
+	} else {
+		uploadPath = req.body.target;
+	}
+
+	mkdirp(uploadPath, function(err) {
+		if (err) {
+			return res.status(500).json(err);
+		} else {
+			fs.exists(uploadPath + filename + sessionId + extension, function(exists) {
+				var timestamp = '';
+				if (exists) {
+					timestamp = '_' + new Date().getTime();
+				}
+
+				var decompressed = LZString.decompressFromBase64(req.body.trialData);
+
+				fs.writeFile(uploadPath + filename + sessionId + timestamp + extension, decompressed, function(err) {
+					if (err) {
+						return res.status(500).json(err);
+					} else {
+						var output = fs.createWriteStream(uploadPath + zipFilename + zipExtension, {
+							'flags': 'w'
+						});
+						var zip = archiver('zip');
+						zip.pipe(output);
+
+						zip.bulk([{
+							src: [uploadPath + '*' + req.user.code + '*.csv'],
+							dest: '',
+							expand: true,
+							flatten: true
+						}]).finalize();
+
+						// currently node-archive doesn't support appending to an existing zip
+						// https://github.com/archiverjs/node-archiver/issues/23
+						//var csvFile = filename + sessionId + timestamp + extension;
+						//zip.append(fs.createReadStream(uploadPath + csvFile), { name: csvFile }).finalize();
+
+						output.on('close', function() {
+							res.json({
+								message: 'Trials successfully uploaded.'
+							});
+						});
+
+						zip.on('error', function(err) {
+							return res.status(500).json(err);
+						});
+
+					}
+				});
+			});
+		}
+	});
+}
+
+
+function setGCSResource(req, res, module, projectsPath, mode) {
+	const bucket = storage.bucket(projectsPath);
+
+	var moduleLabel = (module.moduleLabel) ? module.moduleLabel : module.moduleId;
+	var sessionId = '_' + ('000000' + req.params.sessionId).slice(-6);
+	var filename = moduleLabel + '_' + req.user.code + sessionId + '_' + new Date().getTime() + '.csv';
+
+	var file = 'uploads/' + accessType + '/' + req.params.projectName + '/' + req.params.resourceType + '/' + req.params.resourceName;
+	var remoteFile = bucket.file(file);
+	var data = LZString.decompressFromBase64(req.body.trialData);
+
+	const metadata = {
+		contentType: 'application/CSV' //application/octet-stream
+	};
+
+	remoteFile.save(data, { resumable: false, metadata: metadata }, function(err) {
+  		if (!err) {
+    		res.json({ message: 'Trials successfully uploaded.' });
+  		} else {
+  			res.status(500).json(err);
+  		}
+	});
+
+}
+
+
 function getLocalResource(req, res, module, projectsPath) {
 	var accessType = req.params.projectAccess;
 	if (req.params.projectAccess === 'private') {
@@ -154,8 +271,9 @@ function getGCSResource(req, res, module, projectsPath) {
 }
 
 
-/*
-	Will be deprecated, only used to allow migration from Legacy (PHP remote) solution to GCS.
+/*	
+	TO BE DEPRECATED - use local or gcs type
+	Used to allow migration from Legacy (PHP remote) solution to GCS/Local.
 */
 function getLegacyResource(req, res, module, projectsPath) {
 	var accessType = req.params.projectAccess;

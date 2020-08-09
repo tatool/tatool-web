@@ -417,7 +417,7 @@ exports.addTrials = function(req, res) {
       res.status(500).send(err);
     } else {
       if (module) {
-        exportCtrl.createFile(req, module, 'user', res);
+        resourceCtrl.setResource(req, module, 'user', res);
       } else {
         res.status(500).json({
           message: 'Module not found.'
