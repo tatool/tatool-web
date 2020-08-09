@@ -116,12 +116,24 @@ function getGCSResource(req, res, module, projectsPath) {
 	const file = 'projects/' + accessType + '/' + req.params.projectName + '/' + req.params.resourceType + '/' + req.params.resourceName;
 	const remoteFile = bucket.file(file);
 
-
-
 	//https://storage.googleapis.com/tatool-web-stage.appspot.com/projects/public/tatool-stimuli/stimuli/animal-bear_96x96.png
 
-	request('https://storage.googleapis.com/tatool-web-stage.appspot.com/projects/' + accessType + '/' + req.params.projectName + '/' + req.params.resourceType + '/' + req.params.resourceName)
-		.pipe(res);
+	//request('https://storage.googleapis.com/tatool-web-stage.appspot.com/projects/' + accessType + '/' + req.params.projectName + '/' + req.params.resourceType + '/' + req.params.resourceName)
+	//	.pipe(res);
+
+	const config = {
+  		action: 'read',
+  		expires: '03-17-2025'
+		};
+
+	remoteFile.getSignedUrl(config, function(err, url) {
+		if (err) {
+			console.error(err);
+			return;
+		}
+		request(url).pipe(res);
+	});
+
 /*
 	remoteFile.createReadStream({validation: false})
 		.on('error', function(err) {
