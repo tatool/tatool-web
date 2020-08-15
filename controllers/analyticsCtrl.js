@@ -1,6 +1,7 @@
 var RepoModule = require('../models/module').repositoryModule;
 var Analytics = require('../models/analytics');
 var DownloadToken = require('../models/download');
+var resourceCtrl = require('../controllers/resourceCtrl');
 var Q = require('q');
 var uuid = require('uuid');
 var fs = require('fs');
@@ -473,6 +474,9 @@ exports.getAllUserData = function(req, res) {
         res.status(500).json({ message: 'Download failed' });
       } else {
         if (data) {
+
+          resourceCtrl.getUserData(req, res, data.moduleId);
+/*
           var output = fs.createWriteStream(data.file, {'flags': 'w'});
           var zip = archiver('zip');
           zip.pipe(output);
@@ -480,7 +484,7 @@ exports.getAllUserData = function(req, res) {
 
           output.on('close', function() {
             res.download(data.file, data.fileName);
-          });
+          });*/
 
         } else {
           res.status(500).json({ message: 'Download failed' });

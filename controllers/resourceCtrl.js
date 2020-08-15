@@ -276,6 +276,63 @@ function getGCSResource(req, res, module, projectsPath) {
 }
 
 
+function getUserData = function(req, res, moduleId, userCode) {
+
+	const privatePathType = req.app.get('private_path_type');
+	const privatePath = req.app.get('private_path');
+
+	const prefix = '/uploads/' + moduleId;
+
+	
+  	res.setHeader('Content-Type', 'application/zip');
+	res.setHeader('Content-disposition': 'attachment; filename=myFile.zip')
+
+	listFilesByPrefix(privatePath, prefix).then(function(files) {
+		var archive = archiver('zip');
+		archive.pipe(res);
+
+		files.forEach(file => {
+			archive.append('empty', { name: file.name });
+    		console.log(file.name);
+  		});
+  		
+		archive.finalize();
+
+	});
+
+}
+
+async function listFilesByPrefix(bucketName, prefix) {
+  /**
+   * This can be used to list all blobs in a "folder", e.g. "public/".
+   *
+   * The delimiter argument can be used to restrict the results to only the
+   * "files" in the given "folder". Without the delimiter, the entire tree under
+   * the prefix is returned. For example, given these blobs:
+   *
+   *   /a/1.txt
+   *   /a/b/2.txt
+   *
+   * If you just specify prefix = '/a', you'll get back:
+   *
+   *   /a/1.txt
+   *   /a/b/2.txt
+   *
+   * However, if you specify prefix='/a' and delimiter='/', you'll get back:
+   *
+   *   /a/1.txt
+   */
+  const options = {
+    prefix: prefix,
+    delimiter: '/'
+  };
+
+  // Lists files in the bucket, filtered by a prefix
+  const [files] = await storage.bucket(bucketName).getFiles(options);
+  return files;
+}
+
+
 /*	
 	TO BE DEPRECATED - use local or gcs type
 	Used to allow migration from Legacy (PHP remote) solution to GCS/Local.
