@@ -283,9 +283,9 @@ function getUserData = function(req, res, moduleId, userCode) {
 
 	const prefix = '/uploads/' + moduleId;
 
-	
+
   	res.setHeader('Content-Type', 'application/zip');
-	res.setHeader('Content-disposition': 'attachment; filename=myFile.zip')
+	res.setHeader('Content-Disposition', 'attachment; filename=myFile.zip')
 
 	listFilesByPrefix(privatePath, prefix).then(function(files) {
 		var archive = archiver('zip');
