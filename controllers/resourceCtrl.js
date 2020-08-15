@@ -276,7 +276,7 @@ function getGCSResource(req, res, module, projectsPath) {
 }
 
 
-function getUserData(req, res, moduleId, userCode) {
+exports.getUserData = function(req, res, moduleId, userCode) {
 
 	const privatePathType = req.app.get('private_path_type');
 	const privatePath = req.app.get('private_path');

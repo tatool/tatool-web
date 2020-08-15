@@ -46,7 +46,8 @@ app.set('remote_delete', process.env.REMOTE_DELETE);
 /*******************************/
 mongoose.connect(process.env.DB_URI || 'mongodb://127.0.0.1/tatool-web', {
   useNewUrlParser: true,
-  useUnifiedTopology: true
+  useUnifiedTopology: true,
+  useFindAndModify: false
 });
 
 /*******************************
