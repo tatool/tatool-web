@@ -281,7 +281,7 @@ exports.getUserData = function(req, res, moduleId, userCode) {
 	const privatePathType = req.app.get('private_path_type');
 	const privatePath = req.app.get('private_path');
 
-	const prefix = '/uploads/' + moduleId + '/';
+	const prefix = 'uploads/' + moduleId + '/';
 
 
   	res.setHeader('Content-Type', 'application/zip');
