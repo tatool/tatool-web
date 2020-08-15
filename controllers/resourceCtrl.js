@@ -281,7 +281,7 @@ exports.getUserData = function(req, res, moduleId, userCode) {
 	const privatePathType = req.app.get('private_path_type');
 	const privatePath = req.app.get('private_path');
 
-	const prefix = '/uploads/' + moduleId;
+	const prefix = '/uploads/' + moduleId + '/';
 
 
   	res.setHeader('Content-Type', 'application/zip');
@@ -323,7 +323,6 @@ async function listFilesByPrefix(bucketName, prefix) {
    *   /a/1.txt
    */
 
-   console.log('Prefix: ' + prefix);
   const options = {
     prefix: prefix
   };
@@ -331,6 +330,7 @@ async function listFilesByPrefix(bucketName, prefix) {
   // Lists files in the bucket, filtered by a prefix
   const [files] = await storage.bucket(bucketName).getFiles(options);
 
+  console.log('BucketName: ' + bucketName);
   console.log('Prefix: ' + prefix);
   console.log('No of Files: ' + files.length);
   return files;
