@@ -280,6 +280,7 @@ exports.getUserData = function(req, res, moduleId, userCode) {
 
 	const privatePathType = req.app.get('private_path_type');
 	const privatePath = req.app.get('private_path');
+	const bucket = storage.bucket(privatePath);
 
 	const prefix = 'uploads/' + moduleId + '/';
 
