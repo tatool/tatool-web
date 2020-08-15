@@ -360,6 +360,15 @@ exports.getAllUserDataDownloadToken = function(req, res) {
         fileToken.created_at = Date.now();
         fileToken.created_by = req.user.email;
 
+        fileToken.save(function(err, data) {
+          if (err) {
+            res.status(500).json({message: 'Download Token not saved.'});
+          } else {
+            res.json(token);
+          }
+        });
+
+/*
         if (req.app.get('remote_url')) {
           fileToken.save(function(err, data) {
             if (err) {
@@ -383,6 +392,8 @@ exports.getAllUserDataDownloadToken = function(req, res) {
             }
           });
         }
+*/
+
 
       } else {
         res.status(500).json({message: 'Module not found.'});
