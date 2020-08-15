@@ -292,8 +292,10 @@ exports.getUserData = function(req, res, moduleId, userCode) {
 		archive.pipe(res);
 
 		files.forEach(file => {
-			archive.append('empty', { name: file.name });
-    		console.log(file.name);
+			var remoteFile = bucket.file(file.name);
+			var path = file.name.split("/");
+			var targetFileName = path.pop();
+			archive.append(remoteFile.createReadStream({validation: false}), { name: targetFileName });
   		});
   		
 		archive.finalize();
@@ -330,9 +332,6 @@ async function listFilesByPrefix(bucketName, prefix) {
   // Lists files in the bucket, filtered by a prefix
   const [files] = await storage.bucket(bucketName).getFiles(options);
 
-  console.log('BucketName: ' + bucketName);
-  console.log('Prefix: ' + prefix);
-  console.log('No of Files: ' + files.length);
   return files;
 }
 
