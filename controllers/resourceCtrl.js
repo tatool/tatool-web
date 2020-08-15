@@ -91,18 +91,18 @@ exports.getResourceToken = function(req, res) {
 
 
 exports.setResource = function(req, module, mode, res) {
-	const projectsPathType = req.app.get('projects_path_type');
-	const projectsPath = req.app.get('projects_path');
+	const privatePathType = req.app.get('private_path_type');
+	const privatePath = req.app.get('private_path');
 
-	switch (projectsPathType) {
+	switch (privatePathType) {
 		case 'local':
-			setLocalResource(req, res, module, projectsPath, mode);
+			setLocalResource(req, res, module, privatePath, mode);
 			break;
 		case 'gcs':
-			setGCSResource(req, res, module, projectsPath, mode);
+			setGCSResource(req, res, module, privatePath, mode);
 			break;
 		case 'legacy':
-			//setLegacyResource(req, res, module, projectsPath, mode);
+			//setLegacyResource(req, res, module, privatePath, mode);
 			break;
 		default:
 			res.status(404).json({
@@ -112,7 +112,7 @@ exports.setResource = function(req, module, mode, res) {
 };
 
 
-function setLocalResource(req, res, module, projectsPath, mode) {
+function setLocalResource(req, res, module, privatePath, mode) {
 	var moduleLabel = (module.moduleLabel) ? module.moduleLabel : module.moduleId;
 	var filename = moduleLabel + '_' + req.user.code;
 	var zipFilename = module.moduleId + '_' + req.user.code;
@@ -178,8 +178,8 @@ function setLocalResource(req, res, module, projectsPath, mode) {
 }
 
 
-function setGCSResource(req, res, module, projectsPath, mode) {
-	const bucket = storage.bucket(projectsPath);
+function setGCSResource(req, res, module, privatePath, mode) {
+	const bucket = storage.bucket(privatePath);
 
 	var moduleLabel = (module.moduleLabel) ? module.moduleLabel : module.moduleId;
 	var sessionId = '_' + ('000000' + req.params.sessionId).slice(-6);
@@ -193,12 +193,17 @@ function setGCSResource(req, res, module, projectsPath, mode) {
 		contentType: 'application/CSV' //application/octet-stream
 	};
 
-	remoteFile.save(data, { resumable: false, metadata: metadata }, function(err) {
-  		if (!err) {
-    		res.json({ message: 'Trials successfully uploaded.' });
-  		} else {
-  			res.status(500).json(err);
-  		}
+	remoteFile.save(data, {
+		resumable: false,
+		metadata: metadata
+	}, function(err) {
+		if (!err) {
+			res.json({
+				message: 'Trials successfully uploaded.'
+			});
+		} else {
+			res.status(500).json(err);
+		}
 	});
 
 }

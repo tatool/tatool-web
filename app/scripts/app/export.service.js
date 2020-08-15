@@ -296,6 +296,7 @@ function ExportService($log, $q, $http, moduleDataService, trialDataService, cfg
       });
     };
 
+    // TO BE DEPRECATED
     // run remote export to a different endpoint (e.g. php script)
     var remoteExport = function(module, exportTarget) {
       var deferred = $q.defer();
@@ -324,7 +325,7 @@ function ExportService($log, $q, $http, moduleDataService, trialDataService, cfg
 
       return deferred.promise;
     };
-
+    // TO BE DEPRECATED
     var remoteUpload = function(moduleId, exportTarget, session, callback) {
       getTrials(moduleId, session.sessionId).then(function(data) {
         if (data.length !== 0) {
@@ -367,6 +368,7 @@ function ExportService($log, $q, $http, moduleDataService, trialDataService, cfg
             deferred.reject(error);
           });
           break;
+              // TO BE DEPRECATED
         case 'remote':
           remoteExport(module, exportTarget).then(function(data) {
             if (data > 0) {

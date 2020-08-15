@@ -1,4 +1,3 @@
-// server
 var express = require('express');
 var cors = require('cors');
 var compress = require('compression');
@@ -14,51 +13,64 @@ var jwt = require('jsonwebtoken');
 var favicon = require('serve-favicon');
 var projects = require('./projects');
 
-// server setup
 var app = express();
-app.use(cors());
+
+/*******************************
+   ENVIRONMENT VARIABLES
+*******************************/
 app.set('port', process.env.PORT || 3000);
 app.set('env', process.env.NODE_ENV || process.argv[3] || 'prod');
 app.set('jwt_secret', process.env.JWT_SECRET || 'secret');
 
 app.set('projects_path_type', process.env.PROJECTS_PATH_TYPE || 'local'); // local/gcs/legacy
 app.set('projects_path', process.env.PROJECTS_PATH || __dirname + '/app/projects/'); // path or gcs bucket name
-app.set('resource_user', process.env.RESOURCE_USER || 'tatool');
-app.set('resource_pw', process.env.RESOURCE_PW || 'secret');
+
+app.set('private_path_type', process.env.PRIVATE_PATH_TYPE || 'local'); // local/gcs/legacy
+app.set('private_path', process.env.PRIVATE_PATH || __dirname + '/app/projects/'); // path or gcs bucket name
+
 app.set('captcha_private_key', process.env.RECAPTCHA_PRIVATE_KEY || '');
-app.set('remote_url', process.env.REMOTE_URL);
-app.set('remote_upload', process.env.REMOTE_UPLOAD);
-app.set('remote_download', process.env.REMOTE_DOWNLOAD);
-app.set('remote_delete', process.env.REMOTE_DELETE);
 app.set('editor_user', process.env.EDITOR_USER || '');
 app.set('override_upload_dir', false);
 app.set('module_limit', 3);
 
-// dependencies
-var userController = require('./controllers/user');
-var resourceCtrl = require('./controllers/resourceCtrl');
-var mainCtrl = require('./controllers/mainCtrl');
-var repositoryCtrl = require('./controllers/repositoryCtrl');
-var developerCtrl = require('./controllers/developerCtrl');
-var analyticsCtrl = require('./controllers/analyticsCtrl');
-var authController = require('./controllers/auth')
-var adminController = require('./controllers/admin');
-var commonCtrl = require('./controllers/commonCtrl');
-var logCtrl = require('./controllers/logCtrl');
+// legacy environment variables - TO BE DEPRECATED
+app.set('resource_user', process.env.RESOURCE_USER || 'tatool');
+app.set('resource_pw', process.env.RESOURCE_PW || 'secret');
+app.set('remote_url', process.env.REMOTE_URL);
+app.set('remote_upload', process.env.REMOTE_UPLOAD);
+app.set('remote_download', process.env.REMOTE_DOWNLOAD);
+app.set('remote_delete', process.env.REMOTE_DELETE);
 
-// Database
+/*******************************
+  DATABASE CONNECTION
+/*******************************/
 mongoose.connect(process.env.DB_URI || 'mongodb://127.0.0.1/tatool-web', {
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
 
-//logging setup
+/*******************************
+  CONTROLLERS
+/*******************************/
+var userCtrl = require('./controllers/user');
+var resourceCtrl = require('./controllers/resourceCtrl');
+var mainCtrl = require('./controllers/mainCtrl');
+var repositoryCtrl = require('./controllers/repositoryCtrl');
+var developerCtrl = require('./controllers/developerCtrl');
+var analyticsCtrl = require('./controllers/analyticsCtrl');
+var authCtrl = require('./controllers/auth')
+var adminCtrl = require('./controllers/admin');
+var commonCtrl = require('./controllers/commonCtrl');
+var logCtrl = require('./controllers/logCtrl');
+
+/*******************************
+  EXPRESS SETUP
+/*******************************/
 if (app.get('env') === 'dev') {
   app.use(logger('dev'));
   mongoose.set('debug', true);
 }
-
-//compression
+app.use(cors());
 app.use(compress());
 app.use(favicon(__dirname + '/app/images/app/tatool_icon.ico'));
 
@@ -124,19 +136,19 @@ router.get('/analytics/data/modules/:moduleId', analyticsCtrl.getAllUserDataDown
 router.get('/analytics/data/modules/:moduleId/:userCode', analyticsCtrl.getUserDataDownloadToken);
 
 // Admin
-router.get('/admin/users', adminController.getUsers);
-router.post('/admin/users/:user', adminController.updateUser);
-router.post('/admin/users/:user/reset', adminController.updatePassword);
-router.delete('/admin/users/:user', adminController.removeUser);
+router.get('/admin/users', adminCtrl.getUsers);
+router.post('/admin/users/:user', adminCtrl.updateUser);
+router.post('/admin/users/:user/reset', adminCtrl.updatePassword);
+router.delete('/admin/users/:user', adminCtrl.removeUser);
 
-router.get('/admin/projects', adminController.getAllProjects);
-router.post('/admin/projects/:access/:project', adminController.addProject);
-router.delete('/admin/projects/:access/:project', adminController.deleteProject);
+router.get('/admin/projects', adminCtrl.getAllProjects);
+router.post('/admin/projects/:access/:project', adminCtrl.addProject);
+router.delete('/admin/projects/:access/:project', adminCtrl.deleteProject);
 
 // User
-router.get('/user/roles', authController.getRoles);
-router.post('/register', userController.register);
-router.get('/login', authController.isAuthenticated);
+router.get('/user/roles', authCtrl.getRoles);
+router.post('/register', userCtrl.register);
+router.get('/login', authCtrl.isAuthenticated);
 
 // protect api with JWT
 app.use('/api', expressJwt({
@@ -144,7 +156,7 @@ app.use('/api', expressJwt({
   algorithms: ['HS256']
 }).unless({
   path: ['/api/login', '/api/register']
-}), noCache, authController.hasRole, router);
+}), noCache, authCtrl.hasRole, router);
 
 // disable caching for API
 function noCache(req, res, next) {
@@ -160,13 +172,13 @@ app.get('/mode', function(req, res) {
     mode: req.app.get('mode')
   });
 });
-app.post('/user/verify/resend', userController.verifyResend);
-app.get('/user/verify/:token', userController.verifyUser);
-app.post('/user/reset', userController.resetPasswordSend);
-app.get('/user/resetverify/:token', userController.verifyResetToken);
-app.post('/user/reset/:token', userController.updatePassword);
-app.post('/user/captcha', userController.verifyCaptcha);
-app.post('/user/devaccount', userController.signupDev);
+app.post('/user/verify/resend', userCtrl.verifyResend);
+app.get('/user/verify/:token', userCtrl.verifyUser);
+app.post('/user/reset', userCtrl.resetPasswordSend);
+app.get('/user/resetverify/:token', userCtrl.verifyResetToken);
+app.post('/user/reset/:token', userCtrl.updatePassword);
+app.post('/user/captcha', userCtrl.verifyCaptcha);
+app.post('/user/devaccount', userCtrl.signupDev);
 app.get('/data/user/all/:token', analyticsCtrl.getAllUserData);
 app.get('/data/user/:token', analyticsCtrl.getUserData);
 
@@ -191,24 +203,23 @@ app.use(function(err, req, res, next) {
   }
 });
 
-
-//** -------------- **//
-//** STARTUP SCRIPT **//
-//** -------------- **//
+/*******************************
+  STARTUP SCRIPT
+/*******************************/
 
 // initialize userCode counter at startup
-userController.initCounter(setup);
+userCtrl.initCounter(setup);
 
 function setup() {
   // processing run mode 'lab'
   if (process.argv[2] === 'lab') {
     console.log('Running tatool in LAB mode.')
     app.set('mode', 'lab');
-    userController.registerAdmin();
+    userCtrl.registerAdmin();
   }
 
   // setup default project structure
-  adminController.initProjects(projects);
+  adminCtrl.initProjects(projects);
 }
 
 // start server
