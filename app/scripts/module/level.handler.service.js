@@ -13,6 +13,7 @@ function LevelHandlerService($log, $rootScope, statusPanelService, handlerServic
       this.maxScore = 0;
 
       // preset properties that can be overwritten by properties in module file
+      this.startLevel = 1;
       this.benchmarkSampleSize = 3;
       this.benchmark = 0.6;
       this.allowLevelDown = { propertyType: 'Boolean', propertyValue: false };
@@ -39,7 +40,7 @@ function LevelHandlerService($log, $rootScope, statusPanelService, handlerServic
         this.counter = (moduleService.getModuleProperty(this, 'counter') !== undefined) ? moduleService.getModuleProperty(this, 'counter') : 0;
         this.totalScore = (moduleService.getModuleProperty(this, 'totalScore') !== undefined) ? moduleService.getModuleProperty(this, 'totalScore') : 0;
         this.maxScore = (moduleService.getModuleProperty(this, 'maxScore') !== undefined) ? moduleService.getModuleProperty(this, 'maxScore') : 0;
-        this.currentLevel = (moduleService.getModuleProperty(this, 'currentLevel') !== undefined) ? moduleService.getModuleProperty(this, 'currentLevel') : 1;
+        this.currentLevel = (moduleService.getModuleProperty(this, 'currentLevel') !== undefined) ? moduleService.getModuleProperty(this, 'currentLevel') : parseInt(this.startLevel);
 
       } else if (phase === tatoolPhase.EXECUTABLE_START) {
         this.updateStatusPanel();
