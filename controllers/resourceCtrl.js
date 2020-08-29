@@ -291,11 +291,11 @@ function getGCSUserData(req, res, privatePath, moduleId, userCode) {
 	const prefix = 'uploads/' + moduleId + '/' + ((userCode) ? userCode : '');
 	const targetFilename = moduleId + ((userCode) ? '_' + userCode : '') + '.zip';
 
-	listGCSFilesByPrefix(privatePath, prefix).then(function(files) {
-		if (files.length > 0) {
 			res.setHeader('Content-Type', 'application/zip');
 			res.setHeader('Content-Disposition', 'attachment; filename=' + targetFilename);
-			let archive = archiver('zip');
+
+	listGCSFilesByPrefix(privatePath, prefix).then(function(files) {
+		if (files.length > 0) {			let archive = archiver('zip');
 			archive.pipe(res);
 
 			files.forEach(file => {
