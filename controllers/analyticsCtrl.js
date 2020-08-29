@@ -14,9 +14,14 @@ exports.initAnalytics = function(module) {
   var deferred = Q.defer();
   var today = new Date();
 
-  Analytics.findOne({ moduleId: module.moduleId, created_by: module.created_by }, function(err, moduleStats) {
+  Analytics.findOne({
+    moduleId: module.moduleId,
+    created_by: module.created_by
+  }, function(err, moduleStats) {
     if (err) {
-      deferred.reject({ message: 'Error initializing analytics entry for module.'});
+      deferred.reject({
+        message: 'Error initializing analytics entry for module.'
+      });
     } else {
       if (!moduleStats) {
         var analytics = new Analytics();
@@ -25,7 +30,7 @@ exports.initAnalytics = function(module) {
         analytics.moduleLabel = module.moduleLabel;
         analytics.created_by = module.created_by;
         analytics.created_at = new Date();
-        analytics.email = [ module.created_by ];
+        analytics.email = [module.created_by];
         analytics.userData = [];
 
         analytics.save(function(err, data) {
@@ -56,7 +61,9 @@ exports.initAnalytics = function(module) {
 exports.addAnalyticsUser = function(req, module) {
   var deferred = Q.defer();
 
-  Analytics.findOne({ moduleId: req.params.moduleId }, function(err, analyticsModule) {
+  Analytics.findOne({
+    moduleId: req.params.moduleId
+  }, function(err, analyticsModule) {
     if (err) {
       deferred.reject('Could not add analytics data.');
     } else {
@@ -95,7 +102,7 @@ exports.addAnalyticsUser = function(req, module) {
         } else {
           deferred.resolve();
         }
-        
+
 
       } else {
         deferred.resolve();
@@ -109,7 +116,9 @@ exports.addAnalyticsUser = function(req, module) {
 exports.addAnalyticsData = function(req) {
   var deferred = Q.defer();
 
-  Analytics.findOne({ moduleId: req.params.moduleId }, function(err, module) {
+  Analytics.findOne({
+    moduleId: req.params.moduleId
+  }, function(err, module) {
     if (err) {
       deferred.reject('Could not add analytics data.');
     } else {
@@ -174,7 +183,7 @@ exports.addAnalyticsData = function(req) {
             }
           });
         }
-        
+
 
       } else {
         deferred.resolve();
@@ -186,7 +195,14 @@ exports.addAnalyticsData = function(req) {
 };
 
 exports.getAll = function(req, res) {
-  Analytics.find({ email: { $in: [req.user.email] } }, { moduleId: 1, moduleName: 1 }, function(err, modules) {
+  Analytics.find({
+    email: {
+      $in: [req.user.email]
+    }
+  }, {
+    moduleId: 1,
+    moduleName: 1
+  }, function(err, modules) {
     if (err) {
       res.status(500).send(err);
     } else {
@@ -196,7 +212,12 @@ exports.getAll = function(req, res) {
 };
 
 exports.get = function(req, res) {
-  Analytics.findOne({ email: { $in: [req.user.email] }, moduleId: req.params.moduleId }, function(err, module) {
+  Analytics.findOne({
+    email: {
+      $in: [req.user.email]
+    },
+    moduleId: req.params.moduleId
+  }, function(err, module) {
     if (err) {
       res.status(500).send(err);
     } else {
@@ -208,29 +229,39 @@ exports.get = function(req, res) {
         }
         res.json(module);
       } else {
-        res.status(500).json({message: 'Module not found.'});
+        res.status(500).json({
+          message: 'Module not found.'
+        });
       }
     }
   }).lean();
 };
 
 exports.remove = function(req, res) {
-  Analytics.remove({ created_by: req.user.email, moduleId: req.params.moduleId }, function(err, entry) {
+  Analytics.remove({
+    created_by: req.user.email,
+    moduleId: req.params.moduleId
+  }, function(err, entry) {
     if (err) {
       res.status(500).send(err);
     } else {
-      deleteAnalyticsData(req, res);
+      resourceCtrl.deleteUserData(req, res, req.params.moduleId, null);
     }
   });
 };
 
 exports.removeUser = function(req, res) {
-  Analytics.findOne({ email: { $in: [req.user.email] }, moduleId: req.params.moduleId }, function(err, module) {
+  Analytics.findOne({
+    email: {
+      $in: [req.user.email]
+    },
+    moduleId: req.params.moduleId
+  }, function(err, module) {
     if (err) {
       res.status(500).send(err);
     } else {
       if (module) {
-        
+
         var exists = false;
         for (var i = 0; i < module.userData.length; i++) {
           if (req.params.userCode === module.userData[i].code.toString()) {
@@ -243,9 +274,11 @@ exports.removeUser = function(req, res) {
           module.userData.splice(i, 1);
           module.save(function(err, data) {
             if (err) {
-              res.status(500).json({message: 'Error saving analytics data.'});
+              res.status(500).json({
+                message: 'Error saving analytics data.'
+              });
             } else {
-              deleteAnalyticsData(req, res);
+              resourceCtrl.deleteUserData(req, res, module.moduleId, req.params.userCode);
             }
           });
         } else {
@@ -253,290 +286,71 @@ exports.removeUser = function(req, res) {
         }
 
       } else {
-        res.status(500).json({message: 'Module not found.'});
-      }
-    }
-  });
-};
-
-var deleteAnalyticsData = function(req, res) {
-  if (req.params.userCode) {
-    deleteUserAnalyticsData(req, res);
-  } else {
-    deleteAllAnalyticsData(req, res);
-  }
-};
-
-var deleteAllAnalyticsData = function(req, res) {
-  var moduleId = req.params.moduleId.replace(/\//g, '');
-
-  if (req.app.get('remote_url')) {
-    var options = {
-      uri: req.app.get('remote_url') + req.app.get('remote_delete') + '?moduleId=' + moduleId,
-      method: 'GET'
-    };
-    request(options)
-      .auth(req.app.get('resource_user'), req.app.get('resource_pw'), true)
-        .pipe(res);
-
-  } else {
-    var analyticsPath = 'uploads/user/' + moduleId;
-    rmdir(analyticsPath, function(error){
-      if (error) {
-        res.status(500).send(err);
-      } else {
-        res.json();
-      }
-    });
-  }
-};
-
-var deleteUserAnalyticsData = function(req, res) {
-  var moduleId = req.params.moduleId.replace(/\//g, '');
-  var userCode = req.params.userCode.replace(/\//g, '');
-
-  if (req.app.get('remote_url')) {
-    var options = {
-      uri: req.app.get('remote_url') + req.app.get('remote_delete') + '?moduleId=' + moduleId + '&userCode=' + userCode,
-      method: 'GET'
-    };
-    request(options)
-      .auth(req.app.get('resource_user'), req.app.get('resource_pw'), true)
-        .pipe(res);
-
-  } else {
-    var analyticsPath = 'uploads/user/' + moduleId + '/';
-
-    glob(analyticsPath + '*_' + userCode + "_*.csv", function (err, files) { 
-      deleteFiles(files, function (data) {
-        glob(analyticsPath + '*_' + userCode + ".zip", function (err, files) { 
-          deleteFiles(files, function (data) {
-            res.json();
-          });
+        res.status(500).json({
+          message: 'Module not found.'
         });
-      });
-    });
-  }
-};
-
-function deleteFiles(files, callback){
-  var i = files.length;
-  files.forEach(function(file){
-    fs.unlink(file, function(err) {
-      i--;
-      if (err) {
-        callback(err);
-        return;
-      } else if (i <= 0) {
-        callback(null);
-      }
-    });
-  });
-  callback(null);
-}
-
-exports.getAllUserDataDownloadToken = function(req, res) {
-  Analytics.findOne({ email: { $in: [req.user.email] }, moduleId: req.params.moduleId }, function(err, module) {
-    if (err) {
-      res.status(500).send(err);
-    } else {
-      if (module) {
-        var filename = module.moduleId + '.zip'; 
-        var niceFileName = ((module.moduleLabel) ? module.moduleLabel : module.moduleId);
-        var token = uuid.v4();
-        var file = '';
-
-        if (req.app.get('remote_url')) {
-          file = req.app.get('remote_url') + req.app.get('remote_download') + '?moduleId=' + req.params.moduleId + '&fileName=' + niceFileName;
-        } else {
-          file = 'uploads/user/' + req.params.moduleId + '/' + filename;
-        }
-
-        var fileToken = new DownloadToken();
-        fileToken.token = token;
-        fileToken.file = file;
-        fileToken.fileName = niceFileName + '.zip';
-        fileToken.moduleId = req.params.moduleId;
-        fileToken.created_at = Date.now();
-        fileToken.created_by = req.user.email;
-
-        fileToken.save(function(err, data) {
-          if (err) {
-            res.status(500).json({message: 'Download Token not saved.'});
-          } else {
-            res.json(token);
-          }
-        });
-
-/*
-        if (req.app.get('remote_url')) {
-          fileToken.save(function(err, data) {
-            if (err) {
-              res.status(500).json({message: 'Download Token not saved.'});
-            } else {
-              res.json(token);
-            }
-          });
-        } else {
-          fs.exists('uploads/user/' + req.params.moduleId + '/', function(exists) {
-            if (exists) {
-              fileToken.save(function(err, data) {
-                if (err) {
-                  res.status(500).json({message: 'Download Token not saved.'});
-                } else {
-                  res.json(token);
-                }
-              });
-            } else {
-              res.status(500).json({ message: 'No data available' });
-            }
-          });
-        }
-*/
-
-
-      } else {
-        res.status(500).json({message: 'Module not found.'});
       }
     }
   });
 };
 
 exports.getUserDataDownloadToken = function(req, res) {
-  Analytics.findOne({ email: { $in: [req.user.email] }, moduleId: req.params.moduleId }, function(err, module) {
+  Analytics.findOne({
+    email: {
+      $in: [req.user.email]
+    },
+    moduleId: req.params.moduleId
+  }, function(err, module) {
     if (err) {
       res.status(500).send(err);
     } else {
       if (module) {
-        var filename = module.moduleId + '_' + req.params.userCode + '.zip'; 
-        var niceFileName = ((module.moduleLabel) ? module.moduleLabel : module.moduleId) + '_' + req.params.userCode;
-        var token = uuid.v4();
-        var file = '';
+        const token = uuid.v4();
 
-        if (req.app.get('remote_url')) {
-          file = req.app.get('remote_url') + req.app.get('remote_download') + '?moduleId=' + req.params.moduleId + '&userCode=' + req.params.userCode + '&fileName=' + niceFileName;
-        } else {
-          file = 'uploads/user/' + req.params.moduleId + '/' + filename;
-        }
-
-        var fileToken = new DownloadToken();
+        const fileToken = new DownloadToken();
         fileToken.token = token;
-        fileToken.file = file;
-        fileToken.fileName = niceFileName + '.zip';
         fileToken.moduleId = req.params.moduleId;
+        if (req.params.userCode) {
+          fileToken.userCode = req.params.userCode;
+        }
         fileToken.created_at = Date.now();
         fileToken.created_by = req.user.email;
 
-        if (req.app.get('remote_url')) {
-          fileToken.save(function(err, data) {
-            if (err) {
-              res.status(500).json({message: 'Download Token not saved.'});
-            } else {
-              res.json(token);
-            }
-          });
-        } else {
-          fs.exists(file, function(exists) {
-            if (exists) {
-              fileToken.save(function(err, data) {
-                if (err) {
-                  res.status(500).json({message: 'Download Token not saved.'});
-                } else {
-                  res.json(token);
-                }
-              });
-            } else {
-              res.status(500).json({ message: 'No data available' });
-            }
-          });
-        }
+        fileToken.save(function(err, data) {
+          if (err) {
+            res.status(500).json({
+              message: 'Download Token not saved.'
+            });
+          } else {
+            res.json(token);
+          }
+        });
 
       } else {
-        res.status(500).json({message: 'Module not found.'});
+        res.status(500).json({
+          message: 'Module not found.'
+        });
       }
     }
   });
 };
 
-exports.getAllUserData = function(req, res) {
-
-  if (req.app.get('remote_url')) {
-    DownloadToken.findOneAndRemove({ token: req.params.token }, function(err, data) {
-      if (err) {
-        res.status(500).json({ message: 'Download failed' });
-      } else {
-        if (data) {
-          var options = {
-            uri: data.file,
-            method: 'GET'
-          };
-
-          request(options)
-            .auth(req.app.get('resource_user'), req.app.get('resource_pw'), true)
-              .pipe(res);
-        } else {
-          res.status(500).json({ message: 'Download failed' });
-        }
-      }
-    });
-  } else {
-    DownloadToken.findOneAndRemove({ token: req.params.token }, function(err, data) {
-      if (err) {
-        res.status(500).json({ message: 'Download failed' });
-      } else {
-        if (data) {
-
-          resourceCtrl.getUserData(req, res, data.moduleId);
-/*
-          var output = fs.createWriteStream(data.file, {'flags': 'w'});
-          var zip = archiver('zip');
-          zip.pipe(output);
-          zip.bulk([{src: ['uploads/user/' + data.moduleId + '/' + data.moduleId + '_*.zip'], dest: '', expand: true, flatten: true}]).finalize();
-
-          output.on('close', function() {
-            res.download(data.file, data.fileName);
-          });*/
-
-        } else {
-          res.status(500).json({ message: 'Download failed' });
-        }
-      }
-    });
-  }
-};
-
 exports.getUserData = function(req, res) {
-
-  if (req.app.get('remote_url')) {
-    DownloadToken.findOneAndRemove({ token: req.params.token }, function(err, data) {
-      if (err) {
-        res.status(500).json({ message: 'Download failed' });
+  DownloadToken.findOneAndRemove({
+    token: req.params.token
+  }, function(err, data) {
+    if (err) {
+      res.status(500).json({
+        message: 'Download failed'
+      });
+    } else {
+      if (data) {
+        resourceCtrl.getUserData(req, res, data.moduleId, data.userCode);
       } else {
-        if (data) {
-          var options = {
-            uri: data.file,
-            method: 'GET'
-          };
-
-          request(options)
-            .auth(req.app.get('resource_user'), req.app.get('resource_pw'), true)
-              .pipe(res);
-        } else {
-          res.status(500).json({ message: 'Download failed' });
-        }
+        res.status(500).json({
+          message: 'Download failed'
+        });
       }
-    });
-  } else {
-    DownloadToken.findOneAndRemove({ token: req.params.token }, function(err, data) {
-      if (err) {
-        res.status(500).json({ message: 'Download failed' });
-      } else {
-        if (data) {
-          res.download(data.file, data.fileName);
-        } else {
-          res.status(500).json({ message: 'Download failed' });
-        }
-      }
-    });
-  }
+    }
+  });
 };

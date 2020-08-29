@@ -24,7 +24,7 @@
       <button type="button" class="btn btn-primary" ng-model="showDetail.email" btn-checkbox>
         Show Email
       </button>
-      <button type="button" class="btn btn-default" ng-click="downloadAllData(currentModule.moduleId)">
+      <button type="button" class="btn btn-default" ng-click="downloadUserData(currentModule.moduleId)">
         <i class="fa fa-download"></i> Download All
       </button>
       <button type="button" class="btn btn-default" ng-click="deleteModule(currentModule.moduleId)">
@@ -88,8 +88,8 @@
           <td align="center"> {{formatDate(user.updated_at)}}<br></td>
           <td align="center"> 
             <a ng-click="showDetails(user)" class="btn btn-tatool-off" uib-tooltip="Show user details" uib-tooltip-placement="top" uib-tooltip-animation="false"><i class="fa fa-search-plus"></i></a>
-            <a ng-click="downloadData(user, currentModule)" class="btn btn-tatool-off" uib-tooltip="Download user data for this Module. Download will open a Pop-up window." uib-tooltip-placement="top" uib-tooltip-animation="false"><i class="fa fa-download"></i></a>
-            <a ng-click="deleteUserData(user, currentModule)" class="btn btn-tatool-off" uib-tooltip="Delete all uploaded user data." uib-tooltip-placement="top" uib-tooltip-animation="false"><i class="fa fa-trash-o"></i></a>
+            <a ng-click="downloadUserData(currentModule.moduleId, user.code)" class="btn btn-tatool-off" uib-tooltip="Download user data for this Module. Download will open a Pop-up window." uib-tooltip-placement="top" uib-tooltip-animation="false"><i class="fa fa-download"></i></a>
+            <a ng-click="deleteUserData(currentModule.moduleId, user.code)" class="btn btn-tatool-off" uib-tooltip="Delete all uploaded user data." uib-tooltip-placement="top" uib-tooltip-animation="false"><i class="fa fa-trash-o"></i></a>
           </td>
         </tr>
         <tr ng-if="currentModule.userData.length === 0">

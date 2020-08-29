@@ -1,6 +1,5 @@
 var Module = require('../models/module').userModule;
 var Repository = require('../models/module').repositoryModule;
-var exportCtrl = require('../controllers/exportCtrl');
 var repositoryCtrl = require('../controllers/repositoryCtrl');
 var analyticsCtrl = require('../controllers/analyticsCtrl');
 var userCtrl = require('../controllers/user');
@@ -417,7 +416,7 @@ exports.addTrials = function(req, res) {
       res.status(500).send(err);
     } else {
       if (module) {
-        resourceCtrl.setResource(req, module, 'user', res);
+        resourceCtrl.setUserData(req, module, 'user', res);
       } else {
         res.status(500).json({
           message: 'Module not found.'

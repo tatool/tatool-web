@@ -98,13 +98,13 @@ function AnalyticsCtrl($scope, $sce, $uibModal, $log, $timeout, moduleDataServic
         });
     };
 
-    $scope.deleteUserData = function(user, module) {
+    $scope.deleteUserData = function(moduleId, userCode) {
       function runDelete() {
         startSpinner('Deleting data...');
-        moduleDataService.deleteModuleUserAnalytics(user, module).then( function() {
-          setAlert('info', 'Analytics data for user ' + user.code + ' has been deleted.');
+        moduleDataService.deleteModuleAnalyticsUser(moduleId, userCode).then( function() {
+          setAlert('info', 'Analytics data for user ' + userCode + ' has been deleted.');
 
-          moduleDataService.getModuleAnalytics(module.moduleId).then( function(data) {
+          moduleDataService.getModuleAnalytics(moduleId).then( function(data) {
             $scope.currentModule = data;
           }, function(error) {
             $log.error(error);
@@ -119,7 +119,7 @@ function AnalyticsCtrl($scope, $sce, $uibModal, $log, $timeout, moduleDataServic
       }
       
       bootbox.dialog({
-          message: 'Are you sure you want to delete all analytics data for user <b>\'' + user.code + '\'</b>?',
+          message: 'Are you sure you want to delete all analytics data for user <b>\'' + userCode + '\'</b>?',
           title: '<b>Delete User Analytics Data</b>',
           buttons: {
             ok: {
@@ -153,18 +153,9 @@ function AnalyticsCtrl($scope, $sce, $uibModal, $log, $timeout, moduleDataServic
       }
     };
 
-    $scope.downloadData = function(user, module) {
-      moduleDataService.getModuleAnalyticsUserData(user, module).then( function(data) {
+    $scope.downloadUserData = function(moduleId, userCode) {
+      moduleDataService.getModuleAnalyticsUserData(moduleId, userCode).then( function(data) {
         window.open('/data/user/' + data);
-      }, function(error) {
-        $log.error(error);
-        setAlert('danger', error);
-      });
-    };
-
-    $scope.downloadAllData = function(moduleId) {
-      moduleDataService.getModuleAnalyticsAllUserData(moduleId).then( function(data) {
-        window.open('/data/user/all/' + data);
       }, function(error) {
         $log.error(error);
         setAlert('danger', error);

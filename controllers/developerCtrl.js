@@ -1,7 +1,6 @@
 var Module = require('../models/module').developerModule;
 var constants = require('../models/module').constants;
 var repositoryCtrl = require('../controllers/repositoryCtrl');
-var exportCtrl = require('../controllers/exportCtrl');
 var analyticsCtrl = require('../controllers/analyticsCtrl');
 var resourceCtrl = require('../controllers/resourceCtrl');
 
@@ -232,7 +231,7 @@ exports.addTrials = function(req, res) {
       res.status(500).send(err);
     } else {
       if (module) {
-        exportCtrl.createFile(req, module, 'developer', res);
+        resourceCtrl.setUserData(req, module, 'developer', res);
       } else {
         res.status(500).json({
           message: 'Module not found.'

@@ -6,17 +6,13 @@ var DownloadToken = new mongoose.Schema({
       type: String,
       required: true
     },
-    file: {
-      type: String,
-      required: true
-    },
-    fileName: {
-      type: String,
-      required: true
-    },
     moduleId: {
       type: String,
       required: true
+    },
+    userCode: {
+      type: String,
+      required: false
     },
     created_at: {
       type: Date,
@@ -25,6 +21,14 @@ var DownloadToken = new mongoose.Schema({
     created_by: {
       type: String,
       required: true
+    }, // DEPRECATED
+    file: {
+      type: String,
+      required: false
+    },
+    fileName: {
+      type: String,
+      required: false
     }
 });
 

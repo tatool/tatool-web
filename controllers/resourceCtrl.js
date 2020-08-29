@@ -6,53 +6,17 @@ var fs = require('fs');
 var Q = require('q');
 var archiver = require('archiver');
 var mkdirp = require("mkdirp");
+var rmdir = require('rimraf');
 var LZString = require("lz-string");
+var glob = require("glob");
+
 const {
 	Storage
 } = require('@google-cloud/storage');
 const storage = new Storage();
 const gcsUrl = 'https://storage.googleapis.com/';
 
-
-exports.getResource = function(req, res) {
-
-	const projectsPathType = req.app.get('projects_path_type');
-	const projectsPath = req.app.get('projects_path');
-
-	var moduleModel = req.path.startsWith('/developer') ? DevModule : Module;
-
-	moduleModel.find({
-		sessionToken: req.query.token
-	}, {}, {
-		limit: 1
-	}, function(err, modules) {
-		if (err) {
-			res.status(500).send(err);
-		} else if (modules.length === 1) {
-
-			switch (projectsPathType) {
-				case 'local':
-					getLocalResource(req, res, module, projectsPath);
-					break;
-				case 'gcs':
-					getGCSResource(req, res, module, projectsPath);
-					break;
-				case 'legacy':
-					getLegacyResource(req, res, module, projectsPath);
-					break;
-				default:
-					res.status(404).json({
-						message: 'PROJECTS_PATH_TYPE not set. Resource not found.'
-					});
-			}
-		} else {
-			res.status(404).json({
-				message: 'Resource not found.'
-			});
-		}
-	});
-
-};
+const pathPrefix = 'uploads/user/';
 
 
 exports.getResourceToken = function(req, res) {
@@ -89,125 +53,42 @@ exports.getResourceToken = function(req, res) {
 	});
 };
 
+exports.getResource = function(req, res) {
 
-exports.setResource = function(req, module, mode, res) {
-	const privatePathType = req.app.get('private_path_type');
-	const privatePath = req.app.get('private_path');
+	const projectsPathType = req.app.get('projects_path_type');
+	const projectsPath = req.app.get('projects_path');
 
-	switch (privatePathType) {
-		case 'local':
-			setLocalResource(req, res, module, privatePath, mode);
-			break;
-		case 'gcs':
-			setGCSResource(req, res, module, privatePath, mode);
-			break;
-		case 'legacy':
-			//setLegacyResource(req, res, module, privatePath, mode);
-			break;
-		default:
-			res.status(404).json({
-				message: 'PROJECTS_PATH_TYPE not set. Resource not found.'
-			});
-	}
-};
+	var moduleModel = req.path.startsWith('/developer') ? DevModule : Module;
 
-
-function setLocalResource(req, res, module, privatePath, mode) {
-	var moduleLabel = (module.moduleLabel) ? module.moduleLabel : module.moduleId;
-	var filename = moduleLabel + '_' + req.user.code;
-	var zipFilename = module.moduleId + '_' + req.user.code;
-	var sessionId = '_' + ('000000' + req.params.sessionId).slice(-6);
-	var extension = '.csv';
-	var zipExtension = '.zip';
-
-	if (!req.body.target || !req.app.get('override_upload_dir')) {
-		uploadPath = 'uploads/' + mode + '/' + module.moduleId + '/';
-	} else {
-		uploadPath = req.body.target;
-	}
-
-	mkdirp(uploadPath, function(err) {
+	moduleModel.find({
+		sessionToken: req.query.token
+	}, {}, {
+		limit: 1
+	}, function(err, modules) {
 		if (err) {
-			return res.status(500).json(err);
+			res.status(500).send(err);
+		} else if (modules.length === 1) {
+
+			switch (projectsPathType) {
+				case 'local':
+					getLocalResource(req, res, module, projectsPath);
+					break;
+				case 'gcs':
+					getGCSResource(req, res, module, projectsPath);
+					break;
+				default:
+					res.status(404).json({
+						message: 'PROJECTS_PATH_TYPE not set. Resource not found.'
+					});
+			}
 		} else {
-			fs.exists(uploadPath + filename + sessionId + extension, function(exists) {
-				var timestamp = '';
-				if (exists) {
-					timestamp = '_' + new Date().getTime();
-				}
-
-				var decompressed = LZString.decompressFromBase64(req.body.trialData);
-
-				fs.writeFile(uploadPath + filename + sessionId + timestamp + extension, decompressed, function(err) {
-					if (err) {
-						return res.status(500).json(err);
-					} else {
-						var output = fs.createWriteStream(uploadPath + zipFilename + zipExtension, {
-							'flags': 'w'
-						});
-						var zip = archiver('zip');
-						zip.pipe(output);
-
-						zip.bulk([{
-							src: [uploadPath + '*' + req.user.code + '*.csv'],
-							dest: '',
-							expand: true,
-							flatten: true
-						}]).finalize();
-
-						// currently node-archive doesn't support appending to an existing zip
-						// https://github.com/archiverjs/node-archiver/issues/23
-						//var csvFile = filename + sessionId + timestamp + extension;
-						//zip.append(fs.createReadStream(uploadPath + csvFile), { name: csvFile }).finalize();
-
-						output.on('close', function() {
-							res.json({
-								message: 'Trials successfully uploaded.'
-							});
-						});
-
-						zip.on('error', function(err) {
-							return res.status(500).json(err);
-						});
-
-					}
-				});
+			res.status(404).json({
+				message: 'Resource not found.'
 			});
 		}
 	});
-}
 
-
-function setGCSResource(req, res, module, privatePath, mode) {
-	const bucket = storage.bucket(privatePath);
-
-	var moduleLabel = (module.moduleLabel) ? module.moduleLabel : module.moduleId;
-	var sessionId = '_' + ('000000' + req.params.sessionId).slice(-6);
-	var filename = moduleLabel + '_' + req.user.code + sessionId + '_' + new Date().getTime() + '.csv';
-
-	var filePath = 'uploads/' + module.moduleId + '/' + filename;
-	var remoteFile = bucket.file(filePath);
-	var data = LZString.decompressFromBase64(req.body.trialData);
-
-	const metadata = {
-		contentType: 'application/CSV' //application/octet-stream
-	};
-
-	remoteFile.save(data, {
-		resumable: false,
-		metadata: metadata
-	}, function(err) {
-		if (!err) {
-			res.json({
-				message: 'Trials successfully uploaded.'
-			});
-		} else {
-			res.status(500).json(err);
-		}
-	});
-
-}
-
+};
 
 function getLocalResource(req, res, module, projectsPath) {
 	var accessType = req.params.projectAccess;
@@ -276,78 +157,237 @@ function getGCSResource(req, res, module, projectsPath) {
 }
 
 
-exports.getUserData = function(req, res, moduleId, userCode) {
-
+exports.setUserData = function(req, module, mode, res) {
 	const privatePathType = req.app.get('private_path_type');
 	const privatePath = req.app.get('private_path');
+
+	switch (privatePathType) {
+		case 'local':
+			setLocalUserData(req, res, module, privatePath, mode);
+			break;
+		case 'gcs':
+			setGCSUserData(req, res, module, privatePath, mode);
+			break;
+		case 'legacy':
+			//setLegacyResource(req, res, module, privatePath, mode);
+			break;
+		default:
+			res.status(404).json({
+				message: 'PROJECTS_PATH_TYPE not set. Resource not found.'
+			});
+	}
+};
+
+function setLocalUserData(req, res, module, privatePath, mode) {
+
+	const sessionId = '_' + ('000000' + req.params.sessionId).slice(-6);
+	const filename = 'uploads/' + mode + '/' + module.moduleId + '/' + req.user.code + sessionId + '.csv';
+
+	if (!req.body.target || !req.app.get('override_upload_dir')) {
+		uploadPath = 'uploads/' + mode + '/' + module.moduleId + '/';
+	} else {
+		uploadPath = req.body.target;
+	}
+
+	mkdirp(uploadPath, function(err) {
+		if (err) {
+			return res.status(500).json(err);
+		} else {
+			fs.exists(filename, function(exists) {
+				const timestamp = '_' + new Date().getTime();
+
+				var decompressed = LZString.decompressFromBase64(req.body.trialData);
+
+				fs.writeFile(filename, decompressed, function(err) {
+					if (err) {
+						return res.status(500).json(err);
+					} else {
+						res.json({
+							message: 'Trials successfully uploaded.'
+						});
+
+					}
+				});
+			});
+		}
+	});
+}
+
+function setGCSUserData(req, res, module, privatePath, mode) {
 	const bucket = storage.bucket(privatePath);
 
-	const prefix = 'uploads/' + moduleId + '/';
+	const sessionId = '_' + ('000000' + req.params.sessionId).slice(-6);
+	const filename = req.user.code + sessionId + '_' + new Date().getTime() + '.csv';
 
+	const filePath = 'uploads/' + module.moduleId + '/' + filename;
+	const remoteFile = bucket.file(filePath);
+	const data = LZString.decompressFromBase64(req.body.trialData);
 
-  	res.setHeader('Content-Type', 'application/zip');
-	res.setHeader('Content-Disposition', 'attachment; filename=myFile.zip');
+	const metadata = {
+		contentType: 'application/CSV', //application/octet-stream
+		contentEncoding: 'gzip'
+	};
 
-	listFilesByPrefix(privatePath, prefix).then(function(files) {
-		var archive = archiver('zip');
-		archive.pipe(res);
-
-		files.forEach(file => {
-			var remoteFile = bucket.file(file.name);
-			var path = file.name.split("/");
-			var targetFileName = path.pop();
-			archive.append(remoteFile.createReadStream({validation: false}), { name: targetFileName });
-  		});
-  		
-		archive.finalize();
-
+	remoteFile.save(data, {
+		resumable: false,
+		metadata: metadata
+	}, function(err) {
+		if (!err) {
+			res.json({
+				message: 'Trials successfully uploaded.'
+			});
+		} else {
+			res.status(500).json(err);
+		}
 	});
 
 }
 
-async function listFilesByPrefix(bucketName, prefix) {
-  /**
-   * This can be used to list all blobs in a "folder", e.g. "public/".
-   *
-   * The delimiter argument can be used to restrict the results to only the
-   * "files" in the given "folder". Without the delimiter, the entire tree under
-   * the prefix is returned. For example, given these blobs:
-   *
-   *   /a/1.txt
-   *   /a/b/2.txt
-   *
-   * If you just specify prefix = '/a', you'll get back:
-   *
-   *   /a/1.txt
-   *   /a/b/2.txt
-   *
-   * However, if you specify prefix='/a' and delimiter='/', you'll get back:
-   *
-   *   /a/1.txt
-   */
 
-  const options = {
-    prefix: prefix
-  };
+exports.getUserData = function(req, res, moduleId, userCode) {
+	const privatePathType = req.app.get('private_path_type');
+	const privatePath = req.app.get('private_path');
 
-  // Lists files in the bucket, filtered by a prefix
-  const [files] = await storage.bucket(bucketName).getFiles(options);
-
-  return files;
+	switch (privatePathType) {
+		case 'local':
+			getLocalUserData(req, res, privatePath, moduleId, userCode);
+			break;
+		case 'gcs':
+			getGCSUserData(req, res, privatePath, moduleId, userCode);
+			break;
+		default:
+			res.status(404).json({
+				message: 'PROJECTS_PATH_TYPE not set. Resource not found.'
+			});
+	}
 }
 
+function getLocalUserData(req, res, privatePath, moduleId, userCode) {
+	const targetFilename = moduleId + ((userCode) ? '_' + userCode : '') + '.zip';
 
-/*	
-	TO BE DEPRECATED - use local or gcs type
-	Used to allow migration from Legacy (PHP remote) solution to GCS/Local.
-*/
-function getLegacyResource(req, res, module, projectsPath) {
-	var accessType = req.params.projectAccess;
-	if (req.params.projectAccess === 'private') {
-		accessType = req.params.projectAccess + '/' + module.created_by;
+	glob(((userCode) ? userCode : '') + '*.csv', {
+		cwd: pathPrefix + moduleId
+	}, function(er, files) {
+		if (files.length > 0) {
+			res.setHeader('Content-Type', 'application/zip');
+			res.setHeader('Content-Disposition', 'attachment; filename=' + targetFilename);
+			let archive = archiver('zip');
+			archive.pipe(res);
+
+			archive.glob(((userCode) ? userCode : '') + '*.csv', {
+				cwd: pathPrefix + moduleId
+			});
+			archive.finalize();
+		} else {
+			res.status(500).json({
+				message: 'No data available!'
+			});
+		}
+	});
+}
+
+function getGCSUserData(req, res, privatePath, moduleId, userCode) {
+	const bucket = storage.bucket(privatePath);
+	const prefix = 'uploads/' + moduleId + '/' + ((userCode) ? userCode : '');
+	const targetFilename = moduleId + ((userCode) ? '_' + userCode : '') + '.zip';
+
+	listGCSFilesByPrefix(privatePath, prefix).then(function(files) {
+		if (files.length > 0) {
+			res.setHeader('Content-Type', 'application/zip');
+			res.setHeader('Content-Disposition', 'attachment; filename=' + targetFilename);
+			let archive = archiver('zip');
+			archive.pipe(res);
+
+			files.forEach(file => {
+				let remoteFile = bucket.file(file.name);
+				let path = file.name.split("/");
+				let targetFileName = path.pop();
+				archive.append(remoteFile.createReadStream({
+					validation: false
+				}), {
+					name: targetFileName
+				});
+			});
+			archive.finalize();
+		} else {
+			res.status(500).json({
+				message: 'No data available!'
+			});
+		}
+	});
+}
+
+exports.deleteUserData = function(req, res, moduleId, userCode) {
+	const privatePathType = req.app.get('private_path_type');
+	const privatePath = req.app.get('private_path');
+
+	switch (privatePathType) {
+		case 'local':
+			deleteLocalUserData(req, res, privatePath, moduleId, userCode);
+			break;
+		case 'gcs':
+			deleteGCSUserData(req, res, privatePath, moduleId, userCode);
+			break;
+		default:
+			res.status(404).json({
+				message: 'PROJECTS_PATH_TYPE not set. Resource not found.'
+			});
 	}
+}
 
-	request(projectsPath + accessType + '/' + req.params.projectName + '/' + req.params.resourceType + '/' + req.params.resourceName)
-		.auth(req.app.get('resource_user'), req.app.get('resource_pw'), true)
-		.pipe(res);
+function deleteLocalUserData(req, res, privatePath, moduleId, userCode) {
+	if (userCode) {
+		glob(((userCode) ? userCode : '') + '*.csv', {
+			cwd: pathPrefix + moduleId
+		}, function(er, files) {
+			if (files.length > 0) {
+				var i = files.length;
+				files.forEach(function(file) {
+					fs.unlink(pathPrefix + moduleId + '/' + file, function(err) {
+						i--;
+						if (err) {
+							res.status(404).json({
+								message: 'Error deleting Analytics user files.'
+							});
+							return;
+						} else if (i <= 0) {
+							res.json();
+						}
+					});
+				});
+			} else {
+				res.json();
+			}
+		});
+	} else {
+		rmdir(pathPrefix + moduleId, function(error) {
+			if (error) {
+				res.status(500).send(err);
+			} else {
+				res.json();
+			}
+		});
+	}
+}
+
+function deleteGCSUserData(req, res, privatePath, moduleId, userCode) {
+	const bucket = storage.bucket(privatePath);
+	const prefix = 'uploads/' + moduleId + '/' + ((userCode) ? userCode : '');
+
+	bucket.deleteFiles({
+		prefix: prefix
+	}, function(err) {
+		if (!err) {
+			res.json();
+		}
+	});
+}
+
+async function listGCSFilesByPrefix(bucketName, prefix) {
+	const options = {
+		prefix: prefix
+	};
+	const [files] = await storage.bucket(bucketName).getFiles(options);
+
+	return files;
 }

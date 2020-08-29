@@ -134,7 +134,7 @@ router.get('/analytics/modules', analyticsCtrl.getAll);
 router.get('/analytics/modules/:moduleId', analyticsCtrl.get);
 router.delete('/analytics/modules/:moduleId', analyticsCtrl.remove);
 router.delete('/analytics/modules/:moduleId/:userCode', analyticsCtrl.removeUser);
-router.get('/analytics/data/modules/:moduleId', analyticsCtrl.getAllUserDataDownloadToken);
+router.get('/analytics/data/modules/:moduleId', analyticsCtrl.getUserDataDownloadToken);
 router.get('/analytics/data/modules/:moduleId/:userCode', analyticsCtrl.getUserDataDownloadToken);
 
 // Admin
@@ -181,7 +181,6 @@ app.get('/user/resetverify/:token', userCtrl.verifyResetToken);
 app.post('/user/reset/:token', userCtrl.updatePassword);
 app.post('/user/captcha', userCtrl.verifyCaptcha);
 app.post('/user/devaccount', userCtrl.signupDev);
-app.get('/data/user/all/:token', analyticsCtrl.getAllUserData);
 app.get('/data/user/:token', analyticsCtrl.getUserData);
 
 // open API for public module
