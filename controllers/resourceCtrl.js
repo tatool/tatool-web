@@ -291,32 +291,27 @@ function getGCSUserData(req, res, privatePath, moduleId, userCode) {
 	const prefix = 'uploads/' + moduleId + '/' + ((userCode) ? userCode : '');
 	const targetFilename = moduleId + ((userCode) ? '_' + userCode : '') + '.zip';
 
-	console.log('************************** START');
-
 	listGCSFilesByPrefix(privatePath, prefix).then(function(files) {
 		if (files.length > 0) {
-			res.setHeader('Content-Type', 'application/zip');
-			res.setHeader('Content-Disposition', 'attachment; filename=' + targetFilename);
+			//res.setHeader('Content-Type', 'application/zip');
+			//res.setHeader('Content-Disposition', 'attachment; filename=' + targetFilename);
 			let archive = archiver('zip');
 			archive.pipe(res);
-
-
-			console.log('************************** TOTAL FILES: ' + files.length );
 
 			files.forEach(file => {
 				let remoteFile = bucket.file(file.name);
 				let path = file.name.split("/");
 				let targetFileName = path.pop();
 
-				console.log('************************** FILE: ' + file.name );
 				archive.append(remoteFile.createReadStream({
 					validation: false
+				}).on('response', (streamResponse) => {
+					res.setHeader('Content-Type', 'application/zip');
+					res.setHeader('Content-Disposition', 'attachment; filename=' + targetFilename);
 				}), {
 					name: targetFileName
 				});
 			});
-
-				console.log('************************** FINALIZE: ');
 			archive.finalize();
 		} else {
 			res.status(500).json({
