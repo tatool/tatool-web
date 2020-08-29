@@ -304,7 +304,8 @@ function getGCSUserData(req, res, privatePath, moduleId, userCode) {
 				let targetFileName = path.pop();
 
 				archive.append(remoteFile.createReadStream({
-					validation: false
+					validation: false,
+					decompress: false
 				}), {
 					name: targetFileName
 				});
