@@ -73,7 +73,7 @@ if (app.get('env') === 'dev') {
   mongoose.set('debug', true);
 }
 app.use(cors());
-app.use(compress());
+//app.use(compress());
 app.use(favicon(__dirname + '/app/images/app/tatool_icon.ico'));
 
 // parse json and urlencoded body

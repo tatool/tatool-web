@@ -293,8 +293,8 @@ function getGCSUserData(req, res, privatePath, moduleId, userCode) {
 
 	listGCSFilesByPrefix(privatePath, prefix).then(function(files) {
 		if (files.length > 0) {
-			//res.setHeader('Content-Type', 'application/zip');
-			//res.setHeader('Content-Disposition', 'attachment; filename=' + targetFilename);
+			res.setHeader('Content-Type', 'application/zip');
+			res.setHeader('Content-Disposition', 'attachment; filename=' + targetFilename);
 			let archive = archiver('zip');
 			archive.pipe(res);
 
@@ -305,9 +305,6 @@ function getGCSUserData(req, res, privatePath, moduleId, userCode) {
 
 				archive.append(remoteFile.createReadStream({
 					validation: false
-				}).on('response', (streamResponse) => {
-					res.setHeader('Content-Type', 'application/zip');
-					res.setHeader('Content-Disposition', 'attachment; filename=' + targetFilename);
 				}), {
 					name: targetFileName
 				});
