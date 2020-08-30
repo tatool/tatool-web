@@ -10,7 +10,9 @@ var mkdirp = require('mkdirp');
 var rmdir = require('rimraf');
 
 exports.getUsers = function(req, res) {
-  User.find( { tempUser: null }, function(err, users) {
+  User.find({
+    tempUser: null
+  }, function(err, users) {
     if (err) {
       res.status(500).send(err);
     } else {
@@ -20,7 +22,9 @@ exports.getUsers = function(req, res) {
 };
 
 exports.updateUser = function(req, res) {
-  User.findOne({email: req.body.email}, function(err, user) {
+  User.findOne({
+    email: req.body.email
+  }, function(err, user) {
     if (err) res.status(500).send(err);
 
     if (user) {
@@ -38,19 +42,31 @@ exports.updateUser = function(req, res) {
 
       // only allow one admin user
       if (isAdmin && oldRoles.indexOf('admin') === -1) {
-        User.findOne({ roles: { $in: ['admin'] } }, function(err, adminUser) {
+        User.findOne({
+          roles: {
+            $in: ['admin']
+          }
+        }, function(err, adminUser) {
           if (err) {
             res.status(500).send(err);
           } else {
 
             if (adminUser) {
-              res.status(500).json({ message: 'Admin role is already assigned to another user. There can be only one!'});
+              res.status(500).json({
+                message: 'Admin role is already assigned to another user. There can be only one!'
+              });
             } else {
               user.save(function(err) {
                 if (err) {
-                  res.status(500).json({ message: 'Update of user failed.', data: err });
+                  res.status(500).json({
+                    message: 'Update of user failed.',
+                    data: err
+                  });
                 } else {
-                  res.json({ message: 'User successfully updated.', data: user });
+                  res.json({
+                    message: 'User successfully updated.',
+                    data: user
+                  });
                 }
               });
             }
@@ -60,9 +76,15 @@ exports.updateUser = function(req, res) {
       } else {
         user.save(function(err) {
           if (err) {
-            res.status(500).json({ message: 'Update of user failed.', data: err });
+            res.status(500).json({
+              message: 'Update of user failed.',
+              data: err
+            });
           } else {
-            res.json({ message: 'User successfully updated.', data: user });
+            res.json({
+              message: 'User successfully updated.',
+              data: user
+            });
           }
         });
       }
@@ -78,27 +100,37 @@ exports.updateUser = function(req, res) {
       user.token = '';
       user.updated_at = new Date();
 
-      Counter.getUserCode(function (err, userCode) {
+      Counter.getUserCode(function(err, userCode) {
         if (err) {
-          res.status(500).json({ message: 'Can\'t add user. Please try again later.', data: err });
+          res.status(500).json({
+            message: 'Can\'t add user. Please try again later.',
+            data: err
+          });
         } else {
           user.code = userCode.next;
           user.save(function(err) {
             if (err) {
-              res.status(500).json({ message: 'Can\'t add user. Please try again later.', data: err });
+              res.status(500).json({
+                message: 'Can\'t add user. Please try again later.',
+                data: err
+              });
             } else {
-              res.json( { message: 'User successfully added.' });
+              res.json({
+                message: 'User successfully added.'
+              });
             }
           });
         }
       });
-      
+
     }
   });
 };
 
 exports.updatePassword = function(req, res) {
-  User.findOne({ _id: req.params.user }, function(err, user) {
+  User.findOne({
+    _id: req.params.user
+  }, function(err, user) {
     if (err) {
       res.status(500).send(err);
     } else {
@@ -108,14 +140,21 @@ exports.updatePassword = function(req, res) {
 
         user.save(function(err) {
           if (err) {
-            res.status(500).json({ message: 'Can\'t change password. Please try again later.', data: err });
+            res.status(500).json({
+              message: 'Can\'t change password. Please try again later.',
+              data: err
+            });
           } else {
-            res.json( { message: 'Password changed successfully.' });
+            res.json({
+              message: 'Password changed successfully.'
+            });
           }
         });
 
       } else {
-        res.status(500).json({ message: 'User could not be found.' });
+        res.status(500).json({
+          message: 'User could not be found.'
+        });
       }
     }
   });
@@ -124,27 +163,37 @@ exports.updatePassword = function(req, res) {
 // removes the user and all of his user/developer/repository modules
 exports.removeUser = function(req, res) {
 
-  User.findOne({ _id: req.params.user }, function(err, user) {
+  User.findOne({
+    _id: req.params.user
+  }, function(err, user) {
     if (err) {
       res.status(500).send(err);
     } else {
       if (user) {
-        User.remove({ _id: req.params.user }, function(err, delUser) {
+        User.remove({
+          _id: req.params.user
+        }, function(err, delUser) {
           if (err) {
             res.status(500).send(err);
           } else {
 
-            UserModule.remove({ email: user.email }, function(err, module) {
+            UserModule.remove({
+              email: user.email
+            }, function(err, module) {
               if (err) {
                 res.status(500).send(err);
               } else {
 
-                DeveloperModule.remove({ email: user.email }, function(err, module) {
+                DeveloperModule.remove({
+                  email: user.email
+                }, function(err, module) {
                   if (err) {
                     res.status(500).send(err);
                   } else {
-                    
-                    RepositoryModule.remove({ email: user.email }, function(err, module) {
+
+                    RepositoryModule.remove({
+                      email: user.email
+                    }, function(err, module) {
                       if (err) {
                         res.status(500).send(err);
                       } else {
@@ -161,7 +210,9 @@ exports.removeUser = function(req, res) {
           }
         });
       } else {
-        res.status(500).send({ message: 'User could not be found.'});
+        res.status(500).send({
+          message: 'User could not be found.'
+        });
       }
     }
   });
@@ -169,9 +220,11 @@ exports.removeUser = function(req, res) {
 };
 
 exports.getAllProjects = function(req, res) {
-  Project.find( {}, function(err, projects) {
+  Project.find({}, function(err, projects) {
     if (err) {
-      res.status(500).json({message: 'Error reading projects.'});
+      res.status(500).json({
+        message: 'Error reading projects.'
+      });
     } else {
       res.json(projects);
     }
@@ -180,7 +233,12 @@ exports.getAllProjects = function(req, res) {
 
 exports.addProject = function(req, res) {
 
-  Project.findOne({name: req.params.project, access: req.params.access}, function(err, project) {
+  const projectsPathType = req.app.get('projects_path_type');
+
+  Project.findOne({
+    name: req.params.project,
+    access: req.params.access
+  }, function(err, project) {
     if (err) res.status(500).send(err);
 
     if (project) {
@@ -189,9 +247,14 @@ exports.addProject = function(req, res) {
 
       project.save(function(err) {
         if (err) {
-          res.status(500).json({ message: 'Can\'t edit project. Please try again later.', data: err });
+          res.status(500).json({
+            message: 'Can\'t edit project. Please try again later.',
+            data: err
+          });
         } else {
-          res.json( { message: 'Project saved successfully.' });
+          res.json({
+            message: 'Project saved successfully.'
+          });
         }
       });
 
@@ -203,39 +266,90 @@ exports.addProject = function(req, res) {
       project.description = req.body.description;
       project.executables = req.body.executables;
 
-      var projectPath = '';
-      if (project.access === 'private') {
-        projectPath = 'app/projects/' + project.access + '/' + project.email + '/' + project.name;
-      } else {
-        projectPath = 'app/projects/' + project.access + '/' + project.name;
+
+      switch (projectsPathType) {
+        case 'local':
+          addLocalProject(req, res, project);
+          break;
+        case 'gcs':
+          project.save(function(err) {
+            if (err) {
+              res.status(500).json({
+                message: 'Can\'t add project. Please try again later.',
+                data: err
+              });
+            } else {
+              res.json({
+                message: 'Project added successfully.'
+              });
+            }
+          });
+          break;
+        default:
+          res.status(404).json({
+            message: 'PROJECTS_PATH_TYPE not set. Cannot create Project.'
+          });
       }
 
-      mkdirp(projectPath, function (err) {
+    }
+  });
+};
+
+function addLocalProject(req, res, project) {
+
+  const projectsPath = req.app.get('projects_path');
+
+  let projectPath = '';
+  if (project.access === 'private') {
+    projectPath = projectsPath + project.access + '/' + project.email + '/' + project.name;
+  } else {
+    projectPath = projectsPath + project.access + '/' + project.name;
+  }
+
+  mkdirp(projectPath, function(err) {
+    if (err) {
+      res.status(500).json({
+        message: 'Can\'t add project. Please try again later.',
+        data: err
+      });
+    } else {
+      mkdirp(projectPath + '/' + 'executables', function(err) {
         if (err) {
-          res.status(500).json({ message: 'Can\'t add project. Please try again later.', data: err });
+          res.status(500).json({
+            message: 'Can\'t add project. Please try again later.',
+            data: err
+          });
         } else {
-          mkdirp(projectPath + '/' + 'executables', function (err) {
+          mkdirp(projectPath + '/' + 'instructions', function(err) {
             if (err) {
-              res.status(500).json({ message: 'Can\'t add project. Please try again later.', data: err });
+              res.status(500).json({
+                message: 'Can\'t add project. Please try again later.',
+                data: err
+              });
             } else {
-              mkdirp(projectPath + '/' + 'instructions', function (err) {
+              mkdirp(projectPath + '/' + 'stimuli', function(err) {
                 if (err) {
-                  res.status(500).json({ message: 'Can\'t add project. Please try again later.', data: err });
+                  res.status(500).json({
+                    message: 'Can\'t add project. Please try again later.',
+                    data: err
+                  });
                 } else {
-                  mkdirp(projectPath + '/' + 'stimuli', function (err) {
+                  mkdirp(projectPath + '/' + 'modules', function(err) {
                     if (err) {
-                      res.status(500).json({ message: 'Can\'t add project. Please try again later.', data: err });
+                      res.status(500).json({
+                        message: 'Can\'t add project. Please try again later.',
+                        data: err
+                      });
                     } else {
-                      mkdirp(projectPath + '/' + 'modules', function (err) {
+                      project.save(function(err) {
                         if (err) {
-                          res.status(500).json({ message: 'Can\'t add project. Please try again later.', data: err });
+                          res.status(500).json({
+                            message: 'Can\'t add project. Please try again later.',
+                            data: err
+                          });
                         } else {
-                          project.save(function(err) {
-                            if (err) {
-                              res.status(500).json({ message: 'Can\'t add project. Please try again later.', data: err });
-                            } else {
-                              res.json( { message: 'Project added successfully.' });
-                            }
+                          res.json({
+                            message: 'Project added successfully.'
                           });
                         }
                       });
@@ -245,43 +359,46 @@ exports.addProject = function(req, res) {
               });
             }
           });
-          
         }
       });
+
     }
   });
-};
+}
 
 exports.deleteProject = function(req, res) {
 
-  Project.findOne({name: req.params.project, access: req.params.access}, function(err, project) {
+  const projectsPathType = req.app.get('projects_path_type');
+
+  Project.findOne({
+    name: req.params.project,
+    access: req.params.access
+  }, function(err, project) {
     if (err) {
       res.status(500).send(err);
     } else {
       if (project) {
 
-        var projectPath = '';
-        if (project.access === 'private') {
-          projectPath = 'app/projects/' + project.access + '/' + project.email + '/' + project.name;
-        } else {
-          projectPath = 'app/projects/' + project.access + '/' + project.name;
-        }
-
-        Project.remove({ _id: project._id }, function(err, project) {
-          if (err) {
-            res.status(500).send(err);
-          } else {
-
-            rmdir(projectPath, function(error){
-              if (error) {
+        switch (projectsPathType) {
+          case 'local':
+            removeLocalProject(req, res, project);
+            break;
+          case 'gcs':
+            Project.remove({
+              _id: project._id
+            }, function(err, project) {
+              if (err) {
                 res.status(500).send(err);
               } else {
                 res.json(project);
               }
             });
-            
-          }
-        });
+            break;
+          default:
+            res.status(404).json({
+              message: 'PROJECTS_PATH_TYPE not set. Cannot delete Project.'
+            });
+        }
       } else {
         res.json({});
       }
@@ -289,6 +406,36 @@ exports.deleteProject = function(req, res) {
   });
 
 };
+
+function removeLocalProject(req, res, project) {
+
+  const projectsPath = req.app.get('projects_path');
+
+  let projectPath = '';
+  if (project.access === 'private') {
+    projectPath = projectsPath + project.access + '/' + project.email + '/' + project.name;
+  } else {
+    projectPath = projectsPath + project.access + '/' + project.name;
+  }
+
+  Project.remove({
+    _id: project._id
+  }, function(err, project) {
+    if (err) {
+      res.status(500).send(err);
+    } else {
+
+      rmdir(projectPath, function(error) {
+        if (error) {
+          res.status(500).send(err);
+        } else {
+          res.json(project);
+        }
+      });
+
+    }
+  });
+}
 
 // add/update built-in projects at startup
 exports.initProjects = function(projects) {
@@ -299,7 +446,10 @@ exports.initProjects = function(projects) {
 function saveAll(projects) {
   var project = projects.pop();
 
-  Project.findOne({name: project.name, access: project.access}, function(err, prj) {
+  Project.findOne({
+    name: project.name,
+    access: project.access
+  }, function(err, prj) {
     if (err) res.status(500).send(err);
 
     if (prj) {

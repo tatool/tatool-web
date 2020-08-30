@@ -180,7 +180,7 @@ app.post('/user/reset', userCtrl.resetPasswordSend);
 app.get('/user/resetverify/:token', userCtrl.verifyResetToken);
 app.post('/user/reset/:token', userCtrl.updatePassword);
 app.post('/user/captcha', userCtrl.verifyCaptcha);
-app.post('/user/devaccount', userCtrl.signupDev);
+//app.post('/user/devaccount', userCtrl.signupDev);
 app.get('/data/user/:token', analyticsCtrl.getUserData);
 
 // open API for public module
