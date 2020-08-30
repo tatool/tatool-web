@@ -22,10 +22,14 @@ function ModuleDataService($log, $q, $http, trialDataService) {
     var deferred = $q.defer();
 
     $http.get('/api/' + data.api + '/modules')
-      .success(function(data) {
-        deferred.resolve(data);
+      .then(function onSuccess(response) {
+        if (response.data === 'null') {
+          response.data = null;
+        }
+        deferred.resolve(response.data);
       })
-      .error(function(error) {
+      .catch(function onError(error) {
+        $log.error(error);
         deferred.reject(error.message);
       });
 
@@ -37,10 +41,14 @@ function ModuleDataService($log, $q, $http, trialDataService) {
     var deferred = $q.defer();
 
     $http.get('/api/' + data.api + '/repository')
-      .success(function(data) {
-        deferred.resolve(data);
+      .then(function onSuccess(response) {
+        if (response.data === 'null') {
+          response.data = null;
+        }
+        deferred.resolve(response.data);
       })
-      .error(function(error) {
+      .catch(function onError(error) {
+        $log.error(error);
         deferred.reject(error.message);
       });
 
@@ -52,13 +60,14 @@ function ModuleDataService($log, $q, $http, trialDataService) {
     var deferred = $q.defer();
 
     $http.get('/api/' + data.api + '/modules/' + moduleId)
-      .success(function(data) {
-        if (data === 'null') {
-          data = null;
+      .then(function onSuccess(response) {
+        if (response.data === 'null') {
+          response.data = null;
         }
-        deferred.resolve(data);
+        deferred.resolve(response.data);
       })
-      .error(function(error) {
+      .catch(function onError(error) {
+        $log.error(error);
         deferred.reject(error.message);
       });
 
@@ -70,13 +79,14 @@ function ModuleDataService($log, $q, $http, trialDataService) {
     var deferred = $q.defer();
 
     $http.get('/public/' + moduleId)
-      .success(function(data) {
-        if (data === 'null') {
-          data = null;
+      .then(function onSuccess(response) {
+        if (response.data === 'null') {
+          response.data = null;
         }
-        deferred.resolve(data);
+        deferred.resolve(response.data);
       })
-      .error(function(error) {
+      .catch(function onError(error) {
+        $log.error(error);
         deferred.reject(error.message);
       });
 
@@ -88,13 +98,14 @@ function ModuleDataService($log, $q, $http, trialDataService) {
     var deferred = $q.defer();
 
     $http.get('/api/' + data.api + '/repository/' + moduleId)
-      .success(function(data) {
-        if (data === 'null') {
-          data = null;
+      .then(function onSuccess(response) {
+        if (response.data === 'null') {
+          response.data = null;
         }
-        deferred.resolve(data);
+        deferred.resolve(response.data);
       })
-      .error(function(error) {
+      .catch(function onError(error) {
+        $log.error(error);
         deferred.reject(error.message);
       });
 
@@ -107,13 +118,14 @@ function ModuleDataService($log, $q, $http, trialDataService) {
     var moduleJson = JSON.parse(JSON.stringify(module));
 
     $http.post('/api/' + data.api + '/modules/' + module.moduleId, moduleJson)
-      .success(function(data) {
-        if (data === 'null') {
-          data = null;
+      .then(function onSuccess(response) {
+        if (response.data === 'null') {
+          response.data = null;
         }
-        deferred.resolve(data);
+        deferred.resolve(response.data);
       })
-      .error(function(error) {
+      .catch(function onError(error) {
+        $log.error(error);
         deferred.reject(error.message);
       });
 
@@ -124,13 +136,14 @@ function ModuleDataService($log, $q, $http, trialDataService) {
     var deferred = $q.defer();
 
     $http.post('/api/' + data.api + '/modules/' + moduleId + '/install')
-      .success(function(data) {
-        if (data === 'null') {
-          data = null;
+      .then(function onSuccess(response) {
+        if (response.data === 'null') {
+          response.data = null;
         }
-        deferred.resolve(data);
+        deferred.resolve(response.data);
       })
-      .error(function(error) {
+      .catch(function onError(error) {
+        $log.error(error);
         deferred.reject(error.message);
       });
 
@@ -139,14 +152,16 @@ function ModuleDataService($log, $q, $http, trialDataService) {
 
   data.inviteUser = function(moduleId, user) {
     var deferred = $q.defer();
+
     $http.post('/api/' + data.api + '/repository/' + moduleId + '/invite', user)
-      .success(function(data) {
-        if (data === 'null') {
-          data = null;
+      .then(function onSuccess(response) {
+        if (response.data === 'null') {
+          response.data = null;
         }
-        deferred.resolve(data);
+        deferred.resolve(response.data);
       })
-      .error(function(error) {
+      .catch(function onError(error) {
+        $log.error(error);
         deferred.reject(error.message);
       });
 
@@ -155,14 +170,16 @@ function ModuleDataService($log, $q, $http, trialDataService) {
 
   data.removeInvite = function(moduleId, user) {
     var deferred = $q.defer();
+
     $http.post('/api/' + data.api + '/repository/' + moduleId + '/invite/remove', user)
-      .success(function(data) {
-        if (data === 'null') {
-          data = null;
+      .then(function onSuccess(response) {
+        if (response.data === 'null') {
+          response.data = null;
         }
-        deferred.resolve(data);
+        deferred.resolve(response.data);
       })
-      .error(function(error) {
+      .catch(function onError(error) {
+        $log.error(error);
         deferred.reject(error.message);
       });
 
@@ -171,14 +188,16 @@ function ModuleDataService($log, $q, $http, trialDataService) {
 
   data.replyInvite = function(moduleId, response) {
     var deferred = $q.defer();
+
     $http.post('/api/' + data.api + '/modules/' + moduleId + '/invite/' + response)
-      .success(function(data) {
-        if (data === 'null') {
-          data = null;
+      .then(function onSuccess(response) {
+        if (response.data === 'null') {
+          response.data = null;
         }
-        deferred.resolve(data);
+        deferred.resolve(response.data);
       })
-      .error(function(error) {
+      .catch(function onError(error) {
+        $log.error(error);
         deferred.reject(error.message);
       });
 
@@ -190,13 +209,14 @@ function ModuleDataService($log, $q, $http, trialDataService) {
     var deferred = $q.defer();
 
     $http.post('/api/' + data.api + '/modules/' + moduleId + '/publish/' + moduleType)
-      .success(function(data) {
-        if (data === 'null') {
-          data = null;
+      .then(function onSuccess(response) {
+        if (response.data === 'null') {
+          response.data = null;
         }
-        deferred.resolve(data);
+        deferred.resolve(response.data);
       })
-      .error(function(error) {
+      .catch(function onError(error) {
+        $log.error(error);
         deferred.reject(error.message);
       });
 
@@ -208,13 +228,14 @@ function ModuleDataService($log, $q, $http, trialDataService) {
     var deferred = $q.defer();
 
     $http.get('/api/' + data.api + '/modules/' + moduleId + '/unpublish')
-      .success(function(data) {
-        if (data === 'null') {
-          data = null;
+      .then(function onSuccess(response) {
+        if (response.data === 'null') {
+          response.data = null;
         }
-        deferred.resolve(data);
+        deferred.resolve(response.data);
       })
-      .error(function(error) {
+      .catch(function onError(error) {
+        $log.error(error);
         deferred.reject(error.message);
       });
 
@@ -226,9 +247,9 @@ function ModuleDataService($log, $q, $http, trialDataService) {
     var deferred = $q.defer();
 
     $http.delete('/api/' + data.api + '/modules/' + moduleId)
-      .success(function(data) {
-        if (data === 'null') {
-          data = null;
+      .then(function onSuccess(response) {
+        if (response.data === 'null') {
+          response.data = null;
         }
         trialDataService.deleteModuleTrials(userName, moduleId, data.api).then(
           function(data) {
@@ -238,7 +259,8 @@ function ModuleDataService($log, $q, $http, trialDataService) {
             deferred.reject('Error during removal of module trials.');
           });
       })
-      .error(function(error) {
+      .catch(function onError(error) {
+        $log.error(error);
         deferred.reject(error.message);
       });
 
@@ -250,10 +272,10 @@ function ModuleDataService($log, $q, $http, trialDataService) {
     var deferred = $q.defer();
 
     $http.get('/api/' + data.api + '/projects')
-      .success(function(data) {
-        deferred.resolve(data);
+      .then(function onSuccess(response) {
+        deferred.resolve(response.data);
       })
-      .error(function(error) {
+      .catch(function onError(error) {
         $log.error(error);
         deferred.reject(error.message);
       });
@@ -266,10 +288,10 @@ function ModuleDataService($log, $q, $http, trialDataService) {
     var deferred = $q.defer();
 
     $http.get('/api/admin/projects')
-      .success(function(data) {
-        deferred.resolve(data);
+      .then(function onSuccess(response) {
+        deferred.resolve(response.data);
       })
-      .error(function(error) {
+      .catch(function onError(error) {
         $log.error(error);
         deferred.reject(error.message);
       });
@@ -282,13 +304,14 @@ function ModuleDataService($log, $q, $http, trialDataService) {
     var deferred = $q.defer();
 
     $http.post('/api/admin/projects/' + project.access + '/' + project.name, project)
-      .success(function(data) {
-        if (data === 'null') {
-          data = null;
+      .then(function onSuccess(response) {
+        if (response.data === 'null') {
+          response.data = null;
         }
-        deferred.resolve(data);
+        deferred.resolve(response.data);
       })
-      .error(function(error) {
+      .catch(function onError(error) {
+        $log.error(error);
         deferred.reject(error.message);
       });
 
@@ -300,13 +323,14 @@ function ModuleDataService($log, $q, $http, trialDataService) {
     var deferred = $q.defer();
 
     $http.delete('/api/admin/projects/' + project.access + '/' + project.name)
-      .success(function(data) {
-        if (data === 'null') {
-          data = null;
+      .then(function onSuccess(response) {
+        if (response.data === 'null') {
+          response.data = null;
         }
-        deferred.resolve(data);
+        deferred.resolve(response.data);
       })
-      .error(function(error) {
+      .catch(function onError(error) {
+        $log.error(error);
         deferred.reject(error.message);
       });
 
@@ -318,10 +342,10 @@ function ModuleDataService($log, $q, $http, trialDataService) {
     var deferred = $q.defer();
 
     $http.get('/api/analytics/modules')
-      .success(function(data) {
-        deferred.resolve(data);
+      .then(function onSuccess(response) {
+        deferred.resolve(response.data);
       })
-      .error(function(error) {
+      .catch(function onError(error) {
         $log.error(error);
         deferred.reject(error.message);
       });
@@ -334,10 +358,10 @@ function ModuleDataService($log, $q, $http, trialDataService) {
     var deferred = $q.defer();
 
     $http.get('/api/analytics/modules/' + moduleId)
-      .success(function(data) {
-        deferred.resolve(data);
+      .then(function onSuccess(response) {
+        deferred.resolve(response.data);
       })
-      .error(function(error) {
+      .catch(function onError(error) {
         $log.error(error);
         deferred.reject(error.message);
       });

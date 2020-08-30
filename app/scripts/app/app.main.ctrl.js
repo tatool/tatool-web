@@ -38,10 +38,10 @@ function MainCtrl($scope, $rootScope, $state, $window, $http, authService) {
 
     // get the run mode from the server
     $http.get('/mode')
-      .success(function (data) {
-        mode = data.mode;
+      .then(function onSuccess(response) {
+        mode = response.data.mode;
       })
-      .error(function () {
+      .catch(function onError(error) {
         mode = '';
       });
 

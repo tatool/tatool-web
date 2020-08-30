@@ -35,6 +35,7 @@ function StartCtrl($scope, $http, $location, $anchorScroll, $state, $timeout, pa
         }
       };
 
+      /*
       $scope.applyDeveloper = function(emailDev) {
         if (emailDev) {
           var email = {email: emailDev};
@@ -55,6 +56,7 @@ function StartCtrl($scope, $http, $location, $anchorScroll, $state, $timeout, pa
             });
         }
       };
+      */
 
       $scope.goPage = function(page) {
         $scope.docPage = page;
