@@ -22,7 +22,7 @@
     </div>
 
     <uib-accordion>
-      <uib-accordion-group is-open="accordionStatus.installed">
+      <div uib-accordion-group is-open="accordionStatus.installed">
         <uib-accordion-heading>
           MY MODULES
           <i class="fa fa-chevron-right" ng-class="{'fa fa-chevron-down red': accordionStatus.installed, 'fa fa-chevron-right': !accordionStatus.installed}"></i>
@@ -57,14 +57,14 @@
           </div>
 
         </div>
-      </uib-accordion-group>
+      </div uib-accordion-group>
     </uib-accordion>
   </div>
 
   <!-- INVITES -->
   <div class="container">
     <uib-accordion>
-      <uib-accordion-group is-open="accordionStatus.invites">
+      <div uib-accordion-group is-open="accordionStatus.invites">
         <uib-accordion-heading ng-class="'tatool-panel-heading'">
           INVITES 
           <i class="fa fa-chevron-right" ng-class="{'fa fa-chevron-down red': accordionStatus.invites, 'fa fa-chevron-right': !accordionStatus.invites}"></i>
@@ -86,14 +86,14 @@
             No modules found.
           </div>
         </div>
-      </uib-accordion-group>
+      </div uib-accordion-group>
     </uib-accordion>
   </div>
 
   <!-- REPOSITORY -->
   <div class="container">
     <uib-accordion>
-      <uib-accordion-group is-open="accordionStatus.public">
+      <div uib-accordion-group is-open="accordionStatus.public">
         <uib-accordion-heading ng-class="'tatool-panel-heading'">
           PUBLIC 
           <i class="fa fa-chevron-right" ng-class="{'fa fa-chevron-down red': accordionStatus.public, 'fa fa-chevron-right': !accordionStatus.public}"></i>
@@ -124,7 +124,7 @@
             <i class="fa fa-chevron-right"></i>
           </button>
         </div>
-      </uib-accordion-group>
+      </div uib-accordion-group>
     </uib-accordion>
   </div>
 

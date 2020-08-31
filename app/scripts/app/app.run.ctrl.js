@@ -15,12 +15,12 @@ function RunCtrl($scope, $window, $state, $sce, $timeout, spinnerService, cfg) {
       if (message.type === 'moduleLoaded') {
         stopSpinner();
       } else if (message.type === 'moduleExit') {
-        if (screenfull.enabled) {
+        if (screenfull.isEnabled) {
           screenfull.exit();
         }
         $scope.moduleUrl = $sce.trustAsResourceUrl('about:blank');
         $window.removeEventListener('message', moduleListener, false);
-        if (screenfull.enabled) {
+        if (screenfull.isEnabled) {
           $window.removeEventListener(screenfull.raw.fullscreenchange, fullscreenChange, false);
         }
         
@@ -64,7 +64,7 @@ function RunCtrl($scope, $window, $state, $sce, $timeout, spinnerService, cfg) {
     $window.addEventListener('message', moduleListener, false);
 
     // fullscreen change detection
-    if (screenfull.enabled) {
+    if (screenfull.isEnabled) {
       $window.addEventListener(screenfull.raw.fullscreenchange, fullscreenChange, false);
     }
 
@@ -83,7 +83,7 @@ function RunCtrl($scope, $window, $state, $sce, $timeout, spinnerService, cfg) {
     // open moduleUrl in Iframe
     if (moduleId) {
       startSpinner();
-      $scope.moduleUrl = $sce.trustAsResourceUrl('../../moduleIndex.html#module'); //../../views/module/index.html#module
+      $scope.moduleUrl = $sce.trustAsResourceUrl('../../moduleIndex.html#!module'); //../../views/module/index.html#module
     } else {
       if (mode === cfg.APP_MODE_DEVELOPER) {
         $state.go('developer');

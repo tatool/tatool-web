@@ -8,6 +8,10 @@ import UserDataService from '../user.data.service.js';
 import TrialDataService from '../trial.data.service.js';
 import ModuleDataService from '../module.data.service.js';
 
+import StartCtrl from '../start.ctrl.js';
+
+require('../../images/app/favicon.ico');
+
 var tatool = angular.module('tatool', [uibootstrap, uirouter])
   .constant('cfg', {
     MODE: 'REMOTE', // LOCAL or REMOTE
@@ -22,6 +26,7 @@ window.tatool = tatool;
 tatool.factory('userDataService', UserDataService);
 tatool.factory('trialDataService', TrialDataService);
 tatool.factory('moduleDataService', ModuleDataService);
+tatool.controller('StartCtrl', StartCtrl);
 
 tatool.config(['$stateProvider', '$urlRouterProvider', '$provide', '$controllerProvider', '$logProvider',
     function ($stateProvider, $urlRouterProvider, $provide, $controllerProvider, $logProvider) {
@@ -61,19 +66,6 @@ tatool.config(['$stateProvider', '$urlRouterProvider', '$provide', '$controllerP
           }]
         }
       });
-
-    // helper function for ui-router to force a reload of a state
-    $provide.decorator('$state', ['$delegate', '$stateParams', function($delegate, $stateParams) {
-      $delegate.forceReload = function() {
-        return $delegate.go($delegate.current, $stateParams, {
-          location: false,
-          reload: true,
-          inherit: false,
-          notify: true
-        });
-      };
-      return $delegate;
-    }]);
 
   }])
   .directive('autoFocus', ['$timeout', function($timeout) {

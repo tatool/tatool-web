@@ -27,7 +27,7 @@ function PublicStartCtrl($scope, $window, $state, publicService, moduleId, extid
     $scope.startModule = function() {
       var module = publicService.getModule();
       var fullscreen = module.moduleDefinition.fullscreen ? module.moduleDefinition.fullscreen : false;
-      if (fullscreen && screenfull.enabled) {
+      if (fullscreen && screenfull.isEnabled) {
         screenfull.request();
       }
       $state.go('publicRun');

@@ -308,7 +308,7 @@ function ModuleCtrl($scope, $q, $timeout, $window, $rootScope, $location, $state
 
         // switch to fullscreen if available and enabled in module
         var fullscreen = module.moduleDefinition.fullscreen ? module.moduleDefinition.fullscreen : false;
-        if (fullscreen && screenfull.enabled) {
+        if (fullscreen && screenfull.isEnabled) {
           screenfull.request();
         }
       

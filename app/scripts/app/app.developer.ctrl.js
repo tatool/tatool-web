@@ -4,7 +4,7 @@
 
 import bootbox from 'bootbox';
 import screenfull from 'screenfull';
-import uuidv4  from 'uuid/v4';
+import { v4 as uuidv4 } from 'uuid';
 
 import Module from '../common/module.pojo.js';
 
@@ -229,7 +229,7 @@ function DeveloperCtrl($scope, $q, $timeout, $window, $rootScope, $location, $st
     };
 
     $scope.showPublicUrl = function(moduleId) {
-      var url = 'http://' + window.location.host + '/#/public/' + moduleId;
+      var url = 'http://' + window.location.host + '/#!/public/' + moduleId;
       var msg = 'The module can be accessed with the following URL:<br><br><span class="publicUrl">';
       msg += url;
       msg += '</span><br><br>By providing the query parameter <b>extid</b>, you can pass in an external id to identify the requestor.';
@@ -392,7 +392,7 @@ function DeveloperCtrl($scope, $q, $timeout, $window, $rootScope, $location, $st
 
       // switch to fullscreen if available and enabled in module
       var fullscreen = module.moduleDefinition.fullscreen ? module.moduleDefinition.fullscreen : false;
-      if (fullscreen && screenfull.enabled) {
+      if (fullscreen && screenfull.isEnabled) {
         screenfull.request();
       }
       

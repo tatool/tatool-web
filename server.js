@@ -9,11 +9,11 @@ var mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 var passport = require('passport');
 var expressJwt = require('express-jwt');
-var jwt = require('jsonwebtoken');
 var favicon = require('serve-favicon');
 var projects = require('./projects');
 
 var app = express();
+app.use(favicon(path.join(__dirname, 'dist/images/favicon.ico')));
 
 /*******************************
    ENVIRONMENT VARIABLES
@@ -32,14 +32,6 @@ app.set('captcha_private_key', process.env.RECAPTCHA_PRIVATE_KEY || '');
 app.set('editor_user', process.env.EDITOR_USER || '');
 app.set('override_upload_dir', false);
 app.set('module_limit', 3);
-
-// legacy environment variables - TO BE DEPRECATED
-app.set('resource_user', process.env.RESOURCE_USER || 'tatool');
-app.set('resource_pw', process.env.RESOURCE_PW || 'secret');
-app.set('remote_url', process.env.REMOTE_URL);
-app.set('remote_upload', process.env.REMOTE_UPLOAD);
-app.set('remote_download', process.env.REMOTE_DOWNLOAD);
-app.set('remote_delete', process.env.REMOTE_DELETE);
 
 /*******************************
   DATABASE CONNECTION
@@ -74,7 +66,6 @@ if (app.get('env') === 'dev') {
 }
 app.use(cors());
 app.use(compress());
-app.use(favicon(__dirname + '/app/images/app/tatool_icon.ico'));
 
 // parse json and urlencoded body
 app.use(bodyParser.json({
@@ -180,11 +171,10 @@ app.post('/user/reset', userCtrl.resetPasswordSend);
 app.get('/user/resetverify/:token', userCtrl.verifyResetToken);
 app.post('/user/reset/:token', userCtrl.updatePassword);
 app.post('/user/captcha', userCtrl.verifyCaptcha);
-//app.post('/user/devaccount', userCtrl.signupDev);
 app.get('/data/user/:token', analyticsCtrl.getUserData);
 
 // open API for public module
-app.get('/public/:moduleId', mainCtrl.getPublic);
+app.get('/public/run/:moduleId', mainCtrl.getPublic);
 app.get('/public/login/:moduleId', mainCtrl.installPublic);
 
 // Tatool Web Client

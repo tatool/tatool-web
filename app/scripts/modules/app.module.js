@@ -18,7 +18,6 @@ import RecursionHelper from '../app/app.edit.recursion.js';
 
 // custom controllers
 import MainCtrl from '../app/app.main.ctrl.js';
-import StartCtrl from '../start.ctrl.js';
 import ModuleCtrl from '../app/app.module.ctrl.js';
 import DeveloperCtrl from '../app/app.developer.ctrl.js';
 import InviteCtrl from '../app/app.invite.ctrl.js';
@@ -41,6 +40,7 @@ import 'ui-select/dist/select.min.css';
 import 'angular-ui-bootstrap/dist/ui-bootstrap-csp.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'font-awesome/css/font-awesome.css';
+import 'spin.js/spin.css';
 
 // custom css
 import '../../styles/fonts/module/leaguegothic-regular-webfont.css';
@@ -65,7 +65,6 @@ tatoolApp.factory('publicService', PublicService);
 tatoolApp.factory('recursionHelper', RecursionHelper);
 
 tatoolApp.controller('MainCtrl', MainCtrl);
-tatoolApp.controller('StartCtrl', StartCtrl);
 tatoolApp.controller('ModuleCtrl', ModuleCtrl);
 tatoolApp.controller('DeveloperCtrl', DeveloperCtrl);
 tatoolApp.controller('InviteCtrl', InviteCtrl);
@@ -179,11 +178,11 @@ tatoolApp.config(['$stateProvider', function ($stateProvider) {
           }]
         }
       }).state('publicRun', {
-        url: '/public/run',
+        url: '/public/module/run',
         template: require('../../views/app/run.html'),
         controller: 'PublicRunCtrl'
       }).state('publicEnd', {
-        url: '/public/end',
+        url: '/public/module/end',
         template: require('../../views/app/public_end.html'),
         controller: 'PublicEndCtrl'
       });

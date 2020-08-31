@@ -35,29 +35,6 @@ function StartCtrl($scope, $http, $location, $anchorScroll, $state, $timeout, pa
         }
       };
 
-      /*
-      $scope.applyDeveloper = function(emailDev) {
-        if (emailDev) {
-          var email = {email: emailDev};
-
-          $http.post('/user/devaccount/', email)
-            .success(function (data) {
-              if (data === 'null') {
-                data = null;
-              }
-              $scope.emailDev = '';
-              $scope.singupComplete = 'Thanks, we\'ll let you know once your developer account is activated.';
-              $scope.stopDevSignup = true;
-            })
-            .error(function (error) {
-              $scope.emailDev = '';
-              $scope.singupComplete = error.message;
-              $scope.stopDevSignup = true;
-            });
-        }
-      };
-      */
-
       $scope.goPage = function(page) {
         $scope.docPage = page;
         $scope.scrollTo('top');

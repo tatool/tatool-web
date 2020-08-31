@@ -77,8 +77,7 @@ function ModuleDataService($log, $q, $http, trialDataService) {
   // get a public module
   data.getPublicModule = function(moduleId) {
     var deferred = $q.defer();
-
-    $http.get('/public/' + moduleId)
+    $http.get('/public/run/' + moduleId)
       .then(function onSuccess(response) {
         if (response.data === 'null') {
           response.data = null;

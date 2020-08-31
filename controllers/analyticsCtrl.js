@@ -3,12 +3,7 @@ var Analytics = require('../models/analytics');
 var DownloadToken = require('../models/download');
 var resourceCtrl = require('../controllers/resourceCtrl');
 var Q = require('q');
-var uuid = require('uuid');
-var fs = require('fs');
-var request = require('request');
-var rmdir = require('rimraf');
-var archiver = require('archiver');
-var glob = require('glob');
+var { v4: uuidv4 } = require('uuid');
 
 exports.initAnalytics = function(module) {
   var deferred = Q.defer();
@@ -305,7 +300,7 @@ exports.getUserDataDownloadToken = function(req, res) {
       res.status(500).send(err);
     } else {
       if (module) {
-        const token = uuid.v4();
+        const token = uuidv4();
 
         const fileToken = new DownloadToken();
         fileToken.token = token;

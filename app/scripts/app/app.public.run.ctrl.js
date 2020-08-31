@@ -12,6 +12,7 @@ function PublicRunCtrl($scope, $window, $state, $sce, $log, spinnerService, auth
     var moduleId = publicService.getModuleId();
     var extid = publicService.getExtId();
     var extCondition = publicService.getExtCondition();
+    $scope.moduleUrl = $sce.trustAsResourceUrl('about:blank');
 
     // module listener
     var moduleListener = function(e) {
@@ -19,12 +20,12 @@ function PublicRunCtrl($scope, $window, $state, $sce, $log, spinnerService, auth
       if (message.type === 'moduleLoaded') {
         stopSpinner();
       } else if (message.type === 'moduleExit') {
-        if (screenfull.enabled) {
+        if (screenfull.isEnabled) {
           screenfull.exit();
         }
         $scope.moduleUrl = $sce.trustAsResourceUrl('about:blank');
         $window.removeEventListener('message', moduleListener, false);
-        if (screenfull.enabled) {
+        if (screenfull.isEnabled) {
           $window.removeEventListener(screenfull.raw.fullscreenchange, fullscreenChange, false);
         }
         
@@ -60,7 +61,7 @@ function PublicRunCtrl($scope, $window, $state, $sce, $log, spinnerService, auth
     $window.addEventListener('message', moduleListener, false);
 
     // fullscreen change detection
-    if (screenfull.enabled) {
+    if (screenfull.isEnabled) {
       $window.addEventListener(screenfull.raw.fullscreenchange, fullscreenChange, false);
     }
 
@@ -91,7 +92,7 @@ function PublicRunCtrl($scope, $window, $state, $sce, $log, spinnerService, auth
       // open moduleUrl in Iframe
       if (moduleId) {
         startSpinner('Loading module...');
-        $scope.moduleUrl = $sce.trustAsResourceUrl('../../moduleIndex.html#module');
+        $scope.moduleUrl = $sce.trustAsResourceUrl('../../moduleIndex.html#!module');
       } else {
         authService.logout();
         $state.go('publicEnd');

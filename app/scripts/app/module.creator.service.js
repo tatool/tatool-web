@@ -1,6 +1,6 @@
 'use strict';
 
-import uuidv4  from 'uuid/v4';
+import { v4 as uuidv4 } from 'uuid';
 
 import Module from '../common/module.pojo.js';
 
