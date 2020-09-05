@@ -6,11 +6,12 @@ function MainCtrl($rootScope, $scope, $log, $timeout, $state, $window, moduleSer
 
     $scope.alert = { type: 'danger', msg: '', visible: false };
 
-    var allowEscapeKey = false;
+    let allowEscapeKey = false;
+    $scope.moduleStyle = {'background-color' : '#fff'};
 
     // get the moduleId from sessionStorage and remove afterwards to prevent the module from re-running after refresh
-    var moduleId = $window.sessionStorage.getItem('moduleId');
-    var mode = $window.sessionStorage.getItem('mode');
+    let moduleId = $window.sessionStorage.getItem('moduleId');
+    let mode = $window.sessionStorage.getItem('mode');
     $window.sessionStorage.removeItem('moduleId');
 
     $log.debug('Running module (' + mode +'): ' + moduleId);
@@ -28,7 +29,7 @@ function MainCtrl($rootScope, $scope, $log, $timeout, $state, $window, moduleSer
           executorService.stopModule(true);
         }
       } else {
-        var timing = executableUtils.getTiming();
+        let timing = executableUtils.getTiming();
         // workaround fix for mozilla as event timestamp shows time in ms since last reboot instead of time since epoch
         if ($event.timeStamp < cfgModule.MIN_EPOCH_MS) {
           $event.timeStamp = new Date().getTime();
@@ -39,8 +40,8 @@ function MainCtrl($rootScope, $scope, $log, $timeout, $state, $window, moduleSer
     };
 
     // Stop execution of module on fullscreen exit
-    var appListener = function(e) {
-      var message = e.data;
+    let appListener = function(e) {
+      let message = e.data;
       if (message.type === 'fullscreenExit') {
         if (allowEscapeKey) {
           if (executorService.exec) {
@@ -89,6 +90,7 @@ function MainCtrl($rootScope, $scope, $log, $timeout, $state, $window, moduleSer
       function onModuleSuccess(data) {
         $log.debug('Main: Start module...');
         allowEscapeKey = data.moduleDefinition.allowEscapeKey ? data.moduleDefinition.allowEscapeKey : false;
+        $scope.moduleStyle['background-color'] = data.moduleBackground ? data.moduleBackground : $scope.moduleStyle['background-color'];
 
         executorService.startModule();
       }

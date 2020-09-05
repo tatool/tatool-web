@@ -15,6 +15,7 @@ var Module = function(moduleId) {
   this.moduleType = '';
   this.exportDelimiter = '';
   this.moduleMaxSessions = '';
+  this.moduleBackground = '';
 };
 
 // get the module name
@@ -68,6 +69,11 @@ Module.prototype.getModuleMaxSessions = function() {
   return this.maxSessions;
 };
 
+Module.prototype.getModuleBackground = function() {
+  return this.moduleBackground;
+};
+
+
 // sets the module name
 Module.prototype.setModuleName = function(moduleName) {
   this.moduleName = moduleName;
@@ -117,6 +123,10 @@ Module.prototype.setExportFormat = function(exportFormat) {
 
 Module.prototype.setModuleMaxSessions = function(maxSessions) {
   this.moduleMaxSessions = maxSessions;
+};
+
+Module.prototype.setModuleBackground = function(moduleBackground) {
+  this.moduleBackground = moduleBackground;
 };
 
 // add a session to this module

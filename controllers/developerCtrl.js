@@ -83,6 +83,7 @@ var update = function(req, res, module) {
       module.moduleIcon = req.body.moduleIcon;
       module.moduleDescription = req.body.moduleDescription;
       module.moduleMaxSessions = req.body.moduleMaxSessions;
+      module.moduleBackground = req.body.moduleBackground;
       module.exportDelimiter = req.body.exportDelimiter;
       module.exportFormat = req.body.exportFormat;
       module.markModified('moduleDefinition');

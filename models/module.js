@@ -42,6 +42,10 @@ var Module = new Schema({
       type: Number,
       required: false
     },
+    moduleBackground: { // module background
+      type: String,
+      required: false
+    },
     exportDelimiter: { // export delimiter for module
       type: String,
       required: false

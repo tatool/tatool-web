@@ -41,6 +41,7 @@ import 'angular-ui-bootstrap/dist/ui-bootstrap-csp.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'font-awesome/css/font-awesome.css';
 import 'spin.js/spin.css';
+import 'angular-bootstrap-colorpicker/css/colorpicker.css';
 
 // custom css
 import '../../styles/fonts/module/leaguegothic-regular-webfont.css';
@@ -50,7 +51,7 @@ import '../../styles/tatool_app.css';
 import '../../styles/tatool_auth.css';
 import '../../styles/fonts/app/open-sans-v15-latin-regular.css';
 
-var tatoolApp = angular.module('tatool.app', [tatool, tatoolAuth, tatoolCommon, ngSanitize, uiselect])
+var tatoolApp = angular.module('tatool.app', [tatool, tatoolAuth, tatoolCommon, ngSanitize, uiselect, 'colorpicker.module'])
   .constant('cfgApp', {
     IMG_PATH: 'images/app/',
     MODULE_IMG_PATH: 'images/module/',

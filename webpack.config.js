@@ -13,6 +13,7 @@ module.exports = {
             'angular-ui-bootstrap',
             'angular-ui-router',
             'angular-recaptcha',
+            'angular-bootstrap-colorpicker',
             'jquery',
             'async',
             'bootstrap'

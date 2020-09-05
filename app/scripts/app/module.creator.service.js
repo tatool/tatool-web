@@ -80,6 +80,7 @@ function ModuleCreatorService($log, $q, moduleDataService) {
             newModule.setExportDelimiter(moduleDefinition.exportDelimiter);
             newModule.setExportFormat(moduleDefinition.exportFormat);
             newModule.setModuleMaxSessions(moduleDefinition.moduleMaxSessions);
+            newModule.setModuleBackground(moduleDefinition.moduleBackground);
             newModule.setModuleVersion(1);
 
             // store module
