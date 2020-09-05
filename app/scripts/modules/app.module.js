@@ -44,9 +44,9 @@ import 'spin.js/spin.css';
 import 'angular-bootstrap-colorpicker/css/colorpicker.css';
 
 // custom css
+import '../../styles/reset.css';
 import '../../styles/fonts/module/leaguegothic-regular-webfont.css';
 import '../../styles/fonts/module/tatool-icons.css';
-import '../../styles/reset.css';
 import '../../styles/tatool_app.css';
 import '../../styles/tatool_auth.css';
 import '../../styles/fonts/app/open-sans-v15-latin-regular.css';
