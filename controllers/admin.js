@@ -169,28 +169,28 @@ exports.removeUser = function(req, res) {
       res.status(500).send(err);
     } else {
       if (user) {
-        User.remove({
+        User.deleteMany({
           _id: req.params.user
         }, function(err, delUser) {
           if (err) {
             res.status(500).send(err);
           } else {
 
-            UserModule.remove({
+            UserModule.deleteMany({
               email: user.email
             }, function(err, module) {
               if (err) {
                 res.status(500).send(err);
               } else {
 
-                DeveloperModule.remove({
+                DeveloperModule.deleteMany({
                   email: user.email
                 }, function(err, module) {
                   if (err) {
                     res.status(500).send(err);
                   } else {
 
-                    RepositoryModule.remove({
+                    RepositoryModule.deleteMany({
                       email: user.email
                     }, function(err, module) {
                       if (err) {
@@ -383,7 +383,7 @@ exports.deleteProject = function(req, res) {
             removeLocalProject(req, res, project);
             break;
           case 'gcs':
-            Project.remove({
+            Project.deleteMany({
               _id: project._id
             }, function(err, project) {
               if (err) {
@@ -417,7 +417,7 @@ function removeLocalProject(req, res, project) {
     projectPath = projectsPath + project.access + '/' + project.name;
   }
 
-  Project.remove({
+  Project.deleteMany({
     _id: project._id
   }, function(err, project) {
     if (err) {

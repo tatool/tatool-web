@@ -146,7 +146,7 @@ exports.get = function(req, res) {
 };
 
 exports.remove = function(req, res) {
-  Module.remove({
+  Module.deleteMany({
     email: req.user.email,
     moduleId: req.params.moduleId
   }, function(err, module) {

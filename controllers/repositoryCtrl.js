@@ -119,7 +119,7 @@ exports.get = function(req, res) {
 
 // remove module from repository
 exports.remove = function(moduleId, res) {
-  Module.remove({ moduleId: moduleId }, function(err, entry) {
+  Module.deleteMany({ moduleId: moduleId }, function(err, entry) {
     if (err) {
       res.status(500).send(err);
     } else {

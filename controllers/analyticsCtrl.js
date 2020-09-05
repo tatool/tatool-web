@@ -233,7 +233,7 @@ exports.get = function(req, res) {
 };
 
 exports.remove = function(req, res) {
-  Analytics.remove({
+  Analytics.deleteMany({
     created_by: req.user.email,
     moduleId: req.params.moduleId
   }, function(err, entry) {

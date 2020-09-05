@@ -28,8 +28,8 @@ tatool.factory('trialDataService', TrialDataService);
 tatool.factory('moduleDataService', ModuleDataService);
 tatool.controller('StartCtrl', StartCtrl);
 
-tatool.config(['$stateProvider', '$urlRouterProvider', '$provide', '$controllerProvider', '$logProvider',
-    function ($stateProvider, $urlRouterProvider, $provide, $controllerProvider, $logProvider) {
+tatool.config(['$stateProvider', '$urlRouterProvider', '$provide', '$controllerProvider', '$logProvider', '$locationProvider',
+    function ($stateProvider, $urlRouterProvider, $provide, $controllerProvider, $logProvider, $locationProvider) {
 
     //userDataServiceProvider.setProvider(cfg.MODE);
 
@@ -41,6 +41,8 @@ tatool.config(['$stateProvider', '$urlRouterProvider', '$provide', '$controllerP
 
     // making sure we always point to root in case of unknown url
     $urlRouterProvider.otherwise('/');
+
+    //$locationProvider.html5Mode(true);
 
     $stateProvider
       .state('start', {

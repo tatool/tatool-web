@@ -61,7 +61,7 @@ exports.register = function(req, res) {
               sendVerificationEmail(message, function(error, success) {
                 if (error) {
                   console.error('Unable to send email: ' + error.message);
-                  user.remove();
+                  user.deleteMany();
                   res.status(500).json({
                     message: 'Unable to send verification email. Please try again later.'
                   });
