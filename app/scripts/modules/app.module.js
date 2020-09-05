@@ -4,6 +4,7 @@
 import angular from 'angular';
 import ngSanitize from 'angular-sanitize';
 import uiselect from 'ui-select';
+import ngBootstrapColorpicker from 'angular-bootstrap-colorpicker';
 
 // custom modules
 import tatool from './app.js';
