@@ -29,52 +29,52 @@ tatool.factory('moduleDataService', ModuleDataService);
 tatool.controller('StartCtrl', StartCtrl);
 
 tatool.config(['$stateProvider', '$urlRouterProvider', '$provide', '$controllerProvider', '$logProvider', '$locationProvider',
-    function ($stateProvider, $urlRouterProvider, $provide, $controllerProvider, $logProvider, $locationProvider) {
+    function($stateProvider, $urlRouterProvider, $provide, $controllerProvider, $logProvider, $locationProvider) {
 
-    //userDataServiceProvider.setProvider(cfg.MODE);
+      $logProvider.debugEnabled(true);
 
-    $logProvider.debugEnabled(true);
+      tatool.controller = $controllerProvider.register;
+      tatool.factory = $provide.factory;
+      tatool.service = $provide.service;
 
-    tatool.controller = $controllerProvider.register;
-    tatool.factory = $provide.factory;
-    tatool.service = $provide.service;
+      // making sure we always point to root in case of unknown url
+      $urlRouterProvider.otherwise('/');
 
-    // making sure we always point to root in case of unknown url
-    $urlRouterProvider.otherwise('/');
+      // currently not working due to modules being loaded in iframe (start state)
+      //$locationProvider.html5Mode(true);
 
-    //$locationProvider.html5Mode(true);
+      $stateProvider
+        .state('start', {
+          url: '/',
+          template: require('../../views/start.html'),
+          controller: 'StartCtrl',
+          resolve: {
+            page: [function() {
+              return '';
+            }]
+          }
+        }).state('doc', {
+          url: '/doc/:page',
+          template: require('../../views/documentation.html'),
+          controller: 'StartCtrl',
+          resolve: {
+            page: ['$state', '$stateParams', function($state, $stateParams) {
+              if (!$stateParams.page) {
+                return 'start';
+              } else {
+                return $stateParams.page;
+              }
+            }]
+          }
+        });
 
-    $stateProvider
-      .state('start', {
-        url: '/',
-        template: require('../../views/start.html'),
-        controller: 'StartCtrl',
-        resolve: {
-          page: [function() {
-            return '';
-          }]
-        }
-      }).state('doc', {
-        url: '/doc/:page',
-        template: require('../../views/documentation.html'),
-        controller: 'StartCtrl',
-        resolve: {
-          page: ['$state', '$stateParams', function($state, $stateParams) {
-            if (!$stateParams.page) {
-              return 'start';
-            } else {
-              return $stateParams.page;
-            }
-          }]
-        }
-      });
-
-  }])
+    }
+  ])
   .directive('autoFocus', ['$timeout', function($timeout) {
     return {
       restrict: 'AC',
       link: function(scope, element) {
-        $timeout(function(){
+        $timeout(function() {
           element.focus();
         }, 10);
       }
