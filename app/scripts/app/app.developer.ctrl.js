@@ -228,14 +228,51 @@ function DeveloperCtrl($scope, $q, $timeout, $window, $rootScope, $location, $st
       });
     };
 
+    function fallbackCopyTextToClipboard(text) {
+      var textArea = document.createElement("textarea");
+      textArea.value = text;
+      
+      // Avoid scrolling to bottom
+      textArea.style.top = "0";
+      textArea.style.left = "0";
+      textArea.style.position = "fixed";
+
+      document.body.appendChild(textArea);
+      textArea.focus();
+      textArea.select();
+
+      try {
+        var successful = document.execCommand('copy');
+        var msg = successful ? 'successful' : 'unsuccessful';
+        console.log('Fallback: Copying text command was ' + msg);
+      } catch (err) {
+        console.error('Fallback: Oops, unable to copy', err);
+      }
+
+      document.body.removeChild(textArea);
+    }
+
+    function copyTextToClipboard(text) {
+      if (!navigator.clipboard) {
+        fallbackCopyTextToClipboard(text);
+        return;
+      }
+      navigator.clipboard.writeText(text).then(function() {
+        console.log('Async: Copying to clipboard was successful!');
+      }, function(err) {
+        console.error('Async: Could not copy text: ', err);
+      });
+    }
+
     $scope.showPublicUrl = function(moduleId) {
       var url = 'http://' + window.location.host + '/#!/public/' + moduleId;
       var msg = 'The module can be accessed with the following URL:<br><br><span class="publicUrl">';
       msg += url;
-      msg += '</span><br><br>By providing the query parameter <b>extid</b>, you can pass in an external id to identify the requestor.';
-      msg += 'The external id will be visible in the Analytics tab.<br><br><span class="publicUrl">';
-      msg += url;
-      msg += '?extid=[xyz]</span>';
+      msg += '</span><br><br>By providing the query parameter <b>extid</b>, you can pass in an external id to identify the participant.';
+      msg += 'The external id will be visible in the Analytics tab.<br><br>';
+      msg += 'By providing the query parameter <b>c</b> with a value, you can pass in a <a href="http://localhost:8080/#!/doc/ref-elements.html" target="_blank">condition</a>.';
+      msg += 'This will enable the conditional execution of Executables.<br><br>';
+      msg += 'By providing the empty query parameter <b>forceupload</b>, you can provide the participant with an upload button for any incomplete sessions.';
       bootbox.dialog({
           message: msg,
           title: '<b>Tatool</b>',
@@ -243,6 +280,11 @@ function DeveloperCtrl($scope, $q, $timeout, $window, $rootScope, $location, $st
             ok: {
               label: 'OK',
               className: 'btn-default'
+            },
+            copy: {
+              label: 'Copy URL',
+              className: 'btn-default',
+              callback: copyTextToClipboard(url)
             }
           }
         });
