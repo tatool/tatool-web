@@ -94,6 +94,7 @@ function MainCtrl($rootScope, $scope, $log, $timeout, $state, $window, moduleSer
     if (executorService.exec) {
       executorService.finishExecutable();
     }
+    moduleService.setSessionForceExit();
     executorService.stopModule(true);
   }
 

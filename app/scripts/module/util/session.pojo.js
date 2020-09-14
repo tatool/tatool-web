@@ -9,6 +9,7 @@ var Session = function(sessionId, sessionStartTime) {
   this.sessionCondition = '';
   this.sessionComplete = false;
   this.maxTrialId = 0;
+  this.sessionForceExit = false;
   this.sessionProperties = {};
 };
 
@@ -42,6 +43,11 @@ Session.prototype.setSessionComplete  = function() {
   this.sessionComplete = true;
 };
 
+// mark the session as having had a forced exit (Escape Key)
+Session.prototype.setSessionForceExit  = function() {
+  this.sessionForceExit = true;
+};
+
 // set a session property (element, key and value)
 Session.prototype.setProperty = function(name, propertyKey, propertyValue) {
   if (this.sessionProperties[name] === undefined) {
@@ -72,5 +78,10 @@ Session.prototype.getMaxTrialId = function() {
 Session.prototype.getProperties = function() {
   return this.sessionProperties;
 };
+
+Session.prototype.getSessionForceExit = function() {
+  return this.sessionForceExit;
+};
+
 
 export default Session;
