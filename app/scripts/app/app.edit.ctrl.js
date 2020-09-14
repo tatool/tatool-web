@@ -779,6 +779,22 @@ function EditCtrl($scope, $q, $uibModalInstance, $sce, $compile, $uibModal, $log
         }
       }
 
+      $scope.getExecutableNames = function(value) {
+        let executableNames = [];
+        parseExecutableNames(module.moduleDefinition.moduleHierarchy, executableNames);
+        return [...new Set(executableNames)];
+      };
+
+      function parseExecutableNames(element, names) {
+        if (element.tatoolType === 'List' || element.tatoolType === 'Dual') {
+          angular.forEach(element.children, function(value) {
+            parseExecutableNames(value, names);
+          });
+        } else if (element.tatoolType === 'Executable') {
+          names.push(element.name);
+        }
+      }
+
       $scope.cancel = function () {
         function dismiss() {
           $uibModalInstance.dismiss('cancel');
