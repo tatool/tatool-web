@@ -31,7 +31,7 @@ app.set('private_path', process.env.PRIVATE_PATH || __dirname + '/app/projects/'
 app.set('captcha_private_key', process.env.RECAPTCHA_PRIVATE_KEY || '');
 app.set('editor_user', process.env.EDITOR_USER || '');
 app.set('override_upload_dir', false);
-app.set('module_limit', 3);
+app.set('module_limit', 5);
 
 /*******************************
   DATABASE CONNECTION
