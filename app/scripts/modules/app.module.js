@@ -30,6 +30,7 @@ import RunCtrl from '../app/app.run.ctrl.js';
 import PublicStartCtrl from '../app/app.public.start.ctrl.js';
 import PublicRunCtrl from '../app/app.public.run.ctrl.js';
 import PublicEndCtrl from '../app/app.public.end.ctrl.js';
+import PublicUploadCtrl from '../app/app.public.upload.ctrl.js';
 
 // custom directives
 import { CustomOnChange, Tree, ChecklistModel } from '../app/app.directive.js';
@@ -77,6 +78,7 @@ tatoolApp.controller('RunCtrl', RunCtrl);
 tatoolApp.controller('PublicStartCtrl', PublicStartCtrl);
 tatoolApp.controller('PublicRunCtrl', PublicRunCtrl);
 tatoolApp.controller('PublicEndCtrl', PublicEndCtrl);
+tatoolApp.controller('PublicUploadCtrl', PublicUploadCtrl);
 
 tatoolApp.directive('customOnChange', CustomOnChange);
 tatoolApp.directive('tree', Tree);
@@ -152,7 +154,7 @@ tatoolApp.config(['$stateProvider', function ($stateProvider) {
           }]
         }
       }).state('public', {
-        url: '/public/:moduleId?extid&c',
+        url: '/public/:moduleId?extid&c&forceupload',
         template: require('../../views/app/public_start.html'),
         controller: 'PublicStartCtrl',
         resolve: {
@@ -176,8 +178,19 @@ tatoolApp.config(['$stateProvider', function ($stateProvider) {
             } else {
               return $stateParams.moduleId;
             }
+          }],
+          forceupload: ['$state', '$stateParams', function($state, $stateParams) {
+            if (!$stateParams.forceupload) {
+              return '';
+            } else {
+              return $stateParams.forceupload;
+            }
           }]
         }
+      }).state('publicUpload', {
+        url: '/public/module/upload',
+        template: require('../../views/app/public_upload.html'),
+        controller: 'PublicUploadCtrl'
       }).state('publicRun', {
         url: '/public/run',
         template: require('../../views/app/run.html'),

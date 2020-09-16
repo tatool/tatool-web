@@ -4,11 +4,12 @@
 
 import screenfull from 'screenfull';
 
-PublicStartCtrl.$inject = ['$scope', '$window', '$state', 'publicService', 'moduleId', 'extid', 'condition', 'moduleDataService'];
+PublicStartCtrl.$inject = ['$scope', '$window', '$state', 'publicService', 'moduleId', 'extid', 'condition', 'forceupload', 'moduleDataService'];
 
-function PublicStartCtrl($scope, $window, $state, publicService, moduleId, extid, condition, moduleDataService) {
+function PublicStartCtrl($scope, $window, $state, publicService, moduleId, extid, condition, forceupload, moduleDataService) {
 
     $scope.validModule = false;
+    $scope.forceupload = forceupload;
     publicService.setExtId(extid);
     publicService.setExtCondition(condition);
 
@@ -31,6 +32,11 @@ function PublicStartCtrl($scope, $window, $state, publicService, moduleId, extid
         screenfull.request();
       }
       $state.go('publicRun');
+    };
+
+    // helper method to allow manual upload of missing data
+    $scope.uploadModuleData = function() {
+      $state.go('publicUpload');
     };
 }
 
