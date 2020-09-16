@@ -3,7 +3,6 @@
 /* global screenfull */
 
 import screenfull from 'screenfull';
-import async from 'async';
 
 PublicStartCtrl.$inject = ['$scope', '$window', '$state', 'publicService', 'moduleId', 'extid', 'condition', 'forceupload', 'moduleDataService'];
 
