@@ -673,6 +673,7 @@ function EditCtrl($scope, $q, $uibModalInstance, $sce, $compile, $uibModal, $log
         module.moduleDefinition.exportDelimiter = module.exportDelimiter;
         module.moduleDefinition.exportFormat = module.exportFormat;
         module.moduleDefinition.moduleMaxSessions = module.moduleMaxSessions;
+        module.moduleDefinition.moduleForwardUrl = module.moduleForwardUrl;
 
         // prepare export
         var exportModule = JSON.stringify(module.moduleDefinition);
@@ -711,6 +712,7 @@ function EditCtrl($scope, $q, $uibModalInstance, $sce, $compile, $uibModal, $log
           module.moduleDefinition.exportDelimiter = module.exportDelimiter;
           module.moduleDefinition.exportFormat = module.exportFormat;
           module.moduleDefinition.moduleMaxSessions = module.moduleMaxSessions;
+          module.moduleDefinition.moduleForwardUrl = module.moduleForwardUrl;
           $uibModalInstance.close();
         }
       };

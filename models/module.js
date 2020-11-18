@@ -42,6 +42,10 @@ var Module = new Schema({
       type: Number,
       required: false
     },
+    moduleForwardUrl: { // module forwarding URL
+      type: String,
+      required: false
+    },
     exportDelimiter: { // export delimiter for module
       type: String,
       required: false

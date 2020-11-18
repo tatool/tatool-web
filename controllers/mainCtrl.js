@@ -112,6 +112,7 @@ var update = function(req, res, userModule) {
         userModule.moduleIcon = module.moduleIcon;
         userModule.moduleDescription = module.moduleDescription;
         userModule.moduleMaxSessions = module.moduleMaxSessions;
+        userModule.moduleForwardUrl = module.moduleForwardUrl;
         userModule.exportDelimiter = module.exportDelimiter;
         userModule.markModified('moduleDefinition');
 

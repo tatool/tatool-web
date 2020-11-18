@@ -106,7 +106,11 @@ function PublicRunCtrl($scope, $window, $state, $sce, $log, spinnerService, auth
       }, function() {
         stopSpinner();
         authService.logout();
-        $state.go('publicEnd');
+        if (!module.moduleDefinition.moduleForwardUrl || 0 === module.moduleDefinition.moduleForwardUrl.length) {
+          $state.go('publicEnd');
+        } else {
+          window.location.href = module.moduleDefinition.moduleForwardUrl;
+        }
       });
     }
 
@@ -118,7 +122,11 @@ function PublicRunCtrl($scope, $window, $state, $sce, $log, spinnerService, auth
         }
         stopSpinner();
         authService.logout();
-        $state.go('publicEnd');
+        if (!module.moduleDefinition.moduleForwardUrl || 0 === module.moduleDefinition.moduleForwardUrl.length) {
+          $state.go('publicEnd');
+        } else {
+          window.location.href = module.moduleDefinition.moduleForwardUrl;
+        }
       });
     }
 
