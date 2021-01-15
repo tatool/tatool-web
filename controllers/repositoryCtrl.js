@@ -58,6 +58,7 @@ var update = function(entry, module, res) {
   entry.moduleDescription = module.moduleDescription;
   entry.moduleMaxSessions = module.moduleMaxSessions;
   entry.moduleBackground = module.moduleBackground;
+  entry.moduleForwardUrl = module.moduleForwardUrl;
   entry.exportDelimiter = module.exportDelimiter;
   entry.markModified('moduleDefinition');
 

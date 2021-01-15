@@ -81,6 +81,7 @@ function ModuleCreatorService($log, $q, moduleDataService) {
             newModule.setExportFormat(moduleDefinition.exportFormat);
             newModule.setModuleMaxSessions(moduleDefinition.moduleMaxSessions);
             newModule.setModuleBackground(moduleDefinition.moduleBackground);
+            newModule.setModuleForwardUrl(moduleDefinition.moduleForwardUrl);
             newModule.setModuleVersion(1);
 
             // store module

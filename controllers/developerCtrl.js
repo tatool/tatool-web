@@ -84,6 +84,7 @@ var update = function(req, res, module) {
       module.moduleDescription = req.body.moduleDescription;
       module.moduleMaxSessions = req.body.moduleMaxSessions;
       module.moduleBackground = req.body.moduleBackground;
+      module.moduleForwardUrl = req.body.moduleForwardUrl;
       module.exportDelimiter = req.body.exportDelimiter;
       module.exportFormat = req.body.exportFormat;
       module.markModified('moduleDefinition');
