@@ -269,7 +269,7 @@ function DeveloperCtrl($scope, $q, $timeout, $window, $rootScope, $location, $st
     }
 
     $scope.showPublicUrl = function(moduleId) {
-      var url = 'http://' + window.location.host + '/#!/public/' + moduleId;
+      var url = 'https://' + window.location.host + '/#!/public/' + moduleId;
       var msg = 'The module can be accessed with the following URL:<br><br><span class="publicUrl">';
       msg += url;
       msg += '</span><br><br>By providing the query parameter <b>extid</b>, you can pass in an external id to identify the participant.';
