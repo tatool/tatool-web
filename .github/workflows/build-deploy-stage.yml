@@ -11,7 +11,7 @@ jobs:
       - name: Checkout Repo
         uses: actions/checkout@v2
         with:
-          ref: develop
+          ref: master
       - name: Install Dependencies
         run: npm install && npm run build
   deploy:
@@ -22,7 +22,7 @@ jobs:
       - name: Checkout Repo
         uses: actions/checkout@v2
         with:
-          ref: develop
+          ref: master
       - name: Initialize Google Cloud SDK
         uses: zxyle/publish-gae-action@master
         with:
