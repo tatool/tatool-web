@@ -274,7 +274,7 @@ function DeveloperCtrl($scope, $q, $timeout, $window, $rootScope, $location, $st
       msg += url;
       msg += '</span><br><br>By providing the query parameter <b>extid</b>, you can pass in an external id to identify the participant.';
       msg += 'The external id will be visible in the Analytics tab.<br><br>';
-      msg += 'By providing the query parameter <b>c</b> with a value, you can pass in a <a href="http://localhost:8080/#!/doc/ref-elements.html" target="_blank">condition</a>.';
+      msg += 'By providing the query parameter <b>c</b> with a value, you can pass in a condition.';
       msg += 'This will enable the conditional execution of Executables.<br><br>';
       msg += 'By providing the empty query parameter <b>forceupload</b>, you can provide the participant with an upload button for any incomplete sessions.';
       bootbox.dialog({

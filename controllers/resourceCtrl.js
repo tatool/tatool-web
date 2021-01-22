@@ -60,14 +60,15 @@ exports.getResource = function(req, res) {
 
 	var moduleModel = req.path.startsWith('/developer') ? DevModule : Module;
 
-	moduleModel.find({
+	moduleModel.findOne({
+		email: req.user.email,
 		sessionToken: req.query.token
 	}, {}, {
 		limit: 1
-	}, function(err, modules) {
+	}, function(err, module) {
 		if (err) {
 			res.status(500).send(err);
-		} else if (modules.length === 1) {
+		} else if (module) {
 
 			switch (projectsPathType) {
 				case 'local':
