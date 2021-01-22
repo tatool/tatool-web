@@ -24,7 +24,9 @@ function HandlerService($log, $rootScope, $injector, contextService, tatoolPhase
 
     // register a handler
     handlerService.registerHandler = function(name, handler) {
-      handlers[name] = handler;
+      if (!(name in handlers)) {
+        handlers[name] = handler;
+      }
     };
 
     // get a specific handler
@@ -48,7 +50,7 @@ function HandlerService($log, $rootScope, $injector, contextService, tatoolPhase
         if ('handlers' in currentElement) {
           for (var j = 0; j < currentElement.handlers.length; j++) {
             if ('processPhase' in currentElement.handlers[j]) {
-              currentElement.handlers[j].processPhase(phase);
+              this.getHandler(currentElement.handlers[j].name).processPhase(phase);
             }
           }
         }

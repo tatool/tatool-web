@@ -33,6 +33,13 @@ function DeveloperCtrl($scope, $q, $timeout, $window, $rootScope, $location, $st
       $scope.alert.msg = '';
     };
 
+    let upgradeMsg = '<b>Tatool Maintenance Warning</b>';
+    upgradeMsg += '<br><br>Tatool Web will be unavailable on the 22nd January starting 8am UTC for approximately 5 hours in order to allow us to upgrade and move servers.';
+    upgradeMsg += '<br><br>Make sure to download your already collected Analytics data before this day.';
+    upgradeMsg += '<br><br>Please be aware that the current Public Module URLs will no longer work and you will have to provide a new URL to your users.';
+    upgradeMsg += '<br><br>The new Public Module URL will contain a ! after the hashbang: http://tatool-web.com/#<b>!</b>/public/...';
+    setAlert('danger', upgradeMsg);
+
     function startSpinner(text) {
       spinnerService.spin('loadingSpinner', text);
     }
