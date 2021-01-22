@@ -1,5 +1,5 @@
 
-name: Build & Deploy Stage
+name: Build & Deploy Prod
 
 on: [workflow_dispatch]
 
@@ -11,7 +11,7 @@ jobs:
       - name: Checkout Repo
         uses: actions/checkout@v2
         with:
-          ref: develop
+          ref: master
       - name: Install Dependencies
         run: npm install && npm run build
   deploy:
@@ -22,17 +22,17 @@ jobs:
       - name: Checkout Repo
         uses: actions/checkout@v2
         with:
-          ref: develop
+          ref: master
       - name: Initialize Google Cloud SDK
         uses: zxyle/publish-gae-action@master
         with:
-          service_account_email: ${{ secrets.GCP_SA_EMAIL_STAGE }}
-          service_account_key: ${{ secrets.GCP_SA_KEY_STAGE }}
-          project_id: ${{ secrets.GCP_PROJECT_ID_STAGE }}
-          gae_variables: ${{ secrets.GAE_VARIABLES_STAGE }}
+          service_account_email: ${{ secrets.GCP_SA_EMAIL }}
+          service_account_key: ${{ secrets.GCP_SA_KEY }}
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
+          gae_variables: ${{ secrets.GAE_VARIABLES }}
       - name: Publish app to Google App Engine
         run: |
           # This client-secret.json is converted by GCP_SA_KEY.
-          gcloud auth activate-service-account ${{ secrets.GCP_SA_EMAIL_STAGE }} --key-file=client-secret.json
-          gcloud config set project ${{ secrets.GCP_PROJECT_ID_STAGE }}
-          gcloud -q app deploy --appyaml app-stage.yaml --promote --version staging
+          gcloud auth activate-service-account ${{ secrets.GCP_SA_EMAIL }} --key-file=client-secret.json
+          gcloud config set project ${{ secrets.GCP_PROJECT_ID }}
+          gcloud -q app deploy --appyaml app.yaml --promote --version v1
