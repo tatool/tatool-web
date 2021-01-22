@@ -3,9 +3,10 @@
 <!-- HEADER --> 
 <div ng-include src="'header.html'"></div>
 
-<div id="login" class="container">
+<div id="login" class="container"> 
+  Currently disabled
 
-	<form ng-submit="login(credentials)" novalidate>
+<!--	<form ng-submit="login(credentials)" novalidate>
       <input id="email" class="login_input" type="email" placeholder="Email" ng-model="credentials.userName" ng-focus="true" auto-focus required />
 	    <br>
 	    <input id="password" class="login_input" type="password" placeholder="Password" ng-model="credentials.userPassword" autocomplete="off" required />
@@ -15,7 +16,7 @@
 
 	<br><span ng-if="getMode()!=='lab'"><a ui-sref="register">Register</a> | <a ui-sref="reset" ui-sref-opts="{location: false}">Forgot password</a></span>
   <br><br>
-
+--> 
   <div id="messagebox">
     <div ng-class="{danger:'alert alert-danger', success:'alert alert-success', info:'alert alert-info'}[alert.type]" role="alert" ng-show="alert.visible"><div ng-bind-html="alert.msg"></div></div>
   </div>
