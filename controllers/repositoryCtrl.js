@@ -57,6 +57,7 @@ var update = function(entry, module, res) {
   entry.moduleIcon = module.moduleIcon;
   entry.moduleDescription = module.moduleDescription;
   entry.moduleMaxSessions = module.moduleMaxSessions;
+  entry.moduleBackground = module.moduleBackground;
   entry.moduleForwardUrl = module.moduleForwardUrl;
   entry.exportDelimiter = module.exportDelimiter;
   entry.markModified('moduleDefinition');
@@ -120,7 +121,7 @@ exports.get = function(req, res) {
 
 // remove module from repository
 exports.remove = function(moduleId, res) {
-  Module.remove({ moduleId: moduleId }, function(err, entry) {
+  Module.deleteMany({ moduleId: moduleId }, function(err, entry) {
     if (err) {
       res.status(500).send(err);
     } else {

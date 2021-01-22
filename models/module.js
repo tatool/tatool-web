@@ -42,6 +42,10 @@ var Module = new Schema({
       type: Number,
       required: false
     },
+    moduleBackground: { // module background
+      type: String,
+      required: false
+    },
     moduleForwardUrl: { // module forwarding URL
       type: String,
       required: false

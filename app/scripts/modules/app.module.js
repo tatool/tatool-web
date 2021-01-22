@@ -4,6 +4,7 @@
 import angular from 'angular';
 import ngSanitize from 'angular-sanitize';
 import uiselect from 'ui-select';
+import ngBootstrapColorpicker from 'angular-bootstrap-colorpicker';
 
 // custom modules
 import tatool from './app.js';
@@ -18,7 +19,6 @@ import RecursionHelper from '../app/app.edit.recursion.js';
 
 // custom controllers
 import MainCtrl from '../app/app.main.ctrl.js';
-import StartCtrl from '../start.ctrl.js';
 import ModuleCtrl from '../app/app.module.ctrl.js';
 import DeveloperCtrl from '../app/app.developer.ctrl.js';
 import InviteCtrl from '../app/app.invite.ctrl.js';
@@ -42,16 +42,18 @@ import 'ui-select/dist/select.min.css';
 import 'angular-ui-bootstrap/dist/ui-bootstrap-csp.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'font-awesome/css/font-awesome.css';
+import 'spin.js/spin.css';
+import 'angular-bootstrap-colorpicker/css/colorpicker.css';
 
 // custom css
+import '../../styles/reset.css';
 import '../../styles/fonts/module/leaguegothic-regular-webfont.css';
 import '../../styles/fonts/module/tatool-icons.css';
-import '../../styles/reset.css';
 import '../../styles/tatool_app.css';
 import '../../styles/tatool_auth.css';
 import '../../styles/fonts/app/open-sans-v15-latin-regular.css';
 
-var tatoolApp = angular.module('tatool.app', [tatool, tatoolAuth, tatoolCommon, ngSanitize, uiselect])
+var tatoolApp = angular.module('tatool.app', [tatool, tatoolAuth, tatoolCommon, ngSanitize, uiselect, 'colorpicker.module'])
   .constant('cfgApp', {
     IMG_PATH: 'images/app/',
     MODULE_IMG_PATH: 'images/module/',
@@ -66,7 +68,6 @@ tatoolApp.factory('publicService', PublicService);
 tatoolApp.factory('recursionHelper', RecursionHelper);
 
 tatoolApp.controller('MainCtrl', MainCtrl);
-tatoolApp.controller('StartCtrl', StartCtrl);
 tatoolApp.controller('ModuleCtrl', ModuleCtrl);
 tatoolApp.controller('DeveloperCtrl', DeveloperCtrl);
 tatoolApp.controller('InviteCtrl', InviteCtrl);
@@ -192,11 +193,11 @@ tatoolApp.config(['$stateProvider', function ($stateProvider) {
         template: require('../../views/app/public_upload.html'),
         controller: 'PublicUploadCtrl'
       }).state('publicRun', {
-        url: '/public/run',
+        url: '/public/module/run',
         template: require('../../views/app/run.html'),
         controller: 'PublicRunCtrl'
       }).state('publicEnd', {
-        url: '/public/end',
+        url: '/public/module/end',
         template: require('../../views/app/public_end.html'),
         controller: 'PublicEndCtrl'
       });

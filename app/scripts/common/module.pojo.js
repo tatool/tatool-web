@@ -15,6 +15,7 @@ var Module = function(moduleId) {
   this.moduleType = '';
   this.exportDelimiter = '';
   this.moduleMaxSessions = '';
+  this.moduleBackground = '';
   this.moduleForwardUrl = '';
 };
 
@@ -67,6 +68,10 @@ Module.prototype.getExportFormat = function() {
 
 Module.prototype.getModuleMaxSessions = function() {
   return this.maxSessions;
+};
+
+Module.prototype.getModuleBackground = function() {
+  return this.moduleBackground;
 };
 
 Module.prototype.getModuleForwardUrl = function() {
@@ -122,6 +127,10 @@ Module.prototype.setExportFormat = function(exportFormat) {
 
 Module.prototype.setModuleMaxSessions = function(maxSessions) {
   this.moduleMaxSessions = maxSessions;
+};
+
+Module.prototype.setModuleBackground = function(moduleBackground) {
+  this.moduleBackground = moduleBackground;
 };
 
 Module.prototype.setModuleForwardUrl = function(forwardUrl) {

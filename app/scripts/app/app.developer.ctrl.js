@@ -4,7 +4,7 @@
 
 import bootbox from 'bootbox';
 import screenfull from 'screenfull';
-import uuidv4  from 'uuid/v4';
+import { v4 as uuidv4 } from 'uuid';
 
 import Module from '../common/module.pojo.js';
 
@@ -272,13 +272,14 @@ function DeveloperCtrl($scope, $q, $timeout, $window, $rootScope, $location, $st
     }
 
     $scope.showPublicUrl = function(moduleId) {
-      var url = 'http://' + window.location.host + '/#/public/' + moduleId;
+      var url = 'http://' + window.location.host + '/#!/public/' + moduleId;
       var msg = 'The module can be accessed with the following URL:<br><br><span class="publicUrl">';
       msg += url;
       msg += '</span><br><br>By providing the query parameter <b>extid</b>, you can pass in an external id to identify the participant.';
-      msg += 'The external id will be visible in the Analytics tab.<br><br><span class="publicUrl">';
-      msg += url;
-      msg += '?extid=[xyz]</span>';
+      msg += 'The external id will be visible in the Analytics tab.<br><br>';
+      msg += 'By providing the query parameter <b>c</b> with a value, you can pass in a <a href="http://localhost:8080/#!/doc/ref-elements.html" target="_blank">condition</a>.';
+      msg += 'This will enable the conditional execution of Executables.<br><br>';
+      msg += 'By providing the empty query parameter <b>forceupload</b>, you can provide the participant with an upload button for any incomplete sessions.';
       bootbox.dialog({
           message: msg,
           title: '<b>Tatool</b>',
@@ -440,7 +441,7 @@ function DeveloperCtrl($scope, $q, $timeout, $window, $rootScope, $location, $st
 
       // switch to fullscreen if available and enabled in module
       var fullscreen = module.moduleDefinition.fullscreen ? module.moduleDefinition.fullscreen : false;
-      if (fullscreen && screenfull.enabled) {
+      if (fullscreen && screenfull.isEnabled) {
         screenfull.request();
       }
       

@@ -1,5 +1,5 @@
 var mongoose  = require('mongoose');
-var bcrypt    = require('bcrypt-nodejs');
+var bcrypt    = require('bcryptjs');
 var Schema    = mongoose.Schema;
 var jwt = require('jsonwebtoken');
  
@@ -58,7 +58,7 @@ User.pre('save', function(callback) {
   bcrypt.genSalt(10, function(err, salt) {
     if (err) return callback(err);
 
-    bcrypt.hash(user.password, salt, null, function(err, hash) {
+    bcrypt.hash(user.password, salt, function(err, hash) {
       if (err) return callback(err);
 
       user.password = hash;

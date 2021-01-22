@@ -23,7 +23,7 @@
   </div>
   <div class="form-group">
     <label for="moduleLabel" class="col-sm-3 control-label">Label *
-      <a class="info" uib-tooltip="Internal shorthand name for your module, which will be used to name any export files." uib-tooltip-placement="right"><i class="fa fa-info-circle"></i></a>
+      <a class="info" uib-tooltip="Internal shorthand name for your module." uib-tooltip-placement="right"><i class="fa fa-info-circle"></i></a>
     </label>
     <div class="col-sm-9">
       <input type="text" class="form-control" id="moduleLabel" ng-model="module.moduleLabel" ng-trim="false" ng-pattern="/^[a-zA-Z0-9]*$/">
@@ -43,6 +43,14 @@
     </label>
     <div class="col-sm-9">
       <input type="number" class="form-control" min="0" id="moduleLabel" ng-model="module.moduleMaxSessions">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="moduleBackground" class="col-sm-3 control-label">Background
+      <a class="info" uib-tooltip="Set the background color of your Module using Hex Color Codes." uib-tooltip-placement="right"><i class="fa fa-info-circle"></i></a>
+    </label>
+    <div class="col-sm-9">
+      <input colorpicker colorpicker-close-on-select type="text" class="form-control" ng-model="module.moduleBackground">
     </div>
   </div>
   <div class="form-group">

@@ -2,7 +2,6 @@ var passport = require('passport');
 var BasicStrategy = require('passport-http').BasicStrategy;
 var User = require('../models/user');
 var crypto = require('crypto');
-var jwt = require('jsonwebtoken');
 
 passport.use(new BasicStrategy(
   function(userName, userPassword, callback) {

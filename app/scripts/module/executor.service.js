@@ -209,12 +209,14 @@ function ExecutorService($log, $location, $q, $state, $timeout, $injector, $wind
       var url = 'executables/' + currentExecutable.customType + '.html';
 
       // check for status panel settings
-      var statusEnabled = false;
+      var statusEnabled = 'false';
+
       angular.forEach(currentExecutable.status, function(panelValue) {
         if (panelValue) {
-          statusEnabled = panelValue;
+          statusEnabled = 'true';
         }
       });
+
       var params = { moduleId: moduleService.getModuleId(), type: 'executable', url: url, status: statusEnabled };
 
       // trigger mouse cursor visibility
@@ -223,7 +225,7 @@ function ExecutorService($log, $location, $q, $state, $timeout, $injector, $wind
 
       // focus window to make sure we're receiving user input
       $window.focus();
-      
+
       if ($state.is('module', params)) {
         $state.reload();
       } else {

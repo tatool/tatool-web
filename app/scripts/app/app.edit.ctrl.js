@@ -673,6 +673,7 @@ function EditCtrl($scope, $q, $uibModalInstance, $sce, $compile, $uibModal, $log
         module.moduleDefinition.exportDelimiter = module.exportDelimiter;
         module.moduleDefinition.exportFormat = module.exportFormat;
         module.moduleDefinition.moduleMaxSessions = module.moduleMaxSessions;
+        module.moduleDefinition.moduleBackground = module.moduleBackground;
         module.moduleDefinition.moduleForwardUrl = module.moduleForwardUrl;
 
         // prepare export
@@ -712,6 +713,7 @@ function EditCtrl($scope, $q, $uibModalInstance, $sce, $compile, $uibModal, $log
           module.moduleDefinition.exportDelimiter = module.exportDelimiter;
           module.moduleDefinition.exportFormat = module.exportFormat;
           module.moduleDefinition.moduleMaxSessions = module.moduleMaxSessions;
+          module.moduleDefinition.moduleBackground = module.moduleBackground;
           module.moduleDefinition.moduleForwardUrl = module.moduleForwardUrl;
           $uibModalInstance.close();
         }
@@ -776,6 +778,22 @@ function EditCtrl($scope, $q, $uibModalInstance, $sce, $compile, $uibModal, $log
           if(!element.name || element.name === '') {
             element.name = (Math.random().toString(36)+'00000000000000000').slice(2,16+2);
           }
+        }
+      }
+
+      $scope.getExecutableNames = function(value) {
+        let executableNames = [];
+        parseExecutableNames(module.moduleDefinition.moduleHierarchy, executableNames);
+        return [...new Set(executableNames)];
+      };
+
+      function parseExecutableNames(element, names) {
+        if (element.tatoolType === 'List' || element.tatoolType === 'Dual') {
+          angular.forEach(element.children, function(value) {
+            parseExecutableNames(value, names);
+          });
+        } else if (element.tatoolType === 'Executable') {
+          names.push(element.name);
         }
       }
 

@@ -1,6 +1,6 @@
 'use strict';
 
-import uuidv4  from 'uuid/v4';
+import { v4 as uuidv4 } from 'uuid';
 
 import Module from '../common/module.pojo.js';
 
@@ -80,6 +80,7 @@ function ModuleCreatorService($log, $q, moduleDataService) {
             newModule.setExportDelimiter(moduleDefinition.exportDelimiter);
             newModule.setExportFormat(moduleDefinition.exportFormat);
             newModule.setModuleMaxSessions(moduleDefinition.moduleMaxSessions);
+            newModule.setModuleBackground(moduleDefinition.moduleBackground);
             newModule.setModuleForwardUrl(moduleDefinition.moduleForwardUrl);
             newModule.setModuleVersion(1);
 

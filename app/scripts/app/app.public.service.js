@@ -7,7 +7,7 @@ function PublicService() {
     var publicStart = {};
 
     publicStart.getModuleId = function() {
-      return this.module.moduleId;
+      return (this.module) ? this.module.moduleId : null;
     };
 
     publicStart.getModule = function() {

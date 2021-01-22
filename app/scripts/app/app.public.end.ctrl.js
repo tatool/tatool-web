@@ -1,8 +1,8 @@
 'use strict';
 
-PublicEndCtrl.$inject = ['$scope', 'publicService', '$window',];
+PublicEndCtrl.$inject = ['$scope', 'publicService', '$window', '$state'];
 
-function PublicEndCtrl($scope, publicService, $window) {
+function PublicEndCtrl($scope, publicService, $window, $state) {
 	if (publicService.getModule() != undefined) {
 		if ($window.TatoolXP) {
 			$window.TatoolXP.postMessage('sessionEnd');
@@ -10,6 +10,8 @@ function PublicEndCtrl($scope, publicService, $window) {
 			$scope.message = 'This code confirms the completion of your session:';
 			$scope.sessionToken = publicService.getSessionToken();
 		}
+	} else {
+		$state.go('start');
 	}
 }
 
