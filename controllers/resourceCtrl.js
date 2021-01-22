@@ -61,10 +61,7 @@ exports.getResource = function(req, res) {
 	var moduleModel = req.path.startsWith('/developer') ? DevModule : Module;
 
 	moduleModel.findOne({
-		email: req.user.email,
 		sessionToken: req.query.token
-	}, {}, {
-		limit: 1
 	}, function(err, module) {
 		if (err) {
 			res.status(500).send(err);
