@@ -110,7 +110,7 @@ function getLocalResource(req, res, module, projectsPath) {
 function getGCSResource(req, res, module, projectsPath) {
 	const bucket = storage.bucket(projectsPath);
 
-	var accessType = (req.params.projectAccess === 'private') ? req.params.projectAccess + '/' + module[0].created_by : req.params.projectAccess;
+	var accessType = (req.params.projectAccess === 'private') ? req.params.projectAccess + '/' + module.created_by : req.params.projectAccess;
 
 	if (req.params.projectAccess === 'private') {
 		var file = 'projects/' + accessType + '/' + req.params.projectName + '/' + req.params.resourceType + '/' + req.params.resourceName;
