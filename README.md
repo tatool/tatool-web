@@ -7,3 +7,5 @@ This framework builds on top of the ideas of our original Tatool Java-based clie
 
 Check out our documentation on www.tatool-web.com in order to learn more.
 
+![Build & Deploy Prod](https://github.com/tatool/tatool-web/workflows/Build%20&%20Deploy%20Prod/badge.svg)
+
