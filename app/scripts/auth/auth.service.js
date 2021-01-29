@@ -13,15 +13,15 @@ function AuthService($http, $q, $log, userService, messageService) {
     $http.defaults.headers.common['Content-Type'] = 'application/json;charset=utf-8';
 
     $http.get('/api/login')
-      .then(function onSuccess(response) {
+      .then(function(response) {
         userService.createSession(credentials.userName, response.data.token, response.data.roles, response.data.code);
         deferred.resolve('success');
-      })
-      .catch(function onError(error) {
+      }, function(error) {
         // Erase the session if the user fails to log in
+        console.log(error);
         userService.destroySession();
-        if (error.verify) {
-          deferred.reject(error.message + ' If you have not received an email, you can <a href="/#/verify">resend</a> the verification email.');
+        if (error.data.verify) {
+          deferred.reject(error.data.message + ' If you have not received an email, you can <a href="/#!/verify">resend</a> the verification email.');
         } else {
           deferred.reject('Login failed. Make sure you entered your information correctly.');
         }
@@ -41,16 +41,15 @@ function AuthService($http, $q, $log, userService, messageService) {
     var deferred = $q.defer();
 
     $http.post('/api/register', credentials)
-      .then(function onSuccess(response) {
+      .then(function(response) {
         messageService.setMessage({
           type: 'success',
           msg: 'Registration successful. A <b>verification email</b> has been sent. In order to activate your account, you need to click the link provided in the email.'
         });
         deferred.resolve('success');
-      })
-      .catch(function onError(error) {
+      }, function(error) {
         $log.error(error);
-        deferred.reject(error.message);
+        deferred.reject(error.data.message);
       });
 
     return deferred.promise;
@@ -65,12 +64,11 @@ function AuthService($http, $q, $log, userService, messageService) {
     var deferred = $q.defer();
 
     $http.get('/api/user/roles')
-      .then(function onSuccess(response) {
+      .then(function(response) {
         deferred.resolve(response.data.roles);
-      })
-      .catch(function onError(error) {
+      }, function(error) {
         $log.error(error);
-        deferred.reject(error.message);
+        deferred.reject(error.data.message);
       });
     return deferred.promise;
   };
@@ -79,12 +77,11 @@ function AuthService($http, $q, $log, userService, messageService) {
     var deferred = $q.defer();
 
     $http.post('/user/verify/resend', user)
-      .then(function onSuccess(response) {
+      .then(function(response) {
         deferred.resolve('success');
-      })
-      .catch(function onError(error) {
+      }, function(error) {
         $log.error(error);
-        deferred.reject(error.message);
+        deferred.reject(error.data.message);
       });
 
     return deferred.promise;
@@ -94,15 +91,14 @@ function AuthService($http, $q, $log, userService, messageService) {
     var deferred = $q.defer();
 
     $http.post('/user/reset', user)
-      .then(function onSuccess(response) {
+      .then(function(response) {
         deferred.resolve('success');
-      })
-      .catch(function onError(error) {
+      }, function(error) {
         $log.error(error);
-        if (error.verify) {
-          deferred.reject(error.message + ' If you have not received an email, you can <a href="/#/verify">resend</a> the verification email.');
+        if (error.data.verify) {
+          deferred.reject(error.data.message + ' If you have not received an email, you can <a href="/#!/verify">resend</a> the verification email.');
         } else {
-          deferred.reject(error.message);
+          deferred.reject(error.data.message);
         }
       });
 
@@ -113,12 +109,11 @@ function AuthService($http, $q, $log, userService, messageService) {
     var deferred = $q.defer();
 
     $http.get('/user/resetverify/' + token)
-      .then(function onSuccess(response) {
+      .then(function(response) {
         deferred.resolve(response.data);
-      })
-      .catch(function onError(error) {
+      }, function(error) {
         $log.error(error);
-        deferred.reject(error.message);
+        deferred.reject(error.data.message);
       });
 
     return deferred.promise;
@@ -128,12 +123,11 @@ function AuthService($http, $q, $log, userService, messageService) {
     var deferred = $q.defer();
 
     $http.post('/user/reset/' + user.token, user)
-      .then(function onSuccess(response) {
+      .then(function(response) {
         deferred.resolve('success');
-      })
-      .catch(function onError(error) {
+      }, function(error) {
         $log.error(error);
-        deferred.reject(error.message);
+        deferred.reject(error.data.message);
       });
 
     return deferred.promise;
@@ -145,12 +139,11 @@ function AuthService($http, $q, $log, userService, messageService) {
     $http.post('/user/captcha', {
         'response': captcha
       })
-      .then(function onSuccess(response) {
+      .then(function(response) {
         deferred.resolve('success');
-      })
-      .catch(function onError(error) {
+      }, function(error) {
         $log.error(error);
-        deferred.reject(error.message);
+        deferred.reject(error.data.message);
       });
 
     return deferred.promise;
@@ -160,13 +153,12 @@ function AuthService($http, $q, $log, userService, messageService) {
     var deferred = $q.defer();
 
     $http.get('/public/login/' + moduleId + '?extid=' + extid)
-      .then(function onSuccess(response) {
+      .then(function(response) {
         userService.createSession(response.data.code.toString(), response.data.token, response.data.roles, response.data.code);
         deferred.resolve(response.data.module);
-      })
-      .catch(function onError(error) {
+      }, function(error) {
         $log.error(error);
-        deferred.reject(error.message);
+        deferred.reject(error.data.message);
       });
 
     return deferred.promise;

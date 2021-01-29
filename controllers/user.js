@@ -266,7 +266,7 @@ exports.resetPasswordSend = function(req, res) {
               name: user.email,
               subject: 'Password reset',
               template: 'password-reset-email',
-              pwURL: req.protocol + '://' + req.get('host') + '/#/reset?token=' + user.token
+              pwURL: req.protocol + '://' + req.get('host') + '/#!/reset?token=' + user.token
             };
 
             sendVerificationEmail(message, function(error, success) {

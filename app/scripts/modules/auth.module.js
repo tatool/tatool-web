@@ -43,7 +43,7 @@ tatoolAuth.config(['$httpProvider', '$stateProvider', function ($httpProvider, $
             if ($stateParams.verify === 'success') {
               messageService.setMessage({ type: 'success', msg: 'Email verification successful. You can go ahead and login now.'});
             } else if ($stateParams.verify === 'failure') {
-              messageService.setMessage({ type: 'danger', msg: 'Email verification failed. You can <a href="/#/verify">resend</a> the verification email.'});
+              messageService.setMessage({ type: 'danger', msg: 'Email verification failed. You can <a href="/#!/verify">resend</a> the verification email.'});
             }
           }]
         }
