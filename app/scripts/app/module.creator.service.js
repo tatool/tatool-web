@@ -53,6 +53,7 @@ function ModuleCreatorService($log, $q, moduleDataService) {
     creator.createModule = function(deferred, contents) {
       try {
         var moduleDefinition = contents;
+        
         if (typeof contents !== 'object') {
           moduleDefinition = JSON.parse(contents);
         }
@@ -65,7 +66,6 @@ function ModuleCreatorService($log, $q, moduleDataService) {
           validationResult = '';
           elementNr = 0;
           validateDefinition(moduleDefinition);
-
 
           if (!isValid) {
             deferred.reject('Validation of module file failed. <br><br><b>' + validationResult + '</b>');
