@@ -4,6 +4,7 @@
 /* global async */
 import screenfull from 'screenfull';
 import async from 'async';
+import bootbox from 'bootbox';
 
 PublicRunCtrl.$inject = ['$scope', '$window', '$state', '$sce', '$log', 'spinnerService', 'authService', 'cfg', 'moduleDataService', 'userService', 'exportService', 'publicService'];
 
@@ -107,11 +108,7 @@ function PublicRunCtrl($scope, $window, $state, $sce, $log, spinnerService, auth
       }, function() {
         stopSpinner();
         authService.logout();
-        if (!module.moduleDefinition.moduleForwardUrl || 0 === module.moduleDefinition.moduleForwardUrl.length) {
-          $state.go('publicEnd');
-        } else {
-          window.location.href = module.moduleDefinition.moduleForwardUrl;
-        }
+        $state.go('publicEnd');
       });
     }
 
@@ -126,7 +123,12 @@ function PublicRunCtrl($scope, $window, $state, $sce, $log, spinnerService, auth
         if (!module.moduleDefinition.moduleForwardUrl || 0 === module.moduleDefinition.moduleForwardUrl.length) {
           $state.go('publicEnd');
         } else {
-          window.location.href = module.moduleDefinition.moduleForwardUrl;
+          const url = new URL(module.moduleDefinition.moduleForwardUrl);
+          if (publicService.getExtId() && 0 != publicService.getExtId().length) {
+            url.searchParams.set('extid', publicService.getExtId());
+          }
+          url.searchParams.set('sessiontoken', publicService.getSessionToken());
+          window.location.href = url;
         }
       });
     }
