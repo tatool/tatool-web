@@ -72,6 +72,7 @@ tatool
     $scope.inputAction = function(input, timing, event) {
       service.inputService.disable();
       service.gridService.clear().refresh();
+      service.endTime = timing;
       service.processResponse(input.givenResponse, timing).then(nextStep);
     };
 

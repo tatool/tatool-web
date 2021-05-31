@@ -149,6 +149,7 @@ tatool
     // Process given response
     NumberKeepTrack.prototype.processResponse = function(givenResponse, timing) {
       this.trial = {};
+      this.trial.reactionTime = this.endTime - this.startTime;
       this.trial.trialNumber = this.stimulus['trialsno'];
       this.trial.responseNumber = this.stimulus['step'];
       this.trial.nSubstitutions = this.stimulus['nsubst'];
