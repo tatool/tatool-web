@@ -4,7 +4,8 @@
 /* global LZString */
 
 import async from 'async';
-import LZString from 'lz-string'
+import LZString from 'lz-string';
+import moment from 'moment';
 
 import download from '../common/util/download.js';
 
@@ -79,9 +80,13 @@ function ExportService($log, $q, $http, moduleDataService, trialDataService, cfg
         var sessionComplete = (value.sessionComplete) ? 1 : 0;
         var sessionCondition = (value.sessionCondition) ? value.sessionCondition : '';
         var sessionForceExit = (value.sessionForceExit) ? 1 : 0;
+        var sessionStart = new Date(value.startTime);
+        var sessionEnd = new Date(value.endTime);
         sessionProperties[value.sessionId].push({key: 'session.complete', value: sessionComplete, position: -2 });
         sessionProperties[value.sessionId].push({key: 'session.condition', value: sessionCondition, position: -1 });
         sessionProperties[value.sessionId].push({key: 'session.forceExit', value: sessionForceExit, position: -1 });
+        sessionProperties[value.sessionId].push({key: 'session.startTime', value: moment(sessionStart).format('YYYY-MM-DD HH:mm:ss'), position: -1 });
+        sessionProperties[value.sessionId].push({key: 'session.endTime', value: moment(sessionEnd).format('YYYY-MM-DD HH:mm:ss'), position: -1 });
 
         // loop through user defined properties
         var properties = value.sessionProperties;
