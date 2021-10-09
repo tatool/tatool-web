@@ -1,12 +1,15 @@
 'use strict';
 
-ListIterator.$inject = [];
+ListIterator.$inject = ['timerUtils','executableUtils'];
 
-function ListIterator() {
+function ListIterator(timerUtils, executableUtils) {
 
   var Iterator = function() { 
     this.executedIterations = 0;
     this.iter = null;
+    this.name = (Math.random().toString(36)+'00000000000000000').slice(2,16+2);
+    this.timerRunning = false;
+    this.timerExpired = false;
   };
 
   // logic to select the next element
@@ -16,8 +19,14 @@ function ListIterator() {
         this.createIterator(currentStack);
         this.executedIterations++;
       } else {
+        if(this.timerEnabled) {
+          this.timer.stop();
+        }
         this.executedIterations = 0;
         this.iter = null;
+        this.timer = null;
+        this.timerRunning = false;
+        this.timerExpired = false;
       }
     }
 
@@ -50,12 +59,22 @@ function ListIterator() {
     if (isIterator) {
       isIterator = (this.executedIterations < this.numIterations) || (this.numIterations < 0);
     }
+
+    if (isIterator) {
+      isIterator = (this.timerExpired) ? false : true;
+    }
     
     return isIterator;
   };
 
   // creates a simple iterator over child elements
   Iterator.prototype.createIterator = function(currentStack) {
+    if(this.timerEnabled && !this.timerExpired) {
+      this.timer = timerUtils.createTimer(this.timerDuration, false, this);
+    }
+    if(this.timerEnabled && !this.timerRunning) {
+      this.startTimer();
+    }
     var currentElement = currentStack.peek().children;
     if (currentStack.peek().tatoolType === 'List') {
       
@@ -107,6 +126,20 @@ function ListIterator() {
       };
     }
   };
+
+  Iterator.prototype.startTimer = function() {
+    this.timerRunning = true;
+    this.timer.start(function(){ return this.endTimer(); }.bind(this));
+  };
+
+  Iterator.prototype.endTimer = function() {
+    this.timerRunning = false;
+    this.timerExpired = true;
+    this.iter = null;
+    if (this.timerEndEvent === 'immediate') {
+      executableUtils.stopIteration();
+    }
+  }
 
   // Shuffle array using Fisher-Yates algorithm
   Iterator.prototype.shuffle = function(array) {
