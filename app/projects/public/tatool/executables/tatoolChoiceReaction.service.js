@@ -39,6 +39,13 @@ tatool
       // trial counter property
       this.counter = 0;
 
+      // page flow property
+      if (!this.pageFlow) {
+        this.pageFlow = { propertyValue: false };
+      } else {
+        this.pageFlow.propertyValue = (this.pageFlow.propertyValue === true) ? true : false;
+      }
+
       // prepare stimuli
       if (this.stimuliFile) {
         var self = this;

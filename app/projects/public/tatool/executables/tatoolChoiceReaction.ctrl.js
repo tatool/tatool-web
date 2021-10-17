@@ -8,6 +8,8 @@ tatool
     $scope.stimulusService = service.stimulusService;
     // Make the input service available for the <tatool-input> directive
     $scope.inputService = service.inputService;
+    // Pass page flow variable to template
+    $scope.pageFlow = service.pageFlow.propertyValue;
 
     // Start execution
     $scope.start = function() {

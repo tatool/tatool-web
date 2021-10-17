@@ -27,7 +27,7 @@ i {
 
 /* Status Panel */
 #statusPanel {
-  position: relative;
+  position: fixed;
   width: 100%;
   margin: 0 auto;
   top: 0; left: 0; bottom: 1; right: 0;
@@ -37,6 +37,10 @@ i {
   color: #272727;
   text-shadow: 0 1px 0 #fff;
   z-index: 100;
+}
+/* Used to push content below sticky status panel header */
+#statusPanelBlock {
+  height: 140px;
 }
 #blankPanel {
   display: none;
@@ -55,7 +59,6 @@ i {
 
 /* Executable */
 #topExecutable {
-  position: absolute;
   margin-top: 25px;
   left: 10%;
   right: 10%;
@@ -70,6 +73,11 @@ i {
   left:0;
   width:100%; 
   margin-bottom: 20px;
+}
+
+#bottomExecutableNonFixed { 
+  width:100%; 
+  margin-top: 20px;
 }
 
 
