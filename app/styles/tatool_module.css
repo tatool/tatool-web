@@ -59,6 +59,14 @@ i {
 
 /* Executable */
 #topExecutable {
+  position: absolute;
+  margin-top: 25px;
+  left: 10%;
+  right: 10%;
+  width: 80%;
+  text-align: center;
+}
+#topExecutableNonAbsolute {
   margin-top: 25px;
   left: 10%;
   right: 10%;
