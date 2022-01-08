@@ -69,7 +69,7 @@ function ListIterator(timerUtils, executableUtils) {
 
   // creates a simple iterator over child elements
   Iterator.prototype.createIterator = function(currentStack) {
-    if(this.timerEnabled && !this.timerExpired) {
+    if(this.timerEnabled && !this.timerExpired && !this.timerRunning) {
       this.timer = timerUtils.createTimer(this.timerDuration, false, this);
     }
     if(this.timerEnabled && !this.timerRunning) {
