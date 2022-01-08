@@ -1,0 +1,22 @@
+.survey-outer-div
+{
+     display: table;
+     position: absolute;
+     height: 100%;
+     width: 100%;
+}
+.survey-mid-div
+{
+     display: table-cell;
+     vertical-align: middle;
+}
+.survey-center-div
+{
+     margin: 0 auto;
+     max-width: 700px;
+}
+.surveyquestion 
+{
+  padding-bottom: 20px;
+  line-height: 1.5;
+}
