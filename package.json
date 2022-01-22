@@ -72,10 +72,11 @@
         "serve-favicon": "2.5.0",
         "sha1": "1.1.1",
         "spin.js": "4.1.0",
-        "survey-jquery": "1.7.28",
+        "survey-jquery": "1.9.6",
         "ui-select": "0.19.8",
         "uuid": "8.3.0",
-        "video.js": "7.9.3"
+        "video.js": "7.9.3",
+        "showdown": "1.9.1"
     },
     "devDependencies": {
         "@babel/core": "7.12.13",

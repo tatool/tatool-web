@@ -15,6 +15,8 @@ import droppable from 'jquery-ui/ui/widgets/droppable';
 import mouse from 'jquery-ui/ui/widgets/mouse';
 import jqueryuitouchpunch from 'jquery-ui-touch-punch';
 import fabric from 'fabric';
+import showdown from 'showdown';
+window.showdown = window.showdown = showdown;
 
 // import modules
 import tatool from './app.js';
