@@ -61,6 +61,8 @@ import 'bootstrap';
 // vendor css
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'font-awesome/css/font-awesome.css';
+import 'survey-jquery/modern.min.css';
+import 'survey-jquery/survey.min.css';
 
 // custom css
 import '../../styles/reset.css';
