@@ -254,6 +254,37 @@ function ExecutableUtilsService($q, $http, $log, contextService) {
     return deferred.promise;
   };
 
+  // get a JSON resource (project or external)
+  utils.getJSONResource = function(res, stimuliPath) {
+    var deferred = $q.defer();
+    var resUrl = "";
+
+    if (res && res.project) {
+      if (res.project.access === 'external') {
+        resUrl = res.resourceName;
+      } else {
+        var path = '/' + mode + '/resources/' + res.project.access + '/' + res.project.name + '/';
+        resUrl = path + res.resourceType + '/' + res.resourceName + '?token=' + token
+      }
+
+      $http.get(resUrl, {
+          skipauth: true
+        })
+        .then(function onSuccess(response) {
+          var data = response.data;
+          deferred.resolve(data);
+        })
+        .catch(function onError(error) {
+          deferred.reject(error.message);
+        });
+
+    } else {
+      return $q.reject('Resource not found: undefined');
+    }
+
+    return deferred.promise;
+  };
+
   // loops through a stimuli file and collects all image file names
   var getStimuliFiles = function(list, deferred, stimuliPath) {
     var images = [];

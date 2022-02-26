@@ -209,6 +209,33 @@ executableUtils.getCSVResource(this.stimuliFile, true, this.stimuliPath).then(
 console.log(this.stimuliList[0].stimulusValue);
 </code></pre>
 
+<hr>
+
+<p><b class="red">getJSONResource(resource, stimuliPath)</b> - returns a JSON object from reading an internal/external JSON file.</p>
+<p>Reads a JSON file that needs to be accessed within the Executable.</p>
+
+<p><b>Parameters</b><br>
+<code>resource</code>: A Resource Property object (see <a ui-sref="doc({page: 'ref-properties.html'})">Properties</a> for more details).<br>
+<code>stimuliPath</code>: A Path Property object (see <a ui-sref="doc({page: 'ref-properties.html'})">Properties</a> for more details).</p>
+
+<p><b>Example</b></p>
+<pre><code class="language-javascript">var promise = executableUtils.createPromise();
+var self = this;
+executableUtils.getJSONResource(this.stimuliFile, this.stimuliPath).then(
+  function(data) {
+    // storing the result as property to our Executable object
+    self.JSONdata = data;
+    promise.resolve();
+  }, function(error) {
+    promise.reject(error);
+  });
+
+...
+
+// access the JSON object
+console.log(this.JSONdata);
+</code></pre>
+
 
 <hr>
 

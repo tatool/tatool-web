@@ -13,10 +13,22 @@
 .survey-center-div
 {
      margin: 0 auto;
-     max-width: 700px;
+     max-width: 800px;
 }
-.surveyquestion 
+.survey-question 
 {
-  padding-bottom: 20px;
-  line-height: 1.5;
+     padding-bottom: 20px;
+     line-height: 1.5;
+     font-size: 20px;
+}
+.survey-label
+{
+     font-style: italic;
+}
+.page-title
+{
+     padding-bottom: 20px;
+     line-height: 1.5;
+     font-size: 20px;
+     font-weight: bold;
 }

@@ -20,7 +20,7 @@ tatool
         $("#surveyContainer").Survey({
         	model: survey,
         	onComplete: service.saveSurvey,
-        	css: myCss
+        	
         });
     };
 
