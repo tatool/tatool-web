@@ -13,7 +13,7 @@
 
     <div class="actionHeader" ng-if="modules.length > 0">
       <ui-select ng-model="selectedModule" theme="bootstrap" ng-disabled="disabled" on-select="chooseModule($item)">
-        <ui-select-match placeholder="Select module...">{{$select.selected.moduleName}}</ui-select-match>
+        <ui-select-match placeholder="Select module...">{{$select.selected.moduleName + ' (' + $select.selected.moduleLabel + ')'}}</ui-select-match>
         <ui-select-choices repeat="module in modules | filter: $select.search | orderBy:'moduleName'">
           <span ng-bind-html="module.moduleName + ' (' + module.moduleLabel + ')' | highlight: $select.search"></span>
         </ui-select-choices>
