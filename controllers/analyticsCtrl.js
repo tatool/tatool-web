@@ -196,7 +196,8 @@ exports.getAll = function(req, res) {
     }
   }, {
     moduleId: 1,
-    moduleName: 1
+    moduleName: 1,
+    moduleLabel: 1
   }, function(err, modules) {
     if (err) {
       res.status(500).send(err);

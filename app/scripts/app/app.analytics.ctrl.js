@@ -45,6 +45,7 @@ function AnalyticsCtrl($scope, $sce, $uibModal, $log, $timeout, moduleDataServic
           $scope.selectedModule.moduleId = $scope.modules[0].moduleId;
           $scope.selectedModule.moduleName = $scope.modules[0].moduleName;
           $scope.selectedModule.created_at = $scope.modules[0].created_at;
+          $scope.selectedModule.moduleLabel = $scope.modules[0].moduleLabel;
           $scope.chooseModule($scope.selectedModule);
         }
       }, function(error) {
