@@ -32,13 +32,13 @@ v10.16.3
 
 <h3 id="mongodb">Install MongoDB Community Edition<span class="pull-right"><a href ng-click="scrollTo('top')"><i class="fa fa-caret-up fa-lg"></i></a></span></h3>
 
-<p><img src="../../images/doc/mongodb-logo.png"><br><br>Get the latest download of MongoDB Community Server for your operating system from <a href="https://www.mongodb.com/try/download/community" target="_blank">http://www.mongodb.org</a> and follow the <a href="https://docs.mongodb.com/manual/administration/install-community/" target="_blank">instructions</a> on their page to install it. Choose to install MongoDB as a Service. </p>
+<p><img src="../../images/doc/mongodb-logo.png"><br><br>Get the latest download of MongoDB Community Server for your operating system from <a href="https://www.mongodb.com/try/download/community" target="_blank">http://www.mongodb.org</a> and follow the <a href="https://docs.mongodb.com/manual/administration/install-community/" target="_blank">instructions</a> on their page to install it. Choose to install MongoDB as a Service. There is no need to install the MongoDB Shell.</p>
 
 <p>Type the following commands in your terminal window and make sure you get a response indicating your version of MongoDB. If you don't see the version of your MongoDB, something went wrong with your installation and you'll need to fix it first. The <i>cd</i> command changes your directory to the directory where you installed MongoDB. On Windows by default it will be in "C:\Program Files\MongoDB\Server\4.0\bin" if you install version 4.0.</p>
 <pre><code class="language-javascript">&gt; cd &lt;path to mongodb binary&gt;
-&gt; mongo -version
+&gt; mongod -version
 
-MongoDB shell version v4.0.2
+db version v6.0.0
 ...
 </code></pre>
 
