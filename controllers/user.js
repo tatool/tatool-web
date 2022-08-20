@@ -5,7 +5,6 @@ var { v4: uuidv4 } = require('uuid');
 var postmark = require('postmark');
 var request = require('request');
 var nodemailer = require('nodemailer');
-var smtpTransport = require('nodemailer-smtp-transport');
 var ejs = require('ejs');
 var Q = require('q');
 

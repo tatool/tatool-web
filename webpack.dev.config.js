@@ -1,35 +1,43 @@
+const path = require('path');
 const webpack = require('webpack');
 const { merge } = require('webpack-merge');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const baseConfig = require('./webpack.config.js');
 
 module.exports = merge(baseConfig, {
   mode: 'development',
-  devtool: 'inline-source-map',
   devServer: {
+    static: {
+            directory: path.resolve(__dirname, 'dist'),
+            publicPath: '/dist'
+        },
     historyApiFallback: true,
     hot: true,
-    inline: true,
     proxy: [{
       context: ['/mode', '/api', '/user', '/developer', '/public', '/data'],
       target: 'http://localhost:3000'
-    }]
+    }],
   },
   module: {
     rules: [{
       test: /\.css$/,
-      use: ['style-loader', 'css-loader']
-    }, {
-      test: /\.(eot|svg|ttf|woff|woff2)$/,
-      use: [{
-        loader: 'file-loader',
-        options: {
-          name: '[name].[ext]',
-          outputPath: 'styles/fonts/'
-        }
-      }]
+      use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              publicPath: "../",
+            },
+          },
+          "css-loader",
+        ],
     }]
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
+    new MiniCssExtractPlugin({
+      filename: "./styles/[name].css",
+    }),
+    new webpack.LoaderOptionsPlugin({
+      minimize: false,
+    })
   ]
 });

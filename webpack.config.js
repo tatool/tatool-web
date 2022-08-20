@@ -8,6 +8,10 @@ module.exports = {
     'tatool-app': './app/scripts/modules/app.module.js',
     'tatool-module': './app/scripts/modules/module.module.js'
   },
+  output: {
+    filename: 'scripts/[name].min.js',
+    path: path.resolve(__dirname, 'dist')
+  },
   optimization: {
     runtimeChunk: 'single',
     splitChunks: {
@@ -21,10 +25,6 @@ module.exports = {
       }
     }
   },
-  output: {
-    filename: 'scripts/[name].min.js',
-    path: path.resolve(__dirname, 'dist')
-  },
   module: {
     rules: [{
       test: /\.js$/,
@@ -36,20 +36,23 @@ module.exports = {
         }
       }
     }, {
-      test: /\.html$/,
-      use: ['html-loader']
+      test: /\.html$/i,
+      loader: 'html-loader',
+      options: {
+        esModule: false,
+      }
     }, {
       test: /\.(jpe?g|png|gif|ico)$/,
-      use: [{
-        loader: 'file-loader',
-        options: {
-          name: '[name].[ext]',
-          outputPath: 'images/'
-        }
-      }]
+      type: 'asset/resource',
+      generator: {
+        filename: 'images/[name][ext]'
+      }
     }, {
-      test: /\.txt$/,
-      use: ['raw-loader']
+      test: /\.(eot|svg|ttf|woff|woff2)$/,
+      type: 'asset/resource',
+      generator: {
+        filename: 'styles/fonts/[name][ext]'
+      }
     }]
   },
   plugins: [
@@ -57,7 +60,8 @@ module.exports = {
       inject: true,
       chunks: ['tatool-app', 'vendor'],
       filename: 'index.html',
-      template: 'app/index-template.html'
+      template: 'app/index-template.html',
+      favicon: "app/images/app/favicon.ico"
     }), new HtmlWebpackPlugin({
       inject: true,
       chunks: ['tatool-module', 'vendor'],
