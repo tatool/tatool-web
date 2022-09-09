@@ -323,5 +323,7 @@ tatoolApp.run(['$templateCache', function($templateCache) {
     $templateCache.put('use-editor.html', require('../../views/doc/use-editor.html'));
     $templateCache.put('use-host.html', require('../../views/doc/use-host.html'));
     $templateCache.put('use-modules.html', require('../../views/doc/use-modules.html'));
+    $templateCache.put('use-qualtrics.html', require('../../views/doc/use-qualtrics.html'));
+    $templateCache.put('use-prolific.html', require('../../views/doc/use-prolific.html'));
     $templateCache.put('use-mturk.html', require('../../views/doc/use-mturk.html'));
 }]);
