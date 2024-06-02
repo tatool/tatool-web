@@ -51,7 +51,7 @@ exports.hasRole = function(req, res, next) {
   if (requestedRole === 'login' || requestedRole === 'register' || requestedRole === 'public') {
     next();
   } else {
-    if (req.user.roles.indexOf(requestedRole) !== -1) {
+    if (req.auth.roles.indexOf(requestedRole) !== -1) {
       next();
     } else {
       res.status(403).json({ message: 'Unauthorized access!' });
@@ -60,8 +60,8 @@ exports.hasRole = function(req, res, next) {
 };
 
 exports.getRoles = function(req, res, next) {
-  if (req.user.roles) {
-    res.json({ roles: req.user.roles });
+  if (req.auth.roles) {
+    res.json({ roles: req.auth.roles });
   } else {
     res.status(403).json({ message: 'Unauthorized access!' });
   }

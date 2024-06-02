@@ -8,7 +8,7 @@ var resourceCtrl = require('../controllers/resourceCtrl');
 // Adding a new module from a local file
 exports.add = function(req, res) {
   Module.findOne({
-    email: req.user.email,
+    email: req.auth.email,
     moduleId: req.body.moduleId
   }, function(err, module) {
     if (err) {
@@ -30,10 +30,10 @@ var insert = function(req, res) {
   var module = req.body;
 
   // set all required technical fields (overriding anything set by the user)
-  module.email = req.user.email;
+  module.email = req.auth.email;
   module.moduleVersion = 1;
   module.publishedModuleVersion = 0;
-  module.created_by = req.user.email;
+  module.created_by = req.auth.email;
   module.created_at = today;
   module.updated_at = today;
   module.moduleStatus = constants.MODULE_STATUS_READY;
@@ -56,7 +56,7 @@ var update = function(req, res, module) {
   module.sessionToken = undefined; // unset session token to protect access to resources
 
   Module.find({
-    email: req.user.email,
+    email: req.auth.email,
     moduleType: {
       $exists: true,
       $nin: ['']
@@ -66,7 +66,7 @@ var update = function(req, res, module) {
       res.status(500).send({
         message: 'Unknown error occurred during saving of module.'
       });
-    } else if (result.length >= req.app.get('module_limit') && !module.moduleType && req.body.moduleType !== '' && !req.app.get('editor_user').includes(req.user.email)) {
+    } else if (result.length >= req.app.get('module_limit') && !module.moduleType && req.body.moduleType !== '' && !req.app.get('editor_user').includes(req.auth.email)) {
       res.status(500).send({
         message: 'The number of simultaneously published modules per researcher is currently restricted to ' + req.app.get('module_limit') + '.'
       });
@@ -124,7 +124,7 @@ var update = function(req, res, module) {
 
 exports.getAll = function(req, res) {
   Module.find({
-    email: req.user.email
+    email: req.auth.email
   }, function(err, modules) {
     if (err) {
       res.status(500).send(err);
@@ -136,7 +136,7 @@ exports.getAll = function(req, res) {
 
 exports.get = function(req, res) {
   Module.findOne({
-    email: req.user.email,
+    email: req.auth.email,
     moduleId: req.params.moduleId
   }, function(err, module) {
     if (err) {
@@ -149,7 +149,7 @@ exports.get = function(req, res) {
 
 exports.remove = function(req, res) {
   Module.deleteMany({
-    email: req.user.email,
+    email: req.auth.email,
     moduleId: req.params.moduleId
   }, function(err, module) {
     if (err) {
@@ -164,7 +164,7 @@ exports.remove = function(req, res) {
 
 exports.publish = function(req, res) {
   Module.findOne({
-    email: req.user.email,
+    email: req.auth.email,
     moduleId: req.params.moduleId
   }, function(err, module) {
     if (err) {
@@ -196,7 +196,7 @@ exports.publish = function(req, res) {
 
 exports.unpublish = function(req, res) {
   Module.findOne({
-    email: req.user.email,
+    email: req.auth.email,
     moduleId: req.params.moduleId
   }, function(err, module) {
     if (err) {
@@ -226,7 +226,7 @@ exports.unpublish = function(req, res) {
 
 exports.addTrials = function(req, res) {
   Module.findOne({
-    email: req.user.email,
+    email: req.auth.email,
     moduleId: req.params.moduleId
   }, function(err, module) {
     if (err) {

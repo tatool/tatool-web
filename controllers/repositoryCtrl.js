@@ -72,7 +72,7 @@ var update = function(entry, module, res) {
 };
 
 exports.getAll = function(req, res) {
-  Module.find({ $or: [ { moduleType: 'public' }, {$and: [{ moduleType: 'private' }, {"invites.users": { $elemMatch: { email: req.user.email } } }] } ] }
+  Module.find({ $or: [ { moduleType: 'public' }, {$and: [{ moduleType: 'private' }, {"invites.users": { $elemMatch: { email: req.auth.email } } }] } ] }
     , { moduleDefinition: 0, email: 0, created_by: 0, sessions: 0, moduleProperties: 0, invites: 0 }, function(err, entries) {
     if (err) {
       res.status(500).send(err);
@@ -91,14 +91,14 @@ exports.get = function(req, res) {
         if (entry.moduleType !== 'private') { // public module: OK
           res.json(entry);
         } else {
-          if (entry.created_by === req.user.email) { // owner of private module: OK
+          if (entry.created_by === req.auth.email) { // owner of private module: OK
             res.json(entry);
           } else if (entry.invites) { // invited to private module: OK
 
             var users = entry.invites.users;
             var exists = false;
             for (var i = 0; i < users.length; i++) {
-              if (req.user.email === users[i].email) {
+              if (req.auth.email === users[i].email) {
                 exists = true;
                 break;
               }
@@ -131,7 +131,7 @@ exports.remove = function(moduleId, res) {
 };
 
 exports.invite = function(req, res) {
-  Module.findOne({ moduleType: 'private', moduleId: req.params.moduleId, created_by: req.user.email }, function(err, entry) {
+  Module.findOne({ moduleType: 'private', moduleId: req.params.moduleId, created_by: req.auth.email }, function(err, entry) {
     if (err) {
       res.status(500).send(err);
     } else {
@@ -169,7 +169,7 @@ exports.invite = function(req, res) {
 };
 
 exports.removeInvite = function(req, res) {
-  Module.findOne({ moduleType: 'private', moduleId: req.params.moduleId, created_by: req.user.email }, function(err, entry) {
+  Module.findOne({ moduleType: 'private', moduleId: req.params.moduleId, created_by: req.auth.email }, function(err, entry) {
     if (err) {
       res.status(500).send(err);
     } else {

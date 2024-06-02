@@ -23,7 +23,7 @@ exports.getResourceToken = function(req, res) {
 	var moduleModel = req.path.startsWith('/developer') ? DevModule : Module;
 
 	moduleModel.findOne({
-		email: req.user.email,
+		email: req.auth.email,
 		moduleId: req.params.moduleId
 	}, function(err, module) {
 		if (err) {
@@ -179,7 +179,7 @@ exports.setUserData = function(req, module, mode, res) {
 function setLocalUserData(req, res, module, privatePath, mode) {
 
 	const sessionId = '_' + ('000000' + req.params.sessionId).slice(-6);
-	const filename = 'uploads/' + mode + '/' + module.moduleId + '/' + req.user.code + sessionId + '.csv';
+	const filename = 'uploads/' + mode + '/' + module.moduleId + '/' + req.auth.code + sessionId + '.csv';
 
 	if (!req.body.target || !req.app.get('override_upload_dir')) {
 		uploadPath = 'uploads/' + mode + '/' + module.moduleId + '/';
@@ -215,7 +215,7 @@ function setGCSUserData(req, res, module, privatePath, mode) {
 	const bucket = storage.bucket(privatePath);
 
 	const sessionId = '_' + ('000000' + req.params.sessionId).slice(-6);
-	const filename = req.user.code + sessionId + '_' + new Date().getTime() + '.csv';
+	const filename = req.auth.code + sessionId + '_' + new Date().getTime() + '.csv';
 
 	const filePath = 'uploads/' + module.moduleId + '/' + filename;
 	const remoteFile = bucket.file(filePath);

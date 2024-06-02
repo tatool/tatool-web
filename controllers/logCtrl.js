@@ -4,7 +4,7 @@ var Q = require('q');
 // Add user log entry
 exports.addLogEntry = function(req) {
   var deferred = Q.defer();
-  Log.findOne({ email: req.user.email }, function(err, userLog) {
+  Log.findOne({ email: req.auth.email }, function(err, userLog) {
     if (err) {
       deferred.reject('Could not add log data.');
     } else {
@@ -29,7 +29,7 @@ exports.addLogEntry = function(req) {
       } else {
         // insert new log user entry 
         var newLogEntry = {};
-        newLogEntry.email = req.user.email;
+        newLogEntry.email = req.auth.email;
         newLogEntry.modules = {};
         newLogEntry.modules[req.params.moduleId] = {
           maxSessionId: 0
@@ -53,7 +53,7 @@ exports.addLogEntry = function(req) {
 // Update user log entry
 exports.updateModuleLogEntry = function(req) {
   var deferred = Q.defer();
-  Log.findOne({ email: req.user.email }, function(err, userLog) {
+  Log.findOne({ email: req.auth.email }, function(err, userLog) {
     if (err) {
       deferred.reject('Could not find user log data.');
     } else {
@@ -80,7 +80,7 @@ exports.updateModuleLogEntry = function(req) {
       } else {
         // for backward compatibility we don't crash here but set up log entry
         var newLogEntry = {};
-        newLogEntry.email = req.user.email;
+        newLogEntry.email = req.auth.email;
         newLogEntry.modules = {};
         newLogEntry.modules[req.params.moduleId] = {
           maxSessionId: req.body.maxSessionId
@@ -104,7 +104,7 @@ exports.updateModuleLogEntry = function(req) {
 // get log entry maxSessionId
 exports.getLogMaxSessionId = function(req) {
   var deferred = Q.defer();
-  Log.findOne({ email: req.user.email }, function(err, userLog) {
+  Log.findOne({ email: req.auth.email }, function(err, userLog) {
     if (err) {
       deferred.reject('Could not add log data.');
     } else {

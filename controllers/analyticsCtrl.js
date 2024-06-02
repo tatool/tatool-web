@@ -66,7 +66,7 @@ exports.addAnalyticsUser = function(req, module) {
 
         var exists = false;
         for (var i = 0; i < analyticsModule.userData.length; i++) {
-          if (req.user.email === analyticsModule.userData[i].email) {
+          if (req.auth.email === analyticsModule.userData[i].email) {
             exists = true;
             break;
           }
@@ -74,9 +74,9 @@ exports.addAnalyticsUser = function(req, module) {
 
         if (!exists) {
           var newData = {};
-          newData.email = req.user.email;
-          newData.code = req.user.code;
-          newData.extid = req.user.extid;
+          newData.email = req.auth.email;
+          newData.code = req.auth.code;
+          newData.extid = req.auth.extid;
 
           newData.moduleType = module.moduleType;
           newData.maxSessionId = module.maxSessionId;
@@ -122,7 +122,7 @@ exports.addAnalyticsData = function(req) {
         var exists = -1;
 
         for (var i = 0; i < module.userData.length; i++) {
-          if (req.user.email === module.userData[i].email) {
+          if (req.auth.email === module.userData[i].email) {
             exists = i;
             break;
           }
@@ -158,9 +158,9 @@ exports.addAnalyticsData = function(req) {
         } else {
           // user needs to be added
           var newData = {};
-          newData.email = req.user.email;
-          newData.code = req.user.code;
-          newData.extid = req.user.extid;
+          newData.email = req.auth.email;
+          newData.code = req.auth.code;
+          newData.extid = req.auth.extid;
           newData.sessionToken = req.body.sessionToken;
           newData.moduleType = req.body.moduleType;
           newData.maxSessionId = req.body.maxSessionId;
@@ -192,7 +192,7 @@ exports.addAnalyticsData = function(req) {
 exports.getAll = function(req, res) {
   Analytics.find({
     email: {
-      $in: [req.user.email]
+      $in: [req.auth.email]
     }
   }, {
     moduleId: 1,
@@ -210,7 +210,7 @@ exports.getAll = function(req, res) {
 exports.get = function(req, res) {
   Analytics.findOne({
     email: {
-      $in: [req.user.email]
+      $in: [req.auth.email]
     },
     moduleId: req.params.moduleId
   }, function(err, module) {
@@ -235,7 +235,7 @@ exports.get = function(req, res) {
 
 exports.remove = function(req, res) {
   Analytics.deleteMany({
-    created_by: req.user.email,
+    created_by: req.auth.email,
     moduleId: req.params.moduleId
   }, function(err, entry) {
     if (err) {
@@ -249,7 +249,7 @@ exports.remove = function(req, res) {
 exports.removeUser = function(req, res) {
   Analytics.findOne({
     email: {
-      $in: [req.user.email]
+      $in: [req.auth.email]
     },
     moduleId: req.params.moduleId
   }, function(err, module) {
@@ -293,7 +293,7 @@ exports.removeUser = function(req, res) {
 exports.getUserDataDownloadToken = function(req, res) {
   Analytics.findOne({
     email: {
-      $in: [req.user.email]
+      $in: [req.auth.email]
     },
     moduleId: req.params.moduleId
   }, function(err, module) {
@@ -310,7 +310,7 @@ exports.getUserDataDownloadToken = function(req, res) {
           fileToken.userCode = req.params.userCode;
         }
         fileToken.created_at = Date.now();
-        fileToken.created_by = req.user.email;
+        fileToken.created_by = req.auth.email;
 
         fileToken.save(function(err, data) {
           if (err) {

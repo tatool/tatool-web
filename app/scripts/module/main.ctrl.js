@@ -45,7 +45,8 @@ function MainCtrl($rootScope, $scope, $log, $timeout, $state, $window, moduleSer
             },
             cancel: {
               label: 'Cancel',
-              className: 'btn-default'
+              className: 'btn-default',
+              callback: cancelForceExitModule
             }
           }
         });
@@ -81,7 +82,7 @@ function MainCtrl($rootScope, $scope, $log, $timeout, $state, $window, moduleSer
             cancel: {
               label: 'Cancel',
               className: 'btn-default',
-              callback: cancelForceExitModule
+              callback: cancelForceExitModuleFullscreen
             }
           }
         });
@@ -99,6 +100,10 @@ function MainCtrl($rootScope, $scope, $log, $timeout, $state, $window, moduleSer
   }
 
   function cancelForceExitModule() {
+    escapePressed = false;
+  }
+
+  function cancelForceExitModuleFullscreen() {
     escapePressed = false;
     if (screenfull.isEnabled) {
       screenfull.request();

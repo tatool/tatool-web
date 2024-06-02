@@ -16,7 +16,7 @@ const bucket = storage.bucket('tatool-web-stage.appspot.com');
 // Adding/Updating a new module from the repository
 exports.install = function(req, res) {
   Module.findOne({
-    email: req.user.email,
+    email: req.auth.email,
     moduleId: req.params.moduleId
   }, function(err, module) {
     if (err) {
@@ -48,7 +48,7 @@ var insert = function(req, res) {
         module.isNew = true;
 
         // update technical fields
-        module.email = req.user.email;
+        module.email = req.auth.email;
         module.updated_at = today;
         module.invites = undefined;
         module.moduleStatus = 'ready';
@@ -250,13 +250,13 @@ exports.processInvite = function(req, res) {
   Module.findOne({
     moduleType: 'private',
     moduleId: req.params.moduleId,
-    email: req.user.email
+    email: req.auth.email
   }, function(err, module) {
     if (err) {
       res.status(500).send(err);
     } else {
       if (req.params.response === 'accepted' || req.params.response === 'declined') {
-        repositoryCtrl.updateInvite(req.user.email, req.params.moduleId, req.params.response).then(function(data) {
+        repositoryCtrl.updateInvite(req.auth.email, req.params.moduleId, req.params.response).then(function(data) {
           if (req.params.response === 'accepted') {
             exports.install(req, res);
           } else {
@@ -317,7 +317,7 @@ exports.save = function(req, res) {
   var today = new Date();
 
   Module.findOne({
-    email: req.user.email,
+    email: req.auth.email,
     moduleId: req.params.moduleId
   }, function(err, module) {
     if (err) {
@@ -373,7 +373,7 @@ exports.save = function(req, res) {
 
 exports.getAll = function(req, res) {
   Module.find({
-    email: req.user.email
+    email: req.auth.email
   }, function(err, modules) {
     if (err) {
       res.status(500).send(err);
@@ -385,7 +385,7 @@ exports.getAll = function(req, res) {
 
 exports.get = function(req, res) {
   Module.findOne({
-    email: req.user.email,
+    email: req.auth.email,
     moduleId: req.params.moduleId
   }, function(err, module) {
     if (err) {
@@ -398,7 +398,7 @@ exports.get = function(req, res) {
 
 exports.remove = function(req, res) {
   Module.deleteMany({
-    email: req.user.email,
+    email: req.auth.email,
     moduleId: req.params.moduleId
   }, function(err, module) {
     if (err) {
@@ -411,7 +411,7 @@ exports.remove = function(req, res) {
 
 exports.addTrials = function(req, res) {
   Module.findOne({
-    email: req.user.email,
+    email: req.auth.email,
     moduleId: req.params.moduleId
   }, function(err, module) {
     if (err) {

@@ -8,7 +8,7 @@ var logger = require('morgan');
 var mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 var passport = require('passport');
-var expressJwt = require('express-jwt');
+var { expressjwt } = require('express-jwt');
 var favicon = require('serve-favicon');
 var projects = require('./projects');
 
@@ -144,7 +144,7 @@ router.post('/register', userCtrl.register);
 router.get('/login', authCtrl.isAuthenticated);
 
 // protect api with JWT
-app.use('/api', expressJwt({
+app.use('/api', expressjwt({
   secret: app.get('jwt_secret'),
   algorithms: ['HS256']
 }).unless({
