@@ -256,6 +256,7 @@ tatoolApp.run(['$templateCache', function($templateCache) {
     $templateCache.put('lib-acc-countdown.html', require('../../views/doc/lib-acc-countdown.html'));
     $templateCache.put('lib-acc-instruction.html', require('../../views/doc/lib-acc-instruction.html'));
     $templateCache.put('lib-acc.html', require('../../views/doc/lib-acc.html'));
+    $templateCache.put('lib-bat-ept-14.html', require('../../views/doc/lib-bat-ept-14.html'));
     $templateCache.put('lib-bat-uzh-ef-inhibition.html', require('../../views/doc/lib-bat-uzh-ef-inhibition.html'));
     $templateCache.put('lib-bat-uzh-ef-shifting.html', require('../../views/doc/lib-bat-uzh-ef-shifting.html'));
     $templateCache.put('lib-bat-uzh-ef-updating.html', require('../../views/doc/lib-bat-uzh-ef-updating.html'));
