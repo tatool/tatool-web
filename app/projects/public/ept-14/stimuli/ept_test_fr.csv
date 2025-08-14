@@ -1,0 +1,15 @@
+stimulusValue,stimulusValueType,stimulusType,correctResponse,keyCode,response,keyIndex
+ept_phone_prepaid_fr.png,image,2,3,Digit3,3,2
+ept_health_medicine_fr.png,image,3,4,Digit4,4,3
+ept_consumer_membership_fr.png,image,4,1,Digit1,1,0
+ept_meal_nutrition_fr.png,image,5,3,Digit3,3,2
+ept_finance_refund_fr.png,image,6,2,Digit2,2,1
+ept_consumer_cereal_fr.png,image,7,3,Digit3,3,2
+ept_transport_car_fr.png,image,8,2,Digit2,2,1
+ept_household_stain_fr.png,image,9,3,Digit3,3,2
+ept_transport_taxi_fr.png,image,10,2,Digit2,2,1
+ept_phone_booth_fr.png,image,11,2,Digit2,2,1
+ept_finance_insurance_fr.png,image,12,1,Digit1,1,0
+ept_health_bandage_fr.png,image,13,3,Digit3,3,2
+ept_meal_microwave_fr.png,image,14,1,Digit1,1,0
+ept_household_order_fr.png,image,15,3,Digit3,3,2

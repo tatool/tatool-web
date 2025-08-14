@@ -1,0 +1,5 @@
+stimulusValue,stimulusValueType,stimulusType,correctResponse,keyCode,response,keyIndex
+ept_example_en.png,image,1,3,Digit3,3,2
+ept_example_en.png,image,1,1,Digit1,1,0
+ept_example_en.png,image,1,2,Digit2,2,1
+ept_example_en.png,image,1,4,Digit4,4,3
