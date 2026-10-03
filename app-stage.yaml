@@ -1,4 +1,4 @@
-runtime: nodejs20
+runtime: nodejs24
 instance_class: F1
 automatic_scaling:
   min_instances: 0
