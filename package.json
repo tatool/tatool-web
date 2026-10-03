@@ -8,7 +8,7 @@
         "url": "http://github.com/tatool/tatool-web.git"
     },
     "engines": {
-        "node": "20.x.x"
+        "node": "24.x.x"
     },
     "main": "server.js",
     "scripts": {
